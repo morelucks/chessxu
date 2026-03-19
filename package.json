@@ -1,0 +1,26 @@
+{
+  "name": "@morelucks/stackchess-sdk",
+  "version": "1.0.0",
+  "description": "SDK for interacting with Stackchess Clarity contracts on Stacks Mainnet",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "stacks",
+    "clarity",
+    "chess",
+    "sip-010"
+  ],
+  "author": "morelucks",
+  "license": "MIT",
+  "dependencies": {
+    "@stacks/transactions": "^7.0.0",
+    "@stacks/network": "^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

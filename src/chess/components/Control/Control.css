@@ -1,0 +1,15 @@
+.control {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    min-height: calc(8*var(--tile-size)); /* Use min-height instead of fixed height */
+    background-color: var(--game-selection-bg); /* Use the same background as game selection for consistency */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    gap: 20px; /* Space between children components */
+    align-items: center; /* Center children horizontally */
+    justify-content: flex-start; /* Align children to the start vertically */
+    color: var(--text-color);
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+}

@@ -1,0 +1,480 @@
+/* Professional Gaming Color Palette */
+:root {
+    --primary-blue: #0052FF;
+    --primary-blue-hover: #0045DD;
+    --secondary-blue: #1C64F2;
+    --gaming-purple: #6366F1;
+    --gaming-cyan: #06B6D4;
+    --bg-dark: #0F172A;
+    --bg-card: #1E293B;
+    --bg-input: #334155;
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    --success-green: #10B981;
+    --success-green-light: #34D399;
+    --error-red: #EF4444;
+    --border-subtle: #334155;
+    --shadow-color: rgba(0, 82, 255, 0.15);
+}
+
+.staking-modal {
+    max-width: 500px;
+    width: 90%;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, 
+                    #1a1f3a 0%,
+                    #1e2749 25%,
+                    #1a2f4d 50%,
+                    #162840 75%,
+                    #1a1f3a 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(99, 102, 241, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.staking-modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(0, 82, 255, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.staking-modal > * {
+    position: relative;
+    z-index: 1;
+}
+
+.staking-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.staking-header h1 {
+    font-size: 2rem;
+    margin: 0 0 12px 0;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.staking-header p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+    font-weight: 400;
+}
+
+.balance-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, 
+                    rgba(16, 185, 129, 0.15) 0%, 
+                    rgba(6, 182, 212, 0.1) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 24px;
+    padding: 10px 18px;
+    margin-top: 12px;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+.balance-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.balance-amount {
+    color: var(--success-green-light);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.staking-content {
+    margin-bottom: 28px;
+}
+
+.stake-input-section {
+    margin-bottom: 24px;
+}
+
+.stake-label {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.stake-input-container {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background: linear-gradient(135deg, 
+                    rgba(51, 65, 85, 0.5) 0%, 
+                    rgba(30, 41, 59, 0.5) 100%);
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    padding: 0;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.stake-input-container:focus-within {
+    border-color: var(--gaming-purple);
+    background: linear-gradient(135deg, 
+                    rgba(51, 65, 85, 0.8) 0%, 
+                    rgba(30, 41, 59, 0.8) 100%);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15),
+                0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.stake-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 16px 20px;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    outline: none;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    min-width: 0;
+}
+
+.stake-input::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.stake-input.invalid {
+    color: var(--error-red);
+}
+
+.eth-symbol {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 1px solid var(--border-subtle);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.error-message {
+    color: var(--error-red);
+    font-size: 0.875rem;
+    margin: 10px 0 0 4px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.error-message::before {
+    content: "⚠";
+    font-size: 1rem;
+}
+
+.quick-stakes {
+    margin-bottom: 24px;
+}
+
+.quick-stakes-label {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+    font-weight: 500;
+}
+
+.quick-stakes-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.quick-stake-btn {
+    background: linear-gradient(135deg, 
+                    rgba(51, 65, 85, 0.4) 0%, 
+                    rgba(30, 41, 59, 0.4) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--text-secondary);
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    flex: 1;
+    min-width: fit-content;
+    backdrop-filter: blur(10px);
+}
+
+.quick-stake-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, 
+                    rgba(99, 102, 241, 0.2) 0%, 
+                    rgba(0, 82, 255, 0.2) 100%);
+    border-color: var(--gaming-purple);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.quick-stake-btn.selected {
+    background: linear-gradient(135deg, 
+                    var(--primary-blue) 0%, 
+                    var(--gaming-purple) 100%);
+    border-color: var(--gaming-purple);
+    color: white;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4),
+                0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.quick-stake-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.game-info {
+    background: linear-gradient(135deg, 
+                    rgba(30, 39, 73, 0.6) 0%, 
+                    rgba(26, 47, 77, 0.4) 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding: 0;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 14px;
+    margin-top: 14px;
+}
+
+.info-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+.info-value {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+.info-value.highlight {
+    color: var(--success-green-light);
+    font-size: 1.125rem;
+}
+
+.staking-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 2px solid var(--border-subtle);
+    flex: 1;
+    padding: 16px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-cancel:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-red);
+    color: var(--error-red);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, 
+                    #0052FF 0%, 
+                    #6366F1 50%,
+                    #0052FF 100%);
+    background-size: 200% 100%;
+    color: white;
+    border: none;
+    flex: 2;
+    padding: 16px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 82, 255, 0.3),
+                0 0 20px rgba(99, 102, 241, 0.2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 82, 255, 0.4),
+                0 0 30px rgba(99, 102, 241, 0.3),
+                0 0 60px rgba(99, 102, 241, 0.1);
+}
+
+.btn-primary:hover:not(:disabled)::before {
+    opacity: 1;
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    background: var(--bg-input);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.btn-primary.disabled:hover,
+.btn-primary:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success state animation */
+.btn-primary.success {
+    background: var(--success-green);
+    animation: successPulse 0.6s ease;
+}
+
+@keyframes successPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .staking-modal {
+        padding: 32px 24px;
+        margin: 16px;
+        border-radius: 20px;
+    }
+    
+    .staking-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .stake-input {
+        font-size: 1.25rem;
+        padding: 14px 16px;
+    }
+    
+    .quick-stakes-buttons {
+        gap: 8px;
+    }
+    
+    .quick-stake-btn {
+        padding: 10px 14px;
+        font-size: 0.875rem;
+        flex: 1 1 calc(50% - 4px);
+    }
+    
+    .staking-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-cancel,
+    .btn-primary {
+        flex: 1;
+        width: 100%;
+    }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+    .staking-modal {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7),
+                    0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* Focus visible for accessibility */
+.btn-primary:focus-visible,
+.btn-cancel:focus-visible,
+.quick-stake-btn:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+.stake-input:focus-visible {
+    outline: none;
+}

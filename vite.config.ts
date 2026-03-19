@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => {
           }
         };
       }
-    } catch (error) {
+    } catch {
       console.warn('⚠️  Error reading HTTPS certificates. Using HTTP.');
     }
     

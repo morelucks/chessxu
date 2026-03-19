@@ -3,30 +3,35 @@ import FeatureGrid from "../landing/FeatureGrid";
 import StatsSection from "../landing/StatsSection";
 import CTASection from "../landing/CTASection";
 import { useNavigate } from "react-router-dom";
-import { useStarknetConnect } from "../../dojo/hooks/useStarknetConnect";
 import { useEffect, useState } from "react";
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  const { status, isConnecting, handleConnect, handleDisconnect, address, controllerUsername } = useStarknetConnect();
+  const isConnected = false;
+  const isConnecting = false;
+  const address = "";
+  const controllerUsername = "";
+  const handleConnect = async () => console.log("Connect to Stacks");
+  const handleDisconnect = () => console.log("Disconnect from Stacks");
   const [shouldNavigateAfterConnect, setShouldNavigateAfterConnect] = useState(false);
 
   // Auto-navigate to chess page once wallet is connected (if user clicked a button)
   useEffect(() => {
-    if (status === "connected" && shouldNavigateAfterConnect) {
+    if (isConnected && shouldNavigateAfterConnect) {
       setShouldNavigateAfterConnect(false);
       navigate("/chess");
     }
-  }, [status, shouldNavigateAfterConnect, navigate]);
+  }, [isConnected, shouldNavigateAfterConnect, navigate]);
 
   const handleStartPlaying = async () => {
-    if (status === "connected") {
+    if (isConnected) {
       // Already connected, navigate directly
       navigate("/chess");
     } else {
       // Not connected, set flag and connect
       setShouldNavigateAfterConnect(true);
       await handleConnect();
+      navigate("/chess"); // Mock navigation for now
     }
   };
 
@@ -56,11 +61,11 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md">
         <div className="container mx-auto px-6 py-4 max-w-6xl flex items-center justify-between">
           <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            ♟ Stark Chess
+            ♟ Stack Chess
           </div>
           {/* Mobile Connect Button */}
           <div className="md:hidden">
-            {status === "connected" ? (
+            {isConnected ? (
               <button
                 onClick={handleStartPlaying}
                 className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition"
@@ -87,7 +92,7 @@ export default function LandingPage() {
             <a href="#" className="hover:text-white transition">
               Docs
             </a>
-            {status === "connected" ? (
+            {isConnected ? (
               <div className="flex items-center gap-3">
                 <span className="text-xs text-purple-200">
                   {address?.slice(0, 6)}...{address?.slice(-4)}
@@ -121,12 +126,12 @@ export default function LandingPage() {
 
       {/* Content */}
       <main className="relative pt-24">
-        <HeroSection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={status === "connected"} />
+        <HeroSection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={isConnected} />
         <div id="features">
           <FeatureGrid />
         </div>
         <StatsSection />
-        <CTASection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={status === "connected"} />
+        <CTASection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={isConnected} />
       </main>
     </div>
   );

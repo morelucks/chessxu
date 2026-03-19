@@ -2,11 +2,22 @@
  * Utility functions to detect iframe context and handle OAuth popup issues
  */
 
-export const isInIframe = (): boolean => {
+export const isInsideIframe = () => {
   try {
     return window.self !== window.top;
-  } catch (e) {
+  } catch {
     return true;
+  }
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const sendIframeMessage = (type: string, payload?: any) => {
+  if (!isInsideIframe()) return;
+  
+  try {
+    window.parent.postMessage({ type, payload }, '*');
+  } catch {
+    // Silently fail if postMessage is restricted
   }
 };
 
@@ -18,13 +29,13 @@ export const isPopupBlocked = (): boolean => {
       return false;
     }
     return true;
-  } catch (e) {
+  } catch {
     return true;
   }
 };
 
 export const handleIframeAuth = (): void => {
-  if (isInIframe()) {
+  if (isInsideIframe()) {
     console.warn('Running in iframe context - OAuth popups may be blocked');
     
     // Option 1: Redirect to parent window

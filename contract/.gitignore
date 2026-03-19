@@ -11,3 +11,7 @@ coverage
 *.info
 costs-reports.json
 node_modules
+
+# Deployment and interaction scripts
+deploy.mjs
+interact.mjs

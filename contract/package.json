@@ -1,4 +1,3 @@
-
 {
   "name": "clarinet-tests",
   "version": "1.0.0",
@@ -14,9 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "@stacks/clarinet-sdk": "^3.9.0",
-    "@stacks/transactions": "^7.2.0",
+    "@stacks/network": "^7.3.1",
+    "@stacks/transactions": "^7.3.1",
     "@types/node": "^24.4.0",
     "chokidar-cli": "^3.0.0",
+    "dotenv": "^17.3.1",
     "vitest": "^4.0.7",
     "vitest-environment-clarinet": "^3.0.0"
   }

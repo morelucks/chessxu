@@ -26,4 +26,5 @@ export const initGameState = {
         b : 0,
     },
     gameMode : 'pvc', // Default to pvc (Player vs Computer)
+    playerColor : 'w', // The color the logged-in player controls (relevant for PvP)
 }

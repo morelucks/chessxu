@@ -9,28 +9,34 @@ const Piece = ({
 }) => {
 
     const { appState, dispatch } = useAppContext();
-    const { turn, castleDirection, position : currentPosition } = appState
+    const { turn, castleDirection, position : currentPosition, gameMode, playerColor } = appState
+
+    // In PvP mode, only allow dragging pieces that match the player's assigned color
+    const isMyPiece = gameMode === 'pvp' ? piece[0] === playerColor : true;
+    const canDrag = isMyPiece && turn === piece[0];
 
     const onDragStart = e => {
+        if (!canDrag) {
+            e.preventDefault();
+            return;
+        }
+
         e.dataTransfer.effectAllowed = "move";
         e.dataTransfer.setData("text/plain",`${piece},${rank},${file}`)
         setTimeout(() => {
             e.target.style.display = 'none'
         },0)
 
-        if (turn === piece[0]){
-            const candidateMoves = 
-                arbiter.getValidMoves({
-                    position : currentPosition[currentPosition.length - 1],
-                    prevPosition : currentPosition[currentPosition.length - 2],
-                    castleDirection : castleDirection[turn],
-                    piece,
-                    file,
-                    rank
-                })
-            dispatch(generateCandidates({candidateMoves}))
-        }
-
+        const candidateMoves = 
+            arbiter.getValidMoves({
+                position : currentPosition[currentPosition.length - 1],
+                prevPosition : currentPosition[currentPosition.length - 2],
+                castleDirection : castleDirection[turn],
+                piece,
+                file,
+                rank
+            })
+        dispatch(generateCandidates({candidateMoves}))
     }
     const onDragEnd = e => {
        e.target.style.display = 'block'
@@ -39,10 +45,10 @@ const Piece = ({
     return (
         <div 
             className={`piece ${piece} p-${file}${rank}`}
-            draggable={true}   
+            draggable={canDrag}   
             onDragStart={onDragStart} 
             onDragEnd={onDragEnd}
-
+            style={{ cursor: canDrag ? 'grab' : 'default', opacity: canDrag ? 1 : 0.7 }}
         />)
 }
 

@@ -123,6 +123,7 @@ export const reducer = (state, action) => {
                     b: 0,
                 },
                 gameMode: action.payload.gameMode || 'pvc',
+                playerColor: action.payload.playerColor || 'w',
             }
         }
 

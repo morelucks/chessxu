@@ -72,6 +72,21 @@ clarinet console
   3. **State Machine**: Sequential validation of turns using FEN/ASCII board states (`submit-move`).
   4. **Resolution**: Securely handles forfeits (`resign`) or mutually/Oracle-agreed game resolutions (`resolve-game`).
 
+### **Architecture Overview**
+
+```mermaid
+graph TD
+    A[Player 1] -->|create-game + Escrow| B(Stackchess Contract)
+    C[Player 2] -->|join-game + Escrow| B
+    B -->|Game Active| D{Gameplay Loop}
+    D -->|submit-move| D
+    D -->|resign / resolve| E[Winner / Refund]
+    E -->|Unlock Escrow| A
+    E -->|Unlock Escrow| C
+    B -.->|SIP-010| F[CHESS Token]
+    B -.->|Native| G[STX]
+```
+
 ---
 
 ## 📝 Deployed Contracts (Mainnet)

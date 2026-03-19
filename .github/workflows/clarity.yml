@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup Clarinet
-        uses: hirosystems/setup-clarinet@v1
+        uses: hirosystems/setup-clarinet-action@v1
         with:
           clarinet-version: '2.11.0'
       - name: Clarinet Check

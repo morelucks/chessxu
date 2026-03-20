@@ -11,16 +11,16 @@ export const UserProvider = ({ children }) => {
   
   const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    if (userSession.isUserSignedIn()) {
-      setUserData(userSession.loadUserData());
-    }
-  }, [userSession]);
+  const signOut = () => {
+    userSession.signUserOut();
+    window.location.reload();
+  };
 
   const value = {
     userSession,
     userData,
     setUserData,
+    signOut,
     isSignedIn: userSession.isUserSignedIn(),
   };
 

@@ -5,11 +5,19 @@ import './ConnectWallet.css';
 
 const ConnectWallet = () => {
     const { userData, setUserData, isSignedIn, signOut } = useUser();
+    const [isConnecting, setIsConnecting] = React.useState(false);
 
     const handleConnect = () => {
-        stacksService.connectWallet((payload) => {
-            setUserData(payload.userSession.loadUserData());
-        });
+        setIsConnecting(true);
+        stacksService.connectWallet(
+            (payload) => {
+                setUserData(payload.userSession.loadUserData());
+                setIsConnecting(false);
+            },
+            () => {
+                setIsConnecting(false);
+            }
+        );
     };
 
     if (isSignedIn && userData) {
@@ -29,8 +37,12 @@ const ConnectWallet = () => {
 
     return (
         <div className="connect-wallet">
-            <button className="btn btn-primary btn-full" onClick={handleConnect}>
-                Connect Stacks Wallet
+            <button 
+                className={`btn btn-primary btn-full ${isConnecting ? 'disabled' : ''}`} 
+                onClick={handleConnect}
+                disabled={isConnecting}
+            >
+                {isConnecting ? 'Opening Wallet...' : 'Connect Stacks Wallet'}
             </button>
         </div>
     );

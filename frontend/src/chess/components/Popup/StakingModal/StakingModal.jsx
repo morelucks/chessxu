@@ -86,14 +86,14 @@ const StakingModal = ({ onClosePopup }) => {
                 <p>Stake an amount to kick off a PvP match!</p>
                 <div className="balance-display">
                     <span className="balance-label">Your Balance:</span>
-                    <span className="balance-amount">{playerBalance.toFixed(2)} STRK</span>
+                    <span className="balance-amount">{playerBalance.toFixed(2)} STX</span>
                 </div>
             </div>
 
             <div className="staking-content">
                 <div className="stake-input-section">
                     <label htmlFor="stakeAmount" className="stake-label">
-                        Stake Amount (STRK)
+                        Stake Amount (STX)
                     </label>
                     <div className="stake-input-container">
                         <input
@@ -105,13 +105,13 @@ const StakingModal = ({ onClosePopup }) => {
                             className={`stake-input ${!isValidAmount && stakeAmount ? 'invalid' : ''}`}
                             disabled={isSubmitting}
                         />
-                        <span className="eth-symbol">STRK</span>
+                        <span className="eth-symbol">STX</span>
                     </div>
                     {!isValidAmount && stakeAmount && (
                         <p className="error-message">
                             {parseFloat(stakeAmount) > playerBalance 
-                                ? `Insufficient balance. You have ${playerBalance.toFixed(2)} STRK`
-                                : 'Please enter a valid amount between 0.1 and 100 STRK'
+                                ? `Insufficient balance. You have ${playerBalance.toFixed(2)} STX`
+                                : 'Please enter a valid amount between 0.1 and 100 STX'
                             }
                         </p>
                     )}
@@ -127,7 +127,7 @@ const StakingModal = ({ onClosePopup }) => {
                                 className={`quick-stake-btn ${stakeAmount === amount.toString() ? 'selected' : ''}`}
                                 disabled={isSubmitting}
                             >
-                                {amount} STRK
+                                {amount} STX
                             </button>
                         ))}
                     </div>
@@ -145,7 +145,7 @@ const StakingModal = ({ onClosePopup }) => {
                     <div className="info-item">
                         <span className="info-label">Potential Reward:</span>
                         <span className="info-value">
-                            {stakeAmount && isValidAmount ? `${(parseFloat(stakeAmount) * 1.8).toFixed(2)} STRK` : '-- STRK'}
+                            {stakeAmount && isValidAmount ? `${(parseFloat(stakeAmount) * 1.8).toFixed(2)} STX` : '-- STX'}
                         </span>
                     </div>
                 </div>

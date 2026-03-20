@@ -93,12 +93,12 @@ export const clearStakeData = () => {
 
 /**
  * Get dummy player balance for demo purposes
- * @returns {number} Dummy balance in STRK
+ * @returns {number} Dummy balance in STX
  */
 export const getDummyBalance = () => {
     try {
         const balance = localStorage.getItem('dummyBalance');
-        // If no balance exists, set it to 150 STRK
+        // If no balance exists, set it to 150 STX
         if (!balance) {
             updateDummyBalance(150.0);
             return 150.0;
@@ -123,7 +123,7 @@ export const updateDummyBalance = (newBalance) => {
 };
 
 /**
- * Reset dummy player balance to 150 STRK
+ * Reset dummy player balance to 150 STX
  */
 export const resetDummyBalance = () => {
     try {

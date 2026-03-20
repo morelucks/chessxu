@@ -17,6 +17,11 @@ const getContractParts = (contract) => contract.split('.');
  */
 const stacksService = {
   network,
+  isMainnet: NETWORK === 'mainnet',
+  appDetails: {
+    name: 'Stackchess',
+    icon: window.location.origin + '/vite.svg',
+  },
   
   /**
    * Triggers the Stacks connect wallet popup
@@ -24,10 +29,7 @@ const stacksService = {
    */
   connectWallet: (onFinish, onCancel) => {
     showConnect({
-      appDetails: {
-        name: 'Stackchess',
-        icon: window.location.origin + '/vite.svg',
-      },
+      appDetails: stacksService.appDetails,
       onFinish,
       onCancel,
     });

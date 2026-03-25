@@ -76,3 +76,30 @@
     )
 )
 
+;; ===========================
+;; Private Helpers
+;; ===========================
+
+;; Initializes a new player entry with default stats if they don't exist yet
+(define-private (ensure-player-exists (player principal))
+    (match (map-get? player-stats { player: player })
+        _existing true  ;; already exists, no-op
+        ;; New player — register with defaults
+        (begin
+            (map-set player-stats { player: player }
+                {
+                    wins:         u0,
+                    losses:       u0,
+                    draws:        u0,
+                    total-games:  u0,
+                    elo:          (var-get default-elo),
+                    streak:       u0,
+                    best-streak:  u0
+                }
+            )
+            (var-set total-players-registered (+ (var-get total-players-registered) u1))
+            true
+        )
+    )
+)
+

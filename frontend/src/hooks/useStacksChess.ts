@@ -14,7 +14,7 @@ const CONTRACT_ADDRESS = 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
 const CONTRACT_NAME = 'stackchess';
 
 export const useStacksChess = () => {
-  const { address } = useAppStore();
+  const address = useAppStore((state) => state.address);
   const network = STACKS_MAINNET;
 
   const createGame = async (wager: number, isStxMode: boolean) => {
@@ -85,5 +85,21 @@ export const useStacksChess = () => {
     });
   };
 
-  return { address, network, createGame, joinGame, submitMove };
+  const resign = async (gameId: number) => {
+    if (!address) return;
+
+    await openContractCall({
+        contractAddress: CONTRACT_ADDRESS,
+        contractName: CONTRACT_NAME,
+        functionName: 'resign',
+        functionArgs: [uintCV(gameId)],
+        postConditionMode: PostConditionMode.Allow,
+        network,
+        onFinish: (data) => {
+          console.log('Resigned:', data.txId);
+        },
+      });
+  };
+
+  return { address, network, createGame, joinGame, submitMove, resign };
 };

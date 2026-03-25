@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AppConfig, UserSession } from '@stacks/auth';
+import { AppConfig, UserSession } from '@stacks/connect';
 
 // Stacks Configuration
 const appConfig = new AppConfig(['store_write', 'publish_data']);
@@ -39,10 +39,10 @@ const useAppStore = create<AppStore>()(
       isGameStarted: false,
 
       // Actions
-      setAddress: (address) => set({ address, isAuthenticated: !!address }),
-      setIsLoading: (isLoading) => set({ isLoading }),
-      setActiveGameId: (activeGameId) => set({ activeGameId }),
-      setGameStarted: (isGameStarted) => set({ isGameStarted }),
+      setAddress: (address: string | null) => set({ address, isAuthenticated: !!address }),
+      setIsLoading: (isLoading: boolean) => set({ isLoading }),
+      setActiveGameId: (activeGameId: number | null) => set({ activeGameId }),
+      setGameStarted: (isGameStarted: boolean) => set({ isGameStarted }),
       logout: () => {
         userSession.signUserOut();
         set({ address: null, isAuthenticated: false, activeGameId: null, isGameStarted: false });

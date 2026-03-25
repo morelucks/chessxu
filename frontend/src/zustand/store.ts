@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 // Interface matching your bindings
 export interface Player {
-  owner: string;          
+  owner: string;
   experience: number;
   health: number;
   coins: number;
@@ -14,11 +14,11 @@ export interface Player {
 interface AppState {
   // Player data
   player: Player | null;
-  
+
   // UI state
   isLoading: boolean;
   error: string | null;
-  
+
   // Game state
   gameStarted: boolean;
 }
@@ -30,15 +30,15 @@ interface AppActions {
   updatePlayerCoins: (coins: number) => void;
   updatePlayerExperience: (experience: number) => void;
   updatePlayerHealth: (health: number) => void;
-  
+
   // UI actions
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
-  
+
   // Game actions
   startGame: () => void;
   endGame: () => void;
-  
+
   // Utility actions
   resetStore: () => void;
 }
@@ -63,11 +63,11 @@ const useAppStore = create<AppStore>()(
 
       // Player actions
       setPlayer: (player) => set({ player }),
-      
+
       updatePlayerCoins: (coins) => set((state) => ({
         player: state.player ? { ...state.player, coins } : null
       })),
-      
+
       updatePlayerExperience: (experience) => set((state) => ({
         player: state.player ? { ...state.player, experience } : null
       })),

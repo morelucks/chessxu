@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import { TransactionToast } from './TransactionToast';
 
 export interface Toast {
   id: string;

@@ -47,11 +47,7 @@ export const useStacksChess = () => {
     const postConditions = [];
     if (wager > 0 && isStxMode) {
         postConditions.push(
-            makeStandardSTXPostCondition(
-                address,
-                FungibleConditionCode.Equal,
-                BigInt(wager)
-            )
+            Pc.principal(address).willSendEq(BigInt(wager)).ustx()
         );
     }
 
@@ -69,5 +65,25 @@ export const useStacksChess = () => {
     });
   };
 
-  return { address, network, createGame, joinGame };
+  const submitMove = async (gameId: number, move: string, boardState: string) => {
+    if (!address) return;
+
+    await openContractCall({
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: 'submit-move',
+      functionArgs: [
+        uintCV(gameId),
+        stringAsciiCV(move),
+        stringAsciiCV(boardState)
+      ],
+      postConditionMode: PostConditionMode.Allow,
+      network,
+      onFinish: (data) => {
+        console.log('Move submitted:', data.txId);
+      },
+    });
+  };
+
+  return { address, network, createGame, joinGame, submitMove };
 };

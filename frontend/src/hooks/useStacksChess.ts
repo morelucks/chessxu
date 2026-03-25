@@ -4,9 +4,8 @@ import {
   boolCV, 
   stringAsciiCV, 
   PostConditionMode,
-  FungibleConditionCode,
-  createSTXPostCondition,
-  createStandardPrincipal
+  Pc,
+  Cl
 } from '@stacks/transactions';
 import { STACKS_MAINNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
@@ -24,11 +23,7 @@ export const useStacksChess = () => {
     const postConditions = [];
     if (wager > 0 && isStxMode) {
         postConditions.push(
-            makeStandardSTXPostCondition(
-                address,
-                FungibleConditionCode.Equal,
-                BigInt(wager)
-            )
+            Pc.principal(address).willSendEq(BigInt(wager)).ustx()
         );
     }
 

@@ -112,8 +112,16 @@ export const useStacksChess = () => {
         postConditionMode: PostConditionMode.Allow,
         network,
         onFinish: (data) => {
+          addToast({
+            txId: data.txId,
+            status: 'success',
+            message: 'Resignation transaction broadcasted'
+          });
           console.log('Resigned:', data.txId);
         },
+        onCancel: () => {
+          console.log('Resignation cancelled');
+        }
       });
   };
 

@@ -4,7 +4,7 @@ import StatsSection from "../landing/StatsSection";
 import CTASection from "../landing/CTASection";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Trophy, Users, Sword, Hash, Coins } from "lucide-react";
+import { Users, Sword } from "lucide-react";
 
 import useAppStore from "../../zustand/store";
 import { useStacksChess } from "../../hooks/useStacksChess";

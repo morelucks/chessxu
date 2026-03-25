@@ -1,10 +1,12 @@
-import { openContractCall } from '@stacks/connect';
+import { openContractCall, callReadOnlyFunction } from '@stacks/connect';
 import { 
   uintCV, 
   boolCV, 
   stringAsciiCV, 
   PostConditionMode,
-  Pc
+  Pc,
+  Cl,
+  cvToValue
 } from '@stacks/transactions';
 import { STACKS_MAINNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
@@ -125,5 +127,24 @@ export const useStacksChess = () => {
       });
   };
 
-  return { address, network, createGame, joinGame, submitMove, resign };
+  const getGame = async (gameId: number) => {
+    const options = {
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: 'get-game',
+      functionArgs: [uintCV(gameId)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await callReadOnlyFunction(options);
+      return result;
+    } catch (e) {
+      console.error('Error fetching game:', e);
+      return null;
+    }
+  };
+
+  return { address, network, createGame, joinGame, submitMove, resign, getGame };
 };

@@ -66,6 +66,11 @@ export const useStacksChess = () => {
       postConditions,
       network,
       onFinish: (data) => {
+        addToast({
+          txId: data.txId,
+          status: 'success',
+          message: 'Join game transaction broadcasted'
+        });
         console.log('Join Game transaction broadcasted:', data.txId);
       },
     });
@@ -86,6 +91,11 @@ export const useStacksChess = () => {
       postConditionMode: PostConditionMode.Allow,
       network,
       onFinish: (data) => {
+        addToast({
+          txId: data.txId,
+          status: 'success',
+          message: 'Move submission broadcasted'
+        });
         console.log('Move submitted:', data.txId);
       },
     });

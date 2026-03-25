@@ -215,3 +215,14 @@
     }
 )
 
+;; Get expected win probability (returns 0-1000 where 1000 = 100% win chance)
+;; Useful for frontend UI to show "Expected Score" or "Risk/Reward"
+(define-read-only (get-expected-score (player-a principal) (player-b principal))
+    (let (
+        (elo-a (get-player-elo player-a))
+        (elo-b (get-player-elo player-b))
+    )
+        (expected-score-times-1000 elo-a elo-b)
+    )
+)
+

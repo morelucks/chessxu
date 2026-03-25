@@ -198,3 +198,11 @@
     (map-get? player-stats { player: player })
 )
 
+;; Get only the ELO rating for a specific player (defaults to 1200 if not found)
+(define-read-only (get-player-elo (player principal))
+    (match (map-get? player-stats { player: player })
+        stats (get elo stats)
+        (var-get default-elo)
+    )
+)
+

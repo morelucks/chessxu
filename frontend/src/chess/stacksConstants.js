@@ -4,6 +4,7 @@ export const CONTRACTS = {
   TRAIT: `${STACKCHESS_DEPLOYER}.sip-010-trait-ft-standard`,
   TOKEN: `${STACKCHESS_DEPLOYER}.stackchess-token`,
   GAME: `${STACKCHESS_DEPLOYER}.stackchess`,
+  LEADERBOARD: `${STACKCHESS_DEPLOYER}.stackchess-leaderboard`,
 };
 
 export const GAME_STATUS = {

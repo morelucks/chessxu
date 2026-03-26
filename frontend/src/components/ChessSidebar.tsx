@@ -7,6 +7,8 @@ import actionTypes from '../chess/reducer/actionTypes';
 import StakingModal from '../chess/components/Popup/StakingModal/StakingModal';
 import OnChainLeaderboard from './OnChainLeaderboard';
 import PlayerEloCard from './PlayerEloCard';
+import GameStatusBanner from './GameStatusBanner';
+import { useGameState } from '../chess/hooks/useGameState';
 import useAppStore from '../zustand/store';
 import './ChessSidebar.css';
 
@@ -171,6 +173,8 @@ export default function ChessSidebar() {
     const { appState, dispatch } = useAppContext();
     const gameMode = appState?.gameMode || 'pvc';
     const address = useAppStore((s) => s.address);
+    const activeGameId = useAppStore((s) => s.activeGameId);
+    const { gameState } = useGameState(activeGameId);
     const [leaderboardResults, setLeaderboardResults] = useState([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
@@ -239,6 +243,10 @@ export default function ChessSidebar() {
             {activeTab === 'controls' && (
                 <>
                     {address && <PlayerEloCard address={address} />}
+                    <GameStatusBanner
+                        status={gameState ? Number(gameState.status) : null}
+                        gameId={activeGameId}
+                    />}
                     <GameModeSelection 
                         gameMode={gameMode}
                         onNewGame={handleNewGame}

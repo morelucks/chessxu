@@ -76,3 +76,9 @@ contract StackChess {
 
     function joinGame(uint256 gameId) external payable {
         Game storage game = games[gameId];
+        if (game.playerW == address(0)) revert GameNotFound();
+        if (game.status != 0) revert NotWaiting();
+        if (msg.sender == game.playerW) revert AlreadyJoined();
+
+        if (game.isNative) {
+            if (game.wager > 0) {

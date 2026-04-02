@@ -148,3 +148,9 @@ contract StackChess {
             }
         }
     }
+
+    function resolveGame(uint256 gameId, uint8 newStatus) external {
+        if (msg.sender != owner) revert NotOwner();
+        Game storage game = games[gameId];
+        if (game.playerW == address(0)) revert GameNotFound();
+        if (game.status != 0 && game.status != 1) revert GameNotActive();

@@ -196,3 +196,9 @@ contract StackChess {
                     if (game.playerB != address(0)) {
                         bool successB = stackchessToken.transfer(game.playerB, wager);
                         if (!successB) revert TransferFailed();
+                    }
+                }
+            }
+        }
+
+        game.status = newStatus;

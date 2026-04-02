@@ -58,3 +58,9 @@ contract StackChess {
                 bool success = stackchessToken.transferFrom(msg.sender, address(this), wager);
                 if (!success) revert TransferFailed();
             }
+        }
+
+        games[gameId] = Game({
+            playerW: msg.sender,
+            playerB: address(0),
+            wager: wager,

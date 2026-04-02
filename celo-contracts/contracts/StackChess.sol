@@ -184,3 +184,9 @@ contract StackChess {
             if (game.isNative) {
                 if (wager > 0) {
                     payable(game.playerW).transfer(wager);
+                    if (game.playerB != address(0)) {
+                        payable(game.playerB).transfer(wager);
+                    }
+                }
+            } else {
+                if (wager > 0) {

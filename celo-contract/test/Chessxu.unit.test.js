@@ -417,3 +417,5 @@ describe("Chessxu – Unit Tests", function () {
 // test: token address stored on deploy
 
 // test: zero-address token deploy
+
+// test: createGame zero wager

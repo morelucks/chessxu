@@ -421,3 +421,5 @@ describe("Chessxu – Unit Tests", function () {
 // test: createGame zero wager
 
 // test: createGame native wager holds ETH
+
+// test: createGame initial struct values

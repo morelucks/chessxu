@@ -160,3 +160,9 @@ contract StackChess {
         uint256 wager = game.wager;
 
         if (newStatus == 2) {
+            // White wins
+            if (game.isNative) {
+                if (prize > 0) payable(game.playerW).transfer(prize);
+            } else {
+                if (prize > 0) {
+                    bool success = stackchessToken.transfer(game.playerW, prize);

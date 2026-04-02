@@ -425,3 +425,5 @@ describe("Chessxu – Unit Tests", function () {
 // test: createGame initial struct values
 
 // test: createGame increments nextGameId
+
+// test: createGame InvalidWager revert

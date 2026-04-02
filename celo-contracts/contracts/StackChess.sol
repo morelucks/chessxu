@@ -28,3 +28,9 @@ contract StackChess {
 
     // Errors
     error NotOwner();
+    error GameNotFound();
+    error NotWaiting();
+    error AlreadyJoined();
+    error InvalidWager();
+    error NotPlayer();
+    error NotYourTurn();

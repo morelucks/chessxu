@@ -22,3 +22,9 @@ contract StackChess {
     }
 
     mapping(uint256 => Game) public games;
+
+    // Optional Token (for token wagers)
+    IERC20 public stackchessToken;
+
+    // Errors
+    error NotOwner();

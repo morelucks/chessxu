@@ -5,6 +5,12 @@ import { loadGameResults, clearGameResults } from '../chess/helper/localStorage'
 import { getStakeData, clearStakeData } from '../chess/helper/stakeStorage';
 import actionTypes from '../chess/reducer/actionTypes';
 import StakingModal from '../chess/components/Popup/StakingModal/StakingModal';
+import OnChainLeaderboard from './OnChainLeaderboard';
+import PlayerEloCard from './PlayerEloCard';
+import GameStatusBanner from './GameStatusBanner';
+import ResignButton from './ResignButton';
+import { useGameState } from '../chess/hooks/useGameState';
+import useAppStore from '../zustand/store';
 import './ChessSidebar.css';
 
 
@@ -167,6 +173,13 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: any) => 
 export default function ChessSidebar() {
     const { appState, dispatch } = useAppContext();
     const gameMode = appState?.gameMode || 'pvc';
+    const address = useAppStore((s) => s.address);
+    const activeGameId = useAppStore((s) => s.activeGameId);
+    const { gameState } = useGameState(activeGameId);
+    const currentGameStatus =
+        gameState && typeof gameState === 'object' && 'status' in gameState
+            ? Number((gameState as { status: number | string }).status)
+            : null;
     const [leaderboardResults, setLeaderboardResults] = useState([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
@@ -234,22 +247,32 @@ export default function ChessSidebar() {
 
             {activeTab === 'controls' && (
                 <>
+                    {address && <PlayerEloCard address={address} />}
+                    <GameStatusBanner
+                        status={currentGameStatus}
+                        gameId={activeGameId}
+                    />
                     <GameModeSelection 
                         gameMode={gameMode}
                         onNewGame={handleNewGame}
                         onShowStakingModal={setShowStakingModal}
                     />
                     <TakeBackButton />
+                    {/* Resign only shown in PvP with an active game */}
+                    {gameMode === 'pvp' && <ResignButton />}
                     {/* Stake section always visible under controls */}
                     <StakeSection appState={appState} />
                 </>
             )}
 
             {activeTab === 'leaderboard' && (
-                <Leaderboard 
-                    results={leaderboardResults} 
-                    onClear={handleClearLeaderboard}
-                />
+                <>
+                    <Leaderboard 
+                        results={leaderboardResults} 
+                        onClear={handleClearLeaderboard}
+                    />
+                    <OnChainLeaderboard />
+                </>
             )}
 
             {/* Staking Modal */}

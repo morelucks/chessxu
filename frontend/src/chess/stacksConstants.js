@@ -4,6 +4,7 @@ export const CONTRACTS = {
   TRAIT: `${STACKCHESS_DEPLOYER}.sip-010-trait-ft-standard`,
   TOKEN: `${STACKCHESS_DEPLOYER}.stackchess-token`,
   GAME: `${STACKCHESS_DEPLOYER}.stackchess`,
+  LEADERBOARD: `${STACKCHESS_DEPLOYER}.stackchess-leaderboard`,
 };
 
 export const GAME_STATUS = {
@@ -14,5 +15,8 @@ export const GAME_STATUS = {
   DRAW: 4,
   CANCELLED: 5,
 };
+
+export const DEFAULT_ELO = 1200;
+export const ELO_K_FACTOR = 32;
 
 export const NETWORK = 'mainnet';

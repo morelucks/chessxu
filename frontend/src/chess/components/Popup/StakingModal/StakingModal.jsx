@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../../contexts/Context';
 import { setupNewGame } from '../../../reducer/actions/game';
-import { saveStakeData, getDummyBalance, simulateStakeTransaction, resetDummyBalance } from '../../../helper/stakeStorage';
+import { saveStakeData, getDummyBalance, resetDummyBalance } from '../../../helper/stakeStorage';
+import { winProbabilityPercent, projectEloAfterWin } from '../../../utils/eloUtils';
+import { useOnChainGame } from '../../../hooks/useOnChainGame';
 import './StakingModal.css';
 
 const StakingModal = ({ onClosePopup }) => {
     const { appState: { gameMode }, dispatch } = useAppContext();
+    const { createGame } = useOnChainGame();
     const [stakeAmount, setStakeAmount] = useState('');
     const [isValidAmount, setIsValidAmount] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,37 +43,23 @@ const StakingModal = ({ onClosePopup }) => {
 
     const handleStartGame = async () => {
         if (!isValidAmount) return;
-
         setIsSubmitting(true);
-        
         try {
             const amount = parseFloat(stakeAmount);
-            
-            const transactionResult = await simulateStakeTransaction(amount);
-            
-            if (transactionResult.success) {
-                const stakeData = {
-                    amount,
-                    timestamp: Date.now(),
-                    gameMode: 'pvc',
-                    status: 'active',
-                    transactionHash: transactionResult.transactionHash,
-                    newBalance: transactionResult.newBalance
-                };
-                
-                saveStakeData(stakeData);
-                
-                setPlayerBalance(transactionResult.newBalance);
-                
-                dispatch(setupNewGame('pvp'));
-                onClosePopup();
-            } else {
-                throw new Error('Transaction failed');
-            }
+            const wagerMicroStx = Math.floor(amount * 1_000_000);
+
+            createGame(wagerMicroStx, true,
+                () => {
+                    saveStakeData({ amount, timestamp: Date.now(), gameMode: 'pvp', status: 'active' });
+                    dispatch(setupNewGame('pvp'));
+                    onClosePopup();
+                    setIsSubmitting(false);
+                },
+                () => setIsSubmitting(false),
+            );
         } catch (error) {
             console.error('Error starting game:', error);
-            alert('Failed to process stake. Please try again.');
-        } finally {
+            alert('Failed to open wallet. Please try again.');
             setIsSubmitting(false);
         }
     };
@@ -147,6 +136,14 @@ const StakingModal = ({ onClosePopup }) => {
                         <span className="info-value">
                             {stakeAmount && isValidAmount ? `${(parseFloat(stakeAmount) * 1.8).toFixed(2)} STX` : '-- STX'}
                         </span>
+                    </div>
+                    <div className="info-item">
+                        <span className="info-label">Win Probability:</span>
+                        <span className="info-value">{winProbabilityPercent(1200, 1200)}%</span>
+                    </div>
+                    <div className="info-item">
+                        <span className="info-label">ELO if you win:</span>
+                        <span className="info-value">+{projectEloAfterWin(1200, 1200).newWinnerElo - 1200} pts</span>
                     </div>
                 </div>
             </div>

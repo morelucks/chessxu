@@ -1,0 +1,50 @@
+.lb-page {
+  min-height: 100vh;
+  background: #0f172a;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.lb-page__inner {
+  width: 100%;
+  max-width: 640px;
+}
+
+.lb-page__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.lb-page__global {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.lb-page__stat {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.lb-page__stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #a5b4fc;
+}
+
+.lb-page__stat-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

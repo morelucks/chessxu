@@ -1,19 +1,16 @@
-// Toolbox omitted
-import dotenv from "dotenv";
-dotenv.config();
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
-export default {
+module.exports = {
   solidity: "0.8.24",
   networks: {
     alfajores: {
-      type: "http",
       url: "https://alfajores-forno.celo-testnet.org",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 44787,
     },
     celo: {
-      type: "http",
       url: "https://forno.celo.org",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 42220,

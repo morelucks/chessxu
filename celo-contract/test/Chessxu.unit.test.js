@@ -427,3 +427,5 @@ describe("Chessxu – Unit Tests", function () {
 // test: createGame increments nextGameId
 
 // test: createGame InvalidWager revert
+
+// test: createGame ETH sent for token game revert

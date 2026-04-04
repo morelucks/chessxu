@@ -441,3 +441,5 @@ describe("Chessxu – Unit Tests", function () {
 // test: joinGame AlreadyJoined revert
 
 // test: submitMove turn alternation
+
+// test: submitMove NotYourTurn revert

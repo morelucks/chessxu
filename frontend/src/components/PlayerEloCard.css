@@ -1,0 +1,49 @@
+.elo-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+}
+
+.elo-card--loading {
+  color: #64748b;
+  font-style: italic;
+}
+
+.elo-card__address {
+  font-family: monospace;
+  color: #93c5fd;
+  flex: 1;
+}
+
+.elo-card__elo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.elo-card__elo-label {
+  font-size: 0.65rem;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.elo-card__elo-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.elo-card__record {
+  display: flex;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+.elo-card__win  { color: #4ade80; }
+.elo-card__loss { color: #f87171; }
+.elo-card__draw { color: #94a3b8; }

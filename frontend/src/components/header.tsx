@@ -1,28 +1,47 @@
-import { useConnect, showConnect } from "@stacks/connect-react";
-import { Wallet, LogOut, User } from "lucide-react";
+import { showConnect } from "@stacks/connect-react";
+import { Wallet, LogOut, Trophy } from "lucide-react";
+import { Link } from "react-router-dom";
+import useAppStore from "../zustand/store";
+import { userSession } from "../zustand/store";
 
 export function Header() {
-  const { signout } = useConnect();
-
-  // We can get the user data from session, but for now let's just use the connection flow
-  // We'll update this once we have the Zustand store refined
-  const isAuthenticated = false; // Placeholder for now
-  const userAddress = ""; // Placeholder
+  const address = useAppStore((s) => s.address);
+  const logout = useAppStore((s) => s.logout);
+  const setAddress = useAppStore((s) => s.setAddress);
+  const isAuthenticated = !!address;
 
   const handleConnect = () => {
     showConnect({
       appDetails: {
         name: "Stackchess",
-        icon: window.location.origin + "/logo.png",
+        icon: window.location.origin + "/favicon.ico",
       },
       onFinish: () => {
-        window.location.reload();
+        if (userSession.isUserSignedIn()) {
+          const data = userSession.loadUserData();
+          setAddress(data.profile.stxAddress.mainnet);
+        }
       },
     });
   };
 
+  const handleDisconnect = () => {
+    logout();
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-10 text-center relative">
+      {/* Nav links - top left */}
+      <div className="absolute top-4 left-4 md:top-8 md:left-8">
+        <Link
+          to="/leaderboard"
+          className="flex items-center gap-1 px-3 py-2 text-slate-400 hover:text-indigo-400 text-sm transition-colors"
+        >
+          <Trophy size={15} />
+          <span>Leaderboard</span>
+        </Link>
+      </div>
+
       {/* Wallet Connection - Top Right */}
       <div className="absolute top-4 right-4 md:top-8 md:right-8">
         {!isAuthenticated ? (
@@ -38,11 +57,11 @@ export function Header() {
             <div className="flex flex-col items-end hidden md:flex">
               <span className="text-sm font-bold text-white">Connected</span>
               <span className="text-xs text-slate-400 font-mono">
-                {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
+                {address!.slice(0, 6)}...{address!.slice(-4)}
               </span>
             </div>
             <button
-              onClick={() => signout()}
+              onClick={handleDisconnect}
               className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700"
               title="Disconnect"
             >

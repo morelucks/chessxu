@@ -83,8 +83,8 @@
 ;; Initializes a new player entry with default stats if they don't exist yet
 (define-private (ensure-player-exists (player principal))
     (match (map-get? player-stats { player: player })
-        _existing true  ;; already exists, no-op
-        ;; New player — register with defaults
+        existing-stats true  ;; already exists, no-op
+        ;; New player - register with defaults
         (begin
             (map-set player-stats { player: player }
                 {
@@ -148,6 +148,99 @@
         (var-set total-games-played (+ (var-get total-games-played) u1))
         (var-set total-decisive-games (+ (var-get total-decisive-games) u1))
 
+        (ok true)
+    )
+)
+
+;; Record a draw result. No ELO change, just bumps total games and draw counters.
+(define-public (record-draw (player-a principal) (player-b principal))
+    (let (
+        (a-inited (ensure-player-exists player-a))
+        (b-inited (ensure-player-exists player-b))
+        (a-stats (unwrap! (map-get? player-stats { player: player-a }) err-player-not-found))
+        (b-stats (unwrap! (map-get? player-stats { player: player-b }) err-player-not-found))
+    )
+        ;; Enforce authorization
+        (asserts! (is-eq contract-caller stackchess-contract) err-not-authorized)
+        (asserts! (not (is-eq player-a player-b)) err-same-player)
+
+        ;; Update Player A
+        (map-set player-stats { player: player-a }
+            (merge a-stats {
+                draws: (+ (get draws a-stats) u1),
+                total-games: (+ (get total-games a-stats) u1),
+                streak: u0  ;; Draw resets win streak
+            })
+        )
+
+        ;; Update Player B
+        (map-set player-stats { player: player-b }
+            (merge b-stats {
+                draws: (+ (get draws b-stats) u1),
+                total-games: (+ (get total-games b-stats) u1),
+                streak: u0
+            })
+        )
+
+        ;; Update global stats
+        (var-set total-games-played (+ (var-get total-games-played) u1))
+
+        (ok true)
+    )
+)
+
+;; ===========================
+;; Read-Only Queries
+;; ===========================
+
+;; Get full stats for a specific player
+(define-read-only (get-player-stats (player principal))
+    (map-get? player-stats { player: player })
+)
+
+;; Get only the ELO rating for a specific player (defaults to 1200 if not found)
+(define-read-only (get-player-elo (player principal))
+    (match (map-get? player-stats { player: player })
+        stats (get elo stats)
+        (var-get default-elo)
+    )
+)
+
+;; Get global platform statistics
+(define-read-only (get-global-stats)
+    {
+        total-games: (var-get total-games-played),
+        total-decisive: (var-get total-decisive-games),
+        total-players: (var-get total-players-registered)
+    }
+)
+
+;; Get expected win probability (returns 0-1000 where 1000 = 100% win chance)
+;; Useful for frontend UI to show "Expected Score" or "Risk/Reward"
+(define-read-only (get-expected-score (player-a principal) (player-b principal))
+    (let (
+        (elo-a (get-player-elo player-a))
+        (elo-b (get-player-elo player-b))
+    )
+        (expected-score-times-1000 elo-a elo-b)
+    )
+)
+
+;; ===========================
+;; Admin Functions
+;; ===========================
+
+;; Allows the contract owner to pre-seed or correct a player's ELO
+(define-public (admin-set-elo (player principal) (new-elo uint))
+    (let (
+        (inited (ensure-player-exists player))
+        (stats (unwrap! (map-get? player-stats { player: player }) err-player-not-found))
+    )
+        (asserts! (is-eq contract-caller contract-owner) err-not-authorized)
+        
+        (map-set player-stats { player: player }
+            (merge stats { elo: new-elo })
+        )
         (ok true)
     )
 )

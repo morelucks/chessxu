@@ -214,6 +214,27 @@ const celoService = {
   },
 
   /**
+   * Returns the white and black player addresses for a game
+   * @param {number} gameId - The game ID
+   */
+  getGamePlayers: async (gameId: number) => {
+    const game = await celoService.getGame(gameId) as any;
+    return {
+      white: game.white,
+      black: game.black,
+    };
+  },
+
+  /**
+   * Checks if the game is over (winner is 1 or 2)
+   * @param {number} gameId - The game ID
+   */
+  isGameOver: async (gameId: number) => {
+    const game = await celoService.getGame(gameId) as any;
+    return game.winner > 0;
+  },
+
+  /**
    * Returns the native CELO balance of an address
    * @param {string} address - The wallet address
    */

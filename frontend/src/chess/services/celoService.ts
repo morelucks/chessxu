@@ -5,7 +5,7 @@
  * It uses the viem library for efficient EVM interactions and handles wallet connection,
  * game creation, joining, moves, and query operations.
  */
-import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
+import { createPublicClient, createWalletClient, custom, http, parseEther } from 'viem';
 import { celo } from 'viem/chains';
 import { CELO_CONFIG } from '../blockchainConstants';
 import { CHESSXU_ABI } from './contractAbi';

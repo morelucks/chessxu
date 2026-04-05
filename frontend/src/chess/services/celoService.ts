@@ -29,6 +29,13 @@ const celoService = {
   },
 
   /**
+   * Returns a public client for read operations
+   */
+  getPublicClient: () => {
+    return celoService.publicClient;
+  },
+
+  /**
    * Returns the contract address as a type-safe hex string
    */
   getContractAddress: () => {
@@ -77,7 +84,7 @@ const celoService = {
   },
 
   /**
-   * Joins an existing game on-chain
+   * Join an existing game on-chain
    * @param {number} gameId - The ID of the game to join
    * @param {string} wagerInEth - Wager amount for joining (must match game)
    * @param {boolean} isNative - Whether the wager is in native CELO

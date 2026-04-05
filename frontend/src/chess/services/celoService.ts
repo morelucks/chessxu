@@ -14,7 +14,7 @@
  * const game = await celoService.getGame(1);
  * ```
  */
-import { createPublicClient, createWalletClient, custom, http, parseEther } from 'viem';
+import { createPublicClient, createWalletClient, custom, http, parseEther, formatEther } from 'viem';
 import { celo } from 'viem/chains';
 import { CELO_CONFIG } from '../blockchainConstants';
 import { CHESSXU_ABI } from './contractAbi';
@@ -211,6 +211,14 @@ const celoService = {
   getWager: async (gameId: number) => {
     const game = await celoService.getGame(gameId) as any;
     return game.wager;
+  },
+
+  /**
+   * Formats a wager from BigInt to string
+   * @param {bigint} wager - The wager in wei
+   */
+  formatWager: (wager: bigint) => {
+    return formatEther(wager);
   },
 
   /**

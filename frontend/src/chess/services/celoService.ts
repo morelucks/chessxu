@@ -22,7 +22,6 @@ const celoService = {
       transport: custom((window as any).ethereum)
     });
 
-    
     const [address] = await walletClient.requestAddresses();
     return address;
   },
@@ -50,7 +49,15 @@ const celoService = {
     });
   },
 
+  /**
+   * Joins an existing game on-chain
+   * @param {number} gameId - The ID of the game to join
+   * @param {string} wagerInEth - Wager amount for joining (must match game)
+   * @param {boolean} isNative - Whether the wager is in native CELO
+   */
+  joinGame: async (gameId: number, wagerInEth: string, isNative: boolean) => {
+    // Implementation pending
+  },
 };
-
 
 export default celoService;

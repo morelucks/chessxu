@@ -181,6 +181,16 @@ const celoService = {
   getNativeBalance: async (address: `0x${string}`) => {
     return await celoService.publicClient.getBalance({ address });
   },
+
+  /**
+   * Returns the token balance (XU) of an address
+   * @param {string} address - The wallet address
+   */
+  getTokenBalance: async (address: `0x${string}`) => {
+    // This assumes the contract implements a balance method or uses an ERC20 token
+    // For now, we stub this as it depends on the token contract implementation
+    return 0n;
+  },
 };
 
 export default celoService;

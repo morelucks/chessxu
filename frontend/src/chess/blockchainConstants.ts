@@ -20,3 +20,11 @@ export const DEFAULT_ELO = 1200;
 export const ELO_K_FACTOR = 32;
 
 export const NETWORK = 'mainnet';
+
+export const CELO_CONFIG = {
+  CHAIN_ID: 42220,
+  RPC_URL: "https://forno.celo.org",
+  CONTRACT_ADDRESS: "0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14",
+  CURRENCY: "CELO",
+};
+

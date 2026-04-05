@@ -25,6 +25,30 @@ const celoService = {
     const [address] = await walletClient.requestAddresses();
     return address;
   },
+
+  /**
+   * Creates a new game on-chain
+   * @param {string} wagerInEth - Wager amount in ETH/CELO
+   * @param {boolean} isNative - Whether the wager is in native CELO or token
+   */
+  createGame: async (wagerInEth: string, isNative: boolean) => {
+    const walletClient = createWalletClient({
+      chain: celo,
+      transport: custom(window.ethereum!)
+    });
+    const [address] = await walletClient.requestAddresses();
+    
+    return await walletClient.writeContract({
+      address: CELO_CONFIG.CONTRACT_ADDRESS as `0x${string}`,
+      abi: CHESSXU_ABI,
+      functionName: 'createGame',
+      args: [BigInt(parseEther(wagerInEth)), isNative],
+      account: address,
+      value: isNative ? parseEther(wagerInEth) : 0n,
+    });
+  },
+
 };
+
 
 export default celoService;

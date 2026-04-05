@@ -7,6 +7,9 @@ import { CHESSXU_ABI } from './contractAbi';
  * Service to handle all Celo blockchain interactions
  */
 const celoService = {
+  /**
+   * The Celo network and contract configuration
+   */
   config: CELO_CONFIG,
   
   publicClient: createPublicClient({
@@ -153,6 +156,15 @@ const celoService = {
     });
     
     return Number(result);
+  },
+
+  /**
+   * Checks if the game wager is in native CELO
+   * @param {number} gameId - The game ID
+   */
+  isNative: async (gameId: number) => {
+    const game = await celoService.getGame(gameId) as any;
+    return game.isNative;
   },
 };
 

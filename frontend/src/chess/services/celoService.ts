@@ -98,6 +98,26 @@ const celoService = {
    * @param {number} gameId - The game to resign from
    */
   resign: async (gameId: number) => {
+    const walletClient = createWalletClient({
+      chain: celo,
+      transport: custom((window as any).ethereum)
+    });
+    const [address] = await walletClient.requestAddresses();
+
+    return await walletClient.writeContract({
+      address: CELO_CONFIG.CONTRACT_ADDRESS as `0x${string}`,
+      abi: CHESSXU_ABI,
+      functionName: 'resign',
+      args: [BigInt(gameId)],
+      account: address,
+    });
+  },
+
+  /**
+   * Fetches the current game state from the blockchain
+   * @param {number} gameId - The ID of the game to fetch
+   */
+  getGame: async (gameId: number) => {
     // Implementation pending
   },
 };

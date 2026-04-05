@@ -69,10 +69,7 @@ const celoService = {
    * @param {boolean} isNative - Whether the wager is in native CELO
    */
   joinGame: async (gameId: number, wagerInEth: string, isNative: boolean) => {
-    const walletClient = createWalletClient({
-      chain: celo,
-      transport: custom((window as any).ethereum)
-    });
+    const walletClient = celoService.getWalletClient();
     const [address] = await walletClient.requestAddresses();
 
     return await walletClient.writeContract({
@@ -91,10 +88,7 @@ const celoService = {
    * @param {string} boardState - The resulting board state (FEN)
    */
   submitMove: async (gameId: number, boardState: string) => {
-    const walletClient = createWalletClient({
-      chain: celo,
-      transport: custom((window as any).ethereum)
-    });
+    const walletClient = celoService.getWalletClient();
     const [address] = await walletClient.requestAddresses();
 
     return await walletClient.writeContract({

@@ -281,10 +281,12 @@ const celoService = {
    * Returns the token balance (XU) of an address
    * @param {string} address - The wallet address
    */
-  getTokenBalance: async (address: `0x${string}`) => {
+  getTokenBalance: async (_address: `0x${string}`) => {
     // This assumes the contract implements a balance method or uses an ERC20 token
     return 0n;
   },
 };
 
 export default celoService;
+
+// End of Chessxu Celo Service Implementation

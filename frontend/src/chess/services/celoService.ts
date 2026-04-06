@@ -154,9 +154,10 @@ const celoService = {
   /**
    * Submits a move to the on-chain game
    * @param {number} gameId - The ID of the game
+   * @param {string} moveStr - The move string (e.g., "e2e4")
    * @param {string} boardState - The resulting board state (FEN)
    */
-  submitMove: async (gameId: number, boardState: string) => {
+  submitMove: async (gameId: number, moveStr: string, boardState: string) => {
     const walletClient = celoService.getWalletClient();
     const [address] = await walletClient.requestAddresses();
 
@@ -164,7 +165,7 @@ const celoService = {
       address: celoService.getContractAddress(),
       abi: CHESSXU_ABI,
       functionName: 'submitMove',
-      args: [BigInt(gameId), "", boardState],
+      args: [BigInt(gameId), moveStr, boardState],
       account: address,
     });
   },

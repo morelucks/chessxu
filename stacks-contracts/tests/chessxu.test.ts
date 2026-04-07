@@ -156,6 +156,31 @@ describe("chessxu - join-game", () => {
         expect(data.recipient).toBe(`${deployer}.chessxu`);
         expect(data.amount).toBe(`${wager}`);
     });
+
+    it("correctly sets player-b to the joiner's principal", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        
+        // Check player-b is none initially
+        const res1 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const preJoin = res1.data || res1.value;
+        expect(preJoin["player-b"].type).toBe("none"); // OptionalNone string
+        
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const res2 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const postJoin = res2.data || res2.value;
+        expect(postJoin["player-b"].value.value).toBe(wallet_2);
+    });
+
+    it("upgrades game status to Ongoing (u1) after a player joins", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const game = res.data || res.value;
+        expect(game["status"]).toStrictEqual(Cl.uint(1)); // Ongoing
+    });
 });
 
 

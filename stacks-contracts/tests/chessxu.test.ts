@@ -58,6 +58,45 @@ describe("chessxu - create-game", () => {
         expect(result2).toBeOk(Cl.uint(2));
         expect(result3).toBeOk(Cl.uint(3));
     });
+
+    it("initializes game with the correct default board-state", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
+        
+        // Safety check and extraction
+        const gameValue = (result as any).value;
+        const game = gameValue.data || gameValue.value; 
+        expect(game["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
+    });
+
+    it("initializes game with the correct initial turn ('w')", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
+        const gameValue = (result as any).value;
+        const game = gameValue.data || gameValue.value;
+        expect(game["turn"]).toStrictEqual(Cl.stringAscii("w"));
+    });
+
+    it("initializes game with the correct status (u0 - Waiting)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
+        const gameValue = (result as any).value;
+        const game = gameValue.data || gameValue.value;
+        expect(game["status"]).toStrictEqual(Cl.uint(0));
+    });
+
+    it("allows multiple independent games to be created by different users", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_2);
+        
+        const res1 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const res2 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(2)], wallet_1).result as any).value;
+        const game1 = res1.data || res1.value;
+        const game2 = res2.data || res2.value;
+        
+        expect(game1["player-w"].value).toBe(wallet_1);
+        expect(game2["player-w"].value).toBe(wallet_2);
+    });
 });
 
 

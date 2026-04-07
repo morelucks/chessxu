@@ -99,4 +99,11 @@ describe("chessxu - create-game", () => {
     });
 });
 
+describe("chessxu - join-game", () => {
+    it("properly reverts when joining a non-existent game (err-game-not-found)", () => {
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(999)], wallet_2);
+        expect(result).toBeErr(Cl.uint(102)); // err-game-not-found
+    });
+});
+
 

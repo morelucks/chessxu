@@ -125,6 +125,18 @@ describe("chessxu - join-game", () => {
         expect(transferEvent.recipient).toBe(`${deployer}.chessxu`);
         expect(transferEvent.amount).toBe(`${wager}`);
     });
+
+    it("successfully joins an existing Token-wagered game", () => {
+        const wager = 100;
+        // Mint tokens to both players
+        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_1)], deployer);
+        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_2)], deployer);
+        
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        expect(result).toBeOk(Cl.bool(true));
+    });
 });
 
 

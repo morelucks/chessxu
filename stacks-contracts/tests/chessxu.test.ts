@@ -48,6 +48,16 @@ describe("chessxu - create-game", () => {
         expect(data.recipient).toBe(`${deployer}.chessxu`);
         expect(data.amount).toBe(`${wager}`);
     });
+
+    it("increments next-game-id sequentially across multiple creations", () => {
+        const { result: result1 } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        const { result: result2 } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        const { result: result3 } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_2);
+        
+        expect(result1).toBeOk(Cl.uint(1));
+        expect(result2).toBeOk(Cl.uint(2));
+        expect(result3).toBeOk(Cl.uint(3));
+    });
 });
 
 

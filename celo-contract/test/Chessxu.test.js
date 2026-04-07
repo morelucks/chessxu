@@ -213,6 +213,17 @@ describe("Chessxu Contract", function () {
         chessxu.connect(player1).joinGame(1)
       ).to.be.revertedWithCustomError(chessxu, "AlreadyJoined");
     });
+
+    it("Should revert if native wager doesn't match msg.value on join", async function () {
+      const { chessxu, player1, player2, parseEth } = await deployChessxuFixture();
+      const wager = parseEth("0.5");
+      
+      await chessxu.connect(player1).createGame(wager, true, { value: wager });
+      
+      await expect(
+        chessxu.connect(player2).joinGame(1, { value: parseEth("0.4") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+    });
   });
 
   describe("submitMove", function () {

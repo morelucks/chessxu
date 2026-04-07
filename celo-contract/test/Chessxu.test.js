@@ -76,6 +76,21 @@ describe("Chessxu Contract", function () {
       await chessxu.connect(player1).createGame(0, true);
       expect(await chessxu.nextGameId()).to.equal(3);
     });
+
+    it("Should revert if native wager doesn't match msg.value", async function () {
+      const { chessxu, player1, parseEth } = await deployChessxuFixture();
+      
+      const wager = parseEth("0.5");
+      // Provide 0.4 ETH but say wager is 0.5 ETH
+      await expect(
+        chessxu.connect(player1).createGame(wager, true, { value: parseEth("0.4") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+
+      // Provide 0.6 ETH but say wager is 0.5 ETH
+      await expect(
+        chessxu.connect(player1).createGame(wager, true, { value: parseEth("0.6") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+    });
   });
 
   describe("joinGame", function () {

@@ -199,6 +199,16 @@ describe("chessxu - join-game", () => {
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_3);
         expect(result).toBeErr(Cl.uint(103)); // err-not-waiting
     });
+
+    it("reverts if the creator has insufficient STX balance (err u1)", () => {
+        // 200 Million STX (Default is 100M)
+        const massiveWager = 200_000_000_000_000; 
+        
+        const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(massiveWager), Cl.bool(true)], wallet_1);
+        
+        // stx-transfer? returns (err u1) for insufficient balance
+        expect(result).toBeErr(Cl.uint(1)); 
+    });
 });
 
 

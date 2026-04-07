@@ -299,5 +299,15 @@ describe("Chessxu Contract", function () {
         chessxu.connect(player1).submitMove(999, "e2-e4", "dummyState")
       ).to.be.revertedWithCustomError(chessxu, "GameNotFound");
     });
+
+    it("Should revert if game is not active", async function () {
+      const { chessxu, player1 } = await deployChessxuFixture();
+      
+      await chessxu.connect(player1).createGame(0, true);
+      // Status is Waiting (0), not Active (1)
+      await expect(
+        chessxu.connect(player1).submitMove(1, "e2-e4", "dummyState")
+      ).to.be.revertedWithCustomError(chessxu, "GameNotActive");
+    });
   });
 });

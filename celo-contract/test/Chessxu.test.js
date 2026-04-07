@@ -167,6 +167,21 @@ describe("Chessxu Contract", function () {
       expect(game.playerB).to.equal(player2.address);
       expect(game.status).to.equal(1);
     });
+
+    it("Should verify complete game state after joining", async function () {
+      const { chessxu, player1, player2 } = await deployChessxuFixture();
+      
+      await chessxu.connect(player1).createGame(0, true);
+      await chessxu.connect(player2).joinGame(1);
+
+      const game = await chessxu.getGame(1);
+      expect(game.playerW).to.equal(player1.address);
+      expect(game.playerB).to.equal(player2.address);
+      expect(game.wager).to.equal(0);
+      expect(game.isNative).to.be.true;
+      expect(game.status).to.equal(1); // Ongoing
+      expect(game.turn).to.equal("w");
+    });
   });
 
   describe("submitMove", function () {

@@ -1,6 +1,7 @@
 import { expect } from "chai";
-import hre from "hardhat";
-const { ethers } = hre;
+import { network } from "hardhat";
+
+const { ethers } = await network.connect();
 
 describe("Chessxu Contract", function () {
   async function deployChessxuFixture() {
@@ -25,7 +26,15 @@ describe("Chessxu Contract", function () {
   }
 
   describe("createGame", function () {
-    // Tests for createGame will go here
+    it("Should create a new game with zero wager", async function () {
+      const { chessxu, player1 } = await deployChessxuFixture();
+      
+      const tx = await chessxu.connect(player1).createGame(0, true);
+      await tx.wait();
+
+      const gameId = await chessxu.getLastGameId();
+      expect(gameId).to.equal(1);
+    });
   });
 
   describe("joinGame", function () {

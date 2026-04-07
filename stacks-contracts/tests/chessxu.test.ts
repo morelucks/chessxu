@@ -31,6 +31,23 @@ describe("chessxu - create-game", () => {
         const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(false)], wallet_1);
         expect(result).toBeOk(Cl.uint(1)); // Simnet resets state per test block
     });
+
+    it("deducts CHESS wager from creator and locks it in the contract during creation", () => {
+        const wager = 100;
+        // Mint tokens to wallet_1 first
+        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_1)], deployer);
+        
+        const { events } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        
+        // We expect a ft-transfer-event from chessxu-token
+        const tokenTransfer = events.find(e => e.event === "ft_transfer_event");
+        expect(tokenTransfer).toBeDefined();
+        const data = tokenTransfer!.data;
+        expect(data.asset_identifier).toBe(`${deployer}.chessxu-token::chessxu-token`);
+        expect(data.sender).toBe(wallet_1);
+        expect(data.recipient).toBe(`${deployer}.chessxu`);
+        expect(data.amount).toBe(`${wager}`);
+    });
 });
 
 

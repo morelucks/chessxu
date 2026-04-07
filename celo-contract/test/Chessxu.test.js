@@ -91,6 +91,15 @@ describe("Chessxu Contract", function () {
         chessxu.connect(player1).createGame(wager, true, { value: parseEth("0.6") })
       ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
     });
+
+    it("Should revert if sending ETH for a token game", async function () {
+      const { chessxu, player1, parseEth } = await deployChessxuFixture();
+      const wager = parseEth("0.5");
+      
+      await expect(
+        chessxu.connect(player1).createGame(wager, false, { value: parseEth("0.1") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+    });
   });
 
   describe("joinGame", function () {

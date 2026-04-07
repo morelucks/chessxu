@@ -190,6 +190,19 @@ describe("Chessxu Contract", function () {
         chessxu.connect(player2).joinGame(999)
       ).to.be.revertedWithCustomError(chessxu, "GameNotFound");
     });
+
+    it("Should revert if game is not in Waiting status", async function () {
+      const { chessxu, player1, player2 } = await deployChessxuFixture();
+      
+      await chessxu.connect(player1).createGame(0, true);
+      await chessxu.connect(player2).joinGame(1);
+      
+      // Third player tries to join
+      const [owner, p1, p2, player3] = await ethers.getSigners();
+      await expect(
+        chessxu.connect(player3).joinGame(1)
+      ).to.be.revertedWithCustomError(chessxu, "NotWaiting");
+    });
   });
 
   describe("submitMove", function () {

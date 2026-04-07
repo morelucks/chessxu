@@ -111,6 +111,20 @@ describe("chessxu - join-game", () => {
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
         expect(result).toBeOk(Cl.bool(true));
     });
+
+    it("deducts matching STX wager from joiner and locks it in the contract", () => {
+        const wager = 100;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        
+        const { events } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // We expect exactly one stx-transfer event from wallet_2 to contract
+        expect(events.length).toBe(1);
+        const transferEvent = events[0].data;
+        expect(transferEvent.sender).toBe(wallet_2);
+        expect(transferEvent.recipient).toBe(`${deployer}.chessxu`);
+        expect(transferEvent.amount).toBe(`${wager}`);
+    });
 });
 
 

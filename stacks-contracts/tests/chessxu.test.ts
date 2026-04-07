@@ -224,5 +224,3 @@ describe("chessxu - join-game", () => {
         expect(game["status"]).toStrictEqual(Cl.uint(1));
     });
 });
-
-

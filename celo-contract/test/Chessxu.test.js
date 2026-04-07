@@ -182,6 +182,14 @@ describe("Chessxu Contract", function () {
       expect(game.status).to.equal(1); // Ongoing
       expect(game.turn).to.equal("w");
     });
+
+    it("Should revert if game doesn't exist", async function () {
+      const { chessxu, player2 } = await deployChessxuFixture();
+      
+      await expect(
+        chessxu.connect(player2).joinGame(999)
+      ).to.be.revertedWithCustomError(chessxu, "GameNotFound");
+    });
   });
 
   describe("submitMove", function () {

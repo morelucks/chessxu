@@ -190,6 +190,15 @@ describe("chessxu - join-game", () => {
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_1);
         expect(result).toBeErr(Cl.uint(104)); // err-already-joined
     });
+
+    it("reverts if trying to join a game that is already Ongoing (err-not-waiting)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // wallet_3 tries to join the now-Ongoing game
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_3);
+        expect(result).toBeErr(Cl.uint(103)); // err-not-waiting
+    });
 });
 
 

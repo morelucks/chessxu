@@ -104,6 +104,13 @@ describe("chessxu - join-game", () => {
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(999)], wallet_2);
         expect(result).toBeErr(Cl.uint(102)); // err-game-not-found
     });
+
+    it("successfully joins an existing STX-wagered game", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(true)], wallet_1);
+        
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        expect(result).toBeOk(Cl.bool(true));
+    });
 });
 
 

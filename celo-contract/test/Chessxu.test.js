@@ -141,7 +141,18 @@ describe("Chessxu Contract", function () {
   });
 
   describe("joinGame", function () {
-    // Tests for joinGame will go here
+    it("Should join a zero-wager game successfully", async function () {
+      const { chessxu, player1, player2 } = await deployChessxuFixture();
+      
+      await chessxu.connect(player1).createGame(0, true);
+      
+      const tx = await chessxu.connect(player2).joinGame(1);
+      await tx.wait();
+
+      const game = await chessxu.getGame(1);
+      expect(game.playerB).to.equal(player2.address);
+      expect(game.status).to.equal(1);
+    });
   });
 
   describe("submitMove", function () {

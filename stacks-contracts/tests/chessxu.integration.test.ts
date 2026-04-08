@@ -9,3 +9,4 @@
 // test: token game white resigns black gets tokens
 // test: token game draw refunds both
 // test: contract holds zero tokens after resolution
+// test: two concurrent games are independent

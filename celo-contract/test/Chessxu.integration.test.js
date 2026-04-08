@@ -14,3 +14,5 @@
 // test: owner resolves draw refunds both
 
 // test: token game resign winner gets tokens
+
+// test: token game draw refunds both

@@ -18,3 +18,5 @@
 // test: token game draw refunds both
 
 // test: contract balance zero after token resolution
+
+// test: two concurrent games are independent

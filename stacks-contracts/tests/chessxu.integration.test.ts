@@ -11,3 +11,4 @@
 // test: contract holds zero tokens after resolution
 // test: two concurrent games are independent
 // test: resolving game1 does not affect game2
+// test: moves in game1 do not affect game2 board

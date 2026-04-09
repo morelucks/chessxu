@@ -1,0 +1,31 @@
+.game-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.game-banner--active {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #a5b4fc;
+}
+
+.game-banner--ended {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  color: #94a3b8;
+}
+
+.game-banner__id {
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.game-banner__status {
+  font-weight: 500;
+}

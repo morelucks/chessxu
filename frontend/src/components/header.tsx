@@ -1,0 +1,143 @@
+import { Wallet, LogOut, Trophy } from "lucide-react";
+import { Link } from "react-router-dom";
+import useAppStore from "../zustand/store";
+import { usePlayerStats } from "../hooks/useLeaderboard";
+import { useStacksChess } from "../hooks/useStacksChess";
+import { useWalletAuth } from "../hooks/useWalletAuth";
+import { useEffect } from "react";
+
+export function Header() {
+  const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
+  const activeChain = useAppStore((s) => s.activeChain);
+  const setActiveChain = useAppStore((s) => s.setActiveChain);
+  const eloFromStore = useAppStore((s) => s.elo);
+  const chessBalanceFromStore = useAppStore((s) => s.chessBalance);
+  const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const setElo = useAppStore((s) => s.setElo);
+
+  const { elo: eloFromHook } = usePlayerStats(address);
+  const { getTokenBalance } = useStacksChess();
+  
+  const isAuthenticated = isConnected;
+
+  useEffect(() => {
+    if (address) {
+      getTokenBalance(address).then(setChessBalance).catch(() => setChessBalance(0));
+    }
+  }, [address, getTokenBalance, setChessBalance]);
+
+  useEffect(() => {
+    if (eloFromHook) setElo(Number(eloFromHook));
+  }, [eloFromHook, setElo]);
+
+  const handleConnect = () => {
+    connect();
+  };
+
+  const handleDisconnect = () => {
+    disconnect();
+  };
+
+  const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
+
+  return (
+    <div className="flex flex-col items-center justify-center p-6 md:p-10 text-center relative">
+      {/* Nav links - top left */}
+      <div className="absolute top-4 left-4 md:top-8 md:left-8">
+        <Link
+          to="/leaderboard"
+          className="flex items-center gap-1 px-3 py-2 text-slate-400 hover:text-indigo-400 text-sm transition-colors"
+        >
+          <Trophy size={15} />
+          <span>Leaderboard</span>
+        </Link>
+      </div>
+
+      {/* Wallet Connection - Top Right */}
+      <div className="absolute top-4 right-4 md:top-8 md:right-8 flex items-center gap-4">
+        {!isAuthenticated && !isMiniPay && (
+          <div className="flex bg-slate-800/50 rounded-full p-1 border border-slate-700">
+            <button
+              onClick={() => setActiveChain('stacks')}
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                activeChain === 'stacks' 
+                  ? 'bg-orange-500 text-white shadow-lg' 
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Stacks
+            </button>
+            <button
+              onClick={() => setActiveChain('celo')}
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                activeChain === 'celo' 
+                  ? 'bg-emerald-500 text-white shadow-lg' 
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Celo
+            </button>
+          </div>
+        )}
+
+        {!isAuthenticated ? (
+          !isMiniPay && (
+            <button
+              onClick={handleConnect}
+              className={`flex items-center gap-2 px-4 py-2 text-white rounded-full font-semibold transition-all shadow-lg active:scale-95 ${
+                activeChain === 'stacks'
+                  ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-500/20'
+                  : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20'
+              }`}
+            >
+              <Wallet size={18} />
+              <span>{isConnected ? "Connected" : isConnecting ? "Connecting..." : "Connect Wallet"}</span>
+            </button>
+          )
+        ) : (
+          <div className="flex items-center gap-3">
+            <div className="flex flex-col items-end hidden md:flex">
+              <span className="text-sm font-bold text-white">
+                {address!.slice(0, 6)}...{address!.slice(-4)}
+              </span>
+              <span className="text-xs text-indigo-400 font-bold">
+                ELO: {eloFromStore} | {(chessBalanceFromStore / 1000000).toFixed(2)} CHESS
+              </span>
+            </div>
+            <button
+              onClick={handleDisconnect}
+              className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors border border-slate-700"
+              title="Disconnect"
+            >
+              <LogOut size={18} />
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="mb-6 flex items-center justify-center">
+        <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+          <span className="text-5xl md:text-6xl">♟️</span>
+        </div>
+      </div>
+
+      <h1
+        className="
+          text-4xl md:text-6xl 
+          font-black mb-4 py-2
+          bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500 
+          bg-clip-text text-transparent 
+          leading-tight tracking-tight
+        "
+      >
+        Chessxu
+      </h1>
+      <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto px-4 font-medium">
+        Onchain Chess with STX Wagers on{" "}
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 font-bold">
+          Stacks
+        </span>
+      </p>
+    </div>
+  );
+}

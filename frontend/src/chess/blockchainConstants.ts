@@ -1,0 +1,50 @@
+export const CHESSXU_DEPLOYER = "SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B";
+
+export const CONTRACTS = {
+  TRAIT: `${CHESSXU_DEPLOYER}.sip-010-trait-ft-standard`,
+  TOKEN: `${CHESSXU_DEPLOYER}.chessxu-token`,
+  GAME: `${CHESSXU_DEPLOYER}.chessxu`,
+  LEADERBOARD: `${CHESSXU_DEPLOYER}.chessxu-leaderboard`,
+};
+
+export const GAME_STATUS = {
+  WAITING: 0,
+  ONGOING: 1,
+  WHITE_WINS: 2,
+  BLACK_WINS: 3,
+  DRAW: 4,
+  CANCELLED: 5,
+};
+
+export const DEFAULT_ELO = 1200;
+export const ELO_K_FACTOR = 32;
+
+export const NETWORK = 'mainnet';
+
+export const CELO_CONFIG = {
+  CHAIN_ID: 42220,
+  RPC_URL: "https://forno.celo.org",
+  CONTRACT_ADDRESS: "0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E",
+  CURRENCY: "CELO",
+};
+
+
+export const CLARITY_ERRORS = {
+  NOT_OWNER: 100,
+  GAME_EXISTS: 101,
+  GAME_NOT_FOUND: 102,
+  NOT_WAITING: 103,
+  ALREADY_JOINED: 104,
+  INVALID_WAGER: 105,
+  NOT_PLAYER: 106,
+  NOT_YOUR_TURN: 107,
+  GAME_NOT_ACTIVE: 108,
+  INVALID_STATUS: 109,
+};
+
+export const LEADERBOARD_ERRORS = {
+  NOT_AUTHORIZED: 100,
+  PLAYER_NOT_FOUND: 101,
+  INVALID_RESULT: 102,
+  SAME_PLAYER: 103,
+};

@@ -1,0 +1,22 @@
+.streak-badge {
+  display: flex;
+  gap: 8px;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+.streak-badge__current {
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+.streak-badge__best {
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+  border-radius: 4px;
+  padding: 2px 7px;
+}

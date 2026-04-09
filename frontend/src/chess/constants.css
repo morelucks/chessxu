@@ -1,0 +1,24 @@
+:root {
+    --tile-size : 90px;
+    --light-tile : #e0e0e0; /* A lighter, subtle grey for light tiles */
+    --dark-tile : #a0a0a0; /* A darker, subtle grey for dark tiles */
+    --bg-color : #282c34; /* Darker, more professional background */
+    --app-shadow : 0 10px 20px rgba(0, 0, 0, 0.5);
+    --text-color : #abb2bf;
+    --primary-button-bg : #61afef;
+    --primary-button-hover : #528cbb;
+    --secondary-button-bg : #98c379;
+    --secondary-button-text : #282c34;
+    --secondary-button-bg-hover: #86af6b;
+    --disabled-button-bg : #545862;
+    --disabled-button-text : #abb2bf;
+    --game-selection-bg : #3e4451;
+    --highlight : rgba(255,255,0,0.4); /* Brighter highlight for selected/candidate moves */
+    --check : #e06c75; /* A subtle red for check */
+}
+
+@media all and (max-width: 450px) {
+    :root {
+        --tile-size : 50px;
+    }
+}

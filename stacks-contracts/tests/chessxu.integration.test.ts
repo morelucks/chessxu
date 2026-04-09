@@ -14,3 +14,4 @@
 // test: moves in game1 do not affect game2 board
 // test: five sequential games have correct IDs
 // test: cancel waiting game refunds creator
+// test: zero-wager resign completes cleanly

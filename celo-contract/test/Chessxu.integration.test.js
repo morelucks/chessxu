@@ -28,3 +28,5 @@
 // test: cancel waiting game refunds creator
 
 // test: zero-wager resign completes without ETH transfer
+
+// test: cannot submit move after resolution

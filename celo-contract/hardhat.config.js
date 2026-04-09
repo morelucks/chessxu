@@ -23,13 +23,13 @@ export default defineConfig({
     celo: {
       type: "http",
       url: "https://forno.celo.org",
-      accounts: process.env.MAINNET_PRIVATE_KEY ? [process.env.MAINNET_PRIVATE_KEY] : [],
+      accounts: process.env.MAINNET_PRIVATE_KEY2 ? [process.env.MAINNET_PRIVATE_KEY2] : (process.env.MAINNET_PRIVATE_KEY ? [process.env.MAINNET_PRIVATE_KEY] : []),
       chainId: 42220,
     },
   },
   etherscan: {
     apiKey: {
-      celo: "6FGP9S8JV3X1Y2Z4A5B6C7D8E9F0G1H2I3", 
+      celo: "6FGP9S8JV3X1Y2Z4A5B6C7D8E9F0G1H2I3",
     },
     customChains: [
       {

@@ -16,3 +16,4 @@
 // test: cancel waiting game refunds creator
 // test: zero-wager resign completes cleanly
 // test: cannot submit move after resolution
+// test: cannot resign after resolution

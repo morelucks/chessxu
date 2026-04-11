@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import useAppStore from "../zustand/store";
 import { userSession } from "../zustand/store";
 import { usePlayerStats } from "../hooks/useLeaderboard";
+import { useStacksChess } from "../hooks/useStacksChess";
+import { useState, useEffect } from "react";
 
 export function Header() {
   const address = useAppStore((s) => s.address);

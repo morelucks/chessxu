@@ -54,7 +54,5 @@
     "typescript-eslint": "^8.34.1",
     "vite": "^5.4.19"
   },
-  "overrides": {
-    "@starknet-react/core": "3.7.4"
   }
 }

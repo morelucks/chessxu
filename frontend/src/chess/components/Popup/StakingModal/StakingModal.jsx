@@ -9,11 +9,14 @@ import './StakingModal.css';
 
 const StakingModal = ({ onClosePopup }) => {
     const { appState: { gameMode }, dispatch } = useAppContext();
-    const { createGame } = useOnChainGame();
+    const { createGame, getTokenBalance } = useStacksChess();
+    const address = useAppStore((state) => state.address);
     const [stakeAmount, setStakeAmount] = useState('');
     const [isValidAmount, setIsValidAmount] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [playerBalance, setPlayerBalance] = useState(0);
+    const [chessBalance, setChessBalance] = useState(0);
+    const [isStxMode, setIsStxMode] = useState(true);
 
     // Predefined stake amounts for quick selection
     const quickStakes = [10, 15, 20, 25, 30];

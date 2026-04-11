@@ -9,6 +9,7 @@ export function Header() {
   const address = useAppStore((s) => s.address);
   const logout = useAppStore((s) => s.logout);
   const setAddress = useAppStore((s) => s.setAddress);
+  const { elo } = usePlayerStats(address);
   const isAuthenticated = !!address;
 
   const handleConnect = () => {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useStacksChess } from '../hooks/useStacksChess';
+import useAppStore from '../zustand/store';
 
 interface Props { onClose: () => void; }
 

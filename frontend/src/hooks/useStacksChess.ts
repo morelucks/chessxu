@@ -7,9 +7,10 @@ import {
   Pc,
   fetchCallReadOnlyFunction
 } from '@stacks/transactions';
-import { STACKS_MAINNET } from '@stacks/network';
+import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
+import { CONTRACTS, NETWORK } from '../chess/blockchainConstants';
 
 const CONTRACT_ADDRESS = 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
 const CONTRACT_NAME = 'chessxu';

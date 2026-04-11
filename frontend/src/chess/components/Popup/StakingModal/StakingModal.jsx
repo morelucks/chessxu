@@ -53,20 +53,18 @@ const StakingModal = ({ onClosePopup }) => {
         setIsSubmitting(true);
         try {
             const amount = parseFloat(stakeAmount);
-            const wagerMicroStx = Math.floor(amount * 1_000_000);
+            const wagerMicroUnits = Math.floor(amount * 1_000_000);
 
-            createGame(wagerMicroStx, true,
-                () => {
-                    saveStakeData({ amount, timestamp: Date.now(), gameMode: 'pvp', status: 'active' });
+            createGame(wagerMicroUnits, isStxMode)
+                .then(() => {
+                    saveStakeData({ amount, timestamp: Date.now(), gameMode: 'pvp', status: 'active', isStx: isStxMode });
                     dispatch(setupNewGame('pvp'));
                     onClosePopup();
                     setIsSubmitting(false);
-                },
-                () => setIsSubmitting(false),
-            );
+                })
+                .catch(() => setIsSubmitting(false));
         } catch (error) {
             console.error('Error starting game:', error);
-            alert('Failed to open wallet. Please try again.');
             setIsSubmitting(false);
         }
     };
@@ -141,7 +139,7 @@ const StakingModal = ({ onClosePopup }) => {
                                 className={`quick-stake-btn ${stakeAmount === amount.toString() ? 'selected' : ''}`}
                                 disabled={isSubmitting}
                             >
-                                {amount} STX
+                                {amount} {isStxMode ? 'STX' : 'CHESS'}
                             </button>
                         ))}
                     </div>
@@ -159,16 +157,15 @@ const StakingModal = ({ onClosePopup }) => {
                     <div className="info-item">
                         <span className="info-label">Potential Reward:</span>
                         <span className="info-value">
-                            {stakeAmount && isValidAmount ? `${(parseFloat(stakeAmount) * 1.8).toFixed(2)} STX` : '-- STX'}
+                            {stakeAmount && isValidAmount 
+                                ? `${(parseFloat(stakeAmount) * 1.8).toFixed(2)} ${isStxMode ? 'STX' : 'CHESS'}` 
+                                : `-- ${isStxMode ? 'STX' : 'CHESS'}`
+                            }
                         </span>
                     </div>
                     <div className="info-item">
                         <span className="info-label">Win Probability:</span>
                         <span className="info-value">{winProbabilityPercent(1200, 1200)}%</span>
-                    </div>
-                    <div className="info-item">
-                        <span className="info-label">ELO if you win:</span>
-                        <span className="info-value">+{projectEloAfterWin(1200, 1200).newWinnerElo - 1200} pts</span>
                     </div>
                 </div>
             </div>
@@ -192,7 +189,7 @@ const StakingModal = ({ onClosePopup }) => {
                             Starting Game...
                         </>
                     ) : (
-                        `Stake ${stakeAmount || '0'} STRK & Start`
+                        `Stake ${stakeAmount || '0'} ${isStxMode ? 'STX' : 'CHESS'} & Start`
                     )}
                 </button>
             </div>

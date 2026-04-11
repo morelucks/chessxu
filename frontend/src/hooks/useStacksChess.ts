@@ -12,13 +12,12 @@ import useAppStore from '../zustand/store';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
 import { CONTRACTS, NETWORK } from '../chess/blockchainConstants';
 
-const CONTRACT_ADDRESS = 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
-const CONTRACT_NAME = 'chessxu';
+const [CONTRACT_ADDRESS, CONTRACT_NAME] = CONTRACTS.GAME.split('.');
 
 export const useStacksChess = () => {
   const address = useAppStore((state) => state.address);
   const { addToast } = useToaster();
-  const network = STACKS_MAINNET;
+  const network = NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
 
   const createGame = async (wager: number, isStxMode: boolean) => {
     if (!address) return;

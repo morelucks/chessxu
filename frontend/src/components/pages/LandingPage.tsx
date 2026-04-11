@@ -6,21 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Users, Sword } from "lucide-react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
-import { useStacksChess } from "../../hooks/useStacksChess";
-import { useCeloChess } from "../../hooks/useCeloChess";
-import useAppStore from "../../zustand/store";
+import { useOnChainGame } from "../../chess/hooks/useOnChainGame";
 
 export default function LandingPage() {
-  const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
   const navigate = useNavigate();
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
-  
-  const stacks = useStacksChess();
-  const celo = useCeloChess();
-  
-  const activeChain = useAppStore((state) => state.activeChain);
-  const activeGameId = useAppStore((state) => state.activeGameId);
-  
+  const { createGame, joinGame, activeGameId } = useOnChainGame();
   const [wager, setWager] = useState("0");
   const [idToJoin, setIdToJoin] = useState("");
   const [shouldNavigateAfterConnect, setShouldNavigateAfterConnect] = useState(false);
@@ -51,26 +42,18 @@ export default function LandingPage() {
     }
 
     const parsedWager = Number.parseFloat(wager);
-    
-    setIsCreatingMatch(true);
+    const wagerMicroStx = Number.isFinite(parsedWager) && parsedWager > 0 ? Math.floor(parsedWager * 1_000_000) : 0;
 
-    if (activeChain === 'celo') {
-      celo.createGame(wager, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/chess");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    } else {
-      // Stacks expects microSTX
-      const wagerMicroStx = Number.isFinite(parsedWager) && parsedWager > 0 ? Math.floor(parsedWager * 1_000_000) : 0;
-      stacks.createGame(wagerMicroStx, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/chess");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    }
+    setIsCreatingMatch(true);
+    createGame(
+      wagerMicroStx,
+      true,
+      () => {
+        setIsCreatingMatch(false);
+        navigate("/chess");
+      },
+      () => setIsCreatingMatch(false),
+    );
   };
 
   const handleJoinMatch = () => {
@@ -85,22 +68,14 @@ export default function LandingPage() {
     }
 
     setIsJoiningMatch(true);
-    
-    if (activeChain === 'celo') {
-      celo.joinGame(gameId, "0", true) // assuming 0 for simplicity as per previous code
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/chess");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    } else {
-      stacks.joinGame(gameId, 0, true)
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/chess");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    }
+    joinGame(
+      gameId,
+      () => {
+        setIsJoiningMatch(false);
+        navigate("/chess");
+      },
+      () => setIsJoiningMatch(false),
+    );
   };
 
   return (
@@ -129,29 +104,27 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md">
         <div className="container mx-auto px-6 py-4 max-w-6xl flex items-center justify-between">
           <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            ♟ Chessxu
+            ♟ Stack Chess
           </div>
-          {/* Mobile Connect Button - Hidden in MiniPay if not connected since it auto-connects */}
-          {!isMiniPay && (
-            <div className="md:hidden">
-              {isConnected ? (
-                <button
-                  onClick={handleStartPlaying}
-                  className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition"
-                >
-                  Play
-                </button>
-              ) : (
-                <button
-                  onClick={handleStartPlaying}
-                  disabled={isConnecting}
-                  className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isConnecting ? "..." : "Connect"}
-                </button>
-              )}
-            </div>
-          )}
+          {/* Mobile Connect Button */}
+          <div className="md:hidden">
+            {isConnected ? (
+              <button
+                onClick={handleStartPlaying}
+                className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition"
+              >
+                Play
+              </button>
+            ) : (
+              <button
+                onClick={handleStartPlaying}
+                disabled={isConnecting}
+                className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isConnecting ? "..." : "Connect"}
+              </button>
+            )}
+          </div>
           <div className="hidden md:flex gap-8 items-center text-sm text-white/70">
             <a href="#features" className="hover:text-white transition">
               Features
@@ -173,25 +146,21 @@ export default function LandingPage() {
                 >
                   Play Now
                 </button>
-                {!isMiniPay && (
-                  <button
-                    onClick={disconnect}
-                    className="px-3 py-2 rounded border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition text-xs"
-                  >
-                    Disconnect
-                  </button>
-                )}
+                <button
+                  onClick={disconnect}
+                  className="px-3 py-2 rounded border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition text-xs"
+                >
+                  Disconnect
+                </button>
               </div>
             ) : (
-              !isMiniPay && (
-                <button
-                  onClick={handleStartPlaying}
-                  disabled={isConnecting}
-                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isConnecting ? "Connecting..." : "Connect & Play"}
-                </button>
-              )
+              <button
+                onClick={handleStartPlaying}
+                disabled={isConnecting}
+                className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isConnecting ? "Connecting..." : "Connect & Play"}
+              </button>
             )}
           </div>
         </div>
@@ -219,9 +188,9 @@ export default function LandingPage() {
                              <Sword className="text-purple-400" size={20} />
                              Create New Match
                         </h3>
-                        <p className="text-sm text-white/60">Start a new chess game with an optional {activeChain === 'stacks' ? 'STX' : 'CELO'} wager.</p>
+                        <p className="text-sm text-white/60">Start a new chess game with an optional STX wager.</p>
                         <div className="mt-auto">
-                            <label className="text-xs text-white/40 block mb-1">Wager ({activeChain === 'stacks' ? 'STX' : 'CELO'})</label>
+                            <label className="text-xs text-white/40 block mb-1">Wager (STX)</label>
                             <input 
                                 type="number" 
                                 value={wager}

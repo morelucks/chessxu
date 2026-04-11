@@ -8,11 +8,12 @@ export const useCeloChess = () => {
   const { addToast } = useToaster();
   const network = CELO_CONFIG;
 
-  const createGame = async (wager: string, isNative: boolean) => {
+  const createGame = async (wager: number, isNative: boolean) => {
     if (!address) return;
 
     try {
-      const txHash = await celoService.createGame(wager, isNative);
+      const wagerInEth = celoService.formatWager(BigInt(wager));
+      const txHash = await celoService.createGame(wagerInEth, isNative);
       
       addToast({
         txId: txHash,
@@ -31,11 +32,12 @@ export const useCeloChess = () => {
     }
   };
 
-  const joinGame = async (gameId: number, wager: string, isNative: boolean) => {
+  const joinGame = async (gameId: number, wager: number, isNative: boolean) => {
     if (!address) return;
 
     try {
-      const txHash = await celoService.joinGame(gameId, wager, isNative);
+      const wagerInEth = celoService.formatWager(BigInt(wager));
+      const txHash = await celoService.joinGame(gameId, wagerInEth, isNative);
       
       addToast({
         txId: txHash,

@@ -20,8 +20,6 @@ export interface AuthState {
 export interface GameState {
   activeGameId: number | null;
   isGameStarted: boolean;
-  elo: number;
-  chessBalance: number;
 }
 
 export interface AppStore extends AuthState, GameState {
@@ -33,8 +31,6 @@ export interface AppStore extends AuthState, GameState {
   setIsLoading: (isLoading: boolean) => void;
   setActiveGameId: (gameId: number | null) => void;
   setGameStarted: (started: boolean) => void;
-  setElo: (elo: number) => void;
-  setChessBalance: (balance: number) => void;
   logout: () => void;
 }
 
@@ -52,8 +48,6 @@ const useAppStore = create<AppStore>()(
       // Game State
       activeGameId: null,
       isGameStarted: false,
-      elo: 1200,
-      chessBalance: 0,
 
       // Actions
       setAddress: (address: string | null) => {
@@ -86,8 +80,6 @@ const useAppStore = create<AppStore>()(
       setIsLoading: (isLoading: boolean) => set({ isLoading }),
       setActiveGameId: (activeGameId: number | null) => set({ activeGameId }),
       setGameStarted: (isGameStarted: boolean) => set({ isGameStarted }),
-      setElo: (elo: number) => set({ elo }),
-      setChessBalance: (chessBalance: number) => set({ chessBalance }),
       logout: () => {
         userSession.signUserOut();
         set({ 
@@ -96,9 +88,7 @@ const useAppStore = create<AppStore>()(
             celoAddress: null, 
             isAuthenticated: false, 
             activeGameId: null, 
-            isGameStarted: false,
-            elo: 1200,
-            chessBalance: 0
+            isGameStarted: false 
         });
       },
     }),

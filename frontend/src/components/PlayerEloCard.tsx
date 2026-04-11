@@ -1,4 +1,4 @@
-import { usePlayerStats } from '../hooks/useLeaderboard';
+import { usePlayerStats } from '../chess/hooks/useLeaderboard';
 import StreakBadge from './StreakBadge';
 import './PlayerEloCard.css';
 

@@ -10,7 +10,6 @@ import PlayerEloCard from './PlayerEloCard';
 import GameStatusBanner from './GameStatusBanner';
 import ResignButton from './ResignButton';
 import { useGameState } from '../chess/hooks/useGameState';
-import { useStacksChess } from '../hooks/useStacksChess';
 import useAppStore from '../zustand/store';
 import './ChessSidebar.css';
 
@@ -61,7 +60,7 @@ const StakeSection = ({ appState }: any) => {
                         </div>
                         <div className="stake-info">
                             <h4 className="stake-title">Active Stake</h4>
-                            <div className="stake-amount">{Number(stake.amount).toFixed(2)} {stake.isStx ? 'STX' : 'CHESS'}</div>
+                            <div className="stake-amount">{Number(stake.amount).toFixed(2)} STRK</div>
                         </div>
                     </div>
                     <div className="stake-status">
@@ -183,9 +182,7 @@ export default function ChessSidebar() {
             : null;
     const [leaderboardResults, setLeaderboardResults] = useState([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
-    const { isMyTurn } = useStacksChess();
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
-    isMyTurn(gameState, address || ''); // just evaluating the hook if side effects are expected
 
     // Always clear any persisted active stake on refresh/mount
     useEffect(() => {

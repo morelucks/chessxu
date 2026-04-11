@@ -1,44 +1,33 @@
+import { showConnect } from "@stacks/connect-react";
 import { Wallet, LogOut, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
 import useAppStore from "../zustand/store";
-import { usePlayerStats } from "../hooks/useLeaderboard";
-import { useStacksChess } from "../hooks/useStacksChess";
-import { useWalletAuth } from "../hooks/useWalletAuth";
-import { useEffect } from "react";
+import { userSession } from "../zustand/store";
 
 export function Header() {
-  const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
-  const activeChain = useAppStore((s) => s.activeChain);
-  const setActiveChain = useAppStore((s) => s.setActiveChain);
-  const eloFromStore = useAppStore((s) => s.elo);
-  const chessBalanceFromStore = useAppStore((s) => s.chessBalance);
-  const setChessBalance = useAppStore((s) => s.setChessBalance);
-  const setElo = useAppStore((s) => s.setElo);
-
-  const { elo: eloFromHook } = usePlayerStats(address);
-  const { getTokenBalance } = useStacksChess();
-  
-  const isAuthenticated = isConnected;
-
-  useEffect(() => {
-    if (address) {
-      getTokenBalance(address).then(setChessBalance).catch(() => setChessBalance(0));
-    }
-  }, [address, getTokenBalance, setChessBalance]);
-
-  useEffect(() => {
-    if (eloFromHook) setElo(Number(eloFromHook));
-  }, [eloFromHook, setElo]);
+  const address = useAppStore((s) => s.address);
+  const logout = useAppStore((s) => s.logout);
+  const setAddress = useAppStore((s) => s.setAddress);
+  const isAuthenticated = !!address;
 
   const handleConnect = () => {
-    connect();
+    showConnect({
+      appDetails: {
+        name: "Chessxu",
+        icon: window.location.origin + "/favicon.ico",
+      },
+      onFinish: () => {
+        if (userSession.isUserSignedIn()) {
+          const data = userSession.loadUserData();
+          setAddress(data.profile.stxAddress.mainnet);
+        }
+      },
+    });
   };
 
   const handleDisconnect = () => {
-    disconnect();
+    logout();
   };
-
-  const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-10 text-center relative">
@@ -54,54 +43,21 @@ export function Header() {
       </div>
 
       {/* Wallet Connection - Top Right */}
-      <div className="absolute top-4 right-4 md:top-8 md:right-8 flex items-center gap-4">
-        {!isAuthenticated && !isMiniPay && (
-          <div className="flex bg-slate-800/50 rounded-full p-1 border border-slate-700">
-            <button
-              onClick={() => setActiveChain('stacks')}
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
-                activeChain === 'stacks' 
-                  ? 'bg-orange-500 text-white shadow-lg' 
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Stacks
-            </button>
-            <button
-              onClick={() => setActiveChain('celo')}
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
-                activeChain === 'celo' 
-                  ? 'bg-emerald-500 text-white shadow-lg' 
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Celo
-            </button>
-          </div>
-        )}
-
+      <div className="absolute top-4 right-4 md:top-8 md:right-8">
         {!isAuthenticated ? (
-          !isMiniPay && (
-            <button
-              onClick={handleConnect}
-              className={`flex items-center gap-2 px-4 py-2 text-white rounded-full font-semibold transition-all shadow-lg active:scale-95 ${
-                activeChain === 'stacks'
-                  ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-500/20'
-                  : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20'
-              }`}
-            >
-              <Wallet size={18} />
-              <span>{isConnected ? "Connected" : isConnecting ? "Connecting..." : "Connect Wallet"}</span>
-            </button>
-          )
+          <button
+            onClick={handleConnect}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-lg hover:shadow-blue-500/20 active:scale-95"
+          >
+            <Wallet size={18} />
+            <span>Connect Wallet</span>
+          </button>
         ) : (
           <div className="flex items-center gap-3">
             <div className="flex flex-col items-end hidden md:flex">
-              <span className="text-sm font-bold text-white">
+              <span className="text-sm font-bold text-white">Connected</span>
+              <span className="text-xs text-slate-400 font-mono">
                 {address!.slice(0, 6)}...{address!.slice(-4)}
-              </span>
-              <span className="text-xs text-indigo-400 font-bold">
-                ELO: {eloFromStore} | {(chessBalanceFromStore / 1000000).toFixed(2)} CHESS
               </span>
             </div>
             <button

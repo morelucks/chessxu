@@ -5,13 +5,9 @@ import ChessScreen from "../components/pages/ChessScreen";
 import LeaderboardPage from "../components/pages/LeaderboardPage";
 import useAppStore, { userSession } from "../zustand/store";
 import { ToasterProvider } from "../components/ui/toasts/ToasterProvider";
-import { useMiniPay } from "../hooks/useMiniPay";
 
 function App() {
   const setAddress = useAppStore((state) => state.setAddress);
-  
-  // Attempt MiniPay auto-connection
-  useMiniPay();
 
   useEffect(() => {
     if (userSession.isUserSignedIn()) {

@@ -1,20 +1,19 @@
 import { useState } from 'react';
-import { useStacksChess } from '../hooks/useStacksChess';
-import useAppStore from '../zustand/store';
+import { useOnChainGame } from '../chess/hooks/useOnChainGame';
 import './ResignButton.css';
 
 export default function ResignButton() {
-  const { resign } = useStacksChess();
-  const activeGameId = useAppStore((state) => state.activeGameId);
+  const { resign, activeGameId } = useOnChainGame();
   const [confirming, setConfirming] = useState(false);
 
   if (!activeGameId) return null;
 
   const handleClick = () => {
     if (!confirming) { setConfirming(true); return; }
-    resign(activeGameId)
-      .then(() => setConfirming(false))
-      .catch(() => setConfirming(false));
+    resign(
+      () => setConfirming(false),
+      () => setConfirming(false),
+    );
   };
 
   return (

@@ -98,38 +98,16 @@ All Stacks contracts are deployed under the deployer address `SP34MN3DMM07BNAWYJ
 | Contract | Address | Explorer |
 |---|---|---|
 | **SIP-010 Trait** | `SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.sip-010-trait-ft-standard` | [View](https://explorer.hiro.so/txid/cbf387e01ae4a2965a50c3c44c04497e21f1c68623fa63b125b217f70352a97b?chain=mainnet) |
-| **Chessxu Token (CHESS)** | `SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.chessxu-token` | [View](https://explorer.hiro.so/txid/36f62fb1a2a2010e00b70f6bcdbb9759d205e0b00229015a5127101716fab913?chain=mainnet) |
-| **Chessxu Game** | `SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.chessxu` | [View](https://explorer.hiro.so/txid/0a9a3a2ee47d249797cbb79560436a6ea8b114b0be293ad11d83df519c11211f?chain=mainnet) |
+| **Chessxu Token (CHESS)** | `SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.chessxu-token` | [View](https://explorer.hiro.so/txid/d2a7f964315674699334b2249e3f0dd91299b259cb0b2a9664a02af3176aafc3?chain=mainnet) |
+| **Chessxu Leaderboard** | `SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.chessxu-leaderboard` | [View](https://explorer.hiro.so/txid/7179736dc5eba890258c4bf4ede052b2f81cbe068ed78e7ea69729c90f2e4adb?chain=mainnet) |
+| **Chessxu Game** | `SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.chessxu` | [View](https://explorer.hiro.so/txid/3c226d06cbddb24a78ecf7df6c01d897e07b27133e9810d0138e8dac37fa148c?chain=mainnet) |
 
 ### Celo Mainnet
 The Celo contract is deployed on the Celo Mainnet.
 
 | Contract | Address | Explorer |
 |---|---|---|
-| **Chessxu Game (v1)** | `0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14` | [View](https://celoscan.io/address/0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14) |
-| **Chessxu Game (v2)** | `0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E` | [View](https://celoscan.io/address/0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E) |
-
----
-
-## 🛠️ Interaction Scripts (Celo)
-
-We provide utility scripts in the `celo-contract/` directory to interact with the deployed Chessxu contract directly from the command line.
-
-### **Getting Started**
-Ensure your `.env` file contains the correct `CONTRACT_ADDRESS` and `MAINNET_PRIVATE_KEY`.
-
-### **Usage**
-```bash
-cd celo-contract
-# Get help and list of commands
-node scripts/util-interact.js --help
-
-# Examples
-node scripts/util-interact.js balance          # Check your wallet balance
-node scripts/util-interact.js last             # Get the ID of the last game created
-node scripts/util-interact.js create 0.1       # Create a new game with 0.1 CELO wager
-node scripts/util-interact.js get 5            # View details of game #5
-```
+| **Chessxu Game** | `0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14` | [View](https://celoscan.io/address/0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14) |
 
 ---
 

@@ -123,7 +123,7 @@ export const useStacksChess = () => {
         let attempts = 0;
         const checkMove = async () => {
           attempts++;
-          const updatedGame = await getGame(gameId);
+          const updatedGame = await getGame(gameId) as any;
           if (updatedGame?.['last-move']?.value !== String(move)) {
             if (attempts < 12) setTimeout(checkMove, 5000);
           }

@@ -318,6 +318,9 @@ export const useStacksChess = () => {
     }
   };
 
+  const isGameActive = (status: number) => status === 1;
+  const isWaitingForOpponent = (status: number) => status === 0;
+
   return { 
     address, 
     network, 
@@ -335,6 +338,8 @@ export const useStacksChess = () => {
     resolveGame,
     isPlayerWhite,
     isPlayerBlack,
-    getGameStatusString
+    getGameStatusString,
+    isGameActive,
+    isWaitingForOpponent
   };
 };

@@ -5,7 +5,9 @@ import {
   stringAsciiCV, 
   PostConditionMode,
   Pc,
-  fetchCallReadOnlyFunction
+  fetchCallReadOnlyFunction,
+  principalCV,
+  cvToValue
 } from '@stacks/transactions';
 import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
@@ -13,6 +15,8 @@ import { useToaster } from '../components/ui/toasts/ToasterProvider';
 import { CONTRACTS, NETWORK } from '../chess/blockchainConstants';
 
 const [CONTRACT_ADDRESS, CONTRACT_NAME] = CONTRACTS.GAME.split('.');
+const [TOKEN_ADDRESS, TOKEN_NAME] = CONTRACTS.TOKEN.split('.');
+const [LEADERBOARD_ADDRESS, LEADERBOARD_NAME] = CONTRACTS.LEADERBOARD.split('.');
 
 export const useStacksChess = () => {
   const address = useAppStore((state) => state.address);
@@ -145,5 +149,94 @@ export const useStacksChess = () => {
     }
   };
 
-  return { address, network, createGame, joinGame, submitMove, resign, getGame };
+  const getLastGameId = async () => {
+    const options = {
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: 'get-last-game-id',
+      functionArgs: [],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return Number(cvToValue(result));
+    } catch (e) {
+      console.error('Error fetching last game ID:', e);
+      return 0;
+    }
+  };
+
+  const getTokenBalance = async (userAddress: string) => {
+    const options = {
+      contractAddress: TOKEN_ADDRESS,
+      contractName: TOKEN_NAME,
+      functionName: 'get-balance',
+      functionArgs: [principalCV(userAddress)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return Number(cvToValue(result).value);
+    } catch (e) {
+      console.error('Error fetching token balance:', e);
+      return 0;
+    }
+  };
+
+  const getPlayerStats = async (playerAddress: string) => {
+    const options = {
+      contractAddress: LEADERBOARD_ADDRESS,
+      contractName: LEADERBOARD_NAME,
+      functionName: 'get-player-stats',
+      functionArgs: [principalCV(playerAddress)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      const val: any = cvToValue(result);
+      return val ? val.value : null;
+    } catch (e) {
+      console.error('Error fetching player stats:', e);
+      return null;
+    }
+  };
+
+  const getPlayerElo = async (playerAddress: string) => {
+    const options = {
+      contractAddress: LEADERBOARD_ADDRESS,
+      contractName: LEADERBOARD_NAME,
+      functionName: 'get-player-elo',
+      functionArgs: [principalCV(playerAddress)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return Number(cvToValue(result));
+    } catch (e) {
+      console.error('Error fetching player ELO:', e);
+      return 1200;
+    }
+  };
+
+  return { 
+    address, 
+    network, 
+    createGame, 
+    joinGame, 
+    submitMove, 
+    resign, 
+    getGame, 
+    getLastGameId,
+    getTokenBalance,
+    getPlayerStats,
+    getPlayerElo
+  };
 };

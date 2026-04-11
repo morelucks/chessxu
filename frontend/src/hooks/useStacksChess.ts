@@ -290,6 +290,19 @@ export const useStacksChess = () => {
     return elo?.toString() || '1200';
   };
 
+  const handleContractError = (error: string) => {
+    const errorCode = error.match(/\(err u(\d+)\)/)?.[1] || 
+                      error.match(/Aborted: (\d+)/)?.[1];
+    
+    if (errorCode) {
+      const code = parseInt(errorCode);
+      const message = CLARITY_ERRORS[code as keyof typeof CLARITY_ERRORS] || 
+                      LEADERBOARD_ERRORS[code as keyof typeof LEADERBOARD_ERRORS];
+      if (message) return message;
+    }
+    return error;
+  };
+
   const resolveGame = async (gameId: number, newStatus: number) => {
     if (!address) return;
 

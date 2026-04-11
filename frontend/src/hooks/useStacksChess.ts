@@ -282,6 +282,14 @@ export const useStacksChess = () => {
     }
   };
 
+  const getWinProbability = (rawScore: number) => {
+    return `${(rawScore / 10).toFixed(1)}%`;
+  };
+
+  const formatElo = (elo: number | null | undefined) => {
+    return elo?.toString() || '1200';
+  };
+
   const resolveGame = async (gameId: number, newStatus: number) => {
     if (!address) return;
 
@@ -306,6 +314,40 @@ export const useStacksChess = () => {
   const isPlayerWhite = (game: any, playerAddress: string) => game?.['player-w'] === playerAddress;
   const isPlayerBlack = (game: any, playerAddress: string) => game?.['player-b']?.value === playerAddress;
 
+  const getGameStatusString = (status: number) => {
+    switch (status) {
+      case 0: return 'Waiting for Opponent';
+      case 1: return 'Game in Progress';
+      case 2: return 'White Wins';
+      case 3: return 'Black Wins';
+      case 4: return 'Draw';
+      case 5: return 'Cancelled';
+      default: return 'Unknown';
+    }
+  };
+
+  const isGameActive = (status: number) => status === 1;
+  const isWaitingForOpponent = (status: number) => status === 0;
+
+  const getWagerDisplay = (wager: number, isStx: boolean) => {
+    if (isStx) return `${wager / 1000000} STX`;
+    return `${wager / 1000000} CHESS`;
+  };
+
+  const isMyTurn = (game: any, playerAddress: string) => {
+    if (!game || !playerAddress) return false;
+    const currentTurn = game.turn?.value || game.turn;
+    const isWhite = isPlayerWhite(game, playerAddress);
+    const isBlack = isPlayerBlack(game, playerAddress);
+    return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
+  };
+
+  const getOpponentAddress = (game: any, playerAddress: string) => {
+    if (!game || !playerAddress) return null;
+    const isWhite = isPlayerWhite(game, playerAddress);
+    return isWhite ? (game['player-b']?.value || null) : game['player-w'];
+  };
+
   return { 
     address, 
     network, 
@@ -322,6 +364,12 @@ export const useStacksChess = () => {
     getExpectedScore,
     resolveGame,
     isPlayerWhite,
-    isPlayerBlack
+    isPlayerBlack,
+    getGameStatusString,
+    isGameActive,
+    isWaitingForOpponent,
+    getWagerDisplay,
+    isMyTurn,
+    getOpponentAddress
   };
 };

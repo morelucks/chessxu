@@ -82,14 +82,32 @@ const StakingModal = ({ onClosePopup }) => {
                 <p>Stake an amount to kick off a PvP match!</p>
                 <div className="balance-display">
                     <span className="balance-label">Your Balance:</span>
-                    <span className="balance-amount">{playerBalance.toFixed(2)} STX</span>
+                    <span className="balance-amount">
+                        {isStxMode ? `${playerBalance.toFixed(2)} STX` : `${(chessBalance / 1_000_000).toFixed(2)} CHESS`}
+                    </span>
+                </div>
+                <div className="token-toggle" style={{ marginTop: '12px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                    <button 
+                        className={`btn-toggle ${isStxMode ? 'active' : ''}`}
+                        onClick={() => setIsStxMode(true)}
+                        style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '12px', background: isStxMode ? '#3b82f6' : '#1e293b', border: 'none', color: 'white', cursor: 'pointer' }}
+                    >
+                        STX
+                    </button>
+                    <button 
+                        className={`btn-toggle ${!isStxMode ? 'active' : ''}`}
+                        onClick={() => setIsStxMode(false)}
+                        style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '12px', background: !isStxMode ? '#3b82f6' : '#1e293b', border: 'none', color: 'white', cursor: 'pointer' }}
+                    >
+                        CHESS
+                    </button>
                 </div>
             </div>
 
             <div className="staking-content">
                 <div className="stake-input-section">
                     <label htmlFor="stakeAmount" className="stake-label">
-                        Stake Amount (STX)
+                        Stake Amount ({isStxMode ? 'STX' : 'CHESS'})
                     </label>
                     <div className="stake-input-container">
                         <input
@@ -101,13 +119,13 @@ const StakingModal = ({ onClosePopup }) => {
                             className={`stake-input ${!isValidAmount && stakeAmount ? 'invalid' : ''}`}
                             disabled={isSubmitting}
                         />
-                        <span className="eth-symbol">STX</span>
+                        <span className="eth-symbol">{isStxMode ? 'STX' : 'CHESS'}</span>
                     </div>
                     {!isValidAmount && stakeAmount && (
                         <p className="error-message">
-                            {parseFloat(stakeAmount) > playerBalance 
-                                ? `Insufficient balance. You have ${playerBalance.toFixed(2)} STX`
-                                : 'Please enter a valid amount between 0.1 and 100 STX'
+                            {parseFloat(stakeAmount) > (isStxMode ? playerBalance : (chessBalance / 1_000_000))
+                                ? `Insufficient balance. You have ${isStxMode ? playerBalance.toFixed(2) + ' STX' : (chessBalance / 1_000_000).toFixed(2) + ' CHESS'}`
+                                : `Please enter a valid amount between 0.1 and 1000 ${isStxMode ? 'STX' : 'CHESS'}`
                             }
                         </p>
                     )}

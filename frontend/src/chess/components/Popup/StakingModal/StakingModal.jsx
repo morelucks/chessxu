@@ -22,16 +22,19 @@ const StakingModal = ({ onClosePopup }) => {
     const quickStakes = [10, 15, 20, 25, 30];
 
     useEffect(() => {
-        resetDummyBalance();
-        // Load player balance
-        setPlayerBalance(getDummyBalance());
-    }, []);
+        if (address) {
+            // In a real app, STX balance would come from an API or hook
+            // For now we'll simulate loading, but fetch CHESS balance
+            getTokenBalance(address).then(setChessBalance).catch(() => setChessBalance(0));
+            setPlayerBalance(100); // Simulated STX balance for demo
+        }
+    }, [address, getTokenBalance]);
 
     useEffect(() => {
-        // Validate stake amount
         const amount = parseFloat(stakeAmount);
-        setIsValidAmount(amount > 0 && amount <= playerBalance && amount <= 100 && !isNaN(amount));
-    }, [stakeAmount, playerBalance]);
+        const currentBalance = isStxMode ? playerBalance : (chessBalance / 1_000_000);
+        setIsValidAmount(amount > 0 && amount <= currentBalance && amount <= 1000 && !isNaN(amount));
+    }, [stakeAmount, playerBalance, chessBalance, isStxMode]);
 
     const handleQuickStake = (amount) => {
         setStakeAmount(amount.toString());

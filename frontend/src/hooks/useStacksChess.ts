@@ -168,5 +168,34 @@ export const useStacksChess = () => {
     }
   };
 
-  return { address, network, createGame, joinGame, submitMove, resign, getGame, getLastGameId };
+  const getTokenBalance = async (userAddress: string) => {
+    const options = {
+      contractAddress: TOKEN_ADDRESS,
+      contractName: TOKEN_NAME,
+      functionName: 'get-balance',
+      functionArgs: [principalCV(userAddress)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return Number(cvToValue(result).value);
+    } catch (e) {
+      console.error('Error fetching token balance:', e);
+      return 0;
+    }
+  };
+
+  return { 
+    address, 
+    network, 
+    createGame, 
+    joinGame, 
+    submitMove, 
+    resign, 
+    getGame, 
+    getLastGameId,
+    getTokenBalance
+  };
 };

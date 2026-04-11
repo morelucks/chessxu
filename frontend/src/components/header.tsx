@@ -56,9 +56,11 @@ export function Header() {
         ) : (
           <div className="flex items-center gap-3">
             <div className="flex flex-col items-end hidden md:flex">
-              <span className="text-sm font-bold text-white">Connected</span>
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-sm font-bold text-white">
                 {address!.slice(0, 6)}...{address!.slice(-4)}
+              </span>
+              <span className="text-xs text-indigo-400 font-bold">
+                ELO: {elo}
               </span>
             </div>
             <button

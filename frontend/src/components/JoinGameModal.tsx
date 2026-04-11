@@ -6,16 +6,30 @@ interface Props { onClose: () => void; }
 export default function JoinGameModal({ onClose }: Props) {
   const [gameId, setGameId] = useState('');
   const [joining, setJoining] = useState(false);
-  const { joinGame } = useOnChainGame();
+  const [preview, setPreview] = useState<any>(null);
+  const { joinGame, getGame, getWagerDisplay } = useStacksChess();
+
+  useEffect(() => {
+    const id = parseInt(gameId);
+    if (id > 0) {
+      getGame(id).then(setPreview).catch(() => setPreview(null));
+    } else {
+      setPreview(null);
+    }
+  }, [gameId, getGame]);
 
   const handleJoin = () => {
     const id = parseInt(gameId);
-    if (!id || id <= 0) return;
+    if (!id || !preview) return;
     setJoining(true);
-    joinGame(id,
-      () => { setJoining(false); onClose(); },
-      () => setJoining(false),
-    );
+    
+    // contract wager is at preview.wager.value or similar from cvToValue
+    const wager = Number(preview.wager?.value || 0);
+    const isStx = preview['is-stx']?.value || false;
+
+    joinGame(id, wager, isStx)
+      .then(() => { setJoining(false); onClose(); })
+      .catch(() => setJoining(false));
   };
 
   return (

@@ -28,6 +28,7 @@ function PlayerRow({ address, rank }: PlayerRowProps) {
       <td>{stats ? String(stats['wins'] ?? 0) : '—'}</td>
       <td>{stats ? String(stats['losses'] ?? 0) : '—'}</td>
       <td>{stats ? String(stats['draws'] ?? 0) : '—'}</td>
+      <td className="lb-streak">{stats ? `🔥 ${stats['streak'] ?? 0}` : '—'}</td>
     </tr>
   );
 }
@@ -60,9 +61,10 @@ export default function OnChainLeaderboard() {
               <th>#</th>
               <th>Address</th>
               <th>ELO</th>
-              <th>W</th>
-              <th>L</th>
-              <th>D</th>
+               <th>W</th>
+               <th>L</th>
+               <th>D</th>
+               <th>Streak</th>
             </tr>
           </thead>
           <tbody>

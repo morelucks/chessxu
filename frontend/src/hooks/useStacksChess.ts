@@ -12,7 +12,7 @@ import {
 import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
-import { CONTRACTS, NETWORK } from '../chess/blockchainConstants';
+import { CONTRACTS, NETWORK, CLARITY_ERRORS, LEADERBOARD_ERRORS } from '../chess/blockchainConstants';
 
 const [CONTRACT_ADDRESS, CONTRACT_NAME] = CONTRACTS.GAME.split('.');
 const [TOKEN_ADDRESS, TOKEN_NAME] = CONTRACTS.TOKEN.split('.');
@@ -290,6 +290,19 @@ export const useStacksChess = () => {
     return elo?.toString() || '1200';
   };
 
+  const handleContractError = (error: string) => {
+    const errorCode = error.match(/\(err u(\d+)\)/)?.[1] || 
+                      error.match(/Aborted: (\d+)/)?.[1];
+    
+    if (errorCode) {
+      const code = parseInt(errorCode);
+      const message = (CLARITY_ERRORS as any)[code] || 
+                      (LEADERBOARD_ERRORS as any)[code];
+      if (message) return message;
+    }
+    return error;
+  };
+
   const resolveGame = async (gameId: number, newStatus: number) => {
     if (!address) return;
 
@@ -372,6 +385,7 @@ export const useStacksChess = () => {
     isMyTurn,
     getOpponentAddress,
     getWinProbability,
-    formatElo
+    formatElo,
+    handleContractError
   };
 };

@@ -334,6 +334,12 @@ export const useStacksChess = () => {
     return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
   };
 
+  const getOpponentAddress = (game: any, playerAddress: string) => {
+    if (!game || !playerAddress) return null;
+    const isWhite = isPlayerWhite(game, playerAddress);
+    return isWhite ? (game['player-b']?.value || null) : game['player-w'];
+  };
+
   return { 
     address, 
     network, 
@@ -355,6 +361,7 @@ export const useStacksChess = () => {
     isGameActive,
     isWaitingForOpponent,
     getWagerDisplay,
-    isMyTurn
+    isMyTurn,
+    getOpponentAddress
   };
 };

@@ -1,4 +1,4 @@
-import { useGlobalStats, usePlayerStats, useExpectedScore } from '../chess/hooks/useLeaderboard';
+import { useGlobalStats, usePlayerStats } from '../hooks/useLeaderboard';
 import useAppStore from '../zustand/store';
 import './OnChainLeaderboard.css';
 
@@ -35,7 +35,6 @@ function PlayerRow({ address, rank }: PlayerRowProps) {
 export default function OnChainLeaderboard() {
   const { globalStats, loading, refetch } = useGlobalStats();
   const address = useAppStore((s) => s.address);
-  useExpectedScore(address ?? '', address ?? '');
 
   return (
     <div className="onchain-lb">

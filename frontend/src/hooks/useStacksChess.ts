@@ -370,6 +370,8 @@ export const useStacksChess = () => {
     isWaitingForOpponent,
     getWagerDisplay,
     isMyTurn,
-    getOpponentAddress
+    getOpponentAddress,
+    getWinProbability,
+    formatElo
   };
 };

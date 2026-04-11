@@ -296,8 +296,8 @@ export const useStacksChess = () => {
     
     if (errorCode) {
       const code = parseInt(errorCode);
-      const message = CLARITY_ERRORS[code as keyof typeof CLARITY_ERRORS] || 
-                      LEADERBOARD_ERRORS[code as keyof typeof LEADERBOARD_ERRORS];
+      const message = (CLARITY_ERRORS as any)[code] || 
+                      (LEADERBOARD_ERRORS as any)[code];
       if (message) return message;
     }
     return error;
@@ -382,8 +382,6 @@ export const useStacksChess = () => {
     isGameActive,
     isWaitingForOpponent,
     getWagerDisplay,
-    isMyTurn,
-    getOpponentAddress,
     getWinProbability,
     formatElo,
     handleContractError,

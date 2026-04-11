@@ -245,6 +245,25 @@ export const useStacksChess = () => {
     }
   };
 
+  const getExpectedScore = async (playerA: string, playerB: string) => {
+    const options = {
+      contractAddress: LEADERBOARD_ADDRESS,
+      contractName: LEADERBOARD_NAME,
+      functionName: 'get-expected-score',
+      functionArgs: [principalCV(playerA), principalCV(playerB)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return Number(cvToValue(result));
+    } catch (e) {
+      console.error('Error fetching expected score:', e);
+      return 500;
+    }
+  };
+
   return { 
     address, 
     network, 
@@ -257,6 +276,7 @@ export const useStacksChess = () => {
     getTokenBalance,
     getPlayerStats,
     getPlayerElo,
-    getGlobalStats
+    getGlobalStats,
+    getExpectedScore
   };
 };

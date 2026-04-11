@@ -321,6 +321,19 @@ export const useStacksChess = () => {
   const isGameActive = (status: number) => status === 1;
   const isWaitingForOpponent = (status: number) => status === 0;
 
+  const getWagerDisplay = (wager: number, isStx: boolean) => {
+    if (isStx) return `${wager / 1000000} STX`;
+    return `${wager / 1000000} CHESS`;
+  };
+
+  const isMyTurn = (game: any, playerAddress: string) => {
+    if (!game || !playerAddress) return false;
+    const currentTurn = game.turn?.value || game.turn;
+    const isWhite = isPlayerWhite(game, playerAddress);
+    const isBlack = isPlayerBlack(game, playerAddress);
+    return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
+  };
+
   return { 
     address, 
     network, 
@@ -340,6 +353,8 @@ export const useStacksChess = () => {
     isPlayerBlack,
     getGameStatusString,
     isGameActive,
-    isWaitingForOpponent
+    isWaitingForOpponent,
+    getWagerDisplay,
+    isMyTurn
   };
 };

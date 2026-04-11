@@ -27,10 +27,19 @@ export const useStacksChess = () => {
     if (!address) return;
 
     const postConditions = [];
-    if (wager > 0 && isStxMode) {
-        postConditions.push(
-            Pc.principal(address).willSendEq(BigInt(wager)).ustx()
-        );
+    if (wager > 0) {
+        if (isStxMode) {
+            postConditions.push(
+                Pc.principal(address).willSendEq(BigInt(wager)).ustx()
+            );
+        } else {
+            postConditions.push(
+                Pc.principal(address).willSendEq(BigInt(wager)).ft(
+                    `${TOKEN_ADDRESS}.${TOKEN_NAME}`,
+                    'chessxu-token'
+                )
+            );
+        }
     }
 
     await openContractCall({
@@ -56,10 +65,19 @@ export const useStacksChess = () => {
     if (!address) return;
 
     const postConditions = [];
-    if (wager > 0 && isStxMode) {
-        postConditions.push(
-            Pc.principal(address).willSendEq(BigInt(wager)).ustx()
-        );
+    if (wager > 0) {
+        if (isStxMode) {
+            postConditions.push(
+                Pc.principal(address).willSendEq(BigInt(wager)).ustx()
+            );
+        } else {
+            postConditions.push(
+                Pc.principal(address).willSendEq(BigInt(wager)).ft(
+                    `${TOKEN_ADDRESS}.${TOKEN_NAME}`,
+                    'chessxu-token'
+                )
+            );
+        }
     }
 
     await openContractCall({
@@ -226,6 +244,68 @@ export const useStacksChess = () => {
     }
   };
 
+  const getGlobalStats = async () => {
+    const options = {
+      contractAddress: LEADERBOARD_ADDRESS,
+      contractName: LEADERBOARD_NAME,
+      functionName: 'get-global-stats',
+      functionArgs: [],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return cvToValue(result);
+    } catch (e) {
+      console.error('Error fetching global stats:', e);
+      return null;
+    }
+  };
+
+  const getExpectedScore = async (playerA: string, playerB: string) => {
+    const options = {
+      contractAddress: LEADERBOARD_ADDRESS,
+      contractName: LEADERBOARD_NAME,
+      functionName: 'get-expected-score',
+      functionArgs: [principalCV(playerA), principalCV(playerB)],
+      network,
+      senderAddress: address || CONTRACT_ADDRESS,
+    };
+
+    try {
+      const result = await fetchCallReadOnlyFunction(options);
+      return Number(cvToValue(result));
+    } catch (e) {
+      console.error('Error fetching expected score:', e);
+      return 500;
+    }
+  };
+
+  const resolveGame = async (gameId: number, newStatus: number) => {
+    if (!address) return;
+
+    await openContractCall({
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: 'resolve-game',
+      functionArgs: [uintCV(gameId), uintCV(newStatus)],
+      postConditionMode: PostConditionMode.Allow,
+      network,
+      onFinish: (data) => {
+        addToast({
+          txId: data.txId,
+          status: 'success',
+          message: 'Game resolution transaction broadcasted'
+        });
+        console.log('Resolved game:', data.txId);
+      },
+    });
+  };
+
+  const isPlayerWhite = (game: any, playerAddress: string) => game?.['player-w'] === playerAddress;
+  const isPlayerBlack = (game: any, playerAddress: string) => game?.['player-b']?.value === playerAddress;
+
   return { 
     address, 
     network, 
@@ -237,6 +317,11 @@ export const useStacksChess = () => {
     getLastGameId,
     getTokenBalance,
     getPlayerStats,
-    getPlayerElo
+    getPlayerElo,
+    getGlobalStats,
+    getExpectedScore,
+    resolveGame,
+    isPlayerWhite,
+    isPlayerBlack
   };
 };

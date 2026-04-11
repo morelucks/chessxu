@@ -306,6 +306,18 @@ export const useStacksChess = () => {
   const isPlayerWhite = (game: any, playerAddress: string) => game?.['player-w'] === playerAddress;
   const isPlayerBlack = (game: any, playerAddress: string) => game?.['player-b']?.value === playerAddress;
 
+  const getGameStatusString = (status: number) => {
+    switch (status) {
+      case 0: return 'Waiting for Opponent';
+      case 1: return 'Game in Progress';
+      case 2: return 'White Wins';
+      case 3: return 'Black Wins';
+      case 4: return 'Draw';
+      case 5: return 'Cancelled';
+      default: return 'Unknown';
+    }
+  };
+
   return { 
     address, 
     network, 
@@ -322,6 +334,7 @@ export const useStacksChess = () => {
     getExpectedScore,
     resolveGame,
     isPlayerWhite,
-    isPlayerBlack
+    isPlayerBlack,
+    getGameStatusString
   };
 };

@@ -27,10 +27,19 @@ export const useStacksChess = () => {
     if (!address) return;
 
     const postConditions = [];
-    if (wager > 0 && isStxMode) {
-        postConditions.push(
-            Pc.principal(address).willSendEq(BigInt(wager)).ustx()
-        );
+    if (wager > 0) {
+        if (isStxMode) {
+            postConditions.push(
+                Pc.principal(address).willSendEq(BigInt(wager)).ustx()
+            );
+        } else {
+            postConditions.push(
+                Pc.principal(address).willSendEq(BigInt(wager)).ft(
+                    `${TOKEN_ADDRESS}.${TOKEN_NAME}`,
+                    'chessxu-token'
+                )
+            );
+        }
     }
 
     await openContractCall({

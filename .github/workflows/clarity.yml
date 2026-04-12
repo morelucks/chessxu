@@ -6,11 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Clarinet
-        uses: hirosystems/setup-clarinet@v3
+      - name: Install Clarinet
+        uses: hirosystems/clarinet-action@v2
         with:
-          clarinet-version: '3.11.0'
-      - name: Clarinet Check
-        run: |
-          cd stacks-contracts
-          clarinet check
+          args: check --manifest-path stacks-contracts/Clarinet.toml

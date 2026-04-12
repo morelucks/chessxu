@@ -33,7 +33,7 @@ export default function FeatureGrid() {
     <section className="container mx-auto px-6 py-24 max-w-6xl">
       <div className="space-y-16">
         <div className="text-center space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold">Why Choose Stark Chess?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold">Why Choose Chessxu?</h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
             Experience the future of competitive gaming with blockchain-powered chess
           </p>

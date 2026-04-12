@@ -15,7 +15,7 @@ export default function HeroSection({ onStartPlaying, isConnecting, isConnected 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-2 backdrop-blur-sm">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-sm text-purple-200">On-chain gameplay • Starknet powered</span>
+            <span className="text-sm text-purple-200">On-chain gameplay • Celo & Stacks powered</span>
           </div>
 
           {/* Main headline */}
@@ -32,7 +32,7 @@ export default function HeroSection({ onStartPlaying, isConnecting, isConnected 
 
             <p className="text-xl text-white/60 max-w-2xl leading-relaxed">
               Challenge players globally in verifiable, on-chain chess battles. Every move recorded permanently on
-              Starknet. Prove your mastery. Claim your legacy.
+              Celo & Stacks. Prove your mastery. Claim your legacy.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export default function HeroSection({ onStartPlaying, isConnecting, isConnected 
               disabled={isConnecting}
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              {isConnecting ? "Connecting Wallet..." : isConnected ? "Start Playing Now" : "StarkChess"}
+              {isConnecting ? "Connecting Wallet..." : isConnected ? "Start Playing Now" : "Play Chessxu"}
               {!isConnecting && <ChevronRight className="w-5 h-5" />}
             </button>
             <button className="px-8 py-4 rounded-lg border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition backdrop-blur-sm font-semibold">

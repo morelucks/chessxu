@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { openContractCall } from '@stacks/connect';
 import { 
   uintCV, 

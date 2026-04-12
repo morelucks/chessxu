@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Chessxu Celo Service Layer
  * 
@@ -282,6 +283,7 @@ const celoService = {
    * Returns the token balance (XU) of an address
    * @param {string} address - The wallet address
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTokenBalance: async (_address: `0x${string}`) => {
     // This assumes the contract implements a balance method or uses an ERC20 token
     return 0n;

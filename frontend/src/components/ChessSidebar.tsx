@@ -185,7 +185,7 @@ export default function ChessSidebar() {
     const [showStakingModal, setShowStakingModal] = useState(false);
     const { isMyTurn } = useStacksChess();
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
-    const myTurn = isMyTurn(gameState, address || '');
+    isMyTurn(gameState, address || ''); // just evaluating the hook if side effects are expected
 
     // Always clear any persisted active stake on refresh/mount
     useEffect(() => {

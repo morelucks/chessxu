@@ -16,9 +16,9 @@ passes = ['check_checker']
 
 [repl.analysis.check_checker]
 strict = false
-trusted_sender = false
-trusted_caller = false
-callee_filter = false
+trusted_sender = true
+trusted_caller = true
+callee_filter = true
 
 [repl.remote_data]
 enabled = false

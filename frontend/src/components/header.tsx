@@ -5,22 +5,31 @@ import useAppStore from "../zustand/store";
 import { userSession } from "../zustand/store";
 import { usePlayerStats } from "../hooks/useLeaderboard";
 import { useStacksChess } from "../hooks/useStacksChess";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export function Header() {
   const address = useAppStore((s) => s.address);
   const logout = useAppStore((s) => s.logout);
   const setAddress = useAppStore((s) => s.setAddress);
-  const { elo } = usePlayerStats(address);
+  const eloFromStore = useAppStore((s) => s.elo);
+  const chessBalanceFromStore = useAppStore((s) => s.chessBalance);
+  const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const setElo = useAppStore((s) => s.setElo);
+
+  const { elo: eloFromHook } = usePlayerStats(address);
   const { getTokenBalance } = useStacksChess();
-  const [chessBalance, setChessBalance] = useState<number>(0);
+  
   const isAuthenticated = !!address;
 
   useEffect(() => {
     if (address) {
       getTokenBalance(address).then(setChessBalance).catch(() => setChessBalance(0));
     }
-  }, [address, getTokenBalance]);
+  }, [address, getTokenBalance, setChessBalance]);
+
+  useEffect(() => {
+    if (eloFromHook) setElo(Number(eloFromHook));
+  }, [eloFromHook, setElo]);
 
   const handleConnect = () => {
     showConnect({
@@ -71,7 +80,7 @@ export function Header() {
                 {address!.slice(0, 6)}...{address!.slice(-4)}
               </span>
               <span className="text-xs text-indigo-400 font-bold">
-                ELO: {elo} | {(chessBalance / 1000000).toFixed(2)} CHESS
+                ELO: {eloFromStore} | {(chessBalanceFromStore / 1000000).toFixed(2)} CHESS
               </span>
             </div>
             <button

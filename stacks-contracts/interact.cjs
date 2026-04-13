@@ -10,7 +10,9 @@ const {
   boolCV
 } = require('@stacks/transactions');
 
-const senderKey = 'STX_KEY_SCRUBBED';
+require('dotenv').config();
+const senderKey = process.env.STX_PRIVATE_KEY || '';
+const myAddress = process.env.STX_ADDRESS || 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
 const contractAddress = 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
 const contractName = 'chessxu';
 const FEE_PER_TX = 10000; // 0.01 STX per tx
@@ -53,8 +55,7 @@ function sleep(ms) {
 async function runInteractions() {
   console.log('🚀 STACKS INTERACTION SCRIPT V2 (MEMPOOL-AWARE)');
   console.log('Fetching starting nonce...');
-  const baseNonce = await getNextNonce(senderKey === 'STX_KEY_SCRUBBED' ? 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B' : ''); // Mapping key to address for mempool check
-  const myAddress = 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
+  const baseNonce = await getNextNonce(myAddress);
   
   console.log(`Starting ${NUM_TXS} transactions at nonce ${baseNonce}, fee ${FEE_PER_TX} uSTX (0.01 STX) each...`);
   console.log(`Total STX needed for fees: ${(NUM_TXS * FEE_PER_TX / 1_000_000).toFixed(2)} STX\n`);

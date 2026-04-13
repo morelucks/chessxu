@@ -38,6 +38,9 @@ import {
 import { celo } from 'viem/chains';
 import { CELO_CONFIG } from '../blockchainConstants';
 import { CHESSXU_ABI } from './contractAbi';
+import { celo as celoChain } from 'viem/chains';
+
+const CUSD_ADDRESS = '0x765DE816845861e75A25fCA122bb6898B8B1282a';
 
 /**
  * Service to handle all Celo blockchain interactions
@@ -93,6 +96,20 @@ const celoService = {
   },
   
   /**
+   * Returns common transaction options for MiniPay compatibility
+   */
+  getTxOptions: () => {
+    const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
+    if (isMiniPay) {
+      return {
+        type: 'legacy' as const,
+        feeCurrency: CUSD_ADDRESS as `0x${string}`, // Default to cUSD for gas in MiniPay
+      };
+    }
+    return {};
+  },
+  
+  /**
    * Converts a hex string to a BigInt
    * @param {string} hex - The hex string to convert
    */
@@ -129,6 +146,7 @@ const celoService = {
       args: [BigInt(parseEther(wagerInEth)), isNative],
       account: address,
       value: isNative ? parseEther(wagerInEth) : 0n,
+      ...celoService.getTxOptions(),
     });
   },
 
@@ -149,6 +167,7 @@ const celoService = {
       args: [BigInt(gameId)],
       account: address,
       value: isNative ? parseEther(wagerInEth) : 0n,
+      ...celoService.getTxOptions(),
     });
   },
 
@@ -168,6 +187,7 @@ const celoService = {
       functionName: 'submitMove',
       args: [BigInt(gameId), moveStr, boardState],
       account: address,
+      ...celoService.getTxOptions(),
     });
   },
 
@@ -185,6 +205,7 @@ const celoService = {
       functionName: 'resign',
       args: [BigInt(gameId)],
       account: address,
+      ...celoService.getTxOptions(),
     });
   },
 

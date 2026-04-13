@@ -20,9 +20,9 @@ const PUBLIC_RPCS = [
   "https://1rpc.io/celo", // 1RPC
 ].filter(Boolean);
 
-const TOTAL_MOVES = 50; // Target number of submitMove transactions
+const TOTAL_MOVES = 53; // Target number of submitMove transactions
 const MOVES_PER_GAME = 10; // Moves per game (5 per player per game)
-const TOTAL_GAMES = Math.ceil(TOTAL_MOVES / MOVES_PER_GAME); // 5 games
+const TOTAL_GAMES = Math.ceil(TOTAL_MOVES / MOVES_PER_GAME); // 6 games
 const WIN_GAME_INDEX = TOTAL_GAMES - 1; // Last game ends with a resignation win
 
 // ─── Realistic chess move sequences ──────────────────────────────
@@ -77,11 +77,14 @@ async function waitForTx(tx, label) {
 
 // ─── Main Script ─────────────────────────────────────────────────
 async function main() {
+  const pkW = process.env.MAINNET_PRIVATE_KEY2 || process.env.MAINNET_PRIVATE_KEY;
+  const pkB = process.env.OPPONENT_PRIVATE_KEY;
+
   // Validate env
-  if (!process.env.MAINNET_PRIVATE_KEY) {
-    throw new Error("Missing MAINNET_PRIVATE_KEY in .env");
+  if (!pkW) {
+    throw new Error("Missing MAINNET_PRIVATE_KEY or MAINNET_PRIVATE_KEY2 in .env");
   }
-  if (!process.env.OPPONENT_PRIVATE_KEY) {
+  if (!pkB) {
     throw new Error("Missing OPPONENT_PRIVATE_KEY in .env");
   }
   if (!CONTRACT_ADDRESS) {
@@ -94,8 +97,11 @@ async function main() {
   
   for (const url of PUBLIC_RPCS) {
     try {
-      const p = new ethers.JsonRpcProvider(url);
-      await p.getNetwork(); // Test connection
+      const p = new ethers.JsonRpcProvider(url, undefined, { staticNetwork: true });
+      await Promise.race([
+          p.getNetwork(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000))
+      ]);
       provider = p;
       successfulRpc = url;
       break;
@@ -105,11 +111,11 @@ async function main() {
   }
 
   if (!provider) {
-    throw new Error("Could not connect to any Celo RPC. Please check your internet or provide a WORKING_RPC in .env");
+    throw new Error("Could not connect to any Celo RPC. Please check your internet connection.");
   }
 
-  const walletW = new ethers.Wallet(process.env.MAINNET_PRIVATE_KEY, provider);
-  const walletB = new ethers.Wallet(process.env.OPPONENT_PRIVATE_KEY, provider);
+  const walletW = new ethers.Wallet(pkW, provider);
+  const walletB = new ethers.Wallet(pkB, provider);
 
   console.log("╔══════════════════════════════════════════════════╗");
   console.log("║        Chessxu Interaction Script                ║");
@@ -152,13 +158,13 @@ async function main() {
   // ─── Automatic Funding for Player B ───────────────────────────
   const MIN_BAL_B = ethers.parseEther("0.05"); // 0.05 CELO is enough for 50 moves
   if (balB < MIN_BAL_B) {
-    if (balW < ethers.parseEther("0.2")) {
+    if (balW < ethers.parseEther("0.1")) {
       throw new Error("Player W does not have enough funds to fuel Player B. Please add more CELO to Player W.");
     }
-    console.log(`   ⛽ Player B is low on gas. Sending 0.1 CELO from Player W...`);
+    console.log(`   ⛽ Player B is low on gas. Sending 0.05 CELO from Player W...`);
     const txFund = await walletW.sendTransaction({
       to: walletB.address,
-      value: ethers.parseEther("0.1"),
+      value: ethers.parseEther("0.05"),
     });
     await waitForTx(txFund, "Funding Player B");
     console.log();

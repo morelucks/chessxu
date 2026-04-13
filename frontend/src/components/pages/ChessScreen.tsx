@@ -28,8 +28,10 @@ function getStatusLabel(status: number | null | undefined) {
 
 export default function ChessScreen() {
   const navigate = useNavigate();
-  const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
-  const activeGameId = useAppStore((s) => s.activeGameId);
+  const { isConnected, isConnecting, connect, disconnect } = useWalletAuth();
+  const address = useAppStore((state) => state.address);
+  const activeChain = useAppStore((state) => state.activeChain);
+  const activeGameId = useAppStore((state) => state.activeGameId);
   const { gameState } = useGameState(activeGameId);
   const [currentGameMode, setCurrentGameMode] = useState('pvc');
 
@@ -79,7 +81,7 @@ export default function ChessScreen() {
               </div>
             ) : null}
             <p className="text-xs text-slate-400">
-              Stacks Blockchain
+              {activeChain === 'stacks' ? 'Stacks Blockchain' : 'Celo Blockchain'}
               {address ? (
                 <span className="ml-2 text-white">• {address.slice(0, 6)}…{address.slice(-4)}</span>
               ) : null}

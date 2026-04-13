@@ -106,7 +106,30 @@ The Celo contract is deployed on the Celo Mainnet.
 
 | Contract | Address | Explorer |
 |---|---|---|
-| **Chessxu Game** | `0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14` | [View](https://celoscan.io/address/0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14) |
+| **Chessxu Game (v1)** | `0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14` | [View](https://celoscan.io/address/0xC43b25bB19a6Ccca549bb8E5C21fF0C44161EA14) |
+| **Chessxu Game (v2)** | `0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E` | [View](https://celoscan.io/address/0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E) |
+
+---
+
+## 🛠️ Interaction Scripts (Celo)
+
+We provide utility scripts in the `celo-contract/` directory to interact with the deployed Chessxu contract directly from the command line.
+
+### **Getting Started**
+Ensure your `.env` file contains the correct `CONTRACT_ADDRESS` and `MAINNET_PRIVATE_KEY`.
+
+### **Usage**
+```bash
+cd celo-contract
+# Get help and list of commands
+node scripts/util-interact.js --help
+
+# Examples
+node scripts/util-interact.js balance          # Check your wallet balance
+node scripts/util-interact.js last             # Get the ID of the last game created
+node scripts/util-interact.js create 0.1       # Create a new game with 0.1 CELO wager
+node scripts/util-interact.js get 5            # View details of game #5
+```
 
 ---
 

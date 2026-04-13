@@ -7,6 +7,7 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onStartPlaying, isConnecting, isConnected }: HeroSectionProps) {
+  const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
   return (
     <section className="container mx-auto px-6 py-24 max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -43,7 +44,7 @@ export default function HeroSection({ onStartPlaying, isConnecting, isConnected 
               disabled={isConnecting}
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              {isConnecting ? "Connecting Wallet..." : isConnected ? "Start Playing Now" : "Play Chessxu"}
+              {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Play Chessxu"}
               {!isConnecting && <ChevronRight className="w-5 h-5" />}
             </button>
             <button className="px-8 py-4 rounded-lg border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition backdrop-blur-sm font-semibold">

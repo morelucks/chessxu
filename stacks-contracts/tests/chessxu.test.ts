@@ -455,7 +455,20 @@ describe("chessxu - resolve-game", () => {
         simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
         
         // Allowed statuses are 4, 5, 6. Try u10.
-        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(10)], deployer);
         expect(result).toBeErr(Cl.uint(109)); // err-invalid-status
+    });
+});
+
+describe("chessxu - edge cases", () => {
+    it("successfully creates and joins a game with zero wager (STX)", () => {
+        const createRes = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        expect(createRes.result).toBeOk(Cl.uint(1));
+        
+        const joinRes = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        expect(joinRes.result).toBeOk(Cl.bool(true));
+        
+        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
+        const game = (result as any).value.data || (result as any).value.value;
+        expect(game["wager"]).toStrictEqual(Cl.uint(0));
     });
 });

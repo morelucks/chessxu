@@ -441,4 +441,12 @@ describe("chessxu - resolve-game", () => {
         
         transfers.forEach(t => expect(t.data.amount).toBe(`${wager}`));
     });
+
+    it("reverts if a non-owner attempts to resolve a game (err-not-owner)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], wallet_1);
+        expect(result).toBeErr(Cl.uint(101)); // err-not-owner
+    });
 });

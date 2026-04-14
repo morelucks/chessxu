@@ -35,9 +35,13 @@ mkcert+1.pem
 *.ntvs*
 *.njsproj
 *.sln
-# Automation Scripts
+ 
+ 
 stacks-contracts/*.cjs
 stacks-contracts/*.mjs
 stacks-contracts/*.log
 tmp_scripts/
+
+play_game.cjs
+
 

@@ -386,6 +386,7 @@ describe("chessxu - resign", () => {
         simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
         
         // Game is u0 (Waiting). Resign should fail.
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
 });
@@ -405,6 +406,20 @@ describe("chessxu - resolve-game", () => {
         const transfer = events.find(e => e.event === "stx_transfer_event");
         expect(transfer).toBeDefined();
         expect(transfer!.data.recipient).toBe(wallet_1);
+        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+    });
+
+    it("successfully allows the owner to resolve a game as a win for Player 2 (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // Status u5 - Black wins
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(5)], deployer);
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.recipient).toBe(wallet_2);
         expect(transfer!.data.amount).toBe(`${2 * wager}`);
     });
 });

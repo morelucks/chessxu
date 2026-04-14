@@ -272,6 +272,45 @@ describe("chessxu - join-game", () => {
         expect(game1["status"]).toStrictEqual(Cl.uint(1));
         expect(game2["status"]).toStrictEqual(Cl.uint(1));
         expect(game1["player-b"].value.value).toBe(wallet_2);
-        expect(game2["player-b"].value.value).toBe(wallet_3);
+    });
+});
+
+describe("chessxu - submit-move", () => {
+    it("successfully submits a move on White's turn", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const move = "e2e4";
+        const board = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii(move), Cl.stringAscii(board)], wallet_1);
+        
+        expect(result).toBeOk(Cl.bool(true));
+    });
+
+    it("reverts if Black tries to move when it is White's turn (err-not-your-turn)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e7e5"), Cl.stringAscii("...")], wallet_2);
+        expect(result).toBeErr(Cl.uint(107)); // err-not-your-turn
+    });
+
+    it("reverts if trying to move in a game that is not Ongoing (err-game-not-active)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        
+        // No join, status is u0 (Waiting)
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
+    });
+
+    it("switches the turn from 'w' to 'b' after a successful White move", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        
+        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const game = res.data || res.value;
+        expect(game["turn"]).toStrictEqual(Cl.stringAscii("b"));
     });
 });

@@ -449,4 +449,13 @@ describe("chessxu - resolve-game", () => {
         const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], wallet_1);
         expect(result).toBeErr(Cl.uint(101)); // err-not-owner
     });
+
+    it("reverts if trying to resolve with an invalid status code (err-invalid-status)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // Allowed statuses are 4, 5, 6. Try u10.
+        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(10)], deployer);
+        expect(result).toBeErr(Cl.uint(109)); // err-invalid-status
+    });
 });

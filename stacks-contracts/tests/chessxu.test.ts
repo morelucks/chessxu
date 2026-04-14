@@ -313,4 +313,16 @@ describe("chessxu - submit-move", () => {
         const game = res.data || res.value;
         expect(game["turn"]).toStrictEqual(Cl.stringAscii("b"));
     });
+
+    it("updates the board state correctly after a successful move", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const newBoard = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii(newBoard)], wallet_1);
+        
+        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const game = res.data || res.value;
+        expect(game["board-state"]).toStrictEqual(Cl.stringAscii(newBoard));
+    });
 });

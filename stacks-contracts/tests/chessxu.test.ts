@@ -326,3 +326,19 @@ describe("chessxu - submit-move", () => {
         expect(game["board-state"]).toStrictEqual(Cl.stringAscii(newBoard));
     });
 });
+
+describe("chessxu - resign", () => {
+    it("successfully allows Player 1 to resign and awards prize to Player 2 (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
+        
+        // Winner is wallet_2. Prize should be 2 * wager.
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.recipient).toBe(wallet_2);
+        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+    });
+});

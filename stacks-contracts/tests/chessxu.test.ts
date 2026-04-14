@@ -302,4 +302,15 @@ describe("chessxu - submit-move", () => {
         const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
+
+    it("switches the turn from 'w' to 'b' after a successful White move", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        
+        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const game = res.data || res.value;
+        expect(game["turn"]).toStrictEqual(Cl.stringAscii("b"));
+    });
 });

@@ -363,4 +363,22 @@ describe("chessxu - resign", () => {
         const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_3);
         expect(result).toBeErr(Cl.uint(105)); // err-not-a-player
     });
+
+    it("verifies game status correctly updates to u2 (White resigned) or u3 (Black resigned)", () => {
+        // Case 1: White Resigns
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
+        let res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        let game = res.data || res.value;
+        expect(game["status"]).toStrictEqual(Cl.uint(2)); // White resigned
+        
+        // Case 2: Black Resigns
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(2)], wallet_2);
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(2)], wallet_2);
+        res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(2)], wallet_1).result as any).value;
+        game = res.data || res.value;
+        expect(game["status"]).toStrictEqual(Cl.uint(3)); // Black resigned
+    });
 });

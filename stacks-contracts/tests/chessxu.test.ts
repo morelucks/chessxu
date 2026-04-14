@@ -390,3 +390,85 @@ describe("chessxu - resign", () => {
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
 });
+
+describe("chessxu - resolve-game", () => {
+    it("successfully allows the owner to resolve a game as a win for Player 1 (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // Contract owner settles it
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], deployer);
+        
+        expect(result).toBeOk(Cl.bool(true));
+        
+        // Winner is wallet_1 (Status u4). Prize should be 2 * wager.
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.recipient).toBe(wallet_1);
+        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+    });
+
+    it("successfully allows the owner to resolve a game as a win for Player 2 (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // Status u5 - Black wins
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(5)], deployer);
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.recipient).toBe(wallet_2);
+        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+    });
+
+    it("successfully allows the owner to resolve a game as a draw/refund (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // Status u6 - Draw / Refund
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(6)], deployer);
+        
+        // We expect two stx-transfer events, one to each player
+        const transfers = events.filter(e => e.event === "stx_transfer_event");
+        expect(transfers.length).toBe(2);
+        
+        const recipients = transfers.map(t => t.data.recipient);
+        expect(recipients).toContain(wallet_1);
+        expect(recipients).toContain(wallet_2);
+        
+        transfers.forEach(t => expect(t.data.amount).toBe(`${wager}`));
+    });
+
+    it("reverts if a non-owner attempts to resolve a game (err-not-owner)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], wallet_1);
+        expect(result).toBeErr(Cl.uint(101)); // err-not-owner
+    });
+
+    it("reverts if trying to resolve with an invalid status code (err-invalid-status)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // Allowed statuses are 4, 5, 6. Try u10.
+        expect(result).toBeErr(Cl.uint(109)); // err-invalid-status
+    });
+});
+
+describe("chessxu - edge cases", () => {
+    it("successfully creates and joins a game with zero wager (STX)", () => {
+        const createRes = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        expect(createRes.result).toBeOk(Cl.uint(1));
+        
+        const joinRes = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        expect(joinRes.result).toBeOk(Cl.bool(true));
+        
+        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
+        const game = (result as any).value.data || (result as any).value.value;
+        expect(game["wager"]).toStrictEqual(Cl.uint(0));
+    });
+});

@@ -15,7 +15,7 @@ const senderKey = process.env.STX_PRIVATE_KEY || '';
 const myAddress = process.env.STX_ADDRESS || 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
 const contractAddress = 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B';
 const contractName = 'chessxu';
-const FEE_PER_TX = 10000; // 0.01 STX per tx
+const FEE_PER_TX = 60000; // 0.06 STX per tx
 const NUM_TXS = 45;
 
 async function fetchWithRetry(url, retries = 3) {

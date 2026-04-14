@@ -9,6 +9,12 @@ interface TransactionToastProps {
 }
 
 export const TransactionToast: React.FC<TransactionToastProps> = ({ txId, status, message, onClose }) => {
+  const explorerUrl = txId
+    ? txId.startsWith('0x')
+      ? `https://celoscan.io/tx/${txId}`
+      : `https://explorer.hiro.so/txid/${txId}?chain=mainnet`
+    : null;
+
   const getStatusColor = () => {
     switch (status) {
       case 'success': return 'text-green-400 border-green-500/30 bg-green-500/10';
@@ -49,20 +55,25 @@ export const TransactionToast: React.FC<TransactionToastProps> = ({ txId, status
       <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/10 mt-1">
         <button 
           onClick={copyToClipboard}
+          disabled={!txId}
           className="flex items-center gap-1.5 text-xs hover:text-white transition-colors py-1 px-2 rounded-lg hover:bg-white/5"
         >
           <Copy size={12} />
           <span>Copy ID</span>
         </button>
-        <a 
-          href={`https://explorer.hiro.so/txid/${txId}?chain=mainnet`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-xs hover:text-white transition-colors py-1 px-2 rounded-lg hover:bg-white/5"
-        >
-          <span>Explorer</span>
-          <ExternalLink size={12} />
-        </a>
+        {explorerUrl ? (
+          <a 
+            href={explorerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs hover:text-white transition-colors py-1 px-2 rounded-lg hover:bg-white/5"
+          >
+            <span>Explorer</span>
+            <ExternalLink size={12} />
+          </a>
+        ) : (
+          <span className="px-2 py-1 text-xs opacity-60">Awaiting tx</span>
+        )}
       </div>
     </div>
   );

@@ -15,6 +15,9 @@ export interface AuthState {
   activeChain: ChainType;
   isAuthenticated: boolean;
   isLoading: boolean;
+  miniPayDetected: boolean;
+  miniPayAccessExpiresAt: string | null;
+  miniPayLastPaymentTx: string | null;
 }
 
 export interface GameState {
@@ -31,6 +34,9 @@ export interface AppStore extends AuthState, GameState {
   setCeloAddress: (address: string | null) => void;
   setActiveChain: (chain: ChainType) => void;
   setIsLoading: (isLoading: boolean) => void;
+  setMiniPayDetected: (detected: boolean) => void;
+  setMiniPayAccess: (expiresAt: string | null, txHash?: string | null) => void;
+  clearMiniPayAccess: () => void;
   setActiveGameId: (gameId: number | null) => void;
   setGameStarted: (started: boolean) => void;
   setElo: (elo: number) => void;
@@ -48,6 +54,9 @@ const useAppStore = create<AppStore>()(
       activeChain: 'stacks',
       isAuthenticated: false,
       isLoading: false,
+      miniPayDetected: false,
+      miniPayAccessExpiresAt: null,
+      miniPayLastPaymentTx: null,
 
       // Game State
       activeGameId: null,
@@ -84,6 +93,10 @@ const useAppStore = create<AppStore>()(
         set({ activeChain, address, isAuthenticated: !!address });
       },
       setIsLoading: (isLoading: boolean) => set({ isLoading }),
+      setMiniPayDetected: (miniPayDetected: boolean) => set({ miniPayDetected }),
+      setMiniPayAccess: (miniPayAccessExpiresAt: string | null, miniPayLastPaymentTx: string | null = null) =>
+        set({ miniPayAccessExpiresAt, miniPayLastPaymentTx }),
+      clearMiniPayAccess: () => set({ miniPayAccessExpiresAt: null, miniPayLastPaymentTx: null }),
       setActiveGameId: (activeGameId: number | null) => set({ activeGameId }),
       setGameStarted: (isGameStarted: boolean) => set({ isGameStarted }),
       setElo: (elo: number) => set({ elo }),
@@ -95,6 +108,9 @@ const useAppStore = create<AppStore>()(
             stacksAddress: null, 
             celoAddress: null, 
             isAuthenticated: false, 
+            miniPayDetected: false,
+            miniPayAccessExpiresAt: null,
+            miniPayLastPaymentTx: null,
             activeGameId: null, 
             isGameStarted: false,
             elo: 1200,

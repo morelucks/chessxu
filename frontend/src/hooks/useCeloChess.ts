@@ -5,11 +5,31 @@ import { CELO_CONFIG } from '../chess/blockchainConstants';
 
 export const useCeloChess = () => {
   const address = useAppStore((state) => state.celoAddress);
+  const miniPayDetected = useAppStore((state) => state.miniPayDetected);
+  const miniPayAccessExpiresAt = useAppStore((state) => state.miniPayAccessExpiresAt);
+  const activeChain = useAppStore((state) => state.activeChain);
   const { addToast } = useToaster();
   const network = CELO_CONFIG;
 
+  const hasMiniPayAccess =
+    !!miniPayAccessExpiresAt && new Date(miniPayAccessExpiresAt).getTime() > Date.now();
+
+  const ensureEligibleForCeloPlay = () => {
+    if ((miniPayDetected || activeChain === 'celo') && !hasMiniPayAccess) {
+      addToast({
+        txId: '',
+        status: 'error',
+        message: 'Unlock daily Celo access before creating or joining a match.',
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const createGame = async (wager: string, isNative: boolean) => {
     if (!address) return;
+    if (!ensureEligibleForCeloPlay()) return;
 
     try {
       const txHash = await celoService.createGame(wager, isNative);
@@ -33,6 +53,7 @@ export const useCeloChess = () => {
 
   const joinGame = async (gameId: number, wager: string, isNative: boolean) => {
     if (!address) return;
+    if (!ensureEligibleForCeloPlay()) return;
 
     try {
       const txHash = await celoService.joinGame(gameId, wager, isNative);

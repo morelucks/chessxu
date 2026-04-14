@@ -33,13 +33,14 @@ import {
   http, 
   parseEther, 
   formatEther,
-  hexToBigInt
+  hexToBigInt,
+  encodeFunctionData,
+  erc20Abi,
+  parseUnits,
 } from 'viem';
 import { celo } from 'viem/chains';
-import { CELO_CONFIG } from '../blockchainConstants';
+import { CELO_CONFIG, CELO_FEE_CURRENCIES } from '../blockchainConstants';
 import { CHESSXU_ABI } from './contractAbi';
-
-const CUSD_ADDRESS = '0x765DE816845861e75A25fCA122bb6898B8B1282a';
 
 /**
  * Service to handle all Celo blockchain interactions
@@ -63,9 +64,18 @@ const celoService = {
    */
   ERROR_MESSAGES: {
     WALLET_NOT_FOUND: 'MetaMask or other EVM wallet not found',
+    WRONG_NETWORK: 'Please switch your wallet to the Celo network.',
   },
 
   // --- Utility Helpers ---
+
+  getProvider: () => {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    return (window as any).ethereum || (window as any).provider || null;
+  },
 
   /**
    * Returns a public client for read operations
@@ -85,7 +95,7 @@ const celoService = {
    * Returns a wallet client for write operations
    */
   getWalletClient: () => {
-    const provider = (window as any).ethereum || (window as any).provider;
+    const provider = celoService.getProvider();
     if (!provider) {
       throw new Error(celoService.ERROR_MESSAGES.WALLET_NOT_FOUND);
     }
@@ -99,15 +109,103 @@ const celoService = {
    * Returns common transaction options for MiniPay compatibility
    */
   getTxOptions: () => {
-    const provider = typeof window !== 'undefined' ? ((window as any).ethereum || (window as any).provider) : null;
+    const provider = celoService.getProvider();
     const isMiniPay = provider?.isMiniPay;
     if (isMiniPay) {
       return {
         type: 'legacy' as const,
-        feeCurrency: CUSD_ADDRESS as `0x${string}`, // Default to cUSD for gas in MiniPay
+        feeCurrency: CELO_CONFIG.CUSD_ADDRESS as `0x${string}`,
       };
     }
     return {};
+  },
+
+  isMiniPay: () => {
+    const provider = celoService.getProvider();
+    return Boolean(provider?.isMiniPay);
+  },
+
+  getChainId: async () => {
+    const provider = celoService.getProvider();
+    if (!provider?.request) {
+      throw new Error(celoService.ERROR_MESSAGES.WALLET_NOT_FOUND);
+    }
+
+    const rawChainId = await provider.request({ method: 'eth_chainId' });
+    return Number.parseInt(rawChainId, 16);
+  },
+
+  switchToCelo: async () => {
+    const provider = celoService.getProvider();
+    if (!provider?.request) {
+      throw new Error(celoService.ERROR_MESSAGES.WALLET_NOT_FOUND);
+    }
+
+    const chainHex = `0x${CELO_CONFIG.CHAIN_ID.toString(16)}`;
+
+    try {
+      await provider.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: chainHex }],
+      });
+    } catch (error: any) {
+      if (error?.code !== 4902) {
+        throw error;
+      }
+
+      await provider.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: chainHex,
+            chainName: CELO_CONFIG.CHAIN_NAME,
+            nativeCurrency: {
+              name: CELO_CONFIG.CURRENCY,
+              symbol: CELO_CONFIG.CURRENCY,
+              decimals: 18,
+            },
+            rpcUrls: [CELO_CONFIG.RPC_URL],
+            blockExplorerUrls: [CELO_CONFIG.EXPLORER_URL],
+          },
+        ],
+      });
+    }
+  },
+
+  ensureCorrectNetwork: async () => {
+    const chainId = await celoService.getChainId();
+    if (chainId === CELO_CONFIG.CHAIN_ID) {
+      return true;
+    }
+
+    await celoService.switchToCelo();
+    const nextChainId = await celoService.getChainId();
+    if (nextChainId !== CELO_CONFIG.CHAIN_ID) {
+      throw new Error(celoService.ERROR_MESSAGES.WRONG_NETWORK);
+    }
+
+    return true;
+  },
+
+  getSupportedFeeCurrency: async (address: `0x${string}`) => {
+    for (const currency of CELO_FEE_CURRENCIES) {
+      try {
+        const balance = await celoService.publicClient.readContract({
+          address: currency.tokenAddress as `0x${string}`,
+          abi: erc20Abi,
+          functionName: 'balanceOf',
+          args: [address],
+        });
+
+        if (balance > 0n) {
+          return currency.tokenAddress as `0x${string}`;
+        }
+      } catch (error) {
+        console.error(`Unable to inspect ${currency.symbol} balance for fee currency selection:`, error);
+      }
+    }
+
+    return undefined;
   },
   
   /**
@@ -124,9 +222,77 @@ const celoService = {
    * Connects to the Celo wallet
    */
   connectWallet: async () => {
+    await celoService.ensureCorrectNetwork();
     const walletClient = celoService.getWalletClient();
     const [address] = await walletClient.requestAddresses();
     return address;
+  },
+
+  payForDailyAccess: async (address: string) => {
+    const walletClient = celoService.getWalletClient();
+    const account = address as `0x${string}`;
+    const amount = parseUnits(CELO_CONFIG.DAILY_ACCESS_CUSD, 18);
+    const data = encodeFunctionData({
+      abi: erc20Abi,
+      functionName: 'transfer',
+      args: [CELO_CONFIG.PAYMENT_RECIPIENT as `0x${string}`, amount],
+    });
+
+    const feeCurrency = await celoService.getSupportedFeeCurrency(account);
+
+    return walletClient.sendTransaction({
+      account,
+      to: CELO_CONFIG.CUSD_ADDRESS as `0x${string}`,
+      data,
+      feeCurrency,
+      ...(celoService.isMiniPay() ? { type: 'legacy' as const } : {}),
+    });
+  },
+
+  waitForTransactionReceipt: async (txHash: `0x${string}`, maxRetries = 10, delayMs = 2000) => {
+    for (let attempt = 0; attempt < maxRetries; attempt += 1) {
+      try {
+        const receipt = await celoService.publicClient.getTransactionReceipt({ hash: txHash });
+        if (receipt) {
+          return receipt;
+        }
+      } catch (error: any) {
+        if (error?.name !== 'TransactionReceiptNotFoundError') {
+          throw error;
+        }
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+
+    throw new Error('Transaction confirmation timed out. Check the transaction in your wallet and try again.');
+  },
+
+  verifyDailyAccessPayment: async (txHash: string, walletAddress: string) => {
+    const receipt = await celoService.waitForTransactionReceipt(txHash as `0x${string}`);
+    if (receipt.status !== 'success') {
+      return false;
+    }
+
+    const transferEventSignature =
+      '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
+
+    const transferLog = receipt.logs.find(
+      (log) =>
+        log.address.toLowerCase() === CELO_CONFIG.CUSD_ADDRESS.toLowerCase() &&
+        log.topics[0] === transferEventSignature &&
+        log.topics[1] &&
+        log.topics[2] &&
+        `0x${log.topics[1].slice(-40)}`.toLowerCase() === walletAddress.toLowerCase() &&
+        `0x${log.topics[2].slice(-40)}`.toLowerCase() === CELO_CONFIG.PAYMENT_RECIPIENT.toLowerCase()
+    );
+
+    if (!transferLog) {
+      return false;
+    }
+
+    const amount = BigInt(transferLog.data);
+    return amount === parseUnits(CELO_CONFIG.DAILY_ACCESS_CUSD, 18);
   },
 
   // --- Write Operations ---
@@ -299,6 +465,15 @@ const celoService = {
    */
   getNativeBalance: async (address: `0x${string}`) => {
     return await celoService.getPublicClient().getBalance({ address });
+  },
+
+  getStableTokenBalance: async (address: `0x${string}`, tokenAddress: string) => {
+    return await celoService.getPublicClient().readContract({
+      address: tokenAddress as `0x${string}`,
+      abi: erc20Abi,
+      functionName: 'balanceOf',
+      args: [address],
+    });
   },
 
   /**

@@ -26,7 +26,41 @@ export const CELO_CONFIG = {
   RPC_URL: "https://forno.celo.org",
   CONTRACT_ADDRESS: "0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E",
   CURRENCY: "CELO",
+  CHAIN_NAME: "Celo",
+  EXPLORER_URL: "https://celoscan.io",
+  CUSD_ADDRESS: "0x765DE816845861e75A25fCA122bb6898B8B1282a",
+  PAYMENT_RECIPIENT: "0xEA22ca862C3AFDA79Ef7Fb5Ae8f13D245354f05b",
+  DAILY_ACCESS_CUSD: "0.1",
+  DAILY_ACCESS_DURATION_MS: 24 * 60 * 60 * 1000,
 };
+
+export const CELO_FEE_CURRENCIES = [
+  {
+    symbol: "USDT",
+    tokenAddress: "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e",
+    decimals: 6,
+  },
+  {
+    symbol: "USDC",
+    tokenAddress: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",
+    decimals: 6,
+  },
+  {
+    symbol: "cUSD",
+    tokenAddress: "0x765DE816845861e75A25fCA122bb6898B8B1282a",
+    decimals: 18,
+  },
+  {
+    symbol: "cEUR",
+    tokenAddress: "0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73",
+    decimals: 18,
+  },
+  {
+    symbol: "cREAL",
+    tokenAddress: "0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787",
+    decimals: 18,
+  },
+] as const;
 
 
 export const CLARITY_ERRORS = {

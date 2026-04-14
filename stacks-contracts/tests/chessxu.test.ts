@@ -560,4 +560,21 @@ describe("chessxu - integration flows", () => {
         expect(transfers.length).toBe(2);
         transfers.forEach(t => expect(t.data.amount).toBe("100"));
     });
+
+    it("handles multiple concurrent games without state interference", () => {
+        setupGame(100, true, 2); // Game 1
+        setupGame(200, true, 2); // Game 2
+        
+        // Interleaved moves
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("game1-m1")], wallet_1);
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(2), Cl.stringAscii("d2d4"), Cl.stringAscii("game2-m1")], wallet_1);
+        
+        const g1 = getGame(1);
+        const g2 = getGame(2);
+        
+        expect(g1["board-state"]).toStrictEqual(Cl.stringAscii("game1-m1"));
+        expect(g2["board-state"]).toStrictEqual(Cl.stringAscii("game2-m1"));
+        expect(g1["wager"]).toStrictEqual(Cl.uint(100));
+        expect(g2["wager"]).toStrictEqual(Cl.uint(200));
+    });
 });

@@ -294,4 +294,12 @@ describe("chessxu - submit-move", () => {
         const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e7e5"), Cl.stringAscii("...")], wallet_2);
         expect(result).toBeErr(Cl.uint(107)); // err-not-your-turn
     });
+
+    it("reverts if trying to move in a game that is not Ongoing (err-game-not-active)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        
+        // No join, status is u0 (Waiting)
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
+    });
 });

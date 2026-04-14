@@ -547,4 +547,17 @@ describe("chessxu - integration flows", () => {
         expect(transfer.data.recipient).toBe(wallet_1);
         expect(transfer.data.amount).toBe("200");
     });
+
+    it("completes a full match flow: Create -> Join -> Resolve (Draw/Refund)", () => {
+        const wager = 100;
+        setupGame(wager, true, 2);
+        const gameId = 1;
+        
+        // Match resolved as draw by owner
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(6)], deployer);
+        
+        const transfers = events.filter(e => e.event === "stx_transfer_event");
+        expect(transfers.length).toBe(2);
+        transfers.forEach(t => expect(t.data.amount).toBe("100"));
+    });
 });

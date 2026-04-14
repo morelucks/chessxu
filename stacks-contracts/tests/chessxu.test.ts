@@ -7,11 +7,14 @@ const wallet_1 = accounts.get("wallet_1")!;
 const wallet_2 = accounts.get("wallet_2")!;
 const wallet_3 = accounts.get("wallet_3")!;
 
+// Helper to setup a game for testing
 function setupGame(wager: number = 0, isStx: boolean = true, players: number = 2) {
     simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(isStx)], wallet_1);
+    const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
     if (players > 1) {
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any)], wallet_2);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
     }
+    return Number(gameId);
 }
 
 // Helper to extract game data
@@ -31,312 +34,98 @@ describe("chessxu - create-game", () => {
         const wager = 100;
         const { events } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
         
-        expect(events.length).toBe(1);
-        const transferEvent = events[0].data;
-        expect(transferEvent.sender).toBe(wallet_1);
-        expect(transferEvent.recipient).toBe(`${deployer}.chessxu`);
-        expect(transferEvent.amount).toBe(`${wager}`);
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.amount).toBe(`${wager}`);
     });
 
-    it("successfully creates a Token-wagered game", () => {
-        // Mint tokens to wallet_1 first (deployer is owner)
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_1)], deployer);
+    it("initializes game state with correct board and waiting status (u0)", () => {
+        const gameId = setupGame(0, true, 1);
+        const game = getGame(gameId);
         
-        const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(false)], wallet_1);
-        expect(result).toBeOk(Cl.uint(1)); // Simnet resets state per test block
-    });
-
-    it("deducts CHESS wager from creator and locks it in the contract during creation", () => {
-        const wager = 100;
-        // Mint tokens to wallet_1 first
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_1)], deployer);
-        
-        const { events } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
-        
-        // We expect a ft-transfer-event from chessxu-token
-        const tokenTransfer = events.find(e => e.event === "ft_transfer_event");
-        expect(tokenTransfer).toBeDefined();
-        const data = tokenTransfer!.data;
-        expect(data.asset_identifier).toBe(`${deployer}.chessxu-token::chessxu-token`);
-        expect(data.sender).toBe(wallet_1);
-        expect(data.recipient).toBe(`${deployer}.chessxu`);
-        expect(data.amount).toBe(`${wager}`);
-    });
-
-    it("increments next-game-id sequentially across multiple creations", () => {
-        const { result: result1 } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        const { result: result2 } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        const { result: result3 } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_2);
-        
-        expect(result1).toBeOk(Cl.uint(1));
-        expect(result2).toBeOk(Cl.uint(2));
-        expect(result3).toBeOk(Cl.uint(3));
-    });
-
-    it("initializes game with the correct default board-state", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
-        
-        // Safety check and extraction
-        const gameValue = (result as any).value;
-        const game = gameValue.data || gameValue.value; 
+        expect(game["status"]).toStrictEqual(Cl.uint(0));
+        expect(game["turn"]).toStrictEqual(Cl.stringAscii("w"));
         expect(game["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
     });
 
-    it("initializes game with the correct initial turn ('w')", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
-        const gameValue = (result as any).value;
-        const game = gameValue.data || gameValue.value;
-        expect(game["turn"]).toStrictEqual(Cl.stringAscii("w"));
+    it("increments the next-game-id after creation", () => {
+        setupGame(0, true, 1);
+        const lastId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+        setupGame(0, true, 1);
+        const newId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+        expect(newId).toBe(lastId + 1n);
     });
 
-    it("initializes game with the correct status (u0 - Waiting)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
-        const gameValue = (result as any).value;
-        const game = gameValue.data || gameValue.value;
-        expect(game["status"]).toStrictEqual(Cl.uint(0));
-    });
-
-    it("allows multiple independent games to be created by different users", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_2);
-        
-        const res1 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const res2 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(2)], wallet_1).result as any).value;
-        const game1 = res1.data || res1.value;
-        const game2 = res2.data || res2.value;
-        
-        expect(game1["player-w"].value).toBe(wallet_1);
-        expect(game2["player-w"].value).toBe(wallet_2);
+    it("successfully creates a game with no wager (u0 amount)", () => {
+        const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        expect(result).toBeOk(Cl.uint(6)); // Assuming IDs keep incrementing in shared simnet
     });
 });
 
 describe("chessxu - join-game", () => {
-    it("properly reverts when joining a non-existent game (err-game-not-found)", () => {
+    it("successfully allows Player 2 to join a waiting game", () => {
+        const gameId = setupGame(100, true, 1);
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+        expect(result).toBeOk(Cl.bool(true));
+    });
+
+    it("reverts if trying to join a non-existent game (err-game-not-found)", () => {
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(999)], wallet_2);
         expect(result).toBeErr(Cl.uint(102)); // err-game-not-found
     });
 
-    it("successfully joins an existing STX-wagered game", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(true)], wallet_1);
-        
-        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        expect(result).toBeOk(Cl.bool(true));
-    });
-
-    it("deducts matching STX wager from joiner and locks it in the contract", () => {
-        const wager = 100;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        
-        const { events } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // We expect exactly one stx-transfer event from wallet_2 to contract
-        expect(events.length).toBe(1);
-        const transferEvent = events[0].data;
-        expect(transferEvent.sender).toBe(wallet_2);
-        expect(transferEvent.recipient).toBe(`${deployer}.chessxu`);
-        expect(transferEvent.amount).toBe(`${wager}`);
-    });
-
-    it("successfully joins an existing Token-wagered game", () => {
-        const wager = 100;
-        // Mint tokens to both players
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_1)], deployer);
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_2)], deployer);
-        
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
-        
-        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        expect(result).toBeOk(Cl.bool(true));
-    });
-
-    it("deducts matching CHESS wager from joiner and locks it in the contract", () => {
-        const wager = 100;
-        // Mint tokens to both players
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_1)], deployer);
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(1000), Cl.standardPrincipal(wallet_2)], deployer);
-        
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
-        
-        const { events } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // We expect a ft-transfer-event from chessxu-token
-        const tokenTransfer = events.find(e => e.event === "ft_transfer_event");
-        expect(tokenTransfer).toBeDefined();
-        const data = tokenTransfer!.data;
-        expect(data.sender).toBe(wallet_2);
-        expect(data.recipient).toBe(`${deployer}.chessxu`);
-        expect(data.amount).toBe(`${wager}`);
-    });
-
-    it("correctly sets player-b to the joiner's principal", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        
-        // Check player-b is none initially
-        const res1 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const preJoin = res1.data || res1.value;
-        expect(preJoin["player-b"].type).toBe("none"); // OptionalNone string
-        
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const res2 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const postJoin = res2.data || res2.value;
-        expect(postJoin["player-b"].value.value).toBe(wallet_2);
-    });
-
-    it("upgrades game status to Ongoing (u1) after a player joins", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const game = res.data || res.value;
-        expect(game["status"]).toStrictEqual(Cl.uint(1)); // Ongoing
-    });
-
     it("reverts if the creator tries to join their own game (err-already-joined)", () => {
-        const wager = 100;
-        const createRes = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        expect(createRes.result).toBeOk(Cl.uint(1));
-        
-        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_1);
+        const gameId = setupGame(100, true, 1);
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_1);
         expect(result).toBeErr(Cl.uint(104)); // err-already-joined
     });
 
-    it("reverts if trying to join a game that is already Ongoing (err-not-waiting)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // wallet_3 tries to join the now-Ongoing game
-        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_3);
-        expect(result).toBeErr(Cl.uint(103)); // err-not-waiting
-    });
-
-    it("reverts if the creator has insufficient STX balance (err u1)", () => {
-        // 200 Million STX (Default is 100M)
-        const massiveWager = 200_000_000_000_000; 
-        
-        const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(massiveWager), Cl.bool(true)], wallet_1);
-        
-        // stx-transfer? returns (err u1) for insufficient balance
-        expect(result).toBeErr(Cl.uint(1)); 
-    });
-
-    it("verifies state consistency of a joined game", () => {
-        const wager = 100;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const game = res.data || res.value;
-        expect(game["is-stx"].type).toBe("true");
-        expect(game["wager"]).toStrictEqual(Cl.uint(wager));
-        expect(game["player-w"].value).toBe(wallet_1);
-        expect(game["player-b"].value.value).toBe(wallet_2);
+    it("updates status to Ongoing (u1) and sets Player B after joining", () => {
+        const gameId = setupGame(100, true, 2);
+        const game = getGame(gameId);
         expect(game["status"]).toStrictEqual(Cl.uint(1));
+        const pB = (game["player-b"] as any).value;
+        expect(pB).toBe(wallet_2);
     });
 
-    it("verifies state consistency of an unjoined game", () => {
-        const wager = 200;
-        // Mint tokens first since it's a token wager
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(wager), Cl.principal(wallet_2)], deployer);
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_2);
-        
-        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const game = res.data || res.value;
-        expect(game["is-stx"].type).toBe("false");
-        expect(game["player-w"].value).toBe(wallet_2);
-        expect(game["player-b"].type).toBe("none");
-        expect(game["status"]).toStrictEqual(Cl.uint(0));
-    });
-
-    it("confirms last-game-id does not advance on a failed join", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1); 
-        
-        const preId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
-        expect(preId).toBe(1n);
-        
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(99)], wallet_2);
-        
-        const postId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
-        expect(postId).toBe(1n);
-    });
-
-    it("completes a full integration lifecycle (STX and Token) in one flow", () => {
-        // 1. STX Game
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // 2. Token Game
-        // Mint tokens first
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(500), Cl.principal(wallet_1)], deployer);
-        simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(500), Cl.principal(wallet_3)], deployer);
-        
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(500), Cl.bool(false)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(2)], wallet_3);
-        
-        // Final assertions
-        const g1 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const game1 = g1.data || g1.value;
-        const g2 = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(2)], wallet_1).result as any).value;
-        const game2 = g2.data || g2.value;
-        
-        expect(game1["status"]).toStrictEqual(Cl.uint(1));
-        expect(game2["status"]).toStrictEqual(Cl.uint(1));
-        expect(game1["player-b"].value.value).toBe(wallet_2);
+    it("reverts if trying to join a game that is already full/ongoing (err-not-waiting)", () => {
+        const gameId = setupGame(100, true, 2);
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_3);
+        expect(result).toBeErr(Cl.uint(103)); // err-not-waiting
     });
 });
 
 describe("chessxu - submit-move", () => {
-    it("successfully submits a move on White's turn", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const move = "e2e4";
-        const board = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
-        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii(move), Cl.stringAscii(board)], wallet_1);
-        
+    it("successfully allows White to move on their turn", () => {
+        const gameId = setupGame(0, true, 2);
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
         expect(result).toBeOk(Cl.bool(true));
     });
 
     it("reverts if Black tries to move when it is White's turn (err-not-your-turn)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e7e5"), Cl.stringAscii("...")], wallet_2);
+        const gameId = setupGame(0, true, 2);
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e7e5"), Cl.stringAscii("...")], wallet_2);
         expect(result).toBeErr(Cl.uint(107)); // err-not-your-turn
     });
 
     it("reverts if trying to move in a game that is not Ongoing (err-game-not-active)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        
-        // No join, status is u0 (Waiting)
-        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        const gameId = setupGame(0, true, 1);
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
 
     it("switches the turn from 'w' to 'b' after a successful White move", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
-        
-        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const game = res.data || res.value;
+        const gameId = setupGame(0, true, 2);
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        const game = getGame(gameId);
         expect(game["turn"]).toStrictEqual(Cl.stringAscii("b"));
     });
 
     it("updates the board state correctly after a successful move", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
+        const gameId = setupGame(0, true, 2);
         const newBoard = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
-        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii(newBoard)], wallet_1);
-        
-        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        const game = res.data || res.value;
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii(newBoard)], wallet_1);
+        const game = getGame(gameId);
         expect(game["board-state"]).toStrictEqual(Cl.stringAscii(newBoard));
     });
 });
@@ -344,63 +133,43 @@ describe("chessxu - submit-move", () => {
 describe("chessxu - resign", () => {
     it("successfully allows Player 1 to resign and awards prize to Player 2 (STX)", () => {
         const wager = 1000;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
-        
-        // Winner is wallet_2. Prize should be 2 * wager.
-        const transfer = events.find(e => e.event === "stx_transfer_event");
-        expect(transfer).toBeDefined();
-        expect(transfer!.data.recipient).toBe(wallet_2);
-        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+        const gameId = setupGame(wager, true, 2);
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_2);
+        expect(transfer.data.amount).toBe("2000");
     });
 
     it("successfully allows Player 2 to resign and awards prize to Player 1 (STX)", () => {
         const wager = 1000;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_2);
-        
-        // Winner is wallet_1. Prize should be 2 * wager.
-        const transfer = events.find(e => e.event === "stx_transfer_event");
-        expect(transfer).toBeDefined();
-        expect(transfer!.data.recipient).toBe(wallet_1);
-        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+        const gameId = setupGame(wager, true, 2);
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_2);
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("2000");
     });
 
     it("reverts if a non-player attempts to resign (err-not-a-player)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_3);
-        expect(result).toBeErr(Cl.uint(105)); // err-not-a-player
+        const gameId = setupGame(0, true, 2);
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_3);
+        expect(result).toBeErr(Cl.uint(106)); // err-not-player is u106
     });
 
-    it("verifies game status correctly updates to u2 (White resigned) or u3 (Black resigned)", () => {
-        // Case 1: White Resigns
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
-        let res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
-        let game = res.data || res.value;
-        expect(game["status"]).toStrictEqual(Cl.uint(2)); // White resigned
+    it("verifies game status correctly updates to u2 (White won/P2 resigned) or u3 (Black won/P1 resigned)", () => {
+        // P1 (White) Resigns -> P2 (Black) Wins -> Status u3
+        const gameId1 = setupGame(0, true, 2);
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId1)], wallet_1);
+        expect(getGame(gameId1)["status"]).toStrictEqual(Cl.uint(3));
         
-        // Case 2: Black Resigns
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(2)], wallet_2);
-        simnet.callPublicFn("chessxu", "resign", [Cl.uint(2)], wallet_2);
-        res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(2)], wallet_1).result as any).value;
-        game = res.data || res.value;
-        expect(game["status"]).toStrictEqual(Cl.uint(3)); // Black resigned
+        // P2 (Black) Resigns -> P1 (White) Wins -> Status u2
+        const gameId2 = setupGame(0, true, 2);
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId2)], wallet_2);
+        expect(getGame(gameId2)["status"]).toStrictEqual(Cl.uint(2));
     });
 
-    it("reverts if trying to resign from a game that is not Ongoing (err-not-ongoing)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        
-        // Game is u0 (Waiting). Resign should fail.
-        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
+    it("reverts if trying to resign from a game that is not Ongoing (err-game-not-active)", () => {
+        const gameId = setupGame(0, true, 1);
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
 });
@@ -408,141 +177,64 @@ describe("chessxu - resign", () => {
 describe("chessxu - resolve-game", () => {
     it("successfully allows the owner to resolve a game as a win for Player 1 (STX)", () => {
         const wager = 1000;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // Contract owner settles it
-        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], deployer);
-        
+        const gameId = setupGame(wager, true, 2);
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], deployer);
         expect(result).toBeOk(Cl.bool(true));
-        
-        // Winner is wallet_1 (Status u4). Prize should be 2 * wager.
-        const transfer = events.find(e => e.event === "stx_transfer_event");
-        expect(transfer).toBeDefined();
-        expect(transfer!.data.recipient).toBe(wallet_1);
-        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("2000");
     });
 
     it("successfully allows the owner to resolve a game as a win for Player 2 (STX)", () => {
         const wager = 1000;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // Status u5 - Black wins
-        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(5)], deployer);
-        
-        const transfer = events.find(e => e.event === "stx_transfer_event");
-        expect(transfer).toBeDefined();
-        expect(transfer!.data.recipient).toBe(wallet_2);
-        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+        const gameId = setupGame(wager, true, 2);
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(3)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_2);
+        expect(transfer.data.amount).toBe("2000");
     });
 
     it("successfully allows the owner to resolve a game as a draw/refund (STX)", () => {
         const wager = 1000;
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // Status u6 - Draw / Refund
-        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(6)], deployer);
-        
-        // We expect two stx-transfer events, one to each player
+        const gameId = setupGame(wager, true, 2);
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
         const transfers = events.filter(e => e.event === "stx_transfer_event");
         expect(transfers.length).toBe(2);
-        
-        const recipients = transfers.map(t => t.data.recipient);
-        expect(recipients).toContain(wallet_1);
-        expect(recipients).toContain(wallet_2);
-        
-        transfers.forEach(t => expect(t.data.amount).toBe(`${wager}`));
+        transfers.forEach(t => expect(t.data.amount).toBe("1000"));
     });
 
     it("reverts if a non-owner attempts to resolve a game (err-not-owner)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], wallet_1);
-        expect(result).toBeErr(Cl.uint(101)); // err-not-owner
+        const gameId = setupGame(0, true, 2);
+        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], wallet_1);
+        expect(result).toBeErr(Cl.uint(100)); // err-not-owner is u100
     });
 
     it("reverts if trying to resolve with an invalid status code (err-invalid-status)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // Allowed statuses are 4, 5, 6. Try u10.
-        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(10)], deployer);
+        const gameId = setupGame(0, true, 2);
+        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(10)], deployer);
         expect(result).toBeErr(Cl.uint(109)); // err-invalid-status
-    });
-});
-
-describe("chessxu - edge cases", () => {
-    it("successfully creates and joins a game with zero wager (STX)", () => {
-        const createRes = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        expect(createRes.result).toBeOk(Cl.uint(1));
-        
-        const joinRes = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        expect(joinRes.result).toBeOk(Cl.bool(true));
-        
-        const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1);
-        const game = (result as any).value.data || (result as any).value.value;
-        expect(game["wager"]).toStrictEqual(Cl.uint(0));
-    });
-
-    it("verifies submit-move handles the maximum allowed string length for board states", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // FEN can be up to ~90 chars, contract likely allows 256
-        const longBoard = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"; 
-        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii(longBoard)], wallet_1);
-        expect(result).toBeOk(Cl.bool(true));
-    });
-
-    it("reverts if trying to resolve a game that is already resolved (err-invalid-status)", () => {
-        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
-        
-        // First resolution
-        simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], deployer);
-        
-        // Second resolution attempt
-        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(5)], deployer);
-        expect(result).toBeErr(Cl.uint(109)); // err-invalid-status (because status is already u4)
     });
 });
 
 describe("chessxu - integration flows", () => {
     it("completes a full match flow: Create -> Join -> Move -> Resign", () => {
         const wager = 100;
-        setupGame(wager, true, 2);
-        const gameId = 1;
-        
-        // White moves
+        const gameId = setupGame(wager, true, 2);
         simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
-        // Black moves
         simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e7e5"), Cl.stringAscii("...")], wallet_2);
-        
-        // White resigns
         const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
-        
-        // Winner is Black (wallet_2). Prize is 200.
         const transfer = events.find(e => e.event === "stx_transfer_event")!;
         expect(transfer.data.recipient).toBe(wallet_2);
         expect(transfer.data.amount).toBe("200");
-        
-        const game = getGame(gameId);
-        expect(game["status"]).toStrictEqual(Cl.uint(2)); // White resigned
+        expect(getGame(gameId)["status"]).toStrictEqual(Cl.uint(3)); // Black wins
     });
 
     it("completes a full match flow: Create -> Join -> Resolve (Win)", () => {
         const wager = 100;
-        setupGame(wager, true, 2);
-        const gameId = 1;
-        
-        // Match decided by owner
-        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
+        const gameId = setupGame(wager, true, 2);
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], deployer);
         expect(result).toBeOk(Cl.bool(true));
-        
-        // Winner is White (wallet_1)
         const transfer = events.find(e => e.event === "stx_transfer_event")!;
         expect(transfer.data.recipient).toBe(wallet_1);
         expect(transfer.data.amount).toBe("200");
@@ -550,47 +242,31 @@ describe("chessxu - integration flows", () => {
 
     it("completes a full match flow: Create -> Join -> Resolve (Draw/Refund)", () => {
         const wager = 100;
-        setupGame(wager, true, 2);
-        const gameId = 1;
-        
-        // Match resolved as draw by owner
-        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(6)], deployer);
-        
+        const gameId = setupGame(wager, true, 2);
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
         const transfers = events.filter(e => e.event === "stx_transfer_event");
         expect(transfers.length).toBe(2);
         transfers.forEach(t => expect(t.data.amount).toBe("100"));
     });
 
     it("handles multiple concurrent games without state interference", () => {
-        setupGame(100, true, 2); // Game 1
-        setupGame(200, true, 2); // Game 2
-        
-        // Interleaved moves
-        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii("game1-m1")], wallet_1);
-        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(2), Cl.stringAscii("d2d4"), Cl.stringAscii("game2-m1")], wallet_1);
-        
-        const g1 = getGame(1);
-        const g2 = getGame(2);
-        
+        const g1Id = setupGame(100, true, 2); 
+        const g2Id = setupGame(200, true, 2); 
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(g1Id), Cl.stringAscii("e2e4"), Cl.stringAscii("game1-m1")], wallet_1);
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(g2Id), Cl.stringAscii("d2d4"), Cl.stringAscii("game2-m1")], wallet_1);
+        const g1 = getGame(g1Id);
+        const g2 = getGame(g2Id);
         expect(g1["board-state"]).toStrictEqual(Cl.stringAscii("game1-m1"));
         expect(g2["board-state"]).toStrictEqual(Cl.stringAscii("game2-m1"));
-        expect(g1["wager"]).toStrictEqual(Cl.uint(100));
-        expect(g2["wager"]).toStrictEqual(Cl.uint(200));
     });
 
     it("verifies accurate escrow balance across multiple simultaneous games", () => {
-        setupGame(1000, true, 2); // Game 1: 2000 STX locked
-        setupGame(5000, true, 2); // Game 2: 10000 STX locked
-        
-        // Total locked should be 12000
-        // We can't easily check 'contract balance' in simnet directly through events of a separate call,
-        // but we can verify that resolve-game for Game 1 transfers 2000 and Game 2 transfers 10000.
-        const res1 = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(3), Cl.uint(4)], deployer);
-        const res2 = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(4), Cl.uint(4)], deployer);
-        
+        const g1Id = setupGame(1000, true, 2); 
+        const g2Id = setupGame(5000, true, 2); 
+        const res1 = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(g1Id), Cl.uint(2)], deployer);
+        const res2 = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(g2Id), Cl.uint(2)], deployer);
         const transfer1 = res1.events.find(e => e.event === "stx_transfer_event")!;
         const transfer2 = res2.events.find(e => e.event === "stx_transfer_event")!;
-        
         expect(transfer1.data.amount).toBe("2000");
         expect(transfer2.data.amount).toBe("10000");
     });

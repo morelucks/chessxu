@@ -313,4 +313,80 @@ describe("chessxu - submit-move", () => {
         const game = res.data || res.value;
         expect(game["turn"]).toStrictEqual(Cl.stringAscii("b"));
     });
+
+    it("updates the board state correctly after a successful move", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const newBoard = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii(newBoard)], wallet_1);
+        
+        const res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        const game = res.data || res.value;
+        expect(game["board-state"]).toStrictEqual(Cl.stringAscii(newBoard));
+    });
+});
+
+describe("chessxu - resign", () => {
+    it("successfully allows Player 1 to resign and awards prize to Player 2 (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
+        
+        // Winner is wallet_2. Prize should be 2 * wager.
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.recipient).toBe(wallet_2);
+        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+    });
+
+    it("successfully allows Player 2 to resign and awards prize to Player 1 (STX)", () => {
+        const wager = 1000;
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_2);
+        
+        // Winner is wallet_1. Prize should be 2 * wager.
+        const transfer = events.find(e => e.event === "stx_transfer_event");
+        expect(transfer).toBeDefined();
+        expect(transfer!.data.recipient).toBe(wallet_1);
+        expect(transfer!.data.amount).toBe(`${2 * wager}`);
+    });
+
+    it("reverts if a non-player attempts to resign (err-not-a-player)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_3);
+        expect(result).toBeErr(Cl.uint(105)); // err-not-a-player
+    });
+
+    it("verifies game status correctly updates to u2 (White resigned) or u3 (Black resigned)", () => {
+        // Case 1: White Resigns
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
+        let res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(1)], wallet_1).result as any).value;
+        let game = res.data || res.value;
+        expect(game["status"]).toStrictEqual(Cl.uint(2)); // White resigned
+        
+        // Case 2: Black Resigns
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(2)], wallet_2);
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(2)], wallet_2);
+        res = (simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(2)], wallet_1).result as any).value;
+        game = res.data || res.value;
+        expect(game["status"]).toStrictEqual(Cl.uint(3)); // Black resigned
+    });
+
+    it("reverts if trying to resign from a game that is not Ongoing (err-not-ongoing)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        
+        // Game is u0 (Waiting). Resign should fail.
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(1)], wallet_1);
+        expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
+    });
 });

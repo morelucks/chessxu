@@ -482,4 +482,16 @@ describe("chessxu - edge cases", () => {
         const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(1), Cl.stringAscii("e2e4"), Cl.stringAscii(longBoard)], wallet_1);
         expect(result).toBeOk(Cl.bool(true));
     });
+
+    it("reverts if trying to resolve a game that is already resolved (err-invalid-status)", () => {
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(1)], wallet_2);
+        
+        // First resolution
+        simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(4)], deployer);
+        
+        // Second resolution attempt
+        const { result } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(1), Cl.uint(5)], deployer);
+        expect(result).toBeErr(Cl.uint(109)); // err-invalid-status (because status is already u4)
+    });
 });

@@ -3,6 +3,11 @@ import { createRoot } from "react-dom/client";
 import { Connect } from "@stacks/connect-react";
 import App from "./app/app";
 import "./index.css";
+import { Buffer } from "buffer";
+
+if (typeof window !== "undefined") {
+  window.Buffer = window.Buffer || Buffer;
+}
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");

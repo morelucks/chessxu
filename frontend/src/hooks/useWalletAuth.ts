@@ -36,16 +36,17 @@ export function useWalletAuth() {
     setIsLoading(true);
 
     try {
-      // Detect if we should use Celo (MiniPay or explicit)
+      // Detect if we should use Celo (MiniPay, Farcaster, or explicit)
       const ethereum = (window as any).ethereum;
       const isMiniPay = typeof window !== 'undefined' && ethereum?.isMiniPay;
-      const targetChain = chain || (isMiniPay ? 'celo' : 'stacks');
+      const isFarcaster = celoService.isFarcaster();
+      const targetChain = chain || (isMiniPay || isFarcaster ? 'celo' : 'stacks');
 
       console.log(`Connecting to ${targetChain}...`);
 
       if (targetChain === 'celo') {
         try {
-          if (!ethereum) {
+          if (!ethereum && !isFarcaster) {
             throw new Error("No EVM wallet found (like MetaMask or MiniPay)");
           }
           const celoAddr = await celoService.connectWallet();

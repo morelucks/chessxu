@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
-    "payload": "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkNoZXNzeHUiLCJpYXQiOjE1MTYyMzkwMjJ9",
-    "signature": "PLEASE_GENERATE_SIGNATURE_IN_FARCASTER_DEVELOPER_PORTAL"
+    "header": "eyJmaWQiOjExMDQzMzgsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhBODQwMmE3ZkMxOTQ4ODU5MjhlMjNkNzNBOGViMEFBYjA5NjEzNzlFIn0",
+    "payload": "eyJkb21haW4iOiJjaGVzc3h1LnZlcmNlbC5hcHAifQ",
+    "signature": "UOa+qtasZAaiHQI9rLvIVVpGsNlpz4SJ1Aui3s7ZvpgzKc8a6bY9jNstu0/E0ztZh3G4oQS3IEGFqQVmDzGT4Bw="
   },
   "frame": {
     "version": "1",

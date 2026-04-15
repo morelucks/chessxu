@@ -6,6 +6,7 @@ import useAppStore from "../../zustand/store";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
 import { useGameState } from "../../chess/hooks/useGameState";
 import { GAME_STATUS } from "../../chess/blockchainConstants";
+import useMiniPayAccess from "../../hooks/useMiniPayAccess";
 
 function getStatusLabel(status: number | null | undefined) {
   switch (status) {
@@ -33,6 +34,7 @@ export default function ChessScreen() {
   const address = useAppStore((state) => state.address);
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
+  const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
   const { gameState } = useGameState(activeGameId);
   const [currentGameMode, setCurrentGameMode] = useState('pvc');
 
@@ -118,6 +120,16 @@ export default function ChessScreen() {
             </button>
           </div>
         </div>
+        {activeChain === 'celo' && requiresAccess && !hasAccess ? (
+          <div className="mt-3 rounded-lg border border-amber-400/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-100">
+            Daily Celo access is required before creating or joining a MiniPay match. Return to the lobby to unlock access with cUSD.
+          </div>
+        ) : null}
+        {activeChain === 'celo' && hasAccess && expiresAt ? (
+          <div className="mt-3 rounded-lg border border-emerald-400/20 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-100">
+            Daily Celo access is active until {new Date(expiresAt).toLocaleString()}.
+          </div>
+        ) : null}
       </div>
 
       {/* Main Content Area */}

@@ -50,6 +50,7 @@ export function useWalletAuth() {
           }
           const celoAddr = await celoService.connectWallet();
           setCeloAddress(celoAddr);
+          setAddress(celoAddr);
           setActiveChain('celo');
           setIsLoading(false);
           onFinish?.(celoAddr);

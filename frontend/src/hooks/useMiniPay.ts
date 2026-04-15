@@ -6,11 +6,16 @@ import celoService from '../chess/services/celoService';
 export const useMiniPay = () => {
   const setCeloAddress = useAppStore((state) => state.setCeloAddress);
   const setActiveChain = useAppStore((state) => state.setActiveChain);
+  const setMiniPayDetected = useAppStore((state) => state.setMiniPayDetected);
 
   useEffect(() => {
     const checkAndConnectMiniPay = async () => {
+      const provider = typeof window !== 'undefined' ? window.ethereum : undefined;
+      const detected = Boolean(provider && (provider as any).isMiniPay);
+      setMiniPayDetected(detected);
+
       // Check if the current environment is MiniPay
-      if (window.ethereum && (window.ethereum as any).isMiniPay) {
+      if (detected) {
         try {
           // Because MiniPay auto-authenticates the user in the background, 
           // we can request the address directly without prompting the user.
@@ -29,7 +34,7 @@ export const useMiniPay = () => {
     };
 
     checkAndConnectMiniPay();
-  }, [setCeloAddress, setActiveChain]);
+  }, [setCeloAddress, setActiveChain, setMiniPayDetected]);
 };
 
 export default useMiniPay;

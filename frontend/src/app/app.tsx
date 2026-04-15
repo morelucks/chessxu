@@ -6,6 +6,7 @@ import LeaderboardPage from "../components/pages/LeaderboardPage";
 import useAppStore, { userSession } from "../zustand/store";
 import { ToasterProvider } from "../components/ui/toasts/ToasterProvider";
 import { useMiniPay } from "../hooks/useMiniPay";
+import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 
 function App() {
   const setAddress = useAppStore((state) => state.setAddress);
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <ToasterProvider>
+      <FarcasterMiniAppReady />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />

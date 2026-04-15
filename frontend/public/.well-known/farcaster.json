@@ -1,0 +1,17 @@
+{
+  "accountAssociation": {
+    "header": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+    "payload": "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkNoZXNzeHUiLCJpYXQiOjE1MTYyMzkwMjJ9",
+    "signature": "PLEASE_GENERATE_SIGNATURE_IN_FARCASTER_DEVELOPER_PORTAL"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Chessxu",
+    "iconUrl": "https://chessxu.vercel.app/chess-knight.jpg",
+    "homeUrl": "https://chessxu.vercel.app",
+    "imageUrl": "https://chessxu.vercel.app/chess-hero-bg.jpg",
+    "buttonTitle": "Play Chessxu",
+    "splashImageUrl": "https://chessxu.vercel.app/chess-knight.jpg",
+    "splashBackgroundColor": "#0f172a"
+  }
+}

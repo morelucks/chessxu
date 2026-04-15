@@ -13,6 +13,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@farcaster/miniapp-sdk": "^0.3.0",
     "@radix-ui/react-progress": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@stacks/common": "^7.3.1",
@@ -40,8 +41,8 @@
     "@eslint/js": "^9.29.0",
     "@types/node": "^22.15.32",
     "@types/react": "^18.3.23",
-    "@types/uuid": "^10.0.0",
     "@types/react-dom": "^18.3.7",
+    "@types/uuid": "^10.0.0",
     "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.29.0",

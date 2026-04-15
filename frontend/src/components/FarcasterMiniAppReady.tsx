@@ -12,6 +12,8 @@ export function FarcasterMiniAppReady() {
           return;
         }
 
+        (window as Record<string, any>).isFarcaster = true;
+
         await sdk.actions.ready();
       } catch (error) {
         console.error("Farcaster ready signal failed", error);

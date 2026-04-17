@@ -62,10 +62,10 @@ export default function ChessScreen() {
   return (
     <div className="h-screen bg-slate-900 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="flex-shrink-0 bg-slate-800/50 border-b border-slate-700 px-4 py-3">
+      <div className="flex-shrink-0 bg-slate-900/80 backdrop-blur-xl border-b border-white/10 px-4 py-4 z-10 shadow-lg">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold text-white">Chessxu</h1>
+            <h1 className="text-2xl font-black bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Chessxu</h1>
             <div className="flex flex-wrap items-center gap-2 mb-1">
               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
                 {currentGameMode === 'pvc' ? 'Player vs Computer' : 'Player vs Player'}

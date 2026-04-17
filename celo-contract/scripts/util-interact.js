@@ -11,6 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // --- Configuration ---
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 const PUBLIC_RPCS = [
+    process.env.CELO_RPC,
     "https://forno.celo.org",
     "https://rpc.ankr.com/celo",
     "https://1rpc.io/celo",
@@ -60,16 +61,17 @@ Examples:
     let provider;
     for (const url of PUBLIC_RPCS) {
         try {
-            const p = new ethers.JsonRpcProvider(url, undefined, { staticNetwork: true });
-            // Set a timeout for the network check
+            // console.log(`   Trying RPC: ${url}...`);
+            const p = new ethers.JsonRpcProvider(url, { chainId: 42220, name: 'celo' }, { staticNetwork: true });
+            // Set a shorter timeout for the network check to fail fast and move to next RPC
             await Promise.race([
                 p.getNetwork(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000))
+                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout after 3s")), 3000))
             ]);
             provider = p;
             break;
         } catch (e) {
-            console.warn(`   ⚠️  RPC failed: ${url} (${e.message})`);
+            console.warn(`   ⚠️  RPC failed: ${url} - ${e.message}`);
         }
     }
 

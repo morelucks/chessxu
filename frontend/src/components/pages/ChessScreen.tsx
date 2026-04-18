@@ -34,6 +34,8 @@ export default function ChessScreen() {
   const address = useAppStore((state) => state.address);
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
+  const isFarcaster = useAppStore((state) => state.isFarcaster);
+  const farcasterUser = useAppStore((state) => state.farcasterUser);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
   const { gameState } = useGameState(activeGameId);
   const [currentGameMode, setCurrentGameMode] = useState('pvc');
@@ -90,31 +92,61 @@ export default function ChessScreen() {
               ) : null}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            {!isConnected ? (
-              !isMiniPay && (
-                <button
-                  className="px-3 py-1.5 rounded bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs transition shadow-lg shadow-emerald-500/20 disabled:opacity-50"
-                  onClick={() => connect()}
-                  disabled={isConnecting}
-                >
-                  {isConnecting ? "Connecting..." : "Connect Wallet"}
-                </button>
-              )
+          <div className="flex items-center gap-3">
+            {isFarcaster && farcasterUser ? (
+              <div className="flex items-center gap-2 p-1.5 bg-white/5 rounded-full border border-white/10 pr-3">
+                {farcasterUser.pfpUrl && (
+                   <img src={farcasterUser.pfpUrl} alt="pfp" className="w-6 h-6 rounded-full border border-indigo-400/50" />
+                )}
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-white block leading-tight">
+                    {farcasterUser.displayName || farcasterUser.username}
+                  </span>
+                  <span className="text-[10px] text-indigo-400 font-medium leading-tight">
+                    FID: {farcasterUser.fid}
+                  </span>
+                </div>
+              </div>
             ) : (
-              <button
-                className="px-3 py-1.5 rounded border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 backdrop-blur-sm text-white text-xs font-semibold transition"
-                onClick={disconnect}
-              >
-                Disconnect
-              </button>
+              isConnected && (
+                <div className="hidden sm:flex flex-col items-end">
+                  <span className="text-xs font-bold text-white">
+                    {address!.slice(0, 6)}...{address!.slice(-4)}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-medium">
+                    {activeChain === 'stacks' ? 'Stacks' : 'Celo'}
+                  </span>
+                </div>
+              )
             )}
-            <button
-              className="px-3 py-1.5 rounded bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-xs disabled:opacity-50 transition shadow-lg shadow-purple-500/20"
-              onClick={() => navigate("/")}
-            >
-              {activeGameId ? "Back to Lobby" : "Create or Join Match"}
-            </button>
+
+            <div className="flex items-center gap-2">
+              {!isConnected ? (
+                (!isMiniPay && !isFarcaster) && (
+                  <button
+                    className="px-3 py-1.5 rounded bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs transition shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+                    onClick={() => connect()}
+                    disabled={isConnecting}
+                  >
+                    {isConnecting ? "Connecting..." : "Connect Wallet"}
+                  </button>
+                )
+              ) : (
+                <button
+                  className="p-1.5 rounded-full border border-white/10 hover:bg-white/5 text-slate-400 hover:text-white transition"
+                  onClick={disconnect}
+                  title="Disconnect"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                </button>
+              )}
+              <button
+                className="px-3 py-1.5 rounded bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-xs font-bold transition shadow-lg shadow-purple-500/20 active:scale-95"
+                onClick={() => navigate("/")}
+              >
+                {activeGameId ? "Lobby" : "Match"}
+              </button>
+            </div>
           </div>
         </div>
         {activeChain === 'celo' && requiresAccess && !hasAccess ? (

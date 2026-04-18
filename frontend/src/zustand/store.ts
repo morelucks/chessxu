@@ -8,6 +8,14 @@ export const userSession = new UserSession({ appConfig });
 
 export type ChainType = 'stacks' | 'celo';
 
+export interface FarcasterUser {
+  fid: number;
+  username?: string;
+  displayName?: string;
+  pfpUrl?: string;
+  custody?: string;
+}
+
 export interface AuthState {
   address: string | null; // Currently active chain address
   stacksAddress: string | null;
@@ -15,6 +23,8 @@ export interface AuthState {
   activeChain: ChainType;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isFarcaster: boolean;
+  farcasterUser: FarcasterUser | null;
   miniPayDetected: boolean;
   miniPayAccessExpiresAt: string | null;
   miniPayLastPaymentTx: string | null;
@@ -34,6 +44,8 @@ export interface AppStore extends AuthState, GameState {
   setCeloAddress: (address: string | null) => void;
   setActiveChain: (chain: ChainType) => void;
   setIsLoading: (isLoading: boolean) => void;
+  setIsFarcaster: (isFarcaster: boolean) => void;
+  setFarcasterUser: (user: FarcasterUser | null) => void;
   setMiniPayDetected: (detected: boolean) => void;
   setMiniPayAccess: (expiresAt: string | null, txHash?: string | null) => void;
   clearMiniPayAccess: () => void;
@@ -54,6 +66,8 @@ const useAppStore = create<AppStore>()(
       activeChain: 'stacks',
       isAuthenticated: false,
       isLoading: false,
+      isFarcaster: false,
+      farcasterUser: null,
       miniPayDetected: false,
       miniPayAccessExpiresAt: null,
       miniPayLastPaymentTx: null,
@@ -93,6 +107,8 @@ const useAppStore = create<AppStore>()(
         set({ activeChain, address, isAuthenticated: !!address });
       },
       setIsLoading: (isLoading: boolean) => set({ isLoading }),
+      setIsFarcaster: (isFarcaster: boolean) => set({ isFarcaster }),
+      setFarcasterUser: (farcasterUser: FarcasterUser | null) => set({ farcasterUser }),
       setMiniPayDetected: (miniPayDetected: boolean) => set({ miniPayDetected }),
       setMiniPayAccess: (miniPayAccessExpiresAt: string | null, miniPayLastPaymentTx: string | null = null) =>
         set({ miniPayAccessExpiresAt, miniPayLastPaymentTx }),
@@ -108,6 +124,8 @@ const useAppStore = create<AppStore>()(
             stacksAddress: null, 
             celoAddress: null, 
             isAuthenticated: false, 
+            isFarcaster: false,
+            farcasterUser: null,
             miniPayDetected: false,
             miniPayAccessExpiresAt: null,
             miniPayLastPaymentTx: null,

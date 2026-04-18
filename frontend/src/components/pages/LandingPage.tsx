@@ -13,6 +13,7 @@ import useAppStore from "../../zustand/store";
 
 export default function LandingPage() {
   const isMiniPay = useAppStore((state) => state.miniPayDetected);
+  const isFarcaster = useAppStore((state) => state.isFarcaster);
   const navigate = useNavigate();
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
   
@@ -34,7 +35,10 @@ export default function LandingPage() {
       setShouldNavigateAfterConnect(false);
       navigate("/chess");
     }
-  }, [isConnected, shouldNavigateAfterConnect, navigate]);
+    if (isConnected && isFarcaster) {
+      navigate("/chess");
+    }
+  }, [isConnected, shouldNavigateAfterConnect, isFarcaster, navigate]);
 
   const handleStartPlaying = () => {
     if (isConnected) {
@@ -141,8 +145,8 @@ export default function LandingPage() {
           <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             ♟ Chessxu
           </div>
-          {/* Mobile Connect Button - Hidden in MiniPay if not connected since it auto-connects */}
-          {!isMiniPay && (
+          {/* Mobile Connect Button - Hidden in MiniPay or Farcaster if not connected since it auto-connects */}
+          {(!isMiniPay && !isFarcaster) && (
             <div className="md:hidden">
               {isConnected ? (
                 <button
@@ -183,7 +187,7 @@ export default function LandingPage() {
                 >
                   Play Now
                 </button>
-                {!isMiniPay && (
+                {(!isMiniPay && !isFarcaster) && (
                   <button
                     onClick={disconnect}
                     className="px-3 py-2 rounded border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition text-xs"
@@ -193,7 +197,7 @@ export default function LandingPage() {
                 )}
               </div>
             ) : (
-              !isMiniPay && (
+              (!isMiniPay && !isFarcaster) && (
                 <button
                   onClick={handleStartPlaying}
                   disabled={isConnecting}

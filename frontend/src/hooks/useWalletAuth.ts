@@ -1,6 +1,7 @@
 import { showConnect } from "@stacks/connect-react";
 import useAppStore, { userSession } from "../zustand/store";
 import celoService from "../chess/services/celoService";
+import { sdk } from "@farcaster/miniapp-sdk";
 
 function getSessionAddress() {
   if (!userSession.isUserSignedIn()) {
@@ -36,18 +37,54 @@ export function useWalletAuth() {
     setIsLoading(true);
 
     try {
-      // Detect if we should use Celo (MiniPay, Farcaster, or explicit)
+      const { isFarcaster } = useAppStore.getState();
+
+      if (isFarcaster) {
+        try {
+          // Attempt the same logic as auto-login but manually triggered
+          const ethProvider = await sdk.wallet.getEthereumProvider();
+          if (ethProvider) {
+            const accounts = (await ethProvider.request({ method: "eth_requestAccounts" })) as string[];
+            if (accounts?.[0]) {
+              setCeloAddress(accounts[0]);
+              setAddress(accounts[0]);
+              setActiveChain("celo");
+              setIsLoading(false);
+              onFinish?.(accounts[0]);
+              return;
+            }
+          }
+        } catch (warn) {
+           console.warn("[Farcaster] Wallet connect failed during manual trigger:", warn);
+        }
+
+        try {
+          const nonce = crypto.randomUUID();
+          await sdk.actions.signIn({ nonce });
+          const context = await sdk.context;
+          const fid = context?.user?.fid;
+          if (fid) {
+             const farcasterAddr = `fc:${fid}`;
+             setAddress(farcasterAddr);
+             setIsLoading(false);
+             onFinish?.(farcasterAddr);
+             return;
+          }
+        } catch (error) {
+          console.error("Farcaster sign-in failed:", error);
+        }
+      }
+
+      // Detect if we should use Celo (EVM environments) or Stacks
       const ethereum = (window as any).ethereum;
-      const isMiniPay = typeof window !== 'undefined' && ethereum?.isMiniPay;
-      const isFarcaster = celoService.isFarcaster();
-      const targetChain = chain || (isMiniPay || isFarcaster ? 'celo' : 'stacks');
+      const targetChain = chain || (ethereum ? 'celo' : 'stacks');
 
       console.log(`Connecting to ${targetChain}...`);
 
       if (targetChain === 'celo') {
         try {
-          if (!ethereum && !isFarcaster) {
-            throw new Error("No EVM wallet found (like MetaMask or MiniPay)");
+          if (!ethereum) {
+            throw new Error("No EVM wallet found (like MetaMask or Farcaster)");
           }
           const celoAddr = await celoService.connectWallet();
           setCeloAddress(celoAddr);

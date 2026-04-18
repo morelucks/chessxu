@@ -42,7 +42,6 @@ import { celo } from 'viem/chains';
 import { CELO_CONFIG, CELO_FEE_CURRENCIES } from '../blockchainConstants';
 import { CHESSXU_ABI } from './contractAbi';
 import { selectSupportedFeeCurrency } from '../../utils/feeCurrency';
-import { sdk } from '@farcaster/miniapp-sdk';
 
 /**
  * Service to handle all Celo blockchain interactions
@@ -71,17 +70,9 @@ const celoService = {
 
   // --- Utility Helpers ---
 
-  isFarcaster: () => {
-    return typeof window !== 'undefined' && Boolean((window as Record<string, any>).isFarcaster);
-  },
-
   getProvider: () => {
     if (typeof window === 'undefined') {
       return null;
-    }
-
-    if (celoService.isFarcaster()) {
-      return sdk.wallet.ethProvider;
     }
 
     return (window as any).ethereum || (window as any).provider || null;

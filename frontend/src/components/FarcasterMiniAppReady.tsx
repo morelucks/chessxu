@@ -1,31 +1,5 @@
-import { useEffect } from "react";
-import { sdk } from "@farcaster/miniapp-sdk";
-
+// Note: The logic for sdk.actions.ready() and environment detection
+// has been moved to hooks/useFarcaster.ts which is called at the root.
 export function FarcasterMiniAppReady() {
-  useEffect(() => {
-    let cancelled = false;
-
-    const notifyReady = async () => {
-      try {
-        const isMiniApp = await sdk.isInMiniApp();
-        if (!isMiniApp || cancelled) {
-          return;
-        }
-
-        (window as Record<string, any>).isFarcaster = true;
-
-        await sdk.actions.ready();
-      } catch (error) {
-        console.error("Farcaster ready signal failed", error);
-      }
-    };
-
-    void notifyReady();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   return null;
 }

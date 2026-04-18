@@ -88,15 +88,15 @@ export default function ChessGameWrapper() {
     return (
         <AppContext.Provider value={providerState}>
             {/* Mobile hamburger buttons */}
-            <div className="md:hidden flex items-center justify-between px-2 py-2 gap-2">
+            <div className="md:hidden flex items-center justify-between px-3 py-3 gap-3">
                 <button
-                    className="px-3 py-2 rounded bg-slate-700 text-white text-sm border border-slate-600"
+                    className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 text-slate-300 hover:text-white transition-all active:scale-95 shadow-lg font-semibold text-sm"
                     onClick={() => setLeftOpen(v => !v)}
                 >
                     {leftOpen ? 'Hide Menu' : 'Menu'}
                 </button>
                 <button
-                    className="px-3 py-2 rounded bg-slate-700 text-white text-sm border border-slate-600"
+                    className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 text-slate-300 hover:text-white transition-all active:scale-95 shadow-lg font-semibold text-sm"
                     onClick={() => setRightOpen(v => !v)}
                 >
                     {rightOpen ? 'Hide Moves' : 'Moves'}
@@ -105,13 +105,13 @@ export default function ChessGameWrapper() {
 
             <div className="flex-1 flex flex-col md:flex-row overflow-visible">
                 {/* Left Sidebar - Chess Game Controls */}
-                <div className={`w-full md:w-80 flex-shrink-0 bg-slate-800/30 border-b md:border-b-0 md:border-r border-slate-700 p-4 overflow-y-auto ${leftOpen ? 'block' : 'hidden'} md:block`}>
+                <div className={`w-full md:w-80 flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-b md:border-b-0 md:border-r border-slate-800 p-4 overflow-y-auto ${leftOpen ? 'block' : 'hidden'} md:block shadow-inner`}>
                     <ChessSidebar />
                 </div>
 
                 {/* Chess Board Area */}
                 <div className="flex-1 flex items-center justify-center p-2 md:p-4 overflow-auto">
-                    <div className="bg-slate-800/60 rounded-lg p-2 md:p-4 shadow-lg border border-slate-700 max-w-full">
+                    <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-3 md:p-5 shadow-2xl border border-white/5 max-w-full">
                         <ChessBoardOnly />
                     </div>
                 </div>

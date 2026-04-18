@@ -6,6 +6,7 @@ import LeaderboardPage from "../components/pages/LeaderboardPage";
 import useAppStore, { userSession } from "../zustand/store";
 import { ToasterProvider } from "../components/ui/toasts/ToasterProvider";
 import { useMiniPay } from "../hooks/useMiniPay";
+import { useFarcaster } from "../hooks/useFarcaster";
 import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
   
   // Attempt MiniPay auto-connection
   useMiniPay();
+
+  // Attempt Farcaster auto-connection and init
+  useFarcaster();
 
   useEffect(() => {
     if (userSession.isUserSignedIn()) {

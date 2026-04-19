@@ -9,6 +9,17 @@ import { useMiniPay } from "../hooks/useMiniPay";
 import { useFarcaster } from "../hooks/useFarcaster";
 import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 
+import BottomNav from "../components/BottomNav";
+
+const PlaceholderPage = ({ title }: { title: string }) => (
+  <div className="flex h-screen items-center justify-center bg-slate-950 text-white">
+    <div className="text-center">
+      <h1 className="text-4xl font-bold mb-4">{title}</h1>
+      <p className="text-slate-400">Coming Soon</p>
+    </div>
+  </div>
+);
+
 function App() {
   const setAddress = useAppStore((state) => state.setAddress);
   
@@ -30,11 +41,19 @@ function App() {
     <ToasterProvider>
       <FarcasterMiniAppReady />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/chess" element={<ChessScreen />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-        </Routes>
+        <div className="flex flex-col min-h-screen">
+          <div className="flex-grow pb-24 md:pb-0">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/chess" element={<ChessScreen />} />
+              <Route path="/leaderboard" element={<LeaderboardPage />} />
+              <Route path="/tasks" element={<PlaceholderPage title="Tasks" />} />
+              <Route path="/store" element={<PlaceholderPage title="Store" />} />
+              <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
+            </Routes>
+          </div>
+          <BottomNav />
+        </div>
       </BrowserRouter>
     </ToasterProvider>
   );

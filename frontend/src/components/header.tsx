@@ -14,6 +14,8 @@ export function Header() {
   const chessBalanceFromStore = useAppStore((s) => s.chessBalance);
   const setChessBalance = useAppStore((s) => s.setChessBalance);
   const setElo = useAppStore((s) => s.setElo);
+  const isFarcaster = useAppStore((s) => s.isFarcaster);
+  const farcasterUser = useAppStore((s) => s.farcasterUser);
 
   const { elo: eloFromHook } = usePlayerStats(address);
   const { getTokenBalance } = useStacksChess();
@@ -96,10 +98,19 @@ export function Header() {
           )
         ) : (
           <div className="flex items-center gap-3">
-            <div className="flex flex-col items-end hidden md:flex">
-              <span className="text-sm font-bold text-white">
-                {address!.slice(0, 6)}...{address!.slice(-4)}
-              </span>
+            <div className="flex flex-col items-end">
+              {isFarcaster && farcasterUser ? (
+                 <div className="flex items-center gap-2">
+                    {farcasterUser.pfpUrl && <img src={farcasterUser.pfpUrl} alt="pfp" className="w-5 h-5 rounded-full" />}
+                    <span className="text-sm font-bold text-white">
+                      {farcasterUser.displayName || farcasterUser.username || `fc:${farcasterUser.fid}`}
+                    </span>
+                 </div>
+              ) : (
+                <span className="text-sm font-bold text-white hidden md:block">
+                  {address!.slice(0, 6)}...{address!.slice(-4)}
+                </span>
+              )}
               <span className="text-xs text-indigo-400 font-bold">
                 ELO: {eloFromStore} | {(chessBalanceFromStore / 1000000).toFixed(2)} CHESS
               </span>

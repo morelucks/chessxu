@@ -118,7 +118,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white overflow-hidden">
+    <div className="flex-grow bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white overflow-hidden">
       <div className="fixed inset-0 -z-10 overflow-hidden">
         {/* Chess hero background image */}
         <img

@@ -62,7 +62,7 @@ export default function ChessScreen() {
       : getStatusLabel(null);
 
   return (
-    <div className="h-screen bg-slate-900 flex flex-col overflow-hidden">
+    <div className="flex-grow bg-slate-900 flex flex-col overflow-hidden">
       {/* Header */}
       <div className="flex-shrink-0 bg-slate-900/80 backdrop-blur-xl border-b border-white/10 px-4 py-4 z-10 shadow-lg">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">

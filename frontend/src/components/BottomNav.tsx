@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Gamepad2, ClipboardList, Swords, Trophy, ShoppingBag, User } from 'lucide-react';
+import { Gamepad2, Swords, Trophy, ShoppingBag, User } from 'lucide-react';
 
 const navItems = [
   { label: 'Game', icon: Gamepad2, path: '/' },
-  { label: 'Tasks', icon: ClipboardList, path: '/tasks' },
   { label: '1v1', icon: Swords, path: '/chess' },
   { label: 'Rank', icon: Trophy, path: '/leaderboard' },
-  { label: 'Store', icon: ShoppingBag, path: '/store' },
+  { label: 'Shop', icon: ShoppingBag, path: '/shop' },
   { label: 'Me', icon: User, path: '/profile' },
 ];
 
@@ -34,9 +33,6 @@ export const BottomNav: React.FC = () => {
             >
               <div className={`relative p-1 rounded-xl transition-colors ${isActive ? 'bg-indigo-500/10' : ''}`}>
                 <Icon size={20} className={isActive ? 'stroke-[2.5px]' : 'stroke-[1.5px]'} />
-                {item.label === 'Tasks' && (
-                  <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-red-500 border border-slate-950" />
-                )}
               </div>
               <span className="text-[10px] font-bold uppercase tracking-wider">
                 {item.label}

@@ -47,8 +47,7 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/chess" element={<ChessScreen />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
-              <Route path="/tasks" element={<PlaceholderPage title="Tasks" />} />
-              <Route path="/store" element={<PlaceholderPage title="Store" />} />
+              <Route path="/shop" element={<PlaceholderPage title="Shop" />} />
               <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
             </Routes>
           </div>

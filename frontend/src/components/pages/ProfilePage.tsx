@@ -86,3 +86,25 @@ export default function ProfilePage() {
   const activeChain = useAppStore((s) => s.activeChain);
   const elo = useAppStore((s) => s.elo);
   const chessBalance = useAppStore((s) => s.chessBalance);
+  const isFarcaster = useAppStore((s) => s.isFarcaster);
+
+  const rank = eloRank(elo);
+  const displayName = farcasterUser?.displayName || farcasterUser?.username || "Anonymous";
+  const username = farcasterUser?.username ? `@${farcasterUser.username}` : null;
+  const pfp = farcasterUser?.pfpUrl;
+  const fid = farcasterUser?.fid;
+
+  return (
+    <div className="profile-root">
+      {/* Ambient glow background */}
+      <div className="profile-bg-glow glow-purple" />
+      <div className="profile-bg-glow glow-blue" />
+
+      <div className="profile-container">
+
+        {/* ── Avatar + Identity ── */}
+        <div className="profile-hero-card">
+          <div className="profile-avatar-ring" style={{ borderColor: rank.color }}>
+            {pfp ? (
+              <img src={pfp} alt={displayName} className="profile-avatar-img" />
+            ) : (

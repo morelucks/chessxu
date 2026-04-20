@@ -1,6 +1,6 @@
 // Import the chess components
 import ChessGameWrapper from "../ChessGameWrapper";
-import { useState, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import useAppStore from "../../zustand/store";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
@@ -37,23 +37,6 @@ export default function ChessScreen() {
   const isFarcaster = useAppStore((state) => state.isFarcaster);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
   const { gameState } = useGameState(activeGameId);
-  const [currentGameMode, setCurrentGameMode] = useState('pvc');
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const gameMode = localStorage.getItem('currentGameMode') || 'pvc';
-      setCurrentGameMode(gameMode);
-    };
-
-    handleStorageChange();
-    window.addEventListener('storage', handleStorageChange);
-    const interval = setInterval(handleStorageChange, 1000);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      clearInterval(interval);
-    };
-  }, []);
 
   const activeStatus =
     gameState && typeof gameState === "object" && "status" in gameState
@@ -64,36 +47,30 @@ export default function ChessScreen() {
     <div className="flex-grow bg-slate-900 flex flex-col overflow-hidden">
       {/* Header */}
       <div className="flex-shrink-0 z-10 p-4 pt-6">
-        <div className="mx-auto max-w-5xl rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden relative">
+        <div className="mx-auto max-w-5xl rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-lg overflow-hidden relative">
           {/* Subtle glow effects inside the banner */}
-          <div className="absolute -left-10 -top-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -left-10 -top-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
           
-          <div className="relative p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="relative px-3 py-2 flex flex-row items-center justify-between">
             
-            {/* Left Section: Title & Status */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
-              <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-md">
-                  Chessxu
-                </h1>
-                <div className="px-2 py-0.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">
-                  {currentGameMode === 'pvc' ? 'PvC Mode' : 'PvP Mode'}
+            {/* Left Section: Compact Title & Status */}
+            <div className="flex items-center gap-2.5">
+              <h1 className="text-lg font-black tracking-tight text-white drop-shadow-md leading-none">
+                Chessxu
+              </h1>
+              <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <span className="text-[10px] sm:text-xs text-slate-200 font-semibold tracking-wide leading-none">
+                    {activeStatus}
+                  </span>
                 </div>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                <span className="text-slate-200 font-semibold tracking-wide">
-                  {activeStatus}
-                </span>
-                {activeGameId && (
-                  <span className="text-emerald-400 font-bold ml-1 bg-emerald-500/10 px-1.5 py-0.5 rounded text-xs border border-emerald-500/20">#{activeGameId}</span>
-                )}
-              </div>
-              <div className="text-xs text-slate-400 font-medium flex items-center gap-1 mt-0.5">
-                <div className={`w-1.5 h-1.5 rounded-full ${activeChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
-                {activeChain === 'stacks' ? 'Stacks' : 'Celo'} Network
-                {address && <span className="ml-1 opacity-60 font-mono text-[10px]">• {address.slice(0, 6)}…{address.slice(-4)}</span>}
+                <div className="text-[9px] text-slate-400 font-medium flex items-center gap-1 mt-0.5 sm:mt-0">
+                  <div className={`w-1 h-1 rounded-full ${activeChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
+                  {activeChain === 'stacks' ? 'Stacks' : 'Celo'}
+                  {address && <span className="ml-0.5 opacity-60 font-mono hidden sm:inline">• {address.slice(0, 4)}…</span>}
+                </div>
               </div>
             </div>
 
@@ -102,7 +79,7 @@ export default function ChessScreen() {
               {!isConnected ? (
                 (!isMiniPay && !isFarcaster) && (
                   <button
-                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-bold transition shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
+                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold transition shadow-md hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
                     onClick={() => connect()}
                     disabled={isConnecting}
                   >
@@ -111,19 +88,19 @@ export default function ChessScreen() {
                 )
               ) : (
                 <button
-                  className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-red-500/30 hover:text-red-400 text-slate-400 transition-all active:scale-95 group"
+                  className="p-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-red-500/30 hover:text-red-400 text-slate-400 transition-all active:scale-95 group"
                   onClick={disconnect}
                   title="Disconnect"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
                 </button>
               )}
               
               <button
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-bold transition-all shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] active:scale-95 border border-purple-400/30 flex items-center gap-1.5"
+                className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-md hover:shadow-[0_0_15px_rgba(139,92,246,0.4)] active:scale-95 border border-purple-400/30 flex items-center gap-1"
                 onClick={() => navigate("/")}
               >
-                <span className="text-[16px] leading-none -mt-0.5">⚔️</span>
+                <span className="text-[12px] leading-none">⚔️</span>
                 {activeGameId ? "Lobby" : "Match"}
               </button>
             </div>
@@ -132,15 +109,15 @@ export default function ChessScreen() {
           
           {/* Celo Access Messages */}
           {(activeChain === 'celo' && requiresAccess && !hasAccess) || (activeChain === 'celo' && hasAccess && expiresAt) ? (
-            <div className="bg-black/20 border-t border-white/5 px-4 py-2.5 flex items-center justify-center text-center">
+            <div className="bg-black/20 border-t border-white/5 px-2 py-1 flex items-center justify-center text-center">
               {requiresAccess && !hasAccess ? (
-                <div className="text-[11px] text-amber-200/90 font-medium">
-                  ⚠️ Daily Celo access required for MiniPay matches. Return to lobby to unlock.
+                <div className="text-[9px] text-amber-200/90 font-medium">
+                  ⚠️ Daily Celo access required for MiniPay. Return to lobby.
                 </div>
               ) : (
-                <div className="text-[11px] text-emerald-300/90 font-medium flex items-center gap-1.5">
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  Celo Access Active until {new Date(expiresAt!).toLocaleTimeString()}
+                <div className="text-[9px] text-emerald-300/90 font-medium flex items-center gap-1">
+                  <span className="flex h-1 w-1 rounded-full bg-emerald-400" />
+                  Access Active
                 </div>
               )}
             </div>

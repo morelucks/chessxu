@@ -218,3 +218,25 @@ export default function ProfilePage() {
                   <ExternalLink size={13} />
                 </a>
               </div>
+            )}
+
+            {!celoAddress && !stacksAddress && (
+              <p className="profile-empty-msg">No wallet connected yet.</p>
+            )}
+          </div>
+        </div>
+
+        {/* ── Farcaster Identity ── */}
+        {isFarcaster && farcasterUser && (
+          <div className="profile-section-card">
+            <div className="profile-section-header">
+              <Link2 size={16} className="text-purple-400" />
+              <h2 className="profile-section-title">Farcaster Identity</h2>
+            </div>
+
+            <div className="profile-fc-grid">
+              <div className="profile-fc-field">
+                <p className="profile-fc-key">FID</p>
+                <p className="profile-fc-val">#{farcasterUser.fid}</p>
+              </div>
+              {farcasterUser.username && (

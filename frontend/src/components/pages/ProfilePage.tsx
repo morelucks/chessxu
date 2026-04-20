@@ -152,3 +152,130 @@ export default function ProfilePage() {
         <div className="profile-stats-grid">
           <StatCard
             icon={<TrendingUp size={18} />}
+            label="ELO Rating"
+            value={elo}
+            accent="#a78bfa"
+          />
+          <StatCard
+            icon={<Coins size={18} />}
+            label="Chess Balance"
+            value={`${chessBalance} CHESS`}
+            accent="#facc15"
+          />
+          <StatCard
+            icon={<Swords size={18} />}
+            label="Active Chain"
+            value={activeChain === "celo" ? "🟡 Celo" : "🟠 Stacks"}
+            accent="#60a5fa"
+          />
+          <StatCard
+            icon={<Wallet size={18} />}
+            label="Wallet"
+            value={address ? shortenAddr(address) : "Not connected"}
+            accent="#34d399"
+          />
+        </div>
+
+        {/* ── Wallet Addresses ── */}
+        <div className="profile-section-card">
+          <div className="profile-section-header">
+            <Wallet size={16} className="text-indigo-400" />
+            <h2 className="profile-section-title">Wallet Addresses</h2>
+          </div>
+
+          <div className="profile-address-list">
+            {celoAddress && (
+              <div className="profile-address-row">
+                <div className="profile-address-label">
+                  <span className="profile-chain-dot" style={{ background: "#FCFF52" }} />
+                  Celo / EVM
+                </div>
+                <CopyBadge value={celoAddress} label="Celo address" />
+                <a
+                  href={`https://celoscan.io/address/${celoAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="profile-scan-link"
+                >
+                  <ExternalLink size={13} />
+                </a>
+              </div>
+            )}
+
+            {stacksAddress && (
+              <div className="profile-address-row">
+                <div className="profile-address-label">
+                  <span className="profile-chain-dot" style={{ background: "#F7821B" }} />
+                  Stacks / STX
+                </div>
+                <CopyBadge value={stacksAddress} label="Stacks address" />
+                <a
+                  href={`https://explorer.hiro.so/address/${stacksAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="profile-scan-link"
+                >
+                  <ExternalLink size={13} />
+                </a>
+              </div>
+            )}
+
+            {!celoAddress && !stacksAddress && (
+              <p className="profile-empty-msg">No wallet connected yet.</p>
+            )}
+          </div>
+        </div>
+
+        {/* ── Farcaster Identity ── */}
+        {isFarcaster && farcasterUser && (
+          <div className="profile-section-card">
+            <div className="profile-section-header">
+              <Link2 size={16} className="text-purple-400" />
+              <h2 className="profile-section-title">Farcaster Identity</h2>
+            </div>
+
+            <div className="profile-fc-grid">
+              <div className="profile-fc-field">
+                <p className="profile-fc-key">FID</p>
+                <p className="profile-fc-val">#{farcasterUser.fid}</p>
+              </div>
+              {farcasterUser.username && (
+                <div className="profile-fc-field">
+                  <p className="profile-fc-key">Username</p>
+                  <p className="profile-fc-val">@{farcasterUser.username}</p>
+                </div>
+              )}
+              {farcasterUser.displayName && (
+                <div className="profile-fc-field">
+                  <p className="profile-fc-key">Display Name</p>
+                  <p className="profile-fc-val">{farcasterUser.displayName}</p>
+                </div>
+              )}
+            </div>
+
+            <a
+              href={`https://warpcast.com/${farcasterUser.username || ""}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="profile-warpcast-btn"
+            >
+              <span>View on Warpcast</span>
+              <ChevronRight size={16} />
+            </a>
+          </div>
+        )}
+
+        {/* ── Guest / not connected nudge ── */}
+        {!farcasterUser && !address && (
+          <div className="profile-guest-card">
+            <User size={32} className="text-slate-500 mb-3" />
+            <p className="text-slate-300 font-semibold mb-1">No profile found</p>
+            <p className="text-slate-500 text-sm">
+              Open Chessxu inside Warpcast or connect a wallet to see your profile here.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

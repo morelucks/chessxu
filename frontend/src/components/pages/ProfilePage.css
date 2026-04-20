@@ -178,3 +178,33 @@
 
 .profile-stats-grid {
   display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.profile-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s, background 0.2s;
+  animation: slide-up 0.5s ease;
+}
+.profile-stat-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.06);
+}
+
+.profile-stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.6rem;
+  background: rgba(var(--accent-rgb, 167,139,250), 0.12);
+  color: var(--accent, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;

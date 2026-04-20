@@ -298,3 +298,33 @@
   color: rgba(255,255,255,0.3);
   transition: color 0.2s;
   flex-shrink: 0;
+  padding: 4px;
+}
+.profile-scan-link:hover { color: rgba(255,255,255,0.7); }
+
+.profile-empty-msg { font-size: 0.8rem; color: rgba(255,255,255,0.3); text-align: center; padding: 1rem 0; }
+
+/* ─── Farcaster Section ─────────────────────────────────────────────────── */
+
+.profile-fc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.profile-fc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.75rem;
+  background: rgba(139,92,246,0.06);
+  border: 1px solid rgba(139,92,246,0.12);
+}
+
+.profile-fc-key { font-size: 0.65rem; color: rgba(139,92,246,0.6); text-transform: uppercase; letter-spacing: 0.08em; margin: 0; }
+.profile-fc-val { font-size: 0.85rem; font-weight: 600; color: #e2d9f3; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.profile-warpcast-btn {
+  display: flex;
+  align-items: center;

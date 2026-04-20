@@ -148,3 +148,33 @@
 .profile-fid-link {
   display: flex;
   align-items: center;
+  gap: 2px;
+  color: #a78bfa;
+  text-decoration: none;
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid rgba(139,92,246,0.25);
+  transition: background 0.2s;
+}
+.profile-fid-link:hover { background: rgba(139,92,246,0.25); }
+
+.profile-rank-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid;
+  margin-top: 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── Stats Grid ────────────────────────────────────────────────────────── */
+
+.profile-stats-grid {
+  display: grid;

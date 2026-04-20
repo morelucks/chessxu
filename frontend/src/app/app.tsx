@@ -11,6 +11,8 @@ import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 
 import BottomNav from "../components/BottomNav";
 
+import ProfilePage from "../components/pages/ProfilePage";
+
 const PlaceholderPage = ({ title }: { title: string }) => (
   <div className="flex h-screen items-center justify-center bg-slate-950 text-white">
     <div className="text-center">
@@ -48,7 +50,7 @@ function App() {
               <Route path="/chess" element={<ChessScreen />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/shop" element={<PlaceholderPage title="Shop" />} />
-              <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Routes>
           </div>
           <BottomNav />

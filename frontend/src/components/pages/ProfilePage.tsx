@@ -152,3 +152,25 @@ export default function ProfilePage() {
         <div className="profile-stats-grid">
           <StatCard
             icon={<TrendingUp size={18} />}
+            label="ELO Rating"
+            value={elo}
+            accent="#a78bfa"
+          />
+          <StatCard
+            icon={<Coins size={18} />}
+            label="Chess Balance"
+            value={`${chessBalance} CHESS`}
+            accent="#facc15"
+          />
+          <StatCard
+            icon={<Swords size={18} />}
+            label="Active Chain"
+            value={activeChain === "celo" ? "🟡 Celo" : "🟠 Stacks"}
+            accent="#60a5fa"
+          />
+          <StatCard
+            icon={<Wallet size={18} />}
+            label="Wallet"
+            value={address ? shortenAddr(address) : "Not connected"}
+            accent="#34d399"
+          />

@@ -87,40 +87,69 @@ export default function ChessGameWrapper() {
 
     return (
         <AppContext.Provider value={providerState}>
-            {/* Mobile hamburger buttons */}
-            <div className="md:hidden flex items-center justify-between px-3 py-3 gap-3">
-                <button
-                    className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 text-slate-300 hover:text-white transition-all active:scale-95 shadow-lg font-semibold text-sm"
-                    onClick={() => setLeftOpen(v => !v)}
-                >
-                    {leftOpen ? 'Hide Menu' : 'Menu'}
-                </button>
-                <button
-                    className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 text-slate-300 hover:text-white transition-all active:scale-95 shadow-lg font-semibold text-sm"
-                    onClick={() => setRightOpen(v => !v)}
-                >
-                    {rightOpen ? 'Hide Moves' : 'Moves'}
-                </button>
-            </div>
-
             <div className="flex-1 flex flex-col md:flex-row overflow-visible">
-                {/* Left Sidebar - Chess Game Controls */}
-                <div className={`w-full md:w-80 flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-b md:border-b-0 md:border-r border-slate-800 p-4 overflow-y-auto ${leftOpen ? 'block' : 'hidden'} md:block shadow-inner`}>
+                {/* Left Sidebar - Chess Game Controls (Desktop only, mobile moved below board) */}
+                <div className={`hidden md:flex w-80 flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-r border-slate-800 p-4 overflow-y-auto shadow-inner`}>
                     <ChessSidebar />
                 </div>
 
-                {/* Chess Board Area */}
-                <div className="flex-1 flex items-center justify-center p-2 md:p-4 overflow-auto">
-                    <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-3 md:p-5 shadow-2xl border border-white/5 max-w-full">
-                        <ChessBoardOnly />
+                {/* Main Chess Area (Mobile: Board -> Profiles -> Controls) */}
+                <div className="flex-1 flex flex-col items-center justify-start p-2 md:p-4 overflow-y-auto">
+                    <div className="w-full max-w-[500px] flex flex-col gap-1.5 md:gap-2">
+                        
+                        {/* Top: Opponent Profile */}
+                        <div className="flex items-center justify-between p-2 rounded-t-lg bg-black/20">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-slate-700/80 rounded flex items-center justify-center text-2xl shadow-inner border border-white/5">
+                                    {appState.gameMode === 'pvc' ? '💻' : '👤'}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-white font-bold text-sm">
+                                        {appState.gameMode === 'pvc' ? 'Computer' : 'Opponent'}
+                                    </span>
+                                    <span className="text-xs text-slate-400">
+                                        {appState.gameMode === 'pvc' ? 'Stockfish Engine' : 'Waiting...'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* The Board Container */}
+                        <div className="w-full aspect-square bg-[#ebecd0] rounded-sm shadow-2xl relative overflow-hidden">
+                            <ChessBoardOnly />
+                        </div>
+
+                        {/* Bottom: Player Profile */}
+                        <div className="flex items-center justify-between p-2 rounded-b-lg bg-black/20 mb-4">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-slate-700/80 rounded flex items-center justify-center text-xl shadow-inner border border-white/5 overflow-hidden">
+                                    {/* Usually we'd pull this from zustand store, but since we are inside the Wrapper we will just show a generic avatar or piece */}
+                                    ♟️
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-white font-bold text-sm">
+                                        You
+                                    </span>
+                                    <span className="text-xs text-slate-400">
+                                        Local Player
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Mobile Action Controls (Under the board on mobile) */}
+                        <div className="md:hidden flex flex-col gap-4 mt-2">
+                            {/* We re-use ChessSidebar here on mobile so it sits naturally below the board like chess.com */}
+                            <div className="bg-slate-900/60 rounded-xl p-3 border border-white/5">
+                                <ChessSidebar />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                {/* Right Sidebar - Move History */}
-                <div
-                    className={`w-full md:w-64 flex-shrink-0 bg-slate-800/30 border-t md:border-t-0 md:border-l border-slate-700 p-4 overflow-hidden ${rightOpen ? 'block' : 'hidden'} md:block`}
-                    style={{ height: 'calc(100vh - 64px)' }}
-                >
+                {/* Right Sidebar - Move History (Desktop only) */}
+                <div className={`hidden md:block w-64 flex-shrink-0 bg-slate-800/30 border-l border-slate-700 p-4 overflow-hidden`}>
                     <MoveHistorySidebar />
                 </div>
             </div>

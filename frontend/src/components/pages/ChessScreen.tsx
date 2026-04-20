@@ -64,101 +64,121 @@ export default function ChessScreen() {
   return (
     <div className="flex-grow bg-slate-900 flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="flex-shrink-0 bg-slate-900/80 backdrop-blur-xl border-b border-white/10 px-4 py-4 z-10 shadow-lg">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-black bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Chessxu</h1>
-            <div className="flex flex-wrap items-center gap-2 mb-1">
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
-                {currentGameMode === 'pvc' ? 'Player vs Computer' : 'Player vs Player'}
-              </span>
-              {activeGameId ? (
-                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-200 border border-emerald-400/20">
-                  Match #{activeGameId}
-                </span>
-              ) : null}
-            </div>
-            {isConnected ? (
+      <div className="flex-shrink-0 z-10 p-4 pt-6">
+        <div className="mx-auto max-w-5xl rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden relative">
+          {/* Subtle glow effects inside the banner */}
+          <div className="absolute -left-10 -top-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none" />
+          
+          <div className="relative p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            {/* Left Section: Title & Status */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-slate-400">
+                <h1 className="text-2xl font-black tracking-tight text-white drop-shadow-md">
+                  Chessxu
+                </h1>
+                <div className="px-2 py-0.5 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-[10px] font-bold text-indigo-300 uppercase tracking-wider">
+                  {currentGameMode === 'pvc' ? 'PvC Mode' : 'PvP Mode'}
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                <span className="text-slate-200 font-semibold tracking-wide">
                   {activeStatus}
                 </span>
-              </div>
-            ) : null}
-            <p className="text-xs text-slate-400">
-              {activeChain === 'stacks' ? 'Stacks Blockchain' : 'Celo Blockchain'}
-              {address ? (
-                <span className="ml-2 text-white">• {address.slice(0, 6)}…{address.slice(-4)}</span>
-              ) : null}
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            {isFarcaster && farcasterUser ? (
-              <div className="flex items-center gap-2 p-1.5 bg-white/5 rounded-full border border-white/10 pr-3">
-                {farcasterUser.pfpUrl && (
-                   <img src={farcasterUser.pfpUrl} alt="pfp" className="w-6 h-6 rounded-full border border-indigo-400/50" />
+                {activeGameId && (
+                  <span className="text-emerald-400 font-bold ml-1 bg-emerald-500/10 px-1.5 py-0.5 rounded text-xs border border-emerald-500/20">#{activeGameId}</span>
                 )}
-                <div className="flex flex-col">
-                  <span className="text-xs font-bold text-white block leading-tight">
-                    {farcasterUser.displayName || farcasterUser.username}
-                  </span>
-                  <span className="text-[10px] text-indigo-400 font-medium leading-tight">
-                    FID: {farcasterUser.fid}
-                  </span>
-                </div>
               </div>
-            ) : (
-              isConnected && (
-                <div className="hidden sm:flex flex-col items-end">
-                  <span className="text-xs font-bold text-white">
-                    {address!.slice(0, 6)}...{address!.slice(-4)}
-                  </span>
-                  <span className="text-[10px] text-slate-400 font-medium">
-                    {activeChain === 'stacks' ? 'Stacks' : 'Celo'}
-                  </span>
-                </div>
-              )
-            )}
-
-            <div className="flex items-center gap-2">
-              {!isConnected ? (
-                (!isMiniPay && !isFarcaster) && (
-                  <button
-                    className="px-3 py-1.5 rounded bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white text-xs transition shadow-lg shadow-emerald-500/20 disabled:opacity-50"
-                    onClick={() => connect()}
-                    disabled={isConnecting}
-                  >
-                    {isConnecting ? "Connecting..." : "Connect Wallet"}
-                  </button>
-                )
-              ) : (
-                <button
-                  className="p-1.5 rounded-full border border-white/10 hover:bg-white/5 text-slate-400 hover:text-white transition"
-                  onClick={disconnect}
-                  title="Disconnect"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
-                </button>
-              )}
-              <button
-                className="px-3 py-1.5 rounded bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-xs font-bold transition shadow-lg shadow-purple-500/20 active:scale-95"
-                onClick={() => navigate("/")}
-              >
-                {activeGameId ? "Lobby" : "Match"}
-              </button>
+              <div className="text-xs text-slate-400 font-medium flex items-center gap-1 mt-0.5">
+                <div className={`w-1.5 h-1.5 rounded-full ${activeChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
+                {activeChain === 'stacks' ? 'Stacks' : 'Celo'} Network
+                {address && <span className="ml-1 opacity-60 font-mono text-[10px]">• {address.slice(0, 6)}…{address.slice(-4)}</span>}
+              </div>
             </div>
+
+            {/* Right Section: User & Actions */}
+            <div className="flex items-center gap-3">
+              {isFarcaster && farcasterUser ? (
+                <div className="flex items-center gap-2.5 p-1.5 pr-4 rounded-xl bg-black/40 border border-white/5 shadow-inner">
+                  {farcasterUser.pfpUrl ? (
+                    <img src={farcasterUser.pfpUrl} alt="avatar" className="w-9 h-9 rounded-lg border border-purple-500/40 object-cover" />
+                  ) : (
+                    <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-lg">👤</div>
+                  )}
+                  <div className="flex flex-col items-start leading-none gap-0.5">
+                    <span className="text-sm font-bold text-white shadow-sm">
+                      {farcasterUser.displayName || farcasterUser.username}
+                    </span>
+                    <span className="text-[9px] text-purple-400 font-bold tracking-widest uppercase">
+                      FID {farcasterUser.fid}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                isConnected && (
+                  <div className="hidden sm:flex flex-col items-end px-3 py-1.5 rounded-xl bg-black/40 border border-white/5">
+                    <span className="text-sm font-bold text-white font-mono shadow-sm">
+                      {address!.slice(0, 6)}...{address!.slice(-4)}
+                    </span>
+                    <span className="text-[9px] text-indigo-400 font-bold uppercase tracking-widest mt-0.5">
+                      {activeChain === 'stacks' ? 'STX' : 'CELO'} Connected
+                    </span>
+                  </div>
+                )
+              )}
+
+              <div className="flex items-center gap-2">
+                {!isConnected ? (
+                  (!isMiniPay && !isFarcaster) && (
+                    <button
+                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-bold transition shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
+                      onClick={() => connect()}
+                      disabled={isConnecting}
+                    >
+                      {isConnecting ? "..." : "Connect"}
+                    </button>
+                  )
+                ) : (
+                  <button
+                    className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-red-500/30 hover:text-red-400 text-slate-400 transition-all active:scale-95 group"
+                    onClick={disconnect}
+                    title="Disconnect"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                  </button>
+                )}
+                
+                <button
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-bold transition-all shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] active:scale-95 border border-purple-400/30 flex items-center gap-1.5"
+                  onClick={() => navigate("/")}
+                >
+                  <span className="text-[16px] leading-none -mt-0.5">⚔️</span>
+                  {activeGameId ? "Lobby" : "Match"}
+                </button>
+              </div>
+            </div>
+            
           </div>
+          
+          {/* Celo Access Messages */}
+          {(activeChain === 'celo' && requiresAccess && !hasAccess) || (activeChain === 'celo' && hasAccess && expiresAt) ? (
+            <div className="bg-black/20 border-t border-white/5 px-4 py-2.5 flex items-center justify-center text-center">
+              {requiresAccess && !hasAccess ? (
+                <div className="text-[11px] text-amber-200/90 font-medium">
+                  ⚠️ Daily Celo access required for MiniPay matches. Return to lobby to unlock.
+                </div>
+              ) : (
+                <div className="text-[11px] text-emerald-300/90 font-medium flex items-center gap-1.5">
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Celo Access Active until {new Date(expiresAt!).toLocaleTimeString()}
+                </div>
+              )}
+            </div>
+          ) : null}
+          
         </div>
-        {activeChain === 'celo' && requiresAccess && !hasAccess ? (
-          <div className="mt-3 rounded-lg border border-amber-400/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-100">
-            Daily Celo access is required before creating or joining a MiniPay match. Return to the lobby to unlock access with cUSD.
-          </div>
-        ) : null}
-        {activeChain === 'celo' && hasAccess && expiresAt ? (
-          <div className="mt-3 rounded-lg border border-emerald-400/20 bg-emerald-500/10 px-3 py-2 text-xs text-emerald-100">
-            Daily Celo access is active until {new Date(expiresAt).toLocaleString()}.
-          </div>
-        ) : null}
       </div>
 
       {/* Main Content Area */}

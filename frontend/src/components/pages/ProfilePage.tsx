@@ -108,3 +108,25 @@ export default function ProfilePage() {
             {pfp ? (
               <img src={pfp} alt={displayName} className="profile-avatar-img" />
             ) : (
+              <div className="profile-avatar-fallback">
+                <User size={40} className="text-slate-400" />
+              </div>
+            )}
+            <span className="profile-rank-badge" title={rank.label}>
+              {rank.icon}
+            </span>
+          </div>
+
+          <div className="profile-identity">
+            <h1 className="profile-display-name">{displayName}</h1>
+            {username && <p className="profile-username">{username}</p>}
+            {fid && (
+              <div className="profile-fid-row">
+                <Shield size={12} className="text-purple-400" />
+                <span>FID #{fid}</span>
+                {isFarcaster && (
+                  <a
+                    href={`https://warpcast.com/${farcasterUser?.username || ""}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="profile-fid-link"

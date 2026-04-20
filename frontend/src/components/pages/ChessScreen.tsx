@@ -1,6 +1,7 @@
 // Import the chess components
 import ChessGameWrapper from "../ChessGameWrapper";
 
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAppStore from "../../zustand/store";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
@@ -15,6 +16,20 @@ export default function ChessScreen() {
   const activeGameId = useAppStore((state) => state.activeGameId);
   const isFarcaster = useAppStore((state) => state.isFarcaster);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
+
+  // Alternate between Celo and Stacks when not connected to show multi-chain support
+  const [displayChain, setDisplayChain] = useState(activeChain);
+
+  useEffect(() => {
+    if (isConnected) {
+      setDisplayChain(activeChain);
+      return;
+    }
+    const interval = setInterval(() => {
+      setDisplayChain((prev) => prev === 'celo' ? 'stacks' : 'celo');
+    }, 1000); // 1 second
+    return () => clearInterval(interval);
+  }, [isConnected, activeChain]);
 
   return (
     <div className="flex-grow bg-slate-900 flex flex-col overflow-hidden">
@@ -33,10 +48,10 @@ export default function ChessScreen() {
               </h1>
               <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
               <div className="flex items-center gap-2">
-                <div className="text-[10px] text-slate-300 font-medium flex items-center gap-1.5">
+                <div className="text-[10px] text-slate-300 font-medium flex items-center gap-1.5 transition-all duration-500">
                   <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                  <div className={`w-1.5 h-1.5 rounded-full ${activeChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
-                  {activeChain === 'stacks' ? 'Stacks' : 'Celo'} Network
+                  <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${displayChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
+                  <span className="min-w-[65px] transition-all duration-500">{displayChain === 'stacks' ? 'Stacks' : 'Celo'} Network</span>
                   {address && <span className="ml-0.5 opacity-60 font-mono hidden sm:inline">• {address.slice(0, 4)}…</span>}
                 </div>
               </div>

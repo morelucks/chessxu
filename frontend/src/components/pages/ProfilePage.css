@@ -208,3 +208,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-stat-body { display: flex; flex-direction: column; gap: 1px; overflow: hidden; }
+.profile-stat-label { font-size: 0.65rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.06em; }
+.profile-stat-value { font-size: 0.9rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ─── Section Cards ─────────────────────────────────────────────────────── */
+
+.profile-section-card {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: slide-up 0.5s ease;
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-section-title {
+  font-size: 0.8rem;

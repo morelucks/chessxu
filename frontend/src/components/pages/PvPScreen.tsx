@@ -3,7 +3,7 @@ import { useWalletAuth } from "../../hooks/useWalletAuth";
 import useAppStore from "../../zustand/store";
 
 import { Wallet, Sword, Users } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStacksChess } from "../../hooks/useStacksChess";
 import { useCeloChess } from "../../hooks/useCeloChess";
 import useMiniPayAccess from "../../hooks/useMiniPayAccess";
@@ -11,6 +11,11 @@ import useMiniPayAccess from "../../hooks/useMiniPayAccess";
 export default function PvPScreen() {
   const navigate = useNavigate();
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const isMiniPay = useAppStore((state) => state.miniPayDetected);

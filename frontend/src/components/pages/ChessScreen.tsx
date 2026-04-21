@@ -81,7 +81,7 @@ export default function ChessScreen() {
               
               <button
                 className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-md hover:shadow-[0_0_15px_rgba(139,92,246,0.4)] active:scale-95 border border-purple-400/30 flex items-center gap-1"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/pvp")}
               >
                 <span className="text-[12px] leading-none">⚔️</span>
                 {activeGameId ? "Lobby" : "Match"}

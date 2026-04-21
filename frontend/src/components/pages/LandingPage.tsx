@@ -33,16 +33,16 @@ export default function LandingPage() {
   useEffect(() => {
     if (isConnected && shouldNavigateAfterConnect) {
       setShouldNavigateAfterConnect(false);
-      navigate("/chess");
+      navigate("/");
     }
     if (isConnected && isFarcaster) {
-      navigate("/chess");
+      navigate("/");
     }
   }, [isConnected, shouldNavigateAfterConnect, isFarcaster, navigate]);
 
   const handleStartPlaying = () => {
     if (isConnected) {
-      navigate("/chess");
+      navigate("/");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function LandingPage() {
       celo.createGame(wager, true)
         .then(() => {
           setIsCreatingMatch(false);
-          navigate("/chess");
+          navigate("/");
         })
         .catch(() => setIsCreatingMatch(false));
     } else {
@@ -77,7 +77,7 @@ export default function LandingPage() {
       stacks.createGame(wagerMicroStx, true)
         .then(() => {
           setIsCreatingMatch(false);
-          navigate("/chess");
+          navigate("/");
         })
         .catch(() => setIsCreatingMatch(false));
     }
@@ -104,14 +104,14 @@ export default function LandingPage() {
       celo.joinGame(gameId, "0", true) // assuming 0 for simplicity as per previous code
         .then(() => {
           setIsJoiningMatch(false);
-          navigate("/chess");
+          navigate("/");
         })
         .catch(() => setIsJoiningMatch(false));
     } else {
       stacks.joinGame(gameId, 0, true)
         .then(() => {
           setIsJoiningMatch(false);
-          navigate("/chess");
+          navigate("/");
         })
         .catch(() => setIsJoiningMatch(false));
     }

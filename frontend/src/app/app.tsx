@@ -46,8 +46,8 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <div className="flex-grow pb-24 md:pb-0">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/chess" element={<ChessScreen />} />
+              <Route path="/" element={<ChessScreen />} />
+              <Route path="/pvp" element={<LandingPage />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/shop" element={<PlaceholderPage title="Shop" />} />
               <Route path="/profile" element={<ProfilePage />} />

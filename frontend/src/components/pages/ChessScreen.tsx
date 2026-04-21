@@ -1,31 +1,11 @@
 // Import the chess components
 import ChessGameWrapper from "../ChessGameWrapper";
 
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAppStore from "../../zustand/store";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
-import { useGameState } from "../../chess/hooks/useGameState";
-import { GAME_STATUS } from "../../chess/blockchainConstants";
 import useMiniPayAccess from "../../hooks/useMiniPayAccess";
-
-function getStatusLabel(status: number | null | undefined) {
-  switch (status) {
-    case GAME_STATUS.WAITING:
-      return "Waiting for Opponent";
-    case GAME_STATUS.ONGOING:
-      return "On-Chain Match Live";
-    case GAME_STATUS.WHITE_WINS:
-      return "White Won";
-    case GAME_STATUS.BLACK_WINS:
-      return "Black Won";
-    case GAME_STATUS.DRAW:
-      return "Draw";
-    case GAME_STATUS.CANCELLED:
-      return "Cancelled";
-    default:
-      return "Local Board Ready";
-  }
-}
 
 export default function ChessScreen() {
   const isMiniPay = typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay);
@@ -36,12 +16,20 @@ export default function ChessScreen() {
   const activeGameId = useAppStore((state) => state.activeGameId);
   const isFarcaster = useAppStore((state) => state.isFarcaster);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
-  const { gameState } = useGameState(activeGameId);
 
-  const activeStatus =
-    gameState && typeof gameState === "object" && "status" in gameState
-      ? getStatusLabel(Number((gameState as { status: number | string }).status))
-      : getStatusLabel(null);
+  // Alternate between Celo and Stacks when not connected to show multi-chain support
+  const [displayChain, setDisplayChain] = useState(activeChain);
+
+  useEffect(() => {
+    if (isConnected) {
+      setDisplayChain(activeChain);
+      return;
+    }
+    const interval = setInterval(() => {
+      setDisplayChain((prev) => prev === 'celo' ? 'stacks' : 'celo');
+    }, 1000); // 1 second
+    return () => clearInterval(interval);
+  }, [isConnected, activeChain]);
 
   return (
     <div className="flex-grow bg-slate-900 flex flex-col overflow-hidden">
@@ -59,16 +47,11 @@ export default function ChessScreen() {
                 Chessxu
               </h1>
               <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-2">
-                <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
+                <div className="text-[10px] text-slate-300 font-medium flex items-center gap-1.5 transition-all duration-500">
                   <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                  <span className="text-[10px] sm:text-xs text-slate-200 font-semibold tracking-wide leading-none">
-                    {activeStatus}
-                  </span>
-                </div>
-                <div className="text-[9px] text-slate-400 font-medium flex items-center gap-1 mt-0.5 sm:mt-0">
-                  <div className={`w-1 h-1 rounded-full ${activeChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
-                  {activeChain === 'stacks' ? 'Stacks' : 'Celo'}
+                  <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${displayChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
+                  <span className="min-w-[65px] transition-all duration-500">{displayChain === 'stacks' ? 'Stacks' : 'Celo'} Network</span>
                   {address && <span className="ml-0.5 opacity-60 font-mono hidden sm:inline">• {address.slice(0, 4)}…</span>}
                 </div>
               </div>
@@ -98,7 +81,7 @@ export default function ChessScreen() {
               
               <button
                 className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-md hover:shadow-[0_0_15px_rgba(139,92,246,0.4)] active:scale-95 border border-purple-400/30 flex items-center gap-1"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/pvp")}
               >
                 <span className="text-[12px] leading-none">⚔️</span>
                 {activeGameId ? "Lobby" : "Match"}

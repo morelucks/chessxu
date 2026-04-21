@@ -4,11 +4,7 @@ import StatsSection from "../landing/StatsSection";
 import CTASection from "../landing/CTASection";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Users, Sword } from "lucide-react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
-import { useStacksChess } from "../../hooks/useStacksChess";
-import { useCeloChess } from "../../hooks/useCeloChess";
-import useMiniPayAccess from "../../hooks/useMiniPayAccess";
 import useAppStore from "../../zustand/store";
 
 export default function LandingPage() {
@@ -17,18 +13,7 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
   
-  const stacks = useStacksChess();
-  const celo = useCeloChess();
-  const { cusdBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, requiresAccess } = useMiniPayAccess();
-  
-  const activeChain = useAppStore((state) => state.activeChain);
-  const activeGameId = useAppStore((state) => state.activeGameId);
-  
-  const [wager, setWager] = useState("0");
-  const [idToJoin, setIdToJoin] = useState("");
   const [shouldNavigateAfterConnect, setShouldNavigateAfterConnect] = useState(false);
-  const [isCreatingMatch, setIsCreatingMatch] = useState(false);
-  const [isJoiningMatch, setIsJoiningMatch] = useState(false);
 
   useEffect(() => {
     if (isConnected && shouldNavigateAfterConnect) {
@@ -50,73 +35,6 @@ export default function LandingPage() {
     connect();
   };
 
-  const handleCreateMatch = () => {
-    if (!isConnected) {
-      connect();
-      return;
-    }
-
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
-      return;
-    }
-
-    const parsedWager = Number.parseFloat(wager);
-    
-    setIsCreatingMatch(true);
-
-    if (activeChain === 'celo') {
-      celo.createGame(wager, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    } else {
-      // Stacks expects microSTX
-      const wagerMicroStx = Number.isFinite(parsedWager) && parsedWager > 0 ? Math.floor(parsedWager * 1_000_000) : 0;
-      stacks.createGame(wagerMicroStx, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    }
-  };
-
-  const handleJoinMatch = () => {
-    if (!isConnected) {
-      connect();
-      return;
-    }
-
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
-      return;
-    }
-
-    const gameId = Number.parseInt(idToJoin, 10);
-    if (!Number.isInteger(gameId) || gameId <= 0) {
-      return;
-    }
-
-    setIsJoiningMatch(true);
-    
-    if (activeChain === 'celo') {
-      celo.joinGame(gameId, "0", true) // assuming 0 for simplicity as per previous code
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    } else {
-      stacks.joinGame(gameId, 0, true)
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    }
-  };
-
   return (
     <div className="flex-grow bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white overflow-hidden">
       <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -127,7 +45,6 @@ export default function LandingPage() {
           className="absolute inset-0 w-full h-full object-cover opacity-15"
         />
 
-        {/* Existing code */}
         <div
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
@@ -145,7 +62,7 @@ export default function LandingPage() {
           <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             ♟ Chessxu
           </div>
-          {/* Mobile Connect Button - Hidden in MiniPay or Farcaster if not connected since it auto-connects */}
+          {/* Mobile Connect Button */}
           {(!isMiniPay && !isFarcaster) && (
             <div className="md:hidden">
               {isConnected ? (
@@ -216,7 +133,6 @@ export default function LandingPage() {
         <HeroSection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={isConnected} />
         
         {/* On-chain controls have been moved to /pvp (PvPScreen) */}
-
 
         <div id="features">
           <FeatureGrid />

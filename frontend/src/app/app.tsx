@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "../components/pages/LandingPage";
 import ChessScreen from "../components/pages/ChessScreen";
+import PvPScreen from "../components/pages/PvPScreen";
 import LeaderboardPage from "../components/pages/LeaderboardPage";
 import useAppStore, { userSession } from "../zustand/store";
 import { ToasterProvider } from "../components/ui/toasts/ToasterProvider";
@@ -47,7 +48,7 @@ function App() {
           <div className="flex-grow pb-24 md:pb-0">
             <Routes>
               <Route path="/" element={<ChessScreen />} />
-              <Route path="/pvp" element={<LandingPage />} />
+              <Route path="/pvp" element={<PvPScreen />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/shop" element={<PlaceholderPage title="Shop" />} />
               <Route path="/profile" element={<ProfilePage />} />

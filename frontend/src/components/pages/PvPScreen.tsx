@@ -243,6 +243,14 @@ export default function PvPScreen() {
                         </div>
                     </div>
                 </div>
+                {(!isMiniPay && !isFarcaster) && (
+                    <button
+                        onClick={disconnect}
+                        className="w-full py-3 text-xs text-slate-500 hover:text-red-400 transition"
+                    >
+                        Disconnect Wallet
+                    </button>
+                )}
             </div>
         )}
       </div>

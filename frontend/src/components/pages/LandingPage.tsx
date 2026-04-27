@@ -4,11 +4,7 @@ import StatsSection from "../landing/StatsSection";
 import CTASection from "../landing/CTASection";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Users, Sword } from "lucide-react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
-import { useStacksChess } from "../../hooks/useStacksChess";
-import { useCeloChess } from "../../hooks/useCeloChess";
-import useMiniPayAccess from "../../hooks/useMiniPayAccess";
 import useAppStore from "../../zustand/store";
 
 export default function LandingPage() {
@@ -17,18 +13,7 @@ export default function LandingPage() {
   const navigate = useNavigate();
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
   
-  const stacks = useStacksChess();
-  const celo = useCeloChess();
-  const { cusdBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, requiresAccess } = useMiniPayAccess();
-  
-  const activeChain = useAppStore((state) => state.activeChain);
-  const activeGameId = useAppStore((state) => state.activeGameId);
-  
-  const [wager, setWager] = useState("0");
-  const [idToJoin, setIdToJoin] = useState("");
   const [shouldNavigateAfterConnect, setShouldNavigateAfterConnect] = useState(false);
-  const [isCreatingMatch, setIsCreatingMatch] = useState(false);
-  const [isJoiningMatch, setIsJoiningMatch] = useState(false);
 
   useEffect(() => {
     if (isConnected && shouldNavigateAfterConnect) {
@@ -50,73 +35,6 @@ export default function LandingPage() {
     connect();
   };
 
-  const handleCreateMatch = () => {
-    if (!isConnected) {
-      connect();
-      return;
-    }
-
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
-      return;
-    }
-
-    const parsedWager = Number.parseFloat(wager);
-    
-    setIsCreatingMatch(true);
-
-    if (activeChain === 'celo') {
-      celo.createGame(wager, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    } else {
-      // Stacks expects microSTX
-      const wagerMicroStx = Number.isFinite(parsedWager) && parsedWager > 0 ? Math.floor(parsedWager * 1_000_000) : 0;
-      stacks.createGame(wagerMicroStx, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    }
-  };
-
-  const handleJoinMatch = () => {
-    if (!isConnected) {
-      connect();
-      return;
-    }
-
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
-      return;
-    }
-
-    const gameId = Number.parseInt(idToJoin, 10);
-    if (!Number.isInteger(gameId) || gameId <= 0) {
-      return;
-    }
-
-    setIsJoiningMatch(true);
-    
-    if (activeChain === 'celo') {
-      celo.joinGame(gameId, "0", true) // assuming 0 for simplicity as per previous code
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    } else {
-      stacks.joinGame(gameId, 0, true)
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    }
-  };
-
   return (
     <div className="flex-grow bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white overflow-hidden">
       <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -127,7 +45,6 @@ export default function LandingPage() {
           className="absolute inset-0 w-full h-full object-cover opacity-15"
         />
 
-        {/* Existing code */}
         <div
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
@@ -145,7 +62,7 @@ export default function LandingPage() {
           <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             ♟ Chessxu
           </div>
-          {/* Mobile Connect Button - Hidden in MiniPay or Farcaster if not connected since it auto-connects */}
+          {/* Mobile Connect Button */}
           {(!isMiniPay && !isFarcaster) && (
             <div className="md:hidden">
               {isConnected ? (
@@ -215,107 +132,7 @@ export default function LandingPage() {
       <main className="relative pt-24 pb-20">
         <HeroSection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={isConnected} />
         
-        {isConnected && (
-            <div className="container mx-auto px-6 max-w-4xl mt-12 mb-20 p-8 rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-xl shadow-2xl">
-                <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                    On-chain Game Controls
-                </h2>
-                {activeGameId ? (
-                  <div className="mb-6 rounded-xl border border-emerald-400/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
-                    Active match detected: #{activeGameId}. You can continue it from the chess screen.
-                  </div>
-                ) : null}
-                {activeChain === 'celo' ? (
-                  <div className="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
-                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">MiniPay Access</p>
-                        <h3 className="mt-1 text-lg font-semibold text-white">Unlock daily Celo match access with cUSD</h3>
-                        <p className="mt-2 text-emerald-100/80">
-                          Access is required for Celo match creation and joining. Price: {celo.network.DAILY_ACCESS_CUSD} cUSD.
-                        </p>
-                        <p className="mt-2 text-xs text-emerald-100/70">
-                          cUSD balance: {cusdBalance ? Number(cusdBalance).toFixed(2) : '--'}
-                          {expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => purchaseAccess().catch(() => undefined)}
-                        disabled={isPurchasing || hasAccess}
-                        className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        {hasAccess ? 'Access Active' : isPurchasing ? 'Processing Payment...' : 'Pay With cUSD'}
-                      </button>
-                    </div>
-                  </div>
-                ) : null}
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                    {/* Create Game */}
-                    <div className="p-6 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition flex flex-col gap-4">
-                        <h3 className="text-xl font-semibold flex items-center gap-2">
-                             <Sword className="text-purple-400" size={20} />
-                             Create New Match
-                        </h3>
-                        <p className="text-sm text-white/60">Start a new chess game with an optional {activeChain === 'stacks' ? 'STX' : 'CELO'} wager.</p>
-                        <div className="mt-auto">
-                            <label className="text-xs text-white/40 block mb-1">Wager ({activeChain === 'stacks' ? 'STX' : 'CELO'})</label>
-                            <input 
-                                type="number" 
-                                value={wager}
-                                min="0"
-                                step="0.1"
-                                onChange={(e) => setWager(e.target.value)}
-                                className="w-full bg-slate-800 border border-white/10 rounded-lg p-3 text-sm mb-4 focus:ring-2 focus:ring-purple-500 outline-none"
-                                placeholder="0.0"
-                            />
-                            <button 
-                                onClick={handleCreateMatch}
-                                disabled={isCreatingMatch || (activeChain === 'celo' && requiresAccess && !hasAccess)}
-                                className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition disabled:opacity-60 disabled:cursor-not-allowed"
-                            >
-                                {activeChain === 'celo' && requiresAccess && !hasAccess
-                                  ? "Unlock Celo Access First"
-                                  : isCreatingMatch
-                                    ? "Opening Wallet..."
-                                    : "Broadcast Create"}
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Join Game */}
-                    <div className="p-6 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition flex flex-col gap-4">
-                        <h3 className="text-xl font-semibold flex items-center gap-2">
-                             <Users className="text-blue-400" size={20} />
-                             Join Existing Match
-                        </h3>
-                        <p className="text-sm text-white/60">Enter a Game ID to join an opponent's match.</p>
-                        <div className="mt-auto">
-                            <label className="text-xs text-white/40 block mb-1">Game ID</label>
-                            <input 
-                                type="text"
-                                value={idToJoin}
-                                onChange={(e) => setIdToJoin(e.target.value)}
-                                className="w-full bg-slate-800 border border-white/10 rounded-lg p-3 text-sm mb-4 focus:ring-2 focus:ring-blue-500 outline-none"
-                                placeholder="Match ID"
-                            />
-                            <button 
-                                onClick={handleJoinMatch}
-                                disabled={isJoiningMatch || !idToJoin.trim() || (activeChain === 'celo' && requiresAccess && !hasAccess)}
-                                className="w-full py-3 border border-blue-500/50 hover:bg-blue-500/10 rounded-xl font-bold transition disabled:opacity-60 disabled:cursor-not-allowed"
-                            >
-                                {activeChain === 'celo' && requiresAccess && !hasAccess
-                                  ? "Unlock Celo Access First"
-                                  : isJoiningMatch
-                                    ? "Opening Wallet..."
-                                    : "Join Match"}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )}
+        {/* On-chain controls have been moved to /pvp (PvPScreen) */}
 
         <div id="features">
           <FeatureGrid />

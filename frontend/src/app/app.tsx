@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "../components/pages/LandingPage";
 import ChessScreen from "../components/pages/ChessScreen";
 import PvPScreen from "../components/pages/PvPScreen";
 import LeaderboardPage from "../components/pages/LeaderboardPage";

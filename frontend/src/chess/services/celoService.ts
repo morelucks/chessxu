@@ -253,9 +253,13 @@ const celoService = {
     return address;
   },
 
-  payForDailyAccess: async (address: string) => {
+  payForDailyAccess: async (address?: string) => {
     const walletClient = celoService.getWalletClient();
-    const account = address as `0x${string}`;
+    
+    // Ensure account is authorized by the provider. 
+    // This fixes "The requested account and/or method has not been authorized by the user" errors.
+    const [account] = await walletClient.requestAddresses();
+    
     const amount = parseUnits(CELO_CONFIG.DAILY_ACCESS_CUSD, 18);
     const cusdAddr = CELO_CONFIG.CUSD_ADDRESS as `0x${string}`;
     const data = encodeFunctionData({

@@ -73,7 +73,7 @@ export function useMiniPayAccess() {
     try {
       await celoService.ensureCorrectNetwork();
 
-      const txHash = await celoService.payForDailyAccess(address);
+      const txHash = await celoService.payForDailyAccess();
       updateToast(toastId, {
         txId: txHash,
         status: 'pending',

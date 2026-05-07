@@ -253,7 +253,7 @@ const celoService = {
     return address;
   },
 
-  payForDailyAccess: async (address?: string) => {
+  payForDailyAccess: async () => {
     const walletClient = celoService.getWalletClient();
     
     // Ensure account is authorized by the provider. 

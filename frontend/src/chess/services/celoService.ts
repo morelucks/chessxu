@@ -270,10 +270,12 @@ const celoService = {
 
     const feeCurrency = await celoService.selectFeeCurrency(account, cusdAddr, data);
 
-    return walletClient.sendTransaction({
+    return walletClient.writeContract({
+      address: cusdAddr,
+      abi: erc20Abi,
+      functionName: 'transfer',
+      args: [CELO_CONFIG.PAYMENT_RECIPIENT as `0x${string}`, amount],
       account,
-      to: cusdAddr,
-      data,
       ...(feeCurrency ? { feeCurrency } : {}),
       ...celoService.getTxOptions(),
     });

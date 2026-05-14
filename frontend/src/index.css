@@ -3,10 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  html,
-  body {
-    @apply bg-slate-950 text-slate-100;
-    /* This prevents the white flash during overscroll or route jumps */
+  /* Prevents white flash (FOUC) during initial load and route transitions */
+  html {
     background-color: #020617;
   }
 

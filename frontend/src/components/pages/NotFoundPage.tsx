@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home } from 'lucide-react';
 
-const NotFoundPage: React.FC = () => {
+const NotFoundPage = () => {
   return (
     <div className='min-h-screen bg-slate-950 flex items-center justify-center p-4'>
       {/* Container with premium glassmorphism */}

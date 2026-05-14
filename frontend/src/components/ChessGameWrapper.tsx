@@ -1,17 +1,17 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { reducer } from '../chess/reducer/reducer';
 import { Status } from '../chess/constants';
-import { createPosition } from '../chess/helper';
+import { createPosition, createPuzzlePosition } from '../chess/helper';
 import actionTypes from '../chess/reducer/actionTypes';
 import AppContext from '../chess/contexts/Context';
 import ChessBoardOnly from './ChessBoardOnly';
 import ChessSidebar from './ChessSidebar';
 import MoveHistorySidebar from './MoveHistorySidebar';
 
-export default function ChessGameWrapper() {
+export default function ChessGameWrapper({ isPuzzle = false }) {
     // Create initial state directly to avoid any import issues
     const initialGameState = {
-        position: [createPosition()],
+        position: [isPuzzle ? createPuzzlePosition() : createPosition()],
         turn: 'w',
         candidateMoves: [],
         movesList: [],
@@ -25,7 +25,7 @@ export default function ChessGameWrapper() {
             w: 0,
             b: 0,
         },
-        gameMode: 'pvc',
+        gameMode: isPuzzle ? 'puzzle' : 'pvc',
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,9 +49,9 @@ export default function ChessGameWrapper() {
         dispatch
     };
 
-    // Handle computer moves for PvC mode
+    // Handle computer moves for PvC mode and Puzzle mode
     useEffect(() => {
-        if (appState.gameMode === 'pvc' && appState.turn === 'b' && appState.status === 'Ongoing') {
+        if ((appState.gameMode === 'pvc' || appState.gameMode === 'puzzle') && appState.turn === 'b' && appState.status === 'Ongoing') {
             // Simulate computer thinking time
             const timeout = setTimeout(() => {
                 dispatch({ type: actionTypes.COMPUTER_MOVE });

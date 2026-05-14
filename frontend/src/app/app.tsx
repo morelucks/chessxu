@@ -12,6 +12,7 @@ import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 import BottomNav from "../components/BottomNav";
 
 import ProfilePage from "../components/pages/ProfilePage";
+import PuzzleScreen from '../components/pages/PuzzleScreen';
 import NotFoundPage from '../components/pages/NotFoundPage';
 
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -48,6 +49,7 @@ function App() {
           <div className="flex-grow pb-24 md:pb-0">
             <Routes>
               <Route path="/" element={<ChessScreen />} />
+              <Route path="/puzzle" element={<PuzzleScreen />} />
               <Route path="/pvp" element={<PvPScreen />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/shop" element={<PlaceholderPage title="Shop" />} />

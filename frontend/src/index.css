@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  html,
+  body {
+    @apply bg-slate-950 text-slate-100;
+    /* This prevents the white flash during overscroll or route jumps */
+    background-color: #020617;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;

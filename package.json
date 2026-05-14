@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "dev": "npm run dev --prefix frontend",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
@@ -17,8 +18,8 @@
   "author": "morelucks",
   "license": "MIT",
   "dependencies": {
-    "@stacks/transactions": "^7.0.0",
-    "@stacks/network": "^7.0.0"
+    "@stacks/network": "^7.0.0",
+    "@stacks/transactions": "^7.0.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

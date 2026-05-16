@@ -42,7 +42,15 @@ export const reducer = (state, action) => {
         case actionTypes.CLEAR_CANDIDATE_MOVES : {
             return {
                 ...state,
-                candidateMoves : []
+                candidateMoves : [],
+                selectedPiece : null
+            }
+        }
+
+        case actionTypes.SELECT_PIECE : {
+            return {
+                ...state,
+                selectedPiece : action.payload
             }
         }
     
@@ -111,6 +119,7 @@ export const reducer = (state, action) => {
                 position: [createPosition()],
                 turn: 'w',
                 candidateMoves: [],
+                selectedPiece: null,
                 movesList: [],
                 promotionSquare: null,
                 status: Status.ongoing,

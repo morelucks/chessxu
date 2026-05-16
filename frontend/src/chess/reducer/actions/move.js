@@ -20,6 +20,13 @@ export const generateCandidates = ({candidateMoves}) => {
     }
 }
 
+export const selectPiece = ({piece, rank, file}) => {
+    return {
+        type: actionTypes.SELECT_PIECE,
+        payload : {piece, rank, file}
+    }
+}
+
 export const takeBack = () => {
     return {
         type: actionTypes.TAKE_BACK,

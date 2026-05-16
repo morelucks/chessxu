@@ -1,7 +1,7 @@
 :root {
     --tile-size : 90px;
-    --light-tile : #ebecd0; /* Professional classic light tile */
-    --dark-tile : #739552; /* Professional classic dark green tile */
+    --light-tile : #94a3b8; /* slate-400 to match app theme */
+    --dark-tile : #334155; /* slate-700 to match app theme */
     --bg-color : #282c34; /* Darker, more professional background */
     --app-shadow : 0 10px 20px rgba(0, 0, 0, 0.5);
     --text-color : #abb2bf;
@@ -13,7 +13,7 @@
     --disabled-button-bg : #545862;
     --disabled-button-text : #abb2bf;
     --game-selection-bg : #3e4451;
-    --highlight : rgba(255,255,0,0.4); /* Brighter highlight for selected/candidate moves */
+    --highlight : rgba(168, 85, 247, 0.5); /* Purple-500 highlight to match app accents */
     --check : #e06c75; /* A subtle red for check */
 }
 

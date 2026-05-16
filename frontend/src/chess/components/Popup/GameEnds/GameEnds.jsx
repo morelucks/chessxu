@@ -10,24 +10,34 @@ const GameEnds = ({onClosePopup}) => {
     if (status === Status.ongoing || status === Status.promoting)
         return null
 
+    const isPuzzle = gameMode === 'puzzle';
+
     const newGame = () => {
         dispatch(setupNewGame(gameMode)); // Pass gameMode when setting up new game
     }
 
     const isWin = status.endsWith('wins')
-    const message = gameMode === 'pvc'
+    const message = isPuzzle
         ? status === Status.white
-            ? 'You win!'
+            ? '🎉 Puzzle Solved!'
             : status === Status.black
-                ? 'You lost!'
+                ? 'Puzzle Failed'
                 : 'Draw!'
-        : isWin ? status : 'Draw!';
+        : gameMode === 'pvc'
+            ? status === Status.white
+                ? 'You win!'
+                : status === Status.black
+                    ? 'You lost!'
+                    : 'Draw!'
+            : isWin ? status : 'Draw!';
 
     return <div className="popup--inner popup--inner__center">
         <h1>{message}</h1>
         <p>{!isWin && status}</p> {/* Only display original status if it's a draw and not pvc */}
         <div className={`${status}`}/>
-        <button onClick={newGame}>New Game</button>
+        <button onClick={newGame}>
+            {isPuzzle ? 'Next Puzzle' : 'New Game'}
+        </button>
     </div>
    
 }

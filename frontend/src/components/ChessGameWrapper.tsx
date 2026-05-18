@@ -112,7 +112,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                         </div>
 
                         {/* The Board Container */}
-                        <div className="w-full aspect-square bg-[#ebecd0] rounded-sm shadow-2xl relative overflow-hidden">
+                        <div className="w-full aspect-square bg-[#ebecd0] rounded-sm shadow-2xl relative">
                             <ChessBoardOnly />
                         </div>
 

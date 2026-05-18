@@ -3,7 +3,7 @@ import actionTypes from "./actionTypes";
 import { getComputerMove } from '../ai/chessAI';
 import arbiter from '../arbiter/arbiter';
 import { saveGameResult } from '../helper/localStorage';
-import { createPosition } from '../helper';
+import { createPosition, createPuzzlePosition } from '../helper';
 
 export const reducer = (state, action) => {
 
@@ -115,8 +115,9 @@ export const reducer = (state, action) => {
         }
          
         case actionTypes.NEW_GAME : {
+            const isPuzzleMode = (action.payload.gameMode === 'puzzle');
             return {
-                position: [createPosition()],
+                position: [isPuzzleMode ? createPuzzlePosition() : createPosition()],
                 turn: 'w',
                 candidateMoves: [],
                 selectedPiece: null,

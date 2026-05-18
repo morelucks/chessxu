@@ -1,6 +1,10 @@
 import arbiter from '../../arbiter/arbiter';
 import { useAppContext }from '../../contexts/Context'
-import { generateCandidates, clearCandidates, selectPiece } from '../../reducer/actions/move';
+import { generateCandidates, clearCandidates, selectPiece, makeNewMove } from '../../reducer/actions/move';
+import { openPromotion } from '../../reducer/actions/popup';
+import { getCastlingDirections } from '../../arbiter/getMoves';
+import { updateCastling, detectStalemate, detectInsufficientMaterial, detectCheckmate } from '../../reducer/actions/game';
+import { getNewMoveNotation } from '../../helper';
 
 const Piece = ({
     rank,
@@ -9,7 +13,7 @@ const Piece = ({
 }) => {
 
     const { appState, dispatch } = useAppContext();
-    const { turn, castleDirection, position : currentPosition, gameMode, playerColor, selectedPiece } = appState
+    const { turn, castleDirection, position : currentPosition, gameMode, playerColor, selectedPiece, candidateMoves } = appState
 
     // In PvP mode, only allow dragging pieces that match the player's assigned color
     const isMyPiece = gameMode === 'pvp' ? piece[0] === playerColor : true;
@@ -21,7 +25,7 @@ const Piece = ({
         && selectedPiece.file === file;
 
     const showCandidates = () => {
-        const candidateMoves = 
+        const moves = 
             arbiter.getValidMoves({
                 position : currentPosition[currentPosition.length - 1],
                 prevPosition : currentPosition[currentPosition.length - 2],
@@ -30,12 +34,77 @@ const Piece = ({
                 file,
                 rank
             })
-        dispatch(generateCandidates({candidateMoves}))
+        dispatch(generateCandidates({candidateMoves: moves}))
         dispatch(selectPiece({piece, rank, file}))
+    }
+
+    const executeMove = (x, y) => {
+        const position = currentPosition[currentPosition.length - 1];
+        const sp = selectedPiece;
+        const opponent = sp.piece.startsWith('b') ? 'w' : 'b';
+        const castleDir = castleDirection[`${sp.piece.startsWith('b') ? 'white' : 'black'}`];
+
+        // Handle promotion
+        if ((sp.piece === 'wp' && x === 7) || (sp.piece === 'bp' && x === 0)) {
+            dispatch(openPromotion({
+                rank: Number(sp.rank),
+                file: Number(sp.file),
+                x,
+                y
+            }))
+            return
+        }
+
+        // Handle castling state update
+        if (sp.piece.endsWith('r') || sp.piece.endsWith('k')) {
+            const direction = getCastlingDirections({
+                castleDirection: appState.castleDirection,
+                piece: sp.piece,
+                file: sp.file,
+                rank: sp.rank
+            })
+            if (direction) {
+                dispatch(updateCastling(direction))
+            }
+        }
+
+        // Perform the move
+        const newPosition = arbiter.performMove({
+            position,
+            piece: sp.piece, rank: sp.rank, file: sp.file,
+            x, y
+        })
+        const newMove = getNewMoveNotation({
+            piece: sp.piece,
+            rank: sp.rank,
+            file: sp.file,
+            x,
+            y,
+            position,
+        })
+        dispatch(makeNewMove({ newPosition, newMove }))
+
+        if (arbiter.insufficientMaterial(newPosition))
+            dispatch(detectInsufficientMaterial())
+        else if (arbiter.isStalemate(newPosition, opponent, castleDir)) {
+            dispatch(detectStalemate())
+        }
+        else if (arbiter.isCheckMate(newPosition, opponent, castleDir)) {
+            dispatch(detectCheckmate(sp.piece[0]))
+        }
+
+        dispatch(clearCandidates())
     }
 
     const onClick = e => {
         e.stopPropagation();
+
+        // If a piece is already selected and THIS piece's square is a valid capture target
+        if (selectedPiece && candidateMoves?.find(m => m[0] === rank && m[1] === file)) {
+            executeMove(rank, file);
+            return;
+        }
+
         if (!canDrag) return;
 
         if (isSelected) {

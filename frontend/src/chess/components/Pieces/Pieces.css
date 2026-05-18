@@ -4,6 +4,7 @@
     position: absolute;
     left: calc(.25*var(--tile-size));
     bottom: calc(.25*var(--tile-size));
+    pointer-events: none;
 }
 
 .piece {
@@ -12,6 +13,7 @@
     background-size: 100%;
     position: absolute;
     transition: filter 0.15s ease;
+    pointer-events: auto;
 }
 
 .piece.selected {

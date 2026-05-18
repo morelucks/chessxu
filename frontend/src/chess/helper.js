@@ -1,3 +1,5 @@
+import { puzzleFENs } from './puzzles';
+
 export const getCharacter = (file) => String.fromCharCode(file + 96);
 export const createPosition = () => {
   const position = new Array(8).fill("").map((x) => new Array(8).fill(""));
@@ -88,24 +90,26 @@ export const getNewMoveNotation = ({
 };
 
 export const createPuzzlePosition = () => {
-  const position = new Array(8).fill("").map(() => new Array(8).fill(""));
+  const randomIndex = Math.floor(Math.random() * puzzleFENs.length);
+  const fen = puzzleFENs[randomIndex];
   
-  // Setup Anastasia's Mate in 3 (White to move)
-  // White: Ne7, Ra3, Qh5, Kg1
-  // Black: Kg8, ph7, pg7, rf8
-
-  // Black pieces (top rows)
-  position[7][5] = "br"; // f8
-  position[7][6] = "bk"; // g8
-  position[6][5] = "bp"; // f7 (wait, the FEN I generated earlier had f7 pawn, but g7,h7 is better)
-  position[6][6] = "bp"; // g7
-  position[6][7] = "bp"; // h7
-
-  // White pieces
-  position[6][4] = "wn"; // e7
-  position[4][7] = "wq"; // h5
-  position[2][0] = "wr"; // a3
-  position[0][6] = "wk"; // g1
-
+  const position = new Array(8).fill("").map(() => new Array(8).fill(""));
+  const boardPart = fen.split(" ")[0];
+  const rows = boardPart.split("/");
+  
+  for (let i = 0; i < 8; i++) {
+    const rankIndex = 7 - i; 
+    let fileIndex = 0;
+    for (let char of rows[i]) {
+      if (!isNaN(char)) {
+        fileIndex += parseInt(char, 10);
+      } else {
+        const color = char === char.toUpperCase() ? 'w' : 'b';
+        const pieceType = char.toLowerCase();
+        position[rankIndex][fileIndex] = color + pieceType;
+        fileIndex++;
+      }
+    }
+  }
   return position;
 };

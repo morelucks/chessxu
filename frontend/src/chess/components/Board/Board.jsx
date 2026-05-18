@@ -30,7 +30,7 @@ const Board = () => {
         }))
 
         if (isInCheck)
-            return getKingPosition (position, appState.turn)
+            return getKingPosition (position, appState.turn) || null
 
         return null
     })()

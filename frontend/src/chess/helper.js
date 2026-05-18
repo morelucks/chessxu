@@ -1,3 +1,5 @@
+import { puzzleFENs } from './puzzles';
+
 export const getCharacter = (file) => String.fromCharCode(file + 96);
 export const createPosition = () => {
   const position = new Array(8).fill("").map((x) => new Array(8).fill(""));
@@ -88,44 +90,26 @@ export const getNewMoveNotation = ({
 };
 
 export const createPuzzlePosition = () => {
-  const puzzles = [
-    // Puzzle 1: Anastasia's Mate in 3
-    () => {
-      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
-      p[7][5] = "br"; p[7][6] = "bk"; 
-      p[6][5] = "bp"; p[6][6] = "bp"; p[6][7] = "bp";
-      p[6][4] = "wn"; p[4][7] = "wq"; p[2][0] = "wr"; p[0][6] = "wk";
-      return p;
-    },
-    // Puzzle 2: Back-rank mate in 2
-    // White: Rd1, Qe5, Kg1 / Black: Kg8, pf7, pg7, ph7, Re8
-    () => {
-      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
-      p[7][4] = "br"; p[7][6] = "bk";
-      p[6][5] = "bp"; p[6][6] = "bp"; p[6][7] = "bp";
-      p[4][4] = "wq"; p[0][3] = "wr"; p[0][6] = "wk";
-      return p;
-    },
-    // Puzzle 3: Queen and Knight mate in 2
-    // White: Qh6, Ng5, Kg1 / Black: Kg8, pf7, pg7, ph7, Re8
-    () => {
-      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
-      p[7][4] = "br"; p[7][6] = "bk";
-      p[6][5] = "bp"; p[6][6] = "bp"; p[6][7] = "bp";
-      p[5][7] = "wq"; p[4][6] = "wn"; p[0][6] = "wk";
-      return p;
-    },
-    // Puzzle 4: Arabian Mate theme in 2
-    // White: Ne7, Rb7, Kg1 / Black: Kh8, ph7, Rg8
-    () => {
-      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
-      p[7][6] = "br"; p[7][7] = "bk";
-      p[6][7] = "bp";
-      p[6][4] = "wn"; p[6][1] = "wr"; p[0][6] = "wk";
-      return p;
+  const randomIndex = Math.floor(Math.random() * puzzleFENs.length);
+  const fen = puzzleFENs[randomIndex];
+  
+  const position = new Array(8).fill("").map(() => new Array(8).fill(""));
+  const boardPart = fen.split(" ")[0];
+  const rows = boardPart.split("/");
+  
+  for (let i = 0; i < 8; i++) {
+    const rankIndex = 7 - i; 
+    let fileIndex = 0;
+    for (let char of rows[i]) {
+      if (!isNaN(char)) {
+        fileIndex += parseInt(char, 10);
+      } else {
+        const color = char === char.toUpperCase() ? 'w' : 'b';
+        const pieceType = char.toLowerCase();
+        position[rankIndex][fileIndex] = color + pieceType;
+        fileIndex++;
+      }
     }
-  ];
-
-  const randomIndex = Math.floor(Math.random() * puzzles.length);
-  return puzzles[randomIndex]();
+  }
+  return position;
 };

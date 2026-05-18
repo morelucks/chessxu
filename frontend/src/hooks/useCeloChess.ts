@@ -131,5 +131,17 @@ export const useCeloChess = () => {
     }
   };
 
-  return { address, network, createGame, joinGame, submitMove, resign, getGame };
+  const getGameStatusString = (status: number) => {
+    switch (status) {
+      case 0: return 'Waiting for Opponent';
+      case 1: return 'Game in Progress';
+      case 2: return 'White Wins';
+      case 3: return 'Black Wins';
+      case 4: return 'Draw';
+      case 5: return 'Cancelled';
+      default: return 'Unknown';
+    }
+  };
+
+  return { address, network, createGame, joinGame, submitMove, resign, getGame, getGameStatusString };
 };

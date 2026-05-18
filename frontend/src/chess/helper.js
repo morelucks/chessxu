@@ -88,24 +88,44 @@ export const getNewMoveNotation = ({
 };
 
 export const createPuzzlePosition = () => {
-  const position = new Array(8).fill("").map(() => new Array(8).fill(""));
-  
-  // Setup Anastasia's Mate in 3 (White to move)
-  // White: Ne7, Ra3, Qh5, Kg1
-  // Black: Kg8, ph7, pg7, rf8
+  const puzzles = [
+    // Puzzle 1: Anastasia's Mate in 3
+    () => {
+      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
+      p[7][5] = "br"; p[7][6] = "bk"; 
+      p[6][5] = "bp"; p[6][6] = "bp"; p[6][7] = "bp";
+      p[6][4] = "wn"; p[4][7] = "wq"; p[2][0] = "wr"; p[0][6] = "wk";
+      return p;
+    },
+    // Puzzle 2: Back-rank mate in 2
+    // White: Rd1, Qe5, Kg1 / Black: Kg8, pf7, pg7, ph7, Re8
+    () => {
+      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
+      p[7][4] = "br"; p[7][6] = "bk";
+      p[6][5] = "bp"; p[6][6] = "bp"; p[6][7] = "bp";
+      p[4][4] = "wq"; p[0][3] = "wr"; p[0][6] = "wk";
+      return p;
+    },
+    // Puzzle 3: Queen and Knight mate in 2
+    // White: Qh6, Ng5, Kg1 / Black: Kg8, pf7, pg7, ph7, Re8
+    () => {
+      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
+      p[7][4] = "br"; p[7][6] = "bk";
+      p[6][5] = "bp"; p[6][6] = "bp"; p[6][7] = "bp";
+      p[5][7] = "wq"; p[4][6] = "wn"; p[0][6] = "wk";
+      return p;
+    },
+    // Puzzle 4: Arabian Mate theme in 2
+    // White: Ne7, Rb7, Kg1 / Black: Kh8, ph7, Rg8
+    () => {
+      const p = new Array(8).fill("").map(() => new Array(8).fill(""));
+      p[7][6] = "br"; p[7][7] = "bk";
+      p[6][7] = "bp";
+      p[6][4] = "wn"; p[6][1] = "wr"; p[0][6] = "wk";
+      return p;
+    }
+  ];
 
-  // Black pieces (top rows)
-  position[7][5] = "br"; // f8
-  position[7][6] = "bk"; // g8
-  position[6][5] = "bp"; // f7 (wait, the FEN I generated earlier had f7 pawn, but g7,h7 is better)
-  position[6][6] = "bp"; // g7
-  position[6][7] = "bp"; // h7
-
-  // White pieces
-  position[6][4] = "wn"; // e7
-  position[4][7] = "wq"; // h5
-  position[2][0] = "wr"; // a3
-  position[0][6] = "wk"; // g1
-
-  return position;
+  const randomIndex = Math.floor(Math.random() * puzzles.length);
+  return puzzles[randomIndex]();
 };

@@ -2,39 +2,43 @@
     right: 0;
     top: 0;
     position: absolute;
-    left: 0; /* Changed from calc(.25*var(--tile-size)) */
-    bottom: 0; /* Changed from calc(.25*var(--tile-size)) */
-    background: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure it's on top */
+    z-index: 1000;
 }
 .popup--inner {
-    width: 90%; /* Responsive width */
-    max-width: 400px; /* Max width for larger screens */
-    background: var(--game-selection-bg); /* Use theme color */
-    position: relative; /* Changed from absolute, centered by flex parent */
-    border: none; /* Remove border */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
-    border-radius: 10px; /* Rounded corners */
-    color: var(--text-color);
+    width: 90%;
+    max-width: 400px;
+    background: #3e4451 !important; /* Hardcoded fallback in case CSS var is missing */
+    background: var(--game-selection-bg, #3e4451) !important;
+    position: relative;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: #abb2bf;
+    color: var(--text-color, #abb2bf);
+    z-index: 1001;
 }
 .popup--inner__center {
-    left: auto; /* Remove absolute positioning, handled by flex parent */
-    top: auto; /* Remove absolute positioning, handled by flex parent */
-    transform: none; /* Remove transform, handled by flex parent */
+    left: auto;
+    top: auto;
+    transform: none;
     text-align: center;
-    padding: 30px 20px; /* Increased padding */
+    padding: 30px 20px;
 }
 
 .popup--inner__center h1 {
-    font-size: 2em; /* Adjusted font size */
-    margin: 0 0 15px 0; /* Adjusted margin */
-    color: white; /* Ensure heading is white */
+    font-size: 2em;
+    margin: 0 0 15px 0;
+    color: white;
 }
 .popup--inner__center p {
-    font-size: 1.1em; /* Adjusted font size */
-    margin: 0 0 20px 0; /* Adjusted margin */
-    color: var(--text-color); /* Use theme text color */
+    font-size: 1.1em;
+    margin: 0 0 20px 0;
+    color: #abb2bf;
+    color: var(--text-color, #abb2bf);
 }

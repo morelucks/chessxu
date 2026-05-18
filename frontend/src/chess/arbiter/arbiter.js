@@ -35,6 +35,13 @@ const arbiter = {
                 ...getCastlingMoves({position,castleDirection,piece,rank,file})
             ]
 
+        // Filter out moves that would capture the enemy king (illegal in chess)
+        const enemy = piece[0] === 'w' ? 'b' : 'w'
+        moves = moves.filter(([x,y]) => {
+            const target = position?.[x]?.[y]
+            return !(target && target.startsWith(enemy) && target.endsWith('k'))
+        })
+
         moves.forEach(([x,y]) => {
             const positionAfterMove = 
                 this.performMove({position,piece,rank,file,x,y})
@@ -49,6 +56,10 @@ const arbiter = {
     isPlayerInCheck : function ({positionAfterMove, position, player}) {
         const enemy = player.startsWith('w') ? 'b' : 'w'
         let kingPos = getKingPosition(positionAfterMove,player)
+
+        // If king is not found (e.g. captured), treat as in check
+        if (!kingPos) return true
+
         const enemyPieces = getPieces(positionAfterMove,enemy)
 
         const enemyMoves = enemyPieces.reduce((acc,p) => acc = [

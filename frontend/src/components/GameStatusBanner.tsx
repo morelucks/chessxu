@@ -1,5 +1,7 @@
 import { GAME_STATUS } from '../chess/blockchainConstants';
 import { useStacksChess } from '../hooks/useStacksChess';
+import { useCeloChess } from '../hooks/useCeloChess';
+import useAppStore from '../zustand/store';
 import './GameStatusBanner.css';
 
 interface Props {
@@ -8,9 +10,13 @@ interface Props {
 }
 
 export default function GameStatusBanner({ status, gameId }: Props) {
-  const { getGameStatusString } = useStacksChess();
+  const { getGameStatusString: getStacksStatus } = useStacksChess();
+  const { getGameStatusString: getCeloStatus } = useCeloChess();
+  const activeChain = useAppStore((state) => state.activeChain);
+  
   if (status === null || gameId === null) return null;
 
+  const getGameStatusString = activeChain === 'celo' ? getCeloStatus : getStacksStatus;
   const label = getGameStatusString(status);
   const isActive = status === GAME_STATUS.WAITING || status === GAME_STATUS.ONGOING;
 

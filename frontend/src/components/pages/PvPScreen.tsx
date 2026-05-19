@@ -18,6 +18,7 @@ export default function PvPScreen() {
 
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
+  const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
   const isMiniPay = useAppStore((state) => state.miniPayDetected);
   const isFarcaster = useAppStore((state) => state.isFarcaster);
   
@@ -25,8 +26,16 @@ export default function PvPScreen() {
   const celo = useCeloChess();
   const { cusdBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, requiresAccess } = useMiniPayAccess();
 
+  const timeControls = [
+    { label: 'Unlimited', value: null },
+    { label: '3+0 Bullet', value: 3 * 60 * 1000 },
+    { label: '5+0 Blitz', value: 5 * 60 * 1000 },
+    { label: '10+0 Rapid', value: 10 * 60 * 1000 },
+  ];
+
   const [wager, setWager] = useState("0");
   const [idToJoin, setIdToJoin] = useState("");
+  const [selectedTime, setSelectedTime] = useState<number | null>(null);
   const [isCreatingMatch, setIsCreatingMatch] = useState(false);
   const [isJoiningMatch, setIsJoiningMatch] = useState(false);
 
@@ -42,6 +51,7 @@ export default function PvPScreen() {
 
     const parsedWager = Number.parseFloat(wager);
     setIsCreatingMatch(true);
+    setTimeControlMs(selectedTime);
 
     if (activeChain === 'celo') {
       celo.createGame(wager, true)
@@ -200,7 +210,19 @@ export default function PvPScreen() {
                                     placeholder="0.0"
                                 />
                             </div>
-                            <button 
+                            <div>
+                                <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Time Control</label>
+                                <select 
+                                    value={selectedTime === null ? "null" : selectedTime.toString()}
+                                    onChange={(e) => setSelectedTime(e.target.value === "null" ? null : parseInt(e.target.value))}
+                                    className="w-full bg-slate-900 border border-white/10 rounded-xl p-4 text-sm focus:ring-2 focus:ring-purple-500 outline-none transition appearance-none"
+                                >
+                                    {timeControls.map(tc => (
+                                        <option key={tc.label} value={tc.value === null ? "null" : tc.value}>{tc.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button  
                                 onClick={handleCreateMatch}
                                 disabled={isCreatingMatch || (activeChain === 'celo' && requiresAccess && !hasAccess)}
                                 className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] active:scale-95 transition disabled:opacity-60"

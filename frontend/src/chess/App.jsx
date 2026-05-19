@@ -14,6 +14,7 @@ import StakingModal from './components/Popup/StakingModal/StakingModal';
 import { getStakeData } from './helper/stakeStorage';
 import ConnectWallet from './components/Control/bits/ConnectWallet';
 import { useUser } from './contexts/UserContext';
+import useAppStore from '../zustand/store';
 
 // Leaderboard Component
 const Leaderboard = ({ results, onClear }) => {
@@ -92,9 +93,10 @@ function App() {
         setLeaderboardResults(loadGameResults());
     }, []);
 
+    const timeControlMs = useAppStore((state) => state.timeControlMs);
     const handleNewGame = (mode) => {
         setGameMode(mode);
-        dispatch({ type: actionTypes.NEW_GAME, payload: { ...initGameState, gameMode: mode } });
+        dispatch({ type: actionTypes.NEW_GAME, payload: { ...initGameState, gameMode: mode, timeControlMs } });
     };
 
     const handlePlayerVsComputer = () => {

@@ -35,6 +35,7 @@ export interface GameState {
   isGameStarted: boolean;
   elo: number;
   chessBalance: number;
+  timeControlMs: number | null;
 }
 
 export interface AppStore extends AuthState, GameState {
@@ -53,6 +54,7 @@ export interface AppStore extends AuthState, GameState {
   setGameStarted: (started: boolean) => void;
   setElo: (elo: number) => void;
   setChessBalance: (balance: number) => void;
+  setTimeControlMs: (ms: number | null) => void;
   logout: () => void;
 }
 
@@ -77,6 +79,7 @@ const useAppStore = create<AppStore>()(
       isGameStarted: false,
       elo: 1200,
       chessBalance: 0,
+      timeControlMs: null,
 
       // Actions
       setAddress: (address: string | null) => {
@@ -117,6 +120,7 @@ const useAppStore = create<AppStore>()(
       setGameStarted: (isGameStarted: boolean) => set({ isGameStarted }),
       setElo: (elo: number) => set({ elo }),
       setChessBalance: (chessBalance: number) => set({ chessBalance }),
+      setTimeControlMs: (timeControlMs: number | null) => set({ timeControlMs }),
       logout: () => {
         userSession.signUserOut();
         set({ 
@@ -132,7 +136,8 @@ const useAppStore = create<AppStore>()(
             activeGameId: null, 
             isGameStarted: false,
             elo: 1200,
-            chessBalance: 0
+            chessBalance: 0,
+            timeControlMs: null
         });
       },
     }),

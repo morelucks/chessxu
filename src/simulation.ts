@@ -131,3 +131,4 @@ async function runSimulation() {
     }
     await new Promise(resolve => setTimeout(resolve, SIMULATION_CONFIG.POLLING_INTERVAL));
   }
+  console.log('Simulation complete.');

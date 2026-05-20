@@ -56,6 +56,11 @@ export default function ShopPage() {
     setTimeout(() => setToast(null), 3000);
   };
 
+  const handleFaucet = () => {
+    setChessBalance(chessBalance + 100);
+    triggerToast('Claimed +100 CHESS tokens!', 'success');
+  };
+
   const handleBuy = (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
     if (chessBalance < item.price) {
@@ -93,7 +98,7 @@ export default function ShopPage() {
           <div className="shop-balance-card">
             <span className="balance-label">Your Balance</span>
             <div className="balance-value">{chessBalance} CHESS</div>
-            <button className="shop-faucet-btn">
+            <button onClick={handleFaucet} className="shop-faucet-btn">
               <Gift size={13} />
               <span>Claim +100 CHESS</span>
             </button>

@@ -128,3 +128,4 @@ async function runSimulation() {
       console.log(`   Success! TX ID: ${result.txId}`);
     } else {
       console.log(`   Failed: ${result.error}`);
+    }

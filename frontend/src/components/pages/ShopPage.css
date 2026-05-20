@@ -214,3 +214,13 @@
   transition: all 0.2s ease;
   border: none;
 }
+
+.buy-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+}
+
+.buy-btn:hover:not(.disabled) {
+  filter: brightness(1.1);
+  transform: scale(1.03);
+}

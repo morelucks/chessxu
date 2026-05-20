@@ -121,6 +121,10 @@ export default function ShopPage() {
           <div className="shop-title-section">
             <h1 className="shop-title">Chessxu Premium Shop</h1>
             <p className="shop-subtitle">Customize your chess game appearance with exclusive assets.</p>
+            <div className="shop-notice">
+              <Info size={14} className="text-indigo-400" />
+              <span>All custom assets are client-side only. On-chain purchases are coming soon.</span>
+            </div>
           </div>
           <div className="shop-balance-card">
             <span className="balance-label">Your Balance</span>

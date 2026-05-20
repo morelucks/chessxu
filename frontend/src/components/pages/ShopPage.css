@@ -343,3 +343,16 @@
   border-color: #10b981;
   box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.3);
 }
+
+.shop-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #a5b4fc;
+  margin-top: 10px;
+}

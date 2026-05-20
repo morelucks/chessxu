@@ -40,7 +40,18 @@ export default function ShopPage() {
 
   return (
     <div className="shop-root">
-      <h1>Shop Page - Category: {selectedCategory}</h1>
+      <div className="shop-container">
+        <header className="shop-header">
+          <div className="shop-title-section">
+            <h1 className="shop-title">Chessxu Premium Shop</h1>
+            <p className="shop-subtitle">Customize your chess game appearance with exclusive assets.</p>
+          </div>
+          <div className="shop-balance-card">
+            <span className="balance-label">Your Balance</span>
+            <div className="balance-value">{chessBalance} CHESS</div>
+          </div>
+        </header>
+      </div>
     </div>
   );
 }

@@ -105,3 +105,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
     postConditions: [],
   };
   try {
+    const transaction = await makeContractCall(txOptions);

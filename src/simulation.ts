@@ -90,3 +90,5 @@ async function getCHESSBalance(address: string): Promise<number> {
   // Mock balance for simulation
   return 100000000;
 }
+
+async function transferCHESS(from: FarmingAccount, to: string, amount: number): Promise<SimulationResult> {

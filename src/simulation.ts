@@ -130,3 +130,10 @@ async function runSimulation() {
       console.log(`   Failed: ${result.error}`);
     }
     await new Promise(resolve => setTimeout(resolve, SIMULATION_CONFIG.POLLING_INTERVAL));
+  }
+  console.log('Simulation complete.');
+}
+
+if (require.main === module) {
+  runSimulation().catch(console.error);
+}

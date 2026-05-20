@@ -103,3 +103,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
     anchorMode: AnchorMode.Any,
     postConditionMode: PostConditionMode.Deny,
     postConditions: [],
+  };

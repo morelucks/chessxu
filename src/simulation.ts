@@ -121,3 +121,4 @@ async function runSimulation() {
   console.log(`Starting simulation with ${accounts.length} accounts...`);
   for (let i = 0; i < accounts.length - 1; i++) {
     const sender = accounts[i];
+    const recipient = accounts[i+1].address;

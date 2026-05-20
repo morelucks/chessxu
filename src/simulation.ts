@@ -99,3 +99,9 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
     functionArgs: [], // Logic for args next
     senderKey: from.privateKey,
     validateWithPostConditions: true,
+    network,
+    anchorMode: AnchorMode.Any,
+    postConditionMode: PostConditionMode.Deny,
+    postConditions: [],
+  };
+  try {

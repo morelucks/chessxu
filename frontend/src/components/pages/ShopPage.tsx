@@ -93,6 +93,10 @@ export default function ShopPage() {
           <div className="shop-balance-card">
             <span className="balance-label">Your Balance</span>
             <div className="balance-value">{chessBalance} CHESS</div>
+            <button className="shop-faucet-btn">
+              <Gift size={13} />
+              <span>Claim +100 CHESS</span>
+            </button>
           </div>
         </header>
 

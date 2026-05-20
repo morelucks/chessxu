@@ -36,6 +36,9 @@ const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 export default function ShopPage() {
   const chessBalance = useAppStore((s) => s.chessBalance);
   const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const filteredItems = SHOP_ITEMS.filter(
+    (item) => selectedCategory === 'all' || item.category === selectedCategory
+  );
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
 
   return (

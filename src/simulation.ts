@@ -120,3 +120,4 @@ async function runSimulation() {
   const accounts = generateMockAccounts();
   console.log(`Starting simulation with ${accounts.length} accounts...`);
   for (let i = 0; i < accounts.length - 1; i++) {
+    const sender = accounts[i];

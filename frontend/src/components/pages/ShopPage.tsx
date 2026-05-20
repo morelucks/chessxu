@@ -57,6 +57,10 @@ export default function ShopPage() {
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [balanceTrigger, setBalanceTrigger] = useState(false);
 
+  React.useEffect(() => {
+    document.title = "Chessxu - Shop";
+  }, []);
+
   const triggerToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);

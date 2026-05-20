@@ -37,6 +37,17 @@ const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 export default function ShopPage() {
   const chessBalance = useAppStore((s) => s.chessBalance);
   const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const getIcon = (iconName: string, color: string) => {
+    const props = { size: 24, style: { color } };
+    switch (iconName) {
+      case 'Palette': return <Palette {...props} />;
+      case 'Sparkles': return <Sparkles {...props} />;
+      case 'Award': return <Award {...props} />;
+      case 'ShoppingBag': return <ShoppingBag {...props} />;
+      default: return <Gamepad2 {...props} />;
+    }
+  };
+
   const filteredItems = SHOP_ITEMS.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
@@ -79,7 +90,7 @@ export default function ShopPage() {
             >
               <div className="shop-card-glow" />
               <div className="shop-card-icon-container">
-                {item.category === 'boards' ? <Palette style={{ color: item.accentColor }} /> : item.category === 'pieces' ? <Sparkles style={{ color: item.accentColor }} /> : <Award style={{ color: item.accentColor }} />}
+                {getIcon(item.icon, item.accentColor)}
               </div>
               <div className="shop-card-body">
                 <h3 className="shop-card-title">{item.name}</h3>

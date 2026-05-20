@@ -95,6 +95,13 @@ export default function ShopPage() {
               <div className="shop-card-body">
                 <h3 className="shop-card-title">{item.name}</h3>
                 <p className="shop-card-desc">{item.description}</p>
+                <div className="shop-card-footer">
+                  <div className="shop-card-price">
+                    <Coins size={14} className="text-yellow-500" />
+                    <span>{item.price} CHESS</span>
+                  </div>
+                  <button className="shop-card-btn buy-btn">Buy Item</button>
+                </div>
               </div>
             </div>
           ))}

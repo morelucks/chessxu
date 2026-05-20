@@ -144,13 +144,20 @@ export default function ShopPage() {
                     <Coins size={14} className="text-yellow-500" />
                     <span>{item.price} CHESS</span>
                   </div>
-                  <button 
-                    disabled={chessBalance < item.price}
-                    onClick={() => handleBuy(item)}
-                    className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
-                  >
-                    Buy Item
-                  </button>
+                  ownedItems.includes(item.id) ? (
+                    <div className="shop-card-price owned-badge">
+                      <Check size={14} className="text-emerald-400" />
+                      <span>OWNED</span>
+                    </div>
+                  ) : (
+                    <button 
+                      disabled={chessBalance < item.price}
+                      onClick={() => handleBuy(item)}
+                      className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
+                    >
+                      Buy Item
+                    </button>
+                  )
                 </div>
               </div>
             </div>

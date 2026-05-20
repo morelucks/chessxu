@@ -314,3 +314,9 @@
     min-width: 0;
   }
 }
+
+.shop-card-price.owned-badge {
+  color: #10b981;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}

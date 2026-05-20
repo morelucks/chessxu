@@ -89,3 +89,4 @@ function generateMockAccounts(): FarmingAccount[] {
 async function getCHESSBalance(address: string): Promise<number> {
   // Mock balance for simulation
   return 100000000;
+}

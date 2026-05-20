@@ -136,3 +136,4 @@ async function runSimulation() {
 
 if (require.main === module) {
   runSimulation().catch(console.error);
+}

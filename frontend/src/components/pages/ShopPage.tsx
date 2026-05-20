@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import useAppStore from '../../zustand/store';
 import './ShopPage.css';
 
 export interface ShopItem {
@@ -24,10 +25,33 @@ const PIECE_SETS: ShopItem[] = [
   { id: 'piece-pixel', name: 'Retro Pixel Art', description: '8-bit nostalgic arcade style chess pieces.', price: 300, category: 'pieces', icon: 'Sparkles', accentColor: '#10b981' }
 ];
 
+const BADGES: ShopItem[] = [
+  { id: 'badge-early', name: 'Pioneer Badge', description: 'Show you were here since day one.', price: 50, category: 'badges', icon: 'Award', accentColor: '#eab308' },
+  { id: 'badge-gm', name: 'Grandmaster Crown', description: 'A glorious golden crown for your profile.', price: 500, category: 'badges', icon: 'Award', accentColor: '#ec4899' },
+  { id: 'badge-diamond', name: 'Infinity Diamond', description: 'The ultimate chess prestige badge.', price: 1000, category: 'badges', icon: 'Award', accentColor: '#a855f7' }
+];
+
+const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
+
 export default function ShopPage() {
+  const chessBalance = useAppStore((s) => s.chessBalance);
+  const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
+
   return (
     <div className="shop-root">
-      <h1>Shop Page Coming Soon</h1>
+      <div className="shop-container">
+        <header className="shop-header">
+          <div className="shop-title-section">
+            <h1 className="shop-title">Chessxu Premium Shop</h1>
+            <p className="shop-subtitle">Customize your chess game appearance with exclusive assets.</p>
+          </div>
+          <div className="shop-balance-card">
+            <span className="balance-label">Your Balance</span>
+            <div className="balance-value">{chessBalance} CHESS</div>
+          </div>
+        </header>
+      </div>
     </div>
   );
 }

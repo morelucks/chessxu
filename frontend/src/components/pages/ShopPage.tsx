@@ -68,6 +68,10 @@ export default function ShopPage() {
             </button>
           ))}
         </nav>
+
+        <div className="shop-grid">
+          {/* Cards go here */}
+        </div>
       </div>
     </div>
   );

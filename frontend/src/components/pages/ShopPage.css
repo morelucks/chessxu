@@ -124,3 +124,10 @@
   color: #818cf8;
   background: rgba(99, 102, 241, 0.1);
 }
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding-bottom: 80px;
+}

@@ -12,6 +12,7 @@ import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 import BottomNav from "../components/BottomNav";
 
 import ProfilePage from "../components/pages/ProfilePage";
+import ShopPage from "../components/pages/ShopPage";
 import PuzzleScreen from '../components/pages/PuzzleScreen';
 import NotFoundPage from '../components/pages/NotFoundPage';
 

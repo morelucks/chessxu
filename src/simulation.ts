@@ -129,3 +129,4 @@ async function runSimulation() {
     } else {
       console.log(`   Failed: ${result.error}`);
     }
+    await new Promise(resolve => setTimeout(resolve, SIMULATION_CONFIG.POLLING_INTERVAL));

@@ -144,7 +144,7 @@ export default function ShopPage() {
           {filteredItems.map((item) => (
             <div 
               key={item.id} 
-              className="shop-card"
+              className={`shop-card ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped' : ''}`}
               style={{ '--accent': item.accentColor } as React.CSSProperties}
             >
               <div className="shop-card-glow" />

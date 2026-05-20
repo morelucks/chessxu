@@ -338,3 +338,8 @@
   color: #34d399;
   cursor: default;
 }
+
+.shop-card.equipped {
+  border-color: #10b981;
+  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.3);
+}

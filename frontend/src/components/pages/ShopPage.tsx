@@ -58,6 +58,10 @@ export default function ShopPage() {
 
   const handleBuy = (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
+    if (chessBalance < item.price) {
+      triggerToast('Insufficient balance!', 'error');
+      return;
+    }
     if (chessBalance >= item.price) {
       setChessBalance(chessBalance - item.price);
       setOwnedItems([...ownedItems, item.id]);

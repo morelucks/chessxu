@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Gamepad2, Palette, Sparkles, Award, ShoppingBag, Coins, Gift, Info, Check } from 'lucide-react';
 import useAppStore from '../../zustand/store';
 import './ShopPage.css';
 
@@ -77,6 +78,9 @@ export default function ShopPage() {
               style={{ '--accent': item.accentColor } as React.CSSProperties}
             >
               <div className="shop-card-glow" />
+              <div className="shop-card-icon-container">
+                {item.category === 'boards' ? <Palette style={{ color: item.accentColor }} /> : <Gamepad2 />}
+              </div>
               <div className="shop-card-body">
                 <h3 className="shop-card-title">{item.name}</h3>
                 <p className="shop-card-desc">{item.description}</p>

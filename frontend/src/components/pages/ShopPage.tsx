@@ -48,6 +48,8 @@ export default function ShopPage() {
     }
   };
 
+  const [equippedBoard, setEquippedBoard] = useState<string>(() => localStorage.getItem('chessxu-equipped-board') || 'board-slate');
+  const [equippedPieces, setEquippedPieces] = useState<string>(() => localStorage.getItem('chessxu-equipped-pieces') || 'piece-classic');
   const [ownedItems, setOwnedItems] = useState<string[]>(() => {
     const local = localStorage.getItem('chessxu-owned-items');
     return local ? JSON.parse(local) : ['board-slate', 'piece-classic'];

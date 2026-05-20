@@ -50,10 +50,18 @@ export default function ShopPage() {
 
   const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [balanceTrigger, setBalanceTrigger] = useState(false);
 
   const triggerToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
+  };
+
+  const handleFaucet = () => {
+    setChessBalance(chessBalance + 100);
+    setBalanceTrigger(true);
+    setTimeout(() => setBalanceTrigger(false), 300);
+    triggerToast('Claimed +100 CHESS tokens!', 'success');
   };
 
   const handleBuy = (item: ShopItem) => {
@@ -92,7 +100,11 @@ export default function ShopPage() {
           </div>
           <div className="shop-balance-card">
             <span className="balance-label">Your Balance</span>
-            <div className="balance-value">{chessBalance} CHESS</div>
+            <div className={`balance-value ${balanceTrigger ? 'balance-bounce' : ''}`}>{chessBalance} CHESS</div>
+            <button onClick={handleFaucet} className="shop-faucet-btn">
+              <Gift size={13} />
+              <span>Claim +100 CHESS</span>
+            </button>
           </div>
         </header>
 

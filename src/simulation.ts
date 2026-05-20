@@ -98,3 +98,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
     functionName: 'transfer',
     functionArgs: [], // Logic for args next
     senderKey: from.privateKey,
+    validateWithPostConditions: true,

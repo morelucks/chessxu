@@ -48,6 +48,8 @@ export default function ShopPage() {
     }
   };
 
+  const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
+
   const filteredItems = SHOP_ITEMS.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
@@ -100,7 +102,12 @@ export default function ShopPage() {
                     <Coins size={14} className="text-yellow-500" />
                     <span>{item.price} CHESS</span>
                   </div>
-                  <button className="shop-card-btn buy-btn">Buy Item</button>
+                  <button 
+                    disabled={chessBalance < item.price}
+                    className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
+                  >
+                    Buy Item
+                  </button>
                 </div>
               </div>
             </div>

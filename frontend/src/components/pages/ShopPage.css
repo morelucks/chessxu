@@ -314,3 +314,32 @@
     min-width: 0;
   }
 }
+
+.shop-card-price.owned-badge {
+  color: #10b981;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.equip-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+.equip-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.equip-btn.equipped-btn {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  cursor: default;
+}
+
+.shop-card.equipped {
+  border-color: #10b981;
+  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.3);
+}

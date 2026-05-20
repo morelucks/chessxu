@@ -48,7 +48,12 @@ export default function ShopPage() {
     }
   };
 
-  const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
+  const [equippedBoard, setEquippedBoard] = useState<string>(() => localStorage.getItem('chessxu-equipped-board') || 'board-slate');
+  const [equippedPieces, setEquippedPieces] = useState<string>(() => localStorage.getItem('chessxu-equipped-pieces') || 'piece-classic');
+  const [ownedItems, setOwnedItems] = useState<string[]>(() => {
+    const local = localStorage.getItem('chessxu-owned-items');
+    return local ? JSON.parse(local) : ['board-slate', 'piece-classic'];
+  });
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [balanceTrigger, setBalanceTrigger] = useState(false);
 
@@ -64,6 +69,19 @@ export default function ShopPage() {
     triggerToast('Claimed +100 CHESS tokens!', 'success');
   };
 
+  const handleEquip = (item: ShopItem) => {
+    if (!ownedItems.includes(item.id)) return;
+    if (item.category === 'boards') {
+      setEquippedBoard(item.id);
+      localStorage.setItem('chessxu-equipped-board', item.id);
+      triggerToast(`Equipped ${item.name} board!`, 'success');
+    } else if (item.category === 'pieces') {
+      setEquippedPieces(item.id);
+      localStorage.setItem('chessxu-equipped-pieces', item.id);
+      triggerToast(`Equipped ${item.name} piece set!`, 'success');
+    }
+  };
+
   const handleBuy = (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
     if (chessBalance < item.price) {
@@ -72,7 +90,9 @@ export default function ShopPage() {
     }
     if (chessBalance >= item.price) {
       setChessBalance(chessBalance - item.price);
-      setOwnedItems([...ownedItems, item.id]);
+      const nextOwned = [...ownedItems, item.id];
+      setOwnedItems(nextOwned);
+      localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
       triggerToast(`Successfully purchased ${item.name}!`, 'success');
     }
   };
@@ -124,7 +144,7 @@ export default function ShopPage() {
           {filteredItems.map((item) => (
             <div 
               key={item.id} 
-              className="shop-card"
+              className={`shop-card ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped' : ''}`}
               style={{ '--accent': item.accentColor } as React.CSSProperties}
             >
               <div className="shop-card-glow" />
@@ -139,13 +159,28 @@ export default function ShopPage() {
                     <Coins size={14} className="text-yellow-500" />
                     <span>{item.price} CHESS</span>
                   </div>
-                  <button 
-                    disabled={chessBalance < item.price}
-                    onClick={() => handleBuy(item)}
-                    className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
-                  >
-                    Buy Item
-                  </button>
+                  ownedItems.includes(item.id) ? (
+                    <>
+                      <div className="shop-card-price owned-badge">
+                        <Check size={14} className="text-emerald-400" />
+                        <span>OWNED</span>
+                      </div>
+                      {item.category !== 'badges' && (
+                        <button onClick={() => handleEquip(item)}
+                        className={`shop-card-btn equip-btn ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped-btn' : ''}`}>
+                          {(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'Equipped' : 'Equip'}
+                        </button>
+                      )}
+                    </>
+                  ) : (
+                    <button 
+                      disabled={chessBalance < item.price}
+                      onClick={() => handleBuy(item)}
+                      className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
+                    >
+                      Buy Item
+                    </button>
+                  )
                 </div>
               </div>
             </div>

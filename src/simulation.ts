@@ -32,5 +32,11 @@ interface SimulationResult {
 }
 
 function generateMockAccounts(): FarmingAccount[] {
-  return [];
+  return [
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-1', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef01', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-2', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef02', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-3', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef03', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-4', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef04', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-5', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef05', nonce: 0 },
+    .../
 }

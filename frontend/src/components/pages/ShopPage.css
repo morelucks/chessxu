@@ -231,3 +231,33 @@
   color: #475569;
   cursor: not-allowed;
 }
+
+.shop-toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 12px 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-success {
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.toast-error {
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+@keyframes slideDown {
+  from { transform: translate(-50%, -20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}

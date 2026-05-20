@@ -49,12 +49,19 @@ export default function ShopPage() {
   };
 
   const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const triggerToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
 
   const handleBuy = (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
     if (chessBalance >= item.price) {
       setChessBalance(chessBalance - item.price);
       setOwnedItems([...ownedItems, item.id]);
+      triggerToast(`Successfully purchased ${item.name}!`, 'success');
     }
   };
 
@@ -65,6 +72,12 @@ export default function ShopPage() {
 
   return (
     <div className="shop-root">
+      {toast && (
+        <div className={`shop-toast toast-${toast.type}`}>
+          <span>{toast.type === 'success' ? '✨' : '⚠️'}</span>
+          <span>{toast.message}</span>
+        </div>
+      )}
       <div className="shop-bg-glow glow-purple" />
       <div className="shop-bg-glow glow-blue" />
       <div className="shop-container">

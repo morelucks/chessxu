@@ -70,7 +70,19 @@ export default function ShopPage() {
         </nav>
 
         <div className="shop-grid">
-          {/* Cards go here */}
+          {filteredItems.map((item) => (
+            <div 
+              key={item.id} 
+              className="shop-card"
+              style={{ '--accent': item.accentColor } as React.CSSProperties}
+            >
+              <div className="shop-card-glow" />
+              <div className="shop-card-body">
+                <h3 className="shop-card-title">{item.name}</h3>
+                <p className="shop-card-desc">{item.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

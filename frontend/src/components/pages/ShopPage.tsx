@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Gamepad2, Palette, Sparkles, Award, ShoppingBag, Coins, Gift, Info, Check } from 'lucide-react';
 import useAppStore from '../../zustand/store';
 import './ShopPage.css';
 
@@ -36,6 +37,17 @@ const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 export default function ShopPage() {
   const chessBalance = useAppStore((s) => s.chessBalance);
   const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const getIcon = (iconName: string, color: string) => {
+    const props = { size: 24, style: { color } };
+    switch (iconName) {
+      case 'Palette': return <Palette {...props} />;
+      case 'Sparkles': return <Sparkles {...props} />;
+      case 'Award': return <Award {...props} />;
+      case 'ShoppingBag': return <ShoppingBag {...props} />;
+      default: return <Gamepad2 {...props} />;
+    }
+  };
+
   const filteredItems = SHOP_ITEMS.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
@@ -68,6 +80,32 @@ export default function ShopPage() {
             </button>
           ))}
         </nav>
+
+        <div className="shop-grid">
+          {filteredItems.map((item) => (
+            <div 
+              key={item.id} 
+              className="shop-card"
+              style={{ '--accent': item.accentColor } as React.CSSProperties}
+            >
+              <div className="shop-card-glow" />
+              <div className="shop-card-icon-container">
+                {getIcon(item.icon, item.accentColor)}
+              </div>
+              <div className="shop-card-body">
+                <h3 className="shop-card-title">{item.name}</h3>
+                <p className="shop-card-desc">{item.description}</p>
+                <div className="shop-card-footer">
+                  <div className="shop-card-price">
+                    <Coins size={14} className="text-yellow-500" />
+                    <span>{item.price} CHESS</span>
+                  </div>
+                  <button className="shop-card-btn buy-btn">Buy Item</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

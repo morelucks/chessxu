@@ -53,7 +53,7 @@ function App() {
               <Route path="/puzzle" element={<PuzzleScreen />} />
               <Route path="/pvp" element={<PvPScreen />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
-              <Route path="/shop" element={<PlaceholderPage title="Shop" />} />
+              <Route path="/shop" element={<ShopPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

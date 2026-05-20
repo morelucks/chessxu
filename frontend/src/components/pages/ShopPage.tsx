@@ -36,10 +36,15 @@ const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 export default function ShopPage() {
   const chessBalance = useAppStore((s) => s.chessBalance);
   const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const filteredItems = SHOP_ITEMS.filter(
+    (item) => selectedCategory === 'all' || item.category === selectedCategory
+  );
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
 
   return (
     <div className="shop-root">
+      <div className="shop-bg-glow glow-purple" />
+      <div className="shop-bg-glow glow-blue" />
       <div className="shop-container">
         <header className="shop-header">
           <div className="shop-title-section">
@@ -51,6 +56,18 @@ export default function ShopPage() {
             <div className="balance-value">{chessBalance} CHESS</div>
           </div>
         </header>
+
+        <nav className="shop-nav">
+          {['all', 'boards', 'pieces', 'badges'].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat as any)}
+              className={`shop-nav-tab ${selectedCategory === cat ? 'active' : ''}`}
+            >
+              {cat.toUpperCase()}
+            </button>
+          ))}
+        </nav>
       </div>
     </div>
   );

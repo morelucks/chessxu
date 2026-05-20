@@ -79,7 +79,7 @@ export default function ShopPage() {
             >
               <div className="shop-card-glow" />
               <div className="shop-card-icon-container">
-                {item.category === 'boards' ? <Palette style={{ color: item.accentColor }} /> : <Gamepad2 />}
+                {item.category === 'boards' ? <Palette style={{ color: item.accentColor }} /> : item.category === 'pieces' ? <Sparkles style={{ color: item.accentColor }} /> : <Award style={{ color: item.accentColor }} />}
               </div>
               <div className="shop-card-body">
                 <h3 className="shop-card-title">{item.name}</h3>

@@ -110,3 +110,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
     if ('error' in broadcastResponse) {
       return { success: false, error: broadcastResponse.error };
     }
+    return { success: true, txId: broadcastResponse.txid };

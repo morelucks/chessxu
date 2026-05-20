@@ -147,10 +147,17 @@ export default function ShopPage() {
                     <span>{item.price} CHESS</span>
                   </div>
                   ownedItems.includes(item.id) ? (
-                    <div className="shop-card-price owned-badge">
-                      <Check size={14} className="text-emerald-400" />
-                      <span>OWNED</span>
-                    </div>
+                    <>
+                      <div className="shop-card-price owned-badge">
+                        <Check size={14} className="text-emerald-400" />
+                        <span>OWNED</span>
+                      </div>
+                      {item.category !== 'badges' && (
+                        <button className={`shop-card-btn equip-btn ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped-btn' : ''}`}>
+                          {(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'Equipped' : 'Equip'}
+                        </button>
+                      )}
+                    </>
                   ) : (
                     <button 
                       disabled={chessBalance < item.price}

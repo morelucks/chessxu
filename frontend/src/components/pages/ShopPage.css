@@ -288,3 +288,12 @@
 .shop-faucet-btn:active {
   transform: translateY(1px);
 }
+
+.balance-bounce {
+  animation: bounce 0.3s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}

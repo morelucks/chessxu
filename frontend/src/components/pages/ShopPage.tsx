@@ -69,6 +69,19 @@ export default function ShopPage() {
     triggerToast('Claimed +100 CHESS tokens!', 'success');
   };
 
+  const handleEquip = (item: ShopItem) => {
+    if (!ownedItems.includes(item.id)) return;
+    if (item.category === 'boards') {
+      setEquippedBoard(item.id);
+      localStorage.setItem('chessxu-equipped-board', item.id);
+      triggerToast(`Equipped ${item.name} board!`, 'success');
+    } else if (item.category === 'pieces') {
+      setEquippedPieces(item.id);
+      localStorage.setItem('chessxu-equipped-pieces', item.id);
+      triggerToast(`Equipped ${item.name} piece set!`, 'success');
+    }
+  };
+
   const handleBuy = (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
     if (chessBalance < item.price) {
@@ -153,7 +166,8 @@ export default function ShopPage() {
                         <span>OWNED</span>
                       </div>
                       {item.category !== 'badges' && (
-                        <button className={`shop-card-btn equip-btn ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped-btn' : ''}`}>
+                        <button onClick={() => handleEquip(item)}
+                        className={`shop-card-btn equip-btn ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped-btn' : ''}`}>
                           {(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'Equipped' : 'Equip'}
                         </button>
                       )}

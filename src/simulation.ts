@@ -95,3 +95,5 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
   const txOptions: SignedContractCallOptions = {
     contractAddress: CONTRACTS.TOKEN.split('.')[0],
     contractName: CONTRACTS.TOKEN.split('.')[1],
+    functionName: 'transfer',
+    functionArgs: [], // Logic for args next

@@ -198,12 +198,10 @@ export default function ChessSidebar() {
         setLeaderboardResults(loadGameResults() as any);
     }, []);
 
-    const timeControlMs = useAppStore((s) => s.timeControlMs);
-
     const handleNewGame = (mode: string) => {
         // Clear stake data when starting a new game
         clearStakeData();
-        dispatch({ type: actionTypes.NEW_GAME, payload: { gameMode: mode, timeControlMs } });
+        dispatch({ type: actionTypes.NEW_GAME, payload: { gameMode: mode } });
     };
 
     const handleCloseStakingModal = () => {

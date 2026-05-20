@@ -114,29 +114,8 @@ export const reducer = (state, action) => {
             }
         }
          
-        case actionTypes.TIMEOUT : {
-            const winner = action.payload === 'w' ? 'b' : 'w'; // If white timed out, black wins
-            const newPoints = { ...state.points };
-            newPoints[winner] += 3;
-            return {
-                ...state,
-                status: winner === 'w' ? Status.white : Status.black,
-                points: newPoints,
-                timeoutWinner: winner
-            }
-        }
-
-        case actionTypes.UPDATE_TIME : {
-            return {
-                ...state,
-                whiteTimeMs: action.payload.whiteTimeMs,
-                blackTimeMs: action.payload.blackTimeMs,
-            }
-        }
-         
         case actionTypes.NEW_GAME : {
             const isPuzzleMode = (action.payload.gameMode === 'puzzle');
-            const timeControlMs = action.payload.timeControlMs || null;
             return {
                 position: [isPuzzleMode ? createPuzzlePosition() : createPosition()],
                 turn: 'w',
@@ -155,8 +134,6 @@ export const reducer = (state, action) => {
                 },
                 gameMode: action.payload.gameMode || 'pvc',
                 playerColor: action.payload.playerColor || 'w',
-                whiteTimeMs: timeControlMs,
-                blackTimeMs: timeControlMs,
             }
         }
 

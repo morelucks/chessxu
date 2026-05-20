@@ -7,12 +7,8 @@ import AppContext from '../chess/contexts/Context';
 import ChessBoardOnly from './ChessBoardOnly';
 import ChessSidebar from './ChessSidebar';
 import MoveHistorySidebar from './MoveHistorySidebar';
-import ChessClock from './ChessClock';
-import useAppStore from '../zustand/store';
 
 export default function ChessGameWrapper({ isPuzzle = false }) {
-    const timeControlMs = useAppStore((state) => state.timeControlMs);
-
     // Create initial state directly to avoid any import issues
     const initialGameState = {
         position: [isPuzzle ? createPuzzlePosition() : createPosition()],
@@ -30,9 +26,6 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
             b: 0,
         },
         gameMode: isPuzzle ? 'puzzle' : 'pvc',
-        playerColor: 'w',
-        whiteTimeMs: timeControlMs,
-        blackTimeMs: timeControlMs,
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,10 +73,6 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         }
     }, [appState.status, dispatch]);
 
-    const handleTimeout = (color: 'w' | 'b') => {
-        dispatch({ type: actionTypes.TIMEOUT, payload: color });
-    };
-
     // Show loading state until the chess game is ready
     if (!isReady) {
         return (
@@ -120,12 +109,6 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                     </span>
                                 </div>
                             </div>
-                            <ChessClock 
-                                color={appState.playerColor === 'w' ? 'b' : 'w'} 
-                                timeMs={appState.playerColor === 'w' ? appState.blackTimeMs : appState.whiteTimeMs} 
-                                isActive={appState.status === Status.ongoing && appState.turn === (appState.playerColor === 'w' ? 'b' : 'w')} 
-                                onTimeout={handleTimeout} 
-                            />
                         </div>
 
                         {/* The Board Container */}
@@ -149,12 +132,6 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                     </span>
                                 </div>
                             </div>
-                            <ChessClock 
-                                color={appState.playerColor} 
-                                timeMs={appState.playerColor === 'w' ? appState.whiteTimeMs : appState.blackTimeMs} 
-                                isActive={appState.status === Status.ongoing && appState.turn === appState.playerColor} 
-                                onTimeout={handleTimeout} 
-                            />
                         </div>
 
                         {/* Mobile Action Controls (Under the board on mobile) */}

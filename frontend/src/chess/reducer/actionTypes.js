@@ -12,9 +12,7 @@ const actionTypes = {
     "TAKE_BACK" : "TAKE_BACK",
     "COMPUTER_MOVE" : "COMPUTER_MOVE",
     "SAVE_GAME_RESULT" : "SAVE_GAME_RESULT",
-    "SELECT_PIECE" : "SELECT_PIECE",
-    "TIMEOUT" : "TIMEOUT",
-    "UPDATE_TIME" : "UPDATE_TIME"
+    "SELECT_PIECE" : "SELECT_PIECE"
 }
 
 export default actionTypes

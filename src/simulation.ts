@@ -85,3 +85,5 @@ function generateMockAccounts(): FarmingAccount[] {
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-50', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef32', nonce: 0 },
   ];
 }
+
+async function getCHESSBalance(address: string): Promise<number> {

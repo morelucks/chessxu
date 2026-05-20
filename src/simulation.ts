@@ -133,3 +133,5 @@ async function runSimulation() {
   }
   console.log('Simulation complete.');
 }
+
+if (require.main === module) {

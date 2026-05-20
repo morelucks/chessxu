@@ -123,3 +123,4 @@ async function runSimulation() {
     const sender = accounts[i];
     const recipient = accounts[i+1].address;
     console.log(`[${i+1}/${accounts.length}] Transferring ${SIMULATION_CONFIG.TRANSFER_AMOUNT} from ${sender.address} to ${recipient}...`);
+    const result = await transferCHESS(sender, recipient, SIMULATION_CONFIG.TRANSFER_AMOUNT);

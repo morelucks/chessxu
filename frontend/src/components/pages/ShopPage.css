@@ -13,3 +13,26 @@
   position: relative;
   z-index: 1;
 }
+
+.shop-bg-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-purple {
+  background: #a855f7;
+  top: 10%;
+  left: 5%;
+}
+
+.glow-blue {
+  background: #3b82f6;
+  bottom: 10%;
+  right: 5%;
+}

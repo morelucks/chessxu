@@ -40,6 +40,8 @@ export default function ShopPage() {
 
   return (
     <div className="shop-root">
+      <div className="shop-bg-glow glow-purple" />
+      <div className="shop-bg-glow glow-blue" />
       <div className="shop-container">
         <header className="shop-header">
           <div className="shop-title-section">

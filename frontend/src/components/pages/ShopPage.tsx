@@ -48,6 +48,27 @@ export default function ShopPage() {
     }
   };
 
+  const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const triggerToast = (message: string, type: 'success' | 'error' = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const handleBuy = (item: ShopItem) => {
+    if (ownedItems.includes(item.id)) return;
+    if (chessBalance < item.price) {
+      triggerToast('Insufficient balance!', 'error');
+      return;
+    }
+    if (chessBalance >= item.price) {
+      setChessBalance(chessBalance - item.price);
+      setOwnedItems([...ownedItems, item.id]);
+      triggerToast(`Successfully purchased ${item.name}!`, 'success');
+    }
+  };
+
   const filteredItems = SHOP_ITEMS.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
@@ -55,6 +76,12 @@ export default function ShopPage() {
 
   return (
     <div className="shop-root">
+      {toast && (
+        <div className={`shop-toast toast-${toast.type}`}>
+          <span>{toast.type === 'success' ? '✨' : '⚠️'}</span>
+          <span>{toast.message}</span>
+        </div>
+      )}
       <div className="shop-bg-glow glow-purple" />
       <div className="shop-bg-glow glow-blue" />
       <div className="shop-container">
@@ -100,7 +127,13 @@ export default function ShopPage() {
                     <Coins size={14} className="text-yellow-500" />
                     <span>{item.price} CHESS</span>
                   </div>
-                  <button className="shop-card-btn buy-btn">Buy Item</button>
+                  <button 
+                    disabled={chessBalance < item.price}
+                    onClick={() => handleBuy(item)}
+                    className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
+                  >
+                    Buy Item
+                  </button>
                 </div>
               </div>
             </div>

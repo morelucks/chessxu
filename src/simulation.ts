@@ -109,3 +109,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
     const broadcastResponse = await broadcastTransaction(transaction, network);
     if ('error' in broadcastResponse) {
       return { success: false, error: broadcastResponse.error };
+    }

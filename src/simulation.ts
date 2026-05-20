@@ -122,3 +122,4 @@ async function runSimulation() {
   for (let i = 0; i < accounts.length - 1; i++) {
     const sender = accounts[i];
     const recipient = accounts[i+1].address;
+    console.log(`[${i+1}/${accounts.length}] Transferring ${SIMULATION_CONFIG.TRANSFER_AMOUNT} from ${sender.address} to ${recipient}...`);

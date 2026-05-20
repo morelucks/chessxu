@@ -53,6 +53,18 @@ export default function ShopPage() {
             <div className="balance-value">{chessBalance} CHESS</div>
           </div>
         </header>
+
+        <nav className="shop-nav">
+          {['all', 'boards', 'pieces', 'badges'].map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat as any)}
+              className={`shop-nav-tab ${selectedCategory === cat ? 'active' : ''}`}
+            >
+              {cat.toUpperCase()}
+            </button>
+          ))}
+        </nav>
       </div>
     </div>
   );

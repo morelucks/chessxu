@@ -48,7 +48,10 @@ export default function ShopPage() {
     }
   };
 
-  const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
+  const [ownedItems, setOwnedItems] = useState<string[]>(() => {
+    const local = localStorage.getItem('chessxu-owned-items');
+    return local ? JSON.parse(local) : ['board-slate', 'piece-classic'];
+  });
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [balanceTrigger, setBalanceTrigger] = useState(false);
 
@@ -72,7 +75,9 @@ export default function ShopPage() {
     }
     if (chessBalance >= item.price) {
       setChessBalance(chessBalance - item.price);
-      setOwnedItems([...ownedItems, item.id]);
+      const nextOwned = [...ownedItems, item.id];
+      setOwnedItems(nextOwned);
+      localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
       triggerToast(`Successfully purchased ${item.name}!`, 'success');
     }
   };

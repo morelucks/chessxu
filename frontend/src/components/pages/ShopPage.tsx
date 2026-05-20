@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ShopPage.css';
 
 export interface ShopItem {
@@ -33,9 +33,11 @@ const BADGES: ShopItem[] = [
 const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 
 export default function ShopPage() {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
+
   return (
     <div className="shop-root">
-      <h1>Shop Page Coming Soon</h1>
+      <h1>Shop Page - Category: {selectedCategory}</h1>
     </div>
   );
 }

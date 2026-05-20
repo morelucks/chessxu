@@ -38,5 +38,8 @@ function generateMockAccounts(): FarmingAccount[] {
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-3', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef03', nonce: 0 },
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-4', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef04', nonce: 0 },
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-5', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef05', nonce: 0 },
-    .../
-}
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-6', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef06', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-7', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef07', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-8', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef08', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-9', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef09', nonce: 0 },
+    { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-10', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0a', nonce: 0 },

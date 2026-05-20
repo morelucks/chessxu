@@ -16,15 +16,6 @@ import ShopPage from "../components/pages/ShopPage";
 import PuzzleScreen from '../components/pages/PuzzleScreen';
 import NotFoundPage from '../components/pages/NotFoundPage';
 
-const PlaceholderPage = ({ title }: { title: string }) => (
-  <div className="flex h-screen items-center justify-center bg-slate-950 text-white">
-    <div className="text-center">
-      <h1 className="text-4xl font-bold mb-4">{title}</h1>
-      <p className="text-slate-400">Coming Soon</p>
-    </div>
-  </div>
-);
-
 function App() {
   const setAddress = useAppStore((state) => state.setAddress);
   

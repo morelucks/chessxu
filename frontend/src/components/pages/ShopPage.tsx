@@ -101,10 +101,11 @@ export default function ShopPage() {
     }
   };
 
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
+
   const filteredItems = SHOP_ITEMS.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
 
   return (
     <div className="shop-root">
@@ -167,7 +168,7 @@ export default function ShopPage() {
                     <Coins size={14} className="text-yellow-500" />
                     <span>{item.price} CHESS</span>
                   </div>
-                  ownedItems.includes(item.id) ? (
+                  {ownedItems.includes(item.id) ? (
                     <>
                       <div className="shop-card-price owned-badge">
                         <Check size={14} className="text-emerald-400" />
@@ -188,7 +189,7 @@ export default function ShopPage() {
                     >
                       Buy Item
                     </button>
-                  )
+                  )}
                 </div>
               </div>
             </div>

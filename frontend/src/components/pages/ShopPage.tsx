@@ -50,6 +50,14 @@ export default function ShopPage() {
 
   const [ownedItems, setOwnedItems] = useState<string[]>(['board-slate', 'piece-classic']);
 
+  const handleBuy = (item: ShopItem) => {
+    if (ownedItems.includes(item.id)) return;
+    if (chessBalance >= item.price) {
+      setChessBalance(chessBalance - item.price);
+      setOwnedItems([...ownedItems, item.id]);
+    }
+  };
+
   const filteredItems = SHOP_ITEMS.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
@@ -104,6 +112,7 @@ export default function ShopPage() {
                   </div>
                   <button 
                     disabled={chessBalance < item.price}
+                    onClick={() => handleBuy(item)}
                     className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
                   >
                     Buy Item

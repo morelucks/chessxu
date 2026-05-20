@@ -83,3 +83,5 @@ function generateMockAccounts(): FarmingAccount[] {
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-48', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef30', nonce: 0 },
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-49', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef31', nonce: 0 },
     { address: 'SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B.account-50', privateKey: '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef32', nonce: 0 },
+  ];
+}

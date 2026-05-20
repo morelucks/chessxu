@@ -18,3 +18,19 @@ const SIMULATION_CONFIG = {
   RETRY_ATTEMPTS: 3,
   POLLING_INTERVAL: 10000, // 10 seconds
 };
+
+interface FarmingAccount {
+  address: string;
+  privateKey: string;
+  nonce: number;
+}
+
+interface SimulationResult {
+  success: boolean;
+  txId?: string;
+  error?: string;
+}
+
+function generateMockAccounts(): FarmingAccount[] {
+  return [];
+}

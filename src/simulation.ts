@@ -107,3 +107,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
   try {
     const transaction = await makeContractCall(txOptions);
     const broadcastResponse = await broadcastTransaction(transaction, network);
+    if ('error' in broadcastResponse) {

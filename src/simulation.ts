@@ -114,3 +114,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
   } catch (e: any) {
     return { success: false, error: e.message };
   }
+}

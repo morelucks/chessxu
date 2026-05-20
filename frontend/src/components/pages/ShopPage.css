@@ -1,1 +1,15 @@
-/* ShopPage styles */
+.shop-root {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 40px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.shop-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}

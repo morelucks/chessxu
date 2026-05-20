@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useAppStore from '../../zustand/store';
 import './ShopPage.css';
 
 export interface ShopItem {
@@ -33,6 +34,8 @@ const BADGES: ShopItem[] = [
 const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 
 export default function ShopPage() {
+  const chessBalance = useAppStore((s) => s.chessBalance);
+  const setChessBalance = useAppStore((s) => s.setChessBalance);
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'boards' | 'pieces' | 'badges'>('all');
 
   return (

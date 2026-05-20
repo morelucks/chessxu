@@ -224,3 +224,10 @@
   filter: brightness(1.1);
   transform: scale(1.03);
 }
+
+.buy-btn.disabled {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #475569;
+  cursor: not-allowed;
+}

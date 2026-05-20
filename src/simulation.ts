@@ -118,3 +118,4 @@ async function transferCHESS(from: FarmingAccount, to: string, amount: number): 
 
 async function runSimulation() {
   const accounts = generateMockAccounts();
+  console.log(`Starting simulation with ${accounts.length} accounts...`);

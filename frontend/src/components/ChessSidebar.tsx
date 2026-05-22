@@ -8,7 +8,7 @@ Npm: Npm monorepo collapsed
 Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
-import { GameState, OnChainGameState, StakeData, LeaderboardResult, GameModeSelectionProps, StakeSectionProps } from '../types/chess';
+import { OnChainGameState, StakeData, LeaderboardResult, GameModeSelectionProps, StakeSectionProps } from '../types/chess';
 import { useState, useEffect } from 'react';
 import { useAppContext } from '../chess/contexts/Context';
 import { takeBack } from '../chess/reducer/actions/move';
@@ -50,15 +50,15 @@ const StakeSection = ({ appState }: StakeSectionProps) => {
     const [stake, setStake] = useState<StakeData | null>(null);
 
     useEffect(() => {
-        const current = getStakeData();
+        const current = getStakeData() as unknown as StakeData | null;
         setStake(current);
-        const onStorage = () => setStake(getStakeData());
+        const onStorage = () => setStake(getStakeData() as unknown as StakeData | null);
         window.addEventListener('storage', onStorage);
         return () => window.removeEventListener('storage', onStorage);
     }, []);
 
     useEffect(() => {
-        setStake(getStakeData());
+        setStake(getStakeData() as unknown as StakeData | null);
     }, [appState?.gameMode]);
 
     return (

@@ -145,7 +145,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                             </div>
                             <ChessClock 
                                 color={appState.playerColor === 'w' ? 'b' : 'w'} 
-                                timeMs={appState.playerColor === 'w' ? appState.blackTimeMs : appState.whiteTimeMs} 
+                                timeMs={appState.playerColor === 'w' ? (appState.blackTimeMs ?? null) : (appState.whiteTimeMs ?? null)} 
                                 isActive={appState.status === Status.ongoing && appState.turn === (appState.playerColor === 'w' ? 'b' : 'w')} 
                                 onTimeout={handleTimeout} 
                             />
@@ -173,8 +173,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                 </div>
                             </div>
                             <ChessClock 
-                                color={appState.playerColor} 
-                                timeMs={appState.playerColor === 'w' ? appState.whiteTimeMs : appState.blackTimeMs} 
+                                color={appState.playerColor ?? 'w'} 
+                                timeMs={appState.playerColor === 'w' ? (appState.whiteTimeMs ?? null) : (appState.blackTimeMs ?? null)} 
                                 isActive={appState.status === Status.ongoing && appState.turn === appState.playerColor} 
                                 onTimeout={handleTimeout} 
                             />

@@ -371,12 +371,15 @@ export const useStacksChess = () => {
 
   const isMyTurn = (game: OnChainGameState | null, playerAddress: string) => {
     if (!game || !playerAddress) return false;
-    const currentTurn = game.turn?.value || game.turn;
+    const currentTurn = typeof game.turn === 'string' ? game.turn : game.turn?.value;
     const isWhite = isPlayerWhite(game, playerAddress);
     const isBlack = isPlayerBlack(game, playerAddress);
     return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
   };
 
+  /**
+   * Returns the opponent's principal address given the current game state.
+   */
   const getOpponentAddress = (game: OnChainGameState | null, playerAddress: string) => {
     if (!game || !playerAddress) return null;
     const isWhite = isPlayerWhite(game, playerAddress);

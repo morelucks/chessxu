@@ -9,7 +9,6 @@ Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
 import OnChainLeaderboard from '../OnChainLeaderboard';
-import type { OnChainGameState } from '../../types/chess';
 import { useGlobalStats } from '../../chess/hooks/useLeaderboard';
 import './LeaderboardPage.css';
 

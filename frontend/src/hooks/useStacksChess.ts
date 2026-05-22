@@ -369,7 +369,7 @@ export const useStacksChess = () => {
     return `${wager / 1000000} CHESS`;
   };
 
-  const isMyTurn = (game: any, playerAddress: string) => {
+  const isMyTurn = (game: OnChainGameState | null, playerAddress: string) => {
     if (!game || !playerAddress) return false;
     const currentTurn = game.turn?.value || game.turn;
     const isWhite = isPlayerWhite(game, playerAddress);

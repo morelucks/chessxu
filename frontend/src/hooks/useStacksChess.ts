@@ -8,7 +8,7 @@ Npm: Npm monorepo collapsed
 Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { OnChainGameState } from '../types/chess';
 import { openContractCall } from '@stacks/connect';
 import { 
   uintCV, 

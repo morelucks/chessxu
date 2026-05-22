@@ -7,6 +7,9 @@ async function main() {
     const trustedForwarder = process.env.TRUSTED_FORWARDER || "0xD4295d9aF32dB85038c82302636d7734E4Cc4f69"; 
 
     const ChessxuV2 = await ethers.getContractFactory("ChessxuV2");
+    console.log("Starting deployment of ChessxuV2...");
+    // Constructor requires _tokenAddress and _trustedForwarder
+    const chessxuV2 = await ChessxuV2.deploy(tokenAddress, trustedForwarder);
 }
 
 main()

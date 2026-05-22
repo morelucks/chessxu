@@ -205,7 +205,7 @@ export default function PvPScreen() {
                         </div>
                         <p className="text-sm text-slate-400">
                           {celo.gasSponsored 
-                            ? "Start a match with zero gas fees. Pay only the wager."
+                            ? "Start a zero-gas match securely on Celo. Pay only your wager amount."
                             : "Start a match with a custom wager."}
                         </p>
                         <div className="mt-2 space-y-3">

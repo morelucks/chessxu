@@ -1,6 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import GaslessBadge from "../ui/GaslessBadge";
 
+import GaslessPulse from "../ui/GaslessPulse";
+
 interface CTASectionProps {
   onStartPlaying: () => void;
   isConnecting: boolean;
@@ -11,7 +13,8 @@ export default function CTASection({ onStartPlaying, isConnecting, isConnected }
   const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
 
   return (
-    <section className="container mx-auto px-6 py-24 max-w-6xl">
+    <section className="container mx-auto px-6 py-24 max-w-6xl relative">
+      <GaslessPulse />
       <div className="relative rounded-2xl border border-white/20 bg-gradient-to-br from-purple-900/50 via-slate-900/50 to-blue-900/50 overflow-hidden p-12 md:p-16">
         {/* Background gradient */}
         <div

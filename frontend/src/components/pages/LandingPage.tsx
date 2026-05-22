@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
 import useAppStore from "../../zustand/store";
+import GaslessBadge from "../ui/GaslessBadge";
+import { Sparkles } from "lucide-react";
 
 export default function LandingPage() {
   const isMiniPay = useAppStore((state) => state.miniPayDetected);
@@ -97,6 +99,8 @@ export default function LandingPage() {
               <div className="flex items-center gap-3">
                 <span className="text-xs text-purple-200">
                   {address?.slice(0, 6)}...{address?.slice(-4)}
+                </span>
+                  <GaslessBadge />
                 </span>
                 <button
                   onClick={handleStartPlaying}

@@ -11,7 +11,7 @@ const GaslessBadge: React.FC<GaslessBadgeProps> = ({ className, showLabel = true
   return (
     <div 
       className={cn(
-        "gasless-badge flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider cursor-help",
+        "gasless-badge flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider cursor-help hover:animate-gasless-pulse transition-all duration-300",
         className
       )}
       title="Gas fees are sponsored by Chessxu — play for free!"

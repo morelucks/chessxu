@@ -26,7 +26,8 @@ export function useMiniPayAccess() {
   const [isPurchasing, setIsPurchasing] = useState(false);
 
   const hasAccess = useMemo(() => getActiveAccess(expiresAt), [expiresAt]);
-  const requiresAccess = detected || activeChain === 'celo';
+  const gasSponsored = celoService.gasSponsored;
+  const requiresAccess = (detected || activeChain === 'celo') && !gasSponsored;
 
   useEffect(() => {
     if (!hasAccess && expiresAt) {

@@ -7,7 +7,10 @@ interface GaslessBadgeProps {
 
 const GaslessBadge: React.FC<GaslessBadgeProps> = ({ className }) => {
   return (
-    <div className={cn("gasless-badge", className)}>
+    <div 
+      className={cn("gasless-badge", className)}
+      title="Gas fees are sponsored by Chessxu — play for free!"
+    >
       <span>⛽ Gasless</span>
     </div>
   );

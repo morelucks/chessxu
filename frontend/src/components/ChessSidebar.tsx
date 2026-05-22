@@ -43,6 +43,9 @@ const TakeBackButton = () => {
 };
 
 // Stake section (always visible under Controls)
+/**
+ * Section displaying active player stake information
+ */
 const StakeSection = ({ appState }: StakeSectionProps) => {
     const [stake, setStake] = useState<StakeData | null>(null);
 

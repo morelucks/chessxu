@@ -52,6 +52,12 @@ contract ChessxuV2 is ERC2771Context {
         }
     }
 
+    /**
+     * @notice Create a new chess game
+     * @param wager Amount to wager
+     * @param isNative True for CELO, false for ChessxuToken
+     * @return gameId The ID of the newly created game
+     */
     function createGame(uint256 wager, bool isNative) external payable returns (uint256) {
         uint256 gameId = nextGameId;
 

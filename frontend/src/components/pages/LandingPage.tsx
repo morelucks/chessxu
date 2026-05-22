@@ -97,9 +97,10 @@ export default function LandingPage() {
             </a>
             {isConnected ? (
               <div className="flex items-center gap-3">
-                <span className="text-xs text-purple-200">
-                  {address?.slice(0, 6)}...{address?.slice(-4)}
-                </span>
+                <span className="flex items-center gap-2">
+                  <span className="text-xs text-purple-200">
+                    {address?.slice(0, 6)}...{address?.slice(-4)}
+                  </span>
                   <GaslessBadge />
                 </span>
                 <button

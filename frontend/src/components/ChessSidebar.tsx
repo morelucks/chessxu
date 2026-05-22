@@ -43,8 +43,7 @@ const TakeBackButton = () => {
 };
 
 // Stake section (always visible under Controls)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StakeSection = ({ appState }: any) => {
+const StakeSection = ({ appState }: StakeSectionProps) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [stake, setStake] = useState<any>(null);
 

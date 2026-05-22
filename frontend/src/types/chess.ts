@@ -44,3 +44,9 @@ export interface StakeData {
   savedAt?: string;
   updatedAt?: number;
 }
+
+export interface LeaderboardResult {
+  name: string;
+  score: number;
+  winner?: string;
+}

@@ -36,6 +36,11 @@ export default function GameStatusBanner({ status, gameId, gasSponsored: propGas
           <span className="text-[10px] uppercase tracking-tighter text-emerald-400 font-bold ml-1">Sponsored</span>
         </div>
       )}
+      {activeChain === 'celo' && !gasSponsored && (
+        <div className="game-banner__fallback">
+          <span className="text-[10px] uppercase tracking-tighter text-amber-400 font-bold">Gas Required (CELO)</span>
+        </div>
+      )}
     </div>
   );
 }

@@ -13,6 +13,7 @@ async function main() {
     await chessxuV2.waitForDeployment();
 
     console.log("ChessxuV2 deployed to:", await chessxuV2.getAddress());
+    console.log("To verify on CeloScan: npx hardhat verify --network <network> ", await chessxuV2.getAddress(), tokenAddress, trustedForwarder);
 }
 
 main()

@@ -188,7 +188,7 @@ export default function ChessSidebar() {
     const { gameState } = useGameState(activeGameId);
     const currentGameStatus =
         gameState && typeof gameState === 'object' && 'status' in gameState
-            ? Number((gameState as { status: number | string }).status)
+            ? Number((gameState as OnChainGameState).status)
             : null;
     const [leaderboardResults, setLeaderboardResults] = useState<LeaderboardResult[]>([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
@@ -203,8 +203,7 @@ export default function ChessSidebar() {
 
     // Load leaderboard results on component mount
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        setLeaderboardResults(loadGameResults() as any);
+        setLeaderboardResults(loadGameResults());
     }, []);
 
     const timeControlMs = useAppStore((s) => s.timeControlMs);
@@ -226,8 +225,7 @@ export default function ChessSidebar() {
 
     // Reload leaderboard when game ends
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        setLeaderboardResults(loadGameResults() as any);
+        setLeaderboardResults(loadGameResults());
     }, [gameMode]);
 
     // Don't render if context is not available

@@ -171,6 +171,11 @@ contract ChessxuV2 is ERC2771Context {
         }
     }
 
+    /**
+     * @notice Resolve a chess game (Admin only)
+     * @param gameId The ID of the game
+     * @param newStatus The final status of the game (2=W, 3=B, 4=D, 5=X)
+     */
     function resolveGame(uint256 gameId, uint8 newStatus) external {
         if (_msgSender() != owner) revert NotOwner();
         Game storage game = games[gameId];

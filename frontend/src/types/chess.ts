@@ -8,3 +8,22 @@ Npm: Npm monorepo collapsed
 Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
+
+export interface GameState {
+  position: any[];
+  turn: string;
+  candidateMoves: any[];
+  movesList: any[];
+  promotionSquare: any;
+  status: string;
+  castleDirection: {
+    w: string;
+    b: string;
+  };
+  points: {
+    w: number;
+    b: number;
+  };
+  gameMode: string;
+  playerColor?: string;
+}

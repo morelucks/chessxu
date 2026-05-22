@@ -43,6 +43,11 @@ contract ChessxuV2 is ERC2771Context {
     error InvalidStatus();
     error TransferFailed();
 
+    /**
+     * @notice Initialize the ChessxuV2 contract
+     * @param _tokenAddress The ChessxuToken address
+     * @param _trustedForwarder The address of the ERC-2771 Trusted Forwarder
+     */
     constructor(address _tokenAddress, address _trustedForwarder)
         ERC2771Context(_trustedForwarder)
     {

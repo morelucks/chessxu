@@ -101,7 +101,7 @@ export default function LandingPage() {
                   <span className="text-xs text-purple-200">
                     {address?.slice(0, 6)}...{address?.slice(-4)}
                   </span>
-                  <GaslessBadge />
+                  <GaslessBadge showLabel={false} />
                 </span>
                 <button
                   onClick={handleStartPlaying}

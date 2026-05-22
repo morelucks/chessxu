@@ -11,3 +11,7 @@ Chessxu V2 implements ERC-2771 meta-transactions to support sponsored play via a
 ## Wager Handling
 - **Native (CELO)**: Wagers must be specified in Wei.
 - **Tokens (ERC-20)**: Wagers must be specified in the base unit of the token (e.g., 18 decimals).
+
+## Next Steps
+- **EIP-712**: Implement typed data signing for better security.
+- **Gasless Gateway**: Integrate with a Gasless Gateway (e.g., Gelato, OpenZeppelin Defender) to relay meta-transactions.

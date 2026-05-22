@@ -19,13 +19,13 @@ contract ChessxuV2 is ERC2771Context {
     uint256 public nextGameId = 1;
 
     struct Game {
-        address playerW;
-        address playerB;
-        uint256 wager;
-        bool isNative;
-        string boardState;
-        string turn;
-        uint8 status;
+        address playerW; // Address of the white player
+        address playerB; // Address of the black player (zero address if waiting)
+        uint256 wager; // Amount staked for the game
+        bool isNative; // True if wagered in native currency (CELO), false for ERC20
+        string boardState; // Current board FEN string
+        string turn; // Current turn: "w" or "b"
+        uint8 status; // 0=Wait, 1=Live, 2=W, 3=B, 4=D, 5=X
     }
 
     mapping(uint256 => Game) public games;

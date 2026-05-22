@@ -62,3 +62,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.gasless-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00c853, #69f0ae);
+  color: #003300;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation: gaslessPulse 2s ease-in-out;
+}

@@ -3,10 +3,7 @@ pragma solidity ^0.8.24;
 
 /**
  * @dev MockERC20 token for V2 testing.
- */
-
-/**
- * @dev MockERC20 token for V2 testing.
+ * Compatible with EVM version: cancun
  */
 
 interface IERC20 {

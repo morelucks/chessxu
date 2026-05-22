@@ -99,8 +99,7 @@ const StakeSection = ({ appState }: StakeSectionProps) => {
 };
 
 // Leaderboard Component (tab)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Leaderboard = ({ results, onClear }: any) => {
+const Leaderboard = ({ results, onClear }: { results: LeaderboardResult[]; onClear: () => void }) => {
     // Aggregate wins: 3 points per win, 1 each for draws
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const totals = results.reduce((acc: any, r: any) => {

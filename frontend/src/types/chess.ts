@@ -35,3 +35,12 @@ export interface OnChainGameState {
   'player-b'?: { value: string } | null;
   'last-move'?: { value: string } | null;
 }
+
+export interface StakeData {
+  amount: string | number;
+  isStx: boolean;
+  status?: string;
+  id?: number;
+  savedAt?: string;
+  updatedAt?: number;
+}

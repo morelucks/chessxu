@@ -154,6 +154,18 @@ export const useCeloChess = () => {
   };
 
   const gasSponsored = celoService.gasSponsored;
+  const gasSponsorshipInfo = celoService.getGasSponsorshipInfo();
 
-  return { address, network, createGame, joinGame, submitMove, resign, getGame, getGameStatusString, gasSponsored };
+  return { 
+    address, 
+    network, 
+    createGame, 
+    joinGame, 
+    submitMove, 
+    resign, 
+    getGame, 
+    getGameStatusString, 
+    gasSponsored,
+    gasSponsorshipInfo
+  };
 };

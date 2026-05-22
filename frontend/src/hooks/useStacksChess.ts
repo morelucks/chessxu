@@ -1,4 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/*
+npm
+Npm: Npm download concentration
+NPM Package Downloads
+Npm: Npm download uniform
+Npm: Npm excluded packages quality
+Npm: Npm monorepo collapsed
+Npm: Npm download sparse burst
+Npm: Npm excluded packages
+*/
+import type { OnChainGameState } from '../types/chess';
 import { openContractCall } from '@stacks/connect';
 import { 
   uintCV, 
@@ -124,7 +134,7 @@ export const useStacksChess = () => {
         let attempts = 0;
         const checkMove = async () => {
           attempts++;
-          const updatedGame = await getGame(gameId) as any;
+          const updatedGame = (await getGame(gameId)) as OnChainGameState | null;
           if (updatedGame?.['last-move']?.value !== String(move)) {
             if (attempts < 12) setTimeout(checkMove, 5000);
           }
@@ -227,7 +237,7 @@ export const useStacksChess = () => {
 
     try {
       const result = await fetchCallReadOnlyFunction(options);
-      const val: any = cvToValue(result);
+      const val = cvToValue(result) as { value: unknown } | null;
       return val ? val.value : null;
     } catch (e) {
       console.error('Error fetching player stats:', e);
@@ -306,8 +316,8 @@ export const useStacksChess = () => {
     
     if (errorCode) {
       const code = parseInt(errorCode);
-      const message = (CLARITY_ERRORS as any)[code] || 
-                      (LEADERBOARD_ERRORS as any)[code];
+      const message = (CLARITY_ERRORS as Record<number, string>)[code] ||
+                      (LEADERBOARD_ERRORS as Record<number, string>)[code];
       if (message) return message;
     }
     return error;

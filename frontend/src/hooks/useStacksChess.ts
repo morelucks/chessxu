@@ -346,7 +346,8 @@ export const useStacksChess = () => {
 
   const isPlayerWhite = (game: OnChainGameState | null, playerAddress: string) =>
     game?.['player-w'] === playerAddress;
-  const isPlayerBlack = (game: any, playerAddress: string) => game?.['player-b']?.value === playerAddress;
+  const isPlayerBlack = (game: OnChainGameState | null, playerAddress: string) =>
+    game?.['player-b']?.value === playerAddress;
 
   const getGameStatusString = (status: number) => {
     switch (status) {

@@ -201,7 +201,7 @@ export default function PvPScreen() {
                         </div>
                         <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Create Match</h3>
-                            {celo.gasSponsored && <GaslessBadge showLabel={false} />}
+                            {celo.gasSponsored && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
                         <p className="text-sm text-slate-400">
                           {celo.gasSponsored 
@@ -254,7 +254,7 @@ export default function PvPScreen() {
                         </div>
                         <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Join Match</h3>
-                            {celo.gasSponsored && <GaslessBadge />}
+                            {celo.gasSponsored && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
                         <p className="text-sm text-slate-400">
                           {celo.gasSponsored 

@@ -27,3 +27,11 @@ export interface GameState {
   gameMode: string;
   playerColor?: string;
 }
+
+export interface OnChainGameState {
+  status: number | string;
+  turn?: { value: string } | string;
+  'player-w'?: string;
+  'player-b'?: { value: string } | null;
+  'last-move'?: { value: string } | null;
+}

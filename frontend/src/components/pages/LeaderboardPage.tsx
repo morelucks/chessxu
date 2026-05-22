@@ -9,6 +9,7 @@ Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
 import OnChainLeaderboard from '../OnChainLeaderboard';
+import type { OnChainGameState } from '../../types/chess';
 import { useGlobalStats } from '../../chess/hooks/useLeaderboard';
 import './LeaderboardPage.css';
 
@@ -28,7 +29,7 @@ export default function LeaderboardPage() {
           <div className="lb-page__global">
             <div className="lb-page__stat">
               <span className="lb-page__stat-value">
-                {getDisplayValue((globalStats as any)['total-games'])}
+                {getDisplayValue((globalStats as Record<string, unknown>)['total-games'])}
               </span>
               <span className="lb-page__stat-label">Total Games</span>
             </div>

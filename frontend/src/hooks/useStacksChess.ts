@@ -237,7 +237,7 @@ export const useStacksChess = () => {
 
     try {
       const result = await fetchCallReadOnlyFunction(options);
-      const val: any = cvToValue(result);
+      const val = cvToValue(result) as { value: unknown } | null;
       return val ? val.value : null;
     } catch (e) {
       console.error('Error fetching player stats:', e);

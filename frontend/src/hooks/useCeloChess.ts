@@ -15,6 +15,8 @@ export const useCeloChess = () => {
     !!miniPayAccessExpiresAt && new Date(miniPayAccessExpiresAt).getTime() > Date.now();
 
   const ensureEligibleForCeloPlay = () => {
+    if (gasSponsored) return true;
+
     if ((miniPayDetected || activeChain === 'celo') && !hasMiniPayAccess) {
       addToast({
         txId: '',

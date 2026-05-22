@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("ChessxuV2 Meta-Transactions", function () {
+describe("ChessxuV2 Smart Contract - Meta-Transaction Functional Tests", function () {
     let chessxuV2;
     let mockToken;
     let owner;

@@ -23,8 +23,8 @@ export const NETWORK = 'mainnet';
 
 export const CELO_CONFIG = {
   CHAIN_ID: 42220,
-  RPC_URL: "https://forno.celo.org",
-  CONTRACT_ADDRESS: "0x5FbDB2315678afecb367f032d93F642f64180aa3", // Placeholder for V2 Deployment
+  RPC_URL: "https://forno.celo.org", // Default Celo RPC Provider (Forno)
+  CONTRACT_ADDRESS: "0x5FbDB2315678afecb367f032d93F642f64180aa3", // ERC-2771 V2 Implementation
   TRUSTED_FORWARDER: "0xD4295d9aF32dB85038c82302636d7734E4Cc4f69", // Celo Trusted Forwarder
   CURRENCY: "CELO",
   CHAIN_NAME: "Celo",

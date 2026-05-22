@@ -1,3 +1,6 @@
+/**
+ * CHESSXU_ABI: Smart contract ABI for Chessxu V2 (ERC-2771).
+ */
 export const CHESSXU_ABI = [
   {
     "inputs": [
@@ -137,7 +140,7 @@ export const CHESSXU_ABI = [
             "type": "uint8"
           }
         ],
-        "internalType": "struct Chessxu.Game",
+        "internalType": "struct ChessxuV2.Game",
         "name": "",
         "type": "tuple"
       }

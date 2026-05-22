@@ -145,8 +145,7 @@ const Leaderboard = ({ results, onClear }: { results: LeaderboardResult[]; onCle
 };
 
 // Game Mode Selection Component
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: any) => {
+const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameModeSelectionProps) => {
     const handlePlayerVsComputer = () => {
         onNewGame('pvc');
     };

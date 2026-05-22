@@ -41,7 +41,7 @@ export default function LeaderboardPage() {
             </div>
             <div className="lb-page__stat">
               <span className="lb-page__stat-value">
-                {getDisplayValue((globalStats as any)['total-decisive'])}
+                {getDisplayValue((globalStats as Record<string, unknown>)['total-decisive'])}
               </span>
               <span className="lb-page__stat-label">Decisive Games</span>
             </div>

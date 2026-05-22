@@ -231,10 +231,19 @@ contract ChessxuV2 is ERC2771Context {
         game.status = newStatus;
     }
 
+    /**
+     * @notice Get game details
+     * @param gameId The ID of the game
+     * @return The Game struct
+     */
     function getGame(uint256 gameId) external view returns (Game memory) {
         return games[gameId];
     }
 
+    /**
+     * @notice Get the most recent game ID
+     * @return The ID of the last created game
+     */
     function getLastGameId() external view returns (uint256) {
         return nextGameId - 1;
     }

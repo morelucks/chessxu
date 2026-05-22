@@ -316,8 +316,8 @@ export const useStacksChess = () => {
     
     if (errorCode) {
       const code = parseInt(errorCode);
-      const message = (CLARITY_ERRORS as any)[code] || 
-                      (LEADERBOARD_ERRORS as any)[code];
+      const message = (CLARITY_ERRORS as Record<number, string>)[code] ||
+                      (LEADERBOARD_ERRORS as Record<number, string>)[code];
       if (message) return message;
     }
     return error;

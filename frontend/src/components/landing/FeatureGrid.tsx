@@ -32,6 +32,12 @@ const features = [
     description: "Compete against players worldwide. Climb the leaderboards and establish your chess legacy.",
     image: "/chess-knight.jpg",
   },
+  {
+    icon: Zap,
+    title: "One-Click Access",
+    description: "Optimized for MiniPay. Connect and play instantly with zero configuration and zero fees.",
+    image: "/chess-bishop.jpg",
+  },
 ];
 
 export default function FeatureGrid() {

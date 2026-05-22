@@ -15,8 +15,8 @@ import './LeaderboardPage.css';
 export default function LeaderboardPage() {
   const { globalStats } = useGlobalStats();
 
-  const getDisplayValue = (val: any) => {
-    if (val && typeof val === 'object' && 'value' in val) return String(val.value);
+  const getDisplayValue = (val: unknown) => {
+    if (val && typeof val === 'object' && 'value' in val) return String((val as { value: unknown }).value);
     return String(val ?? 0);
   };
 

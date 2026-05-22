@@ -96,4 +96,20 @@ contract ChessxuV2 is ERC2771Context {
         game.playerB = _msgSender();
         game.status = 1;
     }
+
+    function submitMove(uint256 gameId, string calldata /* moveStr */, string calldata newBoardState) external {
+        Game storage game = games[gameId];
+        if (game.playerW == address(0)) revert GameNotFound();
+        if (game.status != 1) revert GameNotActive();
+
+        if (keccak256(abi.encodePacked(game.turn)) == keccak256(abi.encodePacked("w"))) {
+            if (_msgSender() != game.playerW) revert NotYourTurn();
+            game.turn = "b";
+        } else {
+            if (_msgSender() != game.playerB) revert NotYourTurn();
+            game.turn = "w";
+        }
+
+        game.boardState = newBoardState;
+    }
 }

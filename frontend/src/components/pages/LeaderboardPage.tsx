@@ -35,7 +35,7 @@ export default function LeaderboardPage() {
             </div>
             <div className="lb-page__stat">
               <span className="lb-page__stat-value">
-                {getDisplayValue((globalStats as any)['total-players'])}
+                {getDisplayValue((globalStats as Record<string, unknown>)['total-players'])}
               </span>
               <span className="lb-page__stat-label">Players</span>
             </div>

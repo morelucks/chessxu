@@ -39,6 +39,9 @@ export interface OnChainGameState {
   'last-move'?: { value: string } | null;
 }
 
+/**
+ * Represents the player stake details.
+ */
 export interface StakeData {
   amount: string | number;
   isStx: boolean;
@@ -48,6 +51,9 @@ export interface StakeData {
   updatedAt?: number;
 }
 
+/**
+ * Represents a result entry in the leaderboard.
+ */
 export interface LeaderboardResult {
   name: string;
   score: number;

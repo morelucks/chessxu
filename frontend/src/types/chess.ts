@@ -50,3 +50,9 @@ export interface LeaderboardResult {
   score: number;
   winner?: string;
 }
+
+export interface GameModeSelectionProps {
+  gameMode: string;
+  onNewGame: (mode: string) => void;
+  onShowStakingModal: (show: boolean) => void;
+}

@@ -167,7 +167,7 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {activeChain === 'celo' && (
+                {activeChain === 'celo' && !celo.gasSponsored && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div>

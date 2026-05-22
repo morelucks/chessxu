@@ -2,6 +2,7 @@ import { GAME_STATUS } from '../chess/blockchainConstants';
 import { useStacksChess } from '../hooks/useStacksChess';
 import { useCeloChess } from '../hooks/useCeloChess';
 import useAppStore from '../zustand/store';
+import GaslessBadge from './ui/GaslessBadge';
 import './GameStatusBanner.css';
 
 interface Props {

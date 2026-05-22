@@ -60,12 +60,18 @@ export interface LeaderboardResult {
   winner?: string;
 }
 
+/**
+ * Props for the GameModeSelection component.
+ */
 export interface GameModeSelectionProps {
   gameMode: string;
   onNewGame: (mode: string) => void;
   onShowStakingModal: (show: boolean) => void;
 }
 
+/**
+ * Props for the StakeSection component.
+ */
 export interface StakeSectionProps {
   appState: GameState;
 }

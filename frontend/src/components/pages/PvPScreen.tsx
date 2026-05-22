@@ -46,7 +46,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 
@@ -78,7 +78,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 
@@ -167,7 +167,7 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {activeChain === 'celo' && (
+                {activeChain === 'celo' && !celo.gasSponsored && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div>
@@ -256,6 +256,11 @@ export default function PvPScreen() {
                             <h3 className="text-xl font-bold">Join Match</h3>
                             {celo.gasSponsored && <GaslessBadge />}
                         </div>
+                        <p className="text-sm text-slate-400">
+                          {celo.gasSponsored 
+                            ? "Join an existing match. Gas fees are sponsored."
+                            : "Join an existing match by ID."}
+                        </p>
                         <div className="mt-2 space-y-3">
                             <div>
                                 <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Game ID</label>

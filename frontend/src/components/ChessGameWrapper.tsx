@@ -31,7 +31,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
 
     // Create initial state directly to avoid any import issues
-    const initialGameState = {
+    const initialGameState: GameState = {
         position: [isPuzzle ? createPuzzlePosition() : createPosition()],
         turn: 'w',
         candidateMoves: [],

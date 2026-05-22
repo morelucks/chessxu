@@ -27,6 +27,9 @@ import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
 
+/**
+ * Wrapper providing AppContext with typed reducer for the chess board UI.
+ */
 export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
 

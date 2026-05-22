@@ -107,6 +107,12 @@ export function useMiniPayAccess() {
     }
   };
 
+  const accessReason = gasSponsored 
+    ? "Gas is sponsored by Chessxu foundation" 
+    : (detected || activeChain === 'celo') 
+      ? "Daily access payment required for this network" 
+      : "Standard wallet - no daily access required";
+
   return {
     cusdBalance,
     expiresAt,
@@ -116,6 +122,7 @@ export function useMiniPayAccess() {
     purchaseAccess,
     refreshBalance,
     requiresAccess,
+    accessReason,
   };
 }
 

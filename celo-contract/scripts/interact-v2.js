@@ -1,3 +1,7 @@
+/**
+ * interact-v2.js: Diagnostic script to interact with ChessxuV2.
+ * Fetches contract state and wagering configuration.
+ */
 import { ethers } from "hardhat";
 
 async function main() {

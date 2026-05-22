@@ -180,6 +180,9 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
 };
 
 // Main Chess Sidebar Component
+/**
+ * Main chess sidebar that renders controls, stake info and leaderboard tabs.
+ */
 export default function ChessSidebar() {
     const { appState, dispatch } = useAppContext();
     const gameMode = appState?.gameMode || 'pvc';

@@ -90,7 +90,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo move submission broadcasted'
+        message: gasSponsored
+          ? 'Move submitted! Zero gas fees applied.'
+          : 'Celo move submission broadcasted'
       });
       console.log('Celo move submitted:', txHash);
       return txHash;
@@ -113,7 +115,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo resignation transaction broadcasted'
+        message: gasSponsored
+          ? 'Match resigned. Gas fees sponsored.'
+          : 'Celo resignation transaction broadcasted'
       });
       console.log('Celo resigned:', txHash);
       return txHash;

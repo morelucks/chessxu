@@ -26,8 +26,21 @@ export default function GameStatusBanner({ status, gameId, gasSponsored: propGas
 
   return (
     <div className={`game-banner ${isActive ? 'game-banner--active' : 'game-banner--ended'}`}>
-      <span className="game-banner__id">Game #{gameId}</span>
-      <span className="game-banner__status">{label}</span>
+      <div className="game-banner__main">
+        <span className="game-banner__id">Game #{gameId}</span>
+        <span className="game-banner__status">{label}</span>
+      </div>
+      {activeChain === 'celo' && gasSponsored && (
+        <div className="game-banner__sponsored animate-pulse">
+          <GaslessBadge />
+          <span className="text-[10px] uppercase tracking-tighter text-emerald-400 font-bold ml-1">Sponsored</span>
+        </div>
+      )}
+      {activeChain === 'celo' && !gasSponsored && (
+        <div className="game-banner__fallback">
+          <span className="text-[10px] uppercase tracking-tighter text-amber-400 font-bold">Gas Required (CELO)</span>
+        </div>
+      )}
     </div>
   );
 }

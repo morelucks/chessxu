@@ -25,6 +25,18 @@ contract ChessxuV2 is ERC2771Context {
     mapping(uint256 => Game) public games;
     IERC20 public chessxuToken;
 
+    // Errors
+    error NotOwner();
+    error GameNotFound();
+    error NotWaiting();
+    error AlreadyJoined();
+    error InvalidWager();
+    error NotPlayer();
+    error NotYourTurn();
+    error GameNotActive();
+    error InvalidStatus();
+    error TransferFailed();
+
     constructor(address _tokenAddress, address _trustedForwarder)
         ERC2771Context(_trustedForwarder)
     {

@@ -113,6 +113,11 @@ contract ChessxuV2 is ERC2771Context {
         game.status = 1;
     }
 
+    /**
+     * @notice Submit a chess move
+     * @param gameId The ID of the game
+     * @param newBoardState The new board FEN string after the move
+     */
     function submitMove(uint256 gameId, string calldata /* moveStr */, string calldata newBoardState) external {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();

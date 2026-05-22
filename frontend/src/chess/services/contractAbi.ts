@@ -5,6 +5,11 @@ export const CHESSXU_ABI = [
         "internalType": "address",
         "name": "_tokenAddress",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_trustedForwarder",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",

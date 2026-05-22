@@ -37,4 +37,12 @@ describe("ChessxuV2 Meta-Transactions", function () {
     it("should validate turns using msgSender in submitMove", async function () {
         // Skeleton for meta-tx verification
     });
+
+    it("should correctly identify player via msgSender in resign", async function () {
+        // Skeleton for meta-tx verification
+    });
+
+    it("should verify owner via msgSender in resolveGame", async function () {
+        // Skeleton for meta-tx verification
+    });
 });

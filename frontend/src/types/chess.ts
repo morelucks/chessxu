@@ -56,3 +56,7 @@ export interface GameModeSelectionProps {
   onNewGame: (mode: string) => void;
   onShowStakingModal: (show: boolean) => void;
 }
+
+export interface StakeSectionProps {
+  appState: GameState;
+}

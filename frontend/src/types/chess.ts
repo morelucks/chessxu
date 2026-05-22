@@ -9,6 +9,9 @@ Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
 
+/**
+ * Represents the local client-side game state.
+ */
 export interface GameState {
   position: any[];
   turn: string;

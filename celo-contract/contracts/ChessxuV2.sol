@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+/**
+ * @title ChessxuV2
+ * @dev Chessxu smart contract with ERC-2771 meta-transaction support.
+ * Allows sponsored transactions via a Trusted Forwarder.
+ */
+
 import "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 
 interface IERC20 {
@@ -13,13 +19,13 @@ contract ChessxuV2 is ERC2771Context {
     uint256 public nextGameId = 1;
 
     struct Game {
-        address playerW;
-        address playerB;
-        uint256 wager;
-        bool isNative;
-        string boardState;
-        string turn;
-        uint8 status;
+        address playerW; // Address of the white player
+        address playerB; // Address of the black player (zero address if waiting)
+        uint256 wager; // Amount staked for the game
+        bool isNative; // True if wagered in native currency (CELO), false for ERC20
+        string boardState; // Current board FEN string
+        string turn; // Current turn: "w" or "b"
+        uint8 status; // 0=Wait, 1=Live, 2=W, 3=B, 4=D, 5=X
     }
 
     mapping(uint256 => Game) public games;
@@ -46,6 +52,12 @@ contract ChessxuV2 is ERC2771Context {
         }
     }
 
+    /**
+     * @notice Create a new chess game
+     * @param wager Amount to wager
+     * @param isNative True for CELO, false for ChessxuToken
+     * @return gameId The ID of the newly created game
+     */
     function createGame(uint256 wager, bool isNative) external payable returns (uint256) {
         uint256 gameId = nextGameId;
 
@@ -75,6 +87,10 @@ contract ChessxuV2 is ERC2771Context {
         return gameId;
     }
 
+    /**
+     * @notice Join an existing chess game
+     * @param gameId The ID of the game to join
+     */
     function joinGame(uint256 gameId) external payable {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();
@@ -97,6 +113,11 @@ contract ChessxuV2 is ERC2771Context {
         game.status = 1;
     }
 
+    /**
+     * @notice Submit a chess move
+     * @param gameId The ID of the game
+     * @param newBoardState The new board FEN string after the move
+     */
     function submitMove(uint256 gameId, string calldata /* moveStr */, string calldata newBoardState) external {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();
@@ -113,6 +134,10 @@ contract ChessxuV2 is ERC2771Context {
         game.boardState = newBoardState;
     }
 
+    /**
+     * @notice Resign from a chess game
+     * @param gameId The ID of the game
+     */
     function resign(uint256 gameId) external {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();

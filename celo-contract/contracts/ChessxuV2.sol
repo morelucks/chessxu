@@ -87,6 +87,10 @@ contract ChessxuV2 is ERC2771Context {
         return gameId;
     }
 
+    /**
+     * @notice Join an existing chess game
+     * @param gameId The ID of the game to join
+     */
     function joinGame(uint256 gameId) external payable {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();

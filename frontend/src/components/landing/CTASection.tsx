@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import GaslessBadge from "../ui/GaslessBadge";
 
 interface CTASectionProps {
   onStartPlaying: () => void;
@@ -27,14 +28,19 @@ export default function CTASection({ onStartPlaying, isConnecting, isConnected }
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <button
-              onClick={onStartPlaying}
-              disabled={isConnecting}
-              className="px-10 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-            >
-              {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Connect & Play"}
-              {!isConnecting && <ChevronRight className="w-5 h-5" />}
-            </button>
+            <div className="relative group">
+              <div className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 w-max">
+                <GaslessBadge />
+              </div>
+              <button
+                onClick={onStartPlaying}
+                disabled={isConnecting}
+                className="px-10 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              >
+                {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Connect & Play"}
+                {!isConnecting && <ChevronRight className="w-5 h-5" />}
+              </button>
+            </div>
             <button className="px-10 py-4 rounded-lg border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition backdrop-blur-sm font-semibold">
               Learn More
             </button>

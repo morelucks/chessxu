@@ -1,8 +1,13 @@
 import React from 'react';
+import { cn } from '../../utils/utils';
 
-const GaslessBadge: React.FC = () => {
+interface GaslessBadgeProps {
+  className?: string;
+}
+
+const GaslessBadge: React.FC<GaslessBadgeProps> = ({ className }) => {
   return (
-    <div className="gasless-badge">
+    <div className={cn("gasless-badge", className)}>
       <span>⛽ Gasless</span>
     </div>
   );

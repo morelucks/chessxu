@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useStacksChess } from "../../hooks/useStacksChess";
 import { useCeloChess } from "../../hooks/useCeloChess";
 import useMiniPayAccess from "../../hooks/useMiniPayAccess";
+import GaslessBadge from "../ui/GaslessBadge";
 
 export default function PvPScreen() {
   const navigate = useNavigate();

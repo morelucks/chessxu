@@ -190,7 +190,7 @@ export default function ChessSidebar() {
         gameState && typeof gameState === 'object' && 'status' in gameState
             ? Number((gameState as { status: number | string }).status)
             : null;
-    const [leaderboardResults, setLeaderboardResults] = useState([]);
+    const [leaderboardResults, setLeaderboardResults] = useState<LeaderboardResult[]>([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
     const { isMyTurn } = useStacksChess();
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');

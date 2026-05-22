@@ -12,6 +12,14 @@ async function main() {
     const chessxu = await ChessxuV2.attach(contractAddress);
 
     console.log("Interacting with ChessxuV2 at:", contractAddress);
+
+    const nextId = await chessxu.nextGameId();
+    console.log("Next Game ID:", nextId.toString());
+
+    if (nextId > 1n) {
+        const game = await chessxu.getGame(nextId - 1n);
+        console.log("Last Game Wager:", ethers.formatEther(game.wager), game.isNative ? "Native CELO" : "Tokens");
+    }
 }
 
 main()

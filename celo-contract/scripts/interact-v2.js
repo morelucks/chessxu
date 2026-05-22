@@ -8,7 +8,10 @@ async function main() {
     }
 
     const ChessxuV2 = await ethers.getContractFactory("ChessxuV2");
+    console.log("Attaching to contract instance...");
     const chessxu = await ChessxuV2.attach(contractAddress);
+
+    console.log("Interacting with ChessxuV2 at:", contractAddress);
 }
 
 main()

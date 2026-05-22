@@ -112,4 +112,37 @@ contract ChessxuV2 is ERC2771Context {
 
         game.boardState = newBoardState;
     }
+
+    function resign(uint256 gameId) external {
+        Game storage game = games[gameId];
+        if (game.playerW == address(0)) revert GameNotFound();
+        if (game.status != 1) revert GameNotActive();
+        if (_msgSender() != game.playerW && _msgSender() != game.playerB) revert NotPlayer();
+
+        uint256 prize = game.wager * 2;
+
+        if (_msgSender() == game.playerW) {
+            // P1 resigned, P2 wins
+            game.status = 3;
+            if (prize > 0) {
+                if (game.isNative) {
+                    payable(game.playerB).transfer(prize);
+                } else {
+                    bool success = chessxuToken.transfer(game.playerB, prize);
+                    if (!success) revert TransferFailed();
+                }
+            }
+        } else {
+            // P2 resigned, P1 wins
+            game.status = 2;
+            if (prize > 0) {
+                if (game.isNative) {
+                    payable(game.playerW).transfer(prize);
+                } else {
+                    bool success = chessxuToken.transfer(game.playerW, prize);
+                    if (!success) revert TransferFailed();
+                }
+            }
+        }
+    }
 }

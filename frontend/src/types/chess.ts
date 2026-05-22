@@ -28,7 +28,9 @@ export interface GameState {
     b: number;
   };
   gameMode: string;
-  playerColor?: string;
+  playerColor?: 'w' | 'b';
+  whiteTimeMs?: number | null;
+  blackTimeMs?: number | null;
 }
 
 export interface OnChainGameState {

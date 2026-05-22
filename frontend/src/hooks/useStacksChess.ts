@@ -344,8 +344,10 @@ export const useStacksChess = () => {
     });
   };
 
-  const isPlayerWhite = (game: any, playerAddress: string) => game?.['player-w'] === playerAddress;
-  const isPlayerBlack = (game: any, playerAddress: string) => game?.['player-b']?.value === playerAddress;
+  const isPlayerWhite = (game: OnChainGameState | null, playerAddress: string) =>
+    game?.['player-w'] === playerAddress;
+  const isPlayerBlack = (game: OnChainGameState | null, playerAddress: string) =>
+    game?.['player-b']?.value === playerAddress;
 
   const getGameStatusString = (status: number) => {
     switch (status) {
@@ -367,15 +369,18 @@ export const useStacksChess = () => {
     return `${wager / 1000000} CHESS`;
   };
 
-  const isMyTurn = (game: any, playerAddress: string) => {
+  const isMyTurn = (game: OnChainGameState | null, playerAddress: string) => {
     if (!game || !playerAddress) return false;
-    const currentTurn = game.turn?.value || game.turn;
+    const currentTurn = typeof game.turn === 'string' ? game.turn : game.turn?.value;
     const isWhite = isPlayerWhite(game, playerAddress);
     const isBlack = isPlayerBlack(game, playerAddress);
     return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
   };
 
-  const getOpponentAddress = (game: any, playerAddress: string) => {
+  /**
+   * Returns the opponent's principal address given the current game state.
+   */
+  const getOpponentAddress = (game: OnChainGameState | null, playerAddress: string) => {
     if (!game || !playerAddress) return null;
     const isWhite = isPlayerWhite(game, playerAddress);
     return isWhite ? (game['player-b']?.value || null) : game['player-w'];

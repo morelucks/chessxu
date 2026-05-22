@@ -9,6 +9,12 @@ Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
 import { GameState } from '../types/chess';
+
+interface ChessAction {
+    type: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    payload?: any;
+}
 import React, { useReducer, useEffect, useState } from 'react';
 import { reducer } from '../chess/reducer/reducer';
 import { Status } from '../chess/constants';

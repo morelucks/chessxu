@@ -3,3 +3,5 @@ artifacts/
 cache/
 types/
 .env
+hardhat.config.js.bak
+hardhat.config.js.bak

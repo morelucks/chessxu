@@ -31,7 +31,7 @@ export default function GameStatusBanner({ status, gameId, gasSponsored: propGas
         <span className="game-banner__status">{label}</span>
       </div>
       {activeChain === 'celo' && gasSponsored && (
-        <div className="game-banner__sponsored animate-pulse">
+        <div className="game-banner__sponsored animate-pulse hover:scale-105 transition-transform cursor-default">
           <GaslessBadge />
           <span className="text-[10px] uppercase tracking-tighter text-emerald-400 font-bold ml-1">Sponsored</span>
         </div>

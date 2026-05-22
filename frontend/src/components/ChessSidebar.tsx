@@ -43,10 +43,11 @@ const TakeBackButton = () => {
 };
 
 // Stake section (always visible under Controls)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const StakeSection = ({ appState }: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [stake, setStake] = useState<any>(null);
+/**
+ * Section displaying active player stake information
+ */
+const StakeSection = ({ appState }: StakeSectionProps) => {
+    const [stake, setStake] = useState<StakeData | null>(null);
 
     useEffect(() => {
         const current = getStakeData();
@@ -98,11 +99,9 @@ const StakeSection = ({ appState }: any) => {
 };
 
 // Leaderboard Component (tab)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Leaderboard = ({ results, onClear }: any) => {
+const Leaderboard = ({ results, onClear }: { results: LeaderboardResult[]; onClear: () => void }) => {
     // Aggregate wins: 3 points per win, 1 each for draws
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const totals = results.reduce((acc: any, r: any) => {
+    const totals = results.reduce((acc: { white: number; black: number }, r: LeaderboardResult) => {
         const winner = (r.winner || '').toLowerCase();
         if (winner === 'white') acc.white += 3;
         else if (winner === 'black') acc.black += 3;
@@ -146,8 +145,7 @@ const Leaderboard = ({ results, onClear }: any) => {
 };
 
 // Game Mode Selection Component
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: any) => {
+const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameModeSelectionProps) => {
     const handlePlayerVsComputer = () => {
         onNewGame('pvc');
     };

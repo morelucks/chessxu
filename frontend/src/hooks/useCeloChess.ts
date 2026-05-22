@@ -39,7 +39,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo game creation transaction broadcasted'
+        message: gasSponsored 
+          ? 'Match created! Gas fees sponsored by Chessxu.' 
+          : 'Celo game creation transaction broadcasted'
       });
       console.log('Celo transaction broadcasted:', txHash);
       return txHash;
@@ -63,7 +65,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo join game transaction broadcasted'
+        message: gasSponsored 
+          ? 'Match joined! Gas fees sponsored by Chessxu.' 
+          : 'Celo join game transaction broadcasted'
       });
       console.log('Celo Join Game transaction broadcasted:', txHash);
       return txHash;

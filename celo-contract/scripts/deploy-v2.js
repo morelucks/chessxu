@@ -10,6 +10,10 @@ async function main() {
     console.log("Starting deployment of ChessxuV2...");
     // Constructor requires _tokenAddress and _trustedForwarder
     const chessxuV2 = await ChessxuV2.deploy(tokenAddress, trustedForwarder);
+    await chessxuV2.waitForDeployment();
+
+    console.log("ChessxuV2 deployed to:", await chessxuV2.getAddress());
+    console.log("To verify on CeloScan: npx hardhat verify --network <network> ", await chessxuV2.getAddress(), tokenAddress, trustedForwarder);
 }
 
 main()

@@ -143,5 +143,7 @@ export const useCeloChess = () => {
     }
   };
 
-  return { address, network, createGame, joinGame, submitMove, resign, getGame, getGameStatusString };
+  const gasSponsored = celoService.gasSponsored;
+
+  return { address, network, createGame, joinGame, submitMove, resign, getGame, getGameStatusString, gasSponsored };
 };

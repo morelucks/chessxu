@@ -32,8 +32,9 @@ export default function HeroSection({ onStartPlaying, isConnecting, isConnected 
             </h1>
 
             <p className="text-xl text-white/60 max-w-2xl leading-relaxed">
-              Challenge players globally in verifiable, on-chain chess battles. Every move recorded permanently on
-              Celo & Stacks. Prove your mastery. Claim your legacy.
+              Challenge players globally in verifiable, on-chain chess battles. 
+              <span className="text-emerald-400 font-medium"> Zero gas fees and instant block finality</span> on Celo.
+              Every move recorded permanently. Prove your mastery for free.
             </p>
           </div>
 

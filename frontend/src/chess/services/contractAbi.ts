@@ -1,9 +1,17 @@
+/**
+ * CHESSXU_ABI: Smart contract ABI for Chessxu V2 (ERC-2771).
+ */
 export const CHESSXU_ABI = [
   {
     "inputs": [
       {
         "internalType": "address",
         "name": "_tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_trustedForwarder",
         "type": "address"
       }
     ],
@@ -132,9 +140,28 @@ export const CHESSXU_ABI = [
             "type": "uint8"
           }
         ],
-        "internalType": "struct Chessxu.Game",
+        "internalType": "struct ChessxuV2.Game",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "forwarder",
+        "type": "address"
+      }
+    ],
+    "name": "isTrustedForwarder",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

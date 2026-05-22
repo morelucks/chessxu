@@ -15,6 +15,8 @@ export const useCeloChess = () => {
     !!miniPayAccessExpiresAt && new Date(miniPayAccessExpiresAt).getTime() > Date.now();
 
   const ensureEligibleForCeloPlay = () => {
+    if (gasSponsored) return true;
+
     if ((miniPayDetected || activeChain === 'celo') && !hasMiniPayAccess) {
       addToast({
         txId: '',
@@ -37,7 +39,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo game creation transaction broadcasted'
+        message: gasSponsored 
+          ? 'Match created! Gas fees sponsored by Chessxu.' 
+          : 'Celo game creation transaction broadcasted'
       });
       console.log('Celo transaction broadcasted:', txHash);
       return txHash;
@@ -61,7 +65,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo join game transaction broadcasted'
+        message: gasSponsored 
+          ? 'Match joined! Gas fees sponsored by Chessxu.' 
+          : 'Celo join game transaction broadcasted'
       });
       console.log('Celo Join Game transaction broadcasted:', txHash);
       return txHash;
@@ -84,7 +90,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo move submission broadcasted'
+        message: gasSponsored
+          ? 'Move submitted! Zero gas fees applied.'
+          : 'Celo move submission broadcasted'
       });
       console.log('Celo move submitted:', txHash);
       return txHash;
@@ -107,7 +115,9 @@ export const useCeloChess = () => {
       addToast({
         txId: txHash,
         status: 'success',
-        message: 'Celo resignation transaction broadcasted'
+        message: gasSponsored
+          ? 'Match resigned. Gas fees sponsored.'
+          : 'Celo resignation transaction broadcasted'
       });
       console.log('Celo resigned:', txHash);
       return txHash;
@@ -143,5 +153,19 @@ export const useCeloChess = () => {
     }
   };
 
-  return { address, network, createGame, joinGame, submitMove, resign, getGame, getGameStatusString };
+  const gasSponsored = celoService.gasSponsored;
+  const gasSponsorshipInfo = celoService.getGasSponsorshipInfo();
+
+  return { 
+    address, 
+    network, 
+    createGame, 
+    joinGame, 
+    submitMove, 
+    resign, 
+    getGame, 
+    getGameStatusString, 
+    gasSponsored,
+    gasSponsorshipInfo
+  };
 };

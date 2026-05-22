@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useStacksChess } from "../../hooks/useStacksChess";
 import { useCeloChess } from "../../hooks/useCeloChess";
 import useMiniPayAccess from "../../hooks/useMiniPayAccess";
+import GaslessBadge from "../ui/GaslessBadge";
 
 export default function PvPScreen() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 
@@ -77,7 +78,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 
@@ -113,6 +114,11 @@ export default function PvPScreen() {
                 PvP Matchmaking
             </h1>
             <p className="text-slate-400 text-sm">Create or join a game with on-chain staking</p>
+            {celo.gasSponsored && (
+              <p className="text-emerald-400 text-xs font-medium animate-pulse mt-1">
+                ✨ All game transactions are gasless — no CELO or stablecoins needed
+              </p>
+            )}
         </div>
 
         {!isConnected ? (
@@ -161,7 +167,7 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {activeChain === 'celo' && (
+                {activeChain === 'celo' && !celo.gasSponsored && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div>
@@ -193,10 +199,15 @@ export default function PvPScreen() {
                         <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition">
                              <Sword size={24} />
                         </div>
-                        <div>
+                        <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Create Match</h3>
-                            <p className="text-sm text-slate-400">Start a match with a custom wager.</p>
+                            {celo.gasSponsored && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
+                        <p className="text-sm text-slate-400">
+                          {celo.gasSponsored 
+                            ? "Start a zero-gas match securely on Celo. Pay only your wager amount."
+                            : "Start a match with a custom wager."}
+                        </p>
                         <div className="mt-2 space-y-3">
                             <div>
                                 <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Wager ({activeChain === 'stacks' ? 'STX' : 'CELO'})</label>
@@ -241,10 +252,15 @@ export default function PvPScreen() {
                         <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition">
                              <Users size={24} />
                         </div>
-                        <div>
+                        <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Join Match</h3>
-                            <p className="text-sm text-slate-400">Join an existing match by ID.</p>
+                            {celo.gasSponsored && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
+                        <p className="text-sm text-slate-400">
+                          {celo.gasSponsored 
+                            ? "Join an existing match. Gas fees are sponsored."
+                            : "Join an existing match by ID."}
+                        </p>
                         <div className="mt-2 space-y-3">
                             <div>
                                 <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Game ID</label>

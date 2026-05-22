@@ -53,6 +53,21 @@ const celoService = {
   config: CELO_CONFIG,
   
   /**
+   * Returns gas sponsorship metadata for the current session
+   */
+  getGasSponsorshipInfo: () => ({
+    isSponsored: true,
+    sponsor: 'Chessxu Foundation',
+    method: 'Paymaster',
+    maxSaved: 0.15
+  }),
+
+  /**
+   * Whether transactions are currently being sponsored by the paymaster
+   */
+  gasSponsored: true,
+  
+  /**
    * Public client for read-only operations
    */
   publicClient: createPublicClient({

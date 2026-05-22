@@ -1,4 +1,7 @@
 import { ChevronRight } from "lucide-react";
+import GaslessBadge from "../ui/GaslessBadge";
+
+import GaslessPulse from "../ui/GaslessPulse";
 
 interface CTASectionProps {
   onStartPlaying: () => void;
@@ -10,7 +13,8 @@ export default function CTASection({ onStartPlaying, isConnecting, isConnected }
   const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
 
   return (
-    <section className="container mx-auto px-6 py-24 max-w-6xl">
+    <section className="container mx-auto px-6 py-24 max-w-6xl relative">
+      <GaslessPulse />
       <div className="relative rounded-2xl border border-white/20 bg-gradient-to-br from-purple-900/50 via-slate-900/50 to-blue-900/50 overflow-hidden p-12 md:p-16">
         {/* Background gradient */}
         <div
@@ -23,18 +27,24 @@ export default function CTASection({ onStartPlaying, isConnecting, isConnected }
         <div className="relative z-10 text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-bold max-w-3xl mx-auto">Ready to dominate the chessboard?</h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Join thousands of players competing in real-time, verifiable chess battles. Your first game is on us.
+            Join thousands of players competing in real-time, chess battles. 
+            <span className="text-emerald-400 font-semibold"> All games are gasless on Celo.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <button
-              onClick={onStartPlaying}
-              disabled={isConnecting}
-              className="px-10 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-            >
-              {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Connect & Play"}
-              {!isConnecting && <ChevronRight className="w-5 h-5" />}
-            </button>
+            <div className="relative group">
+              <div className="invisible group-hover:visible absolute -top-10 left-1/2 -translate-x-1/2 w-max">
+                <GaslessBadge />
+              </div>
+              <button
+                onClick={onStartPlaying}
+                disabled={isConnecting}
+                className="px-10 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              >
+                {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Connect & Play"}
+                {!isConnecting && <ChevronRight className="w-5 h-5" />}
+              </button>
+            </div>
             <button className="px-10 py-4 rounded-lg border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition backdrop-blur-sm font-semibold">
               Learn More
             </button>

@@ -1,6 +1,12 @@
-import { Zap, Shield, Trophy, Cast as Zest } from "lucide-react";
+import { Zap, Shield, Trophy, Cast as Zest, Sparkles } from "lucide-react";
 
 const features = [
+  {
+    icon: Sparkles,
+    title: "Zero Gas Fees",
+    description: "Experience truly gasless chess on Celo. No network fees, no balance checks—just pure gameplay.",
+    image: "/chess-pawn.jpg",
+  },
   {
     icon: Zap,
     title: "Lightning Fast",
@@ -25,6 +31,12 @@ const features = [
     title: "Global Tournament",
     description: "Compete against players worldwide. Climb the leaderboards and establish your chess legacy.",
     image: "/chess-knight.jpg",
+  },
+  {
+    icon: Zap,
+    title: "One-Click Access",
+    description: "Optimized for MiniPay. Connect and play instantly with zero configuration and zero fees.",
+    image: "/chess-bishop.jpg",
   },
 ];
 

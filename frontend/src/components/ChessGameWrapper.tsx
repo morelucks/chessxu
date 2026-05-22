@@ -27,6 +27,9 @@ import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
 
+/**
+ * Wrapper providing AppContext with typed reducer for the chess board UI.
+ */
 export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
 
@@ -52,8 +55,11 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         blackTimeMs: timeControlMs,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [appState, dispatch] = useReducer<React.Reducer<any, any>>(reducer as any, initialGameState);
+    // Cast reducer: JS implementation satisfies the GameState+ChessAction contract
+    const [appState, dispatch] = useReducer(
+        reducer as unknown as React.Reducer<GameState, ChessAction>,
+        initialGameState
+    );
     const [isReady, setIsReady] = useState(false);
 
     // Save game mode to localStorage whenever it changes

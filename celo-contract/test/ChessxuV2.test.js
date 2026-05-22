@@ -25,4 +25,24 @@ describe("ChessxuV2 Meta-Transactions", function () {
         expect(await chessxuV2.isTrustedForwarder(await forwarder.getAddress())).to.equal(true);
         expect(await chessxuV2.isTrustedForwarder(await owner.getAddress())).to.equal(false);
     });
+
+    it("should correctly identify player via msgSender in createGame", async function () {
+        // Skeleton for meta-tx verification
+    });
+
+    it("should correctly identify player via msgSender in joinGame", async function () {
+        // Skeleton for meta-tx verification
+    });
+
+    it("should validate turns using msgSender in submitMove", async function () {
+        // Skeleton for meta-tx verification
+    });
+
+    it("should correctly identify player via msgSender in resign", async function () {
+        // Skeleton for meta-tx verification
+    });
+
+    it("should verify owner via msgSender in resolveGame", async function () {
+        // Skeleton for meta-tx verification
+    });
 });

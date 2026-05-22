@@ -5,6 +5,11 @@ export const CHESSXU_ABI = [
         "internalType": "address",
         "name": "_tokenAddress",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_trustedForwarder",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -135,6 +140,25 @@ export const CHESSXU_ABI = [
         "internalType": "struct Chessxu.Game",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "forwarder",
+        "type": "address"
+      }
+    ],
+    "name": "isTrustedForwarder",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

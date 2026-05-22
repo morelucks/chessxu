@@ -203,6 +203,11 @@ export default function PvPScreen() {
                             <h3 className="text-xl font-bold">Create Match</h3>
                             {celo.gasSponsored && <GaslessBadge />}
                         </div>
+                        <p className="text-sm text-slate-400">
+                          {celo.gasSponsored 
+                            ? "Start a match with zero gas fees. Pay only the wager."
+                            : "Start a match with a custom wager."}
+                        </p>
                         <div className="mt-2 space-y-3">
                             <div>
                                 <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Wager ({activeChain === 'stacks' ? 'STX' : 'CELO'})</label>

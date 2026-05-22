@@ -114,6 +114,11 @@ export default function PvPScreen() {
                 PvP Matchmaking
             </h1>
             <p className="text-slate-400 text-sm">Create or join a game with on-chain staking</p>
+            {celo.gasSponsored && (
+              <p className="text-emerald-400 text-xs font-medium animate-pulse mt-1">
+                ✨ All game transactions are gasless — no CELO or stablecoins needed
+              </p>
+            )}
         </div>
 
         {!isConnected ? (

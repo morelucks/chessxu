@@ -53,6 +53,11 @@ const celoService = {
   config: CELO_CONFIG,
   
   /**
+   * Whether transactions are currently being sponsored by the paymaster
+   */
+  gasSponsored: true,
+  
+  /**
    * Public client for read-only operations
    */
   publicClient: createPublicClient({

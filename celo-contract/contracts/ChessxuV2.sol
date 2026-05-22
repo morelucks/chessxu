@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+/**
+ * @title ChessxuV2
+ * @dev Chessxu smart contract with ERC-2771 meta-transaction support.
+ * Allows sponsored transactions via a Trusted Forwarder.
+ */
+
 import "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 
 interface IERC20 {

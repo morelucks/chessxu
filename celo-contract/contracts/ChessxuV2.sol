@@ -134,6 +134,10 @@ contract ChessxuV2 is ERC2771Context {
         game.boardState = newBoardState;
     }
 
+    /**
+     * @notice Resign from a chess game
+     * @param gameId The ID of the game
+     */
     function resign(uint256 gameId) external {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();

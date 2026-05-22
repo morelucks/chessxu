@@ -6,6 +6,7 @@ interface GaslessBadgeProps {
   className?: string;
   showLabel?: boolean;
   tooltip?: string;
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const GaslessBadge: React.FC<GaslessBadgeProps> = ({ 

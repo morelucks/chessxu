@@ -9,6 +9,9 @@ Npm: Npm download sparse burst
 Npm: Npm excluded packages
 */
 
+/**
+ * Represents the local client-side game state.
+ */
 export interface GameState {
   position: any[];
   turn: string;
@@ -36,6 +39,9 @@ export interface OnChainGameState {
   'last-move'?: { value: string } | null;
 }
 
+/**
+ * Represents the player stake details.
+ */
 export interface StakeData {
   amount: string | number;
   isStx: boolean;
@@ -45,8 +51,27 @@ export interface StakeData {
   updatedAt?: number;
 }
 
+/**
+ * Represents a result entry in the leaderboard.
+ */
 export interface LeaderboardResult {
   name: string;
   score: number;
   winner?: string;
+}
+
+/**
+ * Props for the GameModeSelection component.
+ */
+export interface GameModeSelectionProps {
+  gameMode: string;
+  onNewGame: (mode: string) => void;
+  onShowStakingModal: (show: boolean) => void;
+}
+
+/**
+ * Props for the StakeSection component.
+ */
+export interface StakeSectionProps {
+  appState: GameState;
 }

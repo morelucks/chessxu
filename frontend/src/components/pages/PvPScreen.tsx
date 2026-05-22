@@ -199,9 +199,9 @@ export default function PvPScreen() {
                         <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition">
                              <Sword size={24} />
                         </div>
-                        <div>
+                        <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Create Match</h3>
-                            <p className="text-sm text-slate-400">Start a match with a custom wager.</p>
+                            {celo.gasSponsored && <GaslessBadge />}
                         </div>
                         <div className="mt-2 space-y-3">
                             <div>

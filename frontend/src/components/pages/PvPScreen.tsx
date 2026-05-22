@@ -46,7 +46,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (activeChain === 'celo' && requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 

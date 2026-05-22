@@ -45,4 +45,33 @@ contract ChessxuV2 is ERC2771Context {
             chessxuToken = IERC20(_tokenAddress);
         }
     }
+
+    function createGame(uint256 wager, bool isNative) external payable returns (uint256) {
+        uint256 gameId = nextGameId;
+
+        if (isNative) {
+            if (wager > 0) {
+                if (msg.value != wager) revert InvalidWager();
+            }
+        } else {
+            if (msg.value > 0) revert InvalidWager();
+            if (wager > 0) {
+                bool success = chessxuToken.transferFrom(_msgSender(), address(this), wager);
+                if (!success) revert TransferFailed();
+            }
+        }
+
+        games[gameId] = Game({
+            playerW: _msgSender(),
+            playerB: address(0),
+            wager: wager,
+            isNative: isNative,
+            boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+            turn: "w",
+            status: 0
+        });
+
+        nextGameId = gameId + 1;
+        return gameId;
+    }
 }

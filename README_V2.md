@@ -10,3 +10,6 @@ This repository has been upgraded to support gasless gameplay via ERC-2771 meta-
 - **ERC-2771 Support**: Full meta-transaction integration using OpenZeppelin's `ERC2771Context`.
 - **Infrastructure**: New deployment and interaction scripts with verbose logging.
 - **Clean History**: Strictly excluded `.gemini` and other sensitive configuration files.
+
+---
+*Project finalized and ready for EIP-712 integration.*

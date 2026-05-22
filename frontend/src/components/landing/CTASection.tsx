@@ -24,7 +24,8 @@ export default function CTASection({ onStartPlaying, isConnecting, isConnected }
         <div className="relative z-10 text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-bold max-w-3xl mx-auto">Ready to dominate the chessboard?</h2>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Join thousands of players competing in real-time, verifiable chess battles. Your first game is on us.
+            Join thousands of players competing in real-time, chess battles. 
+            <span className="text-emerald-400 font-semibold"> All games are gasless on Celo.</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">

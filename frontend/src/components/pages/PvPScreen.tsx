@@ -247,9 +247,9 @@ export default function PvPScreen() {
                         <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition">
                              <Users size={24} />
                         </div>
-                        <div>
+                        <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Join Match</h3>
-                            <p className="text-sm text-slate-400">Join an existing match by ID.</p>
+                            {celo.gasSponsored && <GaslessBadge />}
                         </div>
                         <div className="mt-2 space-y-3">
                             <div>

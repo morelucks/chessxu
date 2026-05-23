@@ -9,7 +9,15 @@ const wallet_1 = accounts.get("wallet_1")!;
 const wallet_2 = accounts.get("wallet_2")!;
 const wallet_3 = accounts.get("wallet_3")!;
 
-// Helper to setup a game for testing
+/**
+ * Sets up a new chess game by calling the contract public functions.
+ * Optionally joins the game with a second player and sets a custom wager amount.
+ * 
+ * @param wager The amount of STX or CHESS tokens to wager.
+ * @param isStx True if STX is used, false for CHESS tokens.
+ * @param players The number of players to join (1 for creator only, 2 to automatically join p2).
+ * @returns The newly created game's ID.
+ */
 function setupGame(wager: number = 0, isStx: boolean = true, players: number = 2) {
     simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(isStx)], wallet_1);
     const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
@@ -19,14 +27,27 @@ function setupGame(wager: number = 0, isStx: boolean = true, players: number = 2
     return Number(gameId);
 }
 
-// Helper to extract game data
+/**
+ * Retrieves the state of a game from the contract readonly map.
+ * Extracts and returns the parsed tuple values.
+ * 
+ * @param gameId The ID of the game to retrieve.
+ * @returns The parsed game object containing turn, status, players, board state, etc.
+ */
 function getGame(gameId: number) {
     const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(gameId)], wallet_1);
     const val = (result as any).value;
     return val.data || val.value || val;
 }
 
-// Helper to mint CHESS tokens
+/**
+ * Mints CHESS tokens to a specified recipient principal.
+ * Uses the contract deployer authority.
+ * 
+ * @param amount The number of tokens to mint.
+ * @param recipient The principal address of the receiver.
+ * @returns The contract call response object.
+ */
 function mintTokens(amount: number, recipient: string) {
     return simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(amount), Cl.standardPrincipal(recipient)], deployer);
 }
@@ -277,22 +298,64 @@ describe("chessxu - integration tests", () => {
         expect(endedGame["status"]).toStrictEqual(Cl.uint(3)); // Black Wins
     });
 
-    // test: white resigns black wins full lifecycle
-    // test: black resigns white wins full lifecycle
-    // test: owner resolves white wins
-    // test: owner resolves black wins
-    // test: owner resolves draw refunds both
-    // test: token game white resigns black gets tokens
-    // test: token game draw refunds both
-    // test: contract holds zero tokens after resolution
-    // test: two concurrent games are independent
-    // test: resolving game1 does not affect game2
-    // test: moves in game1 do not affect game2 board
-    // test: five sequential games have correct IDs
-    // test: cancel waiting game refunds creator
-    // test: zero-wager resign completes cleanly
-    // test: cannot submit move after resolution
-    // test: cannot resign after resolution
-    // test: multi-move board state integrity
-    // test: e2e game with moves and owner resolution
+    it("verifies cannot submit move after resolution", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
+    });
+
+    it("verifies cannot resign after resolution", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
+    });
+
+    it("verifies multi-move board state integrity", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        const b1 = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        const b2 = "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR";
+        const b3 = "rnbqkbnr/pppp1ppp/8/4p3/3QP3/8/PPP2PPP/RNB1KBNR";
+        const b4 = "rnb1kbnr/pppp1ppp/8/4p3/3QP3/2N5/PPP2PPP/R1B1KBNR";
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii(b1)], wallet_1);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("b"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b1));
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e7e5"), Cl.stringAscii(b2)], wallet_2);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("w"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b2));
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("d2d4"), Cl.stringAscii(b3)], wallet_1);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("b"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b3));
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("b8c6"), Cl.stringAscii(b4)], wallet_2);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("w"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b4));
+    });
+
+    it("verifies e2e game with moves and owner resolution", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const b1 = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii(b1)], wallet_1);
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(2));
+    });
 });

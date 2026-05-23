@@ -286,6 +286,15 @@ describe("chessxu - integration tests", () => {
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
 
+    it("verifies cannot resign after resolution", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        
+        const { result } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

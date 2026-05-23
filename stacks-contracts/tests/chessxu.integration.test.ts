@@ -230,6 +230,19 @@ describe("chessxu - integration tests", () => {
         expect(g2["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
     });
 
+    it("verifies five sequential games have correct IDs", () => {
+        const id1 = setupGame(0, true, 1);
+        const id2 = setupGame(0, true, 1);
+        const id3 = setupGame(0, true, 1);
+        const id4 = setupGame(0, true, 1);
+        const id5 = setupGame(0, true, 1);
+        
+        expect(id2).toBe(id1 + 1);
+        expect(id3).toBe(id2 + 1);
+        expect(id4).toBe(id3 + 1);
+        expect(id5).toBe(id4 + 1);
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

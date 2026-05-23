@@ -22,6 +22,11 @@ async function getRedis(): Promise<import('ioredis').Redis | null> {
   }
 }
 
+/**
+ * Checks and increments the rate limit for a given address.
+ * Uses Redis if REDIS_URL is set, otherwise falls back to in-memory Map.
+ * Returns allowed=false if the address has exceeded the configured limit.
+ */
 export async function checkRateLimit(address: string): Promise<{ allowed: boolean; remaining: number; resetAt: number }> {
   const key = `rl:${address.toLowerCase()}`;
   const now = Date.now();

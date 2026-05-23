@@ -7,6 +7,9 @@ const router = Router();
 const provider = new ethers.JsonRpcProvider(config.celoRpcUrl);
 const PAYMASTER_ABI = ['function getDeposit() view returns (uint256)'];
 
+let totalSponsored = 0;
+export function incrementSponsored(): void { totalSponsored++; }
+
 router.get('/', async (_req: Request, res: Response): Promise<void> => {
   let deposit = '0';
   let rpcOk = false;
@@ -27,6 +30,7 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
     celoDeposit: deposit,
     rpcConnected: rpcOk,
     chainId: config.chainId,
+    totalSponsored,
     uptimeSeconds: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
   });

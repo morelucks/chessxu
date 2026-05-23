@@ -396,4 +396,19 @@ describe("chessxu - integration tests", () => {
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_1);
         expect(result).toBeErr(Cl.uint(104)); // err-already-joined
     });
+
+    it("verifies out-of-turn moves revert with not-your-turn", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        // It is White's (wallet_1) turn. Black (wallet_2) attempts to move.
+        let result = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e7e5"), Cl.stringAscii("...")], wallet_2).result;
+        expect(result).toBeErr(Cl.uint(107)); // err-not-your-turn
+        
+        // White makes a valid move
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("...")], wallet_1);
+        
+        // It is now Black's (wallet_2) turn. White (wallet_1) attempts to move again.
+        result = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("d2d4"), Cl.stringAscii("...")], wallet_1).result;
+        expect(result).toBeErr(Cl.uint(107)); // err-not-your-turn
+    });
 });

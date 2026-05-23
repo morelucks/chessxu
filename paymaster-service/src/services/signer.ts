@@ -8,6 +8,10 @@ export function getSignerAddress(): string {
   return signer.address;
 }
 
+/**
+ * Computes the EIP-712 hash of a UserOperation as expected by VerifyingPaymaster.
+ * Matches the on-chain getHash(userOp, validUntil, validAfter) logic.
+ */
 function getUserOpHash(userOp: UserOp, validUntil: number, validAfter: number): string {
   const userOpPacked = ethers.AbiCoder.defaultAbiCoder().encode(
     ['address', 'uint256', 'bytes32', 'bytes32', 'uint256', 'uint256', 'uint256', 'uint256', 'uint256'],

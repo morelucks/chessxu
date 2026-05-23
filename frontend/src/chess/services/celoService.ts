@@ -37,11 +37,20 @@ import {
   encodeFunctionData,
   erc20Abi,
   parseUnits,
+  concat,
 } from 'viem';
+import { getUserOperationHash } from 'viem/account-abstraction';
 import { celo } from 'viem/chains';
-import { CELO_CONFIG, CELO_FEE_CURRENCIES } from '../blockchainConstants';
+import { CELO_CONFIG, CELO_FEE_CURRENCIES, PAYMASTER_CONFIG } from '../blockchainConstants';
 import { CHESSXU_ABI } from './contractAbi';
 import { selectSupportedFeeCurrency } from '../../utils/feeCurrency';
+import {
+  sponsorUserOp,
+  submitUserOp,
+  waitForUserOpReceipt,
+  UserOperation,
+} from './paymasterClient';
+
 
 /**
  * Service to handle all Celo blockchain interactions

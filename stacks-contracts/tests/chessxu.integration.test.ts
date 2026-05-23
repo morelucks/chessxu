@@ -370,4 +370,18 @@ describe("chessxu - integration tests", () => {
         expect(game["wager"]).toStrictEqual(Cl.uint(wager));
         expect(game["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
     });
+
+    it("verifies player-2 joining transitions status to active", () => {
+        const gameId = setupGame(0, true, 1);
+        
+        let game = getGame(gameId);
+        expect(game["status"]).toStrictEqual(Cl.uint(0));
+        
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        game = getGame(gameId);
+        expect(game["status"]).toStrictEqual(Cl.uint(1));
+        expect(game["player2"]).toStrictEqual(Cl.some(wallet_2));
+    });
 });

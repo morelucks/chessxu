@@ -26,6 +26,7 @@ export interface ValidationResult {
   error?: string;
 }
 
+/** Validates chainId is Celo Mainnet (42220). */
 export function validateChainId(chainId: number): ValidationResult {
   if (chainId !== config.chainId) {
     return { valid: false, error: `Unsupported chainId ${chainId}. Only Celo Mainnet (42220) is accepted.` };
@@ -33,6 +34,7 @@ export function validateChainId(chainId: number): ValidationResult {
   return { valid: true };
 }
 
+/** Validates sender is a valid Ethereum address. */
 export function validateSender(sender: string): ValidationResult {
   if (!ethers.isAddress(sender)) {
     return { valid: false, error: 'Invalid sender address.' };

@@ -27,6 +27,7 @@ router.get('/', async (_req: Request, res: Response): Promise<void> => {
     celoDeposit: deposit,
     rpcConnected: rpcOk,
     chainId: config.chainId,
+    uptimeSeconds: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
   });
 });

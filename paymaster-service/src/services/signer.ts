@@ -48,6 +48,10 @@ export interface SignResult {
   callGasLimit: string;
 }
 
+/**
+ * Signs a UserOperation and returns paymasterAndData.
+ * paymasterAndData = paymasterAddress ++ abi.encode(validUntil, validAfter) ++ signature
+ */
 export async function signUserOp(userOp: UserOp): Promise<SignResult> {
   const validUntil = Math.floor(Date.now() / 1000) + config.signValiditySeconds;
   const validAfter = 0;

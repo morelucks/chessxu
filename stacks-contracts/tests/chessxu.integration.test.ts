@@ -26,6 +26,11 @@ function getGame(gameId: number) {
     return val.data || val.value || val;
 }
 
+// Helper to mint CHESS tokens
+function mintTokens(amount: number, recipient: string) {
+    return simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(amount), Cl.standardPrincipal(recipient)], deployer);
+}
+
 describe("chessxu - integration tests", () => {
     it("should initialize the test suite", () => {
         expect(true).toBe(true);

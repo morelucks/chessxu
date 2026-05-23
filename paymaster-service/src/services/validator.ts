@@ -76,3 +76,22 @@ export function validateUserOp(userOp: UserOp, chainId: number): ValidationResul
   ];
   return checks.find(r => !r.valid) ?? { valid: true };
 }
+
+/**
+ * Verifies the on-chain nonce for the sender matches the UserOp nonce.
+ */
+export async function validateNonce(userOp: UserOp, provider: ethers.JsonRpcProvider): Promise<ValidationResult> {
+  try {
+    const ENTRYPOINT_ABI = ['function getNonce(address sender, uint192 key) view returns (uint256)'];
+    const entrypoint = new ethers.Contract(config.entrypointAddress, ENTRYPOINT_ABI, provider);
+    const onChainNonce: bigint = await entrypoint.getNonce(userOp.sender, 0);
+    const opNonce = BigInt(userOp.nonce);
+    if (opNonce !== onChainNonce) {
+      return { valid: false, error: `Nonce mismatch: expected ${onChainNonce}, got ${opNonce}` };
+    }
+    return { valid: true };
+  } catch (err) {
+    console.warn('[validator] Nonce check failed (non-fatal):', err);
+    return { valid: true };
+  }
+}

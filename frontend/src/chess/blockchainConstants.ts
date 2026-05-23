@@ -35,6 +35,25 @@ export const CELO_CONFIG = {
   DAILY_ACCESS_DURATION_MS: 24 * 60 * 60 * 1000,
 };
 
+/**
+ * ERC-4337 Paymaster configuration for gasless transactions.
+ * The Chessxu Paymaster sponsors gas for all game operations.
+ */
+export const PAYMASTER_CONFIG = {
+  /** Paymaster sponsorship backend URL */
+  SERVICE_URL: 'https://paymaster.chessxu.xyz/api/v1',
+  /** ERC-4337 EntryPoint v0.6 on Celo mainnet */
+  ENTRYPOINT_ADDRESS: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789' as `0x${string}`,
+  /** Deployed ChessxuPaymaster contract address */
+  PAYMASTER_ADDRESS: '0x0000000000000000000000000000000000000000' as `0x${string}`,
+  /** Bundler RPC endpoint (Pimlico / self-hosted) */
+  BUNDLER_RPC_URL: 'https://bundler.chessxu.xyz/rpc',
+  /** Request timeout in milliseconds */
+  TIMEOUT_MS: 10_000,
+  /** Maximum retry attempts for transient failures */
+  MAX_RETRIES: 3,
+};
+
 export const CELO_FEE_CURRENCIES = [
   {
     symbol: "USDT",

@@ -358,4 +358,16 @@ describe("chessxu - integration tests", () => {
         const endedGame = getGame(gameId);
         expect(endedGame["status"]).toStrictEqual(Cl.uint(2));
     });
+
+    it("verifies single-player creation state", () => {
+        const wager = 1500;
+        const gameId = setupGame(wager, true, 1);
+        
+        const game = getGame(gameId);
+        expect(game["status"]).toStrictEqual(Cl.uint(0));
+        expect(game["player1"]).toStrictEqual(wallet_1);
+        expect(game["player2"]).toStrictEqual(Cl.none());
+        expect(game["wager"]).toStrictEqual(Cl.uint(wager));
+        expect(game["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
+    });
 });

@@ -569,29 +569,16 @@ const celoService = {
    * @param {boolean} isNative - Whether the wager is in native CELO or token
    */
   createGame: async (wagerInEth: string, isNative: boolean) => {
-    const walletClient = celoService.getWalletClient();
-    const [address] = await walletClient.requestAddresses();
     const contractAddr = celoService.getContractAddress();
     const value = isNative ? parseEther(wagerInEth) : 0n;
 
-    const data = encodeFunctionData({
-      abi: CHESSXU_ABI,
-      functionName: 'createGame',
-      args: [BigInt(parseEther(wagerInEth)), isNative],
-    });
-
-    const feeCurrency = await celoService.selectFeeCurrency(address, contractAddr, data, value);
-
-    return await walletClient.writeContract({
-      address: contractAddr,
-      abi: CHESSXU_ABI,
-      functionName: 'createGame',
-      args: [BigInt(parseEther(wagerInEth)), isNative],
-      account: address,
+    return await celoService.executeWithFallback(
+      contractAddr,
+      CHESSXU_ABI,
+      'createGame',
+      [BigInt(parseEther(wagerInEth)), isNative],
       value,
-      ...(feeCurrency ? { feeCurrency } : {}),
-      ...celoService.getTxOptions(),
-    });
+    );
   },
 
   /**
@@ -601,29 +588,16 @@ const celoService = {
    * @param {boolean} isNative - Whether the wager is in native CELO
    */
   joinGame: async (gameId: number, wagerInEth: string, isNative: boolean) => {
-    const walletClient = celoService.getWalletClient();
-    const [address] = await walletClient.requestAddresses();
     const contractAddr = celoService.getContractAddress();
     const value = isNative ? parseEther(wagerInEth) : 0n;
 
-    const data = encodeFunctionData({
-      abi: CHESSXU_ABI,
-      functionName: 'joinGame',
-      args: [BigInt(gameId)],
-    });
-
-    const feeCurrency = await celoService.selectFeeCurrency(address, contractAddr, data, value);
-
-    return await walletClient.writeContract({
-      address: contractAddr,
-      abi: CHESSXU_ABI,
-      functionName: 'joinGame',
-      args: [BigInt(gameId)],
-      account: address,
+    return await celoService.executeWithFallback(
+      contractAddr,
+      CHESSXU_ABI,
+      'joinGame',
+      [BigInt(gameId)],
       value,
-      ...(feeCurrency ? { feeCurrency } : {}),
-      ...celoService.getTxOptions(),
-    });
+    );
   },
 
   /**
@@ -633,27 +607,14 @@ const celoService = {
    * @param {string} boardState - The resulting board state (FEN)
    */
   submitMove: async (gameId: number, moveStr: string, boardState: string) => {
-    const walletClient = celoService.getWalletClient();
-    const [address] = await walletClient.requestAddresses();
     const contractAddr = celoService.getContractAddress();
 
-    const data = encodeFunctionData({
-      abi: CHESSXU_ABI,
-      functionName: 'submitMove',
-      args: [BigInt(gameId), moveStr, boardState],
-    });
-
-    const feeCurrency = await celoService.selectFeeCurrency(address, contractAddr, data);
-
-    return await walletClient.writeContract({
-      address: contractAddr,
-      abi: CHESSXU_ABI,
-      functionName: 'submitMove',
-      args: [BigInt(gameId), moveStr, boardState],
-      account: address,
-      ...(feeCurrency ? { feeCurrency } : {}),
-      ...celoService.getTxOptions(),
-    });
+    return await celoService.executeWithFallback(
+      contractAddr,
+      CHESSXU_ABI,
+      'submitMove',
+      [BigInt(gameId), moveStr, boardState],
+    );
   },
 
   /**
@@ -661,27 +622,14 @@ const celoService = {
    * @param {number} gameId - The game to resign from
    */
   resign: async (gameId: number) => {
-    const walletClient = celoService.getWalletClient();
-    const [address] = await walletClient.requestAddresses();
     const contractAddr = celoService.getContractAddress();
 
-    const data = encodeFunctionData({
-      abi: CHESSXU_ABI,
-      functionName: 'resign',
-      args: [BigInt(gameId)],
-    });
-
-    const feeCurrency = await celoService.selectFeeCurrency(address, contractAddr, data);
-
-    return await walletClient.writeContract({
-      address: contractAddr,
-      abi: CHESSXU_ABI,
-      functionName: 'resign',
-      args: [BigInt(gameId)],
-      account: address,
-      ...(feeCurrency ? { feeCurrency } : {}),
-      ...celoService.getTxOptions(),
-    });
+    return await celoService.executeWithFallback(
+      contractAddr,
+      CHESSXU_ABI,
+      'resign',
+      [BigInt(gameId)],
+    );
   },
 
   // --- Read Operations ---

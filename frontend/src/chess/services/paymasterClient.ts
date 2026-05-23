@@ -322,3 +322,66 @@ export async function sponsorUserOp(userOp: UserOperation): Promise<SponsorResul
     };
   });
 }
+
+/**
+ * Submits a fully-signed UserOperation to the Bundler for on-chain execution.
+ * Uses the eth_sendUserOperation JSON-RPC method.
+ *
+ * @param signedUserOp - The signed UserOperation to submit
+ * @returns The UserOperation hash returned by the bundler
+ * @throws PaymasterError if the bundler rejects the UserOp
+ */
+export async function submitUserOp(signedUserOp: UserOperation): Promise<`0x${string}`> {
+  return retryWithBackoff(async () => {
+    const response = await fetchWithTimeout(
+      PAYMASTER_CONFIG.BUNDLER_RPC_URL,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          id: 1,
+          method: 'eth_sendUserOperation',
+          params: [
+            {
+              sender: signedUserOp.sender,
+              nonce: `0x${signedUserOp.nonce.toString(16)}`,
+              initCode: signedUserOp.initCode,
+              callData: signedUserOp.callData,
+              callGasLimit: `0x${signedUserOp.callGasLimit.toString(16)}`,
+              verificationGasLimit: `0x${signedUserOp.verificationGasLimit.toString(16)}`,
+              preVerificationGas: `0x${signedUserOp.preVerificationGas.toString(16)}`,
+              maxFeePerGas: `0x${signedUserOp.maxFeePerGas.toString(16)}`,
+              maxPriorityFeePerGas: `0x${signedUserOp.maxPriorityFeePerGas.toString(16)}`,
+              paymasterAndData: signedUserOp.paymasterAndData,
+              signature: signedUserOp.signature,
+            },
+            PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
+          ],
+        }),
+      },
+      PAYMASTER_CONFIG.TIMEOUT_MS,
+    );
+
+    if (!response.ok) {
+      const body = await response.text().catch(() => 'Unknown error');
+      throw new PaymasterError(
+        `Bundler request failed (${response.status}): ${body}`,
+        PaymasterErrorCategory.BUNDLER_REJECTED,
+        response.status >= 500,
+      );
+    }
+
+    const data = await response.json();
+
+    if (data.error) {
+      throw new PaymasterError(
+        `Bundler rejected UserOp: ${data.error.message || JSON.stringify(data.error)}`,
+        PaymasterErrorCategory.BUNDLER_REJECTED,
+        false,
+      );
+    }
+
+    return data.result as `0x${string}`;
+  });
+}

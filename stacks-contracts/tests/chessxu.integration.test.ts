@@ -203,6 +203,19 @@ describe("chessxu - integration tests", () => {
         expect(g2["status"]).toStrictEqual(Cl.uint(1)); // Ongoing
     });
 
+    it("verifies resolving game1 does not affect game2", () => {
+        const g1Id = setupGame(100, true, 2);
+        const g2Id = setupGame(200, true, 2);
+        
+        simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(g1Id), Cl.uint(2)], deployer);
+        
+        const g1 = getGame(g1Id);
+        const g2 = getGame(g2Id);
+        
+        expect(g1["status"]).toStrictEqual(Cl.uint(2));
+        expect(g2["status"]).toStrictEqual(Cl.uint(1));
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

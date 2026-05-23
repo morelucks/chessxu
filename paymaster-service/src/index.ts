@@ -23,10 +23,21 @@ app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
+// Global error handler
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error('[error]', err.message);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
 app.listen(config.port, () => {
   console.log(`[paymaster-service] Listening on port ${config.port}`);
   console.log(`[paymaster-service] Chain: Celo Mainnet (${config.chainId})`);
   console.log(`[paymaster-service] Paymaster: ${config.paymasterAddress}`);
+});
+
+process.on('SIGTERM', () => {
+  console.log('[paymaster-service] SIGTERM received, shutting down gracefully');
+  process.exit(0);
 });
 
 export default app;

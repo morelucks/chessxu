@@ -173,7 +173,6 @@ describe("chessxu - integration tests", () => {
         const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
         simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
         
-        const { events } = simnet.callPublicFn("chessxu-token", "get-balance", [Cl.standardPrincipal(wallet_1)], wallet_1); // Wait, let's just resolve game
         const { events: resolveEvents } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
         
         const transfers = resolveEvents.filter(e => e.event === "ft_transfer_event");
@@ -195,17 +194,15 @@ describe("chessxu - integration tests", () => {
         mintTokens(wager, wallet_1);
         mintTokens(wager, wallet_2);
         
-        const { result: createRes } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
-        const gameIdNum = Number((createRes as any).value);
-        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameIdNum)], wallet_2);
+        const gameIdNum = setupGame(wager, false, 2);
         
         const contractPrincipal = `${deployer}.chessxu`;
-        const { result: balBefore } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.standardPrincipal(contractPrincipal)], wallet_1);
+        const { result: balBefore } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.contractPrincipal(deployer, "chessxu")], wallet_1);
         expect((balBefore as any).value.value).toBe(2000n);
         
         simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameIdNum)], wallet_1);
         
-        const { result: balAfter } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.standardPrincipal(contractPrincipal)], wallet_1);
+        const { result: balAfter } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.contractPrincipal(deployer, "chessxu")], wallet_1);
         expect((balAfter as any).value.value).toBe(0n);
     });
 
@@ -366,8 +363,8 @@ describe("chessxu - integration tests", () => {
         
         const game = getGame(gameId);
         expect(game["status"]).toStrictEqual(Cl.uint(0));
-        expect(game["player1"]).toStrictEqual(wallet_1);
-        expect(game["player2"]).toStrictEqual(Cl.none());
+        expect(game["player-w"]).toStrictEqual(Cl.standardPrincipal(wallet_1));
+        expect(game["player-b"]).toStrictEqual(Cl.none());
         expect(game["wager"]).toStrictEqual(Cl.uint(wager));
         expect(game["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
     });
@@ -383,13 +380,20 @@ describe("chessxu - integration tests", () => {
         
         game = getGame(gameId);
         expect(game["status"]).toStrictEqual(Cl.uint(1));
-        expect(game["player2"]).toStrictEqual(Cl.some(wallet_2));
+        expect(game["player-b"]).toStrictEqual(Cl.some(Cl.standardPrincipal(wallet_2)));
     });
 
     it("verifies cannot join full game", () => {
         const gameId = setupGame(0, true, 2);
         
         const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_3);
-        expect(result).toBeErr(Cl.uint(106)); // err-game-already-full
+        expect(result).toBeErr(Cl.uint(103)); // err-not-waiting
+    });
+
+    it("verifies player 1 cannot join their own game", () => {
+        const gameId = setupGame(0, true, 1);
+        
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_1);
+        expect(result).toBeErr(Cl.uint(104)); // err-already-joined
     });
 });

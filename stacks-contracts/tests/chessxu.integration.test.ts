@@ -3,6 +3,22 @@ import { Cl } from "@stacks/transactions";
 
 // scaffold: stacks integration test suite initialized
 
+const accounts = simnet.getAccounts();
+const deployer = accounts.get("deployer")!;
+const wallet_1 = accounts.get("wallet_1")!;
+const wallet_2 = accounts.get("wallet_2")!;
+const wallet_3 = accounts.get("wallet_3")!;
+
+// Helper to setup a game for testing
+function setupGame(wager: number = 0, isStx: boolean = true, players: number = 2) {
+    simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(isStx)], wallet_1);
+    const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+    if (players > 1) {
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+    }
+    return Number(gameId);
+}
+
 describe("chessxu - integration tests", () => {
     it("should initialize the test suite", () => {
         expect(true).toBe(true);

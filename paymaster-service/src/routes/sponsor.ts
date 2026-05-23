@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { ethers } from 'ethers';
-import { type UserOp } from '../services/validator';
+import { validateUserOp, type UserOp } from '../services/validator';
 import { config } from '../config';
 
 const router = Router();
@@ -11,6 +11,12 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
 
   if (!userOp || typeof chainId !== 'number') {
     res.status(400).json({ error: 'Request must include userOp object and chainId number.' });
+    return;
+  }
+
+  const validation = validateUserOp(userOp, chainId);
+  if (!validation.valid) {
+    res.status(400).json({ error: validation.error });
     return;
   }
 

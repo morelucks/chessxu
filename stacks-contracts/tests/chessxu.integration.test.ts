@@ -295,6 +295,31 @@ describe("chessxu - integration tests", () => {
         expect(result).toBeErr(Cl.uint(108)); // err-game-not-active
     });
 
+    it("verifies multi-move board state integrity", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        const b1 = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        const b2 = "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR";
+        const b3 = "rnbqkbnr/pppp1ppp/8/4p3/3QP3/8/PPP2PPP/RNB1KBNR";
+        const b4 = "rnb1kbnr/pppp1ppp/8/4p3/3QP3/2N5/PPP2PPP/R1B1KBNR";
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii(b1)], wallet_1);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("b"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b1));
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e7e5"), Cl.stringAscii(b2)], wallet_2);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("w"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b2));
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("d2d4"), Cl.stringAscii(b3)], wallet_1);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("b"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b3));
+        
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("b8c6"), Cl.stringAscii(b4)], wallet_2);
+        expect(getGame(gameId)["turn"]).toStrictEqual(Cl.stringAscii("w"));
+        expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b4));
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

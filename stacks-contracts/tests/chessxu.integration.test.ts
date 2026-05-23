@@ -216,6 +216,20 @@ describe("chessxu - integration tests", () => {
         expect(g2["status"]).toStrictEqual(Cl.uint(1));
     });
 
+    it("verifies moves in game1 do not affect game2 board", () => {
+        const g1Id = setupGame(0, true, 2);
+        const g2Id = setupGame(0, true, 2);
+        
+        const m1Board = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(g1Id), Cl.stringAscii("e2e4"), Cl.stringAscii(m1Board)], wallet_1);
+        
+        const g1 = getGame(g1Id);
+        const g2 = getGame(g2Id);
+        
+        expect(g1["board-state"]).toStrictEqual(Cl.stringAscii(m1Board));
+        expect(g2["board-state"]).toStrictEqual(Cl.stringAscii("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"));
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

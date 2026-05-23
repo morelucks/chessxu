@@ -320,6 +320,24 @@ describe("chessxu - integration tests", () => {
         expect(getGame(gameId)["board-state"]).toStrictEqual(Cl.stringAscii(b4));
     });
 
+    it("verifies e2e game with moves and owner resolution", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const b1 = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+        simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii(b1)], wallet_1);
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(2));
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

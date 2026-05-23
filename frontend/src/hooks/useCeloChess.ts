@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
 import useAppStore from '../zustand/store';
 import celoService from '../chess/services/celoService';
 import { CELO_CONFIG } from '../chess/blockchainConstants';
+import { isPaymasterAvailable } from '../chess/services/paymasterClient';
 
 export const useCeloChess = () => {
   const address = useAppStore((state) => state.celoAddress);
@@ -10,6 +12,18 @@ export const useCeloChess = () => {
   const activeChain = useAppStore((state) => state.activeChain);
   const { addToast } = useToaster();
   const network = CELO_CONFIG;
+
+  const [gasSponsored, setGasSponsored] = useState(celoService.gasSponsored);
+
+  useEffect(() => {
+    isPaymasterAvailable().then((status) => {
+      setGasSponsored(status.available);
+      celoService.gasSponsored = status.available;
+    }).catch(() => {
+      setGasSponsored(false);
+      celoService.gasSponsored = false;
+    });
+  }, []);
 
   const hasMiniPayAccess =
     !!miniPayAccessExpiresAt && new Date(miniPayAccessExpiresAt).getTime() > Date.now();
@@ -153,7 +167,6 @@ export const useCeloChess = () => {
     }
   };
 
-  const gasSponsored = celoService.gasSponsored;
   const gasSponsorshipInfo = celoService.getGasSponsorshipInfo();
 
   return { 

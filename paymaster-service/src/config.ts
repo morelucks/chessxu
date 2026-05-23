@@ -17,4 +17,6 @@ export const config = {
   rateLimitWindowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS ?? '86400000', 10),
   redisUrl: process.env.REDIS_URL,
   chainId: 42220,
+  /** Validity window for signed UserOps in seconds */
+  signValiditySeconds: parseInt(process.env.SIGN_VALIDITY_SECONDS ?? '600', 10),
 } as const;

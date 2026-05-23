@@ -351,6 +351,216 @@ const celoService = {
     return amount === parseUnits(CELO_CONFIG.DAILY_ACCESS_CUSD, 18);
   },
 
+  /**
+   * Executes a transaction through the ERC-4337 Paymaster pipeline (gasless).
+   */
+  executeWithPaymaster: async (
+    targetAddress: `0x${string}`,
+    abi: any,
+    functionName: string,
+    args: any[],
+    value: bigint = 0n,
+  ): Promise<`0x${string}`> => {
+    const walletClient = celoService.getWalletClient();
+    const publicClient = celoService.getPublicClient();
+    const [ownerAddress] = await walletClient.requestAddresses();
+
+    const factoryAddress = '0x9406Cc6185a346906296840746125a0E44976454' as `0x${string}`;
+
+    // Predict Smart Account Address
+    const scAddress = await publicClient.readContract({
+      address: factoryAddress,
+      abi: [{
+        name: 'getAddress',
+        type: 'function',
+        stateMutability: 'view',
+        inputs: [
+          { name: 'owner', type: 'address' },
+          { name: 'salt', type: 'uint256' }
+        ],
+        outputs: [{ type: 'address' }]
+      }],
+      functionName: 'getAddress',
+      args: [ownerAddress, 0n]
+    });
+
+    // Check if deployment is needed
+    const code = await publicClient.getCode({ address: scAddress });
+    const isDeployed = code && code !== '0x';
+
+    const initCode = isDeployed
+      ? '0x' as `0x${string}`
+      : concat([
+          factoryAddress,
+          encodeFunctionData({
+            abi: [{
+              name: 'createAccount',
+              type: 'function',
+              inputs: [
+                { name: 'owner', type: 'address' },
+                { name: 'salt', type: 'uint256' }
+              ]
+            }],
+            functionName: 'createAccount',
+            args: [ownerAddress, 0n]
+          })
+        ]);
+
+    // Encode call to SimpleAccount.execute
+    const callData = encodeFunctionData({
+      abi: [{
+        name: 'execute',
+        type: 'function',
+        inputs: [
+          { name: 'dest', type: 'address' },
+          { name: 'value', type: 'uint256' },
+          { name: 'func', type: 'bytes' }
+        ]
+      }],
+      functionName: 'execute',
+      args: [
+        targetAddress,
+        value,
+        encodeFunctionData({
+          abi,
+          functionName,
+          args
+        })
+      ]
+    });
+
+    // Get nonce from EntryPoint
+    const nonce = await publicClient.readContract({
+      address: PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
+      abi: [{
+        name: 'getNonce',
+        type: 'function',
+        stateMutability: 'view',
+        inputs: [
+          { name: 'sender', type: 'address' },
+          { name: 'key', type: 'uint256' }
+        ],
+        outputs: [{ type: 'uint256' }]
+      }],
+      functionName: 'getNonce',
+      args: [scAddress, 0n]
+    });
+
+    // Estimate Fees
+    let maxFeePerGas = 20_000_000_000n;
+    let maxPriorityFeePerGas = 1_000_000_000n;
+    try {
+      const fees = await publicClient.estimateFeesPerGas();
+      if (fees.maxFeePerGas) maxFeePerGas = fees.maxFeePerGas;
+      if (fees.maxPriorityFeePerGas) maxPriorityFeePerGas = fees.maxPriorityFeePerGas;
+    } catch {
+      // Use fallback defaults
+    }
+
+    const unsignedUserOp: UserOperation = {
+      sender: scAddress,
+      nonce,
+      initCode,
+      callData,
+      callGasLimit: 200_000n,
+      verificationGasLimit: 150_000n,
+      preVerificationGas: 50_000n,
+      maxFeePerGas,
+      maxPriorityFeePerGas,
+      paymasterAndData: '0x',
+      signature: '0x',
+    };
+
+    // 1. Sponsor the UserOp
+    const sponsorResult = await sponsorUserOp(unsignedUserOp);
+
+    const sponsoredUserOp: UserOperation = {
+      ...unsignedUserOp,
+      paymasterAndData: sponsorResult.paymasterAndData,
+      preVerificationGas: sponsorResult.preVerificationGas,
+      verificationGasLimit: sponsorResult.verificationGasLimit,
+      callGasLimit: sponsorResult.callGasLimit,
+    };
+
+    // 2. Sign UserOp Hash
+    const userOpHash = getUserOperationHash({
+      userOperation: {
+        sender: sponsoredUserOp.sender,
+        nonce: sponsoredUserOp.nonce,
+        initCode: sponsoredUserOp.initCode,
+        callData: sponsoredUserOp.callData,
+        callGasLimit: sponsoredUserOp.callGasLimit,
+        verificationGasLimit: sponsoredUserOp.verificationGasLimit,
+        preVerificationGas: sponsoredUserOp.preVerificationGas,
+        maxFeePerGas: sponsoredUserOp.maxFeePerGas,
+        maxPriorityFeePerGas: sponsoredUserOp.maxPriorityFeePerGas,
+        paymasterAndData: sponsoredUserOp.paymasterAndData,
+        signature: sponsoredUserOp.signature,
+      },
+      entryPoint: PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
+      chainId: celo.id,
+    });
+
+    const signature = await walletClient.signMessage({
+      account: ownerAddress,
+      message: { raw: userOpHash },
+    });
+
+    const signedUserOp: UserOperation = {
+      ...sponsoredUserOp,
+      signature,
+    };
+
+    // 3. Submit to Bundler
+    const txHashReturned = await submitUserOp(signedUserOp);
+
+    // 4. Poll for receipt
+    const receipt = await waitForUserOpReceipt(txHashReturned);
+    return receipt.transactionHash;
+  },
+
+  /**
+   * Wrapper implementing the Execute-with-Fallback pattern.
+   * Runs gasless sponsorship via Paymaster, falling back to legacy fee currency or native CELO.
+   */
+  executeWithFallback: async (
+    targetAddress: `0x${string}`,
+    abi: any,
+    functionName: string,
+    args: any[],
+    value: bigint = 0n,
+  ): Promise<`0x${string}`> => {
+    if (celoService.gasSponsored) {
+      try {
+        return await celoService.executeWithPaymaster(targetAddress, abi, functionName, args, value);
+      } catch (error) {
+        console.error('[CeloService] Paymaster transaction failed. Falling back to fee currency...', error);
+      }
+    }
+
+    const walletClient = celoService.getWalletClient();
+    const [address] = await walletClient.requestAddresses();
+    
+    const data = encodeFunctionData({
+      abi,
+      functionName,
+      args,
+    });
+
+    const feeCurrency = await celoService.selectFeeCurrency(address, targetAddress, data, value);
+
+    return await walletClient.writeContract({
+      address: targetAddress,
+      abi,
+      functionName: 'executeWithFallback' === functionName ? '' : functionName, // fallback targets the exact same function name
+      args,
+      account: address,
+      value,
+      ...(feeCurrency ? { feeCurrency } : {}),
+      ...celoService.getTxOptions(),
+    } as any);
+  },
+
   // --- Write Operations ---
 
   /**

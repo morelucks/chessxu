@@ -1,6 +1,14 @@
 import { ethers } from 'ethers';
 import { config } from '../config';
 
+// Function selectors for whitelisted Chessxu operations
+const WHITELISTED_SELECTORS = new Set([
+  ethers.id('submitMove(uint256,string,string)').slice(0, 10),
+  ethers.id('createGame(uint256,bool)').slice(0, 10),
+  ethers.id('joinGame(uint256)').slice(0, 10),
+  ethers.id('resign(uint256)').slice(0, 10),
+]);
+
 export interface UserOp {
   sender: string;
   nonce: string;

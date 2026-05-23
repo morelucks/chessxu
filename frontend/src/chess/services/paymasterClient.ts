@@ -87,3 +87,45 @@ export const USEROP_RECEIPT_POLL_INTERVAL_MS = 2_000;
 
 /** Maximum polling attempts for UserOp receipt */
 export const USEROP_RECEIPT_MAX_POLLS = 30;
+
+// ──────────────────────────────────────────────
+// Error Classification
+// ──────────────────────────────────────────────
+
+/**
+ * Categories of paymaster errors for structured handling.
+ */
+export enum PaymasterErrorCategory {
+  /** Network connectivity failure */
+  NETWORK = 'NETWORK',
+  /** Paymaster service returned an auth error */
+  AUTH = 'AUTH',
+  /** Paymaster has insufficient deposit to sponsor */
+  INSUFFICIENT_FUNDS = 'INSUFFICIENT_FUNDS',
+  /** UserOp was rejected by the bundler */
+  BUNDLER_REJECTED = 'BUNDLER_REJECTED',
+  /** Request timed out */
+  TIMEOUT = 'TIMEOUT',
+  /** Unknown / unclassified error */
+  UNKNOWN = 'UNKNOWN',
+}
+
+/**
+ * Custom error class for Paymaster-specific failures.
+ * Includes a structured category for downstream fallback logic.
+ */
+export class PaymasterError extends Error {
+  public readonly category: PaymasterErrorCategory;
+  public readonly retriable: boolean;
+
+  constructor(
+    message: string,
+    category: PaymasterErrorCategory = PaymasterErrorCategory.UNKNOWN,
+    retriable = false,
+  ) {
+    super(message);
+    this.name = 'PaymasterError';
+    this.category = category;
+    this.retriable = retriable;
+  }
+}

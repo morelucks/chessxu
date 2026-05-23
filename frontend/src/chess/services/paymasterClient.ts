@@ -185,3 +185,40 @@ export function classifyError(error: unknown): PaymasterError {
 
   return new PaymasterError(msg, PaymasterErrorCategory.UNKNOWN, false);
 }
+
+/**
+ * Performs a fetch request with an automatic timeout via AbortController.
+ * Throws a PaymasterError with TIMEOUT category if the request exceeds the deadline.
+ *
+ * @param url - The URL to fetch
+ * @param options - Standard fetch RequestInit options
+ * @param timeoutMs - Timeout in milliseconds (defaults to PAYMASTER_REQUEST_TIMEOUT_MS)
+ * @returns The fetch Response
+ */
+export async function fetchWithTimeout(
+  url: string,
+  options: RequestInit = {},
+  timeoutMs: number = PAYMASTER_REQUEST_TIMEOUT_MS,
+): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    return response;
+  } catch (error: unknown) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new PaymasterError(
+        `Request to ${url} timed out after ${timeoutMs}ms`,
+        PaymasterErrorCategory.TIMEOUT,
+        true,
+      );
+    }
+    throw classifyError(error);
+  } finally {
+    clearTimeout(timer);
+  }
+}

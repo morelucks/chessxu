@@ -259,3 +259,66 @@ export async function retryWithBackoff<T>(
 
   throw lastError ?? new PaymasterError('Retry exhausted', PaymasterErrorCategory.UNKNOWN, false);
 }
+
+// ──────────────────────────────────────────────
+// Public API
+// ──────────────────────────────────────────────
+
+import { PAYMASTER_CONFIG } from '../blockchainConstants';
+
+/**
+ * Sends an unsigned UserOperation to the Paymaster service for gas sponsorship.
+ * The paymaster signs the UserOp and returns `paymasterAndData` along with gas limit overrides.
+ *
+ * @param userOp - The unsigned UserOperation to sponsor
+ * @returns SponsorResult containing paymasterAndData and gas limits
+ * @throws PaymasterError if the service is unavailable or rejects the request
+ */
+export async function sponsorUserOp(userOp: UserOperation): Promise<SponsorResult> {
+  return retryWithBackoff(async () => {
+    const response = await fetchWithTimeout(
+      `${PAYMASTER_CONFIG.SERVICE_URL}/sponsor`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userOp: {
+            sender: userOp.sender,
+            nonce: userOp.nonce.toString(),
+            initCode: userOp.initCode,
+            callData: userOp.callData,
+            callGasLimit: userOp.callGasLimit.toString(),
+            verificationGasLimit: userOp.verificationGasLimit.toString(),
+            preVerificationGas: userOp.preVerificationGas.toString(),
+            maxFeePerGas: userOp.maxFeePerGas.toString(),
+            maxPriorityFeePerGas: userOp.maxPriorityFeePerGas.toString(),
+            paymasterAndData: '0x',
+            signature: '0x',
+          },
+          entryPoint: PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
+        }),
+      },
+      PAYMASTER_CONFIG.TIMEOUT_MS,
+    );
+
+    if (!response.ok) {
+      const body = await response.text().catch(() => 'Unknown error');
+      throw new PaymasterError(
+        `Paymaster sponsorship failed (${response.status}): ${body}`,
+        response.status === 401 || response.status === 403
+          ? PaymasterErrorCategory.AUTH
+          : PaymasterErrorCategory.UNKNOWN,
+        response.status >= 500,
+      );
+    }
+
+    const data = await response.json();
+
+    return {
+      paymasterAndData: data.paymasterAndData as `0x${string}`,
+      preVerificationGas: BigInt(data.preVerificationGas),
+      verificationGasLimit: BigInt(data.verificationGasLimit),
+      callGasLimit: BigInt(data.callGasLimit),
+    };
+  });
+}

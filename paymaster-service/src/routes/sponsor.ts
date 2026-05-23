@@ -31,6 +31,10 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
+  // Attach rate limit headers
+  res.setHeader('X-RateLimit-Remaining', rateLimit.remaining);
+  res.setHeader('X-RateLimit-Reset', rateLimit.resetAt);
+
   const nonceCheck = await validateNonce(userOp, provider);
   if (!nonceCheck.valid) {
     res.status(400).json({ error: nonceCheck.error });

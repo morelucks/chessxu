@@ -39,3 +39,17 @@ export function validateSender(sender: string): ValidationResult {
   }
   return { valid: true };
 }
+
+export function validateCallData(callData: string): ValidationResult {
+  if (!callData || callData === '0x') {
+    return { valid: false, error: 'callData is empty — no function call to sponsor.' };
+  }
+  const selector = callData.slice(0, 10).toLowerCase();
+  if (!WHITELISTED_SELECTORS.has(selector)) {
+    return {
+      valid: false,
+      error: `Function selector ${selector} is not whitelisted. Only submitMove, createGame, joinGame, resign are sponsored.`,
+    };
+  }
+  return { valid: true };
+}

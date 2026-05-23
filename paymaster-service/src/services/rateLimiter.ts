@@ -78,3 +78,10 @@ setInterval(() => {
     if (now > entry.resetAt) memoryStore.delete(key);
   }
 }, 60_000);
+
+/** Returns current count for an address without incrementing (for monitoring). */
+export function peekCount(address: string): number {
+  const entry = memoryStore.get(`rl:${address.toLowerCase()}`);
+  if (!entry || Date.now() > entry.resetAt) return 0;
+  return entry.count;
+}

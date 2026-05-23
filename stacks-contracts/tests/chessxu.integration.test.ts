@@ -122,6 +122,26 @@ describe("chessxu - integration tests", () => {
         expect(endedGame["status"]).toStrictEqual(Cl.uint(4));
     });
 
+    it("verifies token game white resigns black gets tokens", () => {
+        const wager = 1000;
+        
+        mintTokens(wager, wallet_1);
+        mintTokens(wager, wallet_2);
+        
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+        
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        
+        const transfer = events.find(e => e.event === "ft_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_2);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(Number(gameId));
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(3)); // Black Wins
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

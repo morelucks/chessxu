@@ -44,7 +44,7 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await signUserOp(userOp);
     console.log(`[sponsor] Sponsored | sender=${userOp.sender} | selector=${userOp.callData.slice(0, 10)} | ts=${new Date().toISOString()}`);
-    res.json(result);
+    res.json({ ...result, chainId: config.chainId });
   } catch (err) {
     console.error('[sponsor] Signing error:', err);
     res.status(500).json({ error: 'Internal signing error.' });

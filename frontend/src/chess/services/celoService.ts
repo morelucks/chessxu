@@ -497,7 +497,8 @@ const celoService = {
         paymasterAndData: sponsoredUserOp.paymasterAndData,
         signature: sponsoredUserOp.signature,
       },
-      entryPoint: PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
+      entryPointAddress: PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
+      entryPointVersion: '0.6',
       chainId: celo.id,
     });
 

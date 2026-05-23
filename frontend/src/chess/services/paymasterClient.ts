@@ -129,3 +129,59 @@ export class PaymasterError extends Error {
     this.retriable = retriable;
   }
 }
+
+// ──────────────────────────────────────────────
+// Internal Helpers
+// ──────────────────────────────────────────────
+
+/**
+ * Classifies a raw error into a structured PaymasterError.
+ * Used internally to decide whether to retry or fall back.
+ */
+export function classifyError(error: unknown): PaymasterError {
+  if (error instanceof PaymasterError) return error;
+
+  const msg = error instanceof Error ? error.message : String(error);
+
+  if (msg.includes('AbortError') || msg.includes('timeout') || msg.includes('Timeout')) {
+    return new PaymasterError(
+      `Paymaster request timed out: ${msg}`,
+      PaymasterErrorCategory.TIMEOUT,
+      true,
+    );
+  }
+
+  if (msg.includes('fetch') || msg.includes('network') || msg.includes('ECONNREFUSED')) {
+    return new PaymasterError(
+      `Paymaster network error: ${msg}`,
+      PaymasterErrorCategory.NETWORK,
+      true,
+    );
+  }
+
+  if (msg.includes('401') || msg.includes('403') || msg.includes('unauthorized')) {
+    return new PaymasterError(
+      `Paymaster auth error: ${msg}`,
+      PaymasterErrorCategory.AUTH,
+      false,
+    );
+  }
+
+  if (msg.includes('insufficient') || msg.includes('deposit')) {
+    return new PaymasterError(
+      `Paymaster insufficient funds: ${msg}`,
+      PaymasterErrorCategory.INSUFFICIENT_FUNDS,
+      false,
+    );
+  }
+
+  if (msg.includes('rejected') || msg.includes('AA')) {
+    return new PaymasterError(
+      `Bundler rejected UserOp: ${msg}`,
+      PaymasterErrorCategory.BUNDLER_REJECTED,
+      false,
+    );
+  }
+
+  return new PaymasterError(msg, PaymasterErrorCategory.UNKNOWN, false);
+}

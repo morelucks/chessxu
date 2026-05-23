@@ -42,6 +42,7 @@ export function validateSender(sender: string): ValidationResult {
   return { valid: true };
 }
 
+/** Validates callData targets a whitelisted Chessxu function selector. */
 export function validateCallData(callData: string): ValidationResult {
   if (!callData || callData === '0x') {
     return { valid: false, error: 'callData is empty — no function call to sponsor.' };
@@ -56,6 +57,7 @@ export function validateCallData(callData: string): ValidationResult {
   return { valid: true };
 }
 
+/** Validates all gas-related fields are valid non-negative integers. */
 export function validateGasFields(userOp: UserOp): ValidationResult {
   const gasFields: (keyof UserOp)[] = ['callGasLimit', 'verificationGasLimit', 'preVerificationGas', 'maxFeePerGas', 'maxPriorityFeePerGas'];
   for (const field of gasFields) {

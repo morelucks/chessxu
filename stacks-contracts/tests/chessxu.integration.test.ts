@@ -167,6 +167,26 @@ describe("chessxu - integration tests", () => {
         expect(endedGame["status"]).toStrictEqual(Cl.uint(4)); // Draw
     });
 
+    it("verifies contract holds zero tokens after resolution", () => {
+        const wager = 1000;
+        
+        mintTokens(wager, wallet_1);
+        mintTokens(wager, wallet_2);
+        
+        const { result: createRes } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        const gameIdNum = Number((createRes as any).value);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameIdNum)], wallet_2);
+        
+        const contractPrincipal = `${deployer}.chessxu`;
+        const { result: balBefore } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.standardPrincipal(contractPrincipal)], wallet_1);
+        expect((balBefore as any).value.value).toBe(2000n);
+        
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameIdNum)], wallet_1);
+        
+        const { result: balAfter } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.standardPrincipal(contractPrincipal)], wallet_1);
+        expect((balAfter as any).value.value).toBe(0n);
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

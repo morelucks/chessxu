@@ -72,6 +72,121 @@ describe("chessxu - integration tests", () => {
         expect(endedGame["status"]).toStrictEqual(Cl.uint(2)); // White Wins
     });
 
+    it("verifies owner resolves white wins", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(2));
+    });
+
+    it("verifies owner resolves black wins", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(3)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_2);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(3));
+    });
+
+    it("verifies owner resolves draw refunds both", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfers = events.filter(e => e.event === "stx_transfer_event");
+        expect(transfers.length).toBe(2);
+        
+        const transferP1 = transfers.find(t => t.data.recipient === wallet_1)!;
+        const transferP2 = transfers.find(t => t.data.recipient === wallet_2)!;
+        
+        expect(transferP1.data.amount).toBe("1000");
+        expect(transferP2.data.amount).toBe("1000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(4));
+    });
+
+    it("verifies token game white resigns black gets tokens", () => {
+        const wager = 1000;
+        
+        mintTokens(wager, wallet_1);
+        mintTokens(wager, wallet_2);
+        
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+        
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        
+        const transfer = events.find(e => e.event === "ft_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_2);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(Number(gameId));
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(3)); // Black Wins
+    });
+
+    it("verifies token game draw refunds both", () => {
+        const wager = 1000;
+        
+        mintTokens(wager, wallet_1);
+        mintTokens(wager, wallet_2);
+        
+        simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+        
+        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
+        
+        const transfers = events.filter(e => e.event === "ft_transfer_event");
+        expect(transfers.length).toBe(2);
+        
+        const transferP1 = transfers.find(t => t.data.recipient === wallet_1)!;
+        const transferP2 = transfers.find(t => t.data.recipient === wallet_2)!;
+        
+        expect(transferP1.data.amount).toBe("1000");
+        expect(transferP2.data.amount).toBe("1000");
+        
+        const endedGame = getGame(Number(gameId));
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(4)); // Draw
+    });
+
+    it("verifies contract holds zero tokens after resolution", () => {
+        const wager = 1000;
+        
+        mintTokens(wager, wallet_1);
+        mintTokens(wager, wallet_2);
+        
+        const { result: createRes } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(wager), Cl.bool(false)], wallet_1);
+        const gameIdNum = Number((createRes as any).value);
+        simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameIdNum)], wallet_2);
+        
+        const contractPrincipal = `${deployer}.chessxu`;
+        const { result: balBefore } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.standardPrincipal(contractPrincipal)], wallet_1);
+        expect((balBefore as any).value.value).toBe(2000n);
+        
+        simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameIdNum)], wallet_1);
+        
+        const { result: balAfter } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [Cl.standardPrincipal(contractPrincipal)], wallet_1);
+        expect((balAfter as any).value.value).toBe(0n);
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

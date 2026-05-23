@@ -66,3 +66,13 @@ export function validateGasFields(userOp: UserOp): ValidationResult {
   }
   return { valid: true };
 }
+
+export function validateUserOp(userOp: UserOp, chainId: number): ValidationResult {
+  const checks = [
+    validateChainId(chainId),
+    validateSender(userOp.sender),
+    validateCallData(userOp.callData),
+    validateGasFields(userOp),
+  ];
+  return checks.find(r => !r.valid) ?? { valid: true };
+}

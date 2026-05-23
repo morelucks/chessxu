@@ -85,3 +85,8 @@ export function peekCount(address: string): number {
   if (!entry || Date.now() > entry.resetAt) return 0;
   return entry.count;
 }
+
+/** Resets the rate limit for an address (admin use). */
+export function resetRateLimit(address: string): void {
+  memoryStore.delete(`rl:${address.toLowerCase()}`);
+}

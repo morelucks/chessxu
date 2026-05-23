@@ -53,3 +53,16 @@ export function validateCallData(callData: string): ValidationResult {
   }
   return { valid: true };
 }
+
+export function validateGasFields(userOp: UserOp): ValidationResult {
+  const gasFields: (keyof UserOp)[] = ['callGasLimit', 'verificationGasLimit', 'preVerificationGas', 'maxFeePerGas', 'maxPriorityFeePerGas'];
+  for (const field of gasFields) {
+    try {
+      const val = BigInt(userOp[field]);
+      if (val < 0n) throw new Error('negative');
+    } catch {
+      return { valid: false, error: `Invalid gas field: ${field}` };
+    }
+  }
+  return { valid: true };
+}

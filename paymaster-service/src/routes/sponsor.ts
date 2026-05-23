@@ -2,10 +2,11 @@ import { Router, Request, Response } from 'express';
 import { ethers } from 'ethers';
 import { validateUserOp, validateNonce, type UserOp } from '../services/validator';
 import { checkRateLimit } from '../services/rateLimiter';
+import { signUserOp } from '../services/signer';
 import { config } from '../config';
 
 const router = Router();
-export const provider = new ethers.JsonRpcProvider(config.celoRpcUrl);
+const provider = new ethers.JsonRpcProvider(config.celoRpcUrl);
 
 router.post('/', async (req: Request, res: Response): Promise<void> => {
   const { userOp, chainId } = req.body as { userOp: UserOp; chainId: number };
@@ -36,7 +37,14 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  res.status(501).json({ error: 'Signing not yet wired' });
+  try {
+    const result = await signUserOp(userOp);
+    console.log(`[sponsor] Sponsored | sender=${userOp.sender} | selector=${userOp.callData.slice(0, 10)} | ts=${new Date().toISOString()}`);
+    res.json(result);
+  } catch (err) {
+    console.error('[sponsor] Signing error:', err);
+    res.status(500).json({ error: 'Internal signing error.' });
+  }
 });
 
 export default router;

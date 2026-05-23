@@ -187,6 +187,22 @@ describe("chessxu - integration tests", () => {
         expect((balAfter as any).value.value).toBe(0n);
     });
 
+    it("verifies two concurrent games are independent", () => {
+        const g1Id = setupGame(100, true, 2);
+        const g2Id = setupGame(200, true, 2);
+        
+        expect(g1Id).not.toBe(g2Id);
+        
+        const g1 = getGame(g1Id);
+        const g2 = getGame(g2Id);
+        
+        expect(g1["wager"]).toStrictEqual(Cl.uint(100));
+        expect(g2["wager"]).toStrictEqual(Cl.uint(200));
+        
+        expect(g1["status"]).toStrictEqual(Cl.uint(1)); // Ongoing
+        expect(g2["status"]).toStrictEqual(Cl.uint(1)); // Ongoing
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

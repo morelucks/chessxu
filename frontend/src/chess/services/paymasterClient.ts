@@ -385,3 +385,61 @@ export async function submitUserOp(signedUserOp: UserOperation): Promise<`0x${st
     return data.result as `0x${string}`;
   });
 }
+
+/**
+ * Polls the Bundler for a UserOperation receipt until it is mined.
+ * Returns the on-chain transaction hash once the UserOp is included in a block.
+ *
+ * @param userOpHash - The hash returned by submitUserOp
+ * @param pollIntervalMs - Time between polls (defaults to USEROP_RECEIPT_POLL_INTERVAL_MS)
+ * @param maxPolls - Maximum number of polling attempts (defaults to USEROP_RECEIPT_MAX_POLLS)
+ * @returns The UserOpReceipt with the on-chain transaction hash
+ * @throws PaymasterError if polling times out
+ */
+export async function waitForUserOpReceipt(
+  userOpHash: `0x${string}`,
+  pollIntervalMs: number = USEROP_RECEIPT_POLL_INTERVAL_MS,
+  maxPolls: number = USEROP_RECEIPT_MAX_POLLS,
+): Promise<UserOpReceipt> {
+  for (let poll = 0; poll < maxPolls; poll++) {
+    try {
+      const response = await fetchWithTimeout(
+        PAYMASTER_CONFIG.BUNDLER_RPC_URL,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            id: 1,
+            method: 'eth_getUserOperationReceipt',
+            params: [userOpHash],
+          }),
+        },
+        PAYMASTER_CONFIG.TIMEOUT_MS,
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.result) {
+          return {
+            userOpHash,
+            transactionHash: data.result.receipt?.transactionHash as `0x${string}`,
+            success: data.result.success ?? true,
+            actualGasCost: BigInt(data.result.actualGasCost || '0'),
+            actualGasUsed: BigInt(data.result.actualGasUsed || '0'),
+          };
+        }
+      }
+    } catch {
+      // Transient error — continue polling
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, pollIntervalMs));
+  }
+
+  throw new PaymasterError(
+    `UserOp receipt polling timed out after ${maxPolls * pollIntervalMs}ms for hash ${userOpHash}`,
+    PaymasterErrorCategory.TIMEOUT,
+    false,
+  );
+}

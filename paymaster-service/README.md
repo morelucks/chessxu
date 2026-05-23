@@ -36,6 +36,14 @@ cp .env.example .env
 docker compose up -d
 ```
 
+## PM2 (VPS)
+
+```bash
+npm run build
+pm2 start ecosystem.config.js
+pm2 save
+```
+
 ## Validation Rules
 
 - Only `chainId: 42220` (Celo Mainnet) is accepted

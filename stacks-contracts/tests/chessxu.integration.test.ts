@@ -72,6 +72,21 @@ describe("chessxu - integration tests", () => {
         expect(endedGame["status"]).toStrictEqual(Cl.uint(2)); // White Wins
     });
 
+    it("verifies owner resolves white wins", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(2)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(2));
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

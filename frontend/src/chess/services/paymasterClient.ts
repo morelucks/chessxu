@@ -222,3 +222,40 @@ export async function fetchWithTimeout(
     clearTimeout(timer);
   }
 }
+
+/**
+ * Retries an async operation with exponential backoff.
+ * Only retries if the caught PaymasterError is marked as retriable.
+ *
+ * @param fn - The async function to execute
+ * @param maxRetries - Maximum number of retry attempts
+ * @param baseDelayMs - Base delay between retries (doubled each attempt)
+ * @returns The result of fn()
+ */
+export async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  maxRetries: number = PAYMASTER_MAX_RETRIES,
+  baseDelayMs: number = PAYMASTER_RETRY_BASE_DELAY_MS,
+): Promise<T> {
+  let lastError: PaymasterError | undefined;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error: unknown) {
+      lastError = classifyError(error);
+
+      if (!lastError.retriable || attempt === maxRetries) {
+        throw lastError;
+      }
+
+      const delay = baseDelayMs * Math.pow(2, attempt);
+      console.warn(
+        `[Paymaster] Attempt ${attempt + 1}/${maxRetries + 1} failed (${lastError.category}), retrying in ${delay}ms...`,
+      );
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+
+  throw lastError ?? new PaymasterError('Retry exhausted', PaymasterErrorCategory.UNKNOWN, false);
+}

@@ -173,9 +173,10 @@ describe("chessxu - integration tests", () => {
         const gameId = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
         simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
         
-        const { events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
+        const { events } = simnet.callPublicFn("chessxu-token", "get-balance", [Cl.standardPrincipal(wallet_1)], wallet_1); // Wait, let's just resolve game
+        const { events: resolveEvents } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(4)], deployer);
         
-        const transfers = events.filter(e => e.event === "ft_transfer_event");
+        const transfers = resolveEvents.filter(e => e.event === "ft_transfer_event");
         expect(transfers.length).toBe(2);
         
         const transferP1 = transfers.find(t => t.data.recipient === wallet_1)!;
@@ -383,5 +384,12 @@ describe("chessxu - integration tests", () => {
         game = getGame(gameId);
         expect(game["status"]).toStrictEqual(Cl.uint(1));
         expect(game["player2"]).toStrictEqual(Cl.some(wallet_2));
+    });
+
+    it("verifies cannot join full game", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_3);
+        expect(result).toBeErr(Cl.uint(106)); // err-game-already-full
     });
 });

@@ -443,3 +443,33 @@ export async function waitForUserOpReceipt(
     false,
   );
 }
+
+/**
+ * Checks the health status of the Chessxu Paymaster service.
+ * Verifies connectivity and if sponsorship is currently active.
+ *
+ * @returns PaymasterHealthStatus
+ */
+export async function isPaymasterAvailable(): Promise<PaymasterHealthStatus> {
+  try {
+    const response = await fetchWithTimeout(
+      `${PAYMASTER_CONFIG.SERVICE_URL}/health`,
+      { method: 'GET' },
+      5000,
+    );
+
+    if (!response.ok) {
+      return { available: false, balance: '0', lastChecked: Date.now() };
+    }
+
+    const data = await response.json();
+    return {
+      available: data.available ?? true,
+      balance: data.balance || '0',
+      lastChecked: Date.now(),
+    };
+  } catch {
+    return { available: false, balance: '0', lastChecked: Date.now() };
+  }
+}
+

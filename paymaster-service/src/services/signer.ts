@@ -49,7 +49,7 @@ export interface SignResult {
 }
 
 export async function signUserOp(userOp: UserOp): Promise<SignResult> {
-  const validUntil = Math.floor(Date.now() / 1000) + 600;
+  const validUntil = Math.floor(Date.now() / 1000) + config.signValiditySeconds;
   const validAfter = 0;
 
   const hash = getUserOpHash(userOp, validUntil, validAfter);

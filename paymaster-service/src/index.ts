@@ -35,4 +35,9 @@ app.listen(config.port, () => {
   console.log(`[paymaster-service] Paymaster: ${config.paymasterAddress}`);
 });
 
+process.on('SIGTERM', () => {
+  console.log('[paymaster-service] SIGTERM received, shutting down gracefully');
+  process.exit(0);
+});
+
 export default app;

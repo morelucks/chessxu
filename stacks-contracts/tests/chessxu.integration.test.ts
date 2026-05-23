@@ -261,6 +261,22 @@ describe("chessxu - integration tests", () => {
         expect(endedGame["status"]).toStrictEqual(Cl.uint(5));
     });
 
+    it("verifies zero-wager resign completes cleanly", () => {
+        const gameId = setupGame(0, true, 2);
+        
+        const ongoingGame = getGame(gameId);
+        expect(ongoingGame["status"]).toStrictEqual(Cl.uint(1));
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfers = events.filter(e => e.event === "stx_transfer_event");
+        expect(transfers.length).toBe(0);
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(3)); // Black Wins
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

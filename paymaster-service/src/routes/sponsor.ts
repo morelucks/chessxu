@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import { validateUserOp, validateNonce, type UserOp } from '../services/validator';
 import { checkRateLimit } from '../services/rateLimiter';
 import { signUserOp } from '../services/signer';
+import { incrementSponsored } from './health';
 import { config } from '../config';
 
 const router = Router();
@@ -43,6 +44,7 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
 
   try {
     const result = await signUserOp(userOp);
+    incrementSponsored();
     console.log(`[sponsor] Sponsored | sender=${userOp.sender} | selector=${userOp.callData.slice(0, 10)} | ts=${new Date().toISOString()}`);
     res.json({ ...result, chainId: config.chainId });
   } catch (err) {

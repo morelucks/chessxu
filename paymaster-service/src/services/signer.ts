@@ -40,3 +40,36 @@ function getUserOpHash(userOp: UserOp, validUntil: number, validAfter: number): 
 
   return ethers.keccak256(encoded);
 }
+
+export interface SignResult {
+  paymasterAndData: string;
+  preVerificationGas: string;
+  verificationGasLimit: string;
+  callGasLimit: string;
+}
+
+export async function signUserOp(userOp: UserOp): Promise<SignResult> {
+  const validUntil = Math.floor(Date.now() / 1000) + 600;
+  const validAfter = 0;
+
+  const hash = getUserOpHash(userOp, validUntil, validAfter);
+  const signature = await signer.signMessage(ethers.getBytes(hash));
+
+  const validityEncoded = ethers.AbiCoder.defaultAbiCoder().encode(
+    ['uint48', 'uint48'],
+    [validUntil, validAfter],
+  );
+
+  const paymasterAndData = ethers.concat([
+    config.paymasterAddress,
+    validityEncoded,
+    signature,
+  ]);
+
+  return {
+    paymasterAndData,
+    preVerificationGas: userOp.preVerificationGas,
+    verificationGasLimit: userOp.verificationGasLimit,
+    callGasLimit: userOp.callGasLimit,
+  };
+}

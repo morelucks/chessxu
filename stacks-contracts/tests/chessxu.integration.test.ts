@@ -243,6 +243,24 @@ describe("chessxu - integration tests", () => {
         expect(id5).toBe(id4 + 1);
     });
 
+    it("verifies cancel waiting game refunds creator", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 1);
+        
+        const waitingGame = getGame(gameId);
+        expect(waitingGame["status"]).toStrictEqual(Cl.uint(0));
+        
+        const { result, events } = simnet.callPublicFn("chessxu", "resolve-game", [Cl.uint(gameId), Cl.uint(5)], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_1);
+        expect(transfer.data.amount).toBe("1000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(5));
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

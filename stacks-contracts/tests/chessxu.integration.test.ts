@@ -37,6 +37,24 @@ describe("chessxu - integration tests", () => {
     });
 
     // test: lifecycle helpers added
+
+    it("verifies white resigns black wins full lifecycle (STX)", () => {
+        const wager = 1000;
+        const gameId = setupGame(wager, true, 2);
+        
+        const ongoingGame = getGame(gameId);
+        expect(ongoingGame["status"]).toStrictEqual(Cl.uint(1)); // Ongoing
+        
+        const { events } = simnet.callPublicFn("chessxu", "resign", [Cl.uint(gameId)], wallet_1);
+        
+        const transfer = events.find(e => e.event === "stx_transfer_event")!;
+        expect(transfer.data.recipient).toBe(wallet_2);
+        expect(transfer.data.amount).toBe("2000");
+        
+        const endedGame = getGame(gameId);
+        expect(endedGame["status"]).toStrictEqual(Cl.uint(3)); // Black Wins
+    });
+
     // test: white resigns black wins full lifecycle
     // test: black resigns white wins full lifecycle
     // test: owner resolves white wins

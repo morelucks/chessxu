@@ -19,6 +19,13 @@ function setupGame(wager: number = 0, isStx: boolean = true, players: number = 2
     return Number(gameId);
 }
 
+// Helper to extract game data
+function getGame(gameId: number) {
+    const { result } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(gameId)], wallet_1);
+    const val = (result as any).value;
+    return val.data || val.value || val;
+}
+
 describe("chessxu - integration tests", () => {
     it("should initialize the test suite", () => {
         expect(true).toBe(true);

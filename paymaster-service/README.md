@@ -28,6 +28,22 @@ docker build -t chessxu-paymaster .
 docker run -p 3001:3001 --env-file .env chessxu-paymaster
 ```
 
+## Docker Compose (with Redis)
+
+```bash
+cp .env.example .env
+# Fill in required env vars
+docker compose up -d
+```
+
+## PM2 (VPS)
+
+```bash
+npm run build
+pm2 start ecosystem.config.js
+pm2 save
+```
+
 ## Validation Rules
 
 - Only `chainId: 42220` (Celo Mainnet) is accepted

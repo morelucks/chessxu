@@ -44,7 +44,7 @@ export const PAYMASTER_CONFIG = {
   SERVICE_URL: 'https://paymaster.chessxu.xyz/api/v1',
   /** ERC-4337 EntryPoint v0.6 on Celo mainnet */
   ENTRYPOINT_ADDRESS: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789' as `0x${string}`,
-  /** Deployed ChessxuPaymaster contract address */
+  /** Deployed ChessxuPaymaster contract address (Celo Mainnet) */
   PAYMASTER_ADDRESS: '0x0000000000000000000000000000000000000000' as `0x${string}`,
   /** Bundler RPC endpoint (Pimlico / self-hosted) */
   BUNDLER_RPC_URL: 'https://bundler.chessxu.xyz/rpc',
@@ -52,6 +52,15 @@ export const PAYMASTER_CONFIG = {
   TIMEOUT_MS: 10_000,
   /** Maximum retry attempts for transient failures */
   MAX_RETRIES: 3,
+  /** Whitelisted Chessxu game contract */
+  CHESSXU_CONTRACT: '0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E' as `0x${string}`,
+  /** Sponsored function selectors */
+  SPONSORED_SELECTORS: [
+    '0x' as `0x${string}`, // submitMove(uint256,string)
+    '0x' as `0x${string}`, // createGame(uint256,bool)
+    '0x' as `0x${string}`, // joinGame(uint256)
+    '0x' as `0x${string}`, // resign(uint256)
+  ],
 };
 
 export const CELO_FEE_CURRENCIES = [

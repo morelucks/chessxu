@@ -46,7 +46,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 
@@ -78,7 +78,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (requiresAccess && !hasAccess) {
+    if (activeChain === 'celo' && !celo.gasSponsored && requiresAccess && !hasAccess) {
       return;
     }
 
@@ -114,7 +114,7 @@ export default function PvPScreen() {
                 PvP Matchmaking
             </h1>
             <p className="text-slate-400 text-sm">Create or join a game with on-chain staking</p>
-            {celo.gasSponsored && activeChain === 'celo' && (
+            {celo.gasSponsored && (
               <p className="text-emerald-400 text-xs font-medium animate-pulse mt-1">
                 ✨ All game transactions are gasless — no CELO or stablecoins needed
               </p>
@@ -167,38 +167,27 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {requiresAccess && (
+                {activeChain === 'celo' && !celo.gasSponsored && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div>
                         <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">Daily Access</p>
-                        <h3 className="mt-1 text-lg font-semibold text-white">
-                          {activeChain === 'stacks' ? 'Unlock Stacks Match Access' : 'Unlock Celo Match Access'}
-                        </h3>
+                        <h3 className="mt-1 text-lg font-semibold text-white">Unlock Celo match access</h3>
                         <p className="mt-2 text-emerald-100/80 text-xs">
-                          {activeChain === 'stacks'
-                            ? "Required for Stacks match creation/joining. Price: 0.5 STX."
-                            : `Required for Celo match creation/joining. Price: ${celo.network.DAILY_ACCESS_CUSD} cUSD.`}
+                          Required for Celo match creation/joining. Price: {celo.network.DAILY_ACCESS_CUSD} cUSD.
                         </p>
                         <p className="mt-2 text-[10px] text-emerald-100/70">
-                          {activeChain === 'stacks'
-                            ? (expiresAt && hasAccess ? `Access active until ${new Date(expiresAt).toLocaleString()}` : 'Access not active')
-                            : `cUSD balance: ${cusdBalance ? Number(cusdBalance).toFixed(2) : '--'}${expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}`}
+                          cUSD balance: {cusdBalance ? Number(cusdBalance).toFixed(2) : '--'}
+                          {expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}
                         </p>
                       </div>
                       <button
                         type="button"
                         onClick={() => purchaseAccess().catch(() => undefined)}
                         disabled={isPurchasing || hasAccess}
-                        className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(52,211,153,0.3)] active:scale-95"
+                        className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs"
                       >
-                        {hasAccess
-                          ? 'Access Active'
-                          : isPurchasing
-                            ? 'Processing...'
-                            : activeChain === 'stacks'
-                              ? 'Pay With STX'
-                              : 'Pay With cUSD'}
+                        {hasAccess ? 'Access Active' : isPurchasing ? 'Processing...' : 'Pay With cUSD'}
                       </button>
                     </div>
                   </div>
@@ -212,10 +201,10 @@ export default function PvPScreen() {
                         </div>
                         <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Create Match</h3>
-                            {celo.gasSponsored && activeChain === 'celo' && <GaslessBadge showLabel={false} size="sm" />}
+                            {celo.gasSponsored && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
                         <p className="text-sm text-slate-400">
-                          {celo.gasSponsored && activeChain === 'celo'
+                          {celo.gasSponsored 
                             ? "Start a zero-gas match securely on Celo. Pay only your wager amount."
                             : "Start a match with a custom wager."}
                         </p>
@@ -246,10 +235,10 @@ export default function PvPScreen() {
                             </div>
                             <button  
                                 onClick={handleCreateMatch}
-                                disabled={isCreatingMatch || (requiresAccess && !hasAccess)}
+                                disabled={isCreatingMatch || (activeChain === 'celo' && requiresAccess && !hasAccess)}
                                 className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] active:scale-95 transition disabled:opacity-60"
                             >
-                                {requiresAccess && !hasAccess
+                                {activeChain === 'celo' && requiresAccess && !hasAccess
                                   ? "Unlock Access First"
                                   : isCreatingMatch
                                     ? "Broadcasting..."
@@ -265,10 +254,10 @@ export default function PvPScreen() {
                         </div>
                         <div className="flex items-center justify-between">
                             <h3 className="text-xl font-bold">Join Match</h3>
-                            {celo.gasSponsored && activeChain === 'celo' && <GaslessBadge showLabel={false} size="sm" />}
+                            {celo.gasSponsored && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
                         <p className="text-sm text-slate-400">
-                          {celo.gasSponsored && activeChain === 'celo'
+                          {celo.gasSponsored 
                             ? "Join an existing match. Gas fees are sponsored."
                             : "Join an existing match by ID."}
                         </p>
@@ -285,10 +274,10 @@ export default function PvPScreen() {
                             </div>
                             <button 
                                 onClick={handleJoinMatch}
-                                disabled={isJoiningMatch || !idToJoin.trim() || (requiresAccess && !hasAccess)}
+                                disabled={isJoiningMatch || !idToJoin.trim() || (activeChain === 'celo' && requiresAccess && !hasAccess)}
                                 className="w-full py-4 border border-blue-500/50 hover:bg-blue-500/10 rounded-xl font-bold active:scale-95 transition disabled:opacity-60"
                             >
-                                {requiresAccess && !hasAccess
+                                {activeChain === 'celo' && requiresAccess && !hasAccess
                                   ? "Unlock Access First"
                                   : isJoiningMatch
                                     ? "Joining..."

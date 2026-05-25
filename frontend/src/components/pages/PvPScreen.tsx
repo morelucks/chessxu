@@ -171,6 +171,7 @@ export default function PvPScreen() {
                 {/* Network Switcher */}
                 <div className="flex gap-2">
                     <button
+                        aria-label="Switch to Stacks network"
                         onClick={() => setActiveChain('stacks')}
                         className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition ${activeChain === 'stacks' ? 'bg-orange-500/20 text-orange-300 ring-1 ring-orange-500/40' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
                     >

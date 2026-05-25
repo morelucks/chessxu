@@ -201,12 +201,27 @@ export function useMiniPayAccess() {
         status: 'pending',
         message: 'Payment sent. Verifying onchain confirmation.',
       });
-      setIsPurchasing(false);
+
+      const verified = await celoService.verifyDailyAccessPaymentCelo(txHash, celoAddress);
+      if (!verified) {
+        throw new Error('Payment verification failed.');
+      }
+
+      const nextExpiry = new Date(Date.now() + CELO_CONFIG.DAILY_ACCESS_DURATION_MS).toISOString();
+      setMiniPayAccess(nextExpiry, txHash);
+      updateToast(toastId, {
+        txId: txHash,
+        status: 'success',
+        message: 'Daily access unlocked with CELO.',
+      });
+      await refreshBalance();
+      return txHash;
     } catch (error) {
       const message = error instanceof Error ? error.message : 'CELO purchase failed.';
       updateToast(toastId, { status: 'error', message });
-      setIsPurchasing(false);
       throw error;
+    } finally {
+      setIsPurchasing(false);
     }
   };
 
@@ -220,11 +235,13 @@ export function useMiniPayAccess() {
 
   return {
     cusdBalance,
+    celoNativeBalance,
     expiresAt,
     hasAccess,
     isPurchasing,
     isRefreshingBalance,
     purchaseAccess,
+    purchaseAccessWithCelo,
     refreshBalance,
     requiresAccess,
     accessReason,

@@ -235,11 +235,13 @@ export function useMiniPayAccess() {
 
   return {
     cusdBalance,
+    celoNativeBalance,
     expiresAt,
     hasAccess,
     isPurchasing,
     isRefreshingBalance,
     purchaseAccess,
+    purchaseAccessWithCelo,
     refreshBalance,
     requiresAccess,
     accessReason,

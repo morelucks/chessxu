@@ -11,3 +11,4 @@ Offline-first game history with IndexedDB caching.
 - Player statistics
 
 ## Usage
+Navigate to /history to view your game history.

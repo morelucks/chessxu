@@ -239,3 +239,21 @@ const STACKS_ADDRESS_REGEX = /^S[PMNT][0-9A-HJKMNP-TV-Z]{38,40}$/;
 export function isValidStacksAddress(address: string): boolean {
   return STACKS_ADDRESS_REGEX.test(address);
 }
+
+/**
+ * Whether a wager is a valid on-chain amount: a positive, safe integer number
+ * of base units. Zero is rejected (use {@link GAME_STATUS} flows for free
+ * games) as are fractional or negative amounts.
+ */
+export function isValidWager(amount: number): boolean {
+  return Number.isSafeInteger(amount) && amount > 0;
+}
+
+/** Assert a wager is valid, throwing a descriptive error otherwise. */
+export function assertValidWager(amount: number): void {
+  if (!isValidWager(amount)) {
+    throw new Error(
+      `Invalid wager: expected a positive integer of base units, got ${amount}`
+    );
+  }
+}

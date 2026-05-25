@@ -25,7 +25,7 @@ export default function PvPScreen() {
   
   const stacks = useStacksChess();
   const celo = useCeloChess();
-  const { cusdBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, requiresAccess } = useMiniPayAccess();
+  const { cusdBalance, celoNativeBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, purchaseAccessWithCelo, requiresAccess } = useMiniPayAccess();
 
   const timeControls = [
     { label: 'Unlimited', value: null },

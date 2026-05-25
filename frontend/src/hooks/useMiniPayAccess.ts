@@ -58,9 +58,14 @@ export function useMiniPayAccess() {
 
     setIsRefreshingBalance(true);
     try {
-      const balance = await celoService.getStableTokenBalance(celoAddress as `0x${string}`, CELO_CONFIG.CUSD_ADDRESS);
+      const [balance, nativeBalance] = await Promise.all([
+        celoService.getStableTokenBalance(celoAddress as `0x${string}`, CELO_CONFIG.CUSD_ADDRESS),
+        celoService.getNativeBalance(celoAddress as `0x${string}`),
+      ]);
       const formatted = formatUnits(balance, 18);
+      const formattedNative = formatUnits(nativeBalance, 18);
       setCusdBalance(formatted);
+      setCeloNativeBalance(formattedNative);
       return formatted;
     } catch (error) {
       console.error('Failed to refresh cUSD balance:', error);

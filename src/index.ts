@@ -409,3 +409,11 @@ export function activeColorFromFen(fen: string): PlayerColor | null {
   const field = parts[1];
   return field === "w" || field === "b" ? field : null;
 }
+
+/**
+ * Whether the game's `turn` field agrees with the side-to-move encoded in its
+ * FEN board state. Returns `false` if the board state has no parseable colour.
+ */
+export function turnMatchesBoard(game: Game): boolean {
+  return activeColorFromFen(game.boardState) === game.turn;
+}

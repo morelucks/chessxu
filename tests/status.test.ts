@@ -5,6 +5,9 @@ import {
   STATUS_NAMES,
   isValidGameStatus,
   getStatusName,
+  isAwaitingOpponent,
+  isGameActive,
+  isGameOver,
 } from "../src/index";
 
 test("STATUS_NAMES is a complete reverse map of GAME_STATUS", () => {
@@ -22,4 +25,22 @@ test("isValidGameStatus accepts defined statuses and rejects others", () => {
 test("getStatusName resolves codes to names", () => {
   assert.equal(getStatusName(GAME_STATUS.DRAW), "DRAW");
   assert.equal(getStatusName(99), undefined);
+});
+
+test("status predicates are mutually consistent across all statuses", () => {
+  const partition = (s: number) =>
+    [isAwaitingOpponent(s), isGameActive(s), isGameOver(s)].filter(Boolean).length;
+  for (const code of Object.values(GAME_STATUS)) {
+    // Every defined status belongs to exactly one lifecycle phase.
+    assert.equal(partition(code), 1, `status ${code} matched multiple phases`);
+  }
+});
+
+test("isGameOver is true for wins, draw and cancellation only", () => {
+  assert.equal(isGameOver(GAME_STATUS.WHITE_WINS), true);
+  assert.equal(isGameOver(GAME_STATUS.BLACK_WINS), true);
+  assert.equal(isGameOver(GAME_STATUS.DRAW), true);
+  assert.equal(isGameOver(GAME_STATUS.CANCELLED), true);
+  assert.equal(isGameOver(GAME_STATUS.WAITING), false);
+  assert.equal(isGameOver(GAME_STATUS.ONGOING), false);
 });

@@ -199,3 +199,43 @@ export type PlayerColor = "w" | "b";
 export function opponentOf(color: PlayerColor): PlayerColor {
   return color === "w" ? "b" : "w";
 }
+
+/**
+ * Determine which colour an address plays in a game, or `null` if the address
+ * is not one of the two players.
+ */
+export function colorOf(game: Game, address: string): PlayerColor | null {
+  if (game.playerW === address) return "w";
+  if (game.playerB === address) return "b";
+  return null;
+}
+
+/** Whether the given address is one of the two players in the game. */
+export function isPlayer(game: Game, address: string): boolean {
+  return colorOf(game, address) !== null;
+}
+
+/**
+ * Whether it is the given address's turn to move. Requires the game to be
+ * active and the address to be the player whose colour matches `game.turn`.
+ */
+export function isPlayersTurn(game: Game, address: string): boolean {
+  if (!isGameActive(game.status)) return false;
+  return colorOf(game, address) === game.turn;
+}
+
+// ---------------------------------------------------------------------------
+// Validation helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Stacks address shape: a version prefix (`SP`/`SM` mainnet, `ST`/`SN`
+ * testnet) followed by Crockford base32 characters (which omit I, L, O and U).
+ * This is a cheap structural check, not a checksum validation.
+ */
+const STACKS_ADDRESS_REGEX = /^S[PMNT][0-9A-HJKMNP-TV-Z]{38,40}$/;
+
+/** Whether a string is structurally a valid Stacks (standard) address. */
+export function isValidStacksAddress(address: string): boolean {
+  return STACKS_ADDRESS_REGEX.test(address);
+}

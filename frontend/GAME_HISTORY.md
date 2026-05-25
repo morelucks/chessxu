@@ -15,3 +15,4 @@ Navigate to /history to view your game history.
 
 ## Architecture
 Uses IndexedDB for local storage.
+Syncs from Stacks and Celo blockchains.

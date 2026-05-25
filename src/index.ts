@@ -305,3 +305,65 @@ export function parseChess(value: string): number {
   const baseUnits = Number(whole) * ONE_CHESS + Number(fracPadded);
   return sign === "-" ? -baseUnits : baseUnits;
 }
+
+// ---------------------------------------------------------------------------
+// Explorer URL helpers (Hiro explorer, mainnet)
+// ---------------------------------------------------------------------------
+
+/** Base URL of the Hiro Stacks explorer. */
+export const EXPLORER_BASE_URL = "https://explorer.hiro.so";
+
+/** Build an explorer link for a transaction id. */
+export function txExplorerUrl(txid: string): string {
+  const id = txid.startsWith("0x") ? txid : `0x${txid}`;
+  return `${EXPLORER_BASE_URL}/txid/${id}?chain=mainnet`;
+}
+
+/** Build an explorer link for an account or contract address. */
+export function addressExplorerUrl(address: string): string {
+  return `${EXPLORER_BASE_URL}/address/${address}?chain=mainnet`;
+}
+
+// ---------------------------------------------------------------------------
+// Clarity error response helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Extract a numeric error code from a Clarity error representation such as
+ * `"(err u102)"` or a bare `"u102"`. Returns `null` if no code is found.
+ */
+export function parseClarityErrorCode(value: string): number | null {
+  const match = /u(\d+)/.exec(value);
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * Describe a contract error code as `"ERR_NAME: message"`, or just the
+ * fallback message for unknown codes.
+ */
+export function describeError(code: number): string {
+  const name = getErrorName(code);
+  const message = getErrorMessage(code);
+  return name ? `${name}: ${message}` : message;
+}
+
+/**
+ * A typed error wrapping a Chessxu contract error code. Carries the numeric
+ * `code` and (when known) the `name` alongside a human-readable message.
+ */
+export class ChessxuError extends Error {
+  readonly code: number;
+  readonly name: string;
+
+  constructor(code: number) {
+    super(getErrorMessage(code));
+    this.code = code;
+    this.name = getErrorName(code) ?? "ChessxuError";
+  }
+
+  /** Build a {@link ChessxuError} from a Clarity error string, or return null. */
+  static fromClarity(value: string): ChessxuError | null {
+    const code = parseClarityErrorCode(value);
+    return code === null ? null : new ChessxuError(code);
+  }
+}

@@ -5,6 +5,7 @@ import PvPScreen from "../components/pages/PvPScreen";
 import LeaderboardPage from "../components/pages/LeaderboardPage";
 import useAppStore, { userSession } from "../zustand/store";
 import { ToasterProvider } from "../components/ui/toasts/ToasterProvider";
+import { TxHud } from "../components/ui/TxHud";
 import { useMiniPay } from "../hooks/useMiniPay";
 import { useFarcaster } from "../hooks/useFarcaster";
 import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
@@ -53,6 +54,8 @@ function App() {
           </div>
           <BottomNav />
         </div>
+        {/* Transaction Status HUD — rendered outside route tree so it persists across navigation */}
+        <TxHud />
       </BrowserRouter>
     </ToasterProvider>
   );

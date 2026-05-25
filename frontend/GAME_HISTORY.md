@@ -2,3 +2,5 @@
 
 ## Overview
 Offline-first game history with IndexedDB caching.
+
+## Features

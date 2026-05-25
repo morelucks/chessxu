@@ -27,6 +27,7 @@ export function useMiniPayAccess() {
   const setMiniPayAccess = useAppStore((state) => state.setMiniPayAccess);
   const clearMiniPayAccess = useAppStore((state) => state.clearMiniPayAccess);
   const [cusdBalance, setCusdBalance] = useState<string | null>(null);
+  const [celoNativeBalance, setCeloNativeBalance] = useState<string | null>(null);
   const [isRefreshingBalance, setIsRefreshingBalance] = useState(false);
   const [isPurchasing, setIsPurchasing] = useState(false);
 
@@ -45,19 +46,26 @@ export function useMiniPayAccess() {
   const refreshBalance = async () => {
     if (activeChain === 'stacks') {
       setCusdBalance(null);
+      setCeloNativeBalance(null);
       return null;
     }
 
     if (!celoAddress) {
       setCusdBalance(null);
+      setCeloNativeBalance(null);
       return null;
     }
 
     setIsRefreshingBalance(true);
     try {
-      const balance = await celoService.getStableTokenBalance(celoAddress as `0x${string}`, CELO_CONFIG.CUSD_ADDRESS);
+      const [balance, nativeBalance] = await Promise.all([
+        celoService.getStableTokenBalance(celoAddress as `0x${string}`, CELO_CONFIG.CUSD_ADDRESS),
+        celoService.getNativeBalance(celoAddress as `0x${string}`),
+      ]);
       const formatted = formatUnits(balance, 18);
+      const formattedNative = formatUnits(nativeBalance, 18);
       setCusdBalance(formatted);
+      setCeloNativeBalance(formattedNative);
       return formatted;
     } catch (error) {
       console.error('Failed to refresh cUSD balance:', error);

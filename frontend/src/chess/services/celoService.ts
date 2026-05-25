@@ -701,14 +701,6 @@ const celoService = {
   },
 
   /**
-   * Fetches the total game count from the contract
-   * Alias for getLastGameId for consistency with other services
-   */
-  getGameCount: async () => {
-    return await celoService.getLastGameId();
-  },
-
-  /**
    * Checks if the game wager is in native CELO
    * @param {number} gameId - The game ID
    */

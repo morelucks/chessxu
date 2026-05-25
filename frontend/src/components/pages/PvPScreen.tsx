@@ -18,6 +18,7 @@ export default function PvPScreen() {
   }, []);
 
   const activeChain = useAppStore((state) => state.activeChain);
+  const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
   const isMiniPay = useAppStore((state) => state.miniPayDetected);
@@ -165,6 +166,13 @@ export default function PvPScreen() {
                         <p className="text-[10px] text-slate-500 uppercase tracking-widest">Connected as</p>
                         <p className="text-xs font-mono text-slate-300">{address?.slice(0, 6)}...{address?.slice(-4)}</p>
                     </div>
+                </div>
+
+                {/* Network Switcher */}
+                <div className="flex gap-2">
+                    <button onClick={() => setActiveChain('stacks')}>
+                        Play with Stacks
+                    </button>
                 </div>
 
                 {requiresAccess && (

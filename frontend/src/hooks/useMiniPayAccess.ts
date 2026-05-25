@@ -194,6 +194,13 @@ export function useMiniPayAccess() {
 
     try {
       await celoService.ensureCorrectNetwork();
+
+      const txHash = await celoService.payForDailyAccessWithCelo();
+      updateToast(toastId, {
+        txId: txHash,
+        status: 'pending',
+        message: 'Payment sent. Verifying onchain confirmation.',
+      });
       setIsPurchasing(false);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'CELO purchase failed.';

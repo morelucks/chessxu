@@ -85,3 +85,25 @@ export function getErrorName(code: number): string | undefined {
 export function isKnownError(code: number): boolean {
   return code in ERROR_NAMES;
 }
+
+/** Human-readable descriptions for each contract error code. */
+export const ERROR_MESSAGES: Record<number, string> = {
+  [ERRORS.ERR_NOT_OWNER]: "Caller is not the contract owner",
+  [ERRORS.ERR_GAME_EXISTS]: "A game with this id already exists",
+  [ERRORS.ERR_GAME_NOT_FOUND]: "No game exists with this id",
+  [ERRORS.ERR_NOT_WAITING]: "Game is not waiting for an opponent",
+  [ERRORS.ERR_ALREADY_JOINED]: "Player has already joined this game",
+  [ERRORS.ERR_INVALID_WAGER]: "Wager amount is invalid",
+  [ERRORS.ERR_NOT_PLAYER]: "Caller is not a player in this game",
+  [ERRORS.ERR_NOT_YOUR_TURN]: "It is not the caller's turn to move",
+  [ERRORS.ERR_GAME_NOT_ACTIVE]: "Game is not currently active",
+  [ERRORS.ERR_INVALID_STATUS]: "Game status transition is invalid",
+};
+
+/**
+ * Resolve a contract error code to a human-readable message. Falls back to a
+ * generic message that still surfaces the raw code for unknown errors.
+ */
+export function getErrorMessage(code: number): string {
+  return ERROR_MESSAGES[code] ?? `Unknown contract error (code ${code})`;
+}

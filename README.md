@@ -17,10 +17,15 @@ The repository is organized into a monorepo containing both the frontend web app
 
 ```text
 chessxu/
+├── src/               # @morelucks/chessxu-sdk TypeScript SDK
 ├── frontend/          # React + Vite web application
 ├── stacks-contracts/  # Clarinet project with Stacks smart contracts
 └── celo-contracts/    # Hardhat project with Celo smart contracts (EVM)
 ```
+
+The SDK's helper API (error decoding, game-status predicates, wager and address
+validation, CHESS amount formatting and explorer links) is documented in
+[`docs/SDK.md`](docs/SDK.md). Run its test suite with `npm test`.
 
 ---
 

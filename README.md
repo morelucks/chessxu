@@ -59,6 +59,33 @@ clarinet console
 
 ---
 
+## 📦 @morelucks/chessxu-sdk
+
+The Chessxu platform exports a lightweight TypeScript SDK for interacting with the Stacks smart contracts. This allows other developers to easily fetch game states, decode on-chain errors, and build custom bots or interfaces for Chessxu.
+
+### Installation
+
+```bash
+npm install @morelucks/chessxu-sdk
+```
+
+### Usage Example
+
+```typescript
+import { CONTRACTS, GAME_STATUS, ERRORS } from '@morelucks/chessxu-sdk';
+
+console.log(`Connecting to game contract at: ${CONTRACTS.GAME}`);
+
+// Easily map contract state uints to readable statuses
+const getStatus = (statusId: number) => {
+  if (statusId === GAME_STATUS.ONGOING) return "Game is Active";
+  if (statusId === GAME_STATUS.WHITE_WINS) return "White Won";
+  return "Unknown";
+};
+```
+
+---
+
 ## 📚 Technical Architecture
 
 ### **The Frontend (`frontend/`)**

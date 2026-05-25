@@ -126,3 +126,23 @@ export function isValidGameStatus(status: number): boolean {
 export function getStatusName(status: number): string | undefined {
   return STATUS_NAMES[status];
 }
+
+/** Whether the game is open and waiting for a second player to join. */
+export function isAwaitingOpponent(status: number): boolean {
+  return status === GAME_STATUS.WAITING;
+}
+
+/** Whether the game is in progress (joined and not yet finished). */
+export function isGameActive(status: number): boolean {
+  return status === GAME_STATUS.ONGOING;
+}
+
+/** Whether the game has reached a terminal state (win, draw or cancelled). */
+export function isGameOver(status: number): boolean {
+  return (
+    status === GAME_STATUS.WHITE_WINS ||
+    status === GAME_STATUS.BLACK_WINS ||
+    status === GAME_STATUS.DRAW ||
+    status === GAME_STATUS.CANCELLED
+  );
+}

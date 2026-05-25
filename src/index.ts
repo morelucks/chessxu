@@ -199,3 +199,18 @@ export type PlayerColor = "w" | "b";
 export function opponentOf(color: PlayerColor): PlayerColor {
   return color === "w" ? "b" : "w";
 }
+
+/**
+ * Determine which colour an address plays in a game, or `null` if the address
+ * is not one of the two players.
+ */
+export function colorOf(game: Game, address: string): PlayerColor | null {
+  if (game.playerW === address) return "w";
+  if (game.playerB === address) return "b";
+  return null;
+}
+
+/** Whether the given address is one of the two players in the game. */
+export function isPlayer(game: Game, address: string): boolean {
+  return colorOf(game, address) !== null;
+}

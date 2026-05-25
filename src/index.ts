@@ -37,3 +37,22 @@ export interface Game {
   turn: "w" | "b";
   status: number;
 }
+
+// ---------------------------------------------------------------------------
+// Contract identifier helpers
+// ---------------------------------------------------------------------------
+
+/** A fully-qualified Stacks contract identifier: `<address>.<contract-name>`. */
+export type ContractId = `${string}.${string}`;
+
+/**
+ * Split a fully-qualified contract identifier into its address and name parts.
+ * Throws if the identifier is not of the form `<address>.<contract-name>`.
+ */
+export function parseContractId(id: string): { address: string; name: string } {
+  const dot = id.indexOf(".");
+  if (dot <= 0 || dot === id.length - 1) {
+    throw new Error(`Invalid contract identifier: "${id}"`);
+  }
+  return { address: id.slice(0, dot), name: id.slice(dot + 1) };
+}

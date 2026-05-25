@@ -223,3 +223,19 @@ export function isPlayersTurn(game: Game, address: string): boolean {
   if (!isGameActive(game.status)) return false;
   return colorOf(game, address) === game.turn;
 }
+
+// ---------------------------------------------------------------------------
+// Validation helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Stacks address shape: a version prefix (`SP`/`SM` mainnet, `ST`/`SN`
+ * testnet) followed by Crockford base32 characters (which omit I, L, O and U).
+ * This is a cheap structural check, not a checksum validation.
+ */
+const STACKS_ADDRESS_REGEX = /^S[PMNT][0-9A-HJKMNP-TV-Z]{38,40}$/;
+
+/** Whether a string is structurally a valid Stacks (standard) address. */
+export function isValidStacksAddress(address: string): boolean {
+  return STACKS_ADDRESS_REGEX.test(address);
+}

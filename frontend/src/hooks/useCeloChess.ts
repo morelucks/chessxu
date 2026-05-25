@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
+import { useTransactionTracker } from './useTransactionTracker';
 import useAppStore from '../zustand/store';
 import celoService from '../chess/services/celoService';
 import { CELO_CONFIG } from '../chess/blockchainConstants';
@@ -11,6 +12,7 @@ export const useCeloChess = () => {
   const miniPayAccessExpiresAt = useAppStore((state) => state.miniPayAccessExpiresAt);
   const activeChain = useAppStore((state) => state.activeChain);
   const { addToast } = useToaster();
+  const { trackTransaction } = useTransactionTracker();
   const network = CELO_CONFIG;
 
   const [gasSponsored, setGasSponsored] = useState(celoService.gasSponsored);
@@ -57,6 +59,7 @@ export const useCeloChess = () => {
           ? 'Match created! Gas fees sponsored by Chessxu.' 
           : 'Celo game creation transaction broadcasted'
       });
+      trackTransaction(txHash, 'Create Game', 'celo');
       console.log('Celo transaction broadcasted:', txHash);
       return txHash;
     } catch (error) {
@@ -83,6 +86,7 @@ export const useCeloChess = () => {
           ? 'Match joined! Gas fees sponsored by Chessxu.' 
           : 'Celo join game transaction broadcasted'
       });
+      trackTransaction(txHash, 'Join Game', 'celo');
       console.log('Celo Join Game transaction broadcasted:', txHash);
       return txHash;
     } catch (error) {
@@ -108,6 +112,7 @@ export const useCeloChess = () => {
           ? 'Move submitted! Zero gas fees applied.'
           : 'Celo move submission broadcasted'
       });
+      trackTransaction(txHash, 'Submit Move', 'celo');
       console.log('Celo move submitted:', txHash);
       return txHash;
     } catch (error) {
@@ -133,6 +138,7 @@ export const useCeloChess = () => {
           ? 'Match resigned. Gas fees sponsored.'
           : 'Celo resignation transaction broadcasted'
       });
+      trackTransaction(txHash, 'Resign', 'celo');
       console.log('Celo resigned:', txHash);
       return txHash;
     } catch (error) {

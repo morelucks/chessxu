@@ -179,6 +179,7 @@ export default function PvPScreen() {
                         Play with Stacks
                     </button>
                     <button
+                        aria-label="Switch to Celo network"
                         onClick={() => setActiveChain('celo')}
                         className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition ${activeChain === 'celo' ? 'bg-yellow-500/20 text-yellow-300 ring-1 ring-yellow-500/40' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
                     >

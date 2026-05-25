@@ -66,7 +66,7 @@ clarinet console
 
 ## 📦 @morelucks/chessxu-sdk
 
-The Chessxu platform exports a lightweight TypeScript SDK for interacting with the Stacks smart contracts. This allows other developers to easily fetch game states, decode on-chain errors, and build custom bots or interfaces for Chessxu.
+The Chessxu platform exports a lightweight TypeScript SDK for interacting with the Stacks smart contracts. This allows other developers to easily fetch game states, decode on-chain errors, and build custom dashboards or alternative interfaces for Chessxu.
 
 ### Installation
 

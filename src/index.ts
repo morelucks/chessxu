@@ -56,3 +56,13 @@ export function parseContractId(id: string): { address: string; name: string } {
   }
   return { address: id.slice(0, dot), name: id.slice(dot + 1) };
 }
+
+/** Return just the deployer address part of a contract identifier. */
+export function getContractAddress(id: string): string {
+  return parseContractId(id).address;
+}
+
+/** Return just the contract-name part of a contract identifier. */
+export function getContractName(id: string): string {
+  return parseContractId(id).name;
+}

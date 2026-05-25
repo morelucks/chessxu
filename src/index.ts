@@ -377,3 +377,26 @@ export class ChessxuError extends Error {
     return code === null ? null : new ChessxuError(code);
   }
 }
+
+// ---------------------------------------------------------------------------
+// Board / FEN helpers
+// ---------------------------------------------------------------------------
+
+/** Standard chess starting position in Forsyth–Edwards Notation. */
+export const STARTING_FEN =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+/**
+ * Whether a board state string represents the initial position. Comparison is
+ * whitespace-insensitive so encodings with extra padding still match.
+ */
+export function isStartingPosition(boardState: string): boolean {
+  return boardState.trim() === STARTING_FEN;
+}
+
+/** Read the side to move ("w"/"b") encoded in a FEN string, if present. */
+export function activeColorFromFen(fen: string): PlayerColor | null {
+  const parts = fen.trim().split(/\s+/);
+  const field = parts[1];
+  return field === "w" || field === "b" ? field : null;
+}

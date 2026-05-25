@@ -4,3 +4,4 @@
 - Added automatic sync from blockchain
 - Added game viewer for reviewing past games
 - Added player statistics dashboard
+- Added filter and sort capabilities

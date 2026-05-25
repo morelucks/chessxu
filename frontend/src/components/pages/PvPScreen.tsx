@@ -178,7 +178,7 @@ export default function PvPScreen() {
                         <p className="mt-2 text-emerald-100/80 text-xs">
                           {activeChain === 'stacks'
                             ? "Required for Stacks match creation/joining. Price: 0.5 STX."
-                            : `Required for Celo match creation/joining. Price: ${celo.network.DAILY_ACCESS_CUSD} cUSD.`}
+                            : `Required for Celo match creation/joining. Price: ${celo.network.DAILY_ACCESS_CUSD} cUSD or 0.05 CELO.`}
                         </p>
                         <p className="mt-2 text-[10px] text-emerald-100/70">
                           {activeChain === 'stacks'

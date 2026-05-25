@@ -180,6 +180,29 @@ export function useMiniPayAccess() {
     }
   };
 
+  const purchaseAccessWithCelo = async () => {
+    if (!celoAddress) {
+      throw new Error('Connect your Celo wallet before paying for access.');
+    }
+
+    setIsPurchasing(true);
+    const toastId = addToast({
+      txId: '',
+      status: 'pending',
+      message: 'Preparing your CELO access purchase.',
+    });
+
+    try {
+      await celoService.ensureCorrectNetwork();
+      setIsPurchasing(false);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'CELO purchase failed.';
+      updateToast(toastId, { status: 'error', message });
+      setIsPurchasing(false);
+      throw error;
+    }
+  };
+
   const accessReason = gasSponsored 
     ? "Gas is sponsored by Chessxu foundation" 
     : activeChain === 'stacks'

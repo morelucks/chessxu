@@ -170,6 +170,9 @@ export default function PvPScreen() {
 
                 {/* Network Switcher */}
                 <div className="flex gap-2">
+                    <button onClick={() => setActiveChain('stacks')}>
+                        Play with Stacks
+                    </button>
                 </div>
 
                 {requiresAccess && (

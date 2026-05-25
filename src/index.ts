@@ -240,6 +240,16 @@ export function isValidStacksAddress(address: string): boolean {
   return STACKS_ADDRESS_REGEX.test(address);
 }
 
+/** Whether the address is a valid mainnet address (`SP`/`SM` prefix). */
+export function isMainnetAddress(address: string): boolean {
+  return isValidStacksAddress(address) && /^S[PM]/.test(address);
+}
+
+/** Whether the address is a valid testnet address (`ST`/`SN` prefix). */
+export function isTestnetAddress(address: string): boolean {
+  return isValidStacksAddress(address) && /^S[TN]/.test(address);
+}
+
 /**
  * Whether a wager is a valid on-chain amount: a positive, safe integer number
  * of base units. Zero is rejected (use {@link GAME_STATUS} flows for free

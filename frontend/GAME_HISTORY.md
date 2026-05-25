@@ -4,3 +4,4 @@
 Offline-first game history with IndexedDB caching.
 
 ## Features
+- View past games offline

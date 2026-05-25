@@ -284,3 +284,24 @@ export function formatChess(baseUnits: number): string {
   const body = fracStr ? `${whole}.${fracStr}` : `${whole}`;
   return negative ? `-${body}` : body;
 }
+
+/**
+ * Parse a decimal CHESS string (e.g. `"1.5"`) into an integer number of base
+ * units. Rejects malformed input and amounts with more than
+ * {@link CHESS_DECIMALS} fractional digits.
+ */
+export function parseChess(value: string): number {
+  const match = /^(-?)(\d+)(?:\.(\d+))?$/.exec(value.trim());
+  if (!match) {
+    throw new Error(`Invalid CHESS amount: "${value}"`);
+  }
+  const [, sign, whole, frac = ""] = match;
+  if (frac.length > CHESS_DECIMALS) {
+    throw new Error(
+      `Too many decimal places: CHESS supports at most ${CHESS_DECIMALS}`
+    );
+  }
+  const fracPadded = frac.padEnd(CHESS_DECIMALS, "0");
+  const baseUnits = Number(whole) * ONE_CHESS + Number(fracPadded);
+  return sign === "-" ? -baseUnits : baseUnits;
+}

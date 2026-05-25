@@ -23,6 +23,7 @@ import {
 import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
+import { useTransactionTracker } from './useTransactionTracker';
 import { CONTRACTS, NETWORK, CLARITY_ERRORS, LEADERBOARD_ERRORS } from '../chess/blockchainConstants';
 
 const [CONTRACT_ADDRESS, CONTRACT_NAME] = CONTRACTS.GAME.split('.');
@@ -32,6 +33,7 @@ const [LEADERBOARD_ADDRESS, LEADERBOARD_NAME] = CONTRACTS.LEADERBOARD.split('.')
 export const useStacksChess = () => {
   const address = useAppStore((state) => state.address);
   const { addToast } = useToaster();
+  const { trackTransaction } = useTransactionTracker();
   const network = NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
 
   const createGame = async (wager: number, isStxMode: boolean) => {
@@ -67,6 +69,7 @@ export const useStacksChess = () => {
           status: 'success',
           message: 'Game creation transaction broadcasted'
         });
+        trackTransaction(data.txId, 'Create Game', 'stacks');
         console.log('Transaction broadcasted:', data.txId);
       },
     });
@@ -105,6 +108,7 @@ export const useStacksChess = () => {
           status: 'success',
           message: 'Join game transaction broadcasted'
         });
+        trackTransaction(data.txId, 'Join Game', 'stacks');
         console.log('Join Game transaction broadcasted:', data.txId);
       },
     });
@@ -130,6 +134,7 @@ export const useStacksChess = () => {
           status: 'success',
           message: 'Move submission broadcasted'
         });
+        trackTransaction(data.txId, 'Submit Move', 'stacks');
         
         let attempts = 0;
         const checkMove = async () => {
@@ -160,6 +165,7 @@ export const useStacksChess = () => {
             status: 'success',
             message: 'Resignation transaction broadcasted'
           });
+          trackTransaction(data.txId, 'Resign', 'stacks');
           console.log('Resigned:', data.txId);
         },
         onCancel: () => {
@@ -339,6 +345,7 @@ export const useStacksChess = () => {
           status: 'success',
           message: 'Game resolution transaction broadcasted'
         });
+        trackTransaction(data.txId, 'Resolve Game', 'stacks');
         console.log('Resolved game:', data.txId);
       },
     });

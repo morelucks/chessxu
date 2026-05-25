@@ -9,3 +9,5 @@ Offline-first game history with IndexedDB caching.
 - Review move history
 - Filter and sort games
 - Player statistics
+
+## Usage

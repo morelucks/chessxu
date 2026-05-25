@@ -29,7 +29,7 @@ export default defineConfig({
   },
   etherscan: {
     apiKey: {
-      celo: process.env.CELOSCAN_API_KEY || "6FGP9S8JV3X1Y2Z4A5B6C7D8E9F0G1H2I3",
+      celo: "6FGP9S8JV3X1Y2Z4A5B6C7D8E9F0G1H2I3",
     },
     customChains: [
       {

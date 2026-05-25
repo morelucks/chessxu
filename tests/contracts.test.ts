@@ -1,6 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseContractId } from "../src/index";
+import {
+  parseContractId,
+  getContractAddress,
+  getContractName,
+  CONTRACTS,
+  CHESSXU_DEPLOYER,
+} from "../src/index";
 
 test("parseContractId splits address and name", () => {
   const { address, name } = parseContractId("SP000.my-contract");
@@ -19,4 +25,10 @@ test("parseContractId rejects identifiers without a name", () => {
   assert.throws(() => parseContractId("SP000"));
   assert.throws(() => parseContractId("SP000."));
   assert.throws(() => parseContractId(".name"));
+});
+
+test("getContractAddress / getContractName read the deployer's contracts", () => {
+  assert.equal(getContractAddress(CONTRACTS.GAME), CHESSXU_DEPLOYER);
+  assert.equal(getContractName(CONTRACTS.GAME), "chessxu");
+  assert.equal(getContractName(CONTRACTS.TOKEN), "chessxu-token");
 });

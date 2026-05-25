@@ -253,7 +253,7 @@ class GameSyncService {
       
       for (let gameId = gameCount; gameId >= startId && games.length < maxGames; gameId--) {
         try {
-          const gameData = await stacksService.getGameState(gameId);
+          const gameData = await stacksService.getGameState(gameId) as any;
           
           if (!gameData) continue;
 
@@ -316,7 +316,7 @@ class GameSyncService {
     try {
       await gameHistoryDB.init();
 
-      let gameData;
+      let gameData: any;
       if (chain === 'celo') {
         gameData = await celoService.getGame(gameId);
       } else {

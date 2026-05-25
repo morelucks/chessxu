@@ -31,9 +31,6 @@ type HiroTxUpdate = {
   result?: { repr?: string };
 };
 
-function buildHiroWsUrl(txId: string): string {
-  return `${HIRO_WS_URL}/extended/v1/tx/${txId}/events`;
-}
 
 /**
  * Classify a Stacks abort reason into a human-readable RevertReason.

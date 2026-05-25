@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Gamepad2, Zap, Trophy, Puzzle, ShoppingBag, User, History } from 'lucide-react';
+import { Gamepad2, Zap, Trophy, ShoppingBag, User, History } from 'lucide-react';
 
 const navItems = [
   { label: 'Game', icon: Gamepad2, path: '/' },

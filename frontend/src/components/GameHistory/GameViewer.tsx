@@ -5,7 +5,7 @@
  * Displays board state and move history from cached data.
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CachedGame } from '../../services/gameHistoryDB';
 import { 
   ChevronLeft, 
@@ -13,8 +13,7 @@ import {
   SkipBack, 
   SkipForward,
   Trophy,
-  Clock,
-  User
+  Clock
 } from 'lucide-react';
 import './GameViewer.css';
 
@@ -99,7 +98,7 @@ export default function GameViewer({ game, onClose }: GameViewerProps) {
     setBoardState(game.boardState);
   };
 
-  const { position, turn } = parseFEN(boardState);
+  const { turn } = parseFEN(boardState);
 
   return (
     <div className="game-viewer">

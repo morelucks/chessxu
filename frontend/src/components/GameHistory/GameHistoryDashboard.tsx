@@ -18,8 +18,7 @@ import {
   Minus,
   Wifi,
   WifiOff,
-  Calendar,
-  Filter
+  Calendar
 } from 'lucide-react';
 import './GameHistoryDashboard.css';
 

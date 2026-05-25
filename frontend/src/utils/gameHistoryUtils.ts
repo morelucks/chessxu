@@ -259,7 +259,7 @@ export function isGameCompleted(game: CachedGame): boolean {
 /**
  * Get game duration estimate (if timestamps available)
  */
-export function estimateGameDuration(game: CachedGame): string | null {
+export function estimateGameDuration(_game: CachedGame): string | null {
   // TODO: Implement when we have start/end timestamps
   return null;
 }

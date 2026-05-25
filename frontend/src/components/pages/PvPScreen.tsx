@@ -18,6 +18,7 @@ export default function PvPScreen() {
   }, []);
 
   const activeChain = useAppStore((state) => state.activeChain);
+  const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
   const isMiniPay = useAppStore((state) => state.miniPayDetected);
@@ -165,6 +166,26 @@ export default function PvPScreen() {
                         <p className="text-[10px] text-slate-500 uppercase tracking-widest">Connected as</p>
                         <p className="text-xs font-mono text-slate-300">{address?.slice(0, 6)}...{address?.slice(-4)}</p>
                     </div>
+                </div>
+
+                {/* Network Switcher */}
+                <div className="flex gap-2">
+                    <button
+                        aria-label="Switch to Stacks network"
+                        onClick={() => setActiveChain('stacks')}
+                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition ${activeChain === 'stacks' ? 'bg-orange-500/20 text-orange-300 ring-1 ring-orange-500/40' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
+                    >
+                        <span className="w-2 h-2 rounded-full bg-[#F7821B]" />
+                        Play with Stacks
+                    </button>
+                    <button
+                        aria-label="Switch to Celo network"
+                        onClick={() => setActiveChain('celo')}
+                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition ${activeChain === 'celo' ? 'bg-yellow-500/20 text-yellow-300 ring-1 ring-yellow-500/40' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
+                    >
+                        <span className="w-2 h-2 rounded-full bg-[#FCFF52]" />
+                        Play with Celo
+                    </button>
                 </div>
 
                 {requiresAccess && (

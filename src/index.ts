@@ -146,3 +146,44 @@ export function isGameOver(status: number): boolean {
     status === GAME_STATUS.CANCELLED
   );
 }
+
+/** The outcome of a finished game from the perspective of the result, if any. */
+export type GameOutcome = "white" | "black" | "draw" | null;
+
+/**
+ * Resolve the winner of a game from its status. Returns `"white"` / `"black"`
+ * for a decisive result, `"draw"` for a draw, and `null` while the game is
+ * still waiting, ongoing, or was cancelled without a result.
+ */
+export function getWinner(status: number): GameOutcome {
+  switch (status) {
+    case GAME_STATUS.WHITE_WINS:
+      return "white";
+    case GAME_STATUS.BLACK_WINS:
+      return "black";
+    case GAME_STATUS.DRAW:
+      return "draw";
+    default:
+      return null;
+  }
+}
+
+/** A short, human-readable summary of a game's current status. */
+export function gameResultText(status: number): string {
+  switch (status) {
+    case GAME_STATUS.WAITING:
+      return "Waiting for opponent";
+    case GAME_STATUS.ONGOING:
+      return "Game in progress";
+    case GAME_STATUS.WHITE_WINS:
+      return "White wins";
+    case GAME_STATUS.BLACK_WINS:
+      return "Black wins";
+    case GAME_STATUS.DRAW:
+      return "Draw";
+    case GAME_STATUS.CANCELLED:
+      return "Game cancelled";
+    default:
+      return `Unknown status (${status})`;
+  }
+}

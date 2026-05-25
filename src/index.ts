@@ -240,6 +240,16 @@ export function isValidStacksAddress(address: string): boolean {
   return STACKS_ADDRESS_REGEX.test(address);
 }
 
+/** Whether the address is a valid mainnet address (`SP`/`SM` prefix). */
+export function isMainnetAddress(address: string): boolean {
+  return isValidStacksAddress(address) && /^S[PM]/.test(address);
+}
+
+/** Whether the address is a valid testnet address (`ST`/`SN` prefix). */
+export function isTestnetAddress(address: string): boolean {
+  return isValidStacksAddress(address) && /^S[TN]/.test(address);
+}
+
 /**
  * Whether a wager is a valid on-chain amount: a positive, safe integer number
  * of base units. Zero is rejected (use {@link GAME_STATUS} flows for free
@@ -324,6 +334,15 @@ export function addressExplorerUrl(address: string): string {
   return `${EXPLORER_BASE_URL}/address/${address}?chain=mainnet`;
 }
 
+/**
+ * Build an explorer link for a deployed contract. Validates that `id` is a
+ * fully-qualified `<address>.<name>` identifier before linking.
+ */
+export function contractExplorerUrl(id: string): string {
+  parseContractId(id); // throws on malformed identifiers
+  return `${EXPLORER_BASE_URL}/txid/${id}?chain=mainnet`;
+}
+
 // ---------------------------------------------------------------------------
 // Clarity error response helpers
 // ---------------------------------------------------------------------------
@@ -366,4 +385,27 @@ export class ChessxuError extends Error {
     const code = parseClarityErrorCode(value);
     return code === null ? null : new ChessxuError(code);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Board / FEN helpers
+// ---------------------------------------------------------------------------
+
+/** Standard chess starting position in Forsyth–Edwards Notation. */
+export const STARTING_FEN =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+/**
+ * Whether a board state string represents the initial position. Comparison is
+ * whitespace-insensitive so encodings with extra padding still match.
+ */
+export function isStartingPosition(boardState: string): boolean {
+  return boardState.trim() === STARTING_FEN;
+}
+
+/** Read the side to move ("w"/"b") encoded in a FEN string, if present. */
+export function activeColorFromFen(fen: string): PlayerColor | null {
+  const parts = fen.trim().split(/\s+/);
+  const field = parts[1];
+  return field === "w" || field === "b" ? field : null;
 }

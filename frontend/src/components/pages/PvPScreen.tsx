@@ -176,7 +176,10 @@ export default function PvPScreen() {
                     >
                         Play with Stacks
                     </button>
-                    <button onClick={() => setActiveChain('celo')}>
+                    <button
+                        onClick={() => setActiveChain('celo')}
+                        className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition"
+                    >
                         Play with Celo
                     </button>
                 </div>

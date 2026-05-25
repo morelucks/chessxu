@@ -334,6 +334,15 @@ export function addressExplorerUrl(address: string): string {
   return `${EXPLORER_BASE_URL}/address/${address}?chain=mainnet`;
 }
 
+/**
+ * Build an explorer link for a deployed contract. Validates that `id` is a
+ * fully-qualified `<address>.<name>` identifier before linking.
+ */
+export function contractExplorerUrl(id: string): string {
+  parseContractId(id); // throws on malformed identifiers
+  return `${EXPLORER_BASE_URL}/txid/${id}?chain=mainnet`;
+}
+
 // ---------------------------------------------------------------------------
 // Clarity error response helpers
 // ---------------------------------------------------------------------------

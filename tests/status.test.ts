@@ -8,6 +8,8 @@ import {
   isAwaitingOpponent,
   isGameActive,
   isGameOver,
+  getWinner,
+  gameResultText,
 } from "../src/index";
 
 test("STATUS_NAMES is a complete reverse map of GAME_STATUS", () => {
@@ -43,4 +45,19 @@ test("isGameOver is true for wins, draw and cancellation only", () => {
   assert.equal(isGameOver(GAME_STATUS.CANCELLED), true);
   assert.equal(isGameOver(GAME_STATUS.WAITING), false);
   assert.equal(isGameOver(GAME_STATUS.ONGOING), false);
+});
+
+test("getWinner reports decisive results, draws and non-results", () => {
+  assert.equal(getWinner(GAME_STATUS.WHITE_WINS), "white");
+  assert.equal(getWinner(GAME_STATUS.BLACK_WINS), "black");
+  assert.equal(getWinner(GAME_STATUS.DRAW), "draw");
+  assert.equal(getWinner(GAME_STATUS.ONGOING), null);
+  assert.equal(getWinner(GAME_STATUS.CANCELLED), null);
+});
+
+test("gameResultText produces a label for every defined status", () => {
+  for (const code of Object.values(GAME_STATUS)) {
+    assert.doesNotMatch(gameResultText(code), /^Unknown/);
+  }
+  assert.match(gameResultText(99), /^Unknown/);
 });

@@ -66,3 +66,22 @@ export function getContractAddress(id: string): string {
 export function getContractName(id: string): string {
   return parseContractId(id).name;
 }
+
+// ---------------------------------------------------------------------------
+// Error helpers
+// ---------------------------------------------------------------------------
+
+/** Reverse lookup of {@link ERRORS}: maps a numeric error code to its name. */
+export const ERROR_NAMES: Record<number, string> = Object.fromEntries(
+  Object.entries(ERRORS).map(([name, code]) => [code, name])
+);
+
+/** Resolve a contract error code to its `ERR_*` name, or `undefined` if unknown. */
+export function getErrorName(code: number): string | undefined {
+  return ERROR_NAMES[code];
+}
+
+/** Whether the given code is a known Chessxu contract error. */
+export function isKnownError(code: number): boolean {
+  return code in ERROR_NAMES;
+}

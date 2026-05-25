@@ -107,3 +107,22 @@ export const ERROR_MESSAGES: Record<number, string> = {
 export function getErrorMessage(code: number): string {
   return ERROR_MESSAGES[code] ?? `Unknown contract error (code ${code})`;
 }
+
+// ---------------------------------------------------------------------------
+// Game-status helpers
+// ---------------------------------------------------------------------------
+
+/** Reverse lookup of {@link GAME_STATUS}: maps a status code to its name. */
+export const STATUS_NAMES: Record<number, string> = Object.fromEntries(
+  Object.entries(GAME_STATUS).map(([name, code]) => [code, name])
+);
+
+/** Whether a number is one of the defined {@link GAME_STATUS} values. */
+export function isValidGameStatus(status: number): boolean {
+  return status in STATUS_NAMES;
+}
+
+/** Resolve a status code to its name, or `undefined` if not a valid status. */
+export function getStatusName(status: number): string | undefined {
+  return STATUS_NAMES[status];
+}

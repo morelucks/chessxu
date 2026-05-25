@@ -214,3 +214,12 @@ export function colorOf(game: Game, address: string): PlayerColor | null {
 export function isPlayer(game: Game, address: string): boolean {
   return colorOf(game, address) !== null;
 }
+
+/**
+ * Whether it is the given address's turn to move. Requires the game to be
+ * active and the address to be the player whose colour matches `game.turn`.
+ */
+export function isPlayersTurn(game: Game, address: string): boolean {
+  if (!isGameActive(game.status)) return false;
+  return colorOf(game, address) === game.turn;
+}

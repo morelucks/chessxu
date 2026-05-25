@@ -1,9 +1,9 @@
 name: Publish SDK to NPM
 
 on:
-  workflow_dispatch: # Allows you to manually trigger this from the GitHub Actions tab
+  workflow_dispatch:
   release:
-    types: [published] # Also runs automatically when you create a new GitHub Release
+    types: [published]
 
 jobs:
   publish:
@@ -16,7 +16,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Authenticate with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install Dependencies
         run: npm install
@@ -26,5 +28,3 @@ jobs:
 
       - name: Publish to NPM
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

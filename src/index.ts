@@ -305,3 +305,21 @@ export function parseChess(value: string): number {
   const baseUnits = Number(whole) * ONE_CHESS + Number(fracPadded);
   return sign === "-" ? -baseUnits : baseUnits;
 }
+
+// ---------------------------------------------------------------------------
+// Explorer URL helpers (Hiro explorer, mainnet)
+// ---------------------------------------------------------------------------
+
+/** Base URL of the Hiro Stacks explorer. */
+export const EXPLORER_BASE_URL = "https://explorer.hiro.so";
+
+/** Build an explorer link for a transaction id. */
+export function txExplorerUrl(txid: string): string {
+  const id = txid.startsWith("0x") ? txid : `0x${txid}`;
+  return `${EXPLORER_BASE_URL}/txid/${id}?chain=mainnet`;
+}
+
+/** Build an explorer link for an account or contract address. */
+export function addressExplorerUrl(address: string): string {
+  return `${EXPLORER_BASE_URL}/address/${address}?chain=mainnet`;
+}

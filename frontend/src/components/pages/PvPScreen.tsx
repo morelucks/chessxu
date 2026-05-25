@@ -173,6 +173,9 @@ export default function PvPScreen() {
                     <button onClick={() => setActiveChain('stacks')}>
                         Play with Stacks
                     </button>
+                    <button onClick={() => setActiveChain('celo')}>
+                        Play with Celo
+                    </button>
                 </div>
 
                 {requiresAccess && (

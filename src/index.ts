@@ -126,3 +126,76 @@ export function isValidGameStatus(status: number): boolean {
 export function getStatusName(status: number): string | undefined {
   return STATUS_NAMES[status];
 }
+
+/** Whether the game is open and waiting for a second player to join. */
+export function isAwaitingOpponent(status: number): boolean {
+  return status === GAME_STATUS.WAITING;
+}
+
+/** Whether the game is in progress (joined and not yet finished). */
+export function isGameActive(status: number): boolean {
+  return status === GAME_STATUS.ONGOING;
+}
+
+/** Whether the game has reached a terminal state (win, draw or cancelled). */
+export function isGameOver(status: number): boolean {
+  return (
+    status === GAME_STATUS.WHITE_WINS ||
+    status === GAME_STATUS.BLACK_WINS ||
+    status === GAME_STATUS.DRAW ||
+    status === GAME_STATUS.CANCELLED
+  );
+}
+
+/** The outcome of a finished game from the perspective of the result, if any. */
+export type GameOutcome = "white" | "black" | "draw" | null;
+
+/**
+ * Resolve the winner of a game from its status. Returns `"white"` / `"black"`
+ * for a decisive result, `"draw"` for a draw, and `null` while the game is
+ * still waiting, ongoing, or was cancelled without a result.
+ */
+export function getWinner(status: number): GameOutcome {
+  switch (status) {
+    case GAME_STATUS.WHITE_WINS:
+      return "white";
+    case GAME_STATUS.BLACK_WINS:
+      return "black";
+    case GAME_STATUS.DRAW:
+      return "draw";
+    default:
+      return null;
+  }
+}
+
+/** A short, human-readable summary of a game's current status. */
+export function gameResultText(status: number): string {
+  switch (status) {
+    case GAME_STATUS.WAITING:
+      return "Waiting for opponent";
+    case GAME_STATUS.ONGOING:
+      return "Game in progress";
+    case GAME_STATUS.WHITE_WINS:
+      return "White wins";
+    case GAME_STATUS.BLACK_WINS:
+      return "Black wins";
+    case GAME_STATUS.DRAW:
+      return "Draw";
+    case GAME_STATUS.CANCELLED:
+      return "Game cancelled";
+    default:
+      return `Unknown status (${status})`;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Player and turn helpers
+// ---------------------------------------------------------------------------
+
+/** A player's colour, matching {@link Game.turn}. */
+export type PlayerColor = "w" | "b";
+
+/** Return the opposing colour. */
+export function opponentOf(color: PlayerColor): PlayerColor {
+  return color === "w" ? "b" : "w";
+}

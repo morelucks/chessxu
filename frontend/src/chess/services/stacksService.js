@@ -205,42 +205,6 @@ const stacksService = {
   },
 
   /**
-   * Fetches the total game count from the contract
-   * @returns {Promise<number>} Total number of games created
-   */
-  getGameCount: async () => {
-    const [contractAddress, contractName] = getContractParts(CONTRACTS.GAME);
-    try {
-      const response = await fetchCallReadOnlyFunction({
-        contractAddress,
-        contractName,
-        functionName: 'get-game-count',
-        functionArgs: [],
-        network,
-        senderAddress: CHESSXU_DEPLOYER,
-      });
-      return Number(cvToValue(response));
-    } catch (error) {
-      console.error('Error fetching game count:', error);
-      // Fallback: try to get last game ID
-      try {
-        const lastIdResponse = await fetchCallReadOnlyFunction({
-          contractAddress,
-          contractName,
-          functionName: 'get-last-game-id',
-          functionArgs: [],
-          network,
-          senderAddress: CHESSXU_DEPLOYER,
-        });
-        return Number(cvToValue(lastIdResponse));
-      } catch (fallbackError) {
-        console.error('Error fetching last game ID:', fallbackError);
-        return 0;
-      }
-    }
-  },
-
-  /**
    * Fetches the ELO rating for a player
    * @param {string} playerAddress - The player's STX address
    * @returns {Promise<number>} ELO rating (defaults to 1200)

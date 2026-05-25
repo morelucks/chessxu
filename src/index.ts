@@ -346,3 +346,24 @@ export function describeError(code: number): string {
   const message = getErrorMessage(code);
   return name ? `${name}: ${message}` : message;
 }
+
+/**
+ * A typed error wrapping a Chessxu contract error code. Carries the numeric
+ * `code` and (when known) the `name` alongside a human-readable message.
+ */
+export class ChessxuError extends Error {
+  readonly code: number;
+  readonly name: string;
+
+  constructor(code: number) {
+    super(getErrorMessage(code));
+    this.code = code;
+    this.name = getErrorName(code) ?? "ChessxuError";
+  }
+
+  /** Build a {@link ChessxuError} from a Clarity error string, or return null. */
+  static fromClarity(value: string): ChessxuError | null {
+    const code = parseClarityErrorCode(value);
+    return code === null ? null : new ChessxuError(code);
+  }
+}

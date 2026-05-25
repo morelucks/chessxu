@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import {
   txExplorerUrl,
   addressExplorerUrl,
+  contractExplorerUrl,
+  CONTRACTS,
   CHESSXU_DEPLOYER,
 } from "../src/index";
 
@@ -18,4 +20,9 @@ test("addressExplorerUrl points at the address route", () => {
     addressExplorerUrl(CHESSXU_DEPLOYER),
     `https://explorer.hiro.so/address/${CHESSXU_DEPLOYER}?chain=mainnet`
   );
+});
+
+test("contractExplorerUrl links valid contracts and rejects malformed ids", () => {
+  assert.match(contractExplorerUrl(CONTRACTS.GAME), /\/txid\/.+\.chessxu\?chain=mainnet$/);
+  assert.throws(() => contractExplorerUrl("not-a-contract"));
 });

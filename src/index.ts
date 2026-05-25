@@ -323,3 +323,26 @@ export function txExplorerUrl(txid: string): string {
 export function addressExplorerUrl(address: string): string {
   return `${EXPLORER_BASE_URL}/address/${address}?chain=mainnet`;
 }
+
+// ---------------------------------------------------------------------------
+// Clarity error response helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Extract a numeric error code from a Clarity error representation such as
+ * `"(err u102)"` or a bare `"u102"`. Returns `null` if no code is found.
+ */
+export function parseClarityErrorCode(value: string): number | null {
+  const match = /u(\d+)/.exec(value);
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * Describe a contract error code as `"ERR_NAME: message"`, or just the
+ * fallback message for unknown codes.
+ */
+export function describeError(code: number): string {
+  const name = getErrorName(code);
+  const message = getErrorMessage(code);
+  return name ? `${name}: ${message}` : message;
+}

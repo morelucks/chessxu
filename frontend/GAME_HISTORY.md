@@ -8,3 +8,4 @@ Offline-first game history with IndexedDB caching.
 - Automatic sync on load
 - Review move history
 - Filter and sort games
+- Player statistics

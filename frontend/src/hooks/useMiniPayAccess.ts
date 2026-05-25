@@ -27,6 +27,7 @@ export function useMiniPayAccess() {
   const setMiniPayAccess = useAppStore((state) => state.setMiniPayAccess);
   const clearMiniPayAccess = useAppStore((state) => state.clearMiniPayAccess);
   const [cusdBalance, setCusdBalance] = useState<string | null>(null);
+  const [celoNativeBalance, setCeloNativeBalance] = useState<string | null>(null);
   const [isRefreshingBalance, setIsRefreshingBalance] = useState(false);
   const [isPurchasing, setIsPurchasing] = useState(false);
 

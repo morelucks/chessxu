@@ -7,6 +7,8 @@ import {
   getErrorName,
   getErrorMessage,
   isKnownError,
+  parseClarityErrorCode,
+  describeError,
 } from "../src/index";
 
 test("ERROR_NAMES is a complete reverse map of ERRORS", () => {
@@ -37,4 +39,19 @@ test("every error code has a human-readable message", () => {
 test("getErrorMessage falls back and surfaces the raw code", () => {
   assert.equal(getErrorMessage(ERRORS.ERR_INVALID_WAGER), "Wager amount is invalid");
   assert.match(getErrorMessage(9999), /9999/);
+});
+
+test("parseClarityErrorCode extracts codes from Clarity responses", () => {
+  assert.equal(parseClarityErrorCode("(err u102)"), 102);
+  assert.equal(parseClarityErrorCode("u109"), 109);
+  assert.equal(parseClarityErrorCode("(ok true)"), null);
+  assert.equal(parseClarityErrorCode("no code here"), null);
+});
+
+test("describeError combines name and message for known codes", () => {
+  assert.equal(
+    describeError(ERRORS.ERR_GAME_NOT_FOUND),
+    "ERR_GAME_NOT_FOUND: No game exists with this id"
+  );
+  assert.match(describeError(9999), /Unknown contract error/);
 });

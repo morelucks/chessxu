@@ -187,3 +187,15 @@ export function gameResultText(status: number): string {
       return `Unknown status (${status})`;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Player and turn helpers
+// ---------------------------------------------------------------------------
+
+/** A player's colour, matching {@link Game.turn}. */
+export type PlayerColor = "w" | "b";
+
+/** Return the opposing colour. */
+export function opponentOf(color: PlayerColor): PlayerColor {
+  return color === "w" ? "b" : "w";
+}

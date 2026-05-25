@@ -239,3 +239,69 @@ const STACKS_ADDRESS_REGEX = /^S[PMNT][0-9A-HJKMNP-TV-Z]{38,40}$/;
 export function isValidStacksAddress(address: string): boolean {
   return STACKS_ADDRESS_REGEX.test(address);
 }
+
+/**
+ * Whether a wager is a valid on-chain amount: a positive, safe integer number
+ * of base units. Zero is rejected (use {@link GAME_STATUS} flows for free
+ * games) as are fractional or negative amounts.
+ */
+export function isValidWager(amount: number): boolean {
+  return Number.isSafeInteger(amount) && amount > 0;
+}
+
+/** Assert a wager is valid, throwing a descriptive error otherwise. */
+export function assertValidWager(amount: number): void {
+  if (!isValidWager(amount)) {
+    throw new Error(
+      `Invalid wager: expected a positive integer of base units, got ${amount}`
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Token amount helpers (CHESS, SIP-010, 6 decimals)
+// ---------------------------------------------------------------------------
+
+/** Number of decimal places the CHESS token uses. */
+export const CHESS_DECIMALS = 6;
+
+/** One whole CHESS expressed in base units. */
+export const ONE_CHESS = 10 ** CHESS_DECIMALS;
+
+/**
+ * Format an integer amount of base units as a human-readable CHESS string,
+ * trimming trailing zeros in the fractional part (e.g. `1500000` -> `"1.5"`).
+ */
+export function formatChess(baseUnits: number): string {
+  if (!Number.isSafeInteger(baseUnits)) {
+    throw new Error(`Expected integer base units, got ${baseUnits}`);
+  }
+  const negative = baseUnits < 0;
+  const abs = Math.abs(baseUnits);
+  const whole = Math.floor(abs / ONE_CHESS);
+  const frac = abs % ONE_CHESS;
+  const fracStr = frac.toString().padStart(CHESS_DECIMALS, "0").replace(/0+$/, "");
+  const body = fracStr ? `${whole}.${fracStr}` : `${whole}`;
+  return negative ? `-${body}` : body;
+}
+
+/**
+ * Parse a decimal CHESS string (e.g. `"1.5"`) into an integer number of base
+ * units. Rejects malformed input and amounts with more than
+ * {@link CHESS_DECIMALS} fractional digits.
+ */
+export function parseChess(value: string): number {
+  const match = /^(-?)(\d+)(?:\.(\d+))?$/.exec(value.trim());
+  if (!match) {
+    throw new Error(`Invalid CHESS amount: "${value}"`);
+  }
+  const [, sign, whole, frac = ""] = match;
+  if (frac.length > CHESS_DECIMALS) {
+    throw new Error(
+      `Too many decimal places: CHESS supports at most ${CHESS_DECIMALS}`
+    );
+  }
+  const fracPadded = frac.padEnd(CHESS_DECIMALS, "0");
+  const baseUnits = Number(whole) * ONE_CHESS + Number(fracPadded);
+  return sign === "-" ? -baseUnits : baseUnits;
+}

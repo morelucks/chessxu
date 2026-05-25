@@ -2,6 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   isValidStacksAddress,
+  isMainnetAddress,
+  isTestnetAddress,
   isValidWager,
   assertValidWager,
   CHESSXU_DEPLOYER,
@@ -18,6 +20,16 @@ test("isValidStacksAddress rejects malformed input", () => {
   assert.equal(isValidStacksAddress(CHESSXU_DEPLOYER.toLowerCase()), false);
   // contains excluded Crockford characters (I, O)
   assert.equal(isValidStacksAddress("SPIOIOIOIOIOIOIOIOIOIOIOIOIOIOIOIOIOIOIO"), false);
+});
+
+test("the deployer is recognised as a mainnet address, not testnet", () => {
+  assert.equal(isMainnetAddress(CHESSXU_DEPLOYER), true);
+  assert.equal(isTestnetAddress(CHESSXU_DEPLOYER), false);
+});
+
+test("network discriminators require a structurally valid address", () => {
+  assert.equal(isMainnetAddress("SP"), false);
+  assert.equal(isTestnetAddress("ST"), false);
 });
 
 test("isValidWager accepts positive integers only", () => {

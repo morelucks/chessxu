@@ -257,3 +257,30 @@ export function assertValidWager(amount: number): void {
     );
   }
 }
+
+// ---------------------------------------------------------------------------
+// Token amount helpers (CHESS, SIP-010, 6 decimals)
+// ---------------------------------------------------------------------------
+
+/** Number of decimal places the CHESS token uses. */
+export const CHESS_DECIMALS = 6;
+
+/** One whole CHESS expressed in base units. */
+export const ONE_CHESS = 10 ** CHESS_DECIMALS;
+
+/**
+ * Format an integer amount of base units as a human-readable CHESS string,
+ * trimming trailing zeros in the fractional part (e.g. `1500000` -> `"1.5"`).
+ */
+export function formatChess(baseUnits: number): string {
+  if (!Number.isSafeInteger(baseUnits)) {
+    throw new Error(`Expected integer base units, got ${baseUnits}`);
+  }
+  const negative = baseUnits < 0;
+  const abs = Math.abs(baseUnits);
+  const whole = Math.floor(abs / ONE_CHESS);
+  const frac = abs % ONE_CHESS;
+  const fracStr = frac.toString().padStart(CHESS_DECIMALS, "0").replace(/0+$/, "");
+  const body = fracStr ? `${whole}.${fracStr}` : `${whole}`;
+  return negative ? `-${body}` : body;
+}

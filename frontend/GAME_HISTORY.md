@@ -14,3 +14,4 @@ Offline-first game history with IndexedDB caching.
 Navigate to /history to view your game history.
 
 ## Architecture
+Uses IndexedDB for local storage.

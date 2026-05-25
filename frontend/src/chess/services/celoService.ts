@@ -305,6 +305,37 @@ const celoService = {
     });
   },
 
+  /**
+   * Pays for daily access using native CELO instead of cUSD.
+   */
+  payForDailyAccessWithCelo: async () => {
+    const walletClient = celoService.getWalletClient();
+    const [account] = await walletClient.requestAddresses();
+    const value = parseEther(CELO_CONFIG.DAILY_ACCESS_CELO);
+
+    return walletClient.sendTransaction({
+      to: CELO_CONFIG.PAYMENT_RECIPIENT as `0x${string}`,
+      value,
+      account,
+      ...celoService.getTxOptions(),
+    });
+  },
+
+  /**
+   * Verifies a native CELO daily access payment by checking the transaction receipt.
+   */
+  verifyDailyAccessPaymentCelo: async (txHash: string, walletAddress: string) => {
+    const receipt = await celoService.waitForTransactionReceipt(txHash as `0x${string}`);
+    if (receipt.status !== 'success') return false;
+
+    const tx = await celoService.publicClient.getTransaction({ hash: txHash as `0x${string}` });
+    return (
+      tx.from.toLowerCase() === walletAddress.toLowerCase() &&
+      tx.to?.toLowerCase() === CELO_CONFIG.PAYMENT_RECIPIENT.toLowerCase() &&
+      tx.value >= parseEther(CELO_CONFIG.DAILY_ACCESS_CELO)
+    );
+  },
+
   waitForTransactionReceipt: async (txHash: `0x${string}`, maxRetries = 10, delayMs = 2000) => {
     for (let attempt = 0; attempt < maxRetries; attempt += 1) {
       try {

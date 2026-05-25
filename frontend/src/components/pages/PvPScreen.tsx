@@ -178,28 +178,51 @@ export default function PvPScreen() {
                         <p className="mt-2 text-emerald-100/80 text-xs">
                           {activeChain === 'stacks'
                             ? "Required for Stacks match creation/joining. Price: 0.5 STX."
-                            : `Required for Celo match creation/joining. Price: ${celo.network.DAILY_ACCESS_CUSD} cUSD.`}
+                            : `Required for Celo match creation/joining. Price: ${celo.network.DAILY_ACCESS_CUSD} cUSD or 0.05 CELO.`}
                         </p>
                         <p className="mt-2 text-[10px] text-emerald-100/70">
                           {activeChain === 'stacks'
                             ? (expiresAt && hasAccess ? `Access active until ${new Date(expiresAt).toLocaleString()}` : 'Access not active')
-                            : `cUSD balance: ${cusdBalance ? Number(cusdBalance).toFixed(2) : '--'}${expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}`}
+                            : `cUSD: ${cusdBalance ? Number(cusdBalance).toFixed(2) : '--'} • CELO: ${celoNativeBalance ? Number(celoNativeBalance).toFixed(4) : '--'}${expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}`}
                         </p>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => purchaseAccess().catch(() => undefined)}
-                        disabled={isPurchasing || hasAccess}
-                        className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(52,211,153,0.3)] active:scale-95"
-                      >
-                        {hasAccess
-                          ? 'Access Active'
-                          : isPurchasing
-                            ? 'Processing...'
-                            : activeChain === 'stacks'
-                              ? 'Pay With STX'
-                              : 'Pay With cUSD'}
-                      </button>
+                      {hasAccess ? (
+                        <button
+                          type="button"
+                          disabled
+                          className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black opacity-60 cursor-not-allowed text-xs"
+                        >
+                          Access Active
+                        </button>
+                      ) : activeChain === 'stacks' ? (
+                        <button
+                          type="button"
+                          onClick={() => purchaseAccess().catch(() => undefined)}
+                          disabled={isPurchasing}
+                          className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(52,211,153,0.3)] active:scale-95"
+                        >
+                          {isPurchasing ? 'Processing...' : 'Pay With STX'}
+                        </button>
+                      ) : (
+                        <div className="flex flex-col gap-2 min-w-[140px]">
+                          <button
+                            type="button"
+                            onClick={() => purchaseAccess().catch(() => undefined)}
+                            disabled={isPurchasing}
+                            className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(52,211,153,0.3)] active:scale-95"
+                          >
+                            {isPurchasing ? 'Processing...' : 'Pay With cUSD'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => purchaseAccessWithCelo().catch(() => undefined)}
+                            disabled={isPurchasing}
+                            className="rounded-xl bg-yellow-400 px-5 py-3 font-bold text-black transition hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(252,255,82,0.3)] active:scale-95"
+                          >
+                            {isPurchasing ? 'Processing...' : 'Pay With CELO'}
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}

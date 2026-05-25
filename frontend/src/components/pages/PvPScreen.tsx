@@ -183,7 +183,7 @@ export default function PvPScreen() {
                         <p className="mt-2 text-[10px] text-emerald-100/70">
                           {activeChain === 'stacks'
                             ? (expiresAt && hasAccess ? `Access active until ${new Date(expiresAt).toLocaleString()}` : 'Access not active')
-                            : `cUSD balance: ${cusdBalance ? Number(cusdBalance).toFixed(2) : '--'}${expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}`}
+                            : `cUSD: ${cusdBalance ? Number(cusdBalance).toFixed(2) : '--'} • CELO: ${celoNativeBalance ? Number(celoNativeBalance).toFixed(4) : '--'}${expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}`}
                         </p>
                       </div>
                       <button

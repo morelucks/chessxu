@@ -1,20 +1,13 @@
-export const CHESSXU_DEPLOYER = "SP34MN3DMM07BNAWYJSHTS4B08T8JRVK8AT810X1B";
+import { CHESSXU_DEPLOYER as SDK_DEPLOYER, CONTRACTS as SDK_CONTRACTS, GAME_STATUS } from '@morelucks/chessxu-sdk';
+
+export const CHESSXU_DEPLOYER = SDK_DEPLOYER;
 
 export const CONTRACTS = {
-  TRAIT: `${CHESSXU_DEPLOYER}.sip-010-trait-ft-standard`,
-  TOKEN: `${CHESSXU_DEPLOYER}.chessxu-token`,
-  GAME: `${CHESSXU_DEPLOYER}.chessxu`,
-  LEADERBOARD: `${CHESSXU_DEPLOYER}.chessxu-leaderboard`,
+  ...SDK_CONTRACTS,
+  LEADERBOARD: `${SDK_DEPLOYER}.chessxu-leaderboard`,
 };
 
-export const GAME_STATUS = {
-  WAITING: 0,
-  ONGOING: 1,
-  WHITE_WINS: 2,
-  BLACK_WINS: 3,
-  DRAW: 4,
-  CANCELLED: 5,
-};
+export { GAME_STATUS };
 
 export const DEFAULT_ELO = 1200;
 export const ELO_K_FACTOR = 32;

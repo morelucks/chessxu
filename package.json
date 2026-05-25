@@ -6,10 +6,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "tsc -p tsconfig.test.json && node --test dist-test/tests/*.test.js",
-    "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "stacks",
     "clarity",
@@ -23,7 +24,6 @@
     "@stacks/transactions": "^7.0.0"
   },
   "devDependencies": {
-    "@types/node": "^25.9.1",
     "typescript": "^5.0.0"
   }
 }

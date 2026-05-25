@@ -10,7 +10,6 @@ lerna-debug.log*
 # Dependency directories
 node_modules
 dist
-dist-test
 dist-ssr
 dev-dist
 .pnpm-store
@@ -46,3 +45,4 @@ tmp_scripts/
 play_game.cjs
 
 
+.gemini

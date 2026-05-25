@@ -18,6 +18,7 @@ export default function PvPScreen() {
   }, []);
 
   const activeChain = useAppStore((state) => state.activeChain);
+  const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
   const isMiniPay = useAppStore((state) => state.miniPayDetected);

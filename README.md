@@ -17,10 +17,15 @@ The repository is organized into a monorepo containing both the frontend web app
 
 ```text
 chessxu/
+├── src/               # @morelucks/chessxu-sdk TypeScript SDK
 ├── frontend/          # React + Vite web application
 ├── stacks-contracts/  # Clarinet project with Stacks smart contracts
 └── celo-contracts/    # Hardhat project with Celo smart contracts (EVM)
 ```
+
+The SDK's helper API (error decoding, game-status predicates, wager and address
+validation, CHESS amount formatting and explorer links) is documented in
+[`docs/SDK.md`](docs/SDK.md). Run its test suite with `npm test`.
 
 ---
 
@@ -61,7 +66,7 @@ clarinet console
 
 ## 📦 @morelucks/chessxu-sdk
 
-The Chessxu platform exports a lightweight TypeScript SDK for interacting with the Stacks smart contracts. This allows other developers to easily fetch game states, decode on-chain errors, and build custom bots or interfaces for Chessxu.
+The Chessxu platform exports a lightweight TypeScript SDK for interacting with the Stacks smart contracts. This allows other developers to easily fetch game states, decode on-chain errors, and build custom dashboards or alternative interfaces for Chessxu.
 
 ### Installation
 

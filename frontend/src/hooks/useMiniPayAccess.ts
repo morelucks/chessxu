@@ -46,11 +46,13 @@ export function useMiniPayAccess() {
   const refreshBalance = async () => {
     if (activeChain === 'stacks') {
       setCusdBalance(null);
+      setCeloNativeBalance(null);
       return null;
     }
 
     if (!celoAddress) {
       setCusdBalance(null);
+      setCeloNativeBalance(null);
       return null;
     }
 

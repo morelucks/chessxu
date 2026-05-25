@@ -68,7 +68,7 @@ export function useMiniPayAccess() {
       setCeloNativeBalance(formattedNative);
       return formatted;
     } catch (error) {
-      console.error('Failed to refresh cUSD balance:', error);
+      console.error('Failed to refresh balance:', error);
       return null;
     } finally {
       setIsRefreshingBalance(false);

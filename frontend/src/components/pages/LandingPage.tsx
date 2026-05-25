@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
 import useAppStore from "../../zustand/store";
 import GaslessBadge from "../ui/GaslessBadge";
+import { Sparkles } from "lucide-react";
 
 export default function LandingPage() {
   const isMiniPay = useAppStore((state) => state.miniPayDetected);

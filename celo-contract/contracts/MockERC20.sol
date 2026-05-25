@@ -1,11 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-/**
- * @dev MockERC20 token for V2 testing.
- * Compatible with EVM version: cancun
- */
-
 interface IERC20 {
     function transfer(address to, uint256 amount) external returns (bool);
     function transferFrom(address from, address to, uint256 amount) external returns (bool);
@@ -29,7 +24,7 @@ contract MockERC20 is IERC20 {
     }
 
     function transfer(address to, uint256 amount) external override returns (bool) {
-        require(balances[msg.sender] >= amount, "Insufficient balance"); // Check sender balance
+        require(balances[msg.sender] >= amount, "Insufficient balance");
          balances[msg.sender] -= amount;
         balances[to] += amount;
         return true;

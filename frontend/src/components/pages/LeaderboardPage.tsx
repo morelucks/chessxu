@@ -1,13 +1,3 @@
-/*
-npm
-Npm: Npm download concentration
-NPM Package Downloads
-Npm: Npm download uniform
-Npm: Npm excluded packages quality
-Npm: Npm monorepo collapsed
-Npm: Npm download sparse burst
-Npm: Npm excluded packages
-*/
 import OnChainLeaderboard from '../OnChainLeaderboard';
 import { useGlobalStats } from '../../chess/hooks/useLeaderboard';
 import './LeaderboardPage.css';
@@ -15,8 +5,8 @@ import './LeaderboardPage.css';
 export default function LeaderboardPage() {
   const { globalStats } = useGlobalStats();
 
-  const getDisplayValue = (val: unknown) => {
-    if (val && typeof val === 'object' && 'value' in val) return String((val as { value: unknown }).value);
+  const getDisplayValue = (val: any) => {
+    if (val && typeof val === 'object' && 'value' in val) return String(val.value);
     return String(val ?? 0);
   };
 
@@ -28,19 +18,19 @@ export default function LeaderboardPage() {
           <div className="lb-page__global">
             <div className="lb-page__stat">
               <span className="lb-page__stat-value">
-                {getDisplayValue((globalStats as Record<string, unknown>)['total-games'])}
+                {getDisplayValue((globalStats as any)['total-games'])}
               </span>
               <span className="lb-page__stat-label">Total Games</span>
             </div>
             <div className="lb-page__stat">
               <span className="lb-page__stat-value">
-                {getDisplayValue((globalStats as Record<string, unknown>)['total-players'])}
+                {getDisplayValue((globalStats as any)['total-players'])}
               </span>
               <span className="lb-page__stat-label">Players</span>
             </div>
             <div className="lb-page__stat">
               <span className="lb-page__stat-value">
-                {getDisplayValue((globalStats as Record<string, unknown>)['total-decisive'])}
+                {getDisplayValue((globalStats as any)['total-decisive'])}
               </span>
               <span className="lb-page__stat-label">Decisive Games</span>
             </div>

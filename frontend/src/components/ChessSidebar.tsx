@@ -1,14 +1,3 @@
-/*
-npm
-Npm: Npm download concentration
-NPM Package Downloads
-Npm: Npm download uniform
-Npm: Npm excluded packages quality
-Npm: Npm monorepo collapsed
-Npm: Npm download sparse burst
-Npm: Npm excluded packages
-*/
-import { OnChainGameState, StakeData, LeaderboardResult, GameModeSelectionProps, StakeSectionProps } from '../types/chess';
 import { useState, useEffect } from 'react';
 import { useAppContext } from '../chess/contexts/Context';
 import { takeBack } from '../chess/reducer/actions/move';
@@ -43,22 +32,21 @@ const TakeBackButton = () => {
 };
 
 // Stake section (always visible under Controls)
-/**
- * Section displaying active player stake information
- */
-const StakeSection = ({ appState }: StakeSectionProps) => {
-    const [stake, setStake] = useState<StakeData | null>(null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const StakeSection = ({ appState }: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [stake, setStake] = useState<any>(null);
 
     useEffect(() => {
-        const current = getStakeData() as unknown as StakeData | null;
+        const current = getStakeData();
         setStake(current);
-        const onStorage = () => setStake(getStakeData() as unknown as StakeData | null);
+        const onStorage = () => setStake(getStakeData());
         window.addEventListener('storage', onStorage);
         return () => window.removeEventListener('storage', onStorage);
     }, []);
 
     useEffect(() => {
-        setStake(getStakeData() as unknown as StakeData | null);
+        setStake(getStakeData());
     }, [appState?.gameMode]);
 
     return (
@@ -99,9 +87,11 @@ const StakeSection = ({ appState }: StakeSectionProps) => {
 };
 
 // Leaderboard Component (tab)
-const Leaderboard = ({ results, onClear }: { results: LeaderboardResult[]; onClear: () => void }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Leaderboard = ({ results, onClear }: any) => {
     // Aggregate wins: 3 points per win, 1 each for draws
-    const totals = results.reduce((acc: { white: number; black: number }, r: LeaderboardResult) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const totals = results.reduce((acc: any, r: any) => {
         const winner = (r.winner || '').toLowerCase();
         if (winner === 'white') acc.white += 3;
         else if (winner === 'black') acc.black += 3;
@@ -145,7 +135,8 @@ const Leaderboard = ({ results, onClear }: { results: LeaderboardResult[]; onCle
 };
 
 // Game Mode Selection Component
-const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameModeSelectionProps) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: any) => {
     const handlePlayerVsComputer = () => {
         onNewGame('pvc');
     };
@@ -180,9 +171,6 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
 };
 
 // Main Chess Sidebar Component
-/**
- * Main chess sidebar that renders controls, stake info and leaderboard tabs.
- */
 export default function ChessSidebar() {
     const { appState, dispatch } = useAppContext();
     const gameMode = appState?.gameMode || 'pvc';
@@ -191,9 +179,9 @@ export default function ChessSidebar() {
     const { gameState } = useGameState(activeGameId);
     const currentGameStatus =
         gameState && typeof gameState === 'object' && 'status' in gameState
-            ? Number((gameState as OnChainGameState).status)
+            ? Number((gameState as { status: number | string }).status)
             : null;
-    const [leaderboardResults, setLeaderboardResults] = useState<LeaderboardResult[]>([]);
+    const [leaderboardResults, setLeaderboardResults] = useState([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
     const { isMyTurn } = useStacksChess();
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
@@ -206,7 +194,8 @@ export default function ChessSidebar() {
 
     // Load leaderboard results on component mount
     useEffect(() => {
-        setLeaderboardResults(loadGameResults());
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setLeaderboardResults(loadGameResults() as any);
     }, []);
 
     const timeControlMs = useAppStore((s) => s.timeControlMs);
@@ -228,7 +217,8 @@ export default function ChessSidebar() {
 
     // Reload leaderboard when game ends
     useEffect(() => {
-        setLeaderboardResults(loadGameResults());
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setLeaderboardResults(loadGameResults() as any);
     }, [gameMode]);
 
     // Don't render if context is not available

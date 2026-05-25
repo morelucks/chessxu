@@ -23,9 +23,8 @@ export const NETWORK = 'mainnet';
 
 export const CELO_CONFIG = {
   CHAIN_ID: 42220,
-  RPC_URL: "https://forno.celo.org", // Default Celo RPC Provider (Forno)
-  CONTRACT_ADDRESS: "0x5FbDB2315678afecb367f032d93F642f64180aa3", // ERC-2771 V2 Implementation
-  TRUSTED_FORWARDER: "0xD4295d9aF32dB85038c82302636d7734E4Cc4f69", // Celo Trusted Forwarder
+  RPC_URL: "https://forno.celo.org",
+  CONTRACT_ADDRESS: "0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E",
   CURRENCY: "CELO",
   CHAIN_NAME: "Celo",
   EXPLORER_URL: "https://celoscan.io",
@@ -33,25 +32,6 @@ export const CELO_CONFIG = {
   PAYMENT_RECIPIENT: "0xEA22ca862C3AFDA79Ef7Fb5Ae8f13D245354f05b",
   DAILY_ACCESS_CUSD: "0.1",
   DAILY_ACCESS_DURATION_MS: 24 * 60 * 60 * 1000,
-};
-
-/**
- * ERC-4337 Paymaster configuration for gasless transactions.
- * The Chessxu Paymaster sponsors gas for all game operations.
- */
-export const PAYMASTER_CONFIG = {
-  /** Paymaster sponsorship backend URL */
-  SERVICE_URL: 'https://paymaster.chessxu.xyz/api/v1',
-  /** ERC-4337 EntryPoint v0.6 on Celo mainnet */
-  ENTRYPOINT_ADDRESS: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789' as `0x${string}`,
-  /** Deployed ChessxuPaymaster contract address */
-  PAYMASTER_ADDRESS: '0x0000000000000000000000000000000000000000' as `0x${string}`,
-  /** Bundler RPC endpoint (Pimlico / self-hosted) */
-  BUNDLER_RPC_URL: 'https://bundler.chessxu.xyz/rpc',
-  /** Request timeout in milliseconds */
-  TIMEOUT_MS: 10_000,
-  /** Maximum retry attempts for transient failures */
-  MAX_RETRIES: 3,
 };
 
 export const CELO_FEE_CURRENCIES = [

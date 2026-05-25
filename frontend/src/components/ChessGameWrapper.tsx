@@ -1,20 +1,3 @@
-/*
-npm
-Npm: Npm download concentration
-NPM Package Downloads
-Npm: Npm download uniform
-Npm: Npm excluded packages quality
-Npm: Npm monorepo collapsed
-Npm: Npm download sparse burst
-Npm: Npm excluded packages
-*/
-import { GameState } from '../types/chess';
-
-interface ChessAction {
-    type: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: any;
-}
 import React, { useReducer, useEffect, useState } from 'react';
 import { reducer } from '../chess/reducer/reducer';
 import { Status } from '../chess/constants';
@@ -27,14 +10,11 @@ import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
 
-/**
- * Wrapper providing AppContext with typed reducer for the chess board UI.
- */
 export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
 
     // Create initial state directly to avoid any import issues
-    const initialGameState: GameState = {
+    const initialGameState = {
         position: [isPuzzle ? createPuzzlePosition() : createPosition()],
         turn: 'w',
         candidateMoves: [],
@@ -55,11 +35,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         blackTimeMs: timeControlMs,
     };
 
-    // Cast reducer: JS implementation satisfies the GameState+ChessAction contract
-    const [appState, dispatch] = useReducer(
-        reducer as unknown as React.Reducer<GameState, ChessAction>,
-        initialGameState
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [appState, dispatch] = useReducer<React.Reducer<any, any>>(reducer as any, initialGameState);
     const [isReady, setIsReady] = useState(false);
 
     // Save game mode to localStorage whenever it changes
@@ -145,7 +122,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                             </div>
                             <ChessClock 
                                 color={appState.playerColor === 'w' ? 'b' : 'w'} 
-                                timeMs={appState.playerColor === 'w' ? (appState.blackTimeMs ?? null) : (appState.whiteTimeMs ?? null)} 
+                                timeMs={appState.playerColor === 'w' ? appState.blackTimeMs : appState.whiteTimeMs} 
                                 isActive={appState.status === Status.ongoing && appState.turn === (appState.playerColor === 'w' ? 'b' : 'w')} 
                                 onTimeout={handleTimeout} 
                             />
@@ -173,8 +150,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                 </div>
                             </div>
                             <ChessClock 
-                                color={appState.playerColor ?? 'w'} 
-                                timeMs={appState.playerColor === 'w' ? (appState.whiteTimeMs ?? null) : (appState.blackTimeMs ?? null)} 
+                                color={appState.playerColor} 
+                                timeMs={appState.playerColor === 'w' ? appState.whiteTimeMs : appState.blackTimeMs} 
                                 isActive={appState.status === Status.ongoing && appState.turn === appState.playerColor} 
                                 onTimeout={handleTimeout} 
                             />

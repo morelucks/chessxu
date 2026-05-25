@@ -1,14 +1,4 @@
-/*
-npm
-Npm: Npm download concentration
-NPM Package Downloads
-Npm: Npm download uniform
-Npm: Npm excluded packages quality
-Npm: Npm monorepo collapsed
-Npm: Npm download sparse burst
-Npm: Npm excluded packages
-*/
-import type { OnChainGameState } from '../types/chess';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { openContractCall } from '@stacks/connect';
 import { 
   uintCV, 
@@ -134,7 +124,7 @@ export const useStacksChess = () => {
         let attempts = 0;
         const checkMove = async () => {
           attempts++;
-          const updatedGame = (await getGame(gameId)) as OnChainGameState | null;
+          const updatedGame = await getGame(gameId) as any;
           if (updatedGame?.['last-move']?.value !== String(move)) {
             if (attempts < 12) setTimeout(checkMove, 5000);
           }
@@ -237,7 +227,7 @@ export const useStacksChess = () => {
 
     try {
       const result = await fetchCallReadOnlyFunction(options);
-      const val = cvToValue(result) as { value: unknown } | null;
+      const val: any = cvToValue(result);
       return val ? val.value : null;
     } catch (e) {
       console.error('Error fetching player stats:', e);
@@ -316,8 +306,8 @@ export const useStacksChess = () => {
     
     if (errorCode) {
       const code = parseInt(errorCode);
-      const message = (CLARITY_ERRORS as Record<number, string>)[code] ||
-                      (LEADERBOARD_ERRORS as Record<number, string>)[code];
+      const message = (CLARITY_ERRORS as any)[code] || 
+                      (LEADERBOARD_ERRORS as any)[code];
       if (message) return message;
     }
     return error;
@@ -344,10 +334,8 @@ export const useStacksChess = () => {
     });
   };
 
-  const isPlayerWhite = (game: OnChainGameState | null, playerAddress: string) =>
-    game?.['player-w'] === playerAddress;
-  const isPlayerBlack = (game: OnChainGameState | null, playerAddress: string) =>
-    game?.['player-b']?.value === playerAddress;
+  const isPlayerWhite = (game: any, playerAddress: string) => game?.['player-w'] === playerAddress;
+  const isPlayerBlack = (game: any, playerAddress: string) => game?.['player-b']?.value === playerAddress;
 
   const getGameStatusString = (status: number) => {
     switch (status) {
@@ -369,18 +357,15 @@ export const useStacksChess = () => {
     return `${wager / 1000000} CHESS`;
   };
 
-  const isMyTurn = (game: OnChainGameState | null, playerAddress: string) => {
+  const isMyTurn = (game: any, playerAddress: string) => {
     if (!game || !playerAddress) return false;
-    const currentTurn = typeof game.turn === 'string' ? game.turn : game.turn?.value;
+    const currentTurn = game.turn?.value || game.turn;
     const isWhite = isPlayerWhite(game, playerAddress);
     const isBlack = isPlayerBlack(game, playerAddress);
     return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
   };
 
-  /**
-   * Returns the opponent's principal address given the current game state.
-   */
-  const getOpponentAddress = (game: OnChainGameState | null, playerAddress: string) => {
+  const getOpponentAddress = (game: any, playerAddress: string) => {
     if (!game || !playerAddress) return null;
     const isWhite = isPlayerWhite(game, playerAddress);
     return isWhite ? (game['player-b']?.value || null) : game['player-w'];

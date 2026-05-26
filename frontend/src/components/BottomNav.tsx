@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Gamepad2, Zap, Trophy, ShoppingBag, User, History } from 'lucide-react';
+import { Gamepad2, Zap, Trophy, Puzzle, ShoppingBag, User, History } from 'lucide-react';
 
 const navItems = [
   { label: 'Game', icon: Gamepad2, path: '/' },
   { label: 'PvP', icon: Zap, path: '/pvp' },
+  { label: 'Puzzle', icon: Puzzle, path: '/puzzle' },
   { label: 'Rank', icon: Trophy, path: '/leaderboard' },
   { label: 'History', icon: History, path: '/history' },
   { label: 'Shop', icon: ShoppingBag, path: '/shop' },

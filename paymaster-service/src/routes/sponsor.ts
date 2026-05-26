@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { validateUserOp, validateNonce, type UserOp } from '../services/validator';
 import { checkRateLimit } from '../services/rateLimiter';
 import { signUserOp } from '../services/signer';
-import { incrementSponsored } from './health';
+import { incrementSponsored } from '../services/healthMonitor';
 import { config } from '../config';
 
 const router = Router();

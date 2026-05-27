@@ -1,14 +1,30 @@
 {
   "name": "@morelucks/chessxu-sdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "SDK for interacting with Chessxu Clarity contracts on Stacks Mainnet",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "build": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && node scripts/add-esm-package.js",
+    "build": "npm run build:cjs && npm run build:esm",
     "test": "tsc -p tsconfig.test.json && node --test dist-test/tests/*.test.js",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "verify": "node scripts/verify-build.js",
+    "prepublishOnly": "npm run build && npm run verify"
   },
   "files": [
     "dist"
@@ -17,7 +33,9 @@
     "stacks",
     "clarity",
     "chess",
-    "sip-010"
+    "sip-010",
+    "esm",
+    "cjs"
   ],
   "author": "morelucks",
   "license": "MIT",

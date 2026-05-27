@@ -22,6 +22,8 @@
     "build:esm": "tsc -p tsconfig.esm.json && node scripts/add-esm-package.js",
     "build": "npm run build:cjs && npm run build:esm",
     "test": "tsc -p tsconfig.test.json && node --test dist-test/tests/*.test.js",
+    "test:coverage": "tsc -p tsconfig.test.json && c8 --reporter=lcov --reporter=text --reporter=json-summary --include='dist-test/src/**' node --test dist-test/tests/*.test.js",
+    "coverage:check": "c8 check-coverage --lines 80 --functions 80 --branches 70 --statements 80",
     "typecheck": "tsc --noEmit",
     "verify": "node scripts/verify-build.js",
     "prepublishOnly": "npm run build && npm run verify"
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "c8": "^10.1.3",
     "typescript": "^5.0.0"
   }
 }

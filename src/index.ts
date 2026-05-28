@@ -442,3 +442,38 @@ export function activeColorFromFen(fen: string): PlayerColor | null {
 export function turnMatchesBoard(game: Game): boolean {
   return activeColorFromFen(game.boardState) === game.turn;
 }
+
+// ---------------------------------------------------------------------------
+// EIP-712 EVM/Celo Domain Separator & Type Hash Definitions
+// ---------------------------------------------------------------------------
+
+/** Standard EIP-712 Domain Name for Chessxu on EVM/Celo networks */
+export const CHESSXU_EIP712_DOMAIN_NAME = 'Chessxu';
+
+/** Standard EIP-712 Domain Version */
+export const CHESSXU_EIP712_DOMAIN_VERSION = '1';
+
+/**
+ * EIP-712 Type Hash for Chessxu moves.
+ * Hash of "Move(uint256 gameId,string move,string boardState,uint256 nonce)"
+ */
+export const MOVE_TYPE_HASH = '0x31a4cd11cc1fb6952522162013417f00a0f1834a27445b3a3e9cb7848fcb7558';
+
+/**
+ * EIP-712 Type Hash for Paymaster Sponsorship request payloads.
+ * Hash of "Sponsorship(address sender,uint256 nonce,bytes initCode,bytes callData,uint256 callGasLimit,uint256 verificationGasLimit,uint256 preVerificationGas,uint256 maxFeePerGas,uint256 maxPriorityFeePerGas)"
+ */
+export const SPONSORSHIP_TYPE_HASH = '0xc00d29b6ea2faeaf0a684dc8a7a37b24b3c804affa42116472840f698a58c41f';
+
+/**
+ * Generates an EIP-712 compliant domain separator object for Celo Chessxu integrations.
+ */
+export function getChessxuEIP712Domain(chainId: number, contractAddress: string) {
+  return {
+    name: CHESSXU_EIP712_DOMAIN_NAME,
+    version: CHESSXU_EIP712_DOMAIN_VERSION,
+    chainId,
+    verifyingContract: contractAddress as `0x${string}`,
+  };
+}
+

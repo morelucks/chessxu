@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { ethers } from 'ethers';
-import { validateUserOp, validateNonce, type UserOp } from '../services/validator';
+import { validateUserOp, validateNonce, validateEIP712Signature, type UserOp } from '../services/validator';
 import { checkRateLimit } from '../services/rateLimiter';
 import { signUserOp } from '../services/signer';
 import { incrementSponsored } from '../services/healthMonitor';
@@ -10,7 +10,11 @@ const router = Router();
 const provider = new ethers.JsonRpcProvider(config.celoRpcUrl);
 
 router.post('/', async (req: Request, res: Response): Promise<void> => {
-  const { userOp, chainId } = req.body as { userOp: UserOp; chainId: number };
+  const { userOp, chainId, sponsorshipSignature } = req.body as {
+    userOp: UserOp;
+    chainId: number;
+    sponsorshipSignature?: string;
+  };
 
   if (!userOp || typeof chainId !== 'number') {
     res.status(400).json({ error: 'Request must include userOp object and chainId number.' });
@@ -20,6 +24,13 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   const validation = validateUserOp(userOp, chainId);
   if (!validation.valid) {
     res.status(400).json({ error: validation.error });
+    return;
+  }
+
+  // Verify the EIP-712 structured signature from the client request
+  const sigValidation = await validateEIP712Signature(userOp, chainId, sponsorshipSignature, provider);
+  if (!sigValidation.valid) {
+    res.status(400).json({ error: sigValidation.error });
     return;
   }
 

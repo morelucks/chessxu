@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import { config } from './config';
 import sponsorRouter from './routes/sponsor';
 import healthRouter from './routes/health';
-import healthzRouter from './routes/healthz';
 
 const app = express();
 app.use(helmet());
@@ -19,9 +18,6 @@ app.use((req, _res, next) => {
 
 app.use('/api/v1/sponsor', sponsorRouter);
 app.use('/api/v1/health', healthRouter);
-app.use('/healthz', healthzRouter);
-// Also mount under /api/v1/healthz for API consistency
-app.use('/api/v1/healthz', healthzRouter);
 
 app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });

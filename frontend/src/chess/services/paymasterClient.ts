@@ -264,21 +264,17 @@ export async function retryWithBackoff<T>(
 // Public API
 // ──────────────────────────────────────────────
 
-import { PAYMASTER_CONFIG, CELO_CONFIG } from '../blockchainConstants';
+import { PAYMASTER_CONFIG } from '../blockchainConstants';
 
 /**
  * Sends an unsigned UserOperation to the Paymaster service for gas sponsorship.
  * The paymaster signs the UserOp and returns `paymasterAndData` along with gas limit overrides.
  *
  * @param userOp - The unsigned UserOperation to sponsor
- * @param sponsorshipSignature - The EIP-712 structured signature for this sponsorship
  * @returns SponsorResult containing paymasterAndData and gas limits
  * @throws PaymasterError if the service is unavailable or rejects the request
  */
-export async function sponsorUserOp(
-  userOp: UserOperation,
-  sponsorshipSignature: `0x${string}`,
-): Promise<SponsorResult> {
+export async function sponsorUserOp(userOp: UserOperation): Promise<SponsorResult> {
   return retryWithBackoff(async () => {
     const response = await fetchWithTimeout(
       `${PAYMASTER_CONFIG.SERVICE_URL}/sponsor`,
@@ -299,8 +295,7 @@ export async function sponsorUserOp(
             paymasterAndData: '0x',
             signature: '0x',
           },
-          chainId: CELO_CONFIG.CHAIN_ID,
-          sponsorshipSignature,
+          entryPoint: PAYMASTER_CONFIG.ENTRYPOINT_ADDRESS,
         }),
       },
       PAYMASTER_CONFIG.TIMEOUT_MS,

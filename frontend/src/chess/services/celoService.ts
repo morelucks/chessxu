@@ -502,44 +502,8 @@ const celoService = {
       signature: '0x',
     };
 
-    // 1. Sign structured EIP-712 Sponsorship request
-    const sponsorshipSignature = await walletClient.signTypedData({
-      account: ownerAddress,
-      domain: {
-        name: 'Chessxu',
-        version: '1',
-        chainId: celo.id,
-        verifyingContract: PAYMASTER_CONFIG.CHESSXU_CONTRACT,
-      },
-      types: {
-        Sponsorship: [
-          { name: 'sender', type: 'address' },
-          { name: 'nonce', type: 'uint256' },
-          { name: 'initCode', type: 'bytes' },
-          { name: 'callData', type: 'bytes' },
-          { name: 'callGasLimit', type: 'uint256' },
-          { name: 'verificationGasLimit', type: 'uint256' },
-          { name: 'preVerificationGas', type: 'uint256' },
-          { name: 'maxFeePerGas', type: 'uint256' },
-          { name: 'maxPriorityFeePerGas', type: 'uint256' },
-        ],
-      },
-      primaryType: 'Sponsorship',
-      message: {
-        sender: unsignedUserOp.sender,
-        nonce: unsignedUserOp.nonce,
-        initCode: unsignedUserOp.initCode,
-        callData: unsignedUserOp.callData,
-        callGasLimit: unsignedUserOp.callGasLimit,
-        verificationGasLimit: unsignedUserOp.verificationGasLimit,
-        preVerificationGas: unsignedUserOp.preVerificationGas,
-        maxFeePerGas: unsignedUserOp.maxFeePerGas,
-        maxPriorityFeePerGas: unsignedUserOp.maxPriorityFeePerGas,
-      },
-    });
-
-    // 2. Sponsor the UserOp with EIP-712 signature
-    const sponsorResult = await sponsorUserOp(unsignedUserOp, sponsorshipSignature);
+    // 1. Sponsor the UserOp
+    const sponsorResult = await sponsorUserOp(unsignedUserOp);
 
     const sponsoredUserOp: UserOperation = {
       ...unsignedUserOp,

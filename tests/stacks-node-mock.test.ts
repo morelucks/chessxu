@@ -10,6 +10,9 @@ import {
   getExpectedScore,
   getGlobalStats,
   CHESSXU_DEPLOYER,
+  setGlobalRetryOptions,
+  getGlobalRetryOptions,
+  withRetry,
 } from "../src/index";
 
 // Save original fetch
@@ -170,6 +173,146 @@ test("getGlobalStats Node.js mock test", async () => {
   const stats = await getGlobalStats();
   assert.ok(stats);
   assert.equal(stats["total-games"].value, "250");
+});
+
+test("Retry mechanism - success on third attempt", async () => {
+  let attempts = 0;
+  const originalHook = (global as any).fetch;
+  (global as any).fetch = async (url: string, options: any) => {
+    attempts++;
+    if (attempts < 3) {
+      throw new Error("Temporary network error " + attempts);
+    }
+    return new Response(
+      JSON.stringify({
+        okay: true,
+        result: transactions.cvToHex(transactions.uintCV(42)),
+      }),
+      { status: 200 }
+    );
+  };
+
+  try {
+    const id = await getLastGameId(undefined, {
+      maxRetries: 3,
+      initialDelayMs: 1,
+      jitter: false,
+    });
+    assert.equal(id, 42);
+    assert.equal(attempts, 3);
+  } finally {
+    (global as any).fetch = originalHook;
+  }
+});
+
+test("Retry mechanism - persistent failure exhausts retries", async () => {
+  let attempts = 0;
+  const originalHook = (global as any).fetch;
+  (global as any).fetch = async (url: string, options: any) => {
+    attempts++;
+    throw new Error("Persistent network error " + attempts);
+  };
+
+  try {
+    await assert.rejects(
+      async () => {
+        await getLastGameId(undefined, {
+          maxRetries: 2,
+          initialDelayMs: 1,
+          jitter: false,
+        });
+      },
+      /Persistent network error 3/
+    );
+    // 1 initial + 2 retries = 3 attempts total
+    assert.equal(attempts, 3);
+  } finally {
+    (global as any).fetch = originalHook;
+  }
+});
+
+test("Retry mechanism - respects global default options", async () => {
+  setGlobalRetryOptions({
+    maxRetries: 1,
+    initialDelayMs: 1,
+    jitter: false,
+  });
+  
+  assert.equal(getGlobalRetryOptions().maxRetries, 1);
+
+  let attempts = 0;
+  const originalHook = (global as any).fetch;
+  (global as any).fetch = async (url: string, options: any) => {
+    attempts++;
+    throw new Error("Persistent network error " + attempts);
+  };
+
+  try {
+    await assert.rejects(
+      async () => {
+        await getLastGameId();
+      },
+      /Persistent network error 2/
+    );
+    // 1 initial + 1 retry = 2 attempts total
+    assert.equal(attempts, 2);
+  } finally {
+    (global as any).fetch = originalHook;
+    // Restore default options
+    setGlobalRetryOptions({
+      maxRetries: 3,
+      initialDelayMs: 500,
+      backoffFactor: 2,
+      jitter: true,
+    });
+  }
+});
+
+test("Retry mechanism - backoff calculation", async () => {
+  let attempts = 0;
+  const originalHook = (global as any).fetch;
+  (global as any).fetch = async (url: string, options: any) => {
+    attempts++;
+    throw new Error("fail");
+  };
+
+  try {
+    const start = Date.now();
+    await assert.rejects(
+      async () => {
+        await getLastGameId(undefined, {
+          maxRetries: 2,
+          initialDelayMs: 10,
+          backoffFactor: 2,
+          jitter: false,
+        });
+      },
+      /fail/
+    );
+    const duration = Date.now() - start;
+    // Delays: attempt 1 -> initialDelayMs = 10ms. attempt 2 -> 20ms. Total expected: 30ms.
+    assert.ok(duration >= 25, `Expected duration >= 25ms, got ${duration}ms`);
+  } finally {
+    (global as any).fetch = originalHook;
+  }
+});
+
+test("Retry mechanism - generic helper withRetry", async () => {
+  let count = 0;
+  const testFn = async () => {
+    count++;
+    if (count < 3) throw new Error("try again");
+    return "success";
+  };
+
+  const result = await withRetry(testFn, {
+    maxRetries: 3,
+    initialDelayMs: 1,
+    jitter: false,
+  });
+
+  assert.equal(result, "success");
+  assert.equal(count, 3);
 });
 
 // Restore original fetch

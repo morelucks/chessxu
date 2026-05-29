@@ -8,6 +8,9 @@ import {
   getGlobalStats,
   CONTRACTS,
   CHESSXU_DEPLOYER,
+  setGlobalRetryOptions,
+  getGlobalRetryOptions,
+  withRetry,
 } from "../src/index";
 import * as transactions from "@stacks/transactions";
 
@@ -213,6 +216,124 @@ describe("Stacks Network and Contract Parsing Helpers", () => {
         "total-games": { type: "uint", value: "250" },
         "total-players": { type: "uint", value: "40" },
       });
+    });
+  });
+
+  describe("Retry Mechanism and Backoff logic", () => {
+    afterEach(() => {
+      // Restore default global options
+      setGlobalRetryOptions({
+        maxRetries: 3,
+        initialDelayMs: 500,
+        backoffFactor: 2,
+        jitter: true,
+      });
+    });
+
+    it("should succeed immediately without retry on a successful call", async () => {
+      mockedFetchCall.mockResolvedValueOnce(transactions.uintCV(42));
+      const res = await getLastGameId();
+      expect(res).toBe(42);
+      expect(mockedFetchCall).toHaveBeenCalledTimes(1);
+    });
+
+    it("should retry and eventually succeed if initial calls fail", async () => {
+      mockedFetchCall
+        .mockRejectedValueOnce(new Error("Transient error 1"))
+        .mockRejectedValueOnce(new Error("Transient error 2"))
+        .mockResolvedValueOnce(transactions.uintCV(42));
+
+      // Use very short delays in tests to keep execution fast
+      const res = await getLastGameId(undefined, {
+        maxRetries: 3,
+        initialDelayMs: 1,
+        jitter: false,
+      });
+      expect(res).toBe(42);
+      expect(mockedFetchCall).toHaveBeenCalledTimes(3);
+    });
+
+    it("should fail after exhausting maxRetries", async () => {
+      mockedFetchCall.mockRejectedValue(new Error("Persistent error"));
+
+      await expect(
+        getLastGameId(undefined, {
+          maxRetries: 2,
+          initialDelayMs: 1,
+          jitter: false,
+        })
+      ).rejects.toThrow("Persistent error");
+
+      // 1 initial try + 2 retries = 3 total attempts
+      expect(mockedFetchCall).toHaveBeenCalledTimes(3);
+    });
+
+    it("should respect global default retry options", async () => {
+      setGlobalRetryOptions({
+        maxRetries: 1,
+        initialDelayMs: 1,
+        jitter: false,
+      });
+
+      expect(getGlobalRetryOptions().maxRetries).toBe(1);
+
+      mockedFetchCall.mockRejectedValue(new Error("Persistent error"));
+
+      await expect(getLastGameId()).rejects.toThrow("Persistent error");
+      // 1 initial + 1 retry = 2 attempts
+      expect(mockedFetchCall).toHaveBeenCalledTimes(2);
+    });
+
+    it("should calculate backoff delays correctly with and without jitter", async () => {
+      let start = Date.now();
+      mockedFetchCall
+        .mockRejectedValueOnce(new Error("fail"))
+        .mockRejectedValueOnce(new Error("fail"))
+        .mockResolvedValueOnce(transactions.uintCV(42));
+
+      await getLastGameId(undefined, {
+        maxRetries: 3,
+        initialDelayMs: 10,
+        backoffFactor: 2,
+        jitter: false,
+      });
+
+      // Delays: 10ms + 20ms = 30ms minimum wait time
+      let duration = Date.now() - start;
+      expect(duration).toBeGreaterThanOrEqual(25); // allow minor timing variance
+
+      // Check with jitter (delay should be random and generally smaller/equal)
+      mockedFetchCall.mockClear();
+      mockedFetchCall
+        .mockRejectedValueOnce(new Error("fail"))
+        .mockRejectedValueOnce(new Error("fail"))
+        .mockResolvedValueOnce(transactions.uintCV(42));
+
+      await getLastGameId(undefined, {
+        maxRetries: 3,
+        initialDelayMs: 10,
+        backoffFactor: 2,
+        jitter: true,
+      });
+      expect(mockedFetchCall).toHaveBeenCalledTimes(3);
+    });
+
+    it("should generic helper withRetry execute custom functions successfully", async () => {
+      let count = 0;
+      const testFn = async () => {
+        count++;
+        if (count < 3) throw new Error("try again");
+        return "success";
+      };
+
+      const result = await withRetry(testFn, {
+        maxRetries: 3,
+        initialDelayMs: 1,
+        jitter: false,
+      });
+
+      expect(result).toBe("success");
+      expect(count).toBe(3);
     });
   });
 });

@@ -14,8 +14,6 @@
     position: absolute;
     transition: filter 0.15s ease;
     pointer-events: auto;
-    touch-action: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .piece.selected {

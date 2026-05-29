@@ -82,7 +82,6 @@ function App() {
     const [gameMode, setGameMode] = useState('pvc'); // 'pvp' or 'pvc'
     const [leaderboardResults, setLeaderboardResults] = useState([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const providerState = {
         appState,
@@ -92,33 +91,6 @@ function App() {
     // Load leaderboard results on component mount
     useEffect(() => {
         setLeaderboardResults(loadGameResults());
-    }, []);
-
-    // Swipe gesture detection to open the drawer
-    useEffect(() => {
-        let startX = 0;
-        const handleTouchStart = (e) => {
-            const edgeThreshold = window.innerWidth - 40;
-            if (e.touches[0].clientX > edgeThreshold) {
-                startX = e.touches[0].clientX;
-            } else {
-                startX = 0;
-            }
-        };
-        const handleTouchMove = (e) => {
-            if (!startX) return;
-            const diffX = startX - e.touches[0].clientX;
-            if (diffX > 50) {
-                setIsDrawerOpen(true);
-                startX = 0;
-            }
-        };
-        window.addEventListener('touchstart', handleTouchStart);
-        window.addEventListener('touchmove', handleTouchMove);
-        return () => {
-            window.removeEventListener('touchstart', handleTouchStart);
-            window.removeEventListener('touchmove', handleTouchMove);
-        };
     }, []);
 
     const timeControlMs = useAppStore((state) => state.timeControlMs);
@@ -182,13 +154,10 @@ function App() {
                         </button>
                         <button className="btn btn-secondary" onClick={handlePlayerVsComputer} disabled={gameMode === 'pvc'}>Player vs Computer</button>
                         <button className="btn" onClick={() => handleNewGame(gameMode)}>New Game</button>
-                        <button className="btn btn-secondary mobile-only-btn" onClick={() => setIsDrawerOpen(true)}>
-                            Stats & History
-                        </button>
                     </div>
                     <Board/>
                 </div>
-                <Control isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+                <Control>
                     <ConnectWallet />
                     <MovesList/>
                     <TakeBack/>

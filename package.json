@@ -1,14 +1,32 @@
 {
   "name": "@morelucks/chessxu-sdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "SDK for interacting with Chessxu Clarity contracts on Stacks Mainnet",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "build": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && node scripts/add-esm-package.js",
+    "build": "npm run build:cjs && npm run build:esm",
     "test": "tsc -p tsconfig.test.json && node --test dist-test/tests/*.test.js",
+    "test:coverage": "tsc -p tsconfig.test.json && c8 --reporter=lcov --reporter=text --reporter=json-summary --include='dist-test/src/**' node --test dist-test/tests/*.test.js",
+    "coverage:check": "c8 check-coverage --lines 80 --functions 80 --branches 70 --statements 80",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "verify": "node scripts/verify-build.js",
+    "prepublishOnly": "npm run build && npm run verify"
   },
   "files": [
     "dist"
@@ -17,7 +35,9 @@
     "stacks",
     "clarity",
     "chess",
-    "sip-010"
+    "sip-010",
+    "esm",
+    "cjs"
   ],
   "author": "morelucks",
   "license": "MIT",
@@ -26,7 +46,9 @@
     "@stacks/transactions": "^7.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.9.1",
+    "c8": "^10.1.3",
     "typescript": "^5.0.0"
   }
 }

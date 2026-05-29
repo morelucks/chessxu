@@ -499,22 +499,98 @@ function safeCvToValue(response: any): any {
 }
 
 // ---------------------------------------------------------------------------
+// Retry Mechanism for Network/Node Queries
+// ---------------------------------------------------------------------------
+
+/**
+ * Configurable options for the network call retry mechanism.
+ */
+export interface RetryOptions {
+  /** The maximum number of retry attempts. Defaults to 3. */
+  maxRetries?: number;
+  /** The initial delay before retrying, in milliseconds. Defaults to 500. */
+  initialDelayMs?: number;
+  /** The exponential backoff factor. Defaults to 2. */
+  backoffFactor?: number;
+  /** Whether to apply random jitter to the retry delays. Defaults to true. */
+  jitter?: boolean;
+}
+
+const DEFAULT_RETRY_OPTIONS: Required<RetryOptions> = {
+  maxRetries: 3,
+  initialDelayMs: 500,
+  backoffFactor: 2,
+  jitter: true,
+};
+
+let globalRetryOptions = { ...DEFAULT_RETRY_OPTIONS };
+
+/**
+ * Configure global default retry options for all contract read-only queries.
+ */
+export function setGlobalRetryOptions(options: RetryOptions): void {
+  globalRetryOptions = { ...globalRetryOptions, ...options };
+}
+
+/**
+ * Retrieve a copy of the current global default retry options.
+ */
+export function getGlobalRetryOptions(): Required<RetryOptions> {
+  return { ...globalRetryOptions };
+}
+
+/**
+ * Executes an asynchronous function with exponential backoff and optional jitter.
+ */
+export async function withRetry<T>(
+  fn: () => Promise<T>,
+  options?: RetryOptions
+): Promise<T> {
+  const opts = { ...globalRetryOptions, ...options };
+  let attempt = 0;
+
+  while (true) {
+    try {
+      return await fn();
+    } catch (error) {
+      attempt++;
+      if (attempt > opts.maxRetries) {
+        throw error;
+      }
+      let delay = opts.initialDelayMs * Math.pow(opts.backoffFactor, attempt - 1);
+      if (opts.jitter) {
+        // Implement full jitter: a random delay between 0 and the calculated delay
+        delay = Math.random() * delay;
+      }
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Stacks Read-Only Node Interaction & Parsing Helpers
 // ---------------------------------------------------------------------------
 
 /**
  * Fetches the last game ID from the contract.
  */
-export async function getLastGameId(network: StacksNetwork = defaultNetwork): Promise<number> {
+export async function getLastGameId(
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
+): Promise<number> {
   const { address, name } = parseContractId(CONTRACTS.GAME);
-  const response = await fetchCallReadOnlyFunction({
-    contractAddress: address,
-    contractName: name,
-    functionName: "get-last-game-id",
-    functionArgs: [],
-    network,
-    senderAddress: CHESSXU_DEPLOYER,
-  });
+  const response = await withRetry(
+    () =>
+      fetchCallReadOnlyFunction({
+        contractAddress: address,
+        contractName: name,
+        functionName: "get-last-game-id",
+        functionArgs: [],
+        network,
+        senderAddress: CHESSXU_DEPLOYER,
+      }),
+    options
+  );
   const val = safeCvToValue(response);
   return val ? Number(val) : 0;
 }
@@ -525,21 +601,26 @@ export async function getLastGameId(network: StacksNetwork = defaultNetwork): Pr
  */
 export async function getGame(
   gameId: number,
-  network: StacksNetwork = defaultNetwork
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
 ): Promise<Game | null> {
   if (gameId < 0) {
     throw new Error("Invalid game ID: must be non-negative");
   }
   const { address, name } = parseContractId(CONTRACTS.GAME);
   try {
-    const response = await fetchCallReadOnlyFunction({
-      contractAddress: address,
-      contractName: name,
-      functionName: "get-game",
-      functionArgs: [uintCV(gameId)],
-      network,
-      senderAddress: CHESSXU_DEPLOYER,
-    });
+    const response = await withRetry(
+      () =>
+        fetchCallReadOnlyFunction({
+          contractAddress: address,
+          contractName: name,
+          functionName: "get-game",
+          functionArgs: [uintCV(gameId)],
+          network,
+          senderAddress: CHESSXU_DEPLOYER,
+        }),
+      options
+    );
     const parsed = safeCvToValue(response);
     if (!parsed) {
       return null;
@@ -568,22 +649,29 @@ export async function getGame(
 /**
  * Fetches the total game count from the contract.
  */
-export async function getGameCount(network: StacksNetwork = defaultNetwork): Promise<number> {
+export async function getGameCount(
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
+): Promise<number> {
   const { address, name } = parseContractId(CONTRACTS.GAME);
   try {
-    const response = await fetchCallReadOnlyFunction({
-      contractAddress: address,
-      contractName: name,
-      functionName: "get-game-count",
-      functionArgs: [],
-      network,
-      senderAddress: CHESSXU_DEPLOYER,
-    });
+    const response = await withRetry(
+      () =>
+        fetchCallReadOnlyFunction({
+          contractAddress: address,
+          contractName: name,
+          functionName: "get-game-count",
+          functionArgs: [],
+          network,
+          senderAddress: CHESSXU_DEPLOYER,
+        }),
+      options
+    );
     const val = safeCvToValue(response);
-    return val ? Number(val) : getLastGameId(network);
+    return val ? Number(val) : getLastGameId(network, options);
   } catch (error) {
     // Fallback: try to get last game ID
-    return getLastGameId(network);
+    return getLastGameId(network, options);
   }
 }
 
@@ -592,20 +680,25 @@ export async function getGameCount(network: StacksNetwork = defaultNetwork): Pro
  */
 export async function getPlayerStats(
   playerAddress: string,
-  network: StacksNetwork = defaultNetwork
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
 ): Promise<any> {
   if (!isValidStacksAddress(playerAddress)) {
     throw new Error(`Invalid player address: "${playerAddress}"`);
   }
   const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
-  const response = await fetchCallReadOnlyFunction({
-    contractAddress: address,
-    contractName: name,
-    functionName: "get-player-stats",
-    functionArgs: [principalCV(playerAddress)],
-    network,
-    senderAddress: CHESSXU_DEPLOYER,
-  });
+  const response = await withRetry(
+    () =>
+      fetchCallReadOnlyFunction({
+        contractAddress: address,
+        contractName: name,
+        functionName: "get-player-stats",
+        functionArgs: [principalCV(playerAddress)],
+        network,
+        senderAddress: CHESSXU_DEPLOYER,
+      }),
+    options
+  );
   const parsed = safeCvToValue(response);
   return parsed ? parsed.value : null;
 }
@@ -615,21 +708,26 @@ export async function getPlayerStats(
  */
 export async function getPlayerElo(
   playerAddress: string,
-  network: StacksNetwork = defaultNetwork
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
 ): Promise<number> {
   if (!isValidStacksAddress(playerAddress)) {
     throw new Error(`Invalid player address: "${playerAddress}"`);
   }
   const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
   try {
-    const response = await fetchCallReadOnlyFunction({
-      contractAddress: address,
-      contractName: name,
-      functionName: "get-player-elo",
-      functionArgs: [principalCV(playerAddress)],
-      network,
-      senderAddress: CHESSXU_DEPLOYER,
-    });
+    const response = await withRetry(
+      () =>
+        fetchCallReadOnlyFunction({
+          contractAddress: address,
+          contractName: name,
+          functionName: "get-player-elo",
+          functionArgs: [principalCV(playerAddress)],
+          network,
+          senderAddress: CHESSXU_DEPLOYER,
+        }),
+      options
+    );
     const val = safeCvToValue(response);
     return val ? Number(val) : 1200;
   } catch (error) {
@@ -643,20 +741,25 @@ export async function getPlayerElo(
 export async function getExpectedScore(
   playerA: string,
   playerB: string,
-  network: StacksNetwork = defaultNetwork
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
 ): Promise<number> {
   if (!isValidStacksAddress(playerA) || !isValidStacksAddress(playerB)) {
     throw new Error("Invalid player address(es)");
   }
   const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
-  const response = await fetchCallReadOnlyFunction({
-    contractAddress: address,
-    contractName: name,
-    functionName: "get-expected-score",
-    functionArgs: [principalCV(playerA), principalCV(playerB)],
-    network,
-    senderAddress: CHESSXU_DEPLOYER,
-  });
+  const response = await withRetry(
+    () =>
+      fetchCallReadOnlyFunction({
+        contractAddress: address,
+        contractName: name,
+        functionName: "get-expected-score",
+        functionArgs: [principalCV(playerA), principalCV(playerB)],
+        network,
+        senderAddress: CHESSXU_DEPLOYER,
+      }),
+    options
+  );
   const val = safeCvToValue(response);
   return val ? Number(val) : 500;
 }
@@ -664,391 +767,25 @@ export async function getExpectedScore(
 /**
  * Fetches global leaderboard statistics.
  */
-export async function getGlobalStats(network: StacksNetwork = defaultNetwork): Promise<any> {
+export async function getGlobalStats(
+  network: StacksNetwork = defaultNetwork,
+  options?: RetryOptions
+): Promise<any> {
   const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
-  const response = await fetchCallReadOnlyFunction({
-    contractAddress: address,
-    contractName: name,
-    functionName: "get-global-stats",
-    functionArgs: [],
-    network,
-    senderAddress: CHESSXU_DEPLOYER,
-  });
+  const response = await withRetry(
+    () =>
+      fetchCallReadOnlyFunction({
+        contractAddress: address,
+        contractName: name,
+        functionName: "get-global-stats",
+        functionArgs: [],
+        network,
+        senderAddress: CHESSXU_DEPLOYER,
+      }),
+    options
+  );
   return safeCvToValue(response);
 }
 
 
 
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint
-// commit reference tracking checkpoint

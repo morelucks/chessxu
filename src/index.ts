@@ -1,3 +1,11 @@
+import {
+  uintCV,
+  principalCV,
+  cvToValue,
+  fetchCallReadOnlyFunction,
+} from "@stacks/transactions";
+import { STACKS_MAINNET, StacksNetwork } from "@stacks/network";
+
 /**
  * The deployer address for the Chessxu smart contracts on Stacks Mainnet.
  */
@@ -13,6 +21,8 @@ export const CONTRACTS = {
   TOKEN: `${CHESSXU_DEPLOYER}.chessxu-token`,
   /** The core state-machine game contract */
   GAME: `${CHESSXU_DEPLOYER}.chessxu`,
+  /** The leaderboard and stats contract */
+  LEADERBOARD: `${CHESSXU_DEPLOYER}.chessxu-leaderboard`,
 };
 
 /**

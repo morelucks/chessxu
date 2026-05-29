@@ -1,3 +1,11 @@
+import {
+  uintCV,
+  principalCV,
+  cvToValue,
+  fetchCallReadOnlyFunction,
+} from "@stacks/transactions";
+import { STACKS_MAINNET, StacksNetwork } from "@stacks/network";
+
 /**
  * The deployer address for the Chessxu smart contracts on Stacks Mainnet.
  */
@@ -13,6 +21,8 @@ export const CONTRACTS = {
   TOKEN: `${CHESSXU_DEPLOYER}.chessxu-token`,
   /** The core state-machine game contract */
   GAME: `${CHESSXU_DEPLOYER}.chessxu`,
+  /** The leaderboard and stats contract */
+  LEADERBOARD: `${CHESSXU_DEPLOYER}.chessxu-leaderboard`,
 };
 
 /**
@@ -442,3 +452,228 @@ export function activeColorFromFen(fen: string): PlayerColor | null {
 export function turnMatchesBoard(game: Game): boolean {
   return activeColorFromFen(game.boardState) === game.turn;
 }
+
+// ---------------------------------------------------------------------------
+// EIP-712 EVM/Celo Domain Separator & Type Hash Definitions
+// ---------------------------------------------------------------------------
+
+/** Standard EIP-712 Domain Name for Chessxu on EVM/Celo networks */
+export const CHESSXU_EIP712_DOMAIN_NAME = 'Chessxu';
+
+/** Standard EIP-712 Domain Version */
+export const CHESSXU_EIP712_DOMAIN_VERSION = '1';
+
+/**
+ * EIP-712 Type Hash for Chessxu moves.
+ * Hash of "Move(uint256 gameId,string move,string boardState,uint256 nonce)"
+ */
+export const MOVE_TYPE_HASH = '0x31a4cd11cc1fb6952522162013417f00a0f1834a27445b3a3e9cb7848fcb7558';
+
+/**
+ * EIP-712 Type Hash for Paymaster Sponsorship request payloads.
+ * Hash of "Sponsorship(address sender,uint256 nonce,bytes initCode,bytes callData,uint256 callGasLimit,uint256 verificationGasLimit,uint256 preVerificationGas,uint256 maxFeePerGas,uint256 maxPriorityFeePerGas)"
+ */
+export const SPONSORSHIP_TYPE_HASH = '0xc00d29b6ea2faeaf0a684dc8a7a37b24b3c804affa42116472840f698a58c41f';
+
+/**
+ * Generates an EIP-712 compliant domain separator object for Celo Chessxu integrations.
+ */
+export function getChessxuEIP712Domain(chainId: number, contractAddress: string) {
+  return {
+    name: CHESSXU_EIP712_DOMAIN_NAME,
+    version: CHESSXU_EIP712_DOMAIN_VERSION,
+    chainId,
+    verifyingContract: contractAddress as `0x${string}`,
+  };
+}
+
+const defaultNetwork = STACKS_MAINNET;
+
+function safeCvToValue(response: any): any {
+  if (!response) return null;
+  try {
+    return cvToValue(response);
+  } catch (error) {
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Stacks Read-Only Node Interaction & Parsing Helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Fetches the last game ID from the contract.
+ */
+export async function getLastGameId(network: StacksNetwork = defaultNetwork): Promise<number> {
+  const { address, name } = parseContractId(CONTRACTS.GAME);
+  const response = await fetchCallReadOnlyFunction({
+    contractAddress: address,
+    contractName: name,
+    functionName: "get-last-game-id",
+    functionArgs: [],
+    network,
+    senderAddress: CHESSXU_DEPLOYER,
+  });
+  const val = safeCvToValue(response);
+  return val ? Number(val) : 0;
+}
+
+/**
+ * Fetches the current game state from the blockchain.
+ * Returns null if the game is not found or does not exist.
+ */
+export async function getGame(
+  gameId: number,
+  network: StacksNetwork = defaultNetwork
+): Promise<Game | null> {
+  if (gameId < 0) {
+    throw new Error("Invalid game ID: must be non-negative");
+  }
+  const { address, name } = parseContractId(CONTRACTS.GAME);
+  try {
+    const response = await fetchCallReadOnlyFunction({
+      contractAddress: address,
+      contractName: name,
+      functionName: "get-game",
+      functionArgs: [uintCV(gameId)],
+      network,
+      senderAddress: CHESSXU_DEPLOYER,
+    });
+    const parsed = safeCvToValue(response);
+    if (!parsed) {
+      return null;
+    }
+    const gameVal = parsed.value;
+    if (!gameVal) {
+      return null;
+    }
+    return {
+      playerW: gameVal.playerW?.value ?? gameVal.playerW,
+      playerB: gameVal.playerB?.value?.value ?? gameVal.playerB?.value ?? gameVal.playerB ?? undefined,
+      wager: Number(gameVal.wager?.value ?? gameVal.wager),
+      isStx: gameVal.isStx?.value ?? gameVal.isStx,
+      boardState: gameVal.boardState?.value ?? gameVal.boardState,
+      turn: gameVal.turn?.value ?? gameVal.turn,
+      status: Number(gameVal.status?.value ?? gameVal.status),
+    };
+  } catch (error: any) {
+    if (error.message && (error.message.includes("404") || error.message.includes("not found"))) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+/**
+ * Fetches the total game count from the contract.
+ */
+export async function getGameCount(network: StacksNetwork = defaultNetwork): Promise<number> {
+  const { address, name } = parseContractId(CONTRACTS.GAME);
+  try {
+    const response = await fetchCallReadOnlyFunction({
+      contractAddress: address,
+      contractName: name,
+      functionName: "get-game-count",
+      functionArgs: [],
+      network,
+      senderAddress: CHESSXU_DEPLOYER,
+    });
+    const val = safeCvToValue(response);
+    return val ? Number(val) : getLastGameId(network);
+  } catch (error) {
+    // Fallback: try to get last game ID
+    return getLastGameId(network);
+  }
+}
+
+/**
+ * Fetches on-chain stats for a specific player from the leaderboard contract.
+ */
+export async function getPlayerStats(
+  playerAddress: string,
+  network: StacksNetwork = defaultNetwork
+): Promise<any> {
+  if (!isValidStacksAddress(playerAddress)) {
+    throw new Error(`Invalid player address: "${playerAddress}"`);
+  }
+  const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
+  const response = await fetchCallReadOnlyFunction({
+    contractAddress: address,
+    contractName: name,
+    functionName: "get-player-stats",
+    functionArgs: [principalCV(playerAddress)],
+    network,
+    senderAddress: CHESSXU_DEPLOYER,
+  });
+  const parsed = safeCvToValue(response);
+  return parsed ? parsed.value : null;
+}
+
+/**
+ * Fetches the ELO rating for a player.
+ */
+export async function getPlayerElo(
+  playerAddress: string,
+  network: StacksNetwork = defaultNetwork
+): Promise<number> {
+  if (!isValidStacksAddress(playerAddress)) {
+    throw new Error(`Invalid player address: "${playerAddress}"`);
+  }
+  const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
+  try {
+    const response = await fetchCallReadOnlyFunction({
+      contractAddress: address,
+      contractName: name,
+      functionName: "get-player-elo",
+      functionArgs: [principalCV(playerAddress)],
+      network,
+      senderAddress: CHESSXU_DEPLOYER,
+    });
+    const val = safeCvToValue(response);
+    return val ? Number(val) : 1200;
+  } catch (error) {
+    return 1200;
+  }
+}
+
+/**
+ * Fetches expected win probability between two players (0–1000 scale).
+ */
+export async function getExpectedScore(
+  playerA: string,
+  playerB: string,
+  network: StacksNetwork = defaultNetwork
+): Promise<number> {
+  if (!isValidStacksAddress(playerA) || !isValidStacksAddress(playerB)) {
+    throw new Error("Invalid player address(es)");
+  }
+  const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
+  const response = await fetchCallReadOnlyFunction({
+    contractAddress: address,
+    contractName: name,
+    functionName: "get-expected-score",
+    functionArgs: [principalCV(playerA), principalCV(playerB)],
+    network,
+    senderAddress: CHESSXU_DEPLOYER,
+  });
+  const val = safeCvToValue(response);
+  return val ? Number(val) : 500;
+}
+
+/**
+ * Fetches global leaderboard statistics.
+ */
+export async function getGlobalStats(network: StacksNetwork = defaultNetwork): Promise<any> {
+  const { address, name } = parseContractId(CONTRACTS.LEADERBOARD);
+  const response = await fetchCallReadOnlyFunction({
+    contractAddress: address,
+    contractName: name,
+    functionName: "get-global-stats",
+    functionArgs: [],
+    network,
+    senderAddress: CHESSXU_DEPLOYER,
+  });
+  return safeCvToValue(response);
+}
+

@@ -3,7 +3,7 @@
 > **Complete React + Clarity integration documentation**
 > Play chess and wager STX securely on the Stacks blockchain ⚡
 
-[![Stacks](https://img.shields.io/badge/Stacks-Ready-purple)](https://stacks.co) [![Clarity](https://img.shields.io/badge/Clarity-2.0-blue)](https://clarity-lang.org) [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev) [![Farcaster Mini App](https://img.shields.io/badge/Farcaster-MiniApp-purple)](https://farcaster.xyz/miniapps/nRpKP2ahbJIm/chessxu)
+[![Stacks](https://img.shields.io/badge/Stacks-Ready-purple)](https://stacks.co) [![Clarity](https://img.shields.io/badge/Clarity-2.0-blue)](https://clarity-lang.org) [![React](https://img.shields.io/badge/React-18-blue)](https://react.dev) [![Farcaster Mini App](https://img.shields.io/badge/Farcaster-MiniApp-purple)](https://farcaster.xyz/miniapps/nRpKP2ahbJIm/chessxu) [![codecov](https://codecov.io/gh/morelucks/chessxu/branch/master/graph/badge.svg)](https://codecov.io/gh/morelucks/chessxu)
 
 Welcome to **Chessxu**, a fully decentralized chess application built on the Stacks and Celo blockchains. Chessxu enables players to engage in PvP chess matches, completely tracked and resolved using smart contract state-machines, with crypto token wagers on the line.
 

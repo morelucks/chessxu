@@ -905,3 +905,4 @@ export async function getGlobalStats(network: StacksNetwork = defaultNetwork): P
 // commit reference tracking checkpoint
 // commit reference tracking checkpoint
 // commit reference tracking checkpoint
+// commit reference tracking checkpoint

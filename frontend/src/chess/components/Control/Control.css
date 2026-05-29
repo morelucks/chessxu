@@ -12,4 +12,60 @@
     justify-content: flex-start; /* Align children to the start vertically */
     color: var(--text-color);
     overflow-y: auto; /* Allow scrolling if content exceeds height */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.control-close-btn {
+    display: none;
+}
+
+.control-overlay {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .control {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 320px;
+        max-width: 80vw;
+        z-index: 10000;
+        background-color: var(--bg-color); /* darker bg on drawer for contrast */
+        border-radius: 0;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.6);
+        transform: translateX(100%);
+        min-height: 100vh;
+        height: 100%;
+    }
+    
+    .control.open {
+        transform: translateX(0);
+    }
+    
+    .control-close-btn {
+        display: block;
+        align-self: flex-end;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0 10px;
+        line-height: 1;
+        margin-bottom: -10px;
+    }
+    
+    .control-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        backdrop-filter: blur(2px);
+    }
 }

@@ -17,20 +17,8 @@
     --check : #e06c75; /* A subtle red for check */
 }
 
-@media (max-width: 1024px) {
+@media all and (max-width: 450px) {
     :root {
-        --tile-size: min(10vw, 80px);
-    }
-}
-
-@media (max-width: 768px) {
-    :root {
-        --tile-size: min(11vw, 55px);
-    }
-}
-
-@media (max-width: 360px) {
-    :root {
-        --tile-size: 10.5vw;
+        --tile-size : 50px;
     }
 }

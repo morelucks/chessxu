@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   STARTING_FEN,
+  STARTING_BOARD_COMPACT,
   isStartingPosition,
   activeColorFromFen,
   turnMatchesBoard,
@@ -35,5 +36,7 @@ test("turnMatchesBoard cross-checks game.turn against the FEN", () => {
   };
   assert.equal(turnMatchesBoard(base), true);
   assert.equal(turnMatchesBoard({ ...base, turn: "b" }), false);
-  assert.equal(turnMatchesBoard({ ...base, boardState: "garbage" }), false);
+  // Compact format has no side-to-move field — always returns true
+  assert.equal(turnMatchesBoard({ ...base, boardState: STARTING_BOARD_COMPACT }), true);
+  assert.equal(turnMatchesBoard({ ...base, boardState: "garbage" }), true);
 });

@@ -431,11 +431,77 @@ export const STARTING_FEN =
   "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 /**
+ * The compact piece-placement string stored on-chain (v3+).
+ * This is the first field of a FEN string — no side-to-move, castling,
+ * en-passant, or move counters. Maximum 64 characters.
+ */
+export const STARTING_BOARD_COMPACT =
+  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
+/** Maximum length of the compact on-chain board-state field (64 chars). */
+export const MAX_BOARD_STATE_LENGTH = 64;
+
+/**
+ * Extract the piece-placement component from a full FEN string.
+ * This is the compact format stored on-chain in v3+.
+ *
+ * @example
+ * fenToCompact("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+ * // => "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+ */
+export function fenToCompact(fen: string): string {
+  const placement = fen.trim().split(/\s+/)[0];
+  if (placement.length > MAX_BOARD_STATE_LENGTH) {
+    throw new Error(
+      `Board state too long for on-chain storage: ${placement.length} chars (max ${MAX_BOARD_STATE_LENGTH})`
+    );
+  }
+  return placement;
+}
+
+/**
+ * Reconstruct a full FEN string from the compact on-chain board-state and
+ * the turn field stored separately in the game map.
+ *
+ * Castling availability and en-passant are not tracked on-chain; this helper
+ * uses "-" for both (safe for display and off-chain engine analysis).
+ * Move counters default to "0 1".
+ *
+ * @example
+ * compactToFen("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR", "b")
+ * // => "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b - - 0 1"
+ */
+export function compactToFen(
+  boardState: string,
+  turn: "w" | "b",
+  castling = "-",
+  enPassant = "-",
+  halfMove = 0,
+  fullMove = 1
+): string {
+  return `${boardState} ${turn} ${castling} ${enPassant} ${halfMove} ${fullMove}`;
+}
+
+/**
+ * Whether a board-state string is valid for on-chain storage:
+ * - Non-empty
+ * - At most MAX_BOARD_STATE_LENGTH characters
+ * - Contains only valid FEN piece-placement characters
+ */
+export function isValidCompactBoardState(boardState: string): boolean {
+  if (!boardState || boardState.length > MAX_BOARD_STATE_LENGTH) return false;
+  // Valid FEN piece-placement chars: letters, digits 1-8, forward slash
+  return /^[rnbqkpRNBQKP1-8/]+$/.test(boardState);
+}
+
+/**
  * Whether a board state string represents the initial position. Comparison is
  * whitespace-insensitive so encodings with extra padding still match.
+ * Accepts both full FEN and compact piece-placement format.
  */
 export function isStartingPosition(boardState: string): boolean {
-  return boardState.trim() === STARTING_FEN;
+  const trimmed = boardState.trim();
+  return trimmed === STARTING_FEN || trimmed === STARTING_BOARD_COMPACT;
 }
 
 /** Read the side to move ("w"/"b") encoded in a FEN string, if present. */
@@ -448,9 +514,14 @@ export function activeColorFromFen(fen: string): PlayerColor | null {
 /**
  * Whether the game's `turn` field agrees with the side-to-move encoded in its
  * FEN board state. Returns `false` if the board state has no parseable colour.
+ * For compact board states (no side-to-move field), always returns `true`
+ * since the turn is tracked separately in the game map.
  */
 export function turnMatchesBoard(game: Game): boolean {
-  return activeColorFromFen(game.boardState) === game.turn;
+  const color = activeColorFromFen(game.boardState);
+  // Compact format has no side-to-move field — turn is in game.turn
+  if (color === null) return true;
+  return color === game.turn;
 }
 
 // ---------------------------------------------------------------------------

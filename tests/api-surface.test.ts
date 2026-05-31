@@ -54,6 +54,12 @@ const EXPECTED_EXPORTS = [
   "isStartingPosition",
   "activeColorFromFen",
   "turnMatchesBoard",
+  // compact board-state helpers (v3 gas optimization)
+  "STARTING_BOARD_COMPACT",
+  "MAX_BOARD_STATE_LENGTH",
+  "fenToCompact",
+  "compactToFen",
+  "isValidCompactBoardState",
   // explorer helpers
   "txExplorerUrl",
   "addressExplorerUrl",

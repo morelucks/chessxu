@@ -46,6 +46,7 @@
 (define-constant err-game-not-active (err u108))
 (define-constant err-invalid-status (err u109))
 (define-constant err-board-state-too-long (err u110))
+(define-constant err-paused (err u111))
 
 ;; Maximum length for the compact board-state string (piece-placement only)
 (define-constant MAX-BOARD-STATE-LEN u64)
@@ -58,6 +59,12 @@
 
 ;; Data Variables
 (define-data-var next-game-id uint u1)
+
+;; Administrative pause switch. When true, all game state modifications
+;; (create-game, join-game, submit-move) are blocked. Only the contract
+;; owner can toggle this. Intended for emergency stops in the event of a
+;; vulnerability disclosure or a major contract migration.
+(define-data-var paused bool false)
 
 ;; Maps
 ;; board-state is now (string-ascii 64) - piece-placement only, no FEN metadata.
@@ -95,6 +102,42 @@
     STARTING-BOARD
 )
 
+;; ===========================
+;; Administrative Functions
+;; ===========================
+
+;; @desc Pause the contract. Blocks create-game, join-game, and submit-move.
+;;   Owner-only. Intended for emergency stops or migrations.
+;; @emits contract-paused { by, block-height }
+(define-public (pause)
+    (begin
+        (asserts! (is-eq tx-sender contract-owner) err-not-owner)
+        (var-set paused true)
+        (print {
+            topic: "contract-paused",
+            by: tx-sender,
+            block-height: block-height
+        })
+        (ok true)
+    )
+)
+
+;; @desc Unpause the contract, re-enabling game state modifications.
+;;   Owner-only.
+;; @emits contract-unpaused { by, block-height }
+(define-public (unpause)
+    (begin
+        (asserts! (is-eq tx-sender contract-owner) err-not-owner)
+        (var-set paused false)
+        (print {
+            topic: "contract-unpaused",
+            by: tx-sender,
+            block-height: block-height
+        })
+        (ok true)
+    )
+)
+
 ;;
 ;; Public Functions
 ;;
@@ -109,6 +152,9 @@
             (game-id (var-get next-game-id))
         )
         (begin
+            ;; Block new games while the contract is paused
+            (asserts! (not (var-get paused)) err-paused)
+
             ;; Escrow wager
             (if is-stx
                 (if (> wager u0) (try! (stx-transfer? wager tx-sender (as-contract tx-sender))) true)
@@ -158,6 +204,8 @@
             (is-stx (get is-stx game))
         )
         (begin
+            ;; Block joining while the contract is paused
+            (asserts! (not (var-get paused)) err-paused)
             (asserts! (is-eq (get status game) u0) err-not-waiting)
             (asserts! (not (is-eq tx-sender (get player-w game))) err-already-joined)
 
@@ -207,6 +255,8 @@
             (next-turn (if (is-eq current-turn "w") "b" "w"))
         )
         (begin
+            ;; Block moves while the contract is paused
+            (asserts! (not (var-get paused)) err-paused)
             (asserts! (is-eq (get status game) u1) err-game-not-active)
 
             ;; Verify the caller is the active player
@@ -379,4 +429,9 @@
 
 (define-read-only (get-last-game-id)
     (- (var-get next-game-id) u1)
+)
+
+;; @desc Returns whether the contract is currently paused.
+(define-read-only (is-paused)
+    (var-get paused)
 )

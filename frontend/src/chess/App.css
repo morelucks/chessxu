@@ -70,6 +70,29 @@ html,body {
   border-radius: 8px;
 }
 
+.mobile-only-btn {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-only-btn {
+    display: block !important;
+    background-color: #61afef !important;
+    color: white !important;
+  }
+  .game-mode-selection {
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+  }
+  .game-mode-selection button {
+    font-size: 0.9em !important;
+    padding: 8px 12px !important;
+    flex: 1 1 auto;
+  }
+}
+
 .game-mode-selection button {
   padding: 10px 20px;
   font-size: 1em;

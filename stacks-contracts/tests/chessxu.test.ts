@@ -272,3 +272,69 @@ describe("chessxu - integration flows", () => {
         expect(transfer2.data.amount).toBe("10000");
     });
 });
+
+describe("chessxu - admin pause mechanism", () => {
+    it("is unpaused by default", () => {
+        const { result } = simnet.callReadOnlyFn("chessxu", "is-paused", [], wallet_1);
+        expect(result).toStrictEqual(Cl.bool(false));
+    });
+
+    it("allows the contract owner to pause", () => {
+        const { result } = simnet.callPublicFn("chessxu", "pause", [], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        const paused = simnet.callReadOnlyFn("chessxu", "is-paused", [], wallet_1).result;
+        expect(paused).toStrictEqual(Cl.bool(true));
+    });
+
+    it("allows the contract owner to unpause", () => {
+        simnet.callPublicFn("chessxu", "pause", [], deployer);
+        const { result } = simnet.callPublicFn("chessxu", "unpause", [], deployer);
+        expect(result).toBeOk(Cl.bool(true));
+        const paused = simnet.callReadOnlyFn("chessxu", "is-paused", [], wallet_1).result;
+        expect(paused).toStrictEqual(Cl.bool(false));
+    });
+
+    it("reverts when a non-owner tries to pause (err-not-owner)", () => {
+        const { result } = simnet.callPublicFn("chessxu", "pause", [], wallet_1);
+        expect(result).toBeErr(Cl.uint(100)); // err-not-owner
+    });
+
+    it("reverts when a non-owner tries to unpause (err-not-owner)", () => {
+        simnet.callPublicFn("chessxu", "pause", [], deployer);
+        const { result } = simnet.callPublicFn("chessxu", "unpause", [], wallet_1);
+        expect(result).toBeErr(Cl.uint(100)); // err-not-owner
+    });
+
+    it("blocks create-game while paused (err-paused)", () => {
+        simnet.callPublicFn("chessxu", "pause", [], deployer);
+        const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        expect(result).toBeErr(Cl.uint(111)); // err-paused
+    });
+
+    it("blocks join-game while paused (err-paused)", () => {
+        const gameId = setupGame(0, true, 1);
+        simnet.callPublicFn("chessxu", "pause", [], deployer);
+        const { result } = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId)], wallet_2);
+        expect(result).toBeErr(Cl.uint(111)); // err-paused
+    });
+
+    it("blocks submit-move while paused (err-paused)", () => {
+        const gameId = setupGame(0, true, 2);
+        simnet.callPublicFn("chessxu", "pause", [], deployer);
+        const { result } = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId), Cl.stringAscii("e2e4"), Cl.stringAscii("board")], wallet_1);
+        expect(result).toBeErr(Cl.uint(111)); // err-paused
+    });
+
+    it("resumes game state modifications after unpausing", () => {
+        simnet.callPublicFn("chessxu", "pause", [], deployer);
+        simnet.callPublicFn("chessxu", "unpause", [], deployer);
+        const { result } = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(0), Cl.bool(true)], wallet_1);
+        expect(result).toBeOk(Cl.uint(1));
+    });
+
+    it("emits a contract-paused event when paused", () => {
+        const { events } = simnet.callPublicFn("chessxu", "pause", [], deployer);
+        const printEvent = events.find(e => e.event === "print_event");
+        expect(printEvent).toBeDefined();
+    });
+});

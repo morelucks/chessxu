@@ -8,12 +8,8 @@ services:
       - .env
     environment:
       - REDIS_URL=redis://redis:6379
-      - REDIS_MAX_RECONNECT_ATTEMPTS=50
-      - REDIS_HEALTH_CHECK_INTERVAL_MS=15000
-      - REDIS_KEY_PREFIX=chessxu:paymaster:
     depends_on:
-      redis:
-        condition: service_healthy
+      - redis
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3001/healthz"]
@@ -24,22 +20,8 @@ services:
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    command: >
-      redis-server
-      --maxmemory 128mb
-      --maxmemory-policy allkeys-lru
-      --appendonly yes
-      --appendfsync everysec
-      --save 900 1
-      --save 300 10
     volumes:
       - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 5s
 
 volumes:
   redis_data:

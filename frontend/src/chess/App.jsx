@@ -7,6 +7,7 @@ import AppContext from './contexts/Context'
 import Control from './components/Control/Control';
 import TakeBack from './components/Control/bits/TakeBack';
 import MovesList from './components/Control/bits/MovesList';
+import SoundToggle from './components/Control/bits/SoundToggle';
 import actionTypes from './reducer/actionTypes';
 import { loadGameResults, clearGameResults } from './helper/localStorage';
 import Popup from './components/Popup/Popup';
@@ -15,6 +16,8 @@ import { getStakeData } from './helper/stakeStorage';
 import ConnectWallet from './components/Control/bits/ConnectWallet';
 import { useUser } from './contexts/UserContext';
 import useAppStore from '../zustand/store';
+import useSoundSettings from './hooks/useSoundSettings';
+import useChessSound from './hooks/useChessSound';
 
 // Leaderboard Component
 const Leaderboard = ({ results, onClear }) => {
@@ -83,6 +86,10 @@ function App() {
     const [leaderboardResults, setLeaderboardResults] = useState([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    // Sound feedback system
+    const { isMuted, volume, toggleMute, setVolume, play: playSound } = useSoundSettings();
+    useChessSound(appState, playSound);
 
     const providerState = {
         appState,
@@ -190,6 +197,12 @@ function App() {
                 </div>
                 <Control isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
                     <ConnectWallet />
+                    <SoundToggle
+                        isMuted={isMuted}
+                        volume={volume}
+                        onToggle={toggleMute}
+                        onVolumeChange={setVolume}
+                    />
                     <MovesList/>
                     <TakeBack/>
                     <Leaderboard results={leaderboardResults} onClear={handleClearLeaderboard} />

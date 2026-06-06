@@ -239,3 +239,4 @@
 // nav-build-step: 104 — style(nav): set text color slate-200 for hover
 // nav-build-step: 105 — style(nav): set text color indigo-200 for active
 // nav-build-step: 106 — style(nav): configure svg icon color in active state
+// nav-build-step: 107 — fix(nav): ensure nav renders inside BrowserRouter

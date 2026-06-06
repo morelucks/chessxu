@@ -168,3 +168,4 @@
 // nav-build-step: 33 — feat(app): ensure desktop nav persists across navigation
 // nav-build-step: 34 — feat(layout): maintain bottom padding only on mobile
 // nav-build-step: 35 — feat(layout): add min-height screen to main flex col
+// nav-build-step: 36 — refactor(nav): extract nav items array for reusability

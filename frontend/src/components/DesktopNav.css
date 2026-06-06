@@ -135,3 +135,6 @@
 }
 // nav-build-step: 1 — feat(nav): scaffold DesktopNav component structure
 // nav-build-step: 2 — feat(nav): add nav item type definitions and icons
+// nav-build-step: 3 — feat(nav): implement route path mappings for desktop nav
+// nav-build-step: 4 — feat(nav): add NavLink integration with react-router-dom
+// nav-build-step: 5 — feat(nav): render icon and label for each nav item

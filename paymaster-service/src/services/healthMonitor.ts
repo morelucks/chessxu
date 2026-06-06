@@ -7,13 +7,15 @@
  *   - Paymaster EntryPoint deposit with low-deposit warning
  *   - Celo RPC roundtrip latency
  *   - Redis roundtrip latency (if configured)
- *   - In-memory rate-limiter store size
+ *   - Distributed rate-limiter store diagnostics
  *   - Process uptime, memory usage, Node.js version
  */
 
 import { ethers } from 'ethers';
 import { config } from '../config';
 import { getSignerAddress } from './signer';
+import { getRedisClient, getPoolStats, isRedisHealthy, type RedisPoolStats } from './redisPool';
+import { getRateLimiterStats, type RateLimiterStats } from './distributedRateLimiter';
 
 // ---------------------------------------------------------------------------
 // Thresholds
@@ -73,8 +75,17 @@ export interface DepositDiagnostic {
 export interface RedisDiagnostic {
   status: ComponentStatus;
   configured: boolean;
+  connected: boolean;
   latencyMs: number | null;
+  poolStats: RedisPoolStats | null;
   error?: string;
+}
+
+export interface RateLimiterDiagnostic {
+  activeStore: string;
+  memoryFallbackCount: number;
+  redisHitCount: number;
+  memoryStoreSize: number;
 }
 
 export interface MemoryDiagnostic {
@@ -99,6 +110,7 @@ export interface HealthReport {
   signerBalance: BalanceDiagnostic;
   paymasterDeposit: DepositDiagnostic;
   redis: RedisDiagnostic;
+  rateLimiter: RateLimiterDiagnostic;
   memory: MemoryDiagnostic;
   warnings: string[];
 }
@@ -214,35 +226,58 @@ export async function probePaymasterDeposit(
   }
 }
 
+/**
+ * Probes Redis health using the shared connection pool.
+ *
+ * Uses the existing pool-managed client rather than creating throwaway
+ * connections, providing accurate latency measurements and avoiding
+ * unnecessary connection churn.
+ */
 export async function probeRedis(): Promise<RedisDiagnostic> {
+  const poolStats = getPoolStats();
+
   if (!config.redisUrl) {
-    return { status: 'ok', configured: false, latencyMs: null };
+    return {
+      status: 'ok',
+      configured: false,
+      connected: false,
+      latencyMs: null,
+      poolStats: null,
+    };
   }
 
   try {
-    const { default: Redis } = await import('ioredis');
-    const client = new Redis(config.redisUrl, {
-      connectTimeout: 3000,
-      lazyConnect: true,
-      maxRetriesPerRequest: 1,
-    });
+    const client = await getRedisClient();
+
+    if (!client) {
+      return {
+        status: 'error',
+        configured: true,
+        connected: false,
+        latencyMs: null,
+        poolStats,
+        error: 'Redis client unavailable — pool returned null',
+      };
+    }
 
     const start = Date.now();
-    await client.connect();
     await client.ping();
     const latencyMs = Date.now() - start;
-    await client.quit();
 
     return {
       status: latencyMs > REDIS_LATENCY_WARN_MS ? 'warn' : 'ok',
       configured: true,
+      connected: isRedisHealthy(),
       latencyMs,
+      poolStats,
     };
   } catch (err) {
     return {
       status: 'error',
       configured: true,
+      connected: false,
       latencyMs: null,
+      poolStats,
       error: err instanceof Error ? err.message : String(err),
     };
   }
@@ -271,6 +306,15 @@ export async function buildHealthReport(
     probeRedis(),
   ]);
 
+  // Gather rate limiter diagnostics
+  const rlStats = getRateLimiterStats();
+  const rateLimiter: RateLimiterDiagnostic = {
+    activeStore: rlStats.activeStore,
+    memoryFallbackCount: rlStats.memoryFallbackCount,
+    redisHitCount: rlStats.redisHitCount,
+    memoryStoreSize: rlStats.memoryStoreSize,
+  };
+
   const warnings: string[] = [];
   if (signerBalance.warning) warnings.push(signerBalance.warning);
   if (paymasterDeposit.warning) warnings.push(paymasterDeposit.warning);
@@ -279,6 +323,12 @@ export async function buildHealthReport(
   }
   if (redis.status === 'warn') {
     warnings.push(`Redis latency ${redis.latencyMs}ms exceeds threshold of ${REDIS_LATENCY_WARN_MS}ms.`);
+  }
+  if (redis.status === 'error' && redis.configured) {
+    warnings.push('Redis is configured but unavailable — rate limiting is using in-memory fallback.');
+  }
+  if (rlStats.memoryFallbackCount > 0 && rlStats.activeStore === 'memory') {
+    warnings.push(`Rate limiter has fallen back to in-memory store ${rlStats.memoryFallbackCount} times.`);
   }
 
   const mem = process.memoryUsage();
@@ -297,6 +347,7 @@ export async function buildHealthReport(
     signerBalance,
     paymasterDeposit,
     redis,
+    rateLimiter,
     memory: {
       heapUsedMb: mb(mem.heapUsed),
       heapTotalMb: mb(mem.heapTotal),

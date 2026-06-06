@@ -83,19 +83,17 @@ export function Header() {
         )}
 
         {!isAuthenticated ? (
-          !isMiniPay && (
-            <button
-              onClick={handleConnect}
-              className={`flex items-center gap-2 px-4 py-2 text-white rounded-full font-semibold transition-all shadow-lg active:scale-95 ${
-                activeChain === 'stacks'
-                  ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-500/20'
-                  : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20'
-              }`}
-            >
-              <Wallet size={18} />
-              <span>{isConnected ? "Connected" : isConnecting ? "Connecting..." : "Connect Wallet"}</span>
-            </button>
-          )
+          <button
+            onClick={handleConnect}
+            className={`flex items-center gap-2 px-4 py-2 text-white rounded-full font-semibold transition-all shadow-lg active:scale-95 ${
+              activeChain === 'stacks'
+                ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-500/20'
+                : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20'
+            }`}
+          >
+            <Wallet size={18} />
+            <span>{isConnected ? "Connected" : isConnecting ? "Connecting..." : "Connect Wallet"}</span>
+          </button>
         ) : (
           <div className="flex items-center gap-3">
             <div className="flex flex-col items-end">

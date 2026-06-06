@@ -8,13 +8,11 @@ import { useWalletAuth } from "../../hooks/useWalletAuth";
 import useMiniPayAccess from "../../hooks/useMiniPayAccess";
 
 export default function ChessScreen() {
-  const isMiniPay = typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay);
   const navigate = useNavigate();
   const { isConnected, isConnecting, connect, disconnect } = useWalletAuth();
   const address = useAppStore((state) => state.address);
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
-  const isFarcaster = useAppStore((state) => state.isFarcaster);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
 
   // Alternate between Celo and Stacks when not connected to show multi-chain support
@@ -60,15 +58,13 @@ export default function ChessScreen() {
             {/* Right Section: Actions Only */}
             <div className="flex items-center gap-2">
               {!isConnected ? (
-                (!isMiniPay && !isFarcaster) && (
-                  <button
-                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold transition shadow-md hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
-                    onClick={() => connect()}
-                    disabled={isConnecting}
-                  >
-                    {isConnecting ? "..." : "Connect"}
-                  </button>
-                )
+                <button
+                  className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold transition shadow-md hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
+                  onClick={() => connect()}
+                  disabled={isConnecting}
+                >
+                  {isConnecting ? "..." : "Connect"}
+                </button>
               ) : (
                 <button
                   className="p-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-red-500/30 hover:text-red-400 text-slate-400 transition-all active:scale-95 group"

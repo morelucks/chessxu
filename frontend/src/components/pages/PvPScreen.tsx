@@ -21,8 +21,6 @@ export default function PvPScreen() {
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
-  const isMiniPay = useAppStore((state) => state.miniPayDetected);
-  const isFarcaster = useAppStore((state) => state.isFarcaster);
   
   const stacks = useStacksChess();
   const celo = useCeloChess();
@@ -341,14 +339,12 @@ export default function PvPScreen() {
                         </div>
                     </div>
                 </div>
-                {(!isMiniPay && !isFarcaster) && (
-                    <button
-                        onClick={disconnect}
-                        className="w-full py-3 text-xs text-slate-500 hover:text-red-400 transition"
-                    >
-                        Disconnect Wallet
-                    </button>
-                )}
+                <button
+                    onClick={disconnect}
+                    className="w-full py-3 text-xs text-slate-500 hover:text-red-400 transition"
+                >
+                    Disconnect Wallet
+                </button>
             </div>
         )}
       </div>

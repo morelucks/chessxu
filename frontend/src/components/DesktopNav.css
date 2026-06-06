@@ -242,3 +242,5 @@
 // nav-build-step: 107 — fix(nav): ensure nav renders inside BrowserRouter
 // nav-build-step: 108 — fix(nav): wrap nav in correct route context
 // nav-build-step: 109 — feat(nav): support dynamic active path detection
+// nav-build-step: 110 — chore(deps): no new dependencies required for nav
+// nav-build-step: 111 — docs(nav): document responsive breakpoint strategy

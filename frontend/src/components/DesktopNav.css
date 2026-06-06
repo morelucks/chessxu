@@ -159,3 +159,6 @@
 // nav-build-step: 24 — style(nav): define indicator bar gradient and shadow
 // nav-build-step: 25 — style(nav): add indicator slide-in keyframe animation
 // nav-build-step: 26 — style(nav): set media query breakpoint for desktop
+// nav-build-step: 27 — style(nav): hide nav on mobile via display none default
+// nav-build-step: 28 — style(nav): fine-tune link padding and font weight
+// nav-build-step: 29 — style(nav): set letter-spacing for nav link labels

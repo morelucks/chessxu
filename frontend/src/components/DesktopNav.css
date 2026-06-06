@@ -207,3 +207,6 @@
 // nav-build-step: 72 — style(nav): define border-bottom opacity for subtlety
 // nav-build-step: 73 — style(nav): add multiple box-shadow layers
 // nav-build-step: 74 — style(nav): configure gradient direction for brand text
+// nav-build-step: 75 — style(nav): set background-size for shimmer animation
+// nav-build-step: 76 — style(nav): configure animation duration at 4 seconds
+// nav-build-step: 77 — style(nav): define ease timing function for shimmer

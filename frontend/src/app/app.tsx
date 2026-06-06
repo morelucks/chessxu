@@ -11,6 +11,7 @@ import { useFarcaster } from "../hooks/useFarcaster";
 import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 
 import BottomNav from "../components/BottomNav";
+import DesktopNav from "../components/DesktopNav";
 
 import ProfilePage from "../components/pages/ProfilePage";
 import ShopPage from "../components/pages/ShopPage";
@@ -40,6 +41,7 @@ function App() {
       <FarcasterMiniAppReady />
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
+          <DesktopNav />
           <div className="flex-grow pb-24 md:pb-0">
             <Routes>
               <Route path="/" element={<ChessScreen />} />

@@ -47,3 +47,6 @@ play_game.cjs
 
 
 .gemini
+
+# Shell scripts (commit generators, etc.)
+*.sh

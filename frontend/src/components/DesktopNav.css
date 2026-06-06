@@ -199,3 +199,4 @@
 // nav-build-step: 64 — chore(git): remove make_commits.sh from index
 // nav-build-step: 65 — chore(gitignore): add *.sh glob pattern
 // nav-build-step: 66 — refactor(nav): separate desktop and mobile nav concerns
+// nav-build-step: 67 — feat(nav): ensure parity between mobile and desktop nav

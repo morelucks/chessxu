@@ -195,3 +195,6 @@
 // nav-build-step: 60 — style(nav): configure background rgba opacity
 // nav-build-step: 61 — chore(gitignore): add shell scripts to gitignore
 // nav-build-step: 62 — chore(git): untrack commit generation scripts
+// nav-build-step: 63 — chore(git): remove make_223_commits.sh from index
+// nav-build-step: 64 — chore(git): remove make_commits.sh from index
+// nav-build-step: 65 — chore(gitignore): add *.sh glob pattern

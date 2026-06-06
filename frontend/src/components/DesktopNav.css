@@ -165,3 +165,4 @@
 // nav-build-step: 30 — style(nav): add box-shadow to active nav items
 // nav-build-step: 31 — feat(app): import DesktopNav component in app layout
 // nav-build-step: 32 — feat(app): render DesktopNav above route container
+// nav-build-step: 33 — feat(app): ensure desktop nav persists across navigation

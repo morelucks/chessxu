@@ -153,3 +153,6 @@
 // nav-build-step: 18 — style(nav): define keyframes for title shimmer
 // nav-build-step: 19 — style(nav): set nav link base styles and spacing
 // nav-build-step: 20 — style(nav): add nav link hover state transitions
+// nav-build-step: 21 — style(nav): implement active link background glow
+// nav-build-step: 22 — style(nav): add active link border accent color
+// nav-build-step: 23 — style(nav): apply active icon color override

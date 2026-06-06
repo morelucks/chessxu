@@ -192,3 +192,5 @@
 // nav-build-step: 57 — feat(nav): export DesktopNav as default and named
 // nav-build-step: 58 — style(nav): set nav height to 52px for consistency
 // nav-build-step: 59 — style(nav): add subtle box-shadow glow on container
+// nav-build-step: 60 — style(nav): configure background rgba opacity
+// nav-build-step: 61 — chore(gitignore): add shell scripts to gitignore

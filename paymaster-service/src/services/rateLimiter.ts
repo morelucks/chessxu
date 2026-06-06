@@ -1,97 +1,89 @@
-import { config } from '../config';
+/**
+ * rateLimiter.ts
+ *
+ * Public-facing rate-limiter interface for the paymaster service.
+ *
+ * This module delegates to the distributed (Redis-backed) rate limiter,
+ * which automatically falls back to an in-memory store when Redis is
+ * unavailable. This ensures rate limits are shared across multiple API
+ * instances behind a load balancer while maintaining availability during
+ * Redis downtime.
+ *
+ * Migration note:
+ *   Previously this module contained its own in-memory Map store and a
+ *   basic Redis wrapper. That logic has been extracted into dedicated
+ *   modules (redisPool.ts + distributedRateLimiter.ts) for cleaner
+ *   separation of concerns and atomic Lua-script-based operations.
+ */
 
-interface RateLimitEntry {
-  count: number;
-  resetAt: number;
-}
+import {
+  checkRateLimit as distributedCheck,
+  peekRateLimit,
+  resetRateLimit as distributedReset,
+  getRateLimiterStats,
+  getMemoryStoreSize,
+  stopCleanupTimer,
+  type RateLimitResult,
+  type RateLimiterStats,
+} from './distributedRateLimiter';
 
-const memoryStore = new Map<string, RateLimitEntry>();
-
-let redisClient: import('ioredis').Redis | null = null;
-
-async function getRedis(): Promise<import('ioredis').Redis | null> {
-  if (!config.redisUrl) return null;
-  if (redisClient) return redisClient;
-  try {
-    const { default: Redis } = await import('ioredis');
-    redisClient = new Redis(config.redisUrl);
-    return redisClient;
-  } catch {
-    console.warn('[rateLimiter] Redis unavailable, falling back to in-memory store.');
-    return null;
-  }
-}
+// ---------------------------------------------------------------------------
+// Re-exports — maintain backward-compatible public API
+// ---------------------------------------------------------------------------
 
 /**
  * Checks and increments the rate limit for a given address.
- * Uses Redis if REDIS_URL is set, otherwise falls back to in-memory Map.
- * Returns allowed=false if the address has exceeded the configured limit.
+ *
+ * Uses Redis when available for distributed rate limiting across multiple
+ * service instances. Automatically falls back to in-memory limiting if
+ * the Redis connection drops, ensuring the service never blocks all
+ * transactions due to a Redis outage.
+ *
+ * @param address - The Ethereum address to rate-limit
+ * @returns Rate limit result with allowed status, remaining count, and reset time
  */
-export async function checkRateLimit(address: string): Promise<{ allowed: boolean; remaining: number; resetAt: number }> {
-  const key = `rl:${address.toLowerCase()}`;
-  const now = Date.now();
-  const redis = await getRedis();
-
-  if (redis) {
-    const countKey = `${key}:count`;
-    const resetKey = `${key}:reset`;
-
-    const [[, rawCount], [, rawReset]] = await redis.multi()
-      .get(countKey)
-      .get(resetKey)
-      .exec() as [[null, string | null], [null, string | null]];
-
-    const resetAt = rawReset ? parseInt(rawReset, 10) : now + config.rateLimitWindowMs;
-    const count = rawCount ? parseInt(rawCount, 10) : 0;
-
-    if (now > resetAt) {
-      await redis.multi()
-        .set(countKey, '1')
-        .set(resetKey, String(now + config.rateLimitWindowMs))
-        .pexpire(countKey, config.rateLimitWindowMs)
-        .pexpire(resetKey, config.rateLimitWindowMs)
-        .exec();
-      return { allowed: true, remaining: config.rateLimitPerAddress - 1, resetAt: now + config.rateLimitWindowMs };
-    }
-
-    if (count >= config.rateLimitPerAddress) {
-      return { allowed: false, remaining: 0, resetAt };
-    }
-
-    await redis.incr(countKey);
-    return { allowed: true, remaining: config.rateLimitPerAddress - count - 1, resetAt };
-  }
-
-  // In-memory fallback
-  const entry = memoryStore.get(key);
-  if (!entry || now > entry.resetAt) {
-    memoryStore.set(key, { count: 1, resetAt: now + config.rateLimitWindowMs });
-    return { allowed: true, remaining: config.rateLimitPerAddress - 1, resetAt: now + config.rateLimitWindowMs };
-  }
-
-  if (entry.count >= config.rateLimitPerAddress) {
-    return { allowed: false, remaining: 0, resetAt: entry.resetAt };
-  }
-
-  entry.count++;
-  return { allowed: true, remaining: config.rateLimitPerAddress - entry.count, resetAt: entry.resetAt };
+export async function checkRateLimit(address: string): Promise<RateLimitResult> {
+  return distributedCheck(address);
 }
 
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, entry] of memoryStore.entries()) {
-    if (now > entry.resetAt) memoryStore.delete(key);
-  }
-}, 60_000);
-
-/** Returns current count for an address without incrementing (for monitoring). */
-export function peekCount(address: string): number {
-  const entry = memoryStore.get(`rl:${address.toLowerCase()}`);
-  if (!entry || Date.now() > entry.resetAt) return 0;
-  return entry.count;
+/**
+ * Returns current count for an address without incrementing (for monitoring).
+ *
+ * Checks Redis first, then falls back to the in-memory store.
+ */
+export async function peekCount(address: string): Promise<number> {
+  const result = await peekRateLimit(address);
+  return result?.count ?? 0;
 }
 
-/** Resets the rate limit for an address (admin use). */
-export function resetRateLimit(address: string): void {
-  memoryStore.delete(`rl:${address.toLowerCase()}`);
+/**
+ * Resets the rate limit for an address (admin use).
+ * Clears both Redis and in-memory stores to ensure consistency.
+ */
+export async function resetRateLimit(address: string): Promise<void> {
+  return distributedReset(address);
 }
+
+/**
+ * Returns diagnostics about the rate limiter for health monitoring.
+ */
+export function getStats(): RateLimiterStats {
+  return getRateLimiterStats();
+}
+
+/**
+ * Returns the number of entries in the in-memory fallback store.
+ */
+export function getMemorySize(): number {
+  return getMemoryStoreSize();
+}
+
+/**
+ * Stops internal timers for clean shutdown.
+ */
+export function shutdown(): void {
+  stopCleanupTimer();
+}
+
+// Re-export types for consumers
+export type { RateLimitResult, RateLimiterStats };

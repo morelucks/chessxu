@@ -112,6 +112,7 @@ export function useWalletAuth() {
       // Default to Stacks
       try {
         showConnect({
+          userSession,
           appDetails: {
             name: "Chessxu",
             icon: window.location.origin + "/favicon.ico",

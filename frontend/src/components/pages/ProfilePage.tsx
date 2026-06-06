@@ -13,8 +13,10 @@ import {
   ChevronRight,
   Crown,
   Coins,
+  LogOut,
 } from "lucide-react";
 import useAppStore from "../../zustand/store";
+import { useWalletAuth } from "../../hooks/useWalletAuth";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -79,6 +81,7 @@ function StatCard({
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 export default function ProfilePage() {
+  const { disconnect } = useWalletAuth();
   const farcasterUser = useAppStore((s) => s.farcasterUser);
   const address = useAppStore((s) => s.address);
   const celoAddress = useAppStore((s) => s.celoAddress);
@@ -274,6 +277,16 @@ export default function ProfilePage() {
               Open Chessxu inside Warpcast or connect a wallet to see your profile here.
             </p>
           </div>
+        )}
+
+        {address && (
+          <button
+            onClick={disconnect}
+            className="profile-disconnect-btn"
+          >
+            <LogOut size={16} />
+            <span>Disconnect Wallet</span>
+          </button>
         )}
       </div>
     </div>

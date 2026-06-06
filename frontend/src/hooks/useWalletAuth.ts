@@ -1,4 +1,4 @@
-import { showConnect } from "@stacks/connect-react";
+import { showConnect } from "@stacks/connect";
 import useAppStore, { userSession } from "../zustand/store";
 import celoService from "../chess/services/celoService";
 import { sdk } from "@farcaster/miniapp-sdk";

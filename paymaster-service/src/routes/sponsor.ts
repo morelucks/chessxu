@@ -46,7 +46,6 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   // Attach rate limit headers
   res.setHeader('X-RateLimit-Remaining', rateLimit.remaining);
   res.setHeader('X-RateLimit-Reset', rateLimit.resetAt);
-  res.setHeader('X-RateLimit-Store', rateLimit.store);
 
   const nonceCheck = await validateNonce(userOp, provider);
   if (!nonceCheck.valid) {
@@ -57,7 +56,7 @@ router.post('/', async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await signUserOp(userOp);
     incrementSponsored();
-    console.log(`[sponsor] Sponsored | sender=${userOp.sender} | selector=${userOp.callData.slice(0, 10)} | store=${rateLimit.store} | remaining=${rateLimit.remaining} | ts=${new Date().toISOString()}`);
+    console.log(`[sponsor] Sponsored | sender=${userOp.sender} | selector=${userOp.callData.slice(0, 10)} | ts=${new Date().toISOString()}`);
     res.json({ ...result, chainId: config.chainId });
   } catch (err) {
     console.error('[sponsor] Signing error:', err);

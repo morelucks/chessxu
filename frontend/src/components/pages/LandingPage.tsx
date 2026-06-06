@@ -9,7 +9,6 @@ import useAppStore from "../../zustand/store";
 import GaslessBadge from "../ui/GaslessBadge";
 
 export default function LandingPage() {
-  const isMiniPay = useAppStore((state) => state.miniPayDetected);
   const isFarcaster = useAppStore((state) => state.isFarcaster);
   const navigate = useNavigate();
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
@@ -64,26 +63,24 @@ export default function LandingPage() {
             ♟ Chessxu
           </div>
           {/* Mobile Connect Button */}
-          {(!isMiniPay && !isFarcaster) && (
-            <div className="md:hidden">
-              {isConnected ? (
-                <button
-                  onClick={handleStartPlaying}
-                  className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition"
-                >
-                  Play
-                </button>
-              ) : (
-                <button
-                  onClick={handleStartPlaying}
-                  disabled={isConnecting}
-                  className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isConnecting ? "..." : "Connect"}
-                </button>
-              )}
-            </div>
-          )}
+          <div className="md:hidden">
+            {isConnected ? (
+              <button
+                onClick={handleStartPlaying}
+                className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition"
+              >
+                Play
+              </button>
+            ) : (
+              <button
+                onClick={handleStartPlaying}
+                disabled={isConnecting}
+                className="px-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold text-sm transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isConnecting ? "..." : "Connect"}
+              </button>
+            )}
+          </div>
           <div className="hidden md:flex gap-8 items-center text-sm text-white/70">
             <a href="#features" className="hover:text-white transition">
               Features
@@ -108,25 +105,21 @@ export default function LandingPage() {
                 >
                   Play Now
                 </button>
-                {(!isMiniPay && !isFarcaster) && (
-                  <button
-                    onClick={disconnect}
-                    className="px-3 py-2 rounded border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition text-xs"
-                  >
-                    Disconnect
-                  </button>
-                )}
+                <button
+                  onClick={disconnect}
+                  className="px-3 py-2 rounded border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition text-xs"
+                >
+                  Disconnect
+                </button>
               </div>
             ) : (
-              (!isMiniPay && !isFarcaster) && (
-                <button
-                  onClick={handleStartPlaying}
-                  disabled={isConnecting}
-                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isConnecting ? "Connecting..." : "Connect & Play"}
-                </button>
-              )
+              <button
+                onClick={handleStartPlaying}
+                disabled={isConnecting}
+                className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isConnecting ? "Connecting..." : "Connect & Play"}
+              </button>
             )}
           </div>
         </div>

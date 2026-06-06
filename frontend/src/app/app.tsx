@@ -40,9 +40,9 @@ function App() {
     <ToasterProvider>
       <FarcasterMiniAppReady />
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-slate-950 text-white">
           <DesktopNav />
-          <div className="flex-grow pb-24 md:pb-0">
+          <div className="flex flex-col flex-grow pb-24 md:pb-0">
             <Routes>
               <Route path="/" element={<ChessScreen />} />
               <Route path="/puzzle" element={<PuzzleScreen />} />

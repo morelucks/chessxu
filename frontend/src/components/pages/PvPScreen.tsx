@@ -109,7 +109,7 @@ export default function PvPScreen() {
 
   return (
     <div className="flex-grow bg-slate-950 text-white flex flex-col p-4 pt-8 overflow-y-auto">
-      <div className="max-w-4xl mx-auto w-full space-y-6 pb-24">
+      <div className={`max-w-4xl mx-auto w-full space-y-6 pb-24 ${!isConnected ? 'flex-grow flex flex-col justify-center' : ''}`}>
         <div className="text-center space-y-2 mb-8">
             <h1 className="text-3xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 PvP Matchmaking
@@ -123,7 +123,7 @@ export default function PvPScreen() {
         </div>
 
         {!isConnected ? (
-            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-8 text-center space-y-6 backdrop-blur-xl">
+            <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-8 text-center space-y-6 backdrop-blur-xl max-w-md w-full mx-auto">
                 <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto text-purple-400">
                     <Wallet size={32} />
                 </div>

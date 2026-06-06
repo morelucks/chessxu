@@ -226,3 +226,5 @@
 // nav-build-step: 91 — style(nav): set 1.8 stroke for inactive icons
 // nav-build-step: 92 — feat(nav): set icon size to 16px for desktop scale
 // nav-build-step: 93 — fix(layout): desktop nav does not overlap bottom nav
+// nav-build-step: 94 — fix(layout): bottom nav hidden on md screens up
+// nav-build-step: 95 — fix(layout): desktop nav hidden on mobile screens

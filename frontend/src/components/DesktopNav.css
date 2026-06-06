@@ -183,3 +183,4 @@
 // nav-build-step: 48 — style(nav): configure font-size for nav labels
 // nav-build-step: 49 — style(nav): add white-space nowrap to prevent wrapping
 // nav-build-step: 50 — style(nav): set transparent border for inactive links
+// nav-build-step: 51 — perf(nav): use cubic-bezier easing for smooth transitions

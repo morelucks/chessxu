@@ -9,6 +9,7 @@ import { TxHud } from "../components/ui/TxHud";
 import { useMiniPay } from "../hooks/useMiniPay";
 import { useFarcaster } from "../hooks/useFarcaster";
 import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
+import ConnectWalletModal from "../components/ConnectWalletModal";
 
 import BottomNav from "../components/BottomNav";
 import DesktopNav from "../components/DesktopNav";
@@ -39,6 +40,7 @@ function App() {
   return (
     <ToasterProvider>
       <FarcasterMiniAppReady />
+      <ConnectWalletModal />
       <BrowserRouter>
         <div className="flex flex-col min-h-screen bg-slate-950 text-white">
           <DesktopNav />

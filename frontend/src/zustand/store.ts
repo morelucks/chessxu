@@ -28,6 +28,7 @@ export interface AuthState {
   miniPayDetected: boolean;
   miniPayAccessExpiresAt: string | null;
   miniPayLastPaymentTx: string | null;
+  isConnectModalOpen: boolean;
 }
 
 export interface GameState {
@@ -55,6 +56,7 @@ export interface AppStore extends AuthState, GameState {
   setElo: (elo: number) => void;
   setChessBalance: (balance: number) => void;
   setTimeControlMs: (ms: number | null) => void;
+  setConnectModalOpen: (open: boolean) => void;
   logout: () => void;
 }
 
@@ -73,6 +75,7 @@ const useAppStore = create<AppStore>()(
       miniPayDetected: false,
       miniPayAccessExpiresAt: null,
       miniPayLastPaymentTx: null,
+      isConnectModalOpen: false,
 
       // Game State
       activeGameId: null,
@@ -121,6 +124,7 @@ const useAppStore = create<AppStore>()(
       setElo: (elo: number) => set({ elo }),
       setChessBalance: (chessBalance: number) => set({ chessBalance }),
       setTimeControlMs: (timeControlMs: number | null) => set({ timeControlMs }),
+      setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
       logout: () => {
         userSession.signUserOut();
         set({ 
@@ -133,6 +137,7 @@ const useAppStore = create<AppStore>()(
             miniPayDetected: false,
             miniPayAccessExpiresAt: null,
             miniPayLastPaymentTx: null,
+            isConnectModalOpen: false,
             activeGameId: null, 
             isGameStarted: false,
             elo: 1200,

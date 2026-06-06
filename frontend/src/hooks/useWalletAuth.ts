@@ -26,6 +26,7 @@ export function useWalletAuth() {
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const setIsLoading = useAppStore((state) => state.setIsLoading);
   const logout = useAppStore((state) => state.logout);
+  const setConnectModalOpen = useAppStore((state) => state.setConnectModalOpen);
 
   const syncAddressFromSession = () => {
     const nextAddress = getSessionAddress();
@@ -34,10 +35,18 @@ export function useWalletAuth() {
   };
 
   const connect = async ({ onFinish, onCancel, chain }: ConnectOptions = {}) => {
+    const { isFarcaster, miniPayDetected } = useAppStore.getState();
+    const ethereum = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
+    const isMiniPay = Boolean(miniPayDetected || (ethereum && ethereum.isMiniPay));
+
+    if (!chain && !isFarcaster && !isMiniPay) {
+      setConnectModalOpen(true);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const { isFarcaster } = useAppStore.getState();
 
       if (isFarcaster) {
         try {

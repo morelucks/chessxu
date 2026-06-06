@@ -43,7 +43,9 @@ stacks-contracts/*.mjs
 stacks-contracts/*.log
 tmp_scripts/
 
-play_game.cjs
+
 
 
 .gemini
+
+*.sh

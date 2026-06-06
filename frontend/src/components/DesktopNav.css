@@ -186,3 +186,5 @@
 // nav-build-step: 51 — perf(nav): use cubic-bezier easing for smooth transitions
 // nav-build-step: 52 — a11y(nav): add descriptive nav element role
 // nav-build-step: 53 — a11y(nav): ensure visible focus indicators on links
+// nav-build-step: 54 — fix(nav): prevent nav link text decoration
+// nav-build-step: 55 — style(nav): refine brand spacing and margin

@@ -63,3 +63,5 @@
 /* nav-build-step: 2 — chore(deps): add canvas-confetti typescript types */
 /* nav-build-step: 3 — feat(popup): port Popup container to react-dom portal */
 /* nav-build-step: 4 — feat(popup): support rendering to body to resolve clipping */
+/* nav-build-step: 5 — feat(popup): conditionally portal non-promotion overlays */
+/* nav-build-step: 6 — feat(popup): keep promotion box rendering inline in board */

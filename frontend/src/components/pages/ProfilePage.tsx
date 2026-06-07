@@ -97,6 +97,42 @@ export default function ProfilePage() {
   const pfp = farcasterUser?.pfpUrl;
   const fid = farcasterUser?.fid;
 
+  const getAvatarFallback = (eloVal: number) => {
+    let piece = "♟";
+    let bg = "radial-gradient(circle, rgba(148, 163, 184, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%)";
+
+    if (eloVal >= 2200) {
+      piece = "👑";
+      bg = "radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)";
+    } else if (eloVal >= 1800) {
+      piece = "♕";
+      bg = "radial-gradient(circle, rgba(167, 139, 250, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)";
+    } else if (eloVal >= 1500) {
+      piece = "♖";
+      bg = "radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)";
+    } else if (eloVal >= 1200) {
+      piece = "♘";
+      bg = "radial-gradient(circle, rgba(52, 211, 153, 0.3) 0%, rgba(15, 23, 42, 0.9) 100%)";
+    }
+
+    return (
+      <div 
+        className="profile-avatar-fallback-chess" 
+        style={{ 
+          background: bg,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          fontSize: '2.4rem'
+        }}
+      >
+        {piece}
+      </div>
+    );
+  };
+
   return (
     <div className="profile-root">
       {/* Ambient glow background */}
@@ -111,9 +147,7 @@ export default function ProfilePage() {
             {pfp ? (
               <img src={pfp} alt={displayName} className="profile-avatar-img" />
             ) : (
-              <div className="profile-avatar-fallback">
-                <User size={40} className="text-slate-400" />
-              </div>
+              getAvatarFallback(elo)
             )}
             <span className="profile-rank-badge" title={rank.label}>
               {rank.icon}

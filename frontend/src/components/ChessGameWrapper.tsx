@@ -32,6 +32,10 @@ import useAppStore from '../zustand/store';
  */
 export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
+    const address = useAppStore((state) => state.address);
+    const activeChain = useAppStore((state) => state.activeChain);
+    const farcasterUser = useAppStore((state) => state.farcasterUser);
+    const elo = useAppStore((state) => state.elo);
 
     // Create initial state directly to avoid any import issues
     const initialGameState: GameState = {
@@ -116,6 +120,31 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         );
     }
 
+
+    const formatAddress = (addr: string | null) => {
+        if (!addr) return '';
+        return `${addr.slice(0, 5)}...${addr.slice(-4)}`;
+    };
+
+    let playerName = 'You';
+    let playerAvatarUrl = '';
+    let playerSub = 'Local Player';
+
+    if (farcasterUser) {
+        playerName = farcasterUser.displayName || `@${farcasterUser.username}` || 'You';
+        playerAvatarUrl = farcasterUser.pfpUrl || '';
+        playerSub = `Farcaster • ${elo} ELO`;
+    } else if (address) {
+        playerName = formatAddress(address);
+        playerSub = `${activeChain === 'stacks' ? 'Stacks' : 'Celo'} • ${elo} ELO`;
+    } else {
+        playerSub = `Local Player • ${elo} ELO`;
+    }
+
+    const opponentName = appState.gameMode === 'pvc' ? 'Stockfish AI' : 'Opponent';
+    const opponentSub = appState.gameMode === 'pvc' ? 'Engine Level 5 • 1500 ELO' : 'Waiting...';
+    const opponentAvatar = appState.gameMode === 'pvc' ? '🤖' : '👤';
+
     return (
         <AppContext.Provider value={providerState}>
             <div className="flex-1 flex flex-col md:flex-row overflow-visible">
@@ -126,20 +155,20 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 
                 {/* Main Chess Area (Mobile: Board -> Profiles -> Controls) */}
                 <div className="flex-1 flex flex-col items-center justify-start p-2 md:p-4 overflow-y-auto">
-                    <div className="w-full max-w-[500px] flex flex-col gap-1.5 md:gap-2">
+                    <div className="w-full max-w-[500px] flex flex-col gap-3">
                         
                         {/* Top: Opponent Profile */}
-                        <div className="flex items-center justify-between p-2 rounded-t-lg bg-black/20">
+                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-slate-700/80 rounded flex items-center justify-center text-2xl shadow-inner border border-white/5">
-                                    {appState.gameMode === 'pvc' ? '💻' : '👤'}
+                                <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-xl shadow-inner border border-white/5">
+                                    {opponentAvatar}
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-white font-bold text-sm">
-                                        {appState.gameMode === 'pvc' ? 'Computer' : 'Opponent'}
+                                        {opponentName}
                                     </span>
                                     <span className="text-xs text-slate-400">
-                                        {appState.gameMode === 'pvc' ? 'Stockfish Engine' : 'Waiting...'}
+                                        {opponentSub}
                                     </span>
                                 </div>
                             </div>
@@ -157,18 +186,21 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                         </div>
 
                         {/* Bottom: Player Profile */}
-                        <div className="flex items-center justify-between p-2 rounded-b-lg bg-black/20 mb-4">
+                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-slate-700/80 rounded flex items-center justify-center text-xl shadow-inner border border-white/5 overflow-hidden">
-                                    {/* Usually we'd pull this from zustand store, but since we are inside the Wrapper we will just show a generic avatar or piece */}
-                                    ♟️
+                                <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-xl shadow-inner border border-white/5 overflow-hidden">
+                                    {playerAvatarUrl ? (
+                                        <img src={playerAvatarUrl} alt={playerName} className="w-full h-full object-cover" />
+                                    ) : (
+                                        '♟️'
+                                    )}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-white font-bold text-sm">
-                                        You
+                                    <span className="text-white font-bold text-sm text-indigo-200">
+                                        {playerName}
                                     </span>
                                     <span className="text-xs text-slate-400">
-                                        Local Player
+                                        {playerSub}
                                     </span>
                                 </div>
                             </div>

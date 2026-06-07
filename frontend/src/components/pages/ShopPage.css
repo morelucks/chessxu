@@ -177,14 +177,68 @@
 }
 
 .shop-card-icon-container {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+/* Mini Preview Styles */
+.mini-board-preview {
+  display: flex;
+  flex-direction: column;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.mini-board-row {
+  display: flex;
+  flex: 1;
+}
+
+.mini-square {
+  flex: 1;
+}
+
+.mini-piece-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mini-piece-preview.minimal {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.mini-piece-preview.pixel {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.mini-badge-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .shop-card-footer {
@@ -267,7 +321,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: linear-gradient(135deg, #b45309, #d97706);
+  background: linear-gradient(135deg, #6366f1, #a855f7);
   border: none;
   color: #ffffff;
   font-size: 0.8rem;
@@ -276,12 +330,12 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
 }
 
 .shop-faucet-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 6px 16px rgba(168, 85, 247, 0.35);
   filter: brightness(1.1);
 }
 

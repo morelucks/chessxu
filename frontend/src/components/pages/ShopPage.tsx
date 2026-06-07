@@ -107,6 +107,65 @@ export default function ShopPage() {
     (item) => selectedCategory === 'all' || item.category === selectedCategory
   );
 
+  const renderPreview = (item: ShopItem) => {
+    if (item.category === 'boards') {
+      let lightBg = '#e2e8f0';
+      let darkBg = '#475569';
+      if (item.id === 'board-wood') {
+        lightBg = '#fed7aa';
+        darkBg = '#b45309';
+      } else if (item.id === 'board-marble') {
+        lightBg = '#cbd5e1';
+        darkBg = '#64748b';
+      } else if (item.id === 'board-neon') {
+        lightBg = '#ec4899';
+        darkBg = '#1e1b4b';
+      }
+      return (
+        <div className="mini-board-preview" style={{ border: `1px solid ${item.accentColor}` }}>
+          <div className="mini-board-row" style={{ height: '50%', display: 'flex' }}>
+            <div style={{ backgroundColor: lightBg, flex: 1 }} />
+            <div style={{ backgroundColor: darkBg, flex: 1 }} />
+          </div>
+          <div className="mini-board-row" style={{ height: '50%', display: 'flex' }}>
+            <div style={{ backgroundColor: darkBg, flex: 1 }} />
+            <div style={{ backgroundColor: lightBg, flex: 1 }} />
+          </div>
+        </div>
+      );
+    }
+    
+    if (item.category === 'pieces') {
+      if (item.id === 'piece-classic') {
+        return (
+          <div className="mini-piece-preview classic" style={{ color: item.accentColor }}>
+            <span style={{ fontSize: '1.5rem' }}>👑</span>
+          </div>
+        );
+      }
+      if (item.id === 'piece-minimal') {
+        return (
+          <div className="mini-piece-preview minimal" style={{ color: item.accentColor }}>
+            <span style={{ fontSize: '1.5rem' }}>🔺</span>
+          </div>
+        );
+      }
+      if (item.id === 'piece-pixel') {
+        return (
+          <div className="mini-piece-preview pixel" style={{ color: item.accentColor }}>
+            <span style={{ fontSize: '1.5rem' }}>👾</span>
+          </div>
+        );
+      }
+    }
+
+    return (
+      <div className="mini-badge-preview">
+        {getIcon(item.icon, item.accentColor)}
+      </div>
+    );
+  };
+
   return (
     <div className="shop-root">
       {toast && (
@@ -158,7 +217,7 @@ export default function ShopPage() {
             >
               <div className="shop-card-glow" />
               <div className="shop-card-icon-container">
-                {getIcon(item.icon, item.accentColor)}
+                {renderPreview(item)}
               </div>
               <div className="shop-card-body">
                 <h3 className="shop-card-title">{item.name}</h3>

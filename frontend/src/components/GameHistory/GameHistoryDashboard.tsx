@@ -227,13 +227,19 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
       {/* Games List */}
       <div className="games-list">
         {filteredGames.length === 0 ? (
-          <div className="empty-state">
-            <Trophy size={48} />
-            <h3>No games found</h3>
-            <p>
+          <div className="empty-state-card">
+            <div className="empty-state-svg-wrapper">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="empty-state-svg">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+                <path d="M12 11h.01" />
+              </svg>
+            </div>
+            <h3>No Matches Found</h3>
+            <p className="empty-state-desc">
               {filter === 'all' 
-                ? 'Start playing to build your game history!' 
-                : `No ${filter} games yet.`}
+                ? 'No games recorded yet. Put your skills to the test and play a match to build your history!' 
+                : `No ${filter} matches have been recorded in this category yet.`}
             </p>
             {!isOnline && (
               <p className="offline-note">

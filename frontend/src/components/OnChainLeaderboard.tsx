@@ -1,5 +1,6 @@
 import { useGlobalStats, usePlayerStats } from '../hooks/useLeaderboard';
 import useAppStore from '../zustand/store';
+import { useWalletAuth } from '../hooks/useWalletAuth';
 import './OnChainLeaderboard.css';
 
 interface PlayerRowProps {
@@ -37,6 +38,7 @@ function PlayerRow({ address, rank }: PlayerRowProps) {
 export default function OnChainLeaderboard() {
   const { globalStats, loading, refetch } = useGlobalStats();
   const address = useAppStore((s) => s.address);
+  const { connect } = useWalletAuth();
 
   return (
     <div className="onchain-lb">
@@ -74,11 +76,20 @@ export default function OnChainLeaderboard() {
           </tbody>
         </table>
       ) : (
-        <p className="onchain-lb__empty">
-          {typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay)
-            ? "Initializing on-chain stats..."
-            : "Connect wallet to see your on-chain stats"}
-        </p>
+        <div className="onchain-lb__empty-container">
+          <div className="onchain-lb__empty-icon">🏆</div>
+          <p className="onchain-lb__empty-title">Rankings Locked</p>
+          <p className="onchain-lb__empty-desc">
+            {typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay)
+              ? "Initializing on-chain stats..."
+              : "Connect wallet to see your global ELO ranking and stats on the leaderboard."}
+          </p>
+          {!(typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay)) && (
+            <button onClick={() => connect()} className="onchain-lb__empty-btn">
+              Connect Wallet
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

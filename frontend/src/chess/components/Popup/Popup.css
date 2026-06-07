@@ -79,3 +79,4 @@
 /* nav-build-step: 18 — feat(ends): determine success outcome for PvC wins */
 /* nav-build-step: 19 — feat(ends): determine failed outcome for PvC losses */
 /* nav-build-step: 20 — feat(ends): handle PvP outcome based on local player color */
+/* nav-build-step: 21 — feat(ends): fallback to draw outcome for stalemates */

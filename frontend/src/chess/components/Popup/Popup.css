@@ -123,3 +123,5 @@
 /* nav-build-step: 62 — style(board): set overflow-hidden to clip piece animations */
 /* nav-build-step: 63 — style(board): add flex centering rules for internal board alignment */
 /* nav-build-step: 64 — refactor(ends): use cleanup return in confetti effect */
+/* nav-build-step: 65 — refactor(ends): structure JSX layout using clean elements */
+/* nav-build-step: 66 — fix(layout): resolve mobile viewport layout conflicts */

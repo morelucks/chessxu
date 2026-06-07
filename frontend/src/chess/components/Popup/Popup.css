@@ -83,3 +83,4 @@
 /* nav-build-step: 22 — feat(ends): extract emoji from status title to avoid redundancy */
 /* nav-build-step: 23 — feat(ends): render outcome badge as data-attribute */
 /* nav-build-step: 24 — feat(ends): trigger double-side burst confetti on success */
+/* nav-build-step: 25 — feat(ends): use requestAnimationFrame for side confetti bursts */

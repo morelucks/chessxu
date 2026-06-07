@@ -195,34 +195,40 @@
 
 /* Filter Tabs */
 .filter-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  display: inline-flex;
+  gap: 2px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  width: auto;
+  max-width: 100%;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
 }
 
 .filter-tabs button {
-  padding: 0.625rem 1.25rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
-  color: var(--text-secondary, #94a3b8);
-  font-weight: 500;
+  padding: 6px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 
 .filter-tabs button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary, #f8fafc);
+  background: rgba(255, 255, 255, 0.03);
+  color: #f8fafc;
 }
 
 .filter-tabs button.active {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  border-color: transparent;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 /* Error Message */
@@ -242,30 +248,54 @@
   gap: 1rem;
 }
 
-.empty-state {
+.empty-state-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   text-align: center;
-  color: var(--text-secondary, #94a3b8);
+  background: rgba(30, 41, 59, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  max-width: 440px;
+  margin: 2rem auto;
 }
 
-.empty-state svg {
-  color: rgba(148, 163, 184, 0.3);
-  margin-bottom: 1rem;
+.empty-state-svg-wrapper {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 16px;
+  color: #818cf8;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(99, 102, 241, 0.15);
 }
 
-.empty-state h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary, #f8fafc);
+.empty-state-svg {
+  animation: pulseSvg 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseSvg {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.empty-state-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
   margin: 0 0 0.5rem 0;
 }
 
-.empty-state p {
-  margin: 0.5rem 0;
+.empty-state-desc {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .offline-note {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { Status } from '../../constants';
 import { useAppContext }from '../../contexts/Context'
 import { closePopup } from '../../reducer/actions/popup';
@@ -16,11 +17,21 @@ const Popup = ({children}) => {
     if (status === Status.ongoing)
         return null
 
-    return <div className="popup">
-        {React.Children
-            .toArray(children)
-            .map (child => React.cloneElement(child, { onClosePopup }))}
-    </div>
+    const isPromoting = status === Status.promoting;
+
+    const popupContent = (
+        <div className={`popup ${isPromoting ? 'popup--promoting' : 'popup--game-ends'}`}>
+            {React.Children
+                .toArray(children)
+                .map (child => React.cloneElement(child, { onClosePopup }))}
+        </div>
+    );
+
+    if (isPromoting) {
+        return popupContent;
+    }
+
+    return createPortal(popupContent, document.body);
 }
 
 export default Popup

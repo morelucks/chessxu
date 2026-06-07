@@ -54,12 +54,7 @@
     cursor: grabbing;
 }
 
-/* Debug: Add a border to see if the container is there */
-.chess-board-only {
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.1);
-}
+
 
 /* Responsiveness: shrink tiles progressively on small screens */
 @media (max-width: 1024px) {

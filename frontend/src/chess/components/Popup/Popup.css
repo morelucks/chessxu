@@ -67,3 +67,5 @@
 /* nav-build-step: 6 — feat(popup): keep promotion box rendering inline in board */
 /* nav-build-step: 7 — style(popup): structure full-screen overlay for game end */
 /* nav-build-step: 8 — style(popup): add glassmorphic backdrop filter on overlay */
+/* nav-build-step: 9 — style(popup): set z-index 9999 to guarantee front placement */
+/* nav-build-step: 10 — style(popup): configure deep slate translucent background color */

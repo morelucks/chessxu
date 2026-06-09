@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate required libraries for leaderboard test for rank sorting check
+// build-step: refactor(leaderboard): optimize simnet call environment for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

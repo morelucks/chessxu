@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add err-not-owner code returned for cleaner execution
+// build-step: test(leaderboard): check test block for admin-set-elo to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

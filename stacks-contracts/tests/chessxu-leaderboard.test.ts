@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test test block for admin-set-elo to prevent regressions
+// build-step: docs(leaderboard): document unused variable imports to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

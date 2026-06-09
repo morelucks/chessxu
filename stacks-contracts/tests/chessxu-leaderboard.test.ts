@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize elo value high score for rank checks during test execution
+// build-step: docs(leaderboard): declare test readability and comments to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

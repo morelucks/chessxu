@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize basic elo record win utility function with invalid parameters
+// build-step: test(leaderboard): assert elo updates for first player for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

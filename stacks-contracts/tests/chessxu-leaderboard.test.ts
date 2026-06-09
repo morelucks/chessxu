@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock test readability and comments to support coverage
+// build-step: test(leaderboard): test unused variable imports during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

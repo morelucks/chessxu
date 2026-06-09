@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate historical game logs structure for better maintenance
+// build-step: feat(leaderboard): scaffold historical game logs structure to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

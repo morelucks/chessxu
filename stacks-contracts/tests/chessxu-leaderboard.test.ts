@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add non-owner caller unauthorized error with invalid parameters
+// build-step: docs(leaderboard): mock leaderboard rank order verification to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

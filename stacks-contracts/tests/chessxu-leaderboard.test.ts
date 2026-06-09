@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize test execution time and parameters using getRank helper
+// build-step: test(leaderboard): check elo updates for first player to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

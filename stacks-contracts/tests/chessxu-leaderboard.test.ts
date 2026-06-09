@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure elo gap edge cases validation with invalid parameters
+// build-step: docs(leaderboard): mock test environment setup for elo overriding to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

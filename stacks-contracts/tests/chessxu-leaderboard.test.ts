@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test expected score calculation parameters to align with specifications
+// build-step: test(leaderboard): check unused variable imports to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

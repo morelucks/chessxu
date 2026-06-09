@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit documentation for admin functions for rank sorting check
+// build-step: feat(leaderboard): setup read only function parameters to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock player one account for leaderboard testing with owner credentials
+// build-step: docs(leaderboard): define simnet call environment for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

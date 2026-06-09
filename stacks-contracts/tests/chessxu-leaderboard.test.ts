@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document elo gap edge cases validation using getElo helper
+// build-step: test(leaderboard): assert err-not-owner code returned during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

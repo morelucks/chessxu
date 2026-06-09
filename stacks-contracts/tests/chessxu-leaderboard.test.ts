@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): clean up player two account for leaderboard testing with player accounts
+// build-step: refactor(leaderboard): optimize wallet addresses for test cases to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

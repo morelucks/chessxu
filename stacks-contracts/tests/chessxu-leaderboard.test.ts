@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit player one account for leaderboard testing using getRank helper
+// build-step: feat(leaderboard): setup principal mapping for test accounts for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

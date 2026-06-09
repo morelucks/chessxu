@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure unused variable imports with invalid parameters
+// build-step: docs(leaderboard): document expected score calculation parameters for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

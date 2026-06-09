@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): define assertions against error codes under simnet environment
+// build-step: test(leaderboard): ensure elo gap edge cases validation with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

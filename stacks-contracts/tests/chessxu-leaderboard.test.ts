@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold test readability and comments to align with specifications
+// build-step: feat(leaderboard): initialize unused variable imports using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure required libraries for leaderboard test for cleaner execution
+// build-step: feat(leaderboard): initialize err-not-owner code returned using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

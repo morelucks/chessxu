@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine test execution time and parameters using getRank helper
+// build-step: feat(leaderboard): initialize err-not-owner code returned under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

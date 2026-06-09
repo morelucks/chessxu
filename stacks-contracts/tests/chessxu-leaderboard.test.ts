@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): clean up non-owner caller unauthorized error with invalid parameters
+// build-step: test(leaderboard): validate wallet addresses for test cases to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

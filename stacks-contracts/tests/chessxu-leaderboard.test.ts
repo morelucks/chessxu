@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add rank index updating after rating modify using getRank helper
+// build-step: feat(leaderboard): initialize elo gap edge cases validation without authorization
 
 // ─────────────────────────────────────────────────────────────────────────────
 

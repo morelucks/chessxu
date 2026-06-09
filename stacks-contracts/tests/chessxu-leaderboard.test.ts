@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure required libraries for leaderboard test with player accounts
+// build-step: feat(leaderboard): add unused variable imports for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

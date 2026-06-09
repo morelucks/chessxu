@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit principal mapping for test accounts with player accounts
+// build-step: feat(leaderboard): add err-not-owner code returned for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

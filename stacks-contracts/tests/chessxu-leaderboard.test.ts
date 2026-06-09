@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check elo gap edge cases validation during test execution
+// build-step: docs(leaderboard): declare admin-set-elo for first player to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

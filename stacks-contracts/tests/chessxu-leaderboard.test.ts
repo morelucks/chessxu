@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document test environment setup for elo overriding for leaderboard validation
+// build-step: feat(leaderboard): initialize documentation for admin functions for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

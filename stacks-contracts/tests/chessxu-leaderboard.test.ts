@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold required libraries for leaderboard test for leaderboard validation
+// build-step: test(leaderboard): audit initial elo standard value to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

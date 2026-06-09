@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold read only function parameters for cleaner execution
+// build-step: feat(leaderboard): setup historical game logs structure to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

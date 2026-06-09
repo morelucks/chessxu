@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check elo updates for first player using getElo helper
+// build-step: refactor(leaderboard): refine streak preservation rules on elo update during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

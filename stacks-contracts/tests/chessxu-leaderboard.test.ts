@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate principal mapping for test accounts for cleaner execution
+// build-step: docs(leaderboard): define assertions against error codes under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize unused variable imports to prevent regressions
+// build-step: docs(leaderboard): declare documentation for admin functions with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

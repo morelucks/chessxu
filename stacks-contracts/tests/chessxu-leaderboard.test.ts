@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine leaderboard rank order verification using getElo helper
+// build-step: refactor(leaderboard): clean up non-owner caller unauthorized error with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

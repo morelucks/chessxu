@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate initial elo standard value for better maintenance
+// build-step: docs(leaderboard): document test environment setup for elo overriding for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

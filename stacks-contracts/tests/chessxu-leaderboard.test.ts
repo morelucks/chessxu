@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure elo value high score for rank checks using getElo helper
+// build-step: feat(leaderboard): initialize unused variable imports with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

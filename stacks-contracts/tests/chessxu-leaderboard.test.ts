@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize player one account for leaderboard testing with invalid parameters
+// build-step: test(leaderboard): assert player rank top position during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

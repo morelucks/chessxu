@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock database records updates for leaderboard validation
+// build-step: feat(leaderboard): add database records updates using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

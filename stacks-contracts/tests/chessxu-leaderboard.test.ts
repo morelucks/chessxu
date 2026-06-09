@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup principal mapping for test accounts without authorization
+// build-step: refactor(leaderboard): improve player two account for leaderboard testing with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

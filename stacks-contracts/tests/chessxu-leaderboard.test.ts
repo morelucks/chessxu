@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit admin-set-elo for first player using getElo helper
+// build-step: docs(leaderboard): document elo updates for first player during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

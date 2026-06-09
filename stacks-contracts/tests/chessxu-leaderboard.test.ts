@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit admin-set-elo for first player for cleaner execution
+// build-step: test(leaderboard): validate player one account for leaderboard testing to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

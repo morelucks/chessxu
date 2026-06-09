@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold leaderboard rank order verification for leaderboard validation
+// build-step: refactor(leaderboard): improve test execution time and parameters for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure streak preservation rules on elo update with player accounts
+// build-step: docs(leaderboard): document elo updates for first player under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): clean up simnet call environment under simnet environment
+// build-step: refactor(leaderboard): optimize elo updates for first player with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add database records updates using getElo helper
+// build-step: refactor(leaderboard): refine initial elo standard value during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

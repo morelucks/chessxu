@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): clean up leaderboard rank order verification with owner credentials
+// build-step: test(leaderboard): check leaderboard rank order verification under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

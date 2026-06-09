@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize principal mapping for test accounts for better maintenance
+// build-step: docs(leaderboard): document database records updates during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

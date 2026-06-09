@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize err-not-owner code returned under simnet environment
+// build-step: test(leaderboard): test non-owner caller unauthorized error using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

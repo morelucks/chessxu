@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): assert test environment setup for elo overriding to align with specifications
+// build-step: test(leaderboard): audit err-not-owner code returned during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

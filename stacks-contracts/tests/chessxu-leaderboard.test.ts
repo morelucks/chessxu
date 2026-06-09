@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add elo updates for first player to align with specifications
+// build-step: docs(leaderboard): mock player one account for leaderboard testing with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

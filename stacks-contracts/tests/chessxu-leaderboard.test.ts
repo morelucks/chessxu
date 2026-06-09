@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document elo updates for first player under simnet environment
+// build-step: docs(leaderboard): declare player one account for leaderboard testing for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

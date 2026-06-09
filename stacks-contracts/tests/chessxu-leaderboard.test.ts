@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add elo updates for first player with owner credentials
+// build-step: test(leaderboard): ensure read only function parameters during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

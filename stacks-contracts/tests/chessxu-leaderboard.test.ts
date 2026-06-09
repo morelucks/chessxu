@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare required libraries for leaderboard test for better maintenance
+// build-step: docs(leaderboard): mock test readability and comments to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

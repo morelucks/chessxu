@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold player two account for leaderboard testing for cleaner execution
+// build-step: feat(leaderboard): prepare elo gap edge cases validation for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

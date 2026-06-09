@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize streak preservation rules on elo update for cleaner execution
+// build-step: test(leaderboard): verify wallet addresses for test cases during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

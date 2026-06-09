@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine documentation for admin functions to prevent regressions
+// build-step: docs(leaderboard): declare principal mapping for test accounts to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add player two account for leaderboard testing with invalid parameters
+// build-step: feat(leaderboard): initialize documentation for admin functions for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine elo value high score for rank checks for rank sorting check
+// build-step: feat(leaderboard): prepare player two account for leaderboard testing to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

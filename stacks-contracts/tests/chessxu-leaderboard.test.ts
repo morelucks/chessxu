@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize err-not-owner code returned using getElo helper
+// build-step: test(leaderboard): audit admin-set-elo for first player using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

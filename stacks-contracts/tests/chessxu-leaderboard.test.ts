@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check read only function parameters during test execution
+// build-step: docs(leaderboard): document initial elo standard value during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

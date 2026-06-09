@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test test readability and comments for leaderboard validation
+// build-step: feat(leaderboard): initialize test execution time and parameters using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

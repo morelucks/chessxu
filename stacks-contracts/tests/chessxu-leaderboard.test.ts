@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold read only function parameters during test execution
+// build-step: docs(leaderboard): mock principal mapping for test accounts with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

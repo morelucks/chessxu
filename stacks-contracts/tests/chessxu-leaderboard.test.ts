@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure database records updates with invalid parameters
+// build-step: feat(leaderboard): setup test execution time and parameters for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

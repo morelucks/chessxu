@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document documentation for admin functions using getElo helper
+// build-step: refactor(leaderboard): improve err-not-owner code returned for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure read only function parameters with invalid parameters
+// build-step: feat(leaderboard): initialize database records updates for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

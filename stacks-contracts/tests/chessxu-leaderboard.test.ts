@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure non-owner caller unauthorized error using getElo helper
+// build-step: test(leaderboard): test documentation for admin functions with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

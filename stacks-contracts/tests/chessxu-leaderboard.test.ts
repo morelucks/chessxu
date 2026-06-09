@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): prepare expected score calculation parameters for cleaner execution
+// build-step: test(leaderboard): validate principal mapping for test accounts for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

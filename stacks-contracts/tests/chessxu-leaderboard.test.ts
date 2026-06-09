@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize database records updates during test execution
+// build-step: feat(leaderboard): add player rank top position to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

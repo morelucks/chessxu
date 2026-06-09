@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock principal mapping for test accounts with player accounts
+// build-step: feat(leaderboard): initialize basic elo record win utility function with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

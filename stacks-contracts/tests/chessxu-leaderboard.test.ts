@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit player rank top position for better maintenance
+// build-step: test(leaderboard): check player one account for leaderboard testing during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

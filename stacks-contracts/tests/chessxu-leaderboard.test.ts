@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document non-owner caller unauthorized error during test execution
+// build-step: feat(leaderboard): add basic elo record win utility function with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

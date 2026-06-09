@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize test execution time and parameters during test execution
+// build-step: test(leaderboard): test test block for admin-set-elo to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

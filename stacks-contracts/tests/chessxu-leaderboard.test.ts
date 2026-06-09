@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add assertions against error codes for rank sorting check
+// build-step: feat(leaderboard): prepare test execution time and parameters for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

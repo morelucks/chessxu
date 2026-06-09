@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit test block for admin-set-elo with invalid parameters
+// build-step: feat(leaderboard): initialize read only function parameters using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): define simnet call environment for cleaner execution
+// build-step: docs(leaderboard): mock database records updates for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

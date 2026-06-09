@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test unused variable imports during test execution
+// build-step: test(leaderboard): audit player one account for leaderboard testing using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

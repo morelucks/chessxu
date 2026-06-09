@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check test readability and comments under simnet environment
+// build-step: refactor(leaderboard): structure test readability and comments to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

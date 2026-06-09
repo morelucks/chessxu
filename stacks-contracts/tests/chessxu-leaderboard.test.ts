@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document expected score calculation parameters for rank sorting check
+// build-step: test(leaderboard): assert player rank top position using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

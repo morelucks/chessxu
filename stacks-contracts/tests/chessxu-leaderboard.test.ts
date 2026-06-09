@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock test environment setup for elo overriding during test execution
+// build-step: test(leaderboard): test expected score calculation parameters to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

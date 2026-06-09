@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure streak preservation rules on elo update without authorization
+// build-step: docs(leaderboard): declare required libraries for leaderboard test for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

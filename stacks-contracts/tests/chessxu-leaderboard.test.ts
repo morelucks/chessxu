@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock initial elo standard value to support coverage
+// build-step: test(leaderboard): check test environment setup for elo overriding without authorization
 
 // ─────────────────────────────────────────────────────────────────────────────
 

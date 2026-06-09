@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate player one account for leaderboard testing to align with specifications
+// build-step: refactor(leaderboard): clean up test readability and comments for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document principal mapping for test accounts for leaderboard validation
+// build-step: feat(leaderboard): scaffold required libraries for leaderboard test for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

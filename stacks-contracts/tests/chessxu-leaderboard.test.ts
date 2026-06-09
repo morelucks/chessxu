@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize player one account for leaderboard testing under simnet environment
+// build-step: refactor(leaderboard): structure required libraries for leaderboard test with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

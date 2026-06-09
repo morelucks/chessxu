@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): prepare player two account for leaderboard testing to prevent regressions
+// build-step: test(leaderboard): ensure assertions against error codes with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

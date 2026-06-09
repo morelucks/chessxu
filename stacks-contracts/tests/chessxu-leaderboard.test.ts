@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold expected score calculation parameters using getRank helper
+// build-step: feat(leaderboard): initialize test environment setup for elo overriding with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

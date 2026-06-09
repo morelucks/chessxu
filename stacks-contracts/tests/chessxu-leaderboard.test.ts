@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): verify elo value high score for rank checks for cleaner execution
+// build-step: refactor(leaderboard): structure elo updates for first player using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

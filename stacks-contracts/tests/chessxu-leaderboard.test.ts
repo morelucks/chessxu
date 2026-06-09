@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare simnet call environment to align with specifications
+// build-step: refactor(leaderboard): optimize initial elo standard value during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

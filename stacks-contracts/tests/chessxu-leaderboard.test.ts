@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock leaderboard rank order verification to support coverage
+// build-step: docs(leaderboard): document principal mapping for test accounts for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

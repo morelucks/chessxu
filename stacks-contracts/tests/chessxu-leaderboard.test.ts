@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test non-owner caller unauthorized error using getElo helper
+// build-step: refactor(leaderboard): optimize elo value high score for rank checks during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

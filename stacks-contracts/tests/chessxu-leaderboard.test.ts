@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold historical game logs structure to support coverage
+// build-step: feat(leaderboard): prepare wallet addresses for test cases with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

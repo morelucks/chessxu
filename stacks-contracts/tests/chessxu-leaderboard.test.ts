@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): improve get-elo helper functions with owner credentials
+// build-step: docs(leaderboard): declare simnet call environment to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

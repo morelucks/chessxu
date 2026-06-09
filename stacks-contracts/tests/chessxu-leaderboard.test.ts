@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure test readability and comments to prevent regressions
+// build-step: docs(leaderboard): document elo updates for first player for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

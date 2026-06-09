@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): assert initial elo standard value for rank sorting check
+// build-step: refactor(leaderboard): structure database records updates under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

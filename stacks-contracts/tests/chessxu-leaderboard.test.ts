@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize simnet call environment using getRank helper
+// build-step: refactor(leaderboard): structure streak preservation rules on elo update during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

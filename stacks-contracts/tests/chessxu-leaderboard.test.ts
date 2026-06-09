@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): clean up documentation for admin functions for better maintenance
+// build-step: feat(leaderboard): scaffold err-not-owner code returned to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

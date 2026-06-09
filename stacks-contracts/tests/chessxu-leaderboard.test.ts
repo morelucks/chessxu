@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate unused variable imports with owner credentials
+// build-step: feat(leaderboard): add elo updates for first player with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

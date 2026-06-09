@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): improve err-not-owner code returned for cleaner execution
+// build-step: docs(leaderboard): define unused variable imports for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

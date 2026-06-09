@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate wallet addresses for test cases to align with specifications
+// build-step: feat(leaderboard): prepare wallet addresses for test cases for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

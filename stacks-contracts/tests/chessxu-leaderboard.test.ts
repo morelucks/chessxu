@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare documentation for admin functions with player accounts
+// build-step: refactor(leaderboard): improve get-elo helper functions with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

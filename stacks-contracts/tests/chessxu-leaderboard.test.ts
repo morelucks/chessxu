@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): assert err-not-owner code returned during test execution
+// build-step: docs(leaderboard): document documentation for admin functions using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): verify elo updates for first player to support coverage
+// build-step: test(leaderboard): check test readability and comments under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

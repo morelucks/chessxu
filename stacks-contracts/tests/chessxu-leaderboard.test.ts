@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): verify wallet addresses for test cases during test execution
+// build-step: refactor(leaderboard): refine test environment setup for elo overriding to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

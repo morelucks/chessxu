@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: initialize test suite environment
+// build-step: docs(leaderboard): mock err-not-owner code returned to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

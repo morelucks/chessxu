@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure assertions against error codes with invalid parameters
+// build-step: test(leaderboard): ensure unused variable imports with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

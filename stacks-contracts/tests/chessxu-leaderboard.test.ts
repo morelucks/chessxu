@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): improve unused variable imports to support coverage
+// build-step: refactor(leaderboard): structure elo gap edge cases validation for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

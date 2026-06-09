@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): assert player rank top position during test execution
+// build-step: feat(leaderboard): add err-not-owner code returned for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

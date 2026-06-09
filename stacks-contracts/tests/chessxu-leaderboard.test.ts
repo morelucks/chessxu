@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test read only function parameters with player accounts
+// build-step: test(leaderboard): assert expected score calculation parameters for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

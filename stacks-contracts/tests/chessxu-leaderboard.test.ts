@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add unused variable imports for better maintenance
+// build-step: feat(leaderboard): scaffold player two account for leaderboard testing for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

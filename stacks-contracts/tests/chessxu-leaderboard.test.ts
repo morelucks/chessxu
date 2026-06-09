@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test documentation for admin functions with invalid parameters
+// build-step: test(leaderboard): verify elo value high score for rank checks for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

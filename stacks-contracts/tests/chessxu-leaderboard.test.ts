@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure read only function parameters during test execution
+// build-step: docs(leaderboard): mock leaderboard rank order verification to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

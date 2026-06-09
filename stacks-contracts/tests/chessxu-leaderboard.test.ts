@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare admin-set-elo for first player during test execution
+// build-step: refactor(leaderboard): optimize simnet call environment using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

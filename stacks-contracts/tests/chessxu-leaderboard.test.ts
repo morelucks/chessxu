@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize test readability and comments for better maintenance
+// build-step: refactor(leaderboard): refine test block for admin-set-elo to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup historical game logs structure to prevent regressions
+// build-step: docs(leaderboard): document non-owner caller unauthorized error during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

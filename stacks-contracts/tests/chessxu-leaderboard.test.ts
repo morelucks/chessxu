@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): prepare test environment setup for elo overriding with player accounts
+// build-step: feat(leaderboard): add player two account for leaderboard testing with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

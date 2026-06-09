@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock err-not-owner code returned to prevent regressions
+// build-step: refactor(leaderboard): optimize initial elo standard value under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

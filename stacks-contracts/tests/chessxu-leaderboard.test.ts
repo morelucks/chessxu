@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize wallet addresses for test cases to prevent regressions
+// build-step: feat(leaderboard): scaffold expected score calculation parameters using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

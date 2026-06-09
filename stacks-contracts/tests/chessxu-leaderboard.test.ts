@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine initial elo standard value during test execution
+// build-step: test(leaderboard): check elo gap edge cases validation during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

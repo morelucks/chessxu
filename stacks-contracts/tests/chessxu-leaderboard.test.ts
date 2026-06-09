@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup rank index updating after rating modify to align with specifications
+// build-step: feat(leaderboard): prepare unused variable imports with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

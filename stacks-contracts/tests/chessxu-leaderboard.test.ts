@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document initial elo standard value during test execution
+// build-step: docs(leaderboard): define required libraries for leaderboard test for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

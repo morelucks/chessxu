@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure test readability and comments for leaderboard validation
+// build-step: test(leaderboard): assert test environment setup for elo overriding to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare required libraries for leaderboard test to support coverage
+// build-step: feat(leaderboard): scaffold test execution time and parameters during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

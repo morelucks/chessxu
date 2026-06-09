@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup elo value high score for rank checks to align with specifications
+// build-step: docs(leaderboard): document elo gap edge cases validation using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

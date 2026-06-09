@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine streak preservation rules on elo update during test execution
+// build-step: refactor(leaderboard): structure streak preservation rules on elo update without authorization
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare test readability and comments to align with specifications
+// build-step: feat(leaderboard): initialize read only function parameters under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

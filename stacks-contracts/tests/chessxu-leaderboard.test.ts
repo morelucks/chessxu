@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): verify rank index updating after rating modify under simnet environment
+// build-step: test(leaderboard): check read only function parameters to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

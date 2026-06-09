@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check test block for admin-set-elo to align with specifications
+// build-step: refactor(leaderboard): structure read only function parameters with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

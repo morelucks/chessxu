@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup unused variable imports for better maintenance
+// build-step: test(leaderboard): validate test environment setup for elo overriding with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

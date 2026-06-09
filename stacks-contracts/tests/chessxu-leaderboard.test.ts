@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): improve test execution time and parameters for cleaner execution
+// build-step: test(leaderboard): test assertions against error codes using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock test environment setup for elo overriding to align with specifications
+// build-step: feat(leaderboard): scaffold initial elo standard value with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

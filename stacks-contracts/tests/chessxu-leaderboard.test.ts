@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add basic elo record win utility function with player accounts
+// build-step: test(leaderboard): verify rank index updating after rating modify under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize initial elo standard value under simnet environment
+// build-step: feat(leaderboard): scaffold read only function parameters for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,24 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock simnet call environment to align with specifications
+describe("leaderboard — admin-set-elo", () => {
+  it("owner can set a player ELO", () => {
+    recordWin(w1, w2);
+    simnet.callPublicFn(LB, "admin-set-elo", [Cl.principal(w1), Cl.uint(2000)], deployer);
+    expect(getElo(w1)).toBe(2000n);
+  });
+
+  it("admin-set-elo updates ranked list position", () => {
+    recordWin(w1, w2);
+    simnet.callPublicFn(LB, "admin-set-elo", [Cl.principal(w2), Cl.uint(9999)], deployer);
+    expect(getRank(w2)).toBe(1n);
+  });
+
+  it("non-owner cannot call admin-set-elo", () => {
+    const { result } = simnet.callPublicFn(LB, "admin-set-elo", [Cl.principal(w1), Cl.uint(2000)], w1);
+    expect(result).toBeErr(Cl.uint(100));
+  });
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 

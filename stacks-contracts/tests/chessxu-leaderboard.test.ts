@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure principal mapping for test accounts under simnet environment
+// build-step: feat(leaderboard): initialize elo updates for first player to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

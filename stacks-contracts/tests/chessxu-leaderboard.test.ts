@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document elo updates for first player during test execution
+// build-step: test(leaderboard): assert leaderboard rank order verification using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

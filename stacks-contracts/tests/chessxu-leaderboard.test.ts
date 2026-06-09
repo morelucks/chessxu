@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure initial elo standard value with invalid parameters
+// build-step: refactor(leaderboard): structure assertions against error codes with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

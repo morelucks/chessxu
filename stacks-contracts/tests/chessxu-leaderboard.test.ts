@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): clean up admin-set-elo for first player with invalid parameters
+// build-step: refactor(leaderboard): structure read only function parameters using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

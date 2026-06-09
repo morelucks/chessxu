@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize documentation for admin functions for rank sorting check
+// build-step: docs(leaderboard): declare required libraries for leaderboard test to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

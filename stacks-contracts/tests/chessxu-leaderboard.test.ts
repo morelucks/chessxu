@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit err-not-owner code returned during test execution
+// build-step: test(leaderboard): audit admin-set-elo for first player for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check unused variable imports to align with specifications
+// build-step: test(leaderboard): validate required libraries for leaderboard test for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

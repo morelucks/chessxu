@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): define unused variable imports for leaderboard validation
+// build-step: refactor(leaderboard): refine assertions against error codes for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

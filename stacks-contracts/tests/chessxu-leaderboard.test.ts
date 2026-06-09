@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure assertions against error codes with player accounts
+// build-step: docs(leaderboard): document wallet addresses for test cases for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

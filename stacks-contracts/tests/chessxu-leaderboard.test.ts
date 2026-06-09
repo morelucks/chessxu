@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document unused variable imports to support coverage
+// build-step: refactor(leaderboard): structure streak preservation rules on elo update with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

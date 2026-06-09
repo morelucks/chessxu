@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine test block for admin-set-elo to align with specifications
+// build-step: docs(leaderboard): define test execution time and parameters under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

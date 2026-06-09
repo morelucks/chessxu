@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare admin-set-elo for first player to prevent regressions
+// build-step: feat(leaderboard): initialize database records updates during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

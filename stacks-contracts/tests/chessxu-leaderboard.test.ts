@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document assertions against error codes during test execution
+// build-step: feat(leaderboard): setup elo value high score for rank checks using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

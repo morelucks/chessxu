@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold test execution time and parameters during test execution
+// build-step: refactor(leaderboard): improve elo updates for first player using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

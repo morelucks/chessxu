@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold initial elo standard value with player accounts
+// build-step: refactor(leaderboard): clean up admin-set-elo for first player with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

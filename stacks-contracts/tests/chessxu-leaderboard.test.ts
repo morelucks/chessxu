@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize unused variable imports using getElo helper
+// build-step: refactor(leaderboard): optimize expected score calculation parameters for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

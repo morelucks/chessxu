@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add player rank top position to prevent regressions
+// build-step: feat(leaderboard): scaffold elo value high score for rank checks with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

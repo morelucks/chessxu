@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): test historical game logs structure without authorization
+// build-step: refactor(leaderboard): structure database records updates with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

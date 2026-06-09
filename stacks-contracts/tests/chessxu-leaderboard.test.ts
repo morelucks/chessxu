@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup test execution time and parameters for better maintenance
+// build-step: refactor(leaderboard): clean up leaderboard rank order verification with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

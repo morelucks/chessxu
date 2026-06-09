@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare required libraries for leaderboard test to prevent regressions
+// build-step: feat(leaderboard): setup initial elo standard value using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

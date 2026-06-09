@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): define get-elo helper functions for leaderboard validation
+// build-step: test(leaderboard): ensure documentation for admin functions using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

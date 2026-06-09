@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure elo updates for first player using getRank helper
+// build-step: refactor(leaderboard): refine test execution time and parameters using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

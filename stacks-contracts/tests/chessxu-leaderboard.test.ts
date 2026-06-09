@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize elo gap edge cases validation without authorization
+// build-step: refactor(leaderboard): optimize principal mapping for test accounts for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

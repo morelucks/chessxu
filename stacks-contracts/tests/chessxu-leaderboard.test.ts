@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): prepare wallet addresses for test cases with player accounts
+// build-step: feat(leaderboard): setup principal mapping for test accounts for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

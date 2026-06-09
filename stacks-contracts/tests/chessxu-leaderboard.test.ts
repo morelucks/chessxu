@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document database records updates during test execution
+// build-step: feat(leaderboard): scaffold read only function parameters during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

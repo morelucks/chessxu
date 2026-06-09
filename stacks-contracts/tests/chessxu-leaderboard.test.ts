@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize elo value high score for rank checks for better maintenance
+// build-step: test(leaderboard): audit principal mapping for test accounts with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup test readability and comments with owner credentials
+// build-step: refactor(leaderboard): optimize player one account for leaderboard testing with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

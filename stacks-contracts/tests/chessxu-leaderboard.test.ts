@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure expected score calculation parameters with invalid parameters
+// build-step: test(leaderboard): audit test block for admin-set-elo with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): scaffold err-not-owner code returned to prevent regressions
+// build-step: feat(leaderboard): prepare test environment setup for elo overriding with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup read only function parameters to support coverage
+// build-step: feat(leaderboard): setup unused variable imports for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure elo gap edge cases validation for rank sorting check
+// build-step: refactor(leaderboard): optimize test execution time and parameters during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check leaderboard rank order verification under simnet environment
+// build-step: refactor(leaderboard): structure elo value high score for rank checks using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

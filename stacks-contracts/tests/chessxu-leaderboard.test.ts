@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure test block for admin-set-elo using getElo helper
+// build-step: test(leaderboard): test historical game logs structure without authorization
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure wallet addresses for test cases with invalid parameters
+// build-step: test(leaderboard): verify get-elo helper functions using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

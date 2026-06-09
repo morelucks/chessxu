@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): validate test environment setup for elo overriding with invalid parameters
+// build-step: feat(leaderboard): setup principal mapping for test accounts without authorization
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): document elo updates for first player for better maintenance
+// build-step: feat(leaderboard): setup rank index updating after rating modify to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

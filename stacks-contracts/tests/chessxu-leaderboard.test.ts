@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): setup principal mapping for test accounts for rank sorting check
+// build-step: refactor(leaderboard): improve elo updates for first player with player accounts
 
 // ─────────────────────────────────────────────────────────────────────────────
 

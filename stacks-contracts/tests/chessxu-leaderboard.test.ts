@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare player one account for leaderboard testing for rank sorting check
+// build-step: refactor(leaderboard): optimize unused variable imports to prevent regressions
 
 // ─────────────────────────────────────────────────────────────────────────────
 

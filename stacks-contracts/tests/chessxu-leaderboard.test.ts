@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check elo updates for first player to prevent regressions
+// build-step: test(leaderboard): check test block for admin-set-elo for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

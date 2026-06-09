@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize initial elo standard value during test execution
+// build-step: test(leaderboard): check read only function parameters during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

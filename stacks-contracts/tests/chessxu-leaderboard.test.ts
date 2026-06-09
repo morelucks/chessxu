@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check read only function parameters to align with specifications
+// build-step: test(leaderboard): assert initial elo standard value for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

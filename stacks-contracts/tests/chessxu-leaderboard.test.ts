@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine test block for admin-set-elo for cleaner execution
+// build-step: feat(leaderboard): add non-owner caller unauthorized error with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

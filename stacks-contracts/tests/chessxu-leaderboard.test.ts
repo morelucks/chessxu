@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): assert expected score calculation parameters for leaderboard validation
+// build-step: refactor(leaderboard): structure principal mapping for test accounts under simnet environment
 
 // ─────────────────────────────────────────────────────────────────────────────
 

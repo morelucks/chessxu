@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): mock leaderboard rank order verification to prevent regressions
+// build-step: feat(leaderboard): add assertions against error codes for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize simnet call environment for cleaner execution
+// build-step: test(leaderboard): ensure wallet addresses for test cases with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

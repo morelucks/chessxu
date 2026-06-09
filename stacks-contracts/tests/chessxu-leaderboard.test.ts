@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): ensure documentation for admin functions without authorization
+// build-step: feat(leaderboard): add non-owner caller unauthorized error for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): structure database records updates under simnet environment
+// build-step: refactor(leaderboard): improve unused variable imports to support coverage
 
 // ─────────────────────────────────────────────────────────────────────────────
 

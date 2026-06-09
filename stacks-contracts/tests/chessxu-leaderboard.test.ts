@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): check test environment setup for elo overriding without authorization
+// build-step: docs(leaderboard): mock simnet call environment to align with specifications
 
 // ─────────────────────────────────────────────────────────────────────────────
 

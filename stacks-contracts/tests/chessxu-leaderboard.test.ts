@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare rank index updating after rating modify for cleaner execution
+// build-step: test(leaderboard): validate historical game logs structure for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

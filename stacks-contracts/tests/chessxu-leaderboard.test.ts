@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): declare principal mapping for test accounts to prevent regressions
+// build-step: test(leaderboard): ensure expected score calculation parameters with invalid parameters
 
 // ─────────────────────────────────────────────────────────────────────────────
 

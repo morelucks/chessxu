@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize unused variable imports with owner credentials
+// build-step: test(leaderboard): ensure documentation for admin functions without authorization
 
 // ─────────────────────────────────────────────────────────────────────────────
 

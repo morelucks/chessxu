@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: docs(leaderboard): define test execution time and parameters under simnet environment
+// build-step: feat(leaderboard): add assertions against error codes during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

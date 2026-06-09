@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize non-owner caller unauthorized error using getRank helper
+// build-step: test(leaderboard): check elo updates for first player using getElo helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

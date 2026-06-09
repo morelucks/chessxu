@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): prepare admin-set-elo for first player using getRank helper
+// build-step: feat(leaderboard): prepare player two account for leaderboard testing for leaderboard validation
 
 // ─────────────────────────────────────────────────────────────────────────────
 

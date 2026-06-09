@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): add err-not-owner code returned for better maintenance
+// build-step: feat(leaderboard): prepare expected score calculation parameters for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine initial elo standard value for cleaner execution
+// build-step: feat(leaderboard): prepare admin-set-elo for first player using getRank helper
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine assertions against error codes for leaderboard validation
+// build-step: test(leaderboard): verify test execution time and parameters with owner credentials
 
 // ─────────────────────────────────────────────────────────────────────────────
 

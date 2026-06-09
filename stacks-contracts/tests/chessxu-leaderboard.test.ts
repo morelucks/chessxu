@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): refine test environment setup for elo overriding to prevent regressions
+// build-step: refactor(leaderboard): refine elo value high score for rank checks for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

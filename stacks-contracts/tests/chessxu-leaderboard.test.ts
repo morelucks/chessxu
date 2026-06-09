@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: refactor(leaderboard): optimize initial elo standard value with owner credentials
+// build-step: test(leaderboard): audit player rank top position for better maintenance
 
 // ─────────────────────────────────────────────────────────────────────────────
 

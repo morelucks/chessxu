@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize elo updates for first player to align with specifications
+// build-step: docs(leaderboard): declare admin-set-elo for first player during test execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

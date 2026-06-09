@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: test(leaderboard): audit initial elo standard value to support coverage
+// build-step: test(leaderboard): audit get-elo helper functions for rank sorting check
 
 // ─────────────────────────────────────────────────────────────────────────────
 

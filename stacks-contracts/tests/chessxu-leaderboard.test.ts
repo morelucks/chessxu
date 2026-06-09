@@ -308,7 +308,7 @@ describe("leaderboard — score history", () => {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// build-step: feat(leaderboard): initialize database records updates for leaderboard validation
+// build-step: feat(leaderboard): initialize streak preservation rules on elo update for cleaner execution
 
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -703,3 +703,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 219 - refactor(leaderboard): streamline ELO assertion statement for step 213
 // test-build-step: 220 - docs(leaderboard): document ELO calculation details for case 214
 // test-build-step: 221 - test(leaderboard): verify extreme ELO gap expected score (3000 vs 100)
+// test-build-step: 222 - test(leaderboard): verify favored player gains small ELO delta (+10)

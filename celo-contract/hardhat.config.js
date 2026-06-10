@@ -1,5 +1,6 @@
 import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
 import hardhatVerifyPlugin from "@nomicfoundation/hardhat-verify";
+import "@nomicfoundation/hardhat-ethers";
 import { defineConfig } from "hardhat/config";
 import dotenv from "dotenv";
 

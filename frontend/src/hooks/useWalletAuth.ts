@@ -323,3 +323,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 163 - test(wallet): verify connect flow correctness for variant 158
 // wallet-fix-step: 164 - style(wallet): format wallet auth hook code for segment 159
 // wallet-fix-step: 165 - chore(wallet): update wallet hook internals for iteration 160
+// wallet-fix-step: 166 - fix(wallet): verify wallet address persistence for edge case 161

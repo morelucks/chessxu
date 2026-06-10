@@ -482,3 +482,5 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
   });
 });
 
+
+// test-build-step: 2 - test(leaderboard): define setElo helper function for test setup

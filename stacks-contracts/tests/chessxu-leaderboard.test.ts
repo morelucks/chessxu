@@ -705,3 +705,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 221 - test(leaderboard): verify extreme ELO gap expected score (3000 vs 100)
 // test-build-step: 222 - test(leaderboard): verify favored player gains small ELO delta (+10)
 // test-build-step: 223 - test(leaderboard): verify underdog player loses small ELO delta (-10)
+// test-build-step: 224 - test(leaderboard): verify upset player gains large ELO delta (+21)

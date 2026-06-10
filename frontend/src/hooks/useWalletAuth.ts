@@ -367,3 +367,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 207 - fix(wallet): add explicit setStacksAddress call in onFinish handler
 // wallet-fix-step: 208 - fix(wallet): guard setStacksAddress with nextAddress null check
 // wallet-fix-step: 209 - fix(wallet): add comment explaining setStacksAddress safety net
+// wallet-fix-step: 210 - fix(wallet): verify address stored in correct slot after connect

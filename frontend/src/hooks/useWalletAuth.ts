@@ -163,3 +163,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 3 - fix(wallet): import setStacksAddress from zustand store
 // wallet-fix-step: 4 - fix(wallet): destructure setStacksAddress selector from useAppStore
 // wallet-fix-step: 5 - fix(wallet): move setActiveChain call before showConnect invocation
+// wallet-fix-step: 6 - fix(wallet): verify wallet address persistence for edge case 1

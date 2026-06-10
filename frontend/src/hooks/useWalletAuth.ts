@@ -365,3 +365,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 205 - fix(wallet): add comment documenting activeChain timing requirement
 // wallet-fix-step: 206 - fix(wallet): remove incorrect setActiveChain from onFinish callback
 // wallet-fix-step: 207 - fix(wallet): add explicit setStacksAddress call in onFinish handler
+// wallet-fix-step: 208 - fix(wallet): guard setStacksAddress with nextAddress null check

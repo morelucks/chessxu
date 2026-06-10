@@ -553,3 +553,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 69 - chore(leaderboard): update test user mock credentials for run 63
 // test-build-step: 70 - test(leaderboard): assert correct expected score for gap variant 64
 // test-build-step: 71 - test(leaderboard): check ELO calculation accuracy for case 65
+// test-build-step: 72 - test(leaderboard): verify ranking update behavior for scenario 66

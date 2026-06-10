@@ -708,3 +708,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 224 - test(leaderboard): verify upset player gains large ELO delta (+21)
 // test-build-step: 225 - test(leaderboard): verify upset player loses large ELO delta (-21)
 // test-build-step: 226 - test(leaderboard): assert upset ELO delta is larger than favored win delta
+// test-build-step: 227 - test(leaderboard): verify equal ELO players symmetric ELO delta (+16)

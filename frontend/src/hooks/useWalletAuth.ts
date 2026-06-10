@@ -247,3 +247,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 87 - fix(wallet): validate chain state transition for scenario 82
 // wallet-fix-step: 88 - fix(wallet): check store slot assignment for condition 83
 // wallet-fix-step: 89 - refactor(wallet): clean up auth flow logic for step 84
+// wallet-fix-step: 90 - docs(wallet): document wallet connection fix detail for case 85

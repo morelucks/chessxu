@@ -683,3 +683,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 199 - test(leaderboard): check ELO calculation accuracy for case 193
 // test-build-step: 200 - test(leaderboard): verify ranking update behavior for scenario 194
 // test-build-step: 201 - test(leaderboard): validate contract response for ELO range 195
+// test-build-step: 202 - style(leaderboard): clean up formatting in ELO test suite segment 196

@@ -706,3 +706,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 222 - test(leaderboard): verify favored player gains small ELO delta (+10)
 // test-build-step: 223 - test(leaderboard): verify underdog player loses small ELO delta (-10)
 // test-build-step: 224 - test(leaderboard): verify upset player gains large ELO delta (+21)
+// test-build-step: 225 - test(leaderboard): verify upset player loses large ELO delta (-21)

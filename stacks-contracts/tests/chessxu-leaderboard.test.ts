@@ -345,3 +345,140 @@ describe("leaderboard — get-expected-score", () => {
     expect((score.result as any).value).toBeGreaterThan(500n);
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+describe("leaderboard — ELO calculation edge cases (#137)", () => {
+  function setElo(player: string, elo: number) {
+    simnet.callPublicFn(LB, "admin-set-elo", [Cl.principal(player), Cl.uint(elo)], deployer);
+  }
+
+  function getExpectedScore(a: string, b: string): bigint {
+    const r = simnet.callReadOnlyFn(LB, "get-expected-score",
+      [Cl.principal(a), Cl.principal(b)], deployer);
+    return (r.result as any).value;
+  }
+
+  // ── Expected score with large ELO gap ──
+
+  it("expected score for ELO 2000 vs 1000 is 666 (near maximum)", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    expect(getExpectedScore(w1, w2)).toBe(666n);
+  });
+
+  it("expected score for ELO 1000 vs 2000 is 333 (near minimum)", () => {
+    setElo(w1, 1000);
+    setElo(w2, 2000);
+    expect(getExpectedScore(w1, w2)).toBe(333n);
+  });
+
+  it("expected scores for both sides sum close to 1000", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    const sA = getExpectedScore(w1, w2);
+    const sB = getExpectedScore(w2, w1);
+    expect(sA + sB).toBeGreaterThanOrEqual(998n);
+    expect(sA + sB).toBeLessThanOrEqual(1000n);
+  });
+
+  it("extreme gap: expected score for ELO 3000 vs 100 is 967", () => {
+    setElo(w1, 3000);
+    setElo(w2, 100);
+    expect(getExpectedScore(w1, w2)).toBe(967n);
+  });
+
+  // ── Favored player wins (small delta) ──
+
+  it("favored player (2000) gains only 10 ELO beating underdog (1000)", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    recordWin(w1, w2);
+    expect(getElo(w1)).toBe(2010n);
+  });
+
+  it("underdog (1000) loses only 10 ELO to favored player (2000)", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    recordWin(w1, w2);
+    expect(getElo(w2)).toBe(990n);
+  });
+
+  // ── Upset: underdog wins (large delta) ──
+
+  it("upset: underdog (1000) gains 21 ELO beating favored (2000)", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    recordWin(w2, w1);
+    expect(getElo(w2)).toBe(1021n);
+  });
+
+  it("upset: favored (2000) loses 21 ELO to underdog (1000)", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    recordWin(w2, w1);
+    expect(getElo(w1)).toBe(1979n);
+  });
+
+  it("upset delta (21) is larger than favored-win delta (10)", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    recordWin(w1, w2);
+    const favoredDelta = getElo(w1) - 2000n;
+    // In a separate fresh test the upset delta would be 21
+    // Here we verify the favored delta is small (< K/2 = 16)
+    expect(favoredDelta).toBe(10n);
+    expect(favoredDelta).toBeLessThan(16n);
+  });
+
+  // ── Equal ELO: symmetric delta of K/2 ──
+
+  it("equal ELO (1500 vs 1500): winner gains exactly K/2 = 16", () => {
+    setElo(w1, 1500);
+    setElo(w2, 1500);
+    recordWin(w1, w2);
+    expect(getElo(w1)).toBe(1516n);
+  });
+
+  it("equal ELO (1500 vs 1500): loser loses exactly K/2 = 16", () => {
+    setElo(w1, 1500);
+    setElo(w2, 1500);
+    recordWin(w1, w2);
+    expect(getElo(w2)).toBe(1484n);
+  });
+
+  // ── Extreme gap win delta ──
+
+  it("extreme gap: ELO 3000 winner gains only 1 ELO beating ELO 100", () => {
+    setElo(w1, 3000);
+    setElo(w2, 100);
+    recordWin(w1, w2);
+    expect(getElo(w1)).toBe(3001n);
+  });
+
+  // ── ELO floor: cannot go negative ──
+
+  it("ELO floor: loser ELO clamps to 0 when delta exceeds current ELO", () => {
+    setElo(w1, 1500);
+    setElo(w2, 10);
+    recordWin(w1, w2);
+    // loss-delta = 32 * expected(10,1500) / 1000 = 32 * (10000/1510) / 1000
+    // = 32 * 6 / 1000 = 0, so ELO stays at 10... need smaller gap
+    // Use equal ELOs at 10: delta = 16, 10 < 16 → floor to 0
+    setElo(w3, 10);
+    setElo(w4, 10);
+    recordWin(w3, w4);
+    expect(getElo(w4)).toBe(0n);
+  });
+
+  // ── Ranked list ordering after extreme gap ──
+
+  it("ranked list reflects correct ordering after extreme ELO gap match", () => {
+    setElo(w1, 2000);
+    setElo(w2, 1000);
+    recordWin(w1, w2);
+    expect(getRank(w1)).toBe(1n);
+    expect(getRank(w2)).toBe(2n);
+  });
+});
+

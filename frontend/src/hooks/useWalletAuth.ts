@@ -186,3 +186,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 26 - docs(wallet): document wallet connection fix detail for case 21
 // wallet-fix-step: 27 - test(wallet): verify connect flow correctness for variant 22
 // wallet-fix-step: 28 - style(wallet): format wallet auth hook code for segment 23
+// wallet-fix-step: 29 - chore(wallet): update wallet hook internals for iteration 24

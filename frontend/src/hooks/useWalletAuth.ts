@@ -160,3 +160,4 @@ export function useWalletAuth() {
 }
 
 // wallet-fix-step: 2 - fix(wallet): diagnose activeChain race condition in showConnect callback
+// wallet-fix-step: 3 - fix(wallet): import setStacksAddress from zustand store

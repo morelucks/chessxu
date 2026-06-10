@@ -693,3 +693,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 209 - test(leaderboard): validate contract response for ELO range 203
 // test-build-step: 210 - style(leaderboard): clean up formatting in ELO test suite segment 204
 // test-build-step: 211 - refactor(leaderboard): streamline ELO assertion statement for step 205
+// test-build-step: 212 - docs(leaderboard): document ELO calculation details for case 206

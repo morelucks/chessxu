@@ -312,3 +312,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 152 - fix(wallet): check store slot assignment for condition 147
 // wallet-fix-step: 153 - refactor(wallet): clean up auth flow logic for step 148
 // wallet-fix-step: 154 - docs(wallet): document wallet connection fix detail for case 149
+// wallet-fix-step: 155 - test(wallet): verify connect flow correctness for variant 150

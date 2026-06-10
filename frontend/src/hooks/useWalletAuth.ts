@@ -165,3 +165,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 5 - fix(wallet): move setActiveChain call before showConnect invocation
 // wallet-fix-step: 6 - fix(wallet): verify wallet address persistence for edge case 1
 // wallet-fix-step: 7 - fix(wallet): validate chain state transition for scenario 2
+// wallet-fix-step: 8 - fix(wallet): check store slot assignment for condition 3

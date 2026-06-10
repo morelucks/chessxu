@@ -484,3 +484,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 
 
 // test-build-step: 2 - test(leaderboard): define setElo helper function for test setup
+// test-build-step: 3 - test(leaderboard): define getExpectedScore helper function for readonly calls

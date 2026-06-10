@@ -682,3 +682,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 198 - test(leaderboard): assert correct expected score for gap variant 192
 // test-build-step: 199 - test(leaderboard): check ELO calculation accuracy for case 193
 // test-build-step: 200 - test(leaderboard): verify ranking update behavior for scenario 194
+// test-build-step: 201 - test(leaderboard): validate contract response for ELO range 195

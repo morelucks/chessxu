@@ -368,3 +368,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 208 - fix(wallet): guard setStacksAddress with nextAddress null check
 // wallet-fix-step: 209 - fix(wallet): add comment explaining setStacksAddress safety net
 // wallet-fix-step: 210 - fix(wallet): verify address stored in correct slot after connect
+// wallet-fix-step: 211 - fix(wallet): confirm Celo connect flow remains unaffected

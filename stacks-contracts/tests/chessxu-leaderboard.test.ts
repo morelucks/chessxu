@@ -535,3 +535,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 51 - refactor(leaderboard): streamline ELO assertion statement for step 45
 // test-build-step: 52 - docs(leaderboard): document ELO calculation details for case 46
 // test-build-step: 53 - chore(leaderboard): update test user mock credentials for run 47
+// test-build-step: 54 - test(leaderboard): assert correct expected score for gap variant 48

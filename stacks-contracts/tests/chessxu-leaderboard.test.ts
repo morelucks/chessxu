@@ -490,3 +490,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 6 - test(leaderboard): assert expected scores sum is close to 1000
 // test-build-step: 7 - test(leaderboard): check ELO calculation accuracy for case 1
 // test-build-step: 8 - test(leaderboard): verify ranking update behavior for scenario 2
+// test-build-step: 9 - test(leaderboard): validate contract response for ELO range 3

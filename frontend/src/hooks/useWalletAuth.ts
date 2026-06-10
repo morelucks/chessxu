@@ -362,3 +362,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 202 - docs(wallet): document wallet connection fix detail for case 197
 // wallet-fix-step: 203 - test(wallet): verify connect flow correctness for variant 198
 // wallet-fix-step: 204 - fix(wallet): ensure chain context is stacks before wallet popup opens
+// wallet-fix-step: 205 - fix(wallet): add comment documenting activeChain timing requirement

@@ -158,3 +158,5 @@ export function useWalletAuth() {
     syncAddressFromSession,
   };
 }
+
+// wallet-fix-step: 2 - fix(wallet): diagnose activeChain race condition in showConnect callback

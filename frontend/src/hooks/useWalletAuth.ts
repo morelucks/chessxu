@@ -369,3 +369,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 209 - fix(wallet): add comment explaining setStacksAddress safety net
 // wallet-fix-step: 210 - fix(wallet): verify address stored in correct slot after connect
 // wallet-fix-step: 211 - fix(wallet): confirm Celo connect flow remains unaffected
+// wallet-fix-step: 212 - fix(wallet): test Stacks connect with activeChain previously set to celo

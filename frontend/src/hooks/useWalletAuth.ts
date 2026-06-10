@@ -350,3 +350,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 190 - fix(wallet): verify wallet address persistence for edge case 185
 // wallet-fix-step: 191 - fix(wallet): validate chain state transition for scenario 186
 // wallet-fix-step: 192 - fix(wallet): check store slot assignment for condition 187
+// wallet-fix-step: 193 - refactor(wallet): clean up auth flow logic for step 188

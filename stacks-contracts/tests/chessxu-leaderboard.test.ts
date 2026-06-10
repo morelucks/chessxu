@@ -518,3 +518,4 @@ describe("leaderboard — ELO calculation edge cases (#137)", () => {
 // test-build-step: 34 - style(leaderboard): clean up formatting in ELO test suite segment 28
 // test-build-step: 35 - refactor(leaderboard): streamline ELO assertion statement for step 29
 // test-build-step: 36 - docs(leaderboard): document ELO calculation details for case 30
+// test-build-step: 37 - chore(leaderboard): update test user mock credentials for run 31

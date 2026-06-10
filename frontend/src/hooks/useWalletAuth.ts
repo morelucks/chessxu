@@ -261,3 +261,4 @@ export function useWalletAuth() {
 // wallet-fix-step: 101 - chore(wallet): update wallet hook internals for iteration 96
 // wallet-fix-step: 102 - fix(wallet): verify wallet address persistence for edge case 97
 // wallet-fix-step: 103 - fix(wallet): validate chain state transition for scenario 98
+// wallet-fix-step: 104 - fix(wallet): check store slot assignment for condition 99

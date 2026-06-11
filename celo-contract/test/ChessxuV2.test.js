@@ -76,3 +76,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
     }
 
     describe("Setup & Deposit Verification", function () {
+        it("should deploy ChessxuV2 with the mock ERC-20 token address", async function () {
+            const { chessxuV2, mockToken } = await deployFixture();
+

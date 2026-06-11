@@ -348,3 +348,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             // Try resolving again — game status is now 4, not 0 or 1
             await expect(
                 chessxuV2.connect(owner).resolveGame(1, 5)
+            ).to.be.revertedWithCustomError(chessxuV2, "GameNotActive");
+        });

@@ -193,3 +193,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             await chessxuV2.connect(player1).createGame(0, false);
             await chessxuV2.connect(player2).joinGame(1);
 
+            // Should not revert
+            await chessxuV2.connect(owner).resolveGame(1, 4);
+

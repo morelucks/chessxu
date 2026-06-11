@@ -55,3 +55,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
     async function deployFixture() {
         const [owner, player1, player2, forwarder] = await ethers.getSigners();
 
+        // Deploy Mock ERC-20 Token
+        const MockToken = await ethers.getContractFactory("MockERC20");
+        const mockToken = await MockToken.deploy();

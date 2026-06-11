@@ -115,3 +115,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             // Player 2 joins game
             await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
             await chessxuV2.connect(player2).joinGame(1);
+
+            // Verify game state
+            const game = await chessxuV2.getGame(1);

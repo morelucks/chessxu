@@ -202,3 +202,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
     });
 
     describe("Cancellation Resolution (status = 5)", function () {
+        it("should refund the creator's ERC-20 wager on Cancellation (no Player 2)", async function () {
+            const { chessxuV2, mockToken, owner, player1 } = await deployFixture();
+

@@ -1,5 +1,7 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+import { expect } from "chai";
+import { network } from "hardhat";
+
+const { ethers } = await network.connect();
 
 describe("ChessxuV2 Smart Contract - Meta-Transaction Functional Tests", function () {
     let chessxuV2;
@@ -46,3 +48,4 @@ describe("ChessxuV2 Smart Contract - Meta-Transaction Functional Tests", functio
         // Skeleton for meta-tx verification
     });
 });
+

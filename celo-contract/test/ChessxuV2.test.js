@@ -220,3 +220,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             );
 
             // Owner cancels the game (status = 5)
+            await chessxuV2.connect(owner).resolveGame(1, 5);
+
+            // Verify creator received wager back

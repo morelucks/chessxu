@@ -148,3 +148,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             // Verify balances decreased after depositing wagers
             expect(await mockToken.balanceOf(player1.address)).to.equal(
                 p1InitialBalance - WAGER_AMOUNT
+            );
+            expect(await mockToken.balanceOf(player2.address)).to.equal(
+                p2InitialBalance - WAGER_AMOUNT

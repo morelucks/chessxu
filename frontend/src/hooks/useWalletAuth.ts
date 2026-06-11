@@ -22,6 +22,7 @@ export function useWalletAuth() {
   const address = useAppStore((state) => state.address);
   const isLoading = useAppStore((state) => state.isLoading);
   const setAddress = useAppStore((state) => state.setAddress);
+  const setStacksAddress = useAppStore((state) => state.setStacksAddress);
   const setCeloAddress = useAppStore((state) => state.setCeloAddress);
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const setIsLoading = useAppStore((state) => state.setIsLoading);
@@ -111,6 +112,10 @@ export function useWalletAuth() {
 
       // Default to Stacks
       try {
+        // Set activeChain BEFORE syncing address so setAddress stores
+        // the value in the correct slot (stacksAddress, not celoAddress).
+        setActiveChain('stacks');
+
         showConnect({
           userSession,
           appDetails: {
@@ -119,7 +124,11 @@ export function useWalletAuth() {
           },
           onFinish: () => {
             const nextAddress = syncAddressFromSession();
-            setActiveChain('stacks');
+            // Explicitly populate stacksAddress in case setAddress
+            // resolved before the activeChain update propagated.
+            if (nextAddress) {
+              setStacksAddress(nextAddress);
+            }
             setIsLoading(false);
             onFinish?.(nextAddress);
           },
@@ -149,3 +158,4 @@ export function useWalletAuth() {
     syncAddressFromSession,
   };
 }
+

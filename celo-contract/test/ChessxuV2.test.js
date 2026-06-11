@@ -103,3 +103,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             expect(contractBalance).to.equal(WAGER_AMOUNT);
         });
 
+        it("should deposit Player 2's ERC-20 wager when joining", async function () {
+            const { chessxuV2, mockToken, player1, player2 } = await deployFixture();
+

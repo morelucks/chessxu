@@ -290,3 +290,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
 
     describe("Access Control & Edge Cases", function () {
         it("should revert if non-owner tries to resolve the game", async function () {
+            const { chessxuV2, mockToken, player1, player2 } = await deployFixture();
+

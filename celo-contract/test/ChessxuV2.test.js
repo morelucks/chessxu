@@ -350,3 +350,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
                 chessxuV2.connect(owner).resolveGame(1, 5)
             ).to.be.revertedWithCustomError(chessxuV2, "GameNotActive");
         });
+
+        it("should revert if resolving a non-existent game", async function () {

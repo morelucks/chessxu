@@ -154,3 +154,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             );
 
             // Owner resolves game as Draw (status = 4)
+            await chessxuV2.connect(owner).resolveGame(1, 4);
+
+            // Verify both players received their wagers back

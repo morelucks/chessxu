@@ -306,3 +306,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             ).to.be.revertedWithCustomError(chessxuV2, "NotOwner");
         });
 
+        it("should revert if resolving with an invalid status", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();

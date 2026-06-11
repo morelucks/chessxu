@@ -276,3 +276,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
 
         it("should handle Cancellation with zero wager gracefully", async function () {
             const { chessxuV2, owner, player1 } = await deployFixture();
+
+            // Create zero-wager ERC-20 game (no join)

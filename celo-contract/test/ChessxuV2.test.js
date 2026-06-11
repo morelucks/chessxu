@@ -106,3 +106,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
         it("should deposit Player 2's ERC-20 wager when joining", async function () {
             const { chessxuV2, mockToken, player1, player2 } = await deployFixture();
 
+            const contractAddr = await chessxuV2.getAddress();
+
+            // Player 1 creates game

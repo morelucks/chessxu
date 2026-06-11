@@ -352,3 +352,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
         });
 
         it("should revert if resolving a non-existent game", async function () {
+            const { chessxuV2, owner } = await deployFixture();
+

@@ -49,3 +49,6 @@ describe("ChessxuV2 Smart Contract - Meta-Transaction Functional Tests", functio
     });
 });
 
+describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
+    const WAGER_AMOUNT = ethers.parseEther("100");
+

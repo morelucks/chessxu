@@ -318,3 +318,5 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
 
             // Status 0 and 1 are invalid for resolveGame
             await expect(
+                chessxuV2.connect(owner).resolveGame(1, 0)
+            ).to.be.revertedWithCustomError(chessxuV2, "InvalidStatus");

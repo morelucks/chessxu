@@ -64,3 +64,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
         const ChessxuV2 = await ethers.getContractFactory("ChessxuV2");
         const chessxuV2 = await ChessxuV2.deploy(
             await mockToken.getAddress(),
+            await forwarder.getAddress()
+        );
+        await chessxuV2.waitForDeployment();

@@ -67,3 +67,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             await forwarder.getAddress()
         );
         await chessxuV2.waitForDeployment();
+
+        // Mint tokens to players
+        await mockToken.mint(player1.address, ethers.parseEther("1000"));

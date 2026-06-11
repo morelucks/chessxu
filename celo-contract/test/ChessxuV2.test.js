@@ -223,3 +223,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             await chessxuV2.connect(owner).resolveGame(1, 5);
 
             // Verify creator received wager back
+            expect(await mockToken.balanceOf(player1.address)).to.equal(p1InitialBalance);
+
+            // Verify game status is updated to Cancelled

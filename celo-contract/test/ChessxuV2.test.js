@@ -57,250 +57,314 @@ describe("ChessxuV2 Smart Contract - Meta-Transaction Functional Tests", functio
     });
 });
 
-// ─────────────────────────────────────────────────────────────────────────────
+describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
+    const WAGER_AMOUNT = ethers.parseEther("100");
 
-describe("ChessxuV2 — ERC-20 Wager Refund on Draw/Cancellation (#126)", function () {
-    let chessxuV2;
-    let mockToken;
-    let owner;
-    let player1;
-    let player2;
-    let forwarder;
-    let contractAddr;
-
-    const parseEth = (val) => ethers.parseEther(val.toString());
-    const WAGER = parseEth("100");
-
-    beforeEach(async function () {
-        [owner, player1, player2, forwarder] = await ethers.getSigners();
+    async function deployFixture() {
+        const [owner, player1, player2, forwarder] = await ethers.getSigners();
 
         // Deploy Mock ERC-20 Token
         const MockToken = await ethers.getContractFactory("MockERC20");
-        mockToken = await MockToken.deploy();
+        const mockToken = await MockToken.deploy();
         await mockToken.waitForDeployment();
 
-        // Deploy ChessxuV2 with mock token and trusted forwarder
+        // Deploy ChessxuV2 with mock token and forwarder
         const ChessxuV2 = await ethers.getContractFactory("ChessxuV2");
-        chessxuV2 = await ChessxuV2.deploy(await mockToken.getAddress(), await forwarder.getAddress());
+        const chessxuV2 = await ChessxuV2.deploy(
+            await mockToken.getAddress(),
+            await forwarder.getAddress()
+        );
         await chessxuV2.waitForDeployment();
-        contractAddr = await chessxuV2.getAddress();
 
-        // Mint tokens to both players
-        await mockToken.mint(player1.address, parseEth("1000"));
-        await mockToken.mint(player2.address, parseEth("1000"));
-    });
+        // Mint tokens to players
+        await mockToken.mint(player1.address, ethers.parseEther("1000"));
+        await mockToken.mint(player2.address, ethers.parseEther("1000"));
 
-    // ── Helper: create a token-wagered game ──
-
-    async function createTokenGame() {
-        await mockToken.connect(player1).approve(contractAddr, WAGER);
-        await chessxuV2.connect(player1).createGame(WAGER, false);
-        return await chessxuV2.getLastGameId();
+        return { chessxuV2, mockToken, owner, player1, player2, forwarder };
     }
 
-    async function joinTokenGame(gameId) {
-        await mockToken.connect(player2).approve(contractAddr, WAGER);
-        await chessxuV2.connect(player2).joinGame(gameId);
-    }
+    describe("Setup & Deposit Verification", function () {
+        it("should deploy ChessxuV2 with the mock ERC-20 token address", async function () {
+            const { chessxuV2, mockToken } = await deployFixture();
 
-    // ── Setup verification ──
+            expect(await chessxuV2.chessxuToken()).to.equal(await mockToken.getAddress());
+        });
 
-    it("deploys ChessxuV2 with mock ERC-20 token address", async function () {
-        expect(await chessxuV2.chessxuToken()).to.equal(await mockToken.getAddress());
+        it("should create a game with isNative=false and deposit the ERC-20 wager", async function () {
+            const { chessxuV2, mockToken, player1 } = await deployFixture();
+
+            const contractAddr = await chessxuV2.getAddress();
+
+            // Approve and create game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+
+            // Verify game state
+            const game = await chessxuV2.getGame(1);
+            expect(game.playerW).to.equal(player1.address);
+            expect(game.wager).to.equal(WAGER_AMOUNT);
+            expect(game.isNative).to.be.false;
+            expect(game.status).to.equal(0); // Waiting
+
+            // Verify token was transferred to contract
+            const contractBalance = await mockToken.balanceOf(contractAddr);
+            expect(contractBalance).to.equal(WAGER_AMOUNT);
+        });
+
+        it("should deposit Player 2's ERC-20 wager when joining", async function () {
+            const { chessxuV2, mockToken, player1, player2 } = await deployFixture();
+
+            const contractAddr = await chessxuV2.getAddress();
+
+            // Player 1 creates game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+
+            // Player 2 joins game
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
+
+            // Verify game state
+            const game = await chessxuV2.getGame(1);
+            expect(game.playerB).to.equal(player2.address);
+            expect(game.status).to.equal(1); // Live
+
+            // Verify contract holds both wagers
+            const contractBalance = await mockToken.balanceOf(contractAddr);
+            expect(contractBalance).to.equal(WAGER_AMOUNT * 2n);
+        });
     });
 
-    it("creates a game with isNative = false and correct wager amount", async function () {
-        const gameId = await createTokenGame();
-        const game = await chessxuV2.getGame(gameId);
+    describe("Draw Resolution (status = 4)", function () {
+        it("should refund both players' ERC-20 wagers on Draw", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();
 
-        expect(game.isNative).to.be.false;
-        expect(game.wager).to.equal(WAGER);
-        expect(game.playerW).to.equal(player1.address);
-        expect(game.status).to.equal(0); // Waiting
+            const contractAddr = await chessxuV2.getAddress();
+
+            // Record initial balances
+            const p1InitialBalance = await mockToken.balanceOf(player1.address);
+            const p2InitialBalance = await mockToken.balanceOf(player2.address);
+
+            // Player 1 creates game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+
+            // Player 2 joins game
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
+
+            // Verify balances decreased after depositing wagers
+            expect(await mockToken.balanceOf(player1.address)).to.equal(
+                p1InitialBalance - WAGER_AMOUNT
+            );
+            expect(await mockToken.balanceOf(player2.address)).to.equal(
+                p2InitialBalance - WAGER_AMOUNT
+            );
+
+            // Owner resolves game as Draw (status = 4)
+            await chessxuV2.connect(owner).resolveGame(1, 4);
+
+            // Verify both players received their wagers back
+            expect(await mockToken.balanceOf(player1.address)).to.equal(p1InitialBalance);
+            expect(await mockToken.balanceOf(player2.address)).to.equal(p2InitialBalance);
+
+            // Verify game status is updated to Draw
+            const game = await chessxuV2.getGame(1);
+            expect(game.status).to.equal(4);
+        });
+
+        it("should reduce contract ERC-20 balance to zero after Draw refund", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();
+
+            const contractAddr = await chessxuV2.getAddress();
+
+            // Create and join game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
+
+            // Confirm contract holds the wagers
+            expect(await mockToken.balanceOf(contractAddr)).to.equal(WAGER_AMOUNT * 2n);
+
+            // Resolve as Draw
+            await chessxuV2.connect(owner).resolveGame(1, 4);
+
+            // Contract balance should be zero
+            expect(await mockToken.balanceOf(contractAddr)).to.equal(0n);
+        });
+
+        it("should handle Draw with zero wager gracefully", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();
+
+            // Create and join a zero-wager ERC-20 game
+            await chessxuV2.connect(player1).createGame(0, false);
+            await chessxuV2.connect(player2).joinGame(1);
+
+            // Should not revert
+            await chessxuV2.connect(owner).resolveGame(1, 4);
+
+            const game = await chessxuV2.getGame(1);
+            expect(game.status).to.equal(4);
+        });
     });
 
-    it("transfers creator's ERC-20 wager into contract escrow on createGame", async function () {
-        await createTokenGame();
+    describe("Cancellation Resolution (status = 5)", function () {
+        it("should refund the creator's ERC-20 wager on Cancellation (no Player 2)", async function () {
+            const { chessxuV2, mockToken, owner, player1 } = await deployFixture();
 
-        const contractBalance = await mockToken.balanceOf(contractAddr);
-        expect(contractBalance).to.equal(WAGER);
+            const contractAddr = await chessxuV2.getAddress();
 
-        const player1Balance = await mockToken.balanceOf(player1.address);
-        expect(player1Balance).to.equal(parseEth("900"));
+            // Record initial balance
+            const p1InitialBalance = await mockToken.balanceOf(player1.address);
+
+            // Player 1 creates game (no one joins)
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+
+            // Verify wager deducted
+            expect(await mockToken.balanceOf(player1.address)).to.equal(
+                p1InitialBalance - WAGER_AMOUNT
+            );
+
+            // Owner cancels the game (status = 5)
+            await chessxuV2.connect(owner).resolveGame(1, 5);
+
+            // Verify creator received wager back
+            expect(await mockToken.balanceOf(player1.address)).to.equal(p1InitialBalance);
+
+            // Verify game status is updated to Cancelled
+            const game = await chessxuV2.getGame(1);
+            expect(game.status).to.equal(5);
+        });
+
+        it("should reduce contract ERC-20 balance to zero after Cancellation refund", async function () {
+            const { chessxuV2, mockToken, owner, player1 } = await deployFixture();
+
+            const contractAddr = await chessxuV2.getAddress();
+
+            // Create game (no join)
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+
+            // Confirm contract holds the wager
+            expect(await mockToken.balanceOf(contractAddr)).to.equal(WAGER_AMOUNT);
+
+            // Cancel the game
+            await chessxuV2.connect(owner).resolveGame(1, 5);
+
+            // Contract balance should be zero
+            expect(await mockToken.balanceOf(contractAddr)).to.equal(0n);
+        });
+
+        it("should refund both players on Cancellation when Player 2 has joined", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();
+
+            const contractAddr = await chessxuV2.getAddress();
+
+            const p1InitialBalance = await mockToken.balanceOf(player1.address);
+            const p2InitialBalance = await mockToken.balanceOf(player2.address);
+
+            // Create and join game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
+
+            // Cancel the game (status = 5)
+            await chessxuV2.connect(owner).resolveGame(1, 5);
+
+            // Verify both players received their wagers back
+            expect(await mockToken.balanceOf(player1.address)).to.equal(p1InitialBalance);
+            expect(await mockToken.balanceOf(player2.address)).to.equal(p2InitialBalance);
+
+            // Contract balance should be zero
+            expect(await mockToken.balanceOf(contractAddr)).to.equal(0n);
+        });
+
+        it("should handle Cancellation with zero wager gracefully", async function () {
+            const { chessxuV2, owner, player1 } = await deployFixture();
+
+            // Create zero-wager ERC-20 game (no join)
+            await chessxuV2.connect(player1).createGame(0, false);
+
+            // Should not revert
+            await chessxuV2.connect(owner).resolveGame(1, 5);
+
+            const game = await chessxuV2.getGame(1);
+            expect(game.status).to.equal(5);
+        });
     });
 
-    it("deposits player 2's wager on joinGame", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
+    describe("Access Control & Edge Cases", function () {
+        it("should revert if non-owner tries to resolve the game", async function () {
+            const { chessxuV2, mockToken, player1, player2 } = await deployFixture();
 
-        const contractBalance = await mockToken.balanceOf(contractAddr);
-        expect(contractBalance).to.equal(WAGER * 2n);
+            const contractAddr = await chessxuV2.getAddress();
 
-        const player2Balance = await mockToken.balanceOf(player2.address);
-        expect(player2Balance).to.equal(parseEth("900"));
-    });
+            // Create and join game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
 
-    it("sets game status to Live (1) after player 2 joins", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
+            // Player 1 tries to resolve — should revert
+            await expect(
+                chessxuV2.connect(player1).resolveGame(1, 4)
+            ).to.be.revertedWithCustomError(chessxuV2, "NotOwner");
+        });
 
-        const game = await chessxuV2.getGame(gameId);
-        expect(game.status).to.equal(1);
-        expect(game.playerB).to.equal(player2.address);
-    });
+        it("should revert if resolving with an invalid status", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();
 
-    // ── Draw (status = 4): both players refunded ──
+            const contractAddr = await chessxuV2.getAddress();
 
-    it("resolveGame with status 4 (Draw) refunds creator's ERC-20 wager", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
 
-        const balanceBefore = await mockToken.balanceOf(player1.address);
-        await chessxuV2.connect(owner).resolveGame(gameId, 4);
-        const balanceAfter = await mockToken.balanceOf(player1.address);
+            // Status 0 and 1 are invalid for resolveGame
+            await expect(
+                chessxuV2.connect(owner).resolveGame(1, 0)
+            ).to.be.revertedWithCustomError(chessxuV2, "InvalidStatus");
 
-        expect(balanceAfter - balanceBefore).to.equal(WAGER);
-    });
+            await expect(
+                chessxuV2.connect(owner).resolveGame(1, 1)
+            ).to.be.revertedWithCustomError(chessxuV2, "InvalidStatus");
 
-    it("resolveGame with status 4 (Draw) refunds joiner's ERC-20 wager", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
+            // Status 6+ are invalid
+            await expect(
+                chessxuV2.connect(owner).resolveGame(1, 6)
+            ).to.be.revertedWithCustomError(chessxuV2, "InvalidStatus");
+        });
 
-        const balanceBefore = await mockToken.balanceOf(player2.address);
-        await chessxuV2.connect(owner).resolveGame(gameId, 4);
-        const balanceAfter = await mockToken.balanceOf(player2.address);
+        it("should revert if resolving an already resolved game", async function () {
+            const { chessxuV2, mockToken, owner, player1, player2 } = await deployFixture();
 
-        expect(balanceAfter - balanceBefore).to.equal(WAGER);
-    });
+            const contractAddr = await chessxuV2.getAddress();
 
-    it("resolveGame with status 4 (Draw) sets game status to 4", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
+            // Create and join game
+            await mockToken.connect(player1).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player1).createGame(WAGER_AMOUNT, false);
+            await mockToken.connect(player2).approve(contractAddr, WAGER_AMOUNT);
+            await chessxuV2.connect(player2).joinGame(1);
 
-        await chessxuV2.connect(owner).resolveGame(gameId, 4);
+            // Resolve as Draw
+            await chessxuV2.connect(owner).resolveGame(1, 4);
 
-        const game = await chessxuV2.getGame(gameId);
-        expect(game.status).to.equal(4);
-    });
+            // Try resolving again — game status is now 4, not 0 or 1
+            await expect(
+                chessxuV2.connect(owner).resolveGame(1, 5)
+            ).to.be.revertedWithCustomError(chessxuV2, "GameNotActive");
+        });
 
-    it("contract ERC-20 balance is zero after Draw resolution", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
+        it("should revert if resolving a non-existent game", async function () {
+            const { chessxuV2, owner } = await deployFixture();
 
-        await chessxuV2.connect(owner).resolveGame(gameId, 4);
-
-        const contractBalance = await mockToken.balanceOf(contractAddr);
-        expect(contractBalance).to.equal(0n);
-    });
-
-    // ── Cancellation (status = 5): creator refunded ──
-
-    it("resolveGame with status 5 (Cancelled) refunds creator's ERC-20 wager", async function () {
-        const gameId = await createTokenGame();
-        // No player 2 joins — game is still in Waiting status
-
-        const balanceBefore = await mockToken.balanceOf(player1.address);
-        await chessxuV2.connect(owner).resolveGame(gameId, 5);
-        const balanceAfter = await mockToken.balanceOf(player1.address);
-
-        expect(balanceAfter - balanceBefore).to.equal(WAGER);
-    });
-
-    it("resolveGame with status 5 (Cancelled) sets game status to 5", async function () {
-        const gameId = await createTokenGame();
-        await chessxuV2.connect(owner).resolveGame(gameId, 5);
-
-        const game = await chessxuV2.getGame(gameId);
-        expect(game.status).to.equal(5);
-    });
-
-    it("contract ERC-20 balance is zero after Cancellation (no joiner)", async function () {
-        const gameId = await createTokenGame();
-        await chessxuV2.connect(owner).resolveGame(gameId, 5);
-
-        const contractBalance = await mockToken.balanceOf(contractAddr);
-        expect(contractBalance).to.equal(0n);
-    });
-
-    it("resolveGame with status 5 (Cancelled) refunds both players if player 2 joined", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
-
-        const p1Before = await mockToken.balanceOf(player1.address);
-        const p2Before = await mockToken.balanceOf(player2.address);
-
-        await chessxuV2.connect(owner).resolveGame(gameId, 5);
-
-        const p1After = await mockToken.balanceOf(player1.address);
-        const p2After = await mockToken.balanceOf(player2.address);
-
-        expect(p1After - p1Before).to.equal(WAGER);
-        expect(p2After - p2Before).to.equal(WAGER);
-    });
-
-    it("contract ERC-20 balance is zero after Cancellation (with joiner)", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
-
-        await chessxuV2.connect(owner).resolveGame(gameId, 5);
-
-        const contractBalance = await mockToken.balanceOf(contractAddr);
-        expect(contractBalance).to.equal(0n);
-    });
-
-    // ── Guard rails ──
-
-    it("reverts resolveGame if caller is not the owner", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
-
-        await expect(
-            chessxuV2.connect(player1).resolveGame(gameId, 4)
-        ).to.be.revertedWithCustomError(chessxuV2, "NotOwner");
-    });
-
-    it("reverts resolveGame with invalid status (1)", async function () {
-        const gameId = await createTokenGame();
-
-        await expect(
-            chessxuV2.connect(owner).resolveGame(gameId, 1)
-        ).to.be.revertedWithCustomError(chessxuV2, "InvalidStatus");
-    });
-
-    it("reverts resolveGame with invalid status (6)", async function () {
-        const gameId = await createTokenGame();
-
-        await expect(
-            chessxuV2.connect(owner).resolveGame(gameId, 6)
-        ).to.be.revertedWithCustomError(chessxuV2, "InvalidStatus");
-    });
-
-    it("reverts resolveGame if game is already resolved", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
-
-        await chessxuV2.connect(owner).resolveGame(gameId, 4);
-
-        await expect(
-            chessxuV2.connect(owner).resolveGame(gameId, 5)
-        ).to.be.revertedWithCustomError(chessxuV2, "GameNotActive");
-    });
-
-    // ── Player balances restored to original amounts ──
-
-    it("both players have original token balances after Draw refund", async function () {
-        const gameId = await createTokenGame();
-        await joinTokenGame(gameId);
-        await chessxuV2.connect(owner).resolveGame(gameId, 4);
-
-        expect(await mockToken.balanceOf(player1.address)).to.equal(parseEth("1000"));
-        expect(await mockToken.balanceOf(player2.address)).to.equal(parseEth("1000"));
-    });
-
-    it("creator has original token balance after Cancellation refund", async function () {
-        const gameId = await createTokenGame();
-        await chessxuV2.connect(owner).resolveGame(gameId, 5);
-
-        expect(await mockToken.balanceOf(player1.address)).to.equal(parseEth("1000"));
+            await expect(
+                chessxuV2.connect(owner).resolveGame(999, 4)
+            ).to.be.revertedWithCustomError(chessxuV2, "GameNotFound");
+        });
     });
 });

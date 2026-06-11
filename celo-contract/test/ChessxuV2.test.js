@@ -163,3 +163,6 @@ describe("ChessxuV2 - ERC-20 Wager Refund on Draw/Cancellation", function () {
             // Verify game status is updated to Draw
             const game = await chessxuV2.getGame(1);
             expect(game.status).to.equal(4);
+        });
+
+        it("should reduce contract ERC-20 balance to zero after Draw refund", async function () {

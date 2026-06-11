@@ -11,16 +11,24 @@ describe("ChessxuV2 Smart Contract - Meta-Transaction Functional Tests", functio
     let player2;
     let forwarder;
 
+    const parseEth = (val) => ethers.parseEther(val.toString());
+
     beforeEach(async function () {
         [owner, player1, player2, forwarder] = await ethers.getSigners();
 
         // Deploy Mock Token
         const MockToken = await ethers.getContractFactory("MockERC20");
         mockToken = await MockToken.deploy();
+        await mockToken.waitForDeployment();
 
         // Deploy ChessxuV2 with Trusted Forwarder
         const ChessxuV2 = await ethers.getContractFactory("ChessxuV2");
         chessxuV2 = await ChessxuV2.deploy(await mockToken.getAddress(), await forwarder.getAddress());
+        await chessxuV2.waitForDeployment();
+
+        // Mint tokens to players
+        await mockToken.mint(player1.address, parseEth("1000"));
+        await mockToken.mint(player2.address, parseEth("1000"));
     });
 
     it("should set the correct trusted forwarder", async function () {

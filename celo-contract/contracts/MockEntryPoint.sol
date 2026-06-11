@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
 import "@account-abstraction/contracts/interfaces/IStakeManager.sol";
+import "@account-abstraction/contracts/interfaces/UserOperation.sol";
 
 /**
  * @dev Minimal mock EntryPoint for unit tests.
@@ -31,19 +32,24 @@ contract MockEntryPoint is IEntryPoint {
 
     // ── Stub implementations (not used in tests) ──────────────────────────
 
-    function handleOps(PackedUserOperation[] calldata, address payable) external override {}
+    function handleOps(UserOperation[] calldata, address payable) external override {}
     function handleAggregatedOps(UserOpsPerAggregator[] calldata, address payable) external override {}
-    function simulateValidation(PackedUserOperation calldata) external override {}
-    function getSenderAddress(bytes memory) external override {}
-    function delegateAndRevert(address, bytes calldata) external override {}
-
+    function simulateValidation(UserOperation calldata) external override {}
+    
     function addStake(uint32) external payable override {}
     function unlockStake() external override {}
     function withdrawStake(address payable) external override {}
 
-    function getUserOpHash(PackedUserOperation calldata) external view override returns (bytes32) {
+    function getUserOpHash(UserOperation calldata) external view override returns (bytes32) {
         return bytes32(0);
     }
+
+    function getNonce(address, uint192) external view override returns (uint256) {
+        return 0;
+    }
+    function incrementNonce(uint192) external override {}
+    function getSenderAddress(bytes memory) external override {}
+    function simulateHandleOp(UserOperation calldata, address, bytes calldata) external override {}
 
     receive() external payable {}
 }

@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 import "@account-abstraction/contracts/core/BasePaymaster.sol";
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
-import "@account-abstraction/contracts/interfaces/PackedUserOperation.sol";
+import "@account-abstraction/contracts/interfaces/UserOperation.sol";
 
 /**
  * @title ChessxuPaymaster
@@ -47,7 +47,7 @@ contract ChessxuPaymaster is BasePaymaster {
         IEntryPoint _entryPoint,
         address _chessxu,
         uint256 _maxTxPerDay
-    ) BasePaymaster(_entryPoint) {
+    ) BasePaymaster(_entryPoint) Ownable(msg.sender) {
         chessxuContract = _chessxu;
         maxTxPerDay = _maxTxPerDay;
 
@@ -97,7 +97,7 @@ contract ChessxuPaymaster is BasePaymaster {
      *   3. The sender has not exceeded the daily rate limit.
      */
     function _validatePaymasterUserOp(
-        PackedUserOperation calldata userOp,
+        UserOperation calldata userOp,
         bytes32, /* userOpHash */
         uint256  /* maxCost */
     )
@@ -137,8 +137,7 @@ contract ChessxuPaymaster is BasePaymaster {
     function _postOp(
         PostOpMode, /* mode */
         bytes calldata, /* context */
-        uint256, /* actualGasCost */
-        uint256  /* actualUserOpFeePerGas */
+        uint256 /* actualGasCost */
     ) internal override {}
 
     // ─── Internal helpers ─────────────────────────────────────────────────────

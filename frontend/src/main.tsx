@@ -4,6 +4,7 @@ import { Connect } from "@stacks/connect-react";
 import App from "./app/app";
 import "./index.css";
 import { Buffer } from "buffer";
+import { userSession } from "./zustand/store";
 
 if (typeof window !== "undefined") {
   window.Buffer = window.Buffer || Buffer;
@@ -24,7 +25,7 @@ createRoot(rootElement).render(
         onFinish: () => {
           window.location.reload();
         },
-        userSession: undefined, // Will use default
+        userSession,
       }}
     >
       <App />

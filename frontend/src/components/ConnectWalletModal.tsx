@@ -6,7 +6,16 @@ import { useWalletAuth } from "../hooks/useWalletAuth";
 export const ConnectWalletModal: React.FC = () => {
   const isConnectModalOpen = useAppStore((s) => s.isConnectModalOpen);
   const setConnectModalOpen = useAppStore((s) => s.setConnectModalOpen);
+  const miniPayDetected = useAppStore((s) => s.miniPayDetected);
   const { connect } = useWalletAuth();
+
+  // MiniPay is Celo-only — auto-select without showing the modal
+  React.useEffect(() => {
+    if (isConnectModalOpen && (miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay))) {
+      setConnectModalOpen(false);
+      connect({ chain: 'celo' });
+    }
+  }, [isConnectModalOpen, miniPayDetected, setConnectModalOpen, connect]);
 
   if (!isConnectModalOpen) return null;
 

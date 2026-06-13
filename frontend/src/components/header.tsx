@@ -40,7 +40,9 @@ export function Header() {
     disconnect();
   };
 
-  const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
+  const miniPayDetected = useAppStore((s) => s.miniPayDetected);
+
+  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-10 text-center relative">

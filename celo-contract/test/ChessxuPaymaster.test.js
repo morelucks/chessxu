@@ -72,13 +72,17 @@ describe("ChessxuPaymaster", function () {
 
     it("owner can add a new selector", async function () {
       const sel = ethers.id("newFunc()").slice(0, 10);
-      await paymaster.connect(owner).setSelector(sel, true);
+      await expect(paymaster.connect(owner).setSelector(sel, true))
+        .to.emit(paymaster, "SelectorUpdated")
+        .withArgs(sel, true);
       expect(await paymaster.allowedSelectors(sel)).to.be.true;
     });
 
     it("owner can remove a selector", async function () {
       const sel = ethers.id("resign(uint256)").slice(0, 10);
-      await paymaster.connect(owner).setSelector(sel, false);
+      await expect(paymaster.connect(owner).setSelector(sel, false))
+        .to.emit(paymaster, "SelectorUpdated")
+        .withArgs(sel, false);
       expect(await paymaster.allowedSelectors(sel)).to.be.false;
     });
 
@@ -86,7 +90,8 @@ describe("ChessxuPaymaster", function () {
       const sel = ethers.id("hack()").slice(0, 10);
       await expect(
         paymaster.connect(user).setSelector(sel, true)
-      ).to.be.revertedWithCustomError(paymaster, "OwnableUnauthorizedAccount");
+      ).to.be.revertedWithCustomError(paymaster, "OwnableUnauthorizedAccount")
+       .withArgs(user.address);
     });
   });
 

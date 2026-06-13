@@ -219,6 +219,24 @@ export default function PvPScreen() {
                 </div>
                 )}
 
+                {/* MiniPay Add Cash prompt — shown when balance is too low */}
+                {isMiniPay && cusdBalance !== null && Number(cusdBalance) < 0.01 && (
+                  <div className="rounded-xl border border-yellow-400/20 bg-yellow-500/10 p-4 flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-white">Low Balance</p>
+                      <p className="text-xs text-yellow-100/70 mt-1">Top up your MiniPay wallet to wager on matches.</p>
+                    </div>
+                    <a
+                      href="https://minipay.opera.com/add_cash"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-xl bg-yellow-400 px-5 py-2.5 font-bold text-black text-xs hover:bg-yellow-300 transition active:scale-95 whitespace-nowrap"
+                    >
+                      Add Cash
+                    </a>
+                  </div>
+                )}
+
                 {requiresAccess && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

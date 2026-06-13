@@ -45,6 +45,11 @@ describe("ChessxuPaymaster", function () {
 
     // Impersonate EntryPoint
     epSigner = await hreEthers.getImpersonatedSigner(epAddress);
+    // Fund the EntryPoint contract
+    await owner.sendTransaction({
+      to: epAddress,
+      value: hreEthers.parseEther("1"),
+    });
   });
 
   // ─── Selector whitelisting ────────────────────────────────────────────────

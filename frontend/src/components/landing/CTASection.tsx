@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import GaslessBadge from "../ui/GaslessBadge";
 
 import GaslessPulse from "../ui/GaslessPulse";
+import useAppStore from "../../zustand/store";
 
 interface CTASectionProps {
   onStartPlaying: () => void;
@@ -10,7 +11,8 @@ interface CTASectionProps {
 }
 
 export default function CTASection({ onStartPlaying, isConnecting, isConnected }: CTASectionProps) {
-  const isMiniPay = typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay;
+  const miniPayDetected = useAppStore((s) => s.miniPayDetected);
+  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
 
   return (
     <section className="container mx-auto px-6 py-24 max-w-6xl relative">

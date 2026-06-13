@@ -4,6 +4,7 @@ import useAppStore from '../zustand/store';
 import celoService from '../chess/services/celoService';
 
 export const useMiniPay = () => {
+  const setAddress = useAppStore((state) => state.setAddress);
   const setCeloAddress = useAppStore((state) => state.setCeloAddress);
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const setMiniPayDetected = useAppStore((state) => state.setMiniPayDetected);
@@ -22,8 +23,10 @@ export const useMiniPay = () => {
           const address = await celoService.connectWallet();
           
           if (address) {
-            // Set the state
+            // Set both the chain-specific and global address so the app
+            // treats the user as fully connected immediately.
             setCeloAddress(address);
+            setAddress(address);
             setActiveChain('celo');
             console.log('Successfully auto-connected to MiniPay with Celo Address: ', address);
           }
@@ -34,7 +37,8 @@ export const useMiniPay = () => {
     };
 
     checkAndConnectMiniPay();
-  }, [setCeloAddress, setActiveChain, setMiniPayDetected]);
+  }, [setAddress, setCeloAddress, setActiveChain, setMiniPayDetected]);
 };
 
 export default useMiniPay;
+

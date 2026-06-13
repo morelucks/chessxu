@@ -21,10 +21,15 @@ export default function PvPScreen() {
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
+  const miniPayDetected = useAppStore((state) => state.miniPayDetected);
   
   const stacks = useStacksChess();
   const celo = useCeloChess();
   const { cusdBalance, celoNativeBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, purchaseAccessWithCelo, requiresAccess } = useMiniPayAccess();
+
+  // MiniPay users are always on Celo — skip daily access when gas is sponsored
+  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
+  const effectiveRequiresAccess = isMiniPay && celo.gasSponsored ? false : requiresAccess;
 
   const timeControls = [
     { label: 'Unlimited', value: null },
@@ -45,7 +50,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (requiresAccess && !hasAccess) {
+    if (effectiveRequiresAccess && !hasAccess) {
       return;
     }
 
@@ -77,7 +82,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (requiresAccess && !hasAccess) {
+    if (effectiveRequiresAccess && !hasAccess) {
       return;
     }
 
@@ -192,7 +197,8 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {/* Network Switcher */}
+                {/* Network Switcher — hidden for MiniPay since it's always Celo */}
+                {!isMiniPay && (
                 <div className="flex gap-2">
                     <button
                         aria-label="Switch to Stacks network"
@@ -211,8 +217,27 @@ export default function PvPScreen() {
                         Play with Celo
                     </button>
                 </div>
+                )}
 
-                {requiresAccess && (
+                {/* MiniPay Add Cash prompt — shown when balance is too low */}
+                {isMiniPay && cusdBalance !== null && Number(cusdBalance) < 0.01 && (
+                  <div className="rounded-xl border border-yellow-400/20 bg-yellow-500/10 p-4 flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-semibold text-white">Low Balance</p>
+                      <p className="text-xs text-yellow-100/70 mt-1">Top up your MiniPay wallet to wager on matches.</p>
+                    </div>
+                    <a
+                      href="https://minipay.opera.com/add_cash"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-xl bg-yellow-400 px-5 py-2.5 font-bold text-black text-xs hover:bg-yellow-300 transition active:scale-95 whitespace-nowrap"
+                    >
+                      Add Cash
+                    </a>
+                  </div>
+                )}
+
+                {effectiveRequiresAccess && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div>
@@ -314,10 +339,10 @@ export default function PvPScreen() {
                             </div>
                             <button  
                                 onClick={handleCreateMatch}
-                                disabled={isCreatingMatch || (requiresAccess && !hasAccess)}
+                                disabled={isCreatingMatch || (effectiveRequiresAccess && !hasAccess)}
                                 className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] active:scale-95 transition disabled:opacity-60"
                             >
-                                {requiresAccess && !hasAccess
+                                {effectiveRequiresAccess && !hasAccess
                                   ? "Unlock Access First"
                                   : isCreatingMatch
                                     ? "Broadcasting..."
@@ -353,10 +378,10 @@ export default function PvPScreen() {
                             </div>
                             <button 
                                 onClick={handleJoinMatch}
-                                disabled={isJoiningMatch || !idToJoin.trim() || (requiresAccess && !hasAccess)}
+                                disabled={isJoiningMatch || !idToJoin.trim() || (effectiveRequiresAccess && !hasAccess)}
                                 className="w-full py-4 border border-blue-500/50 hover:bg-blue-500/10 rounded-xl font-bold active:scale-95 transition disabled:opacity-60"
                             >
-                                {requiresAccess && !hasAccess
+                                {effectiveRequiresAccess && !hasAccess
                                   ? "Unlock Access First"
                                   : isJoiningMatch
                                     ? "Joining..."

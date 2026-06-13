@@ -90,7 +90,8 @@ describe("ChessxuPaymaster", function () {
       const sel = ethers.id("hack()").slice(0, 10);
       await expect(
         paymaster.connect(user).setSelector(sel, true)
-      ).to.be.revertedWithCustomError(paymaster, "OwnableUnauthorizedAccount");
+      ).to.be.revertedWithCustomError(paymaster, "OwnableUnauthorizedAccount")
+       .withArgs(user.address);
     });
   });
 

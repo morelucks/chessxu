@@ -50,7 +50,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (requiresAccess && !hasAccess) {
+    if (effectiveRequiresAccess && !hasAccess) {
       return;
     }
 
@@ -82,7 +82,7 @@ export default function PvPScreen() {
       return;
     }
 
-    if (requiresAccess && !hasAccess) {
+    if (effectiveRequiresAccess && !hasAccess) {
       return;
     }
 
@@ -237,7 +237,7 @@ export default function PvPScreen() {
                   </div>
                 )}
 
-                {requiresAccess && (
+                {effectiveRequiresAccess && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div>
@@ -304,8 +304,8 @@ export default function PvPScreen() {
                              <Sword size={24} />
                         </div>
                         <div className="flex items-center justify-between">
-                            <h3 className="text-xl font-bold">Create Match</h3>
-                            {celo.gasSponsored && activeChain === 'celo' && <GaslessBadge showLabel={false} size="sm" />}
+                             <h3 className="text-xl font-bold">Create Match</h3>
+                             {celo.gasSponsored && activeChain === 'celo' && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
                         <p className="text-sm text-slate-400">
                           {celo.gasSponsored && activeChain === 'celo'
@@ -339,10 +339,10 @@ export default function PvPScreen() {
                             </div>
                             <button  
                                 onClick={handleCreateMatch}
-                                disabled={isCreatingMatch || (requiresAccess && !hasAccess)}
+                                disabled={isCreatingMatch || (effectiveRequiresAccess && !hasAccess)}
                                 className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] active:scale-95 transition disabled:opacity-60"
                             >
-                                {requiresAccess && !hasAccess
+                                {effectiveRequiresAccess && !hasAccess
                                   ? "Unlock Access First"
                                   : isCreatingMatch
                                     ? "Broadcasting..."
@@ -357,8 +357,8 @@ export default function PvPScreen() {
                              <Users size={24} />
                         </div>
                         <div className="flex items-center justify-between">
-                            <h3 className="text-xl font-bold">Join Match</h3>
-                            {celo.gasSponsored && activeChain === 'celo' && <GaslessBadge showLabel={false} size="sm" />}
+                             <h3 className="text-xl font-bold">Join Match</h3>
+                             {celo.gasSponsored && activeChain === 'celo' && <GaslessBadge showLabel={false} size="sm" />}
                         </div>
                         <p className="text-sm text-slate-400">
                           {celo.gasSponsored && activeChain === 'celo'
@@ -378,10 +378,10 @@ export default function PvPScreen() {
                             </div>
                             <button 
                                 onClick={handleJoinMatch}
-                                disabled={isJoiningMatch || !idToJoin.trim() || (requiresAccess && !hasAccess)}
+                                disabled={isJoiningMatch || !idToJoin.trim() || (effectiveRequiresAccess && !hasAccess)}
                                 className="w-full py-4 border border-blue-500/50 hover:bg-blue-500/10 rounded-xl font-bold active:scale-95 transition disabled:opacity-60"
                             >
-                                {requiresAccess && !hasAccess
+                                {effectiveRequiresAccess && !hasAccess
                                   ? "Unlock Access First"
                                   : isJoiningMatch
                                     ? "Joining..."

@@ -72,9 +72,6 @@ export const useStacksChess = () => {
         trackTransaction(data.txId, 'Create Game', 'stacks');
         console.log('Transaction broadcasted:', data.txId);
       },
-      onCancel: () => {
-        console.log('Create game transaction cancelled');
-      },
     });
   };
 
@@ -113,9 +110,6 @@ export const useStacksChess = () => {
         });
         trackTransaction(data.txId, 'Join Game', 'stacks');
         console.log('Join Game transaction broadcasted:', data.txId);
-      },
-      onCancel: () => {
-        console.log('Join game transaction cancelled');
       },
     });
   };

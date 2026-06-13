@@ -197,7 +197,8 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {/* Network Switcher */}
+                {/* Network Switcher — hidden for MiniPay since it's always Celo */}
+                {!isMiniPay && (
                 <div className="flex gap-2">
                     <button
                         aria-label="Switch to Stacks network"
@@ -216,6 +217,7 @@ export default function PvPScreen() {
                         Play with Celo
                     </button>
                 </div>
+                )}
 
                 {requiresAccess && (
                   <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-5 text-sm text-emerald-50">

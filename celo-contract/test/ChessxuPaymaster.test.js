@@ -72,7 +72,9 @@ describe("ChessxuPaymaster", function () {
 
     it("owner can add a new selector", async function () {
       const sel = ethers.id("newFunc()").slice(0, 10);
-      await paymaster.connect(owner).setSelector(sel, true);
+      await expect(paymaster.connect(owner).setSelector(sel, true))
+        .to.emit(paymaster, "SelectorUpdated")
+        .withArgs(sel, true);
       expect(await paymaster.allowedSelectors(sel)).to.be.true;
     });
 

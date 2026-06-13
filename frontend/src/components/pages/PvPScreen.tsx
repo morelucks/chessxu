@@ -21,10 +21,15 @@ export default function PvPScreen() {
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
+  const miniPayDetected = useAppStore((state) => state.miniPayDetected);
   
   const stacks = useStacksChess();
   const celo = useCeloChess();
   const { cusdBalance, celoNativeBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, purchaseAccessWithCelo, requiresAccess } = useMiniPayAccess();
+
+  // MiniPay users are always on Celo — skip daily access when gas is sponsored
+  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
+  const effectiveRequiresAccess = isMiniPay && celo.gasSponsored ? false : requiresAccess;
 
   const timeControls = [
     { label: 'Unlimited', value: null },

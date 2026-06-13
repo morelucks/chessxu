@@ -6,6 +6,7 @@ import { useWalletAuth } from "../hooks/useWalletAuth";
 export const ConnectWalletModal: React.FC = () => {
   const isConnectModalOpen = useAppStore((s) => s.isConnectModalOpen);
   const setConnectModalOpen = useAppStore((s) => s.setConnectModalOpen);
+  const miniPayDetected = useAppStore((s) => s.miniPayDetected);
   const { connect } = useWalletAuth();
 
   if (!isConnectModalOpen) return null;

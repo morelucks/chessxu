@@ -28,6 +28,8 @@ describe("ChessxuPaymaster", function () {
   let paymaster;
   let owner;
   let user;
+  let epAddress;
+  let epSigner;
 
   beforeEach(async function () {
     [owner, user] = await hreEthers.getSigners();
@@ -35,11 +37,14 @@ describe("ChessxuPaymaster", function () {
     // Deploy a mock EntryPoint (minimal) so we don't need the real one
     const MockEntryPoint = await hreEthers.getContractFactory("MockEntryPoint");
     const ep = await MockEntryPoint.deploy();
-    const epAddress = await ep.getAddress();
+    epAddress = await ep.getAddress();
 
     const Paymaster = await hreEthers.getContractFactory("ChessxuPaymaster");
     paymaster = await Paymaster.deploy(epAddress, CHESSXU, MAX_TX);
     await paymaster.waitForDeployment();
+
+    // Impersonate EntryPoint
+    epSigner = await hreEthers.getImpersonatedSigner(epAddress);
   });
 
   // ─── Selector whitelisting ────────────────────────────────────────────────

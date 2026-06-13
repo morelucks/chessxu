@@ -104,9 +104,6 @@ describe("ChessxuPaymaster", function () {
 
   describe("Rate limiting", function () {
     it("tracks txCountToday correctly", async function () {
-      // We test the internal logic via the public mapping after simulated calls
-      // Since _validatePaymasterUserOp is internal, we test via a helper or
-      // by checking initial state.
       expect(await paymaster.txCountToday(user.address)).to.equal(0);
     });
 
@@ -117,6 +114,41 @@ describe("ChessxuPaymaster", function () {
     it("owner can update maxTxPerDay", async function () {
       await paymaster.connect(owner).setMaxTxPerDay(100);
       expect(await paymaster.maxTxPerDay()).to.equal(100);
+    });
+
+    it("enforces rate limits at exactly the boundary (5 successful, 6th reverts)", async function () {
+      const executeSelector = "0xb61a28f6";
+      const innerData = SELECTORS.submitMove + "00000000";
+      const innerCallData = ethers.AbiCoder.defaultAbiCoder().encode(
+        ["address", "uint256", "bytes"],
+        [CHESSXU, 0, innerData]
+      );
+      const callData = executeSelector + innerCallData.slice(2);
+
+      const userOp = {
+        sender: user.address,
+        nonce: 0,
+        initCode: "0x",
+        callData: callData,
+        callGasLimit: 100000,
+        verificationGasLimit: 100000,
+        preVerificationGas: 100000,
+        maxFeePerGas: 1000000000,
+        maxPriorityFeePerGas: 1000000000,
+        paymasterAndData: "0x",
+        signature: "0x"
+      };
+
+      // 1. Submit 5 operations from user
+      for (let i = 1; i <= 5; i++) {
+        await paymaster.connect(epSigner).validatePaymasterUserOp(userOp, ethers.ZeroHash, 0);
+        expect(await paymaster.txCountToday(user.address)).to.equal(i);
+      }
+
+      // 2. The 6th operation should revert
+      await expect(
+        paymaster.connect(epSigner).validatePaymasterUserOp(userOp, ethers.ZeroHash, 0)
+      ).to.be.revertedWith("Paymaster: rate limit exceeded");
     });
   });
 

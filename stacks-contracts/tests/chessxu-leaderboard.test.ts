@@ -403,3 +403,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 10 — test(leaderboard): access entries list in top-players response
 // nav-build-step: 11 — test(leaderboard): retrieve first entry from entries array
 // nav-build-step: 12 — test(leaderboard): unwrap tuple value field from top entry
+// nav-build-step: 13 — test(leaderboard): extract elo field value from top entry tuple

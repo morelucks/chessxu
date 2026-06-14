@@ -395,3 +395,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 2 — test(leaderboard): outline top-players pagination and sorting tests
 // nav-build-step: 3 — test(leaderboard): trace simnet read-only return types for get-top-players
 // nav-build-step: 4 — test(leaderboard): identify tuple array structure in top-players response
+// nav-build-step: 5 — test(leaderboard): prepare test variables for w1, w2, w3, w4 principals

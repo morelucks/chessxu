@@ -401,3 +401,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 8 — test(leaderboard): stage un-commenting of rank #1 player test
 // nav-build-step: 9 — test(leaderboard): target getTopPlayers call in rank #1 player test
 // nav-build-step: 10 — test(leaderboard): access entries list in top-players response
+// nav-build-step: 11 — test(leaderboard): retrieve first entry from entries array

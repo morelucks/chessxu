@@ -24,7 +24,10 @@ function recordDraw(a: string, b: string) {
 }
 function getStats(player: string) {
   const r = simnet.callReadOnlyFn(LB, "get-player-stats", [Cl.principal(player)], deployer);
-  return (r.result as any).value?.data ?? (r.result as any).value;
+  // get-player-stats returns (optional (tuple ...))
+  // simnet shape: { type:"some", value: { type:"tuple", value: { wins:..., ... } } }
+  const result = r.result as any;
+  return result.value?.value ?? result.value;
 }
 function getElo(player: string): bigint {
   return (simnet.callReadOnlyFn(LB, "get-player-elo", [Cl.principal(player)], deployer).result as any).value;
@@ -37,23 +40,39 @@ function getRankedListSize(): bigint {
 }
 function getTopPlayers(offset: number, limit: number) {
   const r = simnet.callReadOnlyFn(LB, "get-top-players", [Cl.uint(offset), Cl.uint(limit)], deployer);
-  return (r.result as any).value?.data ?? (r.result as any).value;
+  const raw = r.result as any;
+  return raw.value ?? raw;
 }
 function getHistory(player: string, offset: number, limit: number) {
   const r = simnet.callReadOnlyFn(LB, "get-player-history", [Cl.principal(player), Cl.uint(offset), Cl.uint(limit)], deployer);
-  return (r.result as any).value?.data ?? (r.result as any).value;
+  // get-player-history returns a plain tuple (not ok/err), so result.value holds the tuple fields
+  const raw = r.result as any;
+  return raw.value ?? raw;
 }
 function getGlobalStats() {
   const r = simnet.callReadOnlyFn(LB, "get-global-stats", [], deployer);
-  return (r.result as any).value?.data ?? (r.result as any).value;
+  const raw = r.result as any;
+  return raw.value ?? raw;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe("leaderboard — record-win basics", () => {
-  // TODO: fix stats data accessor for simnet response shape
-  // it("records a win and updates winner stats", () => { ... });
-  // it("records a win and updates loser stats", () => { ... });
+  it("records a win and updates winner stats", () => {
+    recordWin(w1, w2);
+    const stats = getStats(w1);
+    expect(stats["wins"]).toStrictEqual(Cl.uint(1));
+    expect(stats["losses"]).toStrictEqual(Cl.uint(0));
+    expect(stats["total-games"]).toStrictEqual(Cl.uint(1));
+  });
+
+  it("records a win and updates loser stats", () => {
+    recordWin(w1, w2);
+    const stats = getStats(w2);
+    expect(stats["wins"]).toStrictEqual(Cl.uint(0));
+    expect(stats["losses"]).toStrictEqual(Cl.uint(1));
+    expect(stats["total-games"]).toStrictEqual(Cl.uint(1));
+  });
 
   it("winner ELO increases after a win", () => {
     const before = getElo(w1);
@@ -67,10 +86,29 @@ describe("leaderboard — record-win basics", () => {
     expect(getElo(w2)).toBeLessThan(before);
   });
 
-  // TODO: fix stats data accessor for streak fields
-  // it("win streak increments on consecutive wins", () => { ... });
-  // it("win streak resets to 0 after a loss", () => { ... });
-  // it("best-streak is preserved when current streak drops", () => { ... });
+  it("win streak increments on consecutive wins", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    const stats = getStats(w1);
+    expect(stats["streak"]).toStrictEqual(Cl.uint(2));
+  });
+
+  it("win streak resets to 0 after a loss", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordWin(w2, w1); // w1 loses
+    const stats = getStats(w1);
+    expect(stats["streak"]).toStrictEqual(Cl.uint(0));
+  });
+
+  it("best-streak is preserved when current streak drops", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordWin(w2, w1); // w1 loses, streak resets
+    const stats = getStats(w1);
+    expect(stats["best-streak"]).toStrictEqual(Cl.uint(2));
+    expect(stats["streak"]).toStrictEqual(Cl.uint(0));
+  });
 
   it("rejects record-win when caller is not the game contract", () => {
     const { result } = simnet.callPublicFn(LB, "record-win", [Cl.principal(w1), Cl.principal(w2)], w1);
@@ -92,8 +130,15 @@ describe("leaderboard — record-win basics", () => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe("leaderboard — record-draw basics", () => {
-  // TODO: fix stats data accessor for draw counter fields
-  // it("records a draw and increments draw counters for both players", () => { ... });
+  it("records a draw and increments draw counters for both players", () => {
+    recordDraw(w1, w2);
+    const s1 = getStats(w1);
+    const s2 = getStats(w2);
+    expect(s1["draws"]).toStrictEqual(Cl.uint(1));
+    expect(s1["total-games"]).toStrictEqual(Cl.uint(1));
+    expect(s2["draws"]).toStrictEqual(Cl.uint(1));
+    expect(s2["total-games"]).toStrictEqual(Cl.uint(1));
+  });
 
   it("draw does not change ELO", () => {
     const e1 = getElo(w1);
@@ -103,8 +148,13 @@ describe("leaderboard — record-draw basics", () => {
     expect(getElo(w2)).toBe(e2);
   });
 
-  // TODO: fix stats data accessor for streak field after draw
-  // it("draw resets win streak", () => { ... });
+  it("draw resets win streak", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordDraw(w1, w2); // streak should reset
+    const stats = getStats(w1);
+    expect(stats["streak"]).toStrictEqual(Cl.uint(0));
+  });
 
   it("rejects record-draw when caller is not the game contract", () => {
     const { result } = simnet.callPublicFn(LB, "record-draw", [Cl.principal(w1), Cl.principal(w2)], w1);
@@ -175,8 +225,15 @@ describe("leaderboard — ranked list", () => {
     expect(getRank(w1)).toBeLessThan(getRank(w2));
   });
 
-  // TODO: fix top-players entry data accessor for elo field
-  // it("rank #1 player has highest ELO", () => { ... });
+  it("rank #1 player has highest ELO", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    // w1 has won twice so should have the highest ELO
+    expect(getRank(w1)).toBe(1n);
+    const top = getTopPlayers(0, 1);
+    const topEntry = top["entries"].value[0];
+    expect(topEntry.value["elo"]).toStrictEqual(Cl.uint(getElo(w1)));
+  });
 
   it("get-player-rank returns 0 for unregistered player", () => {
     expect(getRank(w4)).toBe(0n);
@@ -218,8 +275,18 @@ describe("leaderboard — get-top-players pagination", () => {
     expect(top["entries"].value.length).toBe(3);
   });
 
-  // TODO: fix entry data accessor for player field
-  // it("offset skips the correct number of entries", () => { ... });
+  it("offset skips the correct number of entries", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    // 3 players total; offset=1 should skip rank #1
+    const topAll = getTopPlayers(0, 10);
+    const topOffset = getTopPlayers(1, 10);
+    expect(topOffset["entries"].value.length).toBe(2);
+    // first entry at offset=1 should match second entry of full list
+    const fullSecond = topAll["entries"].value[1].value["player"].value;
+    const offsetFirst = topOffset["entries"].value[0].value["player"].value;
+    expect(offsetFirst).toBe(fullSecond);
+  });
 
   it("returns empty entries when offset >= total players", () => {
     recordWin(w1, w2);
@@ -233,12 +300,41 @@ describe("leaderboard — get-top-players pagination", () => {
     expect(top["limit"]).toStrictEqual(Cl.uint(10));
   });
 
-  // TODO: fix entry data accessor for elo field in sorted check
-  // it("entries are sorted by ELO descending", () => { ... });
+  it("entries are sorted by ELO descending", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordWin(w1, w4);
+    const top = getTopPlayers(0, 10);
+    const entries = top["entries"].value;
+    // ELO values should be non-increasing
+    for (let i = 0; i < entries.length - 1; i++) {
+      const eloA = BigInt(entries[i].value["elo"].value);
+      const eloB = BigInt(entries[i + 1].value["elo"].value);
+      expect(eloA).toBeGreaterThanOrEqual(eloB);
+    }
+  });
 
-  // TODO: fix entry data accessor shape
-  // it("each entry contains rank, player, elo, wins, losses, draws fields", () => { ... });
-  // it("rank field in entry matches 1-based position", () => { ... });
+  it("each entry contains rank, player, elo, wins, losses, draws fields", () => {
+    recordWin(w1, w2);
+    const top = getTopPlayers(0, 10);
+    const entry = top["entries"].value[0].value;
+    expect(entry["rank"]).toBeDefined();
+    expect(entry["player"]).toBeDefined();
+    expect(entry["elo"]).toBeDefined();
+    expect(entry["wins"]).toBeDefined();
+    expect(entry["losses"]).toBeDefined();
+    expect(entry["draws"]).toBeDefined();
+  });
+
+  it("rank field in entry matches 1-based position", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    const top = getTopPlayers(0, 10);
+    const entries = top["entries"].value;
+    entries.forEach((entry: any, i: number) => {
+      expect(entry.value["rank"]).toStrictEqual(Cl.uint(i + 1));
+    });
+  });
 
   it("total field reflects total ranked players", () => {
     recordWin(w1, w2);
@@ -262,15 +358,62 @@ describe("leaderboard — score history", () => {
     expect(h["entries"].value.length).toBe(1);
   });
 
-  // TODO: fix history entry data accessor for delta/result/opponent/new-elo fields
-  // it("winner history entry has positive delta", () => { ... });
-  // it("loser history entry has negative delta", () => { ... });
-  // it("draw history entry has delta of 0", () => { ... });
-  // it("history entry result field is 'win' for winner", () => { ... });
-  // it("history entry result field is 'loss' for loser", () => { ... });
-  // it("history entry result field is 'draw' for draw", () => { ... });
-  // it("history entry contains opponent address", () => { ... });
-  // it("history entry contains new-elo after the game", () => { ... });
+  it("winner history entry has positive delta", () => {
+    recordWin(w1, w2);
+    const h = getHistory(w1, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["delta"].value).toBeGreaterThan(0n);
+  });
+
+  it("loser history entry has negative delta", () => {
+    recordWin(w1, w2);
+    const h = getHistory(w2, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["delta"].value).toBeLessThan(0n);
+  });
+
+  it("draw history entry has delta of 0", () => {
+    recordDraw(w1, w2);
+    const h = getHistory(w1, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["delta"].value).toBe(0n);
+  });
+
+  it("history entry result field is 'win' for winner", () => {
+    recordWin(w1, w2);
+    const h = getHistory(w1, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["result"].value).toBe("win");
+  });
+
+  it("history entry result field is 'loss' for loser", () => {
+    recordWin(w1, w2);
+    const h = getHistory(w2, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["result"].value).toBe("loss");
+  });
+
+  it("history entry result field is 'draw' for draw", () => {
+    recordDraw(w1, w2);
+    const h = getHistory(w1, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["result"].value).toBe("draw");
+  });
+
+  it("history entry contains opponent address", () => {
+    recordWin(w1, w2);
+    const h = getHistory(w1, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["opponent"].value).toBe(w2);
+  });
+
+  it("history entry contains new-elo after the game", () => {
+    recordWin(w1, w2);
+    const newElo = getElo(w1);
+    const h = getHistory(w1, 0, 20);
+    const entry = h["entries"].value[0];
+    expect(entry.value["new-elo"]).toStrictEqual(Cl.uint(newElo));
+  });
 
   it("history grows with each game", () => {
     recordWin(w1, w2);

@@ -439,3 +439,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 46 — test(leaderboard): iterate entries and check rank matches 1-based index
 // nav-build-step: 47 — test(leaderboard): verify rank field matches 1-based position passes
 // nav-build-step: 48 — test(leaderboard): clean up commented out todo blocks for top-players
+// nav-build-step: 49 — test(leaderboard): format leaderboard test suite code

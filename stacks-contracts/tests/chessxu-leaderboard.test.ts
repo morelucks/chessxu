@@ -433,3 +433,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 40 — test(leaderboard): verify losses field is defined in entry
 // nav-build-step: 41 — test(leaderboard): verify draws field is defined in entry
 // nav-build-step: 42 — test(leaderboard): verify entry contains all required fields passes
+// nav-build-step: 43 — test(leaderboard): stage un-commenting of rank 1-based matching test

@@ -408,3 +408,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 15 — test(leaderboard): verify rank #1 player has highest ELO passes
 // nav-build-step: 16 — test(leaderboard): stage un-commenting of offset skips test
 // nav-build-step: 17 — test(leaderboard): record win w1 vs w2 and w1 vs w3 for offset test
+// nav-build-step: 18 — test(leaderboard): query top-players with 0 offset and 10 limit

@@ -175,8 +175,15 @@ describe("leaderboard — ranked list", () => {
     expect(getRank(w1)).toBeLessThan(getRank(w2));
   });
 
-  // TODO: fix top-players entry data accessor for elo field
-  // it("rank #1 player has highest ELO", () => { ... });
+  it("rank #1 player has highest ELO", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    // w1 has won twice so should have the highest ELO
+    expect(getRank(w1)).toBe(1n);
+    const top = getTopPlayers(0, 1);
+    const topEntry = top["entries"].value[0];
+    expect(topEntry.value["elo"]).toStrictEqual(Cl.uint(getElo(w1)));
+  });
 
   it("get-player-rank returns 0 for unregistered player", () => {
     expect(getRank(w4)).toBe(0n);
@@ -218,8 +225,18 @@ describe("leaderboard — get-top-players pagination", () => {
     expect(top["entries"].value.length).toBe(3);
   });
 
-  // TODO: fix entry data accessor for player field
-  // it("offset skips the correct number of entries", () => { ... });
+  it("offset skips the correct number of entries", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    // 3 players total; offset=1 should skip rank #1
+    const topAll = getTopPlayers(0, 10);
+    const topOffset = getTopPlayers(1, 10);
+    expect(topOffset["entries"].value.length).toBe(2);
+    // first entry at offset=1 should match second entry of full list
+    const fullSecond = topAll["entries"].value[1].value["player"].value;
+    const offsetFirst = topOffset["entries"].value[0].value["player"].value;
+    expect(offsetFirst).toBe(fullSecond);
+  });
 
   it("returns empty entries when offset >= total players", () => {
     recordWin(w1, w2);
@@ -233,12 +250,41 @@ describe("leaderboard — get-top-players pagination", () => {
     expect(top["limit"]).toStrictEqual(Cl.uint(10));
   });
 
-  // TODO: fix entry data accessor for elo field in sorted check
-  // it("entries are sorted by ELO descending", () => { ... });
+  it("entries are sorted by ELO descending", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordWin(w1, w4);
+    const top = getTopPlayers(0, 10);
+    const entries = top["entries"].value;
+    // ELO values should be non-increasing
+    for (let i = 0; i < entries.length - 1; i++) {
+      const eloA = BigInt(entries[i].value["elo"].value);
+      const eloB = BigInt(entries[i + 1].value["elo"].value);
+      expect(eloA).toBeGreaterThanOrEqual(eloB);
+    }
+  });
 
-  // TODO: fix entry data accessor shape
-  // it("each entry contains rank, player, elo, wins, losses, draws fields", () => { ... });
-  // it("rank field in entry matches 1-based position", () => { ... });
+  it("each entry contains rank, player, elo, wins, losses, draws fields", () => {
+    recordWin(w1, w2);
+    const top = getTopPlayers(0, 10);
+    const entry = top["entries"].value[0].value;
+    expect(entry["rank"]).toBeDefined();
+    expect(entry["player"]).toBeDefined();
+    expect(entry["elo"]).toBeDefined();
+    expect(entry["wins"]).toBeDefined();
+    expect(entry["losses"]).toBeDefined();
+    expect(entry["draws"]).toBeDefined();
+  });
+
+  it("rank field in entry matches 1-based position", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    const top = getTopPlayers(0, 10);
+    const entries = top["entries"].value;
+    entries.forEach((entry: any, i: number) => {
+      expect(entry.value["rank"]).toStrictEqual(Cl.uint(i + 1));
+    });
+  });
 
   it("total field reflects total ranked players", () => {
     recordWin(w1, w2);
@@ -345,3 +391,4 @@ describe("leaderboard — get-expected-score", () => {
     expect((score.result as any).value).toBeGreaterThan(500n);
   });
 });
+// nav-build-step: 1 — test(leaderboard): setup branch for top-players accessor fix #135

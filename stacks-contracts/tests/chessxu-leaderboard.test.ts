@@ -422,3 +422,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 29 — test(leaderboard): loop through entries to check descending order
 // nav-build-step: 30 — test(leaderboard): retrieve adjacent entries for comparison
 // nav-build-step: 31 — test(leaderboard): parse elo values to BigInt for comparison
+// nav-build-step: 32 — test(leaderboard): assert elo values are non-increasing

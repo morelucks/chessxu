@@ -428,3 +428,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 35 — test(leaderboard): query top-players to validate entry fields
 // nav-build-step: 36 — test(leaderboard): verify rank field is defined in entry
 // nav-build-step: 37 — test(leaderboard): verify player field is defined in entry
+// nav-build-step: 38 — test(leaderboard): verify elo field is defined in entry

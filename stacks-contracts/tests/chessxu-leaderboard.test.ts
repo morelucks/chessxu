@@ -437,3 +437,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 44 — test(leaderboard): record wins to setup multiple ranked entries
 // nav-build-step: 45 — test(leaderboard): query top-players for rank index validation
 // nav-build-step: 46 — test(leaderboard): iterate entries and check rank matches 1-based index
+// nav-build-step: 47 — test(leaderboard): verify rank field matches 1-based position passes

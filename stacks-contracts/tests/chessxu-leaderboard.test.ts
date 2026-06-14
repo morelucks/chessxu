@@ -24,7 +24,8 @@ function recordDraw(a: string, b: string) {
 }
 function getStats(player: string) {
   const r = simnet.callReadOnlyFn(LB, "get-player-stats", [Cl.principal(player)], deployer);
-  return (r.result as any).value?.data ?? (r.result as any).value;
+  const result = r.result as any;
+  return result.value?.value ?? result.value;
 }
 function getElo(player: string): bigint {
   return (simnet.callReadOnlyFn(LB, "get-player-elo", [Cl.principal(player)], deployer).result as any).value;
@@ -51,9 +52,21 @@ function getGlobalStats() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe("leaderboard — record-win basics", () => {
-  // TODO: fix stats data accessor for simnet response shape
-  // it("records a win and updates winner stats", () => { ... });
-  // it("records a win and updates loser stats", () => { ... });
+  it("records a win and updates winner stats", () => {
+    recordWin(w1, w2);
+    const stats = getStats(w1);
+    expect(stats["wins"]).toStrictEqual(Cl.uint(1));
+    expect(stats["losses"]).toStrictEqual(Cl.uint(0));
+    expect(stats["total-games"]).toStrictEqual(Cl.uint(1));
+  });
+
+  it("records a win and updates loser stats", () => {
+    recordWin(w1, w2);
+    const stats = getStats(w2);
+    expect(stats["wins"]).toStrictEqual(Cl.uint(0));
+    expect(stats["losses"]).toStrictEqual(Cl.uint(1));
+    expect(stats["total-games"]).toStrictEqual(Cl.uint(1));
+  });
 
   it("winner ELO increases after a win", () => {
     const before = getElo(w1);
@@ -67,10 +80,29 @@ describe("leaderboard — record-win basics", () => {
     expect(getElo(w2)).toBeLessThan(before);
   });
 
-  // TODO: fix stats data accessor for streak fields
-  // it("win streak increments on consecutive wins", () => { ... });
-  // it("win streak resets to 0 after a loss", () => { ... });
-  // it("best-streak is preserved when current streak drops", () => { ... });
+  it("win streak increments on consecutive wins", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    const stats = getStats(w1);
+    expect(stats["streak"]).toStrictEqual(Cl.uint(2));
+  });
+
+  it("win streak resets to 0 after a loss", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordWin(w2, w1); // w1 loses
+    const stats = getStats(w1);
+    expect(stats["streak"]).toStrictEqual(Cl.uint(0));
+  });
+
+  it("best-streak is preserved when current streak drops", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordWin(w2, w1); // w1 loses, streak resets
+    const stats = getStats(w1);
+    expect(stats["best-streak"]).toStrictEqual(Cl.uint(2));
+    expect(stats["streak"]).toStrictEqual(Cl.uint(0));
+  });
 
   it("rejects record-win when caller is not the game contract", () => {
     const { result } = simnet.callPublicFn(LB, "record-win", [Cl.principal(w1), Cl.principal(w2)], w1);
@@ -92,8 +124,15 @@ describe("leaderboard — record-win basics", () => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe("leaderboard — record-draw basics", () => {
-  // TODO: fix stats data accessor for draw counter fields
-  // it("records a draw and increments draw counters for both players", () => { ... });
+  it("records a draw and increments draw counters for both players", () => {
+    recordDraw(w1, w2);
+    const s1 = getStats(w1);
+    const s2 = getStats(w2);
+    expect(s1["draws"]).toStrictEqual(Cl.uint(1));
+    expect(s1["total-games"]).toStrictEqual(Cl.uint(1));
+    expect(s2["draws"]).toStrictEqual(Cl.uint(1));
+    expect(s2["total-games"]).toStrictEqual(Cl.uint(1));
+  });
 
   it("draw does not change ELO", () => {
     const e1 = getElo(w1);
@@ -103,8 +142,13 @@ describe("leaderboard — record-draw basics", () => {
     expect(getElo(w2)).toBe(e2);
   });
 
-  // TODO: fix stats data accessor for streak field after draw
-  // it("draw resets win streak", () => { ... });
+  it("draw resets win streak", () => {
+    recordWin(w1, w2);
+    recordWin(w1, w3);
+    recordDraw(w1, w2); // streak should reset
+    const stats = getStats(w1);
+    expect(stats["streak"]).toStrictEqual(Cl.uint(0));
+  });
 
   it("rejects record-draw when caller is not the game contract", () => {
     const { result } = simnet.callPublicFn(LB, "record-draw", [Cl.principal(w1), Cl.principal(w2)], w1);
@@ -345,3 +389,4 @@ describe("leaderboard — get-expected-score", () => {
     expect((score.result as any).value).toBeGreaterThan(500n);
   });
 });
+// nav-build-step: 1

@@ -406,3 +406,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 13 — test(leaderboard): extract elo field value from top entry tuple
 // nav-build-step: 14 — test(leaderboard): map elo to Cl.uint representation
 // nav-build-step: 15 — test(leaderboard): verify rank #1 player has highest ELO passes
+// nav-build-step: 16 — test(leaderboard): stage un-commenting of offset skips test

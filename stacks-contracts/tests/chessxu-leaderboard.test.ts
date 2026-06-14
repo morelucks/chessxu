@@ -425,3 +425,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 32 — test(leaderboard): assert elo values are non-increasing
 // nav-build-step: 33 — test(leaderboard): verify entries are sorted by ELO descending passes
 // nav-build-step: 34 — test(leaderboard): stage un-commenting of entry shape validation test
+// nav-build-step: 35 — test(leaderboard): query top-players to validate entry fields

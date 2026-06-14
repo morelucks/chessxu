@@ -393,3 +393,4 @@ describe("leaderboard — get-expected-score", () => {
 });
 // nav-build-step: 1 — test(leaderboard): setup branch for top-players accessor fix #135
 // nav-build-step: 2 — test(leaderboard): outline top-players pagination and sorting tests
+// nav-build-step: 3 — test(leaderboard): trace simnet read-only return types for get-top-players

@@ -432,3 +432,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 39 — test(leaderboard): verify wins field is defined in entry
 // nav-build-step: 40 — test(leaderboard): verify losses field is defined in entry
 // nav-build-step: 41 — test(leaderboard): verify draws field is defined in entry
+// nav-build-step: 42 — test(leaderboard): verify entry contains all required fields passes

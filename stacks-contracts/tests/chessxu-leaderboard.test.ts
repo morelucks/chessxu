@@ -399,3 +399,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 6 — test(leaderboard): establish recordWin helper wrappers in test suite
 // nav-build-step: 7 — test(leaderboard): prepare assertion bounds for offset skips tests
 // nav-build-step: 8 — test(leaderboard): stage un-commenting of rank #1 player test
+// nav-build-step: 9 — test(leaderboard): target getTopPlayers call in rank #1 player test

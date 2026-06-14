@@ -397,3 +397,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 4 — test(leaderboard): identify tuple array structure in top-players response
 // nav-build-step: 5 — test(leaderboard): prepare test variables for w1, w2, w3, w4 principals
 // nav-build-step: 6 — test(leaderboard): establish recordWin helper wrappers in test suite
+// nav-build-step: 7 — test(leaderboard): prepare assertion bounds for offset skips tests

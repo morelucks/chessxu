@@ -420,3 +420,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 27 — test(leaderboard): query top-players list for sorting verification
 // nav-build-step: 28 — test(leaderboard): extract entries array from top-players response
 // nav-build-step: 29 — test(leaderboard): loop through entries to check descending order
+// nav-build-step: 30 — test(leaderboard): retrieve adjacent entries for comparison

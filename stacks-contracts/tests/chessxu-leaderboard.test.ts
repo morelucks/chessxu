@@ -435,3 +435,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 42 — test(leaderboard): verify entry contains all required fields passes
 // nav-build-step: 43 — test(leaderboard): stage un-commenting of rank 1-based matching test
 // nav-build-step: 44 — test(leaderboard): record wins to setup multiple ranked entries
+// nav-build-step: 45 — test(leaderboard): query top-players for rank index validation

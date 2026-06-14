@@ -418,3 +418,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 25 — test(leaderboard): stage un-commenting of sorted ELO test
 // nav-build-step: 26 — test(leaderboard): record multiple wins to establish sorted ELO list
 // nav-build-step: 27 — test(leaderboard): query top-players list for sorting verification
+// nav-build-step: 28 — test(leaderboard): extract entries array from top-players response

@@ -417,3 +417,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 24 — test(leaderboard): verify offset skips the correct number of entries passes
 // nav-build-step: 25 — test(leaderboard): stage un-commenting of sorted ELO test
 // nav-build-step: 26 — test(leaderboard): record multiple wins to establish sorted ELO list
+// nav-build-step: 27 — test(leaderboard): query top-players list for sorting verification

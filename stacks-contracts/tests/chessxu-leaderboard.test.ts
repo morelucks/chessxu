@@ -413,3 +413,4 @@ describe("leaderboard — get-expected-score", () => {
 // nav-build-step: 20 — test(leaderboard): assert topOffset entries length equals 2
 // nav-build-step: 21 — test(leaderboard): resolve fullSecond player principal from topAll entries
 // nav-build-step: 22 — test(leaderboard): resolve offsetFirst player principal from topOffset entries
+// nav-build-step: 23 — test(leaderboard): compare fullSecond and offsetFirst values

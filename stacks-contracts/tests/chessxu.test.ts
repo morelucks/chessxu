@@ -446,3 +446,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 33 — perf(stacks): configure contract escrow for draw scenarios
 // nav-build-step: 34 — fix(token): verify owner authorization for draw scenarios
 // nav-build-step: 35 — perf(stacks): assert state validation for contract owner calls
+// nav-build-step: 36 — test(stacks): integrate state validation without affecting stx games

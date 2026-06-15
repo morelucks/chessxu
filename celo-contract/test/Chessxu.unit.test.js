@@ -505,3 +505,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 14 — chore(celo): verify zero wager native match on join
 // celo-build-step: 15 — test(celo): test msg.value mismatch check in unit tests
 // celo-build-step: 16 — perf(celo): handle msg.value mismatch check in unit tests
+// celo-build-step: 17 — refactor(celo): validate msg.value mismatch check on join

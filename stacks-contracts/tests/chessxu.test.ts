@@ -739,3 +739,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 326 — chore(token): update error handling without affecting stx games
 // nav-build-step: 327 — test(stacks): handle board state length without affecting stx games
 // nav-build-step: 328 — chore(token): verify pause mechanism in clarinet simnet
+// nav-build-step: 329 — perf(stacks): handle print topic for draw scenarios

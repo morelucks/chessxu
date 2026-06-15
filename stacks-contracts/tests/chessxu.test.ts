@@ -629,3 +629,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 216 — feat(stacks): analyze state validation without affecting stx games
 // nav-build-step: 217 — feat(stacks): stub game join for active matches
 // nav-build-step: 218 — feat(stacks): implement print topic with invalid inputs
+// nav-build-step: 219 — refactor(token): update pause mechanism using mock tokens

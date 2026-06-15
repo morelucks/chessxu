@@ -459,3 +459,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 46 — refactor(token): analyze owner authorization using mock tokens
 // nav-build-step: 47 — chore(token): implement owner authorization under paused state
 // nav-build-step: 48 — chore(stacks): mock board state length with standard principals
+// nav-build-step: 49 — refactor(token): refine event emission with unauthorized callers

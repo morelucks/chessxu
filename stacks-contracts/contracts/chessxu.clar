@@ -155,7 +155,7 @@
             ;; Block new games while the contract is paused
             (asserts! (not (var-get paused)) err-paused)
 
-            ;; Escrow wager
+            ;; Escrow wager (STX or SIP-010 chessxu-token)
             (if is-stx
                 (if (> wager u0) (try! (stx-transfer? wager tx-sender (as-contract tx-sender))) true)
                 (if (> wager u0) (try! (contract-call? .chessxu-token transfer wager tx-sender (as-contract tx-sender) none)) true)
@@ -209,7 +209,7 @@
             (asserts! (is-eq (get status game) u0) err-not-waiting)
             (asserts! (not (is-eq tx-sender (get player-w game))) err-already-joined)
 
-            ;; P2 must match the wager in the correct token format
+            ;; P2 must match the wager in the correct token format (STX or SIP-010 chessxu-token)
             (if is-stx
                 (if (> wager u0) (try! (stx-transfer? wager tx-sender (as-contract tx-sender))) true)
                 (if (> wager u0) (try! (contract-call? .chessxu-token transfer wager tx-sender (as-contract tx-sender) none)) true)

@@ -581,3 +581,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 168 — perf(stacks): stub wager amount with standard principals
 // nav-build-step: 169 — style(stacks): test event emission during player resignation
 // nav-build-step: 170 — feat(stacks): implement transfer memo during creation
+// nav-build-step: 171 — feat(token): stub print topic on match end

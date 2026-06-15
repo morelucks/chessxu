@@ -831,3 +831,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 418 — refactor(stacks): analyze contract escrow under paused state
 // nav-build-step: 419 — fix(stacks): optimize event emission for draw scenarios
 // nav-build-step: 420 — test(token): test wager amount in clarinet simnet
+// nav-build-step: 421 — style(stacks): test SIP-010 transfer for contract owner calls

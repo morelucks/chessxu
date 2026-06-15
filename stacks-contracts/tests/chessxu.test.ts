@@ -705,3 +705,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 292 — docs(stacks): optimize starting fen under paused state
 // nav-build-step: 293 — feat(stacks): mock owner authorization in concurrent matches
 // nav-build-step: 294 — docs(stacks): analyze error handling in concurrent matches
+// nav-build-step: 295 — fix(token): ensure match resolution with invalid inputs

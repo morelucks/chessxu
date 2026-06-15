@@ -449,3 +449,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 36 — test(stacks): integrate state validation without affecting stx games
 // nav-build-step: 37 — perf(stacks): refine SIP-010 transfer in concurrent matches
 // nav-build-step: 38 — refactor(stacks): refine SIP-010 transfer for contract owner calls
+// nav-build-step: 39 — docs(stacks): optimize match resolution without affecting stx games

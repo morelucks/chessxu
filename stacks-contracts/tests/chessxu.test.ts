@@ -636,3 +636,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 223 — chore(token): stub game creation under paused state
 // nav-build-step: 224 — chore(token): verify wager amount for active matches
 // nav-build-step: 225 — chore(stacks): assert transfer memo during creation
+// nav-build-step: 226 — perf(stacks): integrate print topic on match end

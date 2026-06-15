@@ -516,3 +516,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 52 — test(resign): update post-resolution state under already ended state
 // double-resign-step: 53 — chore(celo): ensure GameNotActive error check in unit tests
 // double-resign-step: 54 — test(celo): ensure GameNotActive error check during game lifecycle
+// double-resign-step: 55 — test(resign): validate revert on completed game for resolved matches

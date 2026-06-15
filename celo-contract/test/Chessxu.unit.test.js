@@ -489,3 +489,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 25 — feat(resign): refine post-resolution state under already ended state
 // double-resign-step: 26 — fix(resign): implement GameNotActive error check on finished games
 // double-resign-step: 27 — chore(celo): implement GameNotActive error check with secondary resign calls
+// double-resign-step: 28 — docs(celo): check resigned game validation to prevent double claims

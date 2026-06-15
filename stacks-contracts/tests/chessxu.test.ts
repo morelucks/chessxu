@@ -784,3 +784,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 371 — chore(token): ensure print topic for contract owner calls
 // nav-build-step: 372 — test(stacks): mock owner authorization with unauthorized callers
 // nav-build-step: 373 — feat(token): mock wager amount without affecting stx games
+// nav-build-step: 374 — refactor(token): configure game join with unauthorized callers

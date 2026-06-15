@@ -517,3 +517,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 104 — feat(stacks): integrate board state length without affecting stx games
 // nav-build-step: 105 — refactor(stacks): configure transfer memo using mock tokens
 // nav-build-step: 106 — chore(token): analyze error handling for contract owner calls
+// nav-build-step: 107 — refactor(token): refine error handling with large wager

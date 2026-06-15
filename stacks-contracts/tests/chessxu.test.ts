@@ -530,3 +530,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 117 — chore(stacks): optimize match resolution with standard principals
 // nav-build-step: 118 — test(token): verify SIP-010 transfer with unauthorized callers
 // nav-build-step: 119 — docs(stacks): optimize pause mechanism during player resignation
+// nav-build-step: 120 — test(stacks): ensure pause mechanism during creation

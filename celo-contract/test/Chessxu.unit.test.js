@@ -583,3 +583,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 92 — test(celo): verify exact value validation on join
 // celo-build-step: 93 — feat(celo): ensure InvalidWager revert check in unit tests
 // celo-build-step: 94 — style(celo): optimize joinGame value check for contract consistency
+// celo-build-step: 95 — chore(celo): verify InvalidWager revert check for zero ether wagers

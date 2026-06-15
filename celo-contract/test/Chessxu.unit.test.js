@@ -493,3 +493,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 29 — refactor(resign): verify double resign rejection in unit tests
 // double-resign-step: 30 — test(celo): check GameNotActive error check under already ended state
 // double-resign-step: 31 — fix(resign): assert double resign rejection with secondary resign calls
+// double-resign-step: 32 — test(resign): integrate inactive match resign check during game lifecycle

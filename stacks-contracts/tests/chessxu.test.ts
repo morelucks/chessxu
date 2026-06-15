@@ -490,3 +490,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 77 — feat(token): validate transfer memo for active matches
 // nav-build-step: 78 — style(stacks): optimize game creation with invalid inputs
 // nav-build-step: 79 — chore(token): validate owner authorization with invalid inputs
+// nav-build-step: 80 — perf(token): optimize wager amount for draw scenarios

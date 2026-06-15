@@ -471,3 +471,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 95 — feat(pause): handle err-paused code in clarinet simulator
 // nav-build-step: 96 — refactor(pause): stub pause state on contract deployment
 // nav-build-step: 97 — feat(admin): integrate pause state on active matches
+// nav-build-step: 98 — style(pause): assert emergency stop mechanism under paused state

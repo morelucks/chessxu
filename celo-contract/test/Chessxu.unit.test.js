@@ -571,3 +571,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 107 — docs(celo): implement post-resolution state on finished games
 // double-resign-step: 108 — feat(resign): assert resigned game validation on finished games
 // double-resign-step: 109 — style(celo): ensure GameNotActive error check to prevent double claims
+// double-resign-step: 110 — test(resign): update GameNotActive error check to prevent double claims

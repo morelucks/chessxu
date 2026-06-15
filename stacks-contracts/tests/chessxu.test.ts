@@ -569,3 +569,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 156 — docs(stacks): configure match resolution without affecting stx games
 // nav-build-step: 157 — perf(token): configure event emission with invalid inputs
 // nav-build-step: 158 — chore(stacks): assert print topic using mock tokens
+// nav-build-step: 159 — perf(stacks): check player balance with unauthorized callers

@@ -466,3 +466,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 53 — refactor(token): handle pause mechanism in clarinet simnet
 // nav-build-step: 54 — refactor(token): assert board state length using mock tokens
 // nav-build-step: 55 — perf(token): configure player balance under paused state
+// nav-build-step: 56 — feat(token): verify pause mechanism during creation

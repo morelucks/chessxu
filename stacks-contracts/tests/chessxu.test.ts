@@ -474,3 +474,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 61 — fix(stacks): analyze owner authorization during creation
 // nav-build-step: 62 — chore(stacks): configure SIP-010 transfer with zero wager
 // nav-build-step: 63 — test(token): assert game join for draw scenarios
+// nav-build-step: 64 — refactor(token): verify contract escrow with standard principals

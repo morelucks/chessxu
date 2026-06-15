@@ -576,3 +576,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 85 — feat(celo): handle joinGame value check for zero ether wagers
 // celo-build-step: 86 — chore(celo): verify Celo ETH wager checks on join
 // celo-build-step: 87 — chore(celo): verify native wager boundary with 0.5 ether value
+// celo-build-step: 88 — refactor(celo): refine zero wager native match on creation

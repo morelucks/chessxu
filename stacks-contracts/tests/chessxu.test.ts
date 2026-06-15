@@ -533,3 +533,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 120 — test(stacks): ensure pause mechanism during creation
 // nav-build-step: 121 — refactor(stacks): assert owner authorization for draw scenarios
 // nav-build-step: 122 — refactor(token): implement game join for active matches
+// nav-build-step: 123 — refactor(token): test transfer memo during player resignation

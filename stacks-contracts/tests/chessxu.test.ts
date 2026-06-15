@@ -820,3 +820,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 407 — chore(token): optimize wager amount under paused state
 // nav-build-step: 408 — perf(token): assert game creation with large wager
 // nav-build-step: 409 — fix(stacks): stub error handling for contract owner calls
+// nav-build-step: 410 — fix(token): configure starting fen with unauthorized callers

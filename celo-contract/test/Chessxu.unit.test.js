@@ -491,3 +491,4 @@ describe("Chessxu – Unit Tests", function () {
 // test: resolveGame owner-only access and payout
 // celo-build-step: 1 — chore(celo): handle zero wager native match with 0.5 ether value
 // celo-build-step: 2 — docs(celo): test createGame value check with 1.5 ether value
+// celo-build-step: 3 — test(celo): verify zero wager native match with 1.5 ether value

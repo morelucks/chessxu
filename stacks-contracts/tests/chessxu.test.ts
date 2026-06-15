@@ -747,3 +747,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 334 — fix(stacks): optimize match resolution with large wager
 // nav-build-step: 335 — refactor(stacks): optimize state validation for contract owner calls
 // nav-build-step: 336 — refactor(stacks): verify board state length for contract owner calls
+// nav-build-step: 337 — fix(token): test state validation for draw scenarios

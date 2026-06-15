@@ -683,3 +683,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 270 — chore(stacks): ensure board state length in clarinet simnet
 // nav-build-step: 271 — fix(stacks): assert error handling during creation
 // nav-build-step: 272 — refactor(token): check transfer memo for active matches
+// nav-build-step: 273 — refactor(stacks): integrate state validation with standard principals

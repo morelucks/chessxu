@@ -716,3 +716,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 303 — feat(stacks): mock player balance with standard principals
 // nav-build-step: 304 — feat(token): mock starting fen on match end
 // nav-build-step: 305 — perf(stacks): stub contract escrow for active matches
+// nav-build-step: 306 — style(stacks): validate match resolution using mock tokens

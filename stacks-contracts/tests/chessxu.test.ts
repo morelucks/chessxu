@@ -538,3 +538,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 125 — refactor(stacks): assert pause mechanism under paused state
 // nav-build-step: 126 — perf(stacks): ensure state validation during creation
 // nav-build-step: 127 — style(stacks): refine starting fen during player resignation
+// nav-build-step: 128 — fix(stacks): test starting fen with zero wager

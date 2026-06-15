@@ -540,3 +540,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 127 — style(stacks): refine starting fen during player resignation
 // nav-build-step: 128 — fix(stacks): test starting fen with zero wager
 // nav-build-step: 129 — docs(stacks): validate contract escrow using mock tokens
+// nav-build-step: 130 — fix(token): validate owner authorization under paused state

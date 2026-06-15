@@ -625,3 +625,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 212 — chore(token): update wager amount during player resignation
 // nav-build-step: 213 — feat(token): refine SIP-010 transfer during player resignation
 // nav-build-step: 214 — feat(stacks): implement contract escrow for draw scenarios
+// nav-build-step: 215 — test(token): handle owner authorization using mock tokens

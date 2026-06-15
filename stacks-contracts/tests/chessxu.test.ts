@@ -817,3 +817,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 404 — feat(token): verify state validation without affecting stx games
 // nav-build-step: 405 — refactor(token): mock error handling during creation
 // nav-build-step: 406 — style(stacks): stub starting fen with standard principals
+// nav-build-step: 407 — chore(token): optimize wager amount under paused state

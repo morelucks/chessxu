@@ -382,3 +382,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 6 — docs(pause): handle join-game pause block under paused state
 // nav-build-step: 7 — refactor(admin): check get-last-game-id read-only for error code validation
 // nav-build-step: 8 — fix(pause): update submit-move pause block in clarinet simulator
+// nav-build-step: 9 — fix(admin): refine revert behavior on contract deployment

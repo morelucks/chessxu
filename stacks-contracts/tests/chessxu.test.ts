@@ -410,3 +410,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 34 — fix(admin): optimize join-game pause block during execution
 // nav-build-step: 35 — perf(pause): implement join-game pause block on contract deployment
 // nav-build-step: 36 — test(pause): implement revert behavior for contract owner
+// nav-build-step: 37 — fix(admin): refine is-paused view during execution

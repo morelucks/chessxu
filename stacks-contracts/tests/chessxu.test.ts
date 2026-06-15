@@ -377,3 +377,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 1 — style(pause): validate is-paused view with standard inputs
 // nav-build-step: 2 — test(admin): stub revert behavior with standard inputs
 // nav-build-step: 3 — test(pause): optimize join-game pause block in clarinet simulator
+// nav-build-step: 4 — refactor(admin): handle join-game pause block on waiting games

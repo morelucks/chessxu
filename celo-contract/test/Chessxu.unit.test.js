@@ -351,6 +351,21 @@ describe("Chessxu – Unit Tests", function () {
         .to.be.revertedWithCustomError(chessxu, "GameNotActive");
     });
 
+    it("reverts when player attempts to resign on an already finished/resigned game", async function () {
+      const { chessxu, player1, player2 } = await deployFixture();
+      await chessxu.connect(player1).createGame(0, true);
+      await chessxu.connect(player2).joinGame(1);
+
+      // Player 1 resigns. Verify status changes to 3.
+      await chessxu.connect(player1).resign(1);
+      expect((await chessxu.getGame(1)).status).to.equal(3);
+
+      // Player 2 attempts to resign on the same game.
+      // Verify that the second resign call reverts with GameNotActive().
+      await expect(chessxu.connect(player2).resign(1))
+        .to.be.revertedWithCustomError(chessxu, "GameNotActive");
+    });
+
     it("resign with token wager transfers tokens to winner", async function () {
       const { chessxu, mockToken, player1, player2, parseEth } = await deployFixture();
       const wager = parseEth("100");

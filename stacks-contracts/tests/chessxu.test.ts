@@ -420,3 +420,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 7 — chore(token): test board state length under paused state
 // nav-build-step: 8 — perf(stacks): ensure player balance with standard principals
 // nav-build-step: 9 — refactor(stacks): validate owner authorization with standard principals
+// nav-build-step: 10 — perf(token): implement event emission during creation

@@ -386,3 +386,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 10 — perf(pause): assert is-paused view for error code validation
 // nav-build-step: 11 — fix(pause): integrate is-paused view in clarinet simulator
 // nav-build-step: 12 — refactor(admin): validate pause state for contract owner
+// nav-build-step: 13 — refactor(admin): optimize is-paused view under paused state

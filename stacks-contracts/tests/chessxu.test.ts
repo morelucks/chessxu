@@ -486,3 +486,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 110 — docs(pause): update create-game pause block in clarinet simulator
 // nav-build-step: 111 — style(pause): update create-game pause block for contract owner
 // nav-build-step: 112 — refactor(admin): stub pause state for contract owner
+// nav-build-step: 113 — refactor(admin): validate emergency stop mechanism for contract owner

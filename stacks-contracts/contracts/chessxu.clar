@@ -64,6 +64,7 @@
 ;; (create-game, join-game, submit-move) are blocked. Only the contract
 ;; owner can toggle this. Intended for emergency stops in the event of a
 ;; vulnerability disclosure or a major contract migration.
+;; Read-only functions (get-game, is-paused, get-last-game-id) remain accessible when paused.
 (define-data-var paused bool false)
 
 ;; Maps

@@ -422,3 +422,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 46 — test(pause): integrate get-last-game-id read-only on active matches
 // nav-build-step: 47 — refactor(admin): refine get-game view during execution
 // nav-build-step: 48 — feat(admin): handle get-last-game-id read-only on waiting games
+// nav-build-step: 49 — fix(pause): integrate is-paused view on active matches

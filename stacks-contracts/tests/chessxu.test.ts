@@ -519,3 +519,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 106 — chore(token): analyze error handling for contract owner calls
 // nav-build-step: 107 — refactor(token): refine error handling with large wager
 // nav-build-step: 108 — test(token): check board state length for draw scenarios
+// nav-build-step: 109 — perf(stacks): stub owner authorization for draw scenarios

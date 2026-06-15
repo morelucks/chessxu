@@ -338,3 +338,40 @@ describe("chessxu - admin pause mechanism", () => {
         expect(printEvent).toBeDefined();
     });
 });
+
+describe("chessxu - game pause side effects on active games", () => {
+    it("verifies pause blocks mutations but leaves read-only functions accessible", () => {
+        // Setup two games before pausing
+        const gameId1 = setupGame(100, true, 1); // waiting game
+        const gameId2 = setupGame(100, true, 2); // ongoing game
+        const lastIdBeforePause = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+
+        // 1. Call pause as the deployer. Verify is-paused returns true.
+        const pauseResult = simnet.callPublicFn("chessxu", "pause", [], deployer);
+        expect(pauseResult.result).toBeOk(Cl.bool(true));
+
+        const isPausedResult = simnet.callReadOnlyFn("chessxu", "is-paused", [], wallet_1).result;
+        expect(isPausedResult).toStrictEqual(Cl.bool(true));
+
+        // 2. Attempt to call create-game, join-game, submit-move and check that they revert with err-paused (u111).
+        const createRes = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(true)], wallet_1);
+        expect(createRes.result).toBeErr(Cl.uint(111));
+
+        // Test join-game on the waiting game
+        const joinRes = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId1)], wallet_2);
+        expect(joinRes.result).toBeErr(Cl.uint(111));
+
+        // Test submit-move on the active game
+        const moveRes = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId2), Cl.stringAscii("e2e4"), Cl.stringAscii("board")], wallet_1);
+        expect(moveRes.result).toBeErr(Cl.uint(111));
+
+        // 3. Verify that get-game and get-last-game-id still return correct values without reverting.
+        const { result: getGameResult } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(gameId2)], wallet_1);
+        const gameData = (getGameResult as any).value.data || (getGameResult as any).value.value || (getGameResult as any).value;
+        expect(gameData.wager).toStrictEqual(Cl.uint(100));
+
+        const lastIdResult = simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result;
+        expect(lastIdResult).toStrictEqual(Cl.uint(lastIdBeforePause));
+    });
+});
+// nav-build-step: 1 — style(pause): validate is-paused view with standard inputs

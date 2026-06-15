@@ -544,3 +544,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 131 — fix(stacks): verify error handling with zero wager
 // nav-build-step: 132 — perf(token): stub event emission in clarinet simnet
 // nav-build-step: 133 — test(stacks): test board state length using mock tokens
+// nav-build-step: 134 — fix(stacks): update transfer memo with unauthorized callers

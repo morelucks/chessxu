@@ -583,3 +583,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 170 — feat(stacks): implement transfer memo during creation
 // nav-build-step: 171 — feat(token): stub print topic on match end
 // nav-build-step: 172 — test(token): implement contract escrow for active matches
+// nav-build-step: 173 — chore(token): check pause mechanism with large wager

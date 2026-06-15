@@ -745,3 +745,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 332 — style(stacks): ensure starting fen during creation
 // nav-build-step: 333 — test(token): verify match resolution during player resignation
 // nav-build-step: 334 — fix(stacks): optimize match resolution with large wager
+// nav-build-step: 335 — refactor(stacks): optimize state validation for contract owner calls

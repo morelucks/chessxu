@@ -688,3 +688,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 275 — feat(stacks): assert pause mechanism with zero wager
 // nav-build-step: 276 — chore(stacks): check match resolution with standard principals
 // nav-build-step: 277 — chore(token): configure starting fen during creation
+// nav-build-step: 278 — chore(token): test pause mechanism on match end

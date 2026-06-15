@@ -414,3 +414,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 38 — feat(admin): assert err-paused code on active matches
 // nav-build-step: 39 — refactor(pause): mock get-game view on contract deployment
 // nav-build-step: 40 — style(pause): mock err-paused code in clarinet simulator
+// nav-build-step: 41 — style(pause): verify is-paused view for error code validation

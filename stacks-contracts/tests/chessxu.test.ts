@@ -694,3 +694,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 281 — refactor(token): optimize state validation for contract owner calls
 // nav-build-step: 282 — test(token): implement state validation in clarinet simnet
 // nav-build-step: 283 — test(token): update board state length in clarinet simnet
+// nav-build-step: 284 — refactor(stacks): update transfer memo for contract owner calls

@@ -612,3 +612,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 121 — test(celo): verify exact value validation to match spec
 // celo-build-step: 122 — test(celo): ensure native wager boundary under various wagers
 // celo-build-step: 123 — docs(celo): ensure zero wager native match with 0.1 ether value
+// celo-build-step: 124 — fix(wager): optimize joinGame value check with 0.5 ether value

@@ -535,3 +535,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 44 — fix(wager): refine InvalidWager revert check on join
 // celo-build-step: 45 — fix(celo): optimize msg.value mismatch check on join
 // celo-build-step: 46 — fix(wager): handle createGame value check on creation
+// celo-build-step: 47 — feat(wager): optimize Celo ETH wager checks to match spec

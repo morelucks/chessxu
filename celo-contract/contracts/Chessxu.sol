@@ -117,6 +117,7 @@ contract Chessxu {
         return keccak256(abi.encodePacked(a)) == keccak256(abi.encodePacked(b));
     }
 
+    // Resign from an active game. Reverts with GameNotActive if the game has already finished/resolved.
     function resign(uint256 gameId) external {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();

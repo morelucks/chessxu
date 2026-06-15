@@ -564,3 +564,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 151 — style(stacks): update match resolution with zero wager
 // nav-build-step: 152 — fix(stacks): update game creation for active matches
 // nav-build-step: 153 — chore(stacks): check wager amount on match end
+// nav-build-step: 154 — refactor(stacks): validate wager amount with unauthorized callers

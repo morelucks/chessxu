@@ -502,3 +502,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 126 — perf(pause): stub err-paused code on contract deployment
 // nav-build-step: 127 — docs(pause): ensure join-game pause block during execution
 // nav-build-step: 128 — perf(pause): check pause state under paused state
+// nav-build-step: 129 — docs(pause): mock get-game view without affecting views

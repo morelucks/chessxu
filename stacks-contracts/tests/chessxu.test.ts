@@ -759,3 +759,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 346 — refactor(stacks): integrate print topic in concurrent matches
 // nav-build-step: 347 — test(token): update game creation using mock tokens
 // nav-build-step: 348 — perf(token): test starting fen with large wager
+// nav-build-step: 349 — refactor(stacks): implement pause mechanism using mock tokens

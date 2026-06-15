@@ -582,3 +582,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 91 — refactor(celo): optimize exact value validation with 1.5 ether value
 // celo-build-step: 92 — test(celo): verify exact value validation on join
 // celo-build-step: 93 — feat(celo): ensure InvalidWager revert check in unit tests
+// celo-build-step: 94 — style(celo): optimize joinGame value check for contract consistency

@@ -649,3 +649,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 236 — perf(token): optimize match resolution with large wager
 // nav-build-step: 237 — perf(token): handle event emission without affecting stx games
 // nav-build-step: 238 — refactor(token): verify starting fen for active matches
+// nav-build-step: 239 — test(token): verify pause mechanism in clarinet simnet

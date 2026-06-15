@@ -617,3 +617,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 204 — fix(stacks): stub contract escrow with standard principals
 // nav-build-step: 205 — feat(stacks): check contract escrow on match end
 // nav-build-step: 206 — refactor(stacks): update state validation with standard principals
+// nav-build-step: 207 — fix(token): refine board state length with zero wager

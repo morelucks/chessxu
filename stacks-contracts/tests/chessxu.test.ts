@@ -453,3 +453,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 77 — refactor(admin): refine get-last-game-id read-only for error code validation
 // nav-build-step: 78 — refactor(admin): integrate get-game view in clarinet simulator
 // nav-build-step: 79 — refactor(pause): verify create-game pause block on active matches
+// nav-build-step: 80 — test(admin): check get-game view with standard inputs

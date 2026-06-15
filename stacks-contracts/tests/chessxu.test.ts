@@ -542,3 +542,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 129 — docs(stacks): validate contract escrow using mock tokens
 // nav-build-step: 130 — fix(token): validate owner authorization under paused state
 // nav-build-step: 131 — fix(stacks): verify error handling with zero wager
+// nav-build-step: 132 — perf(token): stub event emission in clarinet simnet

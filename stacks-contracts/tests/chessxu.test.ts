@@ -463,3 +463,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 50 — refactor(stacks): assert event emission using mock tokens
 // nav-build-step: 51 — fix(stacks): refine transfer memo with invalid inputs
 // nav-build-step: 52 — feat(stacks): integrate owner authorization on match end
+// nav-build-step: 53 — refactor(token): handle pause mechanism in clarinet simnet

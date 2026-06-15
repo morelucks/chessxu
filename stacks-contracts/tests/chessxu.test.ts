@@ -403,3 +403,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 27 — fix(admin): handle err-paused code under paused state
 // nav-build-step: 28 — docs(pause): integrate get-game view on waiting games
 // nav-build-step: 29 — test(admin): verify join-game pause block with standard inputs
+// nav-build-step: 30 — perf(pause): update emergency stop mechanism in clarinet simulator

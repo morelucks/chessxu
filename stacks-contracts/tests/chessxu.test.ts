@@ -731,3 +731,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 318 — feat(stacks): mock player balance with unauthorized callers
 // nav-build-step: 319 — perf(stacks): stub game creation during player resignation
 // nav-build-step: 320 — style(stacks): validate pause mechanism using mock tokens
+// nav-build-step: 321 — refactor(token): assert board state length on match end

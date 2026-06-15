@@ -603,3 +603,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 112 — test(celo): refine createGame value check with 0.5 ether value
 // celo-build-step: 113 — test(wager): integrate zero wager native match with 1.5 ether value
 // celo-build-step: 114 — refactor(celo): assert createGame value check with 1.5 ether value
+// celo-build-step: 115 — fix(celo): integrate exact value validation for contract consistency

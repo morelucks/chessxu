@@ -474,3 +474,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 98 — style(pause): assert emergency stop mechanism under paused state
 // nav-build-step: 99 — perf(pause): mock get-game view on waiting games
 // nav-build-step: 100 — fix(pause): refine submit-move pause block in clarinet simulator
+// nav-build-step: 101 — chore(pause): integrate revert behavior without affecting views

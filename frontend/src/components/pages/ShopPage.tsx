@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { Gamepad2, Palette, Sparkles, Award, ShoppingBag, Coins, Gift, Info, Check } from 'lucide-react';
+import { Gamepad2, Palette, Sparkles, Award, ShoppingBag, Coins, Gift, Info, Check, Loader2 } from 'lucide-react';
 import useAppStore from '../../zustand/store';
 import './ShopPage.css';
+import { openSTXTransfer } from '@stacks/connect';
+import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
+import { NETWORK, CHESSXU_DEPLOYER, CELO_CONFIG } from '../../chess/blockchainConstants';
+import celoService from '../../chess/services/celoService';
+import { formatEther, parseEther } from 'viem';
 
 export interface ShopItem {
   id: string;
@@ -35,8 +40,14 @@ const BADGES: ShopItem[] = [
 const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 
 export default function ShopPage() {
-  const chessBalance = useAppStore((s) => s.chessBalance);
-  const setChessBalance = useAppStore((s) => s.setChessBalance);
+  const address = useAppStore((s) => s.address);
+  const activeChain = useAppStore((s) => s.activeChain);
+  const setConnectModalOpen = useAppStore((s) => s.setConnectModalOpen);
+
+  const [walletBalance, setWalletBalance] = useState<string>('0.0000');
+  const [isLoadingBalance, setIsLoadingBalance] = useState(false);
+  const [buyingItemId, setBuyingItemId] = useState<string | null>(null);
+
   const getIcon = (iconName: string, color: string) => {
     const props = { size: 24, style: { color } };
     switch (iconName) {
@@ -55,22 +66,41 @@ export default function ShopPage() {
     return local ? JSON.parse(local) : ['board-slate', 'piece-classic'];
   });
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
-  const [balanceTrigger, setBalanceTrigger] = useState(false);
 
   React.useEffect(() => {
     document.title = "Chessxu - Shop";
   }, []);
 
+  const refreshWalletBalance = async () => {
+    if (!address) return;
+    setIsLoadingBalance(true);
+    try {
+      if (activeChain === 'stacks') {
+        const apiHost = NETWORK === 'mainnet' ? 'https://api.mainnet.hiro.so' : 'https://api.testnet.hiro.so';
+        const res = await fetch(`${apiHost}/extended/v1/address/${address}/balances`);
+        if (res.ok) {
+          const data = await res.json();
+          const stxMicro = data.stx?.balance || '0';
+          setWalletBalance((parseInt(stxMicro) / 1_000_000).toFixed(4));
+        }
+      } else {
+        const nativeBalance = await celoService.getNativeBalance(address as `0x${string}`);
+        setWalletBalance(parseFloat(formatEther(nativeBalance)).toFixed(4));
+      }
+    } catch (err) {
+      console.error('Error fetching balance:', err);
+    } finally {
+      setIsLoadingBalance(false);
+    }
+  };
+
+  React.useEffect(() => {
+    refreshWalletBalance();
+  }, [address, activeChain]);
+
   const triggerToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
-  };
-
-  const handleFaucet = () => {
-    setChessBalance(chessBalance + 100);
-    setBalanceTrigger(true);
-    setTimeout(() => setBalanceTrigger(false), 300);
-    triggerToast('Claimed +100 CHESS tokens!', 'success');
   };
 
   const handleEquip = (item: ShopItem) => {
@@ -86,18 +116,92 @@ export default function ShopPage() {
     }
   };
 
-  const handleBuy = (item: ShopItem) => {
+  const getPriceString = (price: number) => {
+    const converted = price / 1000;
+    if (activeChain === 'stacks') {
+      return `${converted} STX`;
+    } else {
+      return `${converted} CELO`;
+    }
+  };
+
+  const handleBuy = async (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
-    if (chessBalance < item.price) {
-      triggerToast('Insufficient balance!', 'error');
+    if (!address) {
+      setConnectModalOpen(true);
+      triggerToast('Please connect your wallet first.', 'error');
       return;
     }
-    if (chessBalance >= item.price) {
-      setChessBalance(chessBalance - item.price);
-      const nextOwned = [...ownedItems, item.id];
-      setOwnedItems(nextOwned);
-      localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
-      triggerToast(`Successfully purchased ${item.name}!`, 'success');
+
+    const price = item.price / 1000;
+    const balanceNum = parseFloat(walletBalance);
+    if (balanceNum < price) {
+      triggerToast(`Insufficient ${activeChain === 'stacks' ? 'STX' : 'CELO'} balance!`, 'error');
+      return;
+    }
+
+    setBuyingItemId(item.id);
+
+    try {
+      if (activeChain === 'stacks') {
+        const stacksNetwork = NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
+        const microStx = (price * 1_000_000).toString();
+
+        await new Promise<string>((resolve, reject) => {
+          openSTXTransfer({
+            recipient: CHESSXU_DEPLOYER,
+            amount: microStx,
+            memo: `Purchase ${item.name}`,
+            network: stacksNetwork,
+            onFinish: (data) => {
+              resolve(data.txId);
+            },
+            onCancel: () => {
+              reject(new Error('Transaction cancelled by user.'));
+            }
+          });
+        });
+
+        const nextOwned = [...ownedItems, item.id];
+        setOwnedItems(nextOwned);
+        localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
+        triggerToast(`Successfully purchased ${item.name}!`, 'success');
+
+        // Delay checking next balance
+        setTimeout(() => refreshWalletBalance(), 5000);
+      } else {
+        await celoService.ensureCorrectNetwork();
+        const walletClient = celoService.getWalletClient();
+        const [account] = await walletClient.requestAddresses();
+        const value = parseEther(price.toString());
+
+        const txHash = await walletClient.sendTransaction({
+          to: CELO_CONFIG.PAYMENT_RECIPIENT as `0x${string}`,
+          value,
+          account,
+          ...celoService.getTxOptions(),
+        });
+
+        triggerToast('Transaction submitted. Verifying payment...', 'success');
+
+        const receipt = await celoService.waitForTransactionReceipt(txHash);
+        if (receipt.status !== 'success') {
+          throw new Error('Transaction execution failed on-chain.');
+        }
+
+        const nextOwned = [...ownedItems, item.id];
+        setOwnedItems(nextOwned);
+        localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
+        triggerToast(`Successfully purchased ${item.name}!`, 'success');
+
+        await refreshWalletBalance();
+      }
+    } catch (error: any) {
+      console.error('Purchase error:', error);
+      const msg = error?.message || 'Transaction failed.';
+      triggerToast(msg.includes('cancelled') ? 'Transaction cancelled.' : msg, 'error');
+    } finally {
+      setBuyingItemId(null);
     }
   };
 
@@ -134,7 +238,7 @@ export default function ShopPage() {
         </div>
       );
     }
-    
+
     if (item.category === 'pieces') {
       if (item.id === 'piece-classic') {
         return (
@@ -183,16 +287,27 @@ export default function ShopPage() {
             <p className="shop-subtitle">Customize your chess game appearance with exclusive assets.</p>
             <div className="shop-notice">
               <Info size={14} className="text-indigo-400" />
-              <span>All custom assets are client-side only. On-chain purchases are coming soon.</span>
+              <span>All custom assets are client-side only. Purchases are made on-chain using STX or CELO.</span>
             </div>
           </div>
           <div className="shop-balance-card">
-            <span className="balance-label">Your Balance</span>
-            <div className={`balance-value ${balanceTrigger ? 'balance-bounce' : ''}`}>{chessBalance} CHESS</div>
-            <button onClick={handleFaucet} className="shop-faucet-btn">
-              <Gift size={13} />
-              <span>Claim +100 CHESS</span>
-            </button>
+            <span className="balance-label">Your Balance ({activeChain.toUpperCase()})</span>
+            {address ? (
+              <>
+                <div className="balance-value">{walletBalance} {activeChain === 'stacks' ? 'STX' : 'CELO'}</div>
+                <button onClick={refreshWalletBalance} disabled={isLoadingBalance} className="shop-faucet-btn" style={{ marginTop: '8px' }}>
+                  {isLoadingBalance ? <Loader2 className="animate-spin" size={13} /> : <Gift size={13} />}
+                  <span>{isLoadingBalance ? 'Refreshing...' : 'Refresh Balance'}</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="balance-value" style={{ fontSize: '1.2rem', color: '#64748b', margin: '4px 0' }}>Disconnected</div>
+                <button onClick={() => setConnectModalOpen(true)} className="shop-connect-btn">
+                  Connect Wallet
+                </button>
+              </>
+            )}
           </div>
         </header>
 
@@ -210,8 +325,8 @@ export default function ShopPage() {
 
         <div className="shop-grid">
           {filteredItems.map((item) => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className={`shop-card ${(item.category === 'boards' && equippedBoard === item.id) || (item.category === 'pieces' && equippedPieces === item.id) ? 'equipped' : ''}`}
               style={{ '--accent': item.accentColor } as React.CSSProperties}
             >
@@ -225,7 +340,7 @@ export default function ShopPage() {
                 <div className="shop-card-footer">
                   <div className="shop-card-price">
                     <Coins size={14} className="text-yellow-500" />
-                    <span>{item.price} CHESS</span>
+                    <span>{getPriceString(item.price)}</span>
                   </div>
                   {ownedItems.includes(item.id) ? (
                     <>
@@ -241,12 +356,21 @@ export default function ShopPage() {
                       )}
                     </>
                   ) : (
-                    <button 
-                      disabled={chessBalance < item.price}
+                    <button
+                      disabled={buyingItemId !== null || (!!address && parseFloat(walletBalance) < item.price / 1000)}
                       onClick={() => handleBuy(item)}
-                      className={`shop-card-btn buy-btn ${chessBalance < item.price ? 'disabled' : ''}`}
+                      className={`shop-card-btn buy-btn ${buyingItemId !== null || (!!address && parseFloat(walletBalance) < item.price / 1000) ? 'disabled' : ''}`}
                     >
-                      Buy Item
+                      {buyingItemId === item.id ? (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <Loader2 className="animate-spin" size={12} />
+                          Processing
+                        </span>
+                      ) : !address ? (
+                        'Connect Wallet'
+                      ) : (
+                        'Buy Item'
+                      )}
                     </button>
                   )}
                 </div>

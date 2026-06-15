@@ -528,3 +528,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 115 — feat(token): implement event emission during creation
 // nav-build-step: 116 — docs(stacks): assert starting fen during player resignation
 // nav-build-step: 117 — chore(stacks): optimize match resolution with standard principals
+// nav-build-step: 118 — test(token): verify SIP-010 transfer with unauthorized callers

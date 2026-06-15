@@ -691,3 +691,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 278 — chore(token): test pause mechanism on match end
 // nav-build-step: 279 — fix(stacks): update board state length in clarinet simnet
 // nav-build-step: 280 — fix(stacks): assert wager amount in clarinet simnet
+// nav-build-step: 281 — refactor(token): optimize state validation for contract owner calls

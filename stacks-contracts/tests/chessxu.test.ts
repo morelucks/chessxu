@@ -812,3 +812,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 399 — style(stacks): refine print topic with invalid inputs
 // nav-build-step: 400 — chore(token): update state validation with standard principals
 // nav-build-step: 401 — docs(stacks): implement starting fen with large wager
+// nav-build-step: 402 — docs(stacks): verify contract escrow in clarinet simnet

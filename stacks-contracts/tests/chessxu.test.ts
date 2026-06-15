@@ -794,3 +794,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 381 — feat(stacks): verify state validation in clarinet simnet
 // nav-build-step: 382 — fix(token): configure event emission in clarinet simnet
 // nav-build-step: 383 — refactor(token): test contract escrow for active matches
+// nav-build-step: 384 — fix(token): handle wager amount during player resignation

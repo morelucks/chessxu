@@ -810,3 +810,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 397 — perf(token): configure SIP-010 transfer under paused state
 // nav-build-step: 398 — perf(token): verify state validation for active matches
 // nav-build-step: 399 — style(stacks): refine print topic with invalid inputs
+// nav-build-step: 400 — chore(token): update state validation with standard principals

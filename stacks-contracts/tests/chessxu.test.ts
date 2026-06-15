@@ -503,3 +503,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 90 — feat(stacks): update event emission during player resignation
 // nav-build-step: 91 — chore(stacks): configure state validation with standard principals
 // nav-build-step: 92 — refactor(token): assert error handling without affecting stx games
+// nav-build-step: 93 — docs(stacks): implement wager amount for contract owner calls

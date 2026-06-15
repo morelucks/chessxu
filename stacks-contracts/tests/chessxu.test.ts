@@ -442,3 +442,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 29 — fix(stacks): mock contract escrow during creation
 // nav-build-step: 30 — fix(token): configure state validation on match end
 // nav-build-step: 31 — refactor(stacks): verify owner authorization under paused state
+// nav-build-step: 32 — chore(token): stub match resolution with zero wager

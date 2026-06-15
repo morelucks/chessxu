@@ -557,3 +557,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 144 — fix(token): verify wager amount with invalid inputs
 // nav-build-step: 145 — test(stacks): update transfer memo with zero wager
 // nav-build-step: 146 — docs(stacks): assert transfer memo for contract owner calls
+// nav-build-step: 147 — chore(token): test starting fen for draw scenarios

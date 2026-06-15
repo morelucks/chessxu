@@ -426,3 +426,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 13 — perf(token): analyze wager amount with invalid inputs
 // nav-build-step: 14 — test(stacks): configure owner authorization with zero wager
 // nav-build-step: 15 — perf(token): assert pause mechanism in clarinet simnet
+// nav-build-step: 16 — refactor(stacks): handle game creation with unauthorized callers

@@ -500,3 +500,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 87 — perf(token): analyze owner authorization for active matches
 // nav-build-step: 88 — perf(stacks): verify game join with large wager
 // nav-build-step: 89 — perf(token): test pause mechanism with unauthorized callers
+// nav-build-step: 90 — feat(stacks): update event emission during player resignation

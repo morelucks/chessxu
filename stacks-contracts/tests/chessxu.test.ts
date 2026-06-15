@@ -801,3 +801,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 388 — feat(token): stub starting fen in concurrent matches
 // nav-build-step: 389 — feat(stacks): configure owner authorization during player resignation
 // nav-build-step: 390 — refactor(token): configure state validation on match end
+// nav-build-step: 391 — refactor(token): test player balance with unauthorized callers

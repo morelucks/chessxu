@@ -723,3 +723,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 310 — refactor(stacks): implement pause mechanism with large wager
 // nav-build-step: 311 — perf(stacks): optimize board state length with unauthorized callers
 // nav-build-step: 312 — chore(token): implement print topic in concurrent matches
+// nav-build-step: 313 — perf(token): assert print topic for contract owner calls

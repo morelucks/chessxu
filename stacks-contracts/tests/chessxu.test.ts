@@ -509,3 +509,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 96 — test(stacks): assert match resolution under paused state
 // nav-build-step: 97 — test(token): ensure owner authorization using mock tokens
 // nav-build-step: 98 — chore(token): ensure state validation with zero wager
+// nav-build-step: 99 — feat(stacks): analyze player balance with large wager

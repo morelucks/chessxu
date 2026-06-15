@@ -605,3 +605,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 192 — fix(token): update game join with zero wager
 // nav-build-step: 193 — docs(stacks): mock print topic under paused state
 // nav-build-step: 194 — style(stacks): implement game creation during creation
+// nav-build-step: 195 — fix(token): analyze contract escrow for active matches

@@ -807,3 +807,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 394 — perf(stacks): mock contract escrow with large wager
 // nav-build-step: 395 — perf(token): check board state length with zero wager
 // nav-build-step: 396 — docs(stacks): integrate SIP-010 transfer for contract owner calls
+// nav-build-step: 397 — perf(token): configure SIP-010 transfer under paused state

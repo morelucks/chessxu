@@ -798,3 +798,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 385 — feat(stacks): optimize SIP-010 transfer on match end
 // nav-build-step: 386 — perf(stacks): implement game creation in clarinet simnet
 // nav-build-step: 387 — feat(stacks): mock player balance for contract owner calls
+// nav-build-step: 388 — feat(token): stub starting fen in concurrent matches

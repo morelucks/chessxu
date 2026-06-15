@@ -513,3 +513,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 22 — perf(celo): implement InvalidWager revert check with 1.5 ether value
 // celo-build-step: 23 — style(celo): handle exact value validation for zero ether wagers
 // celo-build-step: 24 — test(celo): implement zero wager native match with 0.1 ether value
+// celo-build-step: 25 — refactor(celo): verify msg.value mismatch check with 0.5 ether value

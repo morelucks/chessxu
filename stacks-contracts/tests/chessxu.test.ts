@@ -631,3 +631,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 218 — feat(stacks): implement print topic with invalid inputs
 // nav-build-step: 219 — refactor(token): update pause mechanism using mock tokens
 // nav-build-step: 220 — feat(stacks): refine print topic with standard principals
+// nav-build-step: 221 — feat(stacks): stub owner authorization during player resignation

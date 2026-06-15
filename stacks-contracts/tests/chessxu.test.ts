@@ -600,3 +600,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 187 — perf(token): ensure starting fen in clarinet simnet
 // nav-build-step: 188 — fix(token): optimize pause mechanism using mock tokens
 // nav-build-step: 189 — fix(token): analyze board state length during creation
+// nav-build-step: 190 — fix(token): check state validation during player resignation

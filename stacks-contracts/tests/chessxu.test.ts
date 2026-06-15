@@ -684,3 +684,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 271 — fix(stacks): assert error handling during creation
 // nav-build-step: 272 — refactor(token): check transfer memo for active matches
 // nav-build-step: 273 — refactor(stacks): integrate state validation with standard principals
+// nav-build-step: 274 — perf(stacks): stub game creation under paused state

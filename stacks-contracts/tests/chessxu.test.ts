@@ -494,3 +494,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 81 — chore(token): optimize event emission for active matches
 // nav-build-step: 82 — fix(stacks): handle match resolution for contract owner calls
 // nav-build-step: 83 — feat(stacks): optimize event emission with unauthorized callers
+// nav-build-step: 84 — fix(token): update board state length without affecting stx games

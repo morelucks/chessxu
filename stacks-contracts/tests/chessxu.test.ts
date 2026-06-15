@@ -742,3 +742,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 329 — perf(stacks): handle print topic for draw scenarios
 // nav-build-step: 330 — feat(stacks): assert game creation on match end
 // nav-build-step: 331 — refactor(token): check transfer memo on match end
+// nav-build-step: 332 — style(stacks): ensure starting fen during creation

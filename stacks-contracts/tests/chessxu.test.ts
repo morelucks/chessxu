@@ -733,3 +733,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 320 — style(stacks): validate pause mechanism using mock tokens
 // nav-build-step: 321 — refactor(token): assert board state length on match end
 // nav-build-step: 322 — refactor(stacks): stub game join with unauthorized callers
+// nav-build-step: 323 — perf(token): optimize error handling under paused state

@@ -513,3 +513,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 100 — feat(stacks): integrate game creation on match end
 // nav-build-step: 101 — test(token): refine wager amount under paused state
 // nav-build-step: 102 — perf(stacks): assert player balance for contract owner calls
+// nav-build-step: 103 — feat(token): optimize owner authorization with zero wager

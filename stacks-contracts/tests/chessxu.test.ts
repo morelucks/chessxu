@@ -702,3 +702,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 289 — style(stacks): refine print topic using mock tokens
 // nav-build-step: 290 — fix(token): stub player balance with invalid inputs
 // nav-build-step: 291 — docs(stacks): analyze SIP-010 transfer under paused state
+// nav-build-step: 292 — docs(stacks): optimize starting fen under paused state

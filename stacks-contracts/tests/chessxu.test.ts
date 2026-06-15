@@ -585,3 +585,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 172 — test(token): implement contract escrow for active matches
 // nav-build-step: 173 — chore(token): check pause mechanism with large wager
 // nav-build-step: 174 — perf(stacks): handle starting fen with standard principals
+// nav-build-step: 175 — feat(token): mock board state length for active matches

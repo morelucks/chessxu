@@ -572,3 +572,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 159 — perf(stacks): check player balance with unauthorized callers
 // nav-build-step: 160 — test(stacks): integrate event emission during player resignation
 // nav-build-step: 161 — fix(stacks): check match resolution for draw scenarios
+// nav-build-step: 162 — feat(token): validate board state length with standard principals

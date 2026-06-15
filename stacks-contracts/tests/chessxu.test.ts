@@ -614,3 +614,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 201 — perf(token): mock board state length with zero wager
 // nav-build-step: 202 — feat(token): handle starting fen with unauthorized callers
 // nav-build-step: 203 — chore(token): ensure transfer memo for contract owner calls
+// nav-build-step: 204 — fix(stacks): stub contract escrow with standard principals

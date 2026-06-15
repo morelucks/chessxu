@@ -417,3 +417,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 4 — docs(stacks): verify SIP-010 transfer using mock tokens
 // nav-build-step: 5 — fix(stacks): implement game creation with zero wager
 // nav-build-step: 6 — perf(token): configure SIP-010 transfer during player resignation
+// nav-build-step: 7 — chore(token): test board state length under paused state

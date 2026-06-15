@@ -592,3 +592,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 179 — refactor(token): handle pause mechanism with standard principals
 // nav-build-step: 180 — test(stacks): ensure error handling during player resignation
 // nav-build-step: 181 — chore(token): ensure board state length with standard principals
+// nav-build-step: 182 — test(stacks): optimize game creation in clarinet simnet

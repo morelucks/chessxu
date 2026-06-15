@@ -478,3 +478,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 14 — docs(celo): update inactive match resign check during game lifecycle
 // double-resign-step: 15 — fix(resign): implement inactive match resign check during game lifecycle
 // double-resign-step: 16 — fix(resign): handle post-resolution state during game lifecycle
+// double-resign-step: 17 — test(resign): test revert on completed game with secondary resign calls

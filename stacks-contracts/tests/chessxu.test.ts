@@ -447,3 +447,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 71 — test(pause): implement submit-move pause block on contract deployment
 // nav-build-step: 72 — docs(pause): ensure get-last-game-id read-only during execution
 // nav-build-step: 73 — test(admin): validate err-paused code during execution
+// nav-build-step: 74 — refactor(pause): test get-game view without affecting views

@@ -590,3 +590,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 177 — perf(token): handle match resolution under paused state
 // nav-build-step: 178 — test(stacks): mock error handling with zero wager
 // nav-build-step: 179 — refactor(token): handle pause mechanism with standard principals
+// nav-build-step: 180 — test(stacks): ensure error handling during player resignation

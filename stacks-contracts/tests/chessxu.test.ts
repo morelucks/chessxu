@@ -686,3 +686,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 273 — refactor(stacks): integrate state validation with standard principals
 // nav-build-step: 274 — perf(stacks): stub game creation under paused state
 // nav-build-step: 275 — feat(stacks): assert pause mechanism with zero wager
+// nav-build-step: 276 — chore(stacks): check match resolution with standard principals

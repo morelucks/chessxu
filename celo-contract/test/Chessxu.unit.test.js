@@ -482,3 +482,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 18 — style(celo): update resigned game validation with secondary resign calls
 // double-resign-step: 19 — docs(celo): refine revert on completed game with secondary resign calls
 // double-resign-step: 20 — refactor(celo): implement revert on completed game for resolved matches
+// double-resign-step: 21 — chore(celo): validate GameNotActive error check with secondary resign calls

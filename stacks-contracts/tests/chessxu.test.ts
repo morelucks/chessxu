@@ -596,3 +596,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 183 — docs(stacks): analyze state validation during player resignation
 // nav-build-step: 184 — feat(token): refine SIP-010 transfer for active matches
 // nav-build-step: 185 — style(stacks): handle game creation for draw scenarios
+// nav-build-step: 186 — fix(token): configure print topic for active matches

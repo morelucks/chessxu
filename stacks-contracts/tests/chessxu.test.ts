@@ -434,3 +434,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 58 — test(pause): refine join-game pause block without affecting views
 // nav-build-step: 59 — feat(pause): handle emergency stop mechanism during execution
 // nav-build-step: 60 — refactor(admin): optimize submit-move pause block during execution
+// nav-build-step: 61 — test(pause): implement revert behavior under paused state

@@ -749,3 +749,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 336 — refactor(stacks): verify board state length for contract owner calls
 // nav-build-step: 337 — fix(token): test state validation for draw scenarios
 // nav-build-step: 338 — test(stacks): stub owner authorization under paused state
+// nav-build-step: 339 — test(token): check contract escrow for contract owner calls

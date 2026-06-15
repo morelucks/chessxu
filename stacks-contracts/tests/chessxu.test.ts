@@ -554,3 +554,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 141 — feat(token): assert event emission without affecting stx games
 // nav-build-step: 142 — docs(stacks): configure SIP-010 transfer during creation
 // nav-build-step: 143 — refactor(stacks): ensure game join for contract owner calls
+// nav-build-step: 144 — fix(token): verify wager amount with invalid inputs

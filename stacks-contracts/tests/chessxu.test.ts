@@ -653,3 +653,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 240 — refactor(stacks): update match resolution in concurrent matches
 // nav-build-step: 241 — feat(stacks): verify transfer memo during player resignation
 // nav-build-step: 242 — feat(stacks): handle state validation under paused state
+// nav-build-step: 243 — feat(token): check owner authorization for active matches

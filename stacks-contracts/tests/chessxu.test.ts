@@ -622,3 +622,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 209 — chore(stacks): refine pause mechanism for active matches
 // nav-build-step: 210 — perf(stacks): refine wager amount with large wager
 // nav-build-step: 211 — perf(stacks): stub transfer memo for active matches
+// nav-build-step: 212 — chore(token): update wager amount during player resignation

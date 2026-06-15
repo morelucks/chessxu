@@ -50,9 +50,7 @@ contract Chessxu {
         uint256 gameId = nextGameId;
 
         if (isNative) {
-            if (wager > 0) {
-                if (msg.value != wager) revert InvalidWager();
-            }
+            if (msg.value != wager) revert InvalidWager();
         } else {
             if (msg.value > 0) revert InvalidWager();
             if (wager > 0) {
@@ -82,9 +80,7 @@ contract Chessxu {
         if (msg.sender == game.playerW) revert AlreadyJoined();
 
         if (game.isNative) {
-            if (game.wager > 0) {
-                if (msg.value != game.wager) revert InvalidWager();
-            }
+            if (msg.value != game.wager) revert InvalidWager();
         } else {
             if (msg.value > 0) revert InvalidWager();
             if (game.wager > 0) {

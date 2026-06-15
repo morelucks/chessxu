@@ -99,6 +99,26 @@ describe("Chessxu – Unit Tests", function () {
       ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
     });
 
+    it("reverts when creating a native wager of 1 ETH sending 0.5 ETH or 1.5 ETH", async function () {
+      const { chessxu, player1, parseEth } = await deployFixture();
+      const wager = parseEth("1");
+      await expect(
+        chessxu.connect(player1).createGame(wager, true, { value: parseEth("0.5") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+      await expect(
+        chessxu.connect(player1).createGame(wager, true, { value: parseEth("1.5") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+    });
+
+    it("reverts when creating a zero-wager native game sending 0.1 ETH, but succeeds sending 0 ETH", async function () {
+      const { chessxu, player1, parseEth } = await deployFixture();
+      await expect(
+        chessxu.connect(player1).createGame(0, true, { value: parseEth("0.1") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+
+      await chessxu.connect(player1).createGame(0, true, { value: 0 });
+    });
+
     it("reverts when ETH sent for a token game", async function () {
       const { chessxu, player1, parseEth } = await deployFixture();
       await expect(
@@ -178,6 +198,28 @@ describe("Chessxu – Unit Tests", function () {
       await chessxu.connect(player1).createGame(wager, true, { value: wager });
       await expect(chessxu.connect(player2).joinGame(1, { value: parseEth("0.4") }))
         .to.be.revertedWithCustomError(chessxu, "InvalidWager");
+    });
+
+    it("reverts when joining a native wager of 1 ETH sending 0.5 ETH or 1.5 ETH", async function () {
+      const { chessxu, player1, player2, parseEth } = await deployFixture();
+      const wager = parseEth("1");
+      await chessxu.connect(player1).createGame(wager, true, { value: wager });
+      await expect(
+        chessxu.connect(player2).joinGame(1, { value: parseEth("0.5") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+      await expect(
+        chessxu.connect(player2).joinGame(1, { value: parseEth("1.5") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+    });
+
+    it("reverts when joining a zero-wager native game sending 0.1 ETH, but succeeds sending 0 ETH", async function () {
+      const { chessxu, player1, player2, parseEth } = await deployFixture();
+      await chessxu.connect(player1).createGame(0, true);
+      await expect(
+        chessxu.connect(player2).joinGame(1, { value: parseEth("0.1") })
+      ).to.be.revertedWithCustomError(chessxu, "InvalidWager");
+
+      await chessxu.connect(player2).joinGame(1, { value: 0 });
     });
 
     it("joins a token-wagered game and contract holds both token wagers", async function () {

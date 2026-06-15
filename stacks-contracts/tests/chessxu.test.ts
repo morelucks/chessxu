@@ -464,3 +464,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 88 — feat(pause): validate pause state under paused state
 // nav-build-step: 89 — test(admin): refine revert behavior during execution
 // nav-build-step: 90 — fix(admin): optimize submit-move pause block on waiting games
+// nav-build-step: 91 — refactor(admin): update create-game pause block under paused state

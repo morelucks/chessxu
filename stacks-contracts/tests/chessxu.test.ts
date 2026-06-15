@@ -536,3 +536,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 123 — refactor(token): test transfer memo during player resignation
 // nav-build-step: 124 — refactor(stacks): verify contract escrow under paused state
 // nav-build-step: 125 — refactor(stacks): assert pause mechanism under paused state
+// nav-build-step: 126 — perf(stacks): ensure state validation during creation

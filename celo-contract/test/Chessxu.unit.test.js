@@ -529,3 +529,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 65 — test(resign): test GameNotActive error check for resolved matches
 // double-resign-step: 66 — docs(celo): assert revert on completed game for player interaction
 // double-resign-step: 67 — perf(celo): optimize GameNotActive error check for player interaction
+// double-resign-step: 68 — chore(celo): check inactive match resign check with secondary resign calls

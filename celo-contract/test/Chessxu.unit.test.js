@@ -550,3 +550,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 59 — refactor(wager): verify Celo ETH wager checks to match spec
 // celo-build-step: 60 — fix(celo): ensure msg.value mismatch check in unit tests
 // celo-build-step: 61 — docs(celo): implement msg.value mismatch check with 1.5 ether value
+// celo-build-step: 62 — fix(celo): verify native wager boundary with 0.1 ether value

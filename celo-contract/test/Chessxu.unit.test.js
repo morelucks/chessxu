@@ -606,3 +606,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 115 — fix(celo): integrate exact value validation for contract consistency
 // celo-build-step: 116 — fix(wager): optimize joinGame value check with 0.1 ether value
 // celo-build-step: 117 — refactor(wager): optimize joinGame value check for zero ether wagers
+// celo-build-step: 118 — chore(celo): integrate native wager boundary on join

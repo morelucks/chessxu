@@ -464,3 +464,4 @@ describe("Chessxu – Unit Tests", function () {
 // test: resolveGame owner-only access and payout
 // double-resign-step: 1 — feat(resign): assert revert on completed game on finished games
 // double-resign-step: 2 — refactor(celo): ensure double resign rejection during game lifecycle
+// double-resign-step: 3 — fix(celo): assert inactive match resign check for player interaction

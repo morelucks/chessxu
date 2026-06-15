@@ -481,3 +481,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 105 — refactor(pause): validate is-paused view during execution
 // nav-build-step: 106 — fix(pause): update is-paused view in clarinet simulator
 // nav-build-step: 107 — fix(pause): verify revert behavior on waiting games
+// nav-build-step: 108 — test(pause): test is-paused view with standard inputs

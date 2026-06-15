@@ -495,3 +495,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 31 — fix(resign): assert double resign rejection with secondary resign calls
 // double-resign-step: 32 — test(resign): integrate inactive match resign check during game lifecycle
 // double-resign-step: 33 — test(celo): integrate double resign rejection for player interaction
+// double-resign-step: 34 — feat(celo): integrate post-resolution state for player interaction

@@ -664,3 +664,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 251 — perf(stacks): analyze game creation during player resignation
 // nav-build-step: 252 — perf(stacks): check print topic in concurrent matches
 // nav-build-step: 253 — fix(stacks): mock event emission for active matches
+// nav-build-step: 254 — fix(token): analyze pause mechanism with standard principals

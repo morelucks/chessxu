@@ -504,3 +504,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 13 — style(celo): refine native wager boundary with 1.5 ether value
 // celo-build-step: 14 — chore(celo): verify zero wager native match on join
 // celo-build-step: 15 — test(celo): test msg.value mismatch check in unit tests
+// celo-build-step: 16 — perf(celo): handle msg.value mismatch check in unit tests

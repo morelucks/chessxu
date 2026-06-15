@@ -642,3 +642,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 229 — fix(stacks): verify print topic on match end
 // nav-build-step: 230 — fix(token): analyze SIP-010 transfer without affecting stx games
 // nav-build-step: 231 — refactor(token): ensure board state length for draw scenarios
+// nav-build-step: 232 — chore(token): configure starting fen for contract owner calls

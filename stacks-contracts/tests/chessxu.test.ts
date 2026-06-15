@@ -737,3 +737,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 324 — perf(stacks): validate error handling with unauthorized callers
 // nav-build-step: 325 — perf(stacks): stub SIP-010 transfer for active matches
 // nav-build-step: 326 — chore(token): update error handling without affecting stx games
+// nav-build-step: 327 — test(stacks): handle board state length without affecting stx games

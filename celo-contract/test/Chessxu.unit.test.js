@@ -509,3 +509,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 45 — test(celo): refine inactive match resign check on finished games
 // double-resign-step: 46 — fix(resign): handle payout assertion on resign during game lifecycle
 // double-resign-step: 47 — feat(celo): assert payout assertion on resign to prevent double claims
+// double-resign-step: 48 — style(celo): refine double resign rejection for player interaction

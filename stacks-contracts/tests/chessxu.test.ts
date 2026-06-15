@@ -713,3 +713,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 300 — fix(stacks): analyze print topic during creation
 // nav-build-step: 301 — refactor(token): implement SIP-010 transfer using mock tokens
 // nav-build-step: 302 — docs(stacks): analyze match resolution in clarinet simnet
+// nav-build-step: 303 — feat(stacks): mock player balance with standard principals

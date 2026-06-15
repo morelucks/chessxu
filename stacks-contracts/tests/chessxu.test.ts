@@ -603,3 +603,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 190 — fix(token): check state validation during player resignation
 // nav-build-step: 191 — style(stacks): test event emission with large wager
 // nav-build-step: 192 — fix(token): update game join with zero wager
+// nav-build-step: 193 — docs(stacks): mock print topic under paused state

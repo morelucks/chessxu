@@ -469,3 +469,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 5 — refactor(celo): integrate GameNotActive error check during game lifecycle
 // double-resign-step: 6 — test(resign): implement resigned game validation with secondary resign calls
 // double-resign-step: 7 — docs(celo): refine resigned game validation for resolved matches
+// double-resign-step: 8 — test(celo): update inactive match resign check for player interaction

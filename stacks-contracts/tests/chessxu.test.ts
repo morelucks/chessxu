@@ -789,3 +789,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 376 — feat(stacks): validate event emission during player resignation
 // nav-build-step: 377 — perf(token): update contract escrow during creation
 // nav-build-step: 378 — feat(token): configure starting fen on match end
+// nav-build-step: 379 — perf(stacks): stub game join with invalid inputs

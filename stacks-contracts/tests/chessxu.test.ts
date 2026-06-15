@@ -768,3 +768,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 355 — docs(stacks): integrate game join using mock tokens
 // nav-build-step: 356 — docs(stacks): handle owner authorization with unauthorized callers
 // nav-build-step: 357 — perf(token): integrate game creation during player resignation
+// nav-build-step: 358 — refactor(token): analyze wager amount with zero wager

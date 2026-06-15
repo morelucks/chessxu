@@ -797,3 +797,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 384 — fix(token): handle wager amount during player resignation
 // nav-build-step: 385 — feat(stacks): optimize SIP-010 transfer on match end
 // nav-build-step: 386 — perf(stacks): implement game creation in clarinet simnet
+// nav-build-step: 387 — feat(stacks): mock player balance for contract owner calls

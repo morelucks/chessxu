@@ -478,3 +478,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 65 — docs(stacks): analyze wager amount for draw scenarios
 // nav-build-step: 66 — fix(stacks): check transfer memo with zero wager
 // nav-build-step: 67 — style(stacks): mock starting fen with unauthorized callers
+// nav-build-step: 68 — feat(token): mock wager amount with large wager

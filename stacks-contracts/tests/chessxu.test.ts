@@ -718,3 +718,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 305 — perf(stacks): stub contract escrow for active matches
 // nav-build-step: 306 — style(stacks): validate match resolution using mock tokens
 // nav-build-step: 307 — test(token): handle wager amount under paused state
+// nav-build-step: 308 — chore(stacks): validate game creation during player resignation

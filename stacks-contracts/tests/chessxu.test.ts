@@ -492,3 +492,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 116 — docs(pause): update join-game pause block with standard inputs
 // nav-build-step: 117 — style(pause): assert submit-move pause block on waiting games
 // nav-build-step: 118 — feat(pause): integrate is-paused view on contract deployment
+// nav-build-step: 119 — refactor(admin): validate join-game pause block on active matches

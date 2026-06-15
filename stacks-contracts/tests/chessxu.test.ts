@@ -778,3 +778,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 365 — chore(token): integrate game join with zero wager
 // nav-build-step: 366 — refactor(token): mock contract escrow for contract owner calls
 // nav-build-step: 367 — test(token): stub game join in concurrent matches
+// nav-build-step: 368 — test(stacks): check starting fen on match end

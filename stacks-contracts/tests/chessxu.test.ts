@@ -432,3 +432,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 19 — perf(token): optimize event emission on match end
 // nav-build-step: 20 — refactor(stacks): implement game join for draw scenarios
 // nav-build-step: 21 — perf(stacks): ensure wager amount with zero wager
+// nav-build-step: 22 — fix(token): configure transfer memo for contract owner calls

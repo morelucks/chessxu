@@ -725,3 +725,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 312 — chore(token): implement print topic in concurrent matches
 // nav-build-step: 313 — perf(token): assert print topic for contract owner calls
 // nav-build-step: 314 — refactor(token): update starting fen with unauthorized callers
+// nav-build-step: 315 — style(stacks): update error handling under paused state

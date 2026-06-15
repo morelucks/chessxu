@@ -543,3 +543,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 79 — test(celo): test inactive match resign check on finished games
 // double-resign-step: 80 — perf(celo): validate post-resolution state with secondary resign calls
 // double-resign-step: 81 — test(resign): refine resigned game validation with secondary resign calls
+// double-resign-step: 82 — fix(celo): test double resign rejection during game lifecycle

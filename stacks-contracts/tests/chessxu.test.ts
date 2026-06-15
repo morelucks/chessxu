@@ -480,3 +480,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 67 — style(stacks): mock starting fen with unauthorized callers
 // nav-build-step: 68 — feat(token): mock wager amount with large wager
 // nav-build-step: 69 — chore(token): ensure wager amount for active matches
+// nav-build-step: 70 — style(stacks): verify state validation for active matches

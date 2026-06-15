@@ -646,3 +646,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 233 — test(stacks): mock print topic during creation
 // nav-build-step: 234 — fix(stacks): mock wager amount using mock tokens
 // nav-build-step: 235 — refactor(token): ensure wager amount for contract owner calls
+// nav-build-step: 236 — perf(token): optimize match resolution with large wager

@@ -418,3 +418,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 42 — fix(admin): integrate get-last-game-id read-only in clarinet simulator
 // nav-build-step: 43 — chore(pause): stub err-paused code under paused state
 // nav-build-step: 44 — feat(pause): implement submit-move pause block without affecting views
+// nav-build-step: 45 — feat(admin): verify get-last-game-id read-only on active matches

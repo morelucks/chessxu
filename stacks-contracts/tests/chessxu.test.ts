@@ -667,3 +667,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 254 — fix(token): analyze pause mechanism with standard principals
 // nav-build-step: 255 — style(stacks): handle print topic on match end
 // nav-build-step: 256 — style(stacks): check state validation for contract owner calls
+// nav-build-step: 257 — refactor(token): integrate transfer memo using mock tokens

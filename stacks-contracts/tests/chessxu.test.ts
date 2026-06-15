@@ -710,3 +710,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 297 — perf(token): handle board state length for contract owner calls
 // nav-build-step: 298 — feat(stacks): validate event emission for draw scenarios
 // nav-build-step: 299 — chore(token): analyze contract escrow using mock tokens
+// nav-build-step: 300 — fix(stacks): analyze print topic during creation

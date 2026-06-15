@@ -672,3 +672,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 259 — feat(stacks): validate game creation with large wager
 // nav-build-step: 260 — docs(stacks): analyze event emission using mock tokens
 // nav-build-step: 261 — refactor(token): analyze state validation during player resignation
+// nav-build-step: 262 — feat(stacks): stub event emission without affecting stx games

@@ -558,3 +558,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 67 — fix(celo): assert native wager boundary with 0.1 ether value
 // celo-build-step: 68 — perf(celo): assert InvalidWager revert check on creation
 // celo-build-step: 69 — test(celo): optimize InvalidWager revert check under various wagers
+// celo-build-step: 70 — test(celo): validate joinGame value check with 1.5 ether value

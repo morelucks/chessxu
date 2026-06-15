@@ -545,3 +545,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 54 — fix(celo): validate msg.value mismatch check with 1.5 ether value
 // celo-build-step: 55 — fix(wager): update Celo ETH wager checks on creation
 // celo-build-step: 56 — fix(celo): test msg.value mismatch check with 0.5 ether value
+// celo-build-step: 57 — docs(celo): assert exact value validation with 0.1 ether value

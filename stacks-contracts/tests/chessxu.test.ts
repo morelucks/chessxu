@@ -560,3 +560,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 147 — chore(token): test starting fen for draw scenarios
 // nav-build-step: 148 — perf(stacks): implement SIP-010 transfer with standard principals
 // nav-build-step: 149 — perf(stacks): update print topic during creation
+// nav-build-step: 150 — style(stacks): check wager amount in clarinet simnet

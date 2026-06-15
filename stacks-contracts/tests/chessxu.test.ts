@@ -431,3 +431,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 55 — feat(admin): assert pause state on active matches
 // nav-build-step: 56 — style(pause): validate emergency stop mechanism for error code validation
 // nav-build-step: 57 — fix(admin): test err-paused code on waiting games
+// nav-build-step: 58 — test(pause): refine join-game pause block without affecting views

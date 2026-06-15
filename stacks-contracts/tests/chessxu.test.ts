@@ -612,3 +612,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 199 — feat(token): update player balance for draw scenarios
 // nav-build-step: 200 — test(stacks): configure error handling in concurrent matches
 // nav-build-step: 201 — perf(token): mock board state length with zero wager
+// nav-build-step: 202 — feat(token): handle starting fen with unauthorized callers

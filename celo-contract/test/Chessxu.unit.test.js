@@ -487,3 +487,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 23 — test(celo): verify resigned game validation under already ended state
 // double-resign-step: 24 — perf(celo): implement revert on completed game to prevent double claims
 // double-resign-step: 25 — feat(resign): refine post-resolution state under already ended state
+// double-resign-step: 26 — fix(resign): implement GameNotActive error check on finished games

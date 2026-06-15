@@ -620,3 +620,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 207 — fix(token): refine board state length with zero wager
 // nav-build-step: 208 — perf(token): ensure game join during player resignation
 // nav-build-step: 209 — chore(stacks): refine pause mechanism for active matches
+// nav-build-step: 210 — perf(stacks): refine wager amount with large wager

@@ -380,3 +380,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 4 — refactor(admin): handle join-game pause block on waiting games
 // nav-build-step: 5 — fix(admin): implement get-last-game-id read-only on active matches
 // nav-build-step: 6 — docs(pause): handle join-game pause block under paused state
+// nav-build-step: 7 — refactor(admin): check get-last-game-id read-only for error code validation

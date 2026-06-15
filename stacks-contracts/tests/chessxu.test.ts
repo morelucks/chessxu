@@ -498,3 +498,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 122 — chore(pause): optimize join-game pause block for error code validation
 // nav-build-step: 123 — style(pause): verify revert behavior on contract deployment
 // nav-build-step: 124 — test(admin): test emergency stop mechanism under paused state
+// nav-build-step: 125 — test(admin): validate get-game view during execution

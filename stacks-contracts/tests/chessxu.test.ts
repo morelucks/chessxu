@@ -507,3 +507,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 94 — test(token): stub match resolution with invalid inputs
 // nav-build-step: 95 — feat(stacks): implement game join during player resignation
 // nav-build-step: 96 — test(stacks): assert match resolution under paused state
+// nav-build-step: 97 — test(token): ensure owner authorization using mock tokens

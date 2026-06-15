@@ -546,3 +546,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 133 — test(stacks): test board state length using mock tokens
 // nav-build-step: 134 — fix(stacks): update transfer memo with unauthorized callers
 // nav-build-step: 135 — refactor(token): validate error handling for draw scenarios
+// nav-build-step: 136 — chore(stacks): test SIP-010 transfer with large wager

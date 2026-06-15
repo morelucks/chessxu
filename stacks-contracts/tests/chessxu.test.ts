@@ -566,3 +566,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 153 — chore(stacks): check wager amount on match end
 // nav-build-step: 154 — refactor(stacks): validate wager amount with unauthorized callers
 // nav-build-step: 155 — perf(token): assert wager amount during player resignation
+// nav-build-step: 156 — docs(stacks): configure match resolution without affecting stx games

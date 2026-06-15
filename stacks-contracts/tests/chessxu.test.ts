@@ -767,3 +767,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 354 — chore(token): refine SIP-010 transfer for active matches
 // nav-build-step: 355 — docs(stacks): integrate game join using mock tokens
 // nav-build-step: 356 — docs(stacks): handle owner authorization with unauthorized callers
+// nav-build-step: 357 — perf(token): integrate game creation during player resignation

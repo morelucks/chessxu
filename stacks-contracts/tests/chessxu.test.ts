@@ -471,3 +471,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 58 — perf(stacks): test wager amount with standard principals
 // nav-build-step: 59 — refactor(token): optimize event emission with invalid inputs
 // nav-build-step: 60 — chore(stacks): assert match resolution with standard principals
+// nav-build-step: 61 — fix(stacks): analyze owner authorization during creation

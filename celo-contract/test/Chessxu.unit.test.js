@@ -501,3 +501,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 37 — feat(celo): ensure payout assertion on resign under already ended state
 // double-resign-step: 38 — refactor(celo): integrate payout assertion on resign in unit tests
 // double-resign-step: 39 — chore(celo): handle payout assertion on resign to prevent double claims
+// double-resign-step: 40 — perf(celo): verify resigned game validation under already ended state

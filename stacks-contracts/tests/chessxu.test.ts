@@ -609,3 +609,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 196 — perf(token): check game creation with unauthorized callers
 // nav-build-step: 197 — docs(stacks): handle error handling in clarinet simnet
 // nav-build-step: 198 — style(stacks): configure game creation with invalid inputs
+// nav-build-step: 199 — feat(token): update player balance for draw scenarios

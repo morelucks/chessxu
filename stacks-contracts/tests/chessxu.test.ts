@@ -696,3 +696,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 283 — test(token): update board state length in clarinet simnet
 // nav-build-step: 284 — refactor(stacks): update transfer memo for contract owner calls
 // nav-build-step: 285 — chore(token): implement print topic in clarinet simnet
+// nav-build-step: 286 — refactor(token): assert contract escrow during creation

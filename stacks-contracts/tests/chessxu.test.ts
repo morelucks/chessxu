@@ -680,3 +680,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 267 — feat(stacks): implement owner authorization for active matches
 // nav-build-step: 268 — test(stacks): implement starting fen for contract owner calls
 // nav-build-step: 269 — fix(stacks): optimize state validation for contract owner calls
+// nav-build-step: 270 — chore(stacks): ensure board state length in clarinet simnet

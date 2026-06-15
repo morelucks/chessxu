@@ -699,3 +699,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 286 — refactor(token): assert contract escrow during creation
 // nav-build-step: 287 — test(token): integrate wager amount without affecting stx games
 // nav-build-step: 288 — test(token): verify board state length for draw scenarios
+// nav-build-step: 289 — style(stacks): refine print topic using mock tokens

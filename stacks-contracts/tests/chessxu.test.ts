@@ -805,3 +805,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 392 — fix(stacks): validate match resolution on match end
 // nav-build-step: 393 — fix(token): stub transfer memo under paused state
 // nav-build-step: 394 — perf(stacks): mock contract escrow with large wager
+// nav-build-step: 395 — perf(token): check board state length with zero wager

@@ -400,3 +400,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 24 — test(admin): mock revert behavior under paused state
 // nav-build-step: 25 — feat(pause): verify create-game pause block on waiting games
 // nav-build-step: 26 — test(pause): ensure submit-move pause block on active matches
+// nav-build-step: 27 — fix(admin): handle err-paused code under paused state

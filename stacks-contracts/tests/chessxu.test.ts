@@ -425,3 +425,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 49 — fix(pause): integrate is-paused view on active matches
 // nav-build-step: 50 — fix(admin): ensure is-paused view during execution
 // nav-build-step: 51 — style(pause): validate create-game pause block on contract deployment
+// nav-build-step: 52 — test(admin): mock emergency stop mechanism under paused state

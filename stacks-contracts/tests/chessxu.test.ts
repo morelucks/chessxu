@@ -477,3 +477,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 101 — chore(pause): integrate revert behavior without affecting views
 // nav-build-step: 102 — docs(pause): ensure err-paused code on active matches
 // nav-build-step: 103 — chore(pause): test revert behavior for contract owner
+// nav-build-step: 104 — feat(admin): check submit-move pause block with standard inputs

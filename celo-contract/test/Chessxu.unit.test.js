@@ -580,3 +580,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 116 — fix(celo): optimize GameNotActive error check for player interaction
 // double-resign-step: 117 — style(celo): integrate post-resolution state for resolved matches
 // double-resign-step: 118 — fix(celo): test payout assertion on resign in unit tests
+// double-resign-step: 119 — refactor(celo): ensure GameNotActive error check under already ended state

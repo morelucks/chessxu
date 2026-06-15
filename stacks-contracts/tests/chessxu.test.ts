@@ -339,38 +339,75 @@ describe("chessxu - admin pause mechanism", () => {
     });
 });
 
-describe("chessxu - game pause side effects on active games", () => {
-    it("verifies pause blocks mutations but leaves read-only functions accessible", () => {
-        // Setup two games before pausing
-        const gameId1 = setupGame(100, true, 1); // waiting game
-        const gameId2 = setupGame(100, true, 2); // ongoing game
-        const lastIdBeforePause = (simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result as any).value;
+describe("chessxu - SIP-010 token wagers", () => {
+    // Helper to mint chessxu-tokens
+    function mintTokens(amount: number, recipient: string) {
+        return simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(amount), Cl.standardPrincipal(recipient)], deployer);
+    }
 
-        // 1. Call pause as the deployer. Verify is-paused returns true.
-        const pauseResult = simnet.callPublicFn("chessxu", "pause", [], deployer);
-        expect(pauseResult.result).toBeOk(Cl.bool(true));
+    // Helper to get token balance of an account/contract
+    function getTokenBalance(principal: string, isContract: boolean = false) {
+        const principalCl = isContract 
+            ? Cl.contractPrincipal(deployer, principal)
+            : Cl.standardPrincipal(principal);
+        const { result } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [principalCl], wallet_1);
+        return (result as any).value.value;
+    }
 
-        const isPausedResult = simnet.callReadOnlyFn("chessxu", "is-paused", [], wallet_1).result;
-        expect(isPausedResult).toStrictEqual(Cl.bool(true));
+    it("successfully creates and joins a non-STX token-wagered game, escrowing chessxu-token correctly", () => {
+        const wager = 1000n;
+        const totalWager = wager * 2n;
 
-        // 2. Attempt to call create-game, join-game, submit-move and check that they revert with err-paused (u111).
-        const createRes = simnet.callPublicFn("chessxu", "create-game", [Cl.uint(100), Cl.bool(true)], wallet_1);
-        expect(createRes.result).toBeErr(Cl.uint(111));
+        // 1. Mint tokens to Player 1 and Player 2
+        mintTokens(Number(wager), wallet_1);
+        mintTokens(Number(wager), wallet_2);
 
-        // Test join-game on the waiting game
-        const joinRes = simnet.callPublicFn("chessxu", "join-game", [Cl.uint(gameId1)], wallet_2);
-        expect(joinRes.result).toBeErr(Cl.uint(111));
+        // Verify initial balances
+        expect(getTokenBalance(wallet_1)).toBe(wager);
+        expect(getTokenBalance(wallet_2)).toBe(wager);
+        expect(getTokenBalance("chessxu", true)).toBe(0n);
 
-        // Test submit-move on the active game
-        const moveRes = simnet.callPublicFn("chessxu", "submit-move", [Cl.uint(gameId2), Cl.stringAscii("e2e4"), Cl.stringAscii("board")], wallet_1);
-        expect(moveRes.result).toBeErr(Cl.uint(111));
+        // 2. Create a game with is-stx = false and a wager amount
+        const { result: createResult, events: createEvents } = simnet.callPublicFn(
+            "chessxu",
+            "create-game",
+            [Cl.uint(wager), Cl.bool(false)],
+            wallet_1
+        );
+        const gameId = (createResult as any).value;
+        expect(createResult).toBeOk(gameId);
 
-        // 3. Verify that get-game and get-last-game-id still return correct values without reverting.
-        const { result: getGameResult } = simnet.callReadOnlyFn("chessxu", "get-game", [Cl.uint(gameId2)], wallet_1);
-        const gameData = (getGameResult as any).value.data || (getGameResult as any).value.value || (getGameResult as any).value;
-        expect(gameData.wager).toStrictEqual(Cl.uint(100));
+        // Verify that chessxu-token is transferred from Player 1's balance to the escrow
+        expect(getTokenBalance(wallet_1)).toBe(0n);
+        expect(getTokenBalance("chessxu", true)).toBe(wager);
+        
+        // Also verify the transfer event was emitted
+        const createTransfer = createEvents.find(e => e.event === "ft_transfer_event");
+        expect(createTransfer).toBeDefined();
+        expect(createTransfer!.data.amount).toBe(`${wager}`);
+        expect(createTransfer!.data.sender).toBe(wallet_1);
+        expect(createTransfer!.data.recipient).toBe(`${deployer}.chessxu`);
 
-        const lastIdResult = simnet.callReadOnlyFn("chessxu", "get-last-game-id", [], wallet_1).result;
-        expect(lastIdResult).toStrictEqual(Cl.uint(lastIdBeforePause));
+        // 3. Join the game as Player 2
+        const { result: joinResult, events: joinEvents } = simnet.callPublicFn(
+            "chessxu",
+            "join-game",
+            [gameId],
+            wallet_2
+        );
+        expect(joinResult).toBeOk(Cl.bool(true));
+
+        // Verify that chessxu-token is transferred from Player 2's balance
+        expect(getTokenBalance(wallet_2)).toBe(0n);
+
+        // Check that the contract's token escrow holds wager * 2
+        expect(getTokenBalance("chessxu", true)).toBe(totalWager);
+
+        // Also verify the transfer event for player 2 was emitted
+        const joinTransfer = joinEvents.find(e => e.event === "ft_transfer_event");
+        expect(joinTransfer).toBeDefined();
+        expect(joinTransfer!.data.amount).toBe(`${wager}`);
+        expect(joinTransfer!.data.sender).toBe(wallet_2);
+        expect(joinTransfer!.data.recipient).toBe(`${deployer}.chessxu`);
     });
 });

@@ -570,3 +570,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 79 — feat(wager): handle exact value validation for zero ether wagers
 // celo-build-step: 80 — test(wager): optimize joinGame value check with 0.5 ether value
 // celo-build-step: 81 — feat(celo): integrate createGame value check to match spec
+// celo-build-step: 82 — docs(celo): check msg.value mismatch check on creation

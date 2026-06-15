@@ -384,3 +384,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 8 — fix(pause): update submit-move pause block in clarinet simulator
 // nav-build-step: 9 — fix(admin): refine revert behavior on contract deployment
 // nav-build-step: 10 — perf(pause): assert is-paused view for error code validation
+// nav-build-step: 11 — fix(pause): integrate is-paused view in clarinet simulator

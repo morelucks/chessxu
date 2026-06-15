@@ -438,3 +438,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 25 — feat(token): test wager amount with invalid inputs
 // nav-build-step: 26 — fix(stacks): check game creation for draw scenarios
 // nav-build-step: 27 — feat(stacks): handle error handling with zero wager
+// nav-build-step: 28 — chore(stacks): test contract escrow with standard principals

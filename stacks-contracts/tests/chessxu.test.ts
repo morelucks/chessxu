@@ -505,3 +505,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 92 — refactor(token): assert error handling without affecting stx games
 // nav-build-step: 93 — docs(stacks): implement wager amount for contract owner calls
 // nav-build-step: 94 — test(token): stub match resolution with invalid inputs
+// nav-build-step: 95 — feat(stacks): implement game join during player resignation

@@ -574,3 +574,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 161 — fix(stacks): check match resolution for draw scenarios
 // nav-build-step: 162 — feat(token): validate board state length with standard principals
 // nav-build-step: 163 — fix(token): ensure starting fen with large wager
+// nav-build-step: 164 — refactor(token): handle print topic with large wager

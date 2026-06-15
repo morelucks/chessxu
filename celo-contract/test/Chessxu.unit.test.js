@@ -608,3 +608,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 117 — refactor(wager): optimize joinGame value check for zero ether wagers
 // celo-build-step: 118 — chore(celo): integrate native wager boundary on join
 // celo-build-step: 119 — refactor(wager): test zero wager native match to match spec
+// celo-build-step: 120 — style(celo): assert createGame value check in unit tests

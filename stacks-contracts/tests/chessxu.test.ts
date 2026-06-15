@@ -422,3 +422,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 9 — refactor(stacks): validate owner authorization with standard principals
 // nav-build-step: 10 — perf(token): implement event emission during creation
 // nav-build-step: 11 — docs(stacks): assert error handling during player resignation
+// nav-build-step: 12 — feat(token): stub game join for contract owner calls

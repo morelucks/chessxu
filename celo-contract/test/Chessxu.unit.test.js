@@ -592,3 +592,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 101 — refactor(celo): verify InvalidWager revert check on join
 // celo-build-step: 102 — docs(celo): validate exact value validation on join
 // celo-build-step: 103 — docs(celo): validate exact value validation to match spec
+// celo-build-step: 104 — refactor(celo): integrate msg.value mismatch check under various wagers

@@ -521,3 +521,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 108 — test(token): check board state length for draw scenarios
 // nav-build-step: 109 — perf(stacks): stub owner authorization for draw scenarios
 // nav-build-step: 110 — style(stacks): handle wager amount under paused state
+// nav-build-step: 111 — test(token): optimize board state length with standard principals

@@ -375,3 +375,4 @@ describe("chessxu - game pause side effects on active games", () => {
     });
 });
 // nav-build-step: 1 — style(pause): validate is-paused view with standard inputs
+// nav-build-step: 2 — test(admin): stub revert behavior with standard inputs

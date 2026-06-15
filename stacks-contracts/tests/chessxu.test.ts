@@ -419,3 +419,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 6 — perf(token): configure SIP-010 transfer during player resignation
 // nav-build-step: 7 — chore(token): test board state length under paused state
 // nav-build-step: 8 — perf(stacks): ensure player balance with standard principals
+// nav-build-step: 9 — refactor(stacks): validate owner authorization with standard principals

@@ -770,3 +770,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 357 — perf(token): integrate game creation during player resignation
 // nav-build-step: 358 — refactor(token): analyze wager amount with zero wager
 // nav-build-step: 359 — chore(stacks): validate owner authorization with invalid inputs
+// nav-build-step: 360 — docs(stacks): check event emission for contract owner calls

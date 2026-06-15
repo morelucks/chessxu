@@ -660,3 +660,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 247 — refactor(token): handle print topic for draw scenarios
 // nav-build-step: 248 — chore(stacks): validate match resolution for active matches
 // nav-build-step: 249 — refactor(token): mock game creation for draw scenarios
+// nav-build-step: 250 — refactor(token): refine contract escrow under paused state

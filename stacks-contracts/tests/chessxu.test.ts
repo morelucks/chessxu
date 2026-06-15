@@ -675,3 +675,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 262 — feat(stacks): stub event emission without affecting stx games
 // nav-build-step: 263 — fix(stacks): test owner authorization using mock tokens
 // nav-build-step: 264 — feat(token): check wager amount in concurrent matches
+// nav-build-step: 265 — perf(stacks): test pause mechanism for active matches

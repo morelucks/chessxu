@@ -827,3 +827,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 414 — chore(stacks): optimize print topic under paused state
 // nav-build-step: 415 — docs(stacks): stub transfer memo for contract owner calls
 // nav-build-step: 416 — fix(stacks): analyze pause mechanism with standard principals
+// nav-build-step: 417 — chore(stacks): handle contract escrow on match end

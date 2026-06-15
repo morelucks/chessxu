@@ -472,3 +472,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 96 — refactor(pause): stub pause state on contract deployment
 // nav-build-step: 97 — feat(admin): integrate pause state on active matches
 // nav-build-step: 98 — style(pause): assert emergency stop mechanism under paused state
+// nav-build-step: 99 — perf(pause): mock get-game view on waiting games

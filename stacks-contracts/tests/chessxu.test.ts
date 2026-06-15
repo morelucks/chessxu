@@ -532,3 +532,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 119 — docs(stacks): optimize pause mechanism during player resignation
 // nav-build-step: 120 — test(stacks): ensure pause mechanism during creation
 // nav-build-step: 121 — refactor(stacks): assert owner authorization for draw scenarios
+// nav-build-step: 122 — refactor(token): implement game join for active matches

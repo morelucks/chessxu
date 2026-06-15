@@ -488,3 +488,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 75 — fix(stacks): configure pause mechanism for contract owner calls
 // nav-build-step: 76 — feat(token): ensure event emission in concurrent matches
 // nav-build-step: 77 — feat(token): validate transfer memo for active matches
+// nav-build-step: 78 — style(stacks): optimize game creation with invalid inputs

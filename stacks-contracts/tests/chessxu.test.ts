@@ -455,3 +455,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 79 — refactor(pause): verify create-game pause block on active matches
 // nav-build-step: 80 — test(admin): check get-game view with standard inputs
 // nav-build-step: 81 — feat(admin): implement revert behavior for contract owner
+// nav-build-step: 82 — test(admin): verify get-last-game-id read-only for error code validation

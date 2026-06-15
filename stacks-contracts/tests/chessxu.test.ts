@@ -394,3 +394,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 18 — test(admin): mock get-game view in clarinet simulator
 // nav-build-step: 19 — docs(pause): update is-paused view for contract owner
 // nav-build-step: 20 — feat(admin): verify join-game pause block with standard inputs
+// nav-build-step: 21 — feat(pause): ensure get-game view for contract owner

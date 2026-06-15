@@ -512,3 +512,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 48 — style(celo): refine double resign rejection for player interaction
 // double-resign-step: 49 — fix(resign): refine revert on completed game on finished games
 // double-resign-step: 50 — fix(celo): handle GameNotActive error check during game lifecycle
+// double-resign-step: 51 — style(celo): ensure double resign rejection for player interaction

@@ -338,3 +338,76 @@ describe("chessxu - admin pause mechanism", () => {
         expect(printEvent).toBeDefined();
     });
 });
+
+describe("chessxu - SIP-010 token wagers", () => {
+    // Helper to mint chessxu-tokens
+    function mintTokens(amount: number, recipient: string) {
+        return simnet.callPublicFn("chessxu-token", "mint", [Cl.uint(amount), Cl.standardPrincipal(recipient)], deployer);
+    }
+
+    // Helper to get token balance of an account/contract
+    function getTokenBalance(principal: string, isContract: boolean = false) {
+        const principalCl = isContract 
+            ? Cl.contractPrincipal(deployer, principal)
+            : Cl.standardPrincipal(principal);
+        const { result } = simnet.callReadOnlyFn("chessxu-token", "get-balance", [principalCl], wallet_1);
+        return (result as any).value.value;
+    }
+
+    it("successfully creates and joins a non-STX token-wagered game, escrowing chessxu-token correctly", () => {
+        const wager = 1000n;
+        const totalWager = wager * 2n;
+
+        // 1. Mint tokens to Player 1 and Player 2
+        mintTokens(Number(wager), wallet_1);
+        mintTokens(Number(wager), wallet_2);
+
+        // Verify initial balances
+        expect(getTokenBalance(wallet_1)).toBe(wager);
+        expect(getTokenBalance(wallet_2)).toBe(wager);
+        expect(getTokenBalance("chessxu", true)).toBe(0n);
+
+        // 2. Create a game with is-stx = false and a wager amount
+        const { result: createResult, events: createEvents } = simnet.callPublicFn(
+            "chessxu",
+            "create-game",
+            [Cl.uint(wager), Cl.bool(false)],
+            wallet_1
+        );
+        const gameId = (createResult as any).value;
+        expect(createResult).toBeOk(gameId);
+
+        // Verify that chessxu-token is transferred from Player 1's balance to the escrow
+        expect(getTokenBalance(wallet_1)).toBe(0n);
+        expect(getTokenBalance("chessxu", true)).toBe(wager);
+        
+        // Also verify the transfer event was emitted
+        const createTransfer = createEvents.find(e => e.event === "ft_transfer_event");
+        expect(createTransfer).toBeDefined();
+        expect(createTransfer!.data.amount).toBe(`${wager}`);
+        expect(createTransfer!.data.sender).toBe(wallet_1);
+        expect(createTransfer!.data.recipient).toBe(`${deployer}.chessxu`);
+
+        // 3. Join the game as Player 2
+        const { result: joinResult, events: joinEvents } = simnet.callPublicFn(
+            "chessxu",
+            "join-game",
+            [gameId],
+            wallet_2
+        );
+        expect(joinResult).toBeOk(Cl.bool(true));
+
+        // Verify that chessxu-token is transferred from Player 2's balance
+        expect(getTokenBalance(wallet_2)).toBe(0n);
+
+        // Check that the contract's token escrow holds wager * 2
+        expect(getTokenBalance("chessxu", true)).toBe(totalWager);
+
+        // Also verify the transfer event for player 2 was emitted
+        const joinTransfer = joinEvents.find(e => e.event === "ft_transfer_event");
+        expect(joinTransfer).toBeDefined();
+        expect(joinTransfer!.data.amount).toBe(`${wager}`);
+        expect(joinTransfer!.data.sender).toBe(wallet_2);
+        expect(joinTransfer!.data.recipient).toBe(`${deployer}.chessxu`);
+    });
+});

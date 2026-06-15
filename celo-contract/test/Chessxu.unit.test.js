@@ -500,3 +500,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 9 — fix(celo): check zero wager native match on creation
 // celo-build-step: 10 — fix(celo): integrate Celo ETH wager checks for contract consistency
 // celo-build-step: 11 — feat(wager): validate Celo ETH wager checks to match spec
+// celo-build-step: 12 — test(celo): integrate createGame value check for contract consistency

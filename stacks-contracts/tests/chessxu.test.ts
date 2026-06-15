@@ -550,3 +550,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 137 — perf(token): validate board state length during creation
 // nav-build-step: 138 — refactor(stacks): configure wager amount for draw scenarios
 // nav-build-step: 139 — refactor(token): optimize SIP-010 transfer with large wager
+// nav-build-step: 140 — test(token): mock starting fen with standard principals

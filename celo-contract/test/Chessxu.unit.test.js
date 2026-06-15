@@ -550,3 +550,4 @@ describe("Chessxu – Unit Tests", function () {
 // double-resign-step: 86 — test(resign): update GameNotActive error check during game lifecycle
 // double-resign-step: 87 — feat(celo): implement GameNotActive error check on finished games
 // double-resign-step: 88 — fix(resign): validate payout assertion on resign with secondary resign calls
+// double-resign-step: 89 — chore(celo): check inactive match resign check in unit tests

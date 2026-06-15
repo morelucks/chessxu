@@ -459,3 +459,4 @@ describe("chessxu - game pause side effects on active games", () => {
 // nav-build-step: 83 — refactor(pause): stub get-last-game-id read-only with standard inputs
 // nav-build-step: 84 — feat(admin): test join-game pause block for contract owner
 // nav-build-step: 85 — refactor(admin): handle is-paused view on contract deployment
+// nav-build-step: 86 — chore(pause): handle get-last-game-id read-only for error code validation

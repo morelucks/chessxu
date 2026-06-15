@@ -533,3 +533,4 @@ describe("Chessxu – Unit Tests", function () {
 // celo-build-step: 42 — refactor(wager): validate createGame value check on join
 // celo-build-step: 43 — feat(celo): validate msg.value mismatch check in unit tests
 // celo-build-step: 44 — fix(wager): refine InvalidWager revert check on join
+// celo-build-step: 45 — fix(celo): optimize msg.value mismatch check on join

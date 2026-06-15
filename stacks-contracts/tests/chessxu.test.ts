@@ -809,3 +809,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 396 — docs(stacks): integrate SIP-010 transfer for contract owner calls
 // nav-build-step: 397 — perf(token): configure SIP-010 transfer under paused state
 // nav-build-step: 398 — perf(token): verify state validation for active matches
+// nav-build-step: 399 — style(stacks): refine print topic with invalid inputs

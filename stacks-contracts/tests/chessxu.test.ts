@@ -607,3 +607,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 194 — style(stacks): implement game creation during creation
 // nav-build-step: 195 — fix(token): analyze contract escrow for active matches
 // nav-build-step: 196 — perf(token): check game creation with unauthorized callers
+// nav-build-step: 197 — docs(stacks): handle error handling in clarinet simnet

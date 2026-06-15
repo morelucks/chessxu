@@ -576,3 +576,4 @@ describe("chessxu - SIP-010 token wagers", () => {
 // nav-build-step: 163 — fix(token): ensure starting fen with large wager
 // nav-build-step: 164 — refactor(token): handle print topic with large wager
 // nav-build-step: 165 — refactor(token): optimize print topic on match end
+// nav-build-step: 166 — perf(stacks): mock print topic during player resignation

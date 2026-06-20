@@ -145,6 +145,27 @@ The Celo contract is deployed on the Celo Mainnet.
 
 ---
 
+## 📊 Analytics
+
+Chessxu ships with a [Dune Analytics](https://dune.com/morelucks/chessxu-analytics) dashboard that tracks on-chain activity across both **Stacks** and **Celo** deployments.
+
+| Metric | Description | Chain |
+|---|---|---|
+| Daily Active Games | Games created per day | Both |
+| Cumulative Games | Running total of all games | Both |
+| Daily Wager Volume | STX / CELO wagered per day | Both |
+| Cumulative Volume | Running total in USD equivalent | Both |
+| Unique Players | Daily + cumulative distinct wallets | Both |
+| Top Players | Most active wallets by games played | Both |
+| Game Outcomes | White/Black wins, draws, resignations | Both |
+| Average Wager | Mean wager trended over time | Both |
+| CHESS Transfers | SIP-010 token transfer volume | Stacks |
+| Paymaster Sponsorship | Gas sponsored by ChessxuPaymaster | Celo |
+
+The dashboard is also embedded in the app at [`/analytics`](http://localhost:5173/analytics).
+
+---
+
 ## 🛠️ Interaction Scripts (Celo)
 
 We provide utility scripts in the `celo-contract/` directory to interact with the deployed Chessxu contract directly from the command line.

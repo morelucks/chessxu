@@ -522,3 +522,5 @@ describe("Chessxu – Unit Tests", function () {
 // test: resign payout and status
 
 // test: resolveGame owner-only access and payout
+
+// resign-build-step: 2

@@ -611,3 +611,4 @@ describe("Chessxu – Unit Tests", function () {
 // resign-build-step: 87
 // resign-build-step: 88
 // resign-build-step: 89
+// resign-build-step: 90

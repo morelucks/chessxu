@@ -312,13 +312,22 @@ describe("Chessxu – Unit Tests", function () {
       await chessxu.connect(player1).createGame(wager, true, { value: wager });
       await chessxu.connect(player2).joinGame(1, { value: wager });
 
+      // Verify contract balance is double the wager before resigning
+      const contractBefore = await ethers.provider.getBalance(await chessxu.getAddress());
+      expect(contractBefore).to.equal(wager * 2n);
+
       const before = await ethers.provider.getBalance(player2.address);
       const tx = await chessxu.connect(player1).resign(1);
-      const receipt = await tx.wait();
+      await tx.wait();
       const after = await ethers.provider.getBalance(player2.address);
 
+      // Verify winner receives double the wager
       expect(after - before).to.equal(wager * 2n);
       expect((await chessxu.getGame(1)).status).to.equal(3);
+
+      // Verify contract native balance is decremented correctly (to 0)
+      const contractAfter = await ethers.provider.getBalance(await chessxu.getAddress());
+      expect(contractAfter).to.equal(0n);
     });
 
     it("black resigns → white wins (status 2) and receives prize", async function () {
@@ -327,13 +336,22 @@ describe("Chessxu – Unit Tests", function () {
       await chessxu.connect(player1).createGame(wager, true, { value: wager });
       await chessxu.connect(player2).joinGame(1, { value: wager });
 
+      // Verify contract balance is double the wager before resigning
+      const contractBefore = await ethers.provider.getBalance(await chessxu.getAddress());
+      expect(contractBefore).to.equal(wager * 2n);
+
       const before = await ethers.provider.getBalance(player1.address);
       const tx = await chessxu.connect(player2).resign(1);
       await tx.wait();
       const after = await ethers.provider.getBalance(player1.address);
 
+      // Verify winner receives double the wager
       expect(after - before).to.equal(wager * 2n);
       expect((await chessxu.getGame(1)).status).to.equal(2);
+
+      // Verify contract native balance is decremented correctly (to 0)
+      const contractAfter = await ethers.provider.getBalance(await chessxu.getAddress());
+      expect(contractAfter).to.equal(0n);
     });
 
     it("reverts when non-player calls resign", async function () {

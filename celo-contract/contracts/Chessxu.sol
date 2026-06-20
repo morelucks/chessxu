@@ -114,6 +114,8 @@ contract Chessxu {
     }
 
     // Resign from an active game. Reverts with GameNotActive if the game has already finished/resolved.
+    // Transits game state to Black Wins (3) if White resigns, or White Wins (2) if Black resigns.
+    // Winner receives double the wager (wager * 2) and the contract's native/ERC20 balance is decremented accordingly.
     function resign(uint256 gameId) external {
         Game storage game = games[gameId];
         if (game.playerW == address(0)) revert GameNotFound();

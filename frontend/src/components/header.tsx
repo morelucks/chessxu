@@ -5,6 +5,7 @@ import { usePlayerStats } from "../hooks/useLeaderboard";
 import { useStacksChess } from "../hooks/useStacksChess";
 import { useWalletAuth } from "../hooks/useWalletAuth";
 import { useEffect } from "react";
+import { NotificationCenter } from "./NotificationCenter";
 
 export function Header() {
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
@@ -59,6 +60,7 @@ export function Header() {
 
       {/* Wallet Connection - Top Right */}
       <div className="absolute top-4 right-4 md:top-8 md:right-8 flex items-center gap-4">
+        <NotificationCenter />
         {!isAuthenticated && !isMiniPay && (
           <div className="flex bg-slate-800/50 rounded-full p-1 border border-slate-700">
             <button

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Gamepad2, Zap, Trophy, Puzzle, ShoppingBag, User, History } from 'lucide-react';
+import { Gamepad2, Zap, Trophy, Puzzle, ShoppingBag, User, History, BarChart3 } from 'lucide-react';
 import './DesktopNav.css';
 
 const navItems = [
@@ -9,6 +9,7 @@ const navItems = [
   { label: 'Puzzle', icon: Puzzle, path: '/puzzle' },
   { label: 'Rank', icon: Trophy, path: '/leaderboard' },
   { label: 'History', icon: History, path: '/history' },
+  { label: 'Analytics', icon: BarChart3, path: '/analytics' },
   { label: 'Shop', icon: ShoppingBag, path: '/shop' },
   { label: 'Me', icon: User, path: '/profile' },
 ];

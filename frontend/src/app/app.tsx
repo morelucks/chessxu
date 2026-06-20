@@ -19,6 +19,7 @@ import ShopPage from "../components/pages/ShopPage";
 import PuzzleScreen from '../components/pages/PuzzleScreen';
 import NotFoundPage from '../components/pages/NotFoundPage';
 import HistoryPage from '../components/pages/HistoryPage';
+import AnalyticsDashboard from '../components/pages/AnalyticsDashboard';
 
 function App() {
   const setAddress = useAppStore((state) => state.setAddress);
@@ -53,6 +54,7 @@ function App() {
               <Route path="/shop" element={<ShopPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/history" element={<HistoryPage />} />
+              <Route path="/analytics" element={<AnalyticsDashboard />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>

@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Puzzle', icon: Puzzle, path: '/puzzle' },
   { label: 'Rank', icon: Trophy, path: '/leaderboard' },
   { label: 'History', icon: History, path: '/history' },
-  { label: 'Analytics', icon: BarChart3, path: '/analytics' },
+  { label: 'Stats', icon: BarChart3, path: '/analytics' },
   { label: 'Shop', icon: ShoppingBag, path: '/shop' },
   { label: 'Me', icon: User, path: '/profile' },
 ];
@@ -28,16 +28,16 @@ export const BottomNav: React.FC = () => {
               key={item.label}
               to={item.path}
               className={({ isActive }) => `
-                flex flex-col items-center gap-1 px-3 py-1 transition-all duration-200
+                flex flex-col items-center gap-1 px-1 py-1 transition-all duration-200
                 ${isActive 
-                  ? 'text-indigo-400 scale-110' 
+                  ? 'text-indigo-400 scale-105' 
                   : 'text-slate-400 hover:text-slate-200'}
               `}
             >
               <div className={`relative p-1 rounded-xl transition-colors ${isActive ? 'bg-indigo-500/10' : ''}`}>
-                <Icon size={20} className={isActive ? 'stroke-[2.5px]' : 'stroke-[1.5px]'} />
+                <Icon size={18} className={isActive ? 'stroke-[2.5px]' : 'stroke-[1.5px]'} />
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider">
+              <span className="text-[9px] font-bold uppercase tracking-tight">
                 {item.label}
               </span>
               {isActive && (

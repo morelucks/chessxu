@@ -8,7 +8,7 @@ const navItems = [
   { label: 'Puzzle', icon: Puzzle, path: '/puzzle' },
   { label: 'Rank', icon: Trophy, path: '/leaderboard' },
   { label: 'History', icon: History, path: '/history' },
-  { label: 'Analytics', icon: BarChart3, path: '/analytics' },
+  { label: 'Stats', icon: BarChart3, path: '/analytics' },
   { label: 'Shop', icon: ShoppingBag, path: '/shop' },
   { label: 'Me', icon: User, path: '/profile' },
 ];

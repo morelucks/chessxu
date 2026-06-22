@@ -235,3 +235,5 @@ describe('GameHistoryDB Service', () => {
       const saved = await gameHistoryDB.getGame('celo', 101);
       expect(saved).not.toBeNull();
       expect(saved!.gameId).toBe(101);
+      expect(saved!.lastUpdated).toBeGreaterThan(0);
+      expect(saved!.syncedAt).toBeGreaterThan(0);

@@ -3,3 +3,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { gameHistoryDB, CachedGame } from '../gameHistoryDB';
 
+// ---------------------------------------------------------------------------
+// Mock Classes for IndexedDB

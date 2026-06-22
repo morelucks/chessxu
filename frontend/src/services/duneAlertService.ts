@@ -472,3 +472,9 @@ class DuneAlertService {
       },
       {
         event_id: `mock_pause_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'contract_paused',
+        chain: 'Celo',
+        paused: true,
+      },
+      {

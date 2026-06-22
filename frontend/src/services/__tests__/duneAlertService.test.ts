@@ -155,3 +155,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     const events: DuneEventRow[] = [
       {
         event_id: 'evt_paymaster_1',
+        timestamp: new Date().toISOString(),
+        type: 'paymaster_balance_low',

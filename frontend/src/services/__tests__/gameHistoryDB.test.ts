@@ -54,3 +54,5 @@ const mockObjectStore = {
   }),
   get: vi.fn().mockImplementation((keyArray: [string, number]) => {
     const key = JSON.stringify(keyArray);
+    const val = storeMap.get(key);
+    const req = new MockIDBRequest();

@@ -99,3 +99,4 @@ describe('useGameHistory hook', () => {
       losses: 0,
       draws: 0,
       ongoing: 1, // status: 0
+    });

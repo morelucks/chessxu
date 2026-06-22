@@ -223,3 +223,5 @@ describe('GameSyncService', () => {
 
     it('should force update already completed cached games if forceRefresh is true', async () => {
       vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
+        {
+          gameId: 1,

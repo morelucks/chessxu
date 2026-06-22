@@ -47,5 +47,21 @@ export default defineConfig(({ command }) => {
     optimizeDeps: {
       include: ['buffer'],
     },
+    build: {
+      rollupOptions: {
+        input: {
+          main: path.resolve('./index.html'),
+          sw: path.resolve('./src/sw.ts'),
+        },
+        output: {
+          entryFileNames: (chunkInfo) => {
+            if (chunkInfo.name === 'sw') {
+              return 'sw.js';
+            }
+            return 'assets/[name]-[hash].js';
+          },
+        },
+      },
+    },
   };
 });

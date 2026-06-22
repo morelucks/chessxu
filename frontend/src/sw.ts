@@ -81,3 +81,4 @@ self.addEventListener('fetch', (event: any) => {
           // Serve from cache, and update cache in the background
           fetch(request).then((networkResponse) => {
             if (networkResponse && networkResponse.status === 200) {
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));

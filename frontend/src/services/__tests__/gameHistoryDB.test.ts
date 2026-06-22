@@ -165,3 +165,5 @@ const mockIndexedDB = {
 // Stub global indexedDB
 vi.stubGlobal('indexedDB', mockIndexedDB);
 
+// ---------------------------------------------------------------------------
+// Test Suite

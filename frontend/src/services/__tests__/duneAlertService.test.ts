@@ -234,3 +234,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
     // Set last poll and cache in localStorage to simulate recent poll by another tab
     localStorage.setItem(`chessxu_dune_last_poll_${type}`, String(now));
+    localStorage.setItem(`chessxu_dune_cache_${type}`, JSON.stringify([
+      {

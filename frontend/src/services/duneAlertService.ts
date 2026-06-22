@@ -190,3 +190,9 @@ class DuneAlertService {
       const config = DUNE_ALERTS_CONFIG[type];
       if (!config) continue;
 
+      // Deduplication: skip if we've already notified this event
+      if (currentNotifIds.has(event_id)) continue;
+
+      // 1. Alert Type Evaluation Rules
+      let isTriggered = false;
+      let title = config.name;

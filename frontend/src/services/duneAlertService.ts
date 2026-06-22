@@ -532,3 +532,9 @@ class DuneAlertService {
           const cached = localStorage.getItem(cacheKey);
           if (cached) {
             try {
+              const events = JSON.parse(cached) as DuneEventRow[];
+              await this.evaluateAlerts(events, currentUserAddress, isAdmin);
+            } catch (e) {
+              console.error(`[DuneAlertService] Failed to parse cached events for ${type}:`, e);
+            }
+          }

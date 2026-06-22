@@ -118,3 +118,4 @@ describe('useGameHistory hook', () => {
   });
 
   it('should support manual sync (syncNow)', async () => {
+    let result: any;

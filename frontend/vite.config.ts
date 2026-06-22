@@ -48,5 +48,6 @@ export default defineConfig(({ command }) => {
       include: ['buffer'],
     },
     build: {
+      rollupOptions: {
   };
 });

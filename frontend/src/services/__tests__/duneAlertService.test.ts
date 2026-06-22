@@ -250,3 +250,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
     // It should have evaluated the cached events
     expect(evaluateSpy).toHaveBeenCalled();
+    const match = evaluateSpy.mock.calls.find(call => 
+      call[0]?.some((row: DuneEventRow) => row.event_id === 'cached_evt_1')

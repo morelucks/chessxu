@@ -325,3 +325,5 @@ describe('GameHistoryDB Service', () => {
         playerB: '0xCharlie',
         wager: '2',
         isNative: true,
+        boardState: '...',
+        turn: 'w',

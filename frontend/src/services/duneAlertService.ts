@@ -496,3 +496,9 @@ class DuneAlertService {
         volume: 350,
       }
     ];
+
+    const count = Math.random() > 0.5 ? 2 : 1;
+    const shuffled = [...mockData].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+

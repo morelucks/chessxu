@@ -125,3 +125,4 @@ self.addEventListener('fetch', (event: any) => {
             }
             if (request.mode === 'navigate') {
               return caches.match('/');
+            }

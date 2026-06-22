@@ -44,3 +44,4 @@ vi.mock('../../services/gameHistoryDB', () => {
       ]),
     }
   };
+});

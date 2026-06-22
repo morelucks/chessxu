@@ -124,3 +124,6 @@ describe('gameHistoryUtils', () => {
       expect(stats.wins).toBe(1);
       expect(stats.losses).toBe(1);
       expect(stats.draws).toBe(1);
+      expect(stats.ongoing).toBe(1);
+      expect(stats.winRate).toBe(33.33333333333333);
+    });

@@ -136,3 +136,4 @@ describe('useGameHistory hook', () => {
     );
     expect(syncResult).toEqual({
       added: 1,
+      updated: 0,

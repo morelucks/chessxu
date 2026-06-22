@@ -387,3 +387,5 @@ describe('GameHistoryDB Service', () => {
 
     it('should delete a specific game successfully', async () => {
       await gameHistoryDB.deleteGame('celo', 500);
+      const saved = await gameHistoryDB.getGame('celo', 500);
+      expect(saved).toBeNull();

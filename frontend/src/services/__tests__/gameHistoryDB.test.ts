@@ -212,3 +212,5 @@ describe('GameHistoryDB Service', () => {
       await p1;
       await p2;
     });
+  });
+

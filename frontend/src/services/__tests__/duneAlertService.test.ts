@@ -193,3 +193,4 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(storeState.addNotification).not.toHaveBeenCalled();
 
     // Admin
+    await duneAlertService.evaluateAlerts(events, currentUser, true);

@@ -17,3 +17,5 @@ class MockIDBRequest {
 class MockIDBOpenDBRequest extends MockIDBRequest {
   onupgradeneeded: ((ev: any) => void) | null = null;
 }
+
+class MockIDBDatabase {

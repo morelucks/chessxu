@@ -502,3 +502,9 @@ class DuneAlertService {
     return shuffled.slice(0, count);
   }
 
+  /**
+   * Main check function called by the poller heartbeat.
+   */
+  async checkAlerts(currentUserAddress: string | null, isAdmin = false): Promise<void> {
+    if (!this.isTabActive) {
+      console.log('[DuneAlertService] Tab is inactive. Skipping poll check.');

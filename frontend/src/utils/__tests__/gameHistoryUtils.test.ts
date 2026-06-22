@@ -38,3 +38,6 @@ describe('gameHistoryUtils', () => {
       expect(determinePlayerResult(2, true)).toBe('win');
       expect(determinePlayerResult(2, false)).toBe('loss');
     });
+
+    it('returns win for black player when black wins (status 3)', () => {
+      expect(determinePlayerResult(3, true)).toBe('loss');

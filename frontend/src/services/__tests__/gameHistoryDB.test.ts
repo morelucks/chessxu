@@ -196,3 +196,5 @@ describe('GameHistoryDB Service', () => {
       expect(mockDBInstance.createObjectStore).toHaveBeenCalledWith('games', {
         keyPath: ['chain', 'gameId']
       });
+    });
+

@@ -466,3 +466,9 @@ class DuneAlertService {
       },
       {
         event_id: `mock_paymaster_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'paymaster_balance_low',
+        balance: 0.45,
+      },
+      {
+        event_id: `mock_pause_${randId()}`,

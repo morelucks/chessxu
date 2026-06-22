@@ -48,3 +48,4 @@ describe('GameSyncService', () => {
     (gameSyncService as any).syncListeners = [];
   });
 
+  describe('Getters & Subscription', () => {

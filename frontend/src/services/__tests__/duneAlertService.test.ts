@@ -181,3 +181,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     const events: DuneEventRow[] = [
       {
         event_id: 'evt_paused_1',
+        timestamp: new Date().toISOString(),
+        type: 'contract_paused',

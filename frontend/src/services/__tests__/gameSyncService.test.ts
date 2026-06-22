@@ -88,3 +88,4 @@ describe('GameSyncService', () => {
       await gameSyncService.syncPlayerGames(player, 'celo');
       expect(progressList).toHaveLength(0);
     });
+  });

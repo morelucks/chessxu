@@ -129,3 +129,4 @@ describe('useGameHistory hook', () => {
       syncResult = await result.current.syncNow(true);
     });
 
+    expect(gameSyncService.syncPlayerGames).toHaveBeenCalledWith(

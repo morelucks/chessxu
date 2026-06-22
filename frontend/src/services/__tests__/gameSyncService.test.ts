@@ -78,3 +78,4 @@ describe('GameSyncService', () => {
       expect(progressList[progressList.length - 1]).toEqual({
         total: 2,
         synced: 2,
+        failed: 0,

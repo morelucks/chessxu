@@ -359,3 +359,4 @@ describe('GameSyncService', () => {
         duration: 0,
       });
 
+      await gameSyncService.autoSync(player, 'celo');

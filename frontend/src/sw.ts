@@ -20,3 +20,4 @@ self.addEventListener('install', (event: any) => {
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS);
     }).then(() => {
+      return (self as any).skipWaiting();

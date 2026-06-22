@@ -292,3 +292,9 @@ class DuneAlertService {
           // Notify other tabs via localStorage
           if (typeof window !== 'undefined') {
             localStorage.setItem('chessxu_notifications_updated', String(Date.now()));
+          }
+        }
+
+        // 3. Dispatch to Farcaster Frame Push
+        if (store.enabledChannels.farcaster_push && store.farcasterPushEnabled && store.farcasterPushToken && store.farcasterPushUrl) {
+          await sendFrameNotification(store.farcasterPushToken, store.farcasterPushUrl, title, body);

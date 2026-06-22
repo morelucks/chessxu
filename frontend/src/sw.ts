@@ -31,3 +31,4 @@
 // Filter request method to only handle GET requests
 // Filter request destination to bypass API and RPC nodes
 // Avoid caching third party RPC networks
+// Bypass Alchemy RPC endpoint

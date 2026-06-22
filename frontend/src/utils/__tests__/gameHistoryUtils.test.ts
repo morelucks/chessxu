@@ -118,3 +118,6 @@ describe('gameHistoryUtils', () => {
         { ...mockGame, status: 4, playerW: '0xPlayer' }, // draw
         { ...mockGame, status: 1, playerW: '0xPlayer' }, // ongoing
       ];
+
+      const stats = calculatePlayerStats(games, '0xPlayer');
+      expect(stats.totalGames).toBe(4);

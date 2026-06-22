@@ -128,3 +128,5 @@ describe('GameSyncService', () => {
       expect(celoService.getGame).toHaveBeenCalledWith(1);
 
       expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(2);
+      expect(result.success).toBe(true);
+      expect(result.gamesAdded).toBe(2);

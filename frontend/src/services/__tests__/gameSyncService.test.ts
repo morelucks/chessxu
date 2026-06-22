@@ -79,3 +79,5 @@ describe('GameSyncService', () => {
         total: 2,
         synced: 2,
         failed: 0,
+        isComplete: true,
+      });

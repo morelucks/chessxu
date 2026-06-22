@@ -95,3 +95,5 @@ const mockObjectStore = {
       openCursor: vi.fn().mockImplementation((_query: any, _direction: string) => {
         const values = Array.from(storeMap.values());
         if (indexName === 'timestampIndex') {
+          // Sort by timestamp descending
+          values.sort((a, b) => b.timestamp - a.timestamp);

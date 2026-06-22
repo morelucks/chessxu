@@ -150,3 +150,6 @@ describe('gameHistoryUtils', () => {
     it('returns correct label for zero wager', () => {
       expect(formatWager('0', true, 'celo')).toBe('No wager');
     });
+
+    it('returns formatted wager with proper currency', () => {
+      expect(formatWager('0.5', true, 'celo')).toBe('0.5 CELO');

@@ -64,3 +64,6 @@ describe('gameHistoryUtils', () => {
       expect(getStatusText(4)).toBe('Draw');
       expect(getStatusText(5)).toBe('Cancelled');
     });
+
+    it('returns Unknown for invalid status', () => {
+      expect(getStatusText(99 as any)).toBe('Unknown');

@@ -340,3 +340,5 @@ describe('GameSyncService', () => {
       expect(success).toBe(false);
       expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
     });
+
+    it('should return false on exception during single game sync', async () => {

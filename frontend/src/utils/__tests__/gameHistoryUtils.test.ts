@@ -104,3 +104,6 @@ describe('gameHistoryUtils', () => {
     });
 
     it('returns player color', () => {
+      expect(getPlayerColor(mockGame, '0xWhiteAddress')).toBe('white');
+      expect(getPlayerColor(mockGame, '0xBlackAddress')).toBe('black');
+      expect(getPlayerColor(mockGame, '0xUnknownAddress')).toBeNull();

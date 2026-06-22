@@ -412,3 +412,9 @@ class DuneAlertService {
   /**
    * Utility to generate mock events on the fly (for backwards compatibility/demo).
    */
+  generateMockEvents(currentUserAddress: string | null): DuneEventRow[] {
+    const addr = currentUserAddress || '0x9999999999999999999999999999999999999999';
+    const randId = () => Math.floor(Math.random() * 10000000).toString();
+
+    const mockData: DuneEventRow[] = [
+      {

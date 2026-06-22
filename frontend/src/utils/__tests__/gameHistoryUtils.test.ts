@@ -58,3 +58,6 @@ describe('gameHistoryUtils', () => {
   describe('getStatusText', () => {
     it('returns correct text for all known statuses', () => {
       expect(getStatusText(0)).toBe('Waiting for opponent');
+      expect(getStatusText(1)).toBe('Game in progress');
+      expect(getStatusText(2)).toBe('White wins');
+      expect(getStatusText(3)).toBe('Black wins');

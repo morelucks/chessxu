@@ -145,3 +145,4 @@ describe('GameSyncService', () => {
         turn: 'w',
         status: 1,
       } as any);
+

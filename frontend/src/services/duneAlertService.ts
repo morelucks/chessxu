@@ -460,3 +460,9 @@ class DuneAlertService {
       {
         event_id: `mock_daily_rec_${randId()}`,
         timestamp: new Date().toISOString(),
+        type: 'daily_games_record',
+        dailyCount: 156,
+        previousRecord: 150,
+      },
+      {
+        event_id: `mock_paymaster_${randId()}`,

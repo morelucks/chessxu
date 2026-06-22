@@ -113,3 +113,4 @@ self.addEventListener('fetch', (event: any) => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseToCache);

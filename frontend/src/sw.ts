@@ -49,3 +49,4 @@ self.addEventListener('fetch', (event: any) => {
   if (request.method !== 'GET') return;
 
   // For API or RPC requests, always go network-only
+  if (

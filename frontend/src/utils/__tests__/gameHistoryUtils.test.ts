@@ -55,3 +55,6 @@ describe('gameHistoryUtils', () => {
     });
   });
 
+  describe('getStatusText', () => {
+    it('returns correct text for all known statuses', () => {
+      expect(getStatusText(0)).toBe('Waiting for opponent');

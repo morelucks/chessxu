@@ -133,3 +133,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
   it('should deduplicate already seen alerts', async () => {
     // Put event in notifications list
+    storeState.notifications = [{ id: 'evt_dup_1' }];
+

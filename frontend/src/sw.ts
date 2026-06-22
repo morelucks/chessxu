@@ -112,3 +112,4 @@ self.addEventListener('fetch', (event: any) => {
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {

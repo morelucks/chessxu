@@ -79,3 +79,4 @@ self.addEventListener('fetch', (event: any) => {
       caches.match(request).then((cachedResponse) => {
         if (cachedResponse) {
           // Serve from cache, and update cache in the background
+          fetch(request).then((networkResponse) => {

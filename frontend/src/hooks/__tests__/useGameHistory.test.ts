@@ -24,3 +24,4 @@ vi.mock('../../services/gameHistoryDB', () => {
   return {
     gameHistoryDB: {
       init: vi.fn().mockResolvedValue(undefined),
+      getPlayerGames: vi.fn().mockResolvedValue([

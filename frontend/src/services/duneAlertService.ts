@@ -454,3 +454,9 @@ class DuneAlertService {
       {
         event_id: `mock_wager_${randId()}`,
         timestamp: new Date().toISOString(),
+        type: 'wager_milestone',
+        cumulativeVolume: 10000,
+      },
+      {
+        event_id: `mock_daily_rec_${randId()}`,
+        timestamp: new Date().toISOString(),

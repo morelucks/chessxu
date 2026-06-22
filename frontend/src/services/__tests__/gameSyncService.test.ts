@@ -263,3 +263,5 @@ describe('GameSyncService', () => {
         'player-w': player,
         'player-b': '0xBob',
         wager: '500',
+        'is-stx': true,
+        'board-state': 'stacks-state',

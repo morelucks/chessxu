@@ -67,3 +67,4 @@ self.addEventListener('fetch', (event: any) => {
     url.pathname.includes('/assets/') || 
     url.pathname.endsWith('.js') || 
     url.pathname.endsWith('.css') || 
+    url.pathname.endsWith('.png') || 

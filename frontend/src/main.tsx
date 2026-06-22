@@ -18,6 +18,7 @@ if ("serviceWorker" in navigator) {
       .register(swUrl, {
         type: import.meta.env.DEV ? "module" : "classic",
       })
+      .then((registration) => {
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 

@@ -104,3 +104,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
     expect(storeState.addNotification).not.toHaveBeenCalled();
   });
+
+  it('should trigger game_resolved alert when game is completed and user participated', async () => {

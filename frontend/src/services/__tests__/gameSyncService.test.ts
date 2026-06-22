@@ -354,3 +354,4 @@ describe('GameSyncService', () => {
       const spy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
         success: true,
         gamesAdded: 0,
+        gamesUpdated: 0,

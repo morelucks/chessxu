@@ -248,3 +248,5 @@ describe('GameSyncService', () => {
         boardState: 'state',
         turn: 'w',
         status: 2,
+      } as any);
+

@@ -135,3 +135,4 @@ describe('useGameHistory hook', () => {
       { maxGames: 50, forceRefresh: true }
     );
     expect(syncResult).toEqual({
+      added: 1,

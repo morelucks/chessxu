@@ -14,6 +14,7 @@ if (typeof window !== "undefined") {
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     const swUrl = import.meta.env.DEV ? "/src/sw.ts" : "/sw.js";
+    navigator.serviceWorker
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 

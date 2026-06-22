@@ -136,3 +136,9 @@ export async function sendWebhookNotification(
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(payload),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error('[Webhook] Failed to POST webhook:', err);
+    return false;

@@ -290,3 +290,5 @@ describe('GameSyncService', () => {
       vi.mocked(celoService.getGame).mockRejectedValueOnce(new Error('RPC Error'));
 
       const result = await gameSyncService.syncPlayerGames(player, 'celo');
+
+      expect(result.success).toBe(true); // Loops continue despite warning logs

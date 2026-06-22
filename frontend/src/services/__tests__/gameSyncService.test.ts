@@ -186,3 +186,5 @@ describe('GameSyncService', () => {
       expect(result.gamesUpdated).toBe(1);
     });
 
+    it('should skip updating already completed cached games if forceRefresh is false', async () => {
+      // Mock existing cached completed game

@@ -38,3 +38,4 @@ self.addEventListener('activate', (event: any) => {
       return (self as any).clients.claim();
     })
   );
+});

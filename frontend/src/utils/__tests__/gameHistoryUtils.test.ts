@@ -141,3 +141,6 @@ describe('gameHistoryUtils', () => {
     });
 
     it('handles short or missing address', () => {
+      expect(formatAddress('')).toBe('—');
+      expect(formatAddress('123')).toBe('123');
+    });

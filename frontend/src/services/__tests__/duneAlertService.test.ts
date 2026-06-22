@@ -15,3 +15,5 @@ vi.mock('../../zustand/notificationStore', () => {
       leaderboard_rank: true,
       wager_milestone: true,
       daily_games_record: true,
+      paymaster_balance_low: true,
+      contract_paused: true,

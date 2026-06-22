@@ -15,3 +15,4 @@ const STATIC_ASSETS = [
 ];
 
 // Install event: cache static assets
+self.addEventListener('install', (event: any) => {

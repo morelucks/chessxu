@@ -81,3 +81,6 @@ describe('gameHistoryUtils', () => {
   describe('getResultColor', () => {
     it('returns green for win, red for loss, gray for draw', () => {
       expect(getResultColor('win')).toBe('#22c55e');
+      expect(getResultColor('loss')).toBe('#ef4444');
+      expect(getResultColor('draw')).toBe('#94a3b8');
+      expect(getResultColor(undefined as any)).toBe('#f59e0b');

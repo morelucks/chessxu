@@ -106,3 +106,9 @@ export async function sendWebhookNotification(
   details: Record<string, any> = {}
 ): Promise<boolean> {
   if (!webhookUrl) return false;
+  console.log(`[Webhook] Dispatching alert to ${webhookUrl}:`, { alertType, severity, title, body });
+  
+  // Format matching Discord embed structure
+  const payload = {
+    username: 'Chessxu Alerts',
+    avatar_url: 'https://chessxu.io/logo.png',

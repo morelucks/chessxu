@@ -103,3 +103,4 @@ self.addEventListener('fetch', (event: any) => {
             return caches.match('/');
           }
         });
+      })

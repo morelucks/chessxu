@@ -46,3 +46,5 @@ describe('GameSyncService', () => {
     (gameSyncService as any).isSyncing = false;
     (gameSyncService as any).lastSyncTime = null;
     (gameSyncService as any).syncListeners = [];
+  });
+

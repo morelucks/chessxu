@@ -36,3 +36,5 @@ class MockIDBTransaction {
   objectStore(_name: string) {
     return mockObjectStore;
   }
+}
+

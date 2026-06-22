@@ -350,3 +350,5 @@ describe('GameHistoryDB Service', () => {
       expect(aliceCeloGames).toHaveLength(1);
       expect(aliceCeloGames[0].gameId).toBe(1);
     });
+
+    it('should return player games sorted by timestamp descending', async () => {

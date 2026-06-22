@@ -586,3 +586,9 @@ class DuneAlertService {
   }
 
   /**
+   * Stops the polling loop.
+   */
+  stopPolling(): void {
+    if (this.pollingIntervalId) {
+      console.log('[DuneAlertService] Stopping alerts scheduler...');
+      clearInterval(this.pollingIntervalId);

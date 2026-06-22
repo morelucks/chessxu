@@ -448,3 +448,5 @@ describe('GameHistoryDB Service', () => {
       expect(stats.oldestGame).toBeNull();
       expect(stats.newestGame).toBeNull();
     });
+  });
+});

@@ -162,3 +162,4 @@ describe('useGameHistory hook', () => {
     vi.mocked(gameHistoryDB.getPlayerGames).mockRejectedValueOnce(
       new Error('DB Query Failed')
     );
+

@@ -181,3 +181,5 @@ describe('GameSyncService', () => {
         status: 1, // Still ongoing (status < 2)
       } as any);
 
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
+      expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);

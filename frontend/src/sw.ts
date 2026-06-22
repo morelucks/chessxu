@@ -54,3 +54,4 @@ self.addEventListener('fetch', (event: any) => {
     url.host.includes('rpc') || 
     url.host.includes('mainnet') || 
     url.host.includes('testnet') ||
+    url.host.includes('infura') ||

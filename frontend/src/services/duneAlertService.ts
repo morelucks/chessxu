@@ -10,3 +10,9 @@ import { DUNE_ALERTS_CONFIG } from '../config/duneAlerts';
 export interface DuneEventRow {
   event_id: string; // Used for deduplication
   timestamp: string;
+  type: string;
+  creator?: string;
+  joiner?: string;
+  playerW?: string;
+  playerB?: string;
+  gameId?: number;

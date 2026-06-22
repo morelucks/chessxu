@@ -87,3 +87,6 @@ describe('gameHistoryUtils', () => {
     });
   });
 
+  describe('player roles and addresses', () => {
+    it('correctly identifies player color roles', () => {
+      expect(isPlayerWhite(mockGame, '0xWhiteAddress')).toBe(true);

@@ -267,3 +267,4 @@ describe('GameSyncService', () => {
         'board-state': 'stacks-state',
         turn: 'w',
         status: 4, // Draw
+      });

@@ -37,3 +37,4 @@ self.addEventListener('activate', (event: any) => {
     }).then(() => {
       return (self as any).clients.claim();
     })
+  );

@@ -228,3 +228,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     );
   });
 
+  it('should skip network polling and use cached events if polled within interval (multi-tab rate limiting)', async () => {
+    const type = 'contract_paused';

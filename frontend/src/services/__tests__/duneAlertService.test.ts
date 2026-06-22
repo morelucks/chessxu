@@ -19,3 +19,5 @@ vi.mock('../../zustand/notificationStore', () => {
       contract_paused: true,
       unusual_activity: true,
       weekly_digest: true,
+    },
+    enabledChannels: {

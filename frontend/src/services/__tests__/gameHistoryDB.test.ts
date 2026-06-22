@@ -261,3 +261,4 @@ describe('GameHistoryDB Service', () => {
         lastUpdated: 0,
         syncedAt: 0
       },
+      {

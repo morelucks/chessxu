@@ -220,3 +220,5 @@ describe('GameSyncService', () => {
       expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
       expect(result.gamesUpdated).toBe(0);
     });
+
+    it('should force update already completed cached games if forceRefresh is true', async () => {

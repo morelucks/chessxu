@@ -23,3 +23,5 @@ vi.mock('../../zustand/notificationStore', () => {
     enabledChannels: {
       in_app: true,
       farcaster_push: true,
+      webhook: true,
+    },

@@ -107,3 +107,5 @@ const mockObjectStore = {
             return values[cursorIndex];
           },
           continue: () => {
+            cursorIndex++;
+            if (cursorIndex < values.length) {

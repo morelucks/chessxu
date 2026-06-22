@@ -212,3 +212,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         type: 'leaderboard_rank',
         player: currentUser,
         rank: 3,
+        previousRank: 6, // Delta of 3
+      },

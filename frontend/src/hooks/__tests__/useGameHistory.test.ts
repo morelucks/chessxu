@@ -54,3 +54,4 @@ vi.mock('../../services/gameSyncService', () => {
       syncing: false,
       syncPlayerGames: vi.fn().mockResolvedValue({
         added: 1,
+        updated: 0,

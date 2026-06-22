@@ -268,3 +268,9 @@ class DuneAlertService {
           body = `High activity: ${row.hourlyGames} games created in the last hour (7-day average: ${row.averageHourlyGames}/hr)`;
           details.hourly_games = row.hourlyGames;
           details.average_hourly = row.averageHourlyGames;
+        }
+      } else if (type === 'weekly_digest' && currentUserAddress) {
+        if (row.player?.toLowerCase() === currentUserAddress.toLowerCase()) {
+          isTriggered = true;
+          body = `Your Weekly digest: Played ${row.gamesPlayed} games (${row.wins} W / ${row.losses} L / ${row.draws} D) with $${row.volume} wager volume.`;
+          details.games_played = row.gamesPlayed;

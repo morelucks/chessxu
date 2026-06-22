@@ -26,3 +26,4 @@
 // Set up activate event listener
 // Retrieve all cache keys
 // Delete any cache that doesn't match current CACHE_NAME
+// Claim clients to start controlling them immediately

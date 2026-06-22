@@ -63,3 +63,4 @@ vi.mock('../../services/gameSyncService', () => {
   };
 });
 
+describe('useGameHistory hook', () => {

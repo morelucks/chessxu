@@ -29,3 +29,5 @@ class MockIDBDatabase {
   transaction = (_storeNames: string[], mode: string) => {
     return new MockIDBTransaction(mode);
   };
+}
+

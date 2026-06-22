@@ -96,3 +96,4 @@ self.addEventListener('fetch', (event: any) => {
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(request, responseToCache);
           });
+          return networkResponse;

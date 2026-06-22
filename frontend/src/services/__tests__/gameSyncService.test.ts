@@ -115,3 +115,4 @@ describe('GameSyncService', () => {
             turn: 'b',
             status: 3, // Black wins (player B wins)
           } as any;
+        }

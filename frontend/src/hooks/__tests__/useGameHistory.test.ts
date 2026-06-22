@@ -140,3 +140,4 @@ describe('useGameHistory hook', () => {
       failed: 0,
     });
   });
+

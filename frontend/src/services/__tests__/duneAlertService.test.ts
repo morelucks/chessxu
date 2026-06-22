@@ -244,3 +244,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       }
     ]));
 
+    const evaluateSpy = vi.spyOn(duneAlertService, 'evaluateAlerts');
+

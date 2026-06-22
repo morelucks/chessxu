@@ -58,3 +58,4 @@ describe('GameSyncService', () => {
       const progressList: any[] = [];
       const unsubscribe = gameSyncService.onSyncProgress((p) => {
         progressList.push(p);
+      });

@@ -35,3 +35,4 @@ vi.mock('../../services/gameHistoryDB', () => {
         },
         {
           gameId: 2,
+          playerW: '0x2222222222222222222222222222222222222222',

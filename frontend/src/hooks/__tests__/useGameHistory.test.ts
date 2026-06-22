@@ -165,3 +165,12 @@ describe('useGameHistory hook', () => {
 
     let result: any;
     await act(async () => {
+      const rendered = renderHook(() => useGameHistory());
+      result = rendered.result;
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBe('DB Query Failed');
+    expect(result.current.games).toEqual([]);
+  });
+});

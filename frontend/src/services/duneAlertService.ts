@@ -478,3 +478,9 @@ class DuneAlertService {
         paused: true,
       },
       {
+        event_id: `mock_activity_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'unusual_activity',
+        hourlyGames: 45,
+        averageHourlyGames: 12,
+      },

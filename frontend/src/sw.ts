@@ -4,3 +4,4 @@
 // It works in tandem with the offline-first IndexedDB database.
 // Goals:
 // 1. Cache static assets such as HTML, JS, CSS, and main assets.
+// 2. Cache chess specific images used across game screens.

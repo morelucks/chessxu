@@ -22,3 +22,9 @@ export interface DuneEventRow {
   player?: string;
   rank?: number;
   previousRank?: number;
+  cumulativeVolume?: number;
+  dailyCount?: number;
+  previousRecord?: number;
+  balance?: number;
+  chain?: string;
+  paused?: boolean;

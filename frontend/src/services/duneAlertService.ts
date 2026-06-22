@@ -424,3 +424,9 @@ class DuneAlertService {
         creator: addr,
         joiner: '0x1234567890abcdef1234567890abcdef12345678',
         gameId: 42,
+      },
+      {
+        event_id: `mock_res_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'game_resolved',
+        playerW: addr,

@@ -51,3 +51,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     // Mock global fetch to prevent actual network calls hanging during tests
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true,
+      json: async () => ({}),
+    }));

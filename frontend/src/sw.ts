@@ -78,3 +78,4 @@ self.addEventListener('fetch', (event: any) => {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
         if (cachedResponse) {
+          // Serve from cache, and update cache in the background

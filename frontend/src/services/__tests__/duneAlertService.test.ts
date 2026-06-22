@@ -82,3 +82,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       expect.objectContaining({
         id: 'evt_joined_1',
         type: 'game_joined',
+        severity: 'high',
+        body: 'Player 0x2222 joined game #101',

@@ -18,3 +18,6 @@ import {
 import { CachedGame } from '../../services/gameHistoryDB';
 
 describe('gameHistoryUtils', () => {
+  const mockGame: CachedGame = {
+    gameId: 1,
+    chain: 'celo',

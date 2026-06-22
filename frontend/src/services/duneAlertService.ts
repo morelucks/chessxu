@@ -316,3 +316,9 @@ class DuneAlertService {
     const randId = () => Math.floor(Math.random() * 10000000).toString();
 
     switch (type) {
+      case 'game_joined':
+        return [{
+          event_id: `mock_join_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'game_joined',
+          creator: addr,

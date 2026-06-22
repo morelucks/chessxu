@@ -295,3 +295,5 @@ describe('GameSyncService', () => {
       expect(result.errors).toHaveLength(0); // Warn logs do not propagate to result.errors
     });
 
+    it('should handle db save failures and report them in errors array', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);

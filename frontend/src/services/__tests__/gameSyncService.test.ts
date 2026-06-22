@@ -43,3 +43,4 @@ describe('GameSyncService', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Reset private fields on the singleton
+    (gameSyncService as any).isSyncing = false;

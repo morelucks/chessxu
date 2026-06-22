@@ -79,3 +79,4 @@ describe('useGameHistory hook', () => {
     expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledWith(
       '0x1111111111111111111111111111111111111111',
       'Celo'
+    );

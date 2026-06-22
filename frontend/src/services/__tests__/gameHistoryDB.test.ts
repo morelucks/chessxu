@@ -224,3 +224,4 @@ describe('GameHistoryDB Service', () => {
       isNative: true,
       boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
       turn: 'w',
+      status: 1,

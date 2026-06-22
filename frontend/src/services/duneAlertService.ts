@@ -526,3 +526,9 @@ class DuneAlertService {
         lastPoll = Number(localStorage.getItem(lastPollKey) || '0');
       }
 
+      if (now - lastPoll < interval) {
+        // Multi-tab rate limiting: read from local cache to evaluate alerts
+        if (typeof window !== 'undefined') {
+          const cached = localStorage.getItem(cacheKey);
+          if (cached) {
+            try {

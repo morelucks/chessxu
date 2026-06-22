@@ -48,3 +48,5 @@ const mockObjectStore = {
     const req = new MockIDBRequest();
     req.result = [game.chain, game.gameId];
     setTimeout(() => {
+      if (req.onsuccess) req.onsuccess({ target: req } as any);
+    }, 0);

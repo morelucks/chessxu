@@ -64,3 +64,5 @@ const mockObjectStore = {
   }),
   getAll: vi.fn().mockImplementation(() => {
     const values = Array.from(storeMap.values());
+    const req = new MockIDBRequest();
+    req.result = values;

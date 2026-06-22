@@ -81,3 +81,5 @@ describe('GameSyncService', () => {
         failed: 0,
         isComplete: true,
       });
+
+      // Verify unsubscribe works

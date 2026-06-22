@@ -580,3 +580,9 @@ class DuneAlertService {
     void this.checkAlerts(currentUserAddress, isAdmin);
 
     // Run the heartbeat scheduler every 5 seconds to support stagger
+    this.pollingIntervalId = setInterval(() => {
+      void this.checkAlerts(currentUserAddress, isAdmin);
+    }, 5000);
+  }
+
+  /**

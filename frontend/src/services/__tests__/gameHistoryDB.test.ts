@@ -362,3 +362,5 @@ describe('GameHistoryDB Service', () => {
       expect(recent).toHaveLength(2);
       expect(recent[0].gameId).toBe(3); // Newest
       expect(recent[1].gameId).toBe(2);
+    });
+  });

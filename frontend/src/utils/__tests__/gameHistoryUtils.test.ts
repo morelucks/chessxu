@@ -110,3 +110,6 @@ describe('gameHistoryUtils', () => {
     });
   });
 
+  describe('calculatePlayerStats', () => {
+    it('calculates wins, losses, draws, and win rate correctly', () => {
+      const games: CachedGame[] = [

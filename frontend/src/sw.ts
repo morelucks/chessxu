@@ -45,3 +45,4 @@
 // Check if file extension is .svg
 // Check if file extension is .ico
 // Check if file extension is .woff
+// Check if file extension is .woff2

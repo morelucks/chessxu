@@ -77,3 +77,4 @@ self.addEventListener('fetch', (event: any) => {
   if (isStaticAsset) {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
+        if (cachedResponse) {

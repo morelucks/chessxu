@@ -420,3 +420,5 @@ describe('GameHistoryDB Service', () => {
           chain: 'celo',
           playerW: '0xW',
           playerB: '0xB',
+          wager: '5',
+          isNative: true,

@@ -32,3 +32,4 @@ vi.mock('../../services/gameHistoryDB', () => {
           status: 2, // White wins
           wager: '10',
           chain: 'Celo',
+        },

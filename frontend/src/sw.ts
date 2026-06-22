@@ -11,3 +11,4 @@ const STATIC_ASSETS = [
   '/chess-king.jpg',
   '/chess-knight.jpg',
   '/chess-queen.jpg',
+  '/chess-rook.jpg',

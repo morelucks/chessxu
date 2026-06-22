@@ -38,3 +38,4 @@
 // Determine if request is for a static asset
 // Check if URL is in static assets list
 // Check if URL path includes compiled assets
+// Check if file extension is .js

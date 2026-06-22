@@ -124,3 +124,9 @@ export async function sendWebhookNotification(
         })),
         timestamp: new Date().toISOString(),
         footer: {
+          text: 'Chessxu Analytics Pipeline',
+        }
+      }
+    ]
+  };
+

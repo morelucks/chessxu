@@ -12,3 +12,4 @@
 // - Install: Pre-cache core shell resources.
 // - Activate: Clean up outdated caches from previous versions.
 // - Fetch: Intercept requests, serve from cache or network.
+// Define Cache Name for versioning

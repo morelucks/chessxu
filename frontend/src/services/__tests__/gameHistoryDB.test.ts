@@ -81,3 +81,5 @@ const mockObjectStore = {
     }, 0);
     return req;
   }),
+  clear: vi.fn().mockImplementation(() => {
+    storeMap.clear();

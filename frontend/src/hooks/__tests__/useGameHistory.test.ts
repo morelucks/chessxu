@@ -138,3 +138,4 @@ describe('useGameHistory hook', () => {
       added: 1,
       updated: 0,
       failed: 0,
+    });

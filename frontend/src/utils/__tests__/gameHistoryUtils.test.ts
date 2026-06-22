@@ -26,3 +26,6 @@ describe('gameHistoryUtils', () => {
     wager: '100000000000000000', // 0.1 CELO in Wei or standard units
     isNative: true,
     boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+    turn: 'w',
+    status: 1, // in progress
+    timestamp: Date.now() - 3600000, // 1 hour ago

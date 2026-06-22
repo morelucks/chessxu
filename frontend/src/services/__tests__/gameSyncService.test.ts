@@ -121,3 +121,5 @@ describe('GameSyncService', () => {
 
       const result = await gameSyncService.syncPlayerGames(player, 'celo');
 
+      expect(gameHistoryDB.init).toHaveBeenCalled();
+      expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledWith(player, 'celo');

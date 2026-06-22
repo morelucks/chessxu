@@ -40,3 +40,4 @@
 // Check if URL path includes compiled assets
 // Check if file extension is .js
 // Check if file extension is .css
+// Check if file extension is .png

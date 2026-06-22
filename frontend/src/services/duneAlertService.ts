@@ -208,3 +208,9 @@ class DuneAlertService {
           details.joiner = row.joiner;
         }
       } else if (type === 'game_resolved' && currentUserAddress) {
+        if (row.playerW?.toLowerCase() === currentUserAddress.toLowerCase() ||
+            row.playerB?.toLowerCase() === currentUserAddress.toLowerCase()) {
+          isTriggered = true;
+          const isWinner = row.winner?.toLowerCase() === currentUserAddress.toLowerCase();
+          const outcomeText = row.status === 4 ? 'Draw' : isWinner ? 'You Won!' : 'You Lost';
+          body = `Game #${row.gameId} resolved. Result: ${outcomeText}`;

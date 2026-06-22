@@ -70,3 +70,9 @@ export async function sendFrameNotification(
   url: string,
   title: string,
   body: string
+): Promise<boolean> {
+  console.log(`[Farcaster Push] Sending notification to ${url} with token ${token}:`, { title, body });
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {

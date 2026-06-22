@@ -400,3 +400,9 @@ class DuneAlertService {
           player: addr,
           gamesPlayed: 14,
           wins: 9,
+          losses: 4,
+          draws: 1,
+          volume: 350,
+        }];
+      default:
+        return [];

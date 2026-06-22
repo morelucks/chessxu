@@ -59,5 +59,6 @@ export default defineConfig(({ command }) => {
               return 'sw.js';
             }
             return 'assets/[name]-[hash].js';
+          },
   };
 });

@@ -242,3 +242,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         chain: 'Celo',
         paused: true,
       }
+    ]));
+

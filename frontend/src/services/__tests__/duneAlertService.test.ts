@@ -96,3 +96,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         type: 'game_joined',
         creator: '0x3333333333333333333333333333333333333333',
         joiner: currentUser,
+        gameId: 102,
+      },

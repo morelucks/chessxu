@@ -103,3 +103,5 @@ describe('GameSyncService', () => {
             boardState: 'state2',
             turn: 'w',
             status: 2, // White wins
+          } as any;
+        }

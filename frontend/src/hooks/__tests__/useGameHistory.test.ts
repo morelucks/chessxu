@@ -59,3 +59,4 @@ vi.mock('../../services/gameSyncService', () => {
       }),
       onSyncProgress: vi.fn().mockReturnValue(() => {}),
       autoSync: vi.fn().mockResolvedValue(undefined),
+    }

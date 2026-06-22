@@ -77,3 +77,5 @@ const mockObjectStore = {
     const req = new MockIDBRequest();
     req.result = undefined;
     setTimeout(() => {
+      if (req.onsuccess) req.onsuccess({ target: req } as any);
+    }, 0);

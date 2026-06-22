@@ -5,3 +5,4 @@
 // Goals:
 // 1. Cache static assets such as HTML, JS, CSS, and main assets.
 // 2. Cache chess specific images used across game screens.
+// 3. Cache styles and styling files.

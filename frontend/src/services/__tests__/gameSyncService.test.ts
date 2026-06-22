@@ -278,3 +278,5 @@ describe('GameSyncService', () => {
       expect(result.gamesAdded).toBe(1);
     });
   });
+
+  describe('Error Handling & Concurrency Guard', () => {

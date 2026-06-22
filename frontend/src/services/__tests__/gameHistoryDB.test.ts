@@ -276,3 +276,5 @@ describe('GameHistoryDB Service', () => {
         syncedAt: 0
       }
     ];
+
+    it('should save multiple games in batch successfully', async () => {

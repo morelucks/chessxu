@@ -167,3 +167,6 @@ describe('gameHistoryUtils', () => {
       expect(isGameCompleted({ ...mockGame, status: 1 })).toBe(false);
       expect(isGameCompleted({ ...mockGame, status: 2 })).toBe(true);
     });
+  });
+
+  describe('parseFEN', () => {

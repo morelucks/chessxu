@@ -56,3 +56,4 @@ vi.mock('../../services/gameSyncService', () => {
         added: 1,
         updated: 0,
         failed: 0,
+      }),

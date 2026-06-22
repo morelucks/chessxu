@@ -416,3 +416,5 @@ describe('GameHistoryDB Service', () => {
           syncedAt: 0
         },
         {
+          gameId: 2,
+          chain: 'celo',

@@ -358,3 +358,9 @@ class DuneAlertService {
         return [{
           event_id: `mock_wager_${randId()}`,
           timestamp: new Date().toISOString(),
+          type: 'wager_milestone',
+          cumulativeVolume: 10000,
+        }];
+      case 'daily_games_record':
+        return [{
+          event_id: `mock_daily_rec_${randId()}`,

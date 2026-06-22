@@ -362,3 +362,5 @@ describe('GameSyncService', () => {
       await gameSyncService.autoSync(player, 'celo');
       expect(spy).toHaveBeenCalledWith(player, 'celo', { maxGames: 30, forceRefresh: false });
     });
+
+    it('should skip sync if lastSync is within the past hour', async () => {

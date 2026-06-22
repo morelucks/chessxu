@@ -95,3 +95,4 @@ describe('GameSyncService', () => {
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(2);
       vi.mocked(celoService.getGame).mockImplementation(async (id) => {
         if (id === 2) {
+          return {

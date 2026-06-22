@@ -418,3 +418,5 @@ describe('GameHistoryDB Service', () => {
         {
           gameId: 2,
           chain: 'celo',
+          playerW: '0xW',
+          playerB: '0xB',

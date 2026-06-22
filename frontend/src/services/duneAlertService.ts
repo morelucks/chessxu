@@ -34,3 +34,9 @@ export interface DuneEventRow {
   wins?: number;
   losses?: number;
   draws?: number;
+  volume?: number;
+}
+
+// ---------------------------------------------------------------------------
+// Staggered Polling Intervals (milliseconds)
+// ---------------------------------------------------------------------------

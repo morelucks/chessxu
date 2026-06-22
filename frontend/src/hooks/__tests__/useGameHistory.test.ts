@@ -15,3 +15,4 @@ vi.mock('../../zustand/store', () => {
   const mockUseAppStore = (selector: any) => selector(store);
   return {
     default: mockUseAppStore,
+    useAppStore: mockUseAppStore,

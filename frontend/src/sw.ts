@@ -58,3 +58,4 @@
 // Fetch from network first
 // If network successful, update cache
 // If network fails, serve from cache if available
+// If cache miss, fallback to index.html for navigation

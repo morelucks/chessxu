@@ -66,3 +66,4 @@ self.addEventListener('fetch', (event: any) => {
     STATIC_ASSETS.includes(url.pathname) || 
     url.pathname.includes('/assets/') || 
     url.pathname.endsWith('.js') || 
+    url.pathname.endsWith('.css') || 

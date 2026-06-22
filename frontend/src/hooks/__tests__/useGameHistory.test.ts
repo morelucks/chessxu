@@ -8,3 +8,4 @@ import { gameSyncService } from '../../services/gameSyncService';
 
 // Mock Zustand store
 vi.mock('../../zustand/store', () => {
+  const store = {

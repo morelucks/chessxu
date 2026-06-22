@@ -206,3 +206,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
   it('should trigger leaderboard_rank alert on large rank moves', async () => {
     const events: DuneEventRow[] = [
+      {
+        event_id: 'evt_rank_1',

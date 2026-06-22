@@ -346,3 +346,9 @@ class DuneAlertService {
           gameId: 43,
         }];
       case 'leaderboard_rank':
+        return [{
+          event_id: `mock_rank_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'leaderboard_rank',
+          player: addr,
+          rank: 5,

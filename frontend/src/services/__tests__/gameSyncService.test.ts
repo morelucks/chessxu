@@ -305,3 +305,5 @@ describe('GameSyncService', () => {
         boardState: '...',
         turn: 'w',
         status: 1,
+      } as any);
+      vi.mocked(gameHistoryDB.saveGame).mockRejectedValueOnce(new Error('IndexedDB Write Failed'));

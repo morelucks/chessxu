@@ -160,3 +160,4 @@ describe('GameSyncService', () => {
           playerW: player,
           playerB: '0xBob',
           wager: '10',
+          isNative: true,

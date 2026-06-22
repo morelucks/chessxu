@@ -89,3 +89,5 @@ const mockObjectStore = {
       if (req.onsuccess) req.onsuccess({ target: req } as any);
     }, 0);
     return req;
+  }),
+  index: vi.fn().mockImplementation((indexName: string) => {

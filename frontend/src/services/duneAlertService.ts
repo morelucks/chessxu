@@ -220,3 +220,9 @@ class DuneAlertService {
         }
       } else if (type === 'opponent_resigned' && currentUserAddress) {
         if (row.winner?.toLowerCase() === currentUserAddress.toLowerCase()) {
+          isTriggered = true;
+          body = `Opponent resigned in game #${row.gameId}. You received the wager payout!`;
+          details.game_id = row.gameId;
+          details.resigner = row.resignedPlayer;
+        }
+      } else if (type === 'leaderboard_rank' && currentUserAddress) {

@@ -332,3 +332,5 @@ describe('GameSyncService', () => {
       expect(celoService.getGame).toHaveBeenCalledWith(10);
       expect(gameHistoryDB.saveGame).toHaveBeenCalled();
     });
+
+    it('should return false if single game not found', async () => {

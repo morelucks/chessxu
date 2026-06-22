@@ -148,3 +148,4 @@ const mockIndexedDB = {
     } else {
       req.result = mockDBInstance;
       setTimeout(() => {
+        if (req.onupgradeneeded) {

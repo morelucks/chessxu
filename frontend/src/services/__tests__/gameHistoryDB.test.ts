@@ -173,3 +173,5 @@ describe('GameHistoryDB Service', () => {
   beforeEach(() => {
     storeMap.clear();
     dbOpenShouldFail = false;
+    mockDBInstance = new MockIDBDatabase();
+    vi.clearAllMocks();

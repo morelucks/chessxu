@@ -438,3 +438,5 @@ describe('GameHistoryDB Service', () => {
       expect(stats.stacksGames).toBe(1);
       expect(stats.celoGames).toBe(1);
       expect(stats.oldestGame).toBe(1000);
+      expect(stats.newestGame).toBe(2000);
+    });

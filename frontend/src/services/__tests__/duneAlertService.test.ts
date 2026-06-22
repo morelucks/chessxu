@@ -135,3 +135,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     // Put event in notifications list
     storeState.notifications = [{ id: 'evt_dup_1' }];
 
+    const events: DuneEventRow[] = [
+      {

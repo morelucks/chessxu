@@ -25,3 +25,5 @@ class MockIDBDatabase {
   createObjectStore = vi.fn().mockReturnValue({
     createIndex: vi.fn(),
   });
+  close = vi.fn();
+  transaction = (_storeNames: string[], mode: string) => {

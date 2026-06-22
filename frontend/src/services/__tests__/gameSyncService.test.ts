@@ -280,3 +280,5 @@ describe('GameSyncService', () => {
   });
 
   describe('Error Handling & Concurrency Guard', () => {
+    it('should throw an error if sync is already in progress', async () => {
+      (gameSyncService as any).isSyncing = true;

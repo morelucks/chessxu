@@ -72,3 +72,4 @@ describe('useGameHistory hook', () => {
     let result: any;
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
+      result = rendered.result;

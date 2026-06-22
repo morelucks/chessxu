@@ -319,3 +319,4 @@ describe('GameSyncService', () => {
     it('should sync a single Celo game successfully', async () => {
       vi.mocked(celoService.getGame).mockResolvedValueOnce({
         playerW: player,
+        playerB: '0xBob',

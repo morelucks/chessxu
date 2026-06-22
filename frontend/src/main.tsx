@@ -19,6 +19,7 @@ if ("serviceWorker" in navigator) {
         type: import.meta.env.DEV ? "module" : "classic",
       })
       .then((registration) => {
+        console.log("ServiceWorker registered successfully with scope: ", registration.scope);
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 

@@ -240,3 +240,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         timestamp: new Date().toISOString(),
         type: 'contract_paused',
         chain: 'Celo',
+        paused: true,
+      }

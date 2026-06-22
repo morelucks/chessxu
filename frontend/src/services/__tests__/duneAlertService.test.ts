@@ -106,3 +106,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
   });
 
   it('should trigger game_resolved alert when game is completed and user participated', async () => {
+    const events: DuneEventRow[] = [
+      {

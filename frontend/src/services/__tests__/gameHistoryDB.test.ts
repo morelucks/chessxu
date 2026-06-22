@@ -83,3 +83,5 @@ const mockObjectStore = {
   }),
   clear: vi.fn().mockImplementation(() => {
     storeMap.clear();
+    const req = new MockIDBRequest();
+    req.result = undefined;

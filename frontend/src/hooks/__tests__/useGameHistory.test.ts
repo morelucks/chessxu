@@ -67,3 +67,4 @@ describe('useGameHistory hook', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
+

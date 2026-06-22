@@ -33,3 +33,4 @@
 // Avoid caching third party RPC networks
 // Bypass Alchemy RPC endpoint
 // Bypass Infura RPC endpoint
+// Bypass Celo mainnet/testnet RPC endpoints

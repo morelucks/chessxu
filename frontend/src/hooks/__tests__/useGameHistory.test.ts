@@ -157,3 +157,4 @@ describe('useGameHistory hook', () => {
 
     expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledTimes(1);
   });
+

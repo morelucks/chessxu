@@ -130,3 +130,6 @@ describe('gameHistoryUtils', () => {
 
     it('returns zero stats if player has no games', () => {
       const stats = calculatePlayerStats([], '0xPlayer');
+      expect(stats.totalGames).toBe(0);
+      expect(stats.winRate).toBe(0);
+    });

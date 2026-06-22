@@ -385,3 +385,5 @@ describe('GameHistoryDB Service', () => {
       await gameHistoryDB.saveGame(sampleGame);
     });
 
+    it('should delete a specific game successfully', async () => {
+      await gameHistoryDB.deleteGame('celo', 500);

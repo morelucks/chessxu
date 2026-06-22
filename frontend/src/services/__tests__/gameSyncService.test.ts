@@ -31,3 +31,5 @@ vi.mock('../../chess/services/celoService', () => {
 vi.mock('../../chess/services/stacksService', () => {
   return {
     default: {
+      getGameCount: vi.fn().mockResolvedValue(0),
+      getGameState: vi.fn().mockResolvedValue(null),

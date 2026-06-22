@@ -80,3 +80,4 @@ describe('useGameHistory hook', () => {
       '0x1111111111111111111111111111111111111111',
       'Celo'
     );
+    expect(result.current.games).toHaveLength(2);

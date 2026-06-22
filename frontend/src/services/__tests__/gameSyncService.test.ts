@@ -275,3 +275,5 @@ describe('GameSyncService', () => {
       expect(stacksService.getGameState).toHaveBeenCalledWith(1);
       expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
       expect(result.success).toBe(true);
+      expect(result.gamesAdded).toBe(1);
+    });

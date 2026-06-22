@@ -310,3 +310,5 @@ describe('GameSyncService', () => {
 
       const result = await gameSyncService.syncPlayerGames(player, 'celo');
 
+      expect(result.success).toBe(false);
+      expect(result.errors).toContain('Game 1: Error: IndexedDB Write Failed');

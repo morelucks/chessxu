@@ -178,3 +178,9 @@ class DuneAlertService {
    * Evaluates alert rules against query rows.
    */
   async evaluateAlerts(
+    rows: DuneEventRow[],
+    currentUserAddress: string | null,
+    isAdmin = false
+  ): Promise<void> {
+    const store = useNotificationStore.getState();
+    const currentNotifIds = new Set(store.notifications.map(n => n.id));

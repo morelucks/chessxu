@@ -163,3 +163,4 @@ describe('useGameHistory hook', () => {
       new Error('DB Query Failed')
     );
 
+    let result: any;

@@ -53,3 +53,4 @@ describe('GameSyncService', () => {
       expect(gameSyncService.syncing).toBe(false);
       expect(gameSyncService.lastSync).toBeNull();
     });
+

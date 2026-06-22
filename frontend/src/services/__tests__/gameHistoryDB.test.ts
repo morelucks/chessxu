@@ -111,3 +111,4 @@ const mockObjectStore = {
             if (cursorIndex < values.length) {
               req.result = cursor;
             } else {
+              req.result = null;

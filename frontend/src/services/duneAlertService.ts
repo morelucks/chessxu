@@ -568,3 +568,9 @@ class DuneAlertService {
       }
     }
   }
+
+  /**
+   * Starts the polling loop.
+   */
+  startPolling(currentUserAddress: string | null, isAdmin = false, _intervalMs = 60000): void {
+    if (this.pollingIntervalId) return;

@@ -148,3 +148,9 @@ export async function sendWebhookNotification(
 // ---------------------------------------------------------------------------
 // Dune Alert Evaluator Service
 // ---------------------------------------------------------------------------
+
+class DuneAlertService {
+  private pollingIntervalId: NodeJS.Timeout | null = null;
+  private isTabActive = true;
+
+  constructor() {

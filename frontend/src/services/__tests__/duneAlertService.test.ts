@@ -53,3 +53,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       ok: true,
       json: async () => ({}),
     }));
+
+    if (typeof window !== 'undefined') {

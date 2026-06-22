@@ -40,3 +40,5 @@ class MockIDBTransaction {
 
 // In-memory backing store for mock IndexedDB
 const storeMap = new Map<string, any>();
+
+const mockObjectStore = {

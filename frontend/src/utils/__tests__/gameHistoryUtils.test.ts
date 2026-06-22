@@ -101,3 +101,6 @@ describe('gameHistoryUtils', () => {
     it('returns the opponent address', () => {
       expect(getOpponentAddress(mockGame, '0xWhiteAddress')).toBe('0xBlackAddress');
       expect(getOpponentAddress(mockGame, '0xBlackAddress')).toBe('0xWhiteAddress');
+    });
+
+    it('returns player color', () => {

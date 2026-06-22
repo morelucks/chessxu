@@ -138,3 +138,5 @@ let dbOpenShouldFail = false;
 let mockDBInstance = new MockIDBDatabase();
 
 const mockIndexedDB = {
+  open: vi.fn().mockImplementation((_name: string, _version: number) => {
+    const req = new MockIDBOpenDBRequest();

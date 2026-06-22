@@ -146,3 +146,5 @@ const mockIndexedDB = {
         if (req.onerror) req.onerror({ target: req } as any);
       }, 0);
     } else {
+      req.result = mockDBInstance;
+      setTimeout(() => {

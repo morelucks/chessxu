@@ -35,3 +35,6 @@ describe('gameHistoryUtils', () => {
 
   describe('determinePlayerResult', () => {
     it('returns win for white player when white wins (status 2)', () => {
+      expect(determinePlayerResult(2, true)).toBe('win');
+      expect(determinePlayerResult(2, false)).toBe('loss');
+    });

@@ -75,3 +75,5 @@ const mockObjectStore = {
     const key = JSON.stringify(keyArray);
     storeMap.delete(key);
     const req = new MockIDBRequest();
+    req.result = undefined;
+    setTimeout(() => {

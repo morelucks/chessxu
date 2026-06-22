@@ -172,3 +172,9 @@ class DuneAlertService {
         console.error('Failed to reload notifications on storage change:', err);
       });
     }
+  }
+
+  /**
+   * Evaluates alert rules against query rows.
+   */
+  async evaluateAlerts(

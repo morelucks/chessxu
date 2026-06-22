@@ -130,3 +130,4 @@ describe('useGameHistory hook', () => {
     });
 
     expect(gameSyncService.syncPlayerGames).toHaveBeenCalledWith(
+      '0x1111111111111111111111111111111111111111',

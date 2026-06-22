@@ -21,3 +21,5 @@ class MockIDBOpenDBRequest extends MockIDBRequest {
 class MockIDBDatabase {
   objectStoreNames = {
     contains: vi.fn().mockReturnValue(false),
+  };
+  createObjectStore = vi.fn().mockReturnValue({

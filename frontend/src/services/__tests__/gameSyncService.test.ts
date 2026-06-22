@@ -116,3 +116,5 @@ describe('GameSyncService', () => {
             status: 3, // Black wins (player B wins)
           } as any;
         }
+        return null as any;
+      });

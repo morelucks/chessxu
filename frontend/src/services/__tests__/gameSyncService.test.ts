@@ -370,3 +370,5 @@ describe('GameSyncService', () => {
       await gameSyncService.autoSync(player, 'celo');
       expect(spy).not.toHaveBeenCalled();
     });
+
+    it('should sync if lastSync is older than one hour', async () => {

@@ -53,3 +53,4 @@
 // Cache successful network responses
 // Clone response before saving to cache
 // Handle network failure offline
+// Fallback to index.html for navigation requests when offline

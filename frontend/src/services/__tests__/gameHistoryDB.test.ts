@@ -358,3 +358,5 @@ describe('GameHistoryDB Service', () => {
     });
 
     it('should get recent games using cursor-based timestamp ordering', async () => {
+      const recent = await gameHistoryDB.getRecentGames(2);
+      expect(recent).toHaveLength(2);

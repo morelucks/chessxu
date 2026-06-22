@@ -43,3 +43,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
   const storeState = useNotificationStore.getState() as any;
   const currentUser = '0x1111111111111111111111111111111111111111';
 
+  beforeEach(() => {
+    vi.clearAllMocks();

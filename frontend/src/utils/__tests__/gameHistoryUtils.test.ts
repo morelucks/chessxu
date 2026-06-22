@@ -133,3 +133,6 @@ describe('gameHistoryUtils', () => {
       expect(stats.totalGames).toBe(0);
       expect(stats.winRate).toBe(0);
     });
+  });
+
+  describe('formatAddress', () => {

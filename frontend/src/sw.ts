@@ -26,3 +26,4 @@ self.addEventListener('install', (event: any) => {
 });
 
 // Activate event: clean up old caches
+self.addEventListener('activate', (event: any) => {

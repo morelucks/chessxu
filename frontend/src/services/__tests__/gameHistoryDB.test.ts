@@ -185,3 +185,4 @@ describe('GameHistoryDB Service', () => {
   });
 
   describe('Database Initialization', () => {
+    it('should initialize database successfully', async () => {

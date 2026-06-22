@@ -196,3 +196,9 @@ class DuneAlertService {
       // 1. Alert Type Evaluation Rules
       let isTriggered = false;
       let title = config.name;
+      let body = config.description;
+      const details: Record<string, any> = {};
+
+      if (type === 'game_joined' && currentUserAddress) {
+        if (row.creator?.toLowerCase() === currentUserAddress.toLowerCase() &&
+            row.joiner?.toLowerCase() !== currentUserAddress.toLowerCase()) {

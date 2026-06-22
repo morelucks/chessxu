@@ -159,3 +159,5 @@ describe('gameHistoryUtils', () => {
   });
 
   describe('isGameActive and isGameCompleted', () => {
+    it('identifies active and completed games correctly', () => {
+      expect(isGameActive({ ...mockGame, status: 0 })).toBe(true);

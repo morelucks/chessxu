@@ -18,3 +18,4 @@ vi.mock('../../zustand/store', () => {
     useAppStore: mockUseAppStore,
   };
 });
+

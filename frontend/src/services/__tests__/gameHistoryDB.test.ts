@@ -249,3 +249,5 @@ describe('GameHistoryDB Service', () => {
     const sampleGames: CachedGame[] = [
       {
         gameId: 201,
+        chain: 'celo',
+        playerW: '0xW',

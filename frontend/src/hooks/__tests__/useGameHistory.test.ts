@@ -68,3 +68,4 @@ describe('useGameHistory hook', () => {
     vi.clearAllMocks();
   });
 
+  it('should load games initially', async () => {

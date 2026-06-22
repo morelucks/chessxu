@@ -9,3 +9,5 @@ import { gameHistoryDB, CachedGame } from '../gameHistoryDB';
 
 class MockIDBRequest {
   onsuccess: ((ev: any) => void) | null = null;
+  onerror: ((ev: any) => void) | null = null;
+  result: any = null;

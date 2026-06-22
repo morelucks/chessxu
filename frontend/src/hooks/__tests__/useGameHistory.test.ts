@@ -103,3 +103,4 @@ describe('useGameHistory hook', () => {
   });
 
   it('should retrieve a specific game by ID', async () => {
+    let result: any;

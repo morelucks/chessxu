@@ -50,3 +50,5 @@ const mockObjectStore = {
     setTimeout(() => {
       if (req.onsuccess) req.onsuccess({ target: req } as any);
     }, 0);
+    return req;
+  }),

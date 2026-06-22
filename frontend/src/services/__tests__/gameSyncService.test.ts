@@ -150,3 +150,4 @@ describe('GameSyncService', () => {
       expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
       expect(result.gamesAdded).toBe(0);
     });
+

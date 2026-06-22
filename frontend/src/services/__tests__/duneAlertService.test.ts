@@ -220,3 +220,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
     expect(storeState.addNotification).toHaveBeenCalledTimes(1);
     expect(storeState.addNotification).toHaveBeenCalledWith(
+      expect.objectContaining({
+        id: 'evt_rank_1',

@@ -54,5 +54,6 @@ export default defineConfig(({ command }) => {
           sw: path.resolve('./src/sw.ts'),
         },
         output: {
+          entryFileNames: (chunkInfo) => {
   };
 });

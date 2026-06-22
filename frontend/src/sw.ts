@@ -126,3 +126,4 @@ self.addEventListener('fetch', (event: any) => {
             if (request.mode === 'navigate') {
               return caches.match('/');
             }
+            return new Response('Offline content not available', {

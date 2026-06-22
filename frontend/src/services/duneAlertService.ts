@@ -28,3 +28,9 @@ export interface DuneEventRow {
   balance?: number;
   chain?: string;
   paused?: boolean;
+  hourlyGames?: number;
+  averageHourlyGames?: number;
+  gamesPlayed?: number;
+  wins?: number;
+  losses?: number;
+  draws?: number;

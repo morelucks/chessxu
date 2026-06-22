@@ -118,3 +118,5 @@ const mockObjectStore = {
         };
 
         if (values.length > 0) {
+          req.result = cursor;
+        } else {

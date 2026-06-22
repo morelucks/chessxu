@@ -46,3 +46,4 @@ self.addEventListener('fetch', (event: any) => {
   const url = new URL(request.url);
 
   // Only handle GET requests
+  if (request.method !== 'GET') return;

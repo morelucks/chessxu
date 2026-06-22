@@ -232,3 +232,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     const type = 'contract_paused';
     const now = Date.now();
 
+    // Set last poll and cache in localStorage to simulate recent poll by another tab
+    localStorage.setItem(`chessxu_dune_last_poll_${type}`, String(now));

@@ -256,3 +256,9 @@ class DuneAlertService {
       } else if (type === 'contract_paused' && isAdmin) {
         if (row.paused) {
           isTriggered = true;
+          title = '⚠️ CRITICAL: Contract Paused';
+          body = `The Chessxu contract on ${row.chain} has been paused by the deployer.`;
+          details.chain = row.chain;
+          details.paused = true;
+        }
+      } else if (type === 'unusual_activity' && isAdmin) {

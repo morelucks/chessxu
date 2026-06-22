@@ -226,3 +226,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         body: 'Leaderboard Rank Update: You moved UP to #3!',
       })
     );
+  });
+

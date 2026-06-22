@@ -37,3 +37,4 @@ vi.mock('../../services/gameHistoryDB', () => {
           gameId: 2,
           playerW: '0x2222222222222222222222222222222222222222',
           playerB: '0x1111111111111111111111111111111111111111',
+          status: 0, // Ongoing

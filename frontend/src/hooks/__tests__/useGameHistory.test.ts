@@ -112,3 +112,4 @@ describe('useGameHistory hook', () => {
     const game = result.current.getGame(1);
     expect(game).toBeDefined();
     expect(game?.gameId).toBe(1);
+

@@ -52,3 +52,6 @@ describe('gameHistoryUtils', () => {
     it('returns undefined for other statuses', () => {
       expect(determinePlayerResult(1, true)).toBeUndefined();
       expect(determinePlayerResult(0, false)).toBeUndefined();
+    });
+  });
+

@@ -88,3 +88,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     );
   });
 
+  it('should not trigger game_joined alert if the current user is not the creator', async () => {
+    const events: DuneEventRow[] = [

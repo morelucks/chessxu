@@ -132,3 +132,4 @@ self.addEventListener('fetch', (event: any) => {
               headers: new Headers({ 'Content-Type': 'text/plain' })
             });
           });
+        })

@@ -129,3 +129,4 @@ self.addEventListener('fetch', (event: any) => {
             return new Response('Offline content not available', {
               status: 503,
               statusText: 'Service Unavailable',
+              headers: new Headers({ 'Content-Type': 'text/plain' })

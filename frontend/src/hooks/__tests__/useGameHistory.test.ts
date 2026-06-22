@@ -115,3 +115,4 @@ describe('useGameHistory hook', () => {
 
     const nonExistent = result.current.getGame(99);
     expect(nonExistent).toBeUndefined();
+  });

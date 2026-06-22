@@ -133,3 +133,4 @@ describe('useGameHistory hook', () => {
       '0x1111111111111111111111111111111111111111',
       'Celo',
       { maxGames: 50, forceRefresh: true }
+    );

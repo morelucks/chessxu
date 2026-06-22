@@ -21,3 +21,5 @@ vi.mock('../../zustand/notificationStore', () => {
       weekly_digest: true,
     },
     enabledChannels: {
+      in_app: true,
+      farcaster_push: true,

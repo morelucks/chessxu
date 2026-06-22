@@ -13,3 +13,5 @@ class MockIDBRequest {
   result: any = null;
   error: any = null;
 }
+
+class MockIDBOpenDBRequest extends MockIDBRequest {

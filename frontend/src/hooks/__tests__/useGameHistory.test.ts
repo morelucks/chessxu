@@ -23,3 +23,4 @@ vi.mock('../../zustand/store', () => {
 vi.mock('../../services/gameHistoryDB', () => {
   return {
     gameHistoryDB: {
+      init: vi.fn().mockResolvedValue(undefined),

@@ -274,3 +274,9 @@ class DuneAlertService {
           isTriggered = true;
           body = `Your Weekly digest: Played ${row.gamesPlayed} games (${row.wins} W / ${row.losses} L / ${row.draws} D) with $${row.volume} wager volume.`;
           details.games_played = row.gamesPlayed;
+          details.win_rate = `${((row.wins || 0) / (row.gamesPlayed || 1) * 100).toFixed(0)}%`;
+        }
+      }
+
+      if (isTriggered) {
+        // 2. Dispatch to In-App Toast

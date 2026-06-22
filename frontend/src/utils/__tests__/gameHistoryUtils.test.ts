@@ -98,3 +98,6 @@ describe('gameHistoryUtils', () => {
       expect(isPlayerBlack(mockGame, '0xWhiteAddress')).toBe(false);
     });
 
+    it('returns the opponent address', () => {
+      expect(getOpponentAddress(mockGame, '0xWhiteAddress')).toBe('0xBlackAddress');
+      expect(getOpponentAddress(mockGame, '0xBlackAddress')).toBe('0xWhiteAddress');

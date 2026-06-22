@@ -91,3 +91,5 @@ describe('GameSyncService', () => {
   });
 
   describe('syncPlayerGames on Celo', () => {
+    it('should sync new games and update syncing state/lastSync time', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(2);

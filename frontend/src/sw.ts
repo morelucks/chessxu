@@ -57,3 +57,4 @@ self.addEventListener('fetch', (event: any) => {
     url.host.includes('infura') ||
     url.host.includes('alchemy')
   ) {
+    return;

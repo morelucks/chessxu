@@ -33,3 +33,4 @@ vi.mock('../../chess/services/stacksService', () => {
     default: {
       getGameCount: vi.fn().mockResolvedValue(0),
       getGameState: vi.fn().mockResolvedValue(null),
+    }

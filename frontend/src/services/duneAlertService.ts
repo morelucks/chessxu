@@ -406,3 +406,9 @@ class DuneAlertService {
         }];
       default:
         return [];
+    }
+  }
+
+  /**
+   * Utility to generate mock events on the fly (for backwards compatibility/demo).
+   */

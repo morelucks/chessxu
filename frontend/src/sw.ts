@@ -75,3 +75,4 @@ self.addEventListener('fetch', (event: any) => {
     url.pathname.endsWith('.woff2');
 
   if (isStaticAsset) {
+    event.respondWith(

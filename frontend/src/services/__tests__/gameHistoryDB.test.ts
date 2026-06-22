@@ -132,3 +132,5 @@ const mockObjectStore = {
     };
   })
 };
+
+// Mock IndexedDB open requests

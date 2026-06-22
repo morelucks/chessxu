@@ -30,3 +30,4 @@ vi.mock('../../services/gameHistoryDB', () => {
           playerW: '0x1111111111111111111111111111111111111111',
           playerB: '0x2222222222222222222222222222222222222222',
           status: 2, // White wins
+          wager: '10',

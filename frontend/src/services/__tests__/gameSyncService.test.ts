@@ -26,3 +26,5 @@ vi.mock('../../chess/services/celoService', () => {
     }
   };
 });
+
+// Mock Stacks service

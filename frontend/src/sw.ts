@@ -52,3 +52,4 @@ self.addEventListener('fetch', (event: any) => {
   if (
     url.pathname.startsWith('/api') || 
     url.host.includes('rpc') || 
+    url.host.includes('mainnet') || 

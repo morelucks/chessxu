@@ -181,3 +181,5 @@ describe('GameHistoryDB Service', () => {
   });
 
   afterEach(() => {
+    gameHistoryDB.close();
+  });

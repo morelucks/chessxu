@@ -367,3 +367,5 @@ describe('GameSyncService', () => {
       (gameSyncService as any).lastSyncTime = Date.now() - 30 * 60 * 1000; // 30 minutes ago
       const spy = vi.spyOn(gameSyncService, 'syncPlayerGames');
 
+      await gameSyncService.autoSync(player, 'celo');
+      expect(spy).not.toHaveBeenCalled();

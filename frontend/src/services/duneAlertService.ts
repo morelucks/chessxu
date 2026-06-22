@@ -376,3 +376,9 @@ class DuneAlertService {
           type: 'paymaster_balance_low',
           balance: 0.45,
         }];
+      case 'contract_paused':
+        return [{
+          event_id: `mock_pause_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'contract_paused',
+          chain: 'Celo',

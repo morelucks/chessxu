@@ -73,3 +73,4 @@ describe('GameSyncService', () => {
       } as any);
 
       await gameSyncService.syncPlayerGames(player, 'celo');
+

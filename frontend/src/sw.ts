@@ -51,3 +51,4 @@ self.addEventListener('fetch', (event: any) => {
   // For API or RPC requests, always go network-only
   if (
     url.pathname.startsWith('/api') || 
+    url.host.includes('rpc') || 

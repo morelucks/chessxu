@@ -111,3 +111,5 @@ describe('GameSyncService', () => {
             playerB: player,
             wager: 50n,
             isNative: false,
+            boardState: 'state1',
+            turn: 'b',

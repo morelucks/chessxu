@@ -17,3 +17,4 @@
 // Include root, index.html, favicon, and chess images
 // Chess hero background image
 // Chess king image
+// Chess knight image

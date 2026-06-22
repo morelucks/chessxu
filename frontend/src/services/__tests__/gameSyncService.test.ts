@@ -197,3 +197,4 @@ describe('GameSyncService', () => {
           wager: '10',
           isNative: true,
           boardState: 'state',
+          turn: 'w',

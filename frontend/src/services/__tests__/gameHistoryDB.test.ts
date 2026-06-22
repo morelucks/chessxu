@@ -243,3 +243,5 @@ describe('GameHistoryDB Service', () => {
       const saved = await gameHistoryDB.getGame('celo', 999);
       expect(saved).toBeNull();
     });
+  });
+

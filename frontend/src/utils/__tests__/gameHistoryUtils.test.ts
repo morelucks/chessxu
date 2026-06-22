@@ -164,3 +164,6 @@ describe('gameHistoryUtils', () => {
       expect(isGameActive({ ...mockGame, status: 1 })).toBe(true);
       expect(isGameActive({ ...mockGame, status: 2 })).toBe(false);
 
+      expect(isGameCompleted({ ...mockGame, status: 1 })).toBe(false);
+      expect(isGameCompleted({ ...mockGame, status: 2 })).toBe(true);
+    });

@@ -33,3 +33,4 @@ vi.mock('../../services/gameHistoryDB', () => {
           wager: '10',
           chain: 'Celo',
         },
+        {

@@ -297,3 +297,5 @@ describe('GameSyncService', () => {
 
     it('should handle db save failures and report them in errors array', async () => {
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
+      vi.mocked(celoService.getGame).mockResolvedValueOnce({
+        playerW: player,

@@ -113,3 +113,5 @@ describe('GameSyncService', () => {
             isNative: false,
             boardState: 'state1',
             turn: 'b',
+            status: 3, // Black wins (player B wins)
+          } as any;

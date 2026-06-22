@@ -21,3 +21,4 @@
 // Chess queen image
 // Chess rook image
 // Set up install event listener
+// Open target cache and add all static assets

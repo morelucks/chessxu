@@ -3,3 +3,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { duneAlertService, DuneEventRow } from '../duneAlertService';
 import { useNotificationStore } from '../../zustand/notificationStore';
+
+// Mock Zustand store

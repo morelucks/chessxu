@@ -88,3 +88,4 @@ describe('useGameHistory hook', () => {
 
   it('should calculate correct stats', async () => {
     let result: any;
+    await act(async () => {

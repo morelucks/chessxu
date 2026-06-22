@@ -334,3 +334,9 @@ class DuneAlertService {
           playerB: '0x1234567890abcdef1234567890abcdef12345678',
           gameId: 42,
           status: 2,
+          winner: addr,
+        }];
+      case 'opponent_resigned':
+        return [{
+          event_id: `mock_resign_${randId()}`,
+          timestamp: new Date().toISOString(),

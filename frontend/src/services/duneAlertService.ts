@@ -298,3 +298,9 @@ class DuneAlertService {
         // 3. Dispatch to Farcaster Frame Push
         if (store.enabledChannels.farcaster_push && store.farcasterPushEnabled && store.farcasterPushToken && store.farcasterPushUrl) {
           await sendFrameNotification(store.farcasterPushToken, store.farcasterPushUrl, title, body);
+        }
+
+        // 4. Dispatch to Admin Webhook
+        if (store.enabledChannels.webhook && store.webhookUrl && isAdmin) {
+          await sendWebhookNotification(store.webhookUrl, type, config.defaultSeverity, title, body, details);
+        }

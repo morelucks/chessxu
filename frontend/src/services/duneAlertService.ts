@@ -160,3 +160,9 @@ class DuneAlertService {
     }
   }
 
+  private handleVisibilityChange() {
+    this.isTabActive = !document.hidden;
+    console.log(`[DuneAlertService] Tab active state changed: ${this.isTabActive}`);
+  }
+
+  private handleStorageChange(event: StorageEvent) {

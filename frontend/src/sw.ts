@@ -33,3 +33,4 @@ self.addEventListener('activate', (event: any) => {
         cacheNames
           .filter((name) => name !== CACHE_NAME)
           .map((name) => caches.delete(name))
+      );

@@ -56,3 +56,5 @@ describe('GameSyncService', () => {
 
     it('should support subscribing to sync progress updates', async () => {
       const progressList: any[] = [];
+      const unsubscribe = gameSyncService.onSyncProgress((p) => {
+        progressList.push(p);

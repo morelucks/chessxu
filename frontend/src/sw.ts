@@ -10,3 +10,4 @@
 // 5. Provide offline fallback for client-side routing.
 // Lifecycle steps:
 // - Install: Pre-cache core shell resources.
+// - Activate: Clean up outdated caches from previous versions.

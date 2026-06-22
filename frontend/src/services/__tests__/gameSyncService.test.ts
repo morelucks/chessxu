@@ -277,3 +277,4 @@ describe('GameSyncService', () => {
       expect(result.success).toBe(true);
       expect(result.gamesAdded).toBe(1);
     });
+  });

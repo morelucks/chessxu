@@ -222,3 +222,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(storeState.addNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         id: 'evt_rank_1',
+        type: 'leaderboard_rank',
+        body: 'Leaderboard Rank Update: You moved UP to #3!',

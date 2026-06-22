@@ -335,3 +335,5 @@ describe('GameSyncService', () => {
 
     it('should return false if single game not found', async () => {
       vi.mocked(celoService.getGame).mockResolvedValueOnce(null as any);
+
+      const success = await gameSyncService.syncGame(10, 'celo');

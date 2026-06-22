@@ -125,3 +125,4 @@ describe('GameSyncService', () => {
       expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledWith(player, 'celo');
       expect(celoService.getGameCount).toHaveBeenCalled();
       expect(celoService.getGame).toHaveBeenCalledWith(2);
+      expect(celoService.getGame).toHaveBeenCalledWith(1);

@@ -403,3 +403,5 @@ describe('GameHistoryDB Service', () => {
       await gameHistoryDB.saveGames([
         {
           gameId: 1,
+          chain: 'stacks',
+          playerW: '0xW',

@@ -136,3 +136,5 @@ describe('gameHistoryUtils', () => {
   });
 
   describe('formatAddress', () => {
+    it('truncates middle of the address', () => {
+      expect(formatAddress('0x1234567890abcdef')).toBe('0x1234...cdef');

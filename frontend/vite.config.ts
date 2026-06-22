@@ -50,5 +50,6 @@ export default defineConfig(({ command }) => {
     build: {
       rollupOptions: {
         input: {
+          main: path.resolve('./index.html'),
   };
 });

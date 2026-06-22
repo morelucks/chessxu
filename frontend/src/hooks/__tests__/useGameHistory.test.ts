@@ -51,3 +51,4 @@ vi.mock('../../services/gameSyncService', () => {
   return {
     gameSyncService: {
       lastSync: 123456789,
+      syncing: false,

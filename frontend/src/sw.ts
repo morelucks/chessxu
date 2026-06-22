@@ -87,3 +87,4 @@ self.addEventListener('fetch', (event: any) => {
           return cachedResponse;
         }
 
+        // Cache miss: fetch from network and cache

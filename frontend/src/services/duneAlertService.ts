@@ -514,3 +514,9 @@ class DuneAlertService {
     const hasApiKey = typeof window !== 'undefined' && !!import.meta.env.VITE_DUNE_API_KEY;
 
     for (const config of Object.values(DUNE_ALERTS_CONFIG)) {
+      const type = config.id;
+      const interval = ALERT_POLL_INTERVALS[type] || 60000;
+      const now = Date.now();
+
+      const lastPollKey = `chessxu_dune_last_poll_${type}`;
+      const cacheKey = `chessxu_dune_cache_${type}`;

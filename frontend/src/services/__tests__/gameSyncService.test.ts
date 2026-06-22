@@ -272,3 +272,4 @@ describe('GameSyncService', () => {
       const result = await gameSyncService.syncPlayerGames(player, 'stacks');
 
       expect(stacksService.getGameCount).toHaveBeenCalled();
+      expect(stacksService.getGameState).toHaveBeenCalledWith(1);

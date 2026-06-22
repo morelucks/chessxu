@@ -42,3 +42,5 @@ class MockIDBTransaction {
 const storeMap = new Map<string, any>();
 
 const mockObjectStore = {
+  put: vi.fn().mockImplementation((game: any) => {
+    const key = JSON.stringify([game.chain, game.gameId]);

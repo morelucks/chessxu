@@ -40,3 +40,9 @@ export interface DuneEventRow {
 // ---------------------------------------------------------------------------
 // Staggered Polling Intervals (milliseconds)
 // ---------------------------------------------------------------------------
+
+export const ALERT_POLL_INTERVALS: Record<string, number> = {
+  // Critical / high priority alerts checked frequently
+  contract_paused: 15 * 1000,
+  paymaster_balance_low: 15 * 1000,
+  

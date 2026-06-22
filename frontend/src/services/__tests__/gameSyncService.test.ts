@@ -166,3 +166,5 @@ describe('GameSyncService', () => {
           status: 1, // Ongoing
           timestamp: 0,
           lastUpdated: 0,
+          syncedAt: 0,
+        }

@@ -360,3 +360,5 @@ describe('GameSyncService', () => {
       });
 
       await gameSyncService.autoSync(player, 'celo');
+      expect(spy).toHaveBeenCalledWith(player, 'celo', { maxGames: 30, forceRefresh: false });
+    });

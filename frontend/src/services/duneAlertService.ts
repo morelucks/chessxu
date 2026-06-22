@@ -232,3 +232,9 @@ class DuneAlertService {
           const movedUp = row.rank < row.previousRank;
           body = `Leaderboard Rank Update: You moved ${movedUp ? 'UP' : 'DOWN'} to #${row.rank}!`;
           details.previous_rank = row.previousRank;
+          details.new_rank = row.rank;
+        }
+      } else if (type === 'wager_milestone') {
+        isTriggered = true;
+        body = `Platform milestone: Cumulative wager volume has crossed $${row.cumulativeVolume?.toLocaleString()} USD!`;
+        details.cumulative_volume = `$${row.cumulativeVolume?.toLocaleString()}`;

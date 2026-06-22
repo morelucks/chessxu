@@ -106,3 +106,5 @@ describe('GameSyncService', () => {
           } as any;
         }
         if (id === 1) {
+          return {
+            playerW: '0xBob',

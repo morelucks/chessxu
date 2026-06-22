@@ -133,3 +133,5 @@ describe('GameSyncService', () => {
       expect(result.gamesUpdated).toBe(0);
       expect(gameSyncService.lastSync).not.toBeNull();
     });
+
+    it('should filter games where the player is not participant', async () => {

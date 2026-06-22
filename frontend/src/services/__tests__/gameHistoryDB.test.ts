@@ -159,3 +159,5 @@ const mockIndexedDB = {
       }, 0);
     }
     return req;
+  })
+};

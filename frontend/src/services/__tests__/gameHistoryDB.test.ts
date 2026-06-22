@@ -364,3 +364,5 @@ describe('GameHistoryDB Service', () => {
       expect(recent[1].gameId).toBe(2);
     });
   });
+
+  describe('Deletion & Clear', () => {

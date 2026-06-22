@@ -177,3 +177,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     );
   });
 
+  it('should trigger contract_paused alert only if user is admin', async () => {
+    const events: DuneEventRow[] = [

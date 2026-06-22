@@ -226,3 +226,9 @@ class DuneAlertService {
           details.resigner = row.resignedPlayer;
         }
       } else if (type === 'leaderboard_rank' && currentUserAddress) {
+        if (row.player?.toLowerCase() === currentUserAddress.toLowerCase() &&
+            row.rank && row.previousRank && Math.abs(row.rank - row.previousRank) >= 3) {
+          isTriggered = true;
+          const movedUp = row.rank < row.previousRank;
+          body = `Leaderboard Rank Update: You moved ${movedUp ? 'UP' : 'DOWN'} to #${row.rank}!`;
+          details.previous_rank = row.previousRank;

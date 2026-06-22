@@ -152,3 +152,4 @@ describe('useGameHistory hook', () => {
     vi.mocked(gameHistoryDB.getPlayerGames).mockClear();
 
     await act(async () => {
+      await result.current.refresh();

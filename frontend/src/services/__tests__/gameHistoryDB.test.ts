@@ -239,3 +239,5 @@ describe('GameHistoryDB Service', () => {
       expect(saved!.syncedAt).toBeGreaterThan(0);
     });
 
+    it('should retrieve null if game does not exist', async () => {
+      const saved = await gameHistoryDB.getGame('celo', 999);

@@ -58,3 +58,9 @@ export const ALERT_POLL_INTERVALS: Record<string, number> = {
   // Low priority / digest / milestones checked hourly/sub-hourly
   daily_games_record: 15 * 60 * 1000,
   wager_milestone: 30 * 60 * 1000,
+  weekly_digest: 60 * 60 * 1000,
+};
+
+// ---------------------------------------------------------------------------
+// Farcaster V2 Push Notification Mock Utility
+// ---------------------------------------------------------------------------

@@ -338,3 +338,5 @@ describe('GameHistoryDB Service', () => {
       await gameHistoryDB.saveGames(games);
     });
 
+    it('should filter games for a player address (case-insensitive)', async () => {
+      const aliceGames = await gameHistoryDB.getPlayerGames('0xalice');

@@ -46,3 +46,4 @@
 // Check if file extension is .ico
 // Check if file extension is .woff
 // Check if file extension is .woff2
+// Caching strategy: Cache-First for static assets

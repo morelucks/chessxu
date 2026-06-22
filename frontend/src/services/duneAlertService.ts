@@ -352,3 +352,9 @@ class DuneAlertService {
           type: 'leaderboard_rank',
           player: addr,
           rank: 5,
+          previousRank: 8,
+        }];
+      case 'wager_milestone':
+        return [{
+          event_id: `mock_wager_${randId()}`,
+          timestamp: new Date().toISOString(),

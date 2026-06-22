@@ -157,3 +157,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         event_id: 'evt_paymaster_1',
         timestamp: new Date().toISOString(),
         type: 'paymaster_balance_low',
+        balance: 0.35,
+      },

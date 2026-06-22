@@ -65,3 +65,4 @@ self.addEventListener('fetch', (event: any) => {
   const isStaticAsset = 
     STATIC_ASSETS.includes(url.pathname) || 
     url.pathname.includes('/assets/') || 
+    url.pathname.endsWith('.js') || 

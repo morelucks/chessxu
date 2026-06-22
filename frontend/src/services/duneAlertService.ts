@@ -166,3 +166,9 @@ class DuneAlertService {
   }
 
   private handleStorageChange(event: StorageEvent) {
+    if (event.key === 'chessxu_notifications_updated') {
+      console.log('[DuneAlertService] Notifications updated by another tab, reloading...');
+      useNotificationStore.getState().loadNotifications().catch(err => {
+        console.error('Failed to reload notifications on storage change:', err);
+      });
+    }

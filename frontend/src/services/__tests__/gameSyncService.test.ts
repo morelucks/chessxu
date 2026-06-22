@@ -16,3 +16,5 @@ vi.mock('../gameHistoryDB', () => {
     }
   };
 });
+
+// Mock Celo service

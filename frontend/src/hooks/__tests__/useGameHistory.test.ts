@@ -164,3 +164,4 @@ describe('useGameHistory hook', () => {
     );
 
     let result: any;
+    await act(async () => {

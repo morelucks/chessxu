@@ -90,3 +90,4 @@ self.addEventListener('fetch', (event: any) => {
         // Cache miss: fetch from network and cache
         return fetch(request).then((networkResponse) => {
           if (!networkResponse || networkResponse.status !== 200) {
+            return networkResponse;

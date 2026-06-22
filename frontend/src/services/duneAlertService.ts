@@ -76,3 +76,9 @@ export async function sendFrameNotification(
     const res = await fetch(url, {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token,
+        title,
+        body,

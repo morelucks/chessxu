@@ -141,3 +141,4 @@ describe('useGameHistory hook', () => {
     });
   });
 
+  it('should support manual refresh', async () => {

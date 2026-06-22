@@ -32,3 +32,4 @@ self.addEventListener('activate', (event: any) => {
       return Promise.all(
         cacheNames
           .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))

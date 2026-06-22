@@ -550,3 +550,9 @@ class DuneAlertService {
 
       try {
         let events: DuneEventRow[] = [];
+        if (hasApiKey) {
+          events = await getLatestResults<DuneEventRow>(config.queryId).catch(() => [] as DuneEventRow[]);
+        } else {
+          events = this.generateMockEventForType(type, currentUserAddress);
+        }
+

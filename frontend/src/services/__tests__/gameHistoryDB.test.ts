@@ -434,3 +434,5 @@ describe('GameHistoryDB Service', () => {
 
     it('should compute total, stack, celo, oldest, and newest stats correctly', async () => {
       const stats = await gameHistoryDB.getStats();
+      expect(stats.totalGames).toBe(2);
+      expect(stats.stacksGames).toBe(1);

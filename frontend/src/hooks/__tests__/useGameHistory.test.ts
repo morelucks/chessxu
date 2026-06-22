@@ -124,3 +124,4 @@ describe('useGameHistory hook', () => {
       result = rendered.result;
     });
 
+    let syncResult: any;

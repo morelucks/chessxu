@@ -13,3 +13,4 @@ vi.mock('../../zustand/store', () => {
     activeChain: 'Celo',
   };
   const mockUseAppStore = (selector: any) => selector(store);
+  return {

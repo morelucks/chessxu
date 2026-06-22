@@ -214,3 +214,9 @@ class DuneAlertService {
           const isWinner = row.winner?.toLowerCase() === currentUserAddress.toLowerCase();
           const outcomeText = row.status === 4 ? 'Draw' : isWinner ? 'You Won!' : 'You Lost';
           body = `Game #${row.gameId} resolved. Result: ${outcomeText}`;
+          details.game_id = row.gameId;
+          details.status = row.status;
+          details.winner = row.winner;
+        }
+      } else if (type === 'opponent_resigned' && currentUserAddress) {
+        if (row.winner?.toLowerCase() === currentUserAddress.toLowerCase()) {

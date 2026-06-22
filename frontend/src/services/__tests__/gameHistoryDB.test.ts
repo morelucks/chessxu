@@ -257,3 +257,5 @@ describe('GameHistoryDB Service', () => {
         boardState: '...',
         turn: 'w',
         status: 1,
+        timestamp: 1700000001000,
+        lastUpdated: 0,

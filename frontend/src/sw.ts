@@ -107,3 +107,4 @@ self.addEventListener('fetch', (event: any) => {
     );
   } else {
     // Network first, falling back to cache (e.g. for HTML navigation/routing)
+    event.respondWith(

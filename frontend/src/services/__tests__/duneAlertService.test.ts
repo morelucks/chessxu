@@ -171,3 +171,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(storeState.addNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         id: 'evt_paymaster_1',
+        type: 'paymaster_balance_low',
+        severity: 'critical',

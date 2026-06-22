@@ -248,3 +248,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
     await duneAlertService.checkAlerts(currentUser, true);
 
+    // It should have evaluated the cached events
+    expect(evaluateSpy).toHaveBeenCalled();

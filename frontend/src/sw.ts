@@ -6,3 +6,4 @@ const CACHE_NAME = 'chessxu-cache-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/favicon.png',

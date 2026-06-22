@@ -151,3 +151,5 @@ describe('GameSyncService', () => {
       expect(result.gamesAdded).toBe(0);
     });
 
+    it('should update existing games if forced or not finished', async () => {
+      // Mock existing cached games

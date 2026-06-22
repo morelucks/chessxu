@@ -231,3 +231,5 @@ describe('GameHistoryDB Service', () => {
     };
 
     it('should save game and populate lastUpdated/syncedAt timestamps', async () => {
+      await gameHistoryDB.saveGame(sampleGame);
+      const saved = await gameHistoryDB.getGame('celo', 101);

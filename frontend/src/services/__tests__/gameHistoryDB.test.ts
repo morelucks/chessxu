@@ -446,3 +446,5 @@ describe('GameHistoryDB Service', () => {
       const stats = await gameHistoryDB.getStats();
       expect(stats.totalGames).toBe(0);
       expect(stats.oldestGame).toBeNull();
+      expect(stats.newestGame).toBeNull();
+    });

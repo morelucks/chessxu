@@ -225,3 +225,5 @@ describe('GameSyncService', () => {
       vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
         {
           gameId: 1,
+          chain: 'celo',
+          playerW: player,

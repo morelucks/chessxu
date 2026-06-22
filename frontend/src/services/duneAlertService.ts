@@ -382,3 +382,9 @@ class DuneAlertService {
           timestamp: new Date().toISOString(),
           type: 'contract_paused',
           chain: 'Celo',
+          paused: true,
+        }];
+      case 'unusual_activity':
+        return [{
+          event_id: `mock_activity_${randId()}`,
+          timestamp: new Date().toISOString(),

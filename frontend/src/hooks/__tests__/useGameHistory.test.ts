@@ -16,3 +16,4 @@ vi.mock('../../zustand/store', () => {
   return {
     default: mockUseAppStore,
     useAppStore: mockUseAppStore,
+  };

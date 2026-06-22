@@ -538,3 +538,9 @@ class DuneAlertService {
               console.error(`[DuneAlertService] Failed to parse cached events for ${type}:`, e);
             }
           }
+        }
+        continue;
+      }
+
+      // Claim the polling action to prevent concurrent fetches across tabs
+      if (typeof window !== 'undefined') {

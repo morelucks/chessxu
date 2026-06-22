@@ -56,3 +56,5 @@ const mockObjectStore = {
     const key = JSON.stringify(keyArray);
     const val = storeMap.get(key);
     const req = new MockIDBRequest();
+    req.result = val || null;
+    setTimeout(() => {

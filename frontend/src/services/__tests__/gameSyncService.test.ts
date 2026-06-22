@@ -260,3 +260,5 @@ describe('GameSyncService', () => {
     it('should sync Stacks games successfully', async () => {
       vi.mocked(stacksService.getGameCount).mockResolvedValueOnce(1);
       vi.mocked(stacksService.getGameState).mockResolvedValueOnce({
+        'player-w': player,
+        'player-b': '0xBob',

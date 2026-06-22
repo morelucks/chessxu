@@ -113,3 +113,4 @@ describe('useGameHistory hook', () => {
     expect(game).toBeDefined();
     expect(game?.gameId).toBe(1);
 
+    const nonExistent = result.current.getGame(99);

@@ -86,3 +86,4 @@ describe('useGameHistory hook', () => {
     expect(result.current.lastSync).toBe(123456789);
   });
 
+  it('should calculate correct stats', async () => {

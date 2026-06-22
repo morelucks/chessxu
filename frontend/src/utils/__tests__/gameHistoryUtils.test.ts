@@ -1,1 +1,184 @@
-// Test suite for gameHistoryUtils
+import { describe, it, expect } from 'vitest';
+import {
+  determinePlayerResult,
+  getStatusText,
+  getStatusColor,
+  getResultColor,
+  isPlayerWhite,
+  isPlayerBlack,
+  getOpponentAddress,
+  getPlayerColor,
+  calculatePlayerStats,
+  formatAddress,
+  formatWager,
+  isGameActive,
+  isGameCompleted,
+  parseFEN,
+} from '../gameHistoryUtils';
+import { CachedGame } from '../../services/gameHistoryDB';
+
+describe('gameHistoryUtils', () => {
+  const mockGame: CachedGame = {
+    gameId: 1,
+    chain: 'celo',
+    playerW: '0xWhiteAddress',
+    playerB: '0xBlackAddress',
+    wager: '100000000000000000', // 0.1 CELO in Wei or standard units
+    isNative: true,
+    boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+    turn: 'w',
+    status: 1, // in progress
+    timestamp: Date.now() - 3600000, // 1 hour ago
+    lastUpdated: Date.now(),
+    syncedAt: Date.now(),
+  };
+
+  describe('determinePlayerResult', () => {
+    it('returns win for white player when white wins (status 2)', () => {
+      expect(determinePlayerResult(2, true)).toBe('win');
+      expect(determinePlayerResult(2, false)).toBe('loss');
+    });
+
+    it('returns win for black player when black wins (status 3)', () => {
+      expect(determinePlayerResult(3, true)).toBe('loss');
+      expect(determinePlayerResult(3, false)).toBe('win');
+    });
+
+    it('returns draw for any player when status is 4', () => {
+      expect(determinePlayerResult(4, true)).toBe('draw');
+      expect(determinePlayerResult(4, false)).toBe('draw');
+    });
+
+    it('returns undefined for other statuses', () => {
+      expect(determinePlayerResult(1, true)).toBeUndefined();
+      expect(determinePlayerResult(0, false)).toBeUndefined();
+    });
+  });
+
+  describe('getStatusText', () => {
+    it('returns correct text for all known statuses', () => {
+      expect(getStatusText(0)).toBe('Waiting for opponent');
+      expect(getStatusText(1)).toBe('Game in progress');
+      expect(getStatusText(2)).toBe('White wins');
+      expect(getStatusText(3)).toBe('Black wins');
+      expect(getStatusText(4)).toBe('Draw');
+      expect(getStatusText(5)).toBe('Cancelled');
+    });
+
+    it('returns Unknown for invalid status', () => {
+      expect(getStatusText(99 as any)).toBe('Unknown');
+    });
+  });
+
+  describe('getStatusColor', () => {
+    it('returns a hex color string for valid statuses', () => {
+      expect(getStatusColor(0)).toBe('#fbbf24');
+      expect(getStatusColor(2)).toBe('#22c55e');
+      expect(getStatusColor(99 as any)).toBe('#94a3b8');
+    });
+  });
+
+  describe('getResultColor', () => {
+    it('returns green for win, red for loss, gray for draw', () => {
+      expect(getResultColor('win')).toBe('#22c55e');
+      expect(getResultColor('loss')).toBe('#ef4444');
+      expect(getResultColor('draw')).toBe('#94a3b8');
+      expect(getResultColor(undefined as any)).toBe('#f59e0b');
+    });
+  });
+
+  describe('player roles and addresses', () => {
+    it('correctly identifies player color roles', () => {
+      expect(isPlayerWhite(mockGame, '0xWhiteAddress')).toBe(true);
+      expect(isPlayerWhite(mockGame, '0xwhiteaddress')).toBe(true); // case insensitivity
+      expect(isPlayerWhite(mockGame, '0xBlackAddress')).toBe(false);
+
+      expect(isPlayerBlack(mockGame, '0xBlackAddress')).toBe(true);
+      expect(isPlayerBlack(mockGame, '0xblackaddress')).toBe(true);
+      expect(isPlayerBlack(mockGame, '0xWhiteAddress')).toBe(false);
+    });
+
+    it('returns the opponent address', () => {
+      expect(getOpponentAddress(mockGame, '0xWhiteAddress')).toBe('0xBlackAddress');
+      expect(getOpponentAddress(mockGame, '0xBlackAddress')).toBe('0xWhiteAddress');
+    });
+
+    it('returns player color', () => {
+      expect(getPlayerColor(mockGame, '0xWhiteAddress')).toBe('white');
+      expect(getPlayerColor(mockGame, '0xBlackAddress')).toBe('black');
+      expect(getPlayerColor(mockGame, '0xUnknownAddress')).toBeNull();
+    });
+  });
+
+  describe('calculatePlayerStats', () => {
+    it('calculates wins, losses, draws, and win rate correctly', () => {
+      const games: CachedGame[] = [
+        { ...mockGame, status: 2, playerW: '0xPlayer' }, // win as white
+        { ...mockGame, status: 3, playerW: '0xPlayer' }, // loss as white
+        { ...mockGame, status: 4, playerW: '0xPlayer' }, // draw
+        { ...mockGame, status: 1, playerW: '0xPlayer' }, // ongoing
+      ];
+
+      const stats = calculatePlayerStats(games, '0xPlayer');
+      expect(stats.totalGames).toBe(4);
+      expect(stats.wins).toBe(1);
+      expect(stats.losses).toBe(1);
+      expect(stats.draws).toBe(1);
+      expect(stats.ongoing).toBe(1);
+      expect(stats.winRate).toBe(33.33333333333333);
+    });
+
+    it('returns zero stats if player has no games', () => {
+      const stats = calculatePlayerStats([], '0xPlayer');
+      expect(stats.totalGames).toBe(0);
+      expect(stats.winRate).toBe(0);
+    });
+  });
+
+  describe('formatAddress', () => {
+    it('truncates middle of the address', () => {
+      expect(formatAddress('0x1234567890abcdef')).toBe('0x1234...cdef');
+    });
+
+    it('handles short or missing address', () => {
+      expect(formatAddress('')).toBe('—');
+      expect(formatAddress('123')).toBe('123');
+    });
+  });
+
+  describe('formatWager', () => {
+    it('returns correct label for zero wager', () => {
+      expect(formatWager('0', true, 'celo')).toBe('No wager');
+    });
+
+    it('returns formatted wager with proper currency', () => {
+      expect(formatWager('0.5', true, 'celo')).toBe('0.5 CELO');
+      expect(formatWager('10', true, 'stacks')).toBe('10 STX');
+      expect(formatWager('100', false, 'stacks')).toBe('100 CHESS');
+    });
+  });
+
+  describe('isGameActive and isGameCompleted', () => {
+    it('identifies active and completed games correctly', () => {
+      expect(isGameActive({ ...mockGame, status: 0 })).toBe(true);
+      expect(isGameActive({ ...mockGame, status: 1 })).toBe(true);
+      expect(isGameActive({ ...mockGame, status: 2 })).toBe(false);
+
+      expect(isGameCompleted({ ...mockGame, status: 1 })).toBe(false);
+      expect(isGameCompleted({ ...mockGame, status: 2 })).toBe(true);
+    });
+  });
+
+  describe('parseFEN', () => {
+    it('parses standard FEN correctly', () => {
+      const fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
+      const parsed = parseFEN(fen);
+      expect(parsed.position).toBe('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR');
+      expect(parsed.turn).toBe('b');
+      expect(parsed.castling).toBe('KQkq');
+      expect(parsed.enPassant).toBe('e3');
+      expect(parsed.halfmove).toBe('0');
+      expect(parsed.fullmove).toBe('1');
+    });
+  });
+});

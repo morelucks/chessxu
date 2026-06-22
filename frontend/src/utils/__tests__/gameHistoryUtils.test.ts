@@ -127,3 +127,6 @@ describe('gameHistoryUtils', () => {
       expect(stats.ongoing).toBe(1);
       expect(stats.winRate).toBe(33.33333333333333);
     });
+
+    it('returns zero stats if player has no games', () => {
+      const stats = calculatePlayerStats([], '0xPlayer');

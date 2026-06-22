@@ -216,3 +216,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       },
     ];
 
+    await duneAlertService.evaluateAlerts(events, currentUser, false);
+

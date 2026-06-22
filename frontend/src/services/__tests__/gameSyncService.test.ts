@@ -315,3 +315,5 @@ describe('GameSyncService', () => {
     });
   });
 
+  describe('syncGame (Single Game)', () => {
+    it('should sync a single Celo game successfully', async () => {

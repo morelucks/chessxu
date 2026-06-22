@@ -116,3 +116,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         gameId: 101,
         status: 2,
         winner: currentUser,
+      },
+    ];

@@ -41,3 +41,4 @@
 // Check if file extension is .js
 // Check if file extension is .css
 // Check if file extension is .png
+// Check if file extension is .jpg

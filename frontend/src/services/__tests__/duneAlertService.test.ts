@@ -198,3 +198,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(storeState.addNotification).toHaveBeenCalledWith(
       expect.objectContaining({
         id: 'evt_paused_1',
+        type: 'contract_paused',
+        severity: 'critical',

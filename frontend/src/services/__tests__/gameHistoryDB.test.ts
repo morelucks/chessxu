@@ -440,3 +440,5 @@ describe('GameHistoryDB Service', () => {
       expect(stats.oldestGame).toBe(1000);
       expect(stats.newestGame).toBe(2000);
     });
+
+    it('should return nulls if stats computed on an empty database', async () => {

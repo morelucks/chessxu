@@ -43,3 +43,4 @@ self.addEventListener('activate', (event: any) => {
 // Fetch event: serve cached assets when offline or for speed
 self.addEventListener('fetch', (event: any) => {
   const request = event.request;
+  const url = new URL(request.url);

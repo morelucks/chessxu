@@ -364,3 +364,9 @@ class DuneAlertService {
       case 'daily_games_record':
         return [{
           event_id: `mock_daily_rec_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'daily_games_record',
+          dailyCount: 156,
+          previousRecord: 150,
+        }];
+      case 'paymaster_balance_low':

@@ -121,3 +121,6 @@ describe('gameHistoryUtils', () => {
 
       const stats = calculatePlayerStats(games, '0xPlayer');
       expect(stats.totalGames).toBe(4);
+      expect(stats.wins).toBe(1);
+      expect(stats.losses).toBe(1);
+      expect(stats.draws).toBe(1);

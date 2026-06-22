@@ -288,3 +288,5 @@ describe('GameHistoryDB Service', () => {
     });
   });
 
+  describe('Queries & Filtering', () => {
+    const games: CachedGame[] = [

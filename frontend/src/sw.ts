@@ -60,3 +60,4 @@ self.addEventListener('fetch', (event: any) => {
     return;
   }
 
+  // Caching strategy:

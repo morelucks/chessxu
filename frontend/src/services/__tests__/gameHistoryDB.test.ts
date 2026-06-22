@@ -342,3 +342,5 @@ describe('GameHistoryDB Service', () => {
       const aliceGames = await gameHistoryDB.getPlayerGames('0xalice');
       expect(aliceGames).toHaveLength(2);
       expect(aliceGames.map(g => g.gameId)).toContain(1);
+      expect(aliceGames.map(g => g.gameId)).toContain(3);
+    });

@@ -117,3 +117,4 @@ self.addEventListener('fetch', (event: any) => {
             });
           }
           return networkResponse;
+        })

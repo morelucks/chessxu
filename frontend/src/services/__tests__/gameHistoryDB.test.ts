@@ -31,3 +31,5 @@ class MockIDBDatabase {
   };
 }
 
+class MockIDBTransaction {
+  constructor(public mode: string) {}

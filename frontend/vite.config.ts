@@ -47,5 +47,6 @@ export default defineConfig(({ command }) => {
     optimizeDeps: {
       include: ['buffer'],
     },
+    build: {
   };
 });

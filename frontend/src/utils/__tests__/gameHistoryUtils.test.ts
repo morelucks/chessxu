@@ -113,3 +113,5 @@ describe('gameHistoryUtils', () => {
   describe('calculatePlayerStats', () => {
     it('calculates wins, losses, draws, and win rate correctly', () => {
       const games: CachedGame[] = [
+        { ...mockGame, status: 2, playerW: '0xPlayer' }, // win as white
+        { ...mockGame, status: 3, playerW: '0xPlayer' }, // loss as white

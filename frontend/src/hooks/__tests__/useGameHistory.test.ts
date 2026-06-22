@@ -39,3 +39,4 @@ vi.mock('../../services/gameHistoryDB', () => {
           playerB: '0x1111111111111111111111111111111111111111',
           status: 0, // Ongoing
           wager: '5',
+          chain: 'Celo',

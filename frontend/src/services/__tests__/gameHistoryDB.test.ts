@@ -62,3 +62,5 @@ const mockObjectStore = {
     }, 0);
     return req;
   }),
+  getAll: vi.fn().mockImplementation(() => {
+    const values = Array.from(storeMap.values());

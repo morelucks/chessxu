@@ -20,3 +20,4 @@
 // Chess knight image
 // Chess queen image
 // Chess rook image
+// Set up install event listener

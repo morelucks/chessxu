@@ -3,3 +3,6 @@ import {
   determinePlayerResult,
   getStatusText,
   getStatusColor,
+  getResultColor,
+  isPlayerWhite,
+  isPlayerBlack,

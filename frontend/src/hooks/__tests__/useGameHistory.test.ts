@@ -48,3 +48,4 @@ vi.mock('../../services/gameHistoryDB', () => {
 
 // Mock gameSyncService
 vi.mock('../../services/gameSyncService', () => {
+  return {

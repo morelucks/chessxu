@@ -198,3 +198,5 @@ describe('GameSyncService', () => {
           isNative: true,
           boardState: 'state',
           turn: 'w',
+          status: 2, // Completed
+          timestamp: 0,

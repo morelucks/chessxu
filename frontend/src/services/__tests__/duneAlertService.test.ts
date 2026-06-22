@@ -202,3 +202,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         severity: 'critical',
       })
     );
+  });
+

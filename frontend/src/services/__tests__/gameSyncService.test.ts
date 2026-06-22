@@ -59,3 +59,5 @@ describe('GameSyncService', () => {
       const unsubscribe = gameSyncService.onSyncProgress((p) => {
         progressList.push(p);
       });
+
+      // Mock Celo service responses to trigger processing loop

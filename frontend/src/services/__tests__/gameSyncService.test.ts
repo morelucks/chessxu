@@ -262,3 +262,4 @@ describe('GameSyncService', () => {
       vi.mocked(stacksService.getGameState).mockResolvedValueOnce({
         'player-w': player,
         'player-b': '0xBob',
+        wager: '500',

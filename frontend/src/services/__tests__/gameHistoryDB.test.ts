@@ -46,3 +46,5 @@ const mockObjectStore = {
     const key = JSON.stringify([game.chain, game.gameId]);
     storeMap.set(key, game);
     const req = new MockIDBRequest();
+    req.result = [game.chain, game.gameId];
+    setTimeout(() => {

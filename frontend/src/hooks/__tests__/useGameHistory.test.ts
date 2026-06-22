@@ -97,3 +97,4 @@ describe('useGameHistory hook', () => {
       totalGames: 2,
       wins: 1, // status: 2 (White wins), user is playerW (White) -> win
       losses: 0,
+      draws: 0,

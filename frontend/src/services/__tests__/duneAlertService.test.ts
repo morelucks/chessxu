@@ -200,3 +200,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         id: 'evt_paused_1',
         type: 'contract_paused',
         severity: 'critical',
+      })
+    );

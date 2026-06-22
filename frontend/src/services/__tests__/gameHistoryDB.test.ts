@@ -222,3 +222,5 @@ describe('GameHistoryDB Service', () => {
       playerB: '0xB',
       wager: '10',
       isNative: true,
+      boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+      turn: 'w',

@@ -352,3 +352,5 @@ describe('GameSyncService', () => {
   describe('autoSync', () => {
     it('should sync if it has never run before', async () => {
       const spy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
+        success: true,
+        gamesAdded: 0,

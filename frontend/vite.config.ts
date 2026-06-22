@@ -58,5 +58,6 @@ export default defineConfig(({ command }) => {
             if (chunkInfo.name === 'sw') {
               return 'sw.js';
             }
+            return 'assets/[name]-[hash].js';
   };
 });

@@ -490,3 +490,9 @@ class DuneAlertService {
         type: 'weekly_digest',
         player: addr,
         gamesPlayed: 14,
+        wins: 9,
+        losses: 4,
+        draws: 1,
+        volume: 350,
+      }
+    ];

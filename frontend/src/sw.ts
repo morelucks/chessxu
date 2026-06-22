@@ -34,3 +34,4 @@
 // Bypass Alchemy RPC endpoint
 // Bypass Infura RPC endpoint
 // Bypass Celo mainnet/testnet RPC endpoints
+// Bypass Stacks mainnet/testnet RPC endpoints

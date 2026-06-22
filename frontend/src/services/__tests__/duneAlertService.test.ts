@@ -151,3 +151,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(storeState.addNotification).not.toHaveBeenCalled();
   });
 
+  it('should trigger paymaster_balance_low alert only if the user is admin', async () => {
+    const events: DuneEventRow[] = [

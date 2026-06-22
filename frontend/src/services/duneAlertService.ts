@@ -508,3 +508,9 @@ class DuneAlertService {
   async checkAlerts(currentUserAddress: string | null, isAdmin = false): Promise<void> {
     if (!this.isTabActive) {
       console.log('[DuneAlertService] Tab is inactive. Skipping poll check.');
+      return;
+    }
+
+    const hasApiKey = typeof window !== 'undefined' && !!import.meta.env.VITE_DUNE_API_KEY;
+
+    for (const config of Object.values(DUNE_ALERTS_CONFIG)) {

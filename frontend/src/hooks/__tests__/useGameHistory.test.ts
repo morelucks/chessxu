@@ -94,3 +94,4 @@ describe('useGameHistory hook', () => {
     });
 
     expect(result.current.stats).toEqual({
+      totalGames: 2,

@@ -128,3 +128,5 @@ const mockObjectStore = {
         }, 0);
 
         return req;
+      })
+    };

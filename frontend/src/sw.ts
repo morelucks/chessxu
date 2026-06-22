@@ -131,3 +131,4 @@ self.addEventListener('fetch', (event: any) => {
               statusText: 'Service Unavailable',
               headers: new Headers({ 'Content-Type': 'text/plain' })
             });
+          });

@@ -556,3 +556,9 @@ class DuneAlertService {
           events = this.generateMockEventForType(type, currentUserAddress);
         }
 
+        // Cache the newly fetched/mocked events
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(cacheKey, JSON.stringify(events));
+        }
+
+        // Evaluate the events

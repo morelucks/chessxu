@@ -82,3 +82,9 @@ export async function sendFrameNotification(
         token,
         title,
         body,
+        targetUrl: typeof window !== 'undefined' ? window.location.origin : 'https://chessxu.io',
+      }),
+    });
+    return res.ok;
+  } catch (err) {
+    console.warn('[Farcaster Push] Direct fetch failed (likely CORS or Mock):', err);

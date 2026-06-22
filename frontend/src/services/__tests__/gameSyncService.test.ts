@@ -185,3 +185,4 @@ describe('GameSyncService', () => {
       expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
       expect(result.gamesUpdated).toBe(1);
     });
+

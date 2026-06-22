@@ -200,3 +200,5 @@ describe('GameSyncService', () => {
           turn: 'w',
           status: 2, // Completed
           timestamp: 0,
+          lastUpdated: 0,
+          syncedAt: 0,

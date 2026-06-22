@@ -44,3 +44,4 @@ self.addEventListener('activate', (event: any) => {
 self.addEventListener('fetch', (event: any) => {
   const request = event.request;
   const url = new URL(request.url);
+

@@ -47,3 +47,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     vi.clearAllMocks();
     storeState.notifications = [];
     storeState.addNotification.mockResolvedValue(undefined);
+
+    // Mock global fetch to prevent actual network calls hanging during tests

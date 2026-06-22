@@ -41,3 +41,5 @@ describe('GameSyncService', () => {
   const player = '0xPlayerAddress';
 
   beforeEach(() => {
+    vi.clearAllMocks();
+    // Reset private fields on the singleton

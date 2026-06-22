@@ -244,3 +244,9 @@ class DuneAlertService {
           body = `New Daily Games Record! We set a new record with ${row.dailyCount} games played today!`;
           details.daily_count = row.dailyCount;
           details.previous_record = row.previousRecord;
+        }
+      } else if (type === 'paymaster_balance_low' && isAdmin) {
+        if (row.balance !== undefined && row.balance < 1.0) {
+          isTriggered = true;
+          title = '🚨 CRITICAL: Paymaster Balance Low';
+          body = `ChessxuPaymaster gas balance is down to ${row.balance} CELO. Please top it up immediately.`;

@@ -98,3 +98,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         joiner: currentUser,
         gameId: 102,
       },
+    ];
+

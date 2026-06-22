@@ -72,3 +72,4 @@ const mockObjectStore = {
     return req;
   }),
   delete: vi.fn().mockImplementation((keyArray: [string, number]) => {
+    const key = JSON.stringify(keyArray);

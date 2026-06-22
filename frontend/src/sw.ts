@@ -23,3 +23,4 @@
 // Set up install event listener
 // Open target cache and add all static assets
 // Skip waiting to activate immediately
+// Set up activate event listener

@@ -377,3 +377,5 @@ describe('GameHistoryDB Service', () => {
       turn: 'w',
       status: 1,
       timestamp: 1700000000000,
+      lastUpdated: 0,
+      syncedAt: 0

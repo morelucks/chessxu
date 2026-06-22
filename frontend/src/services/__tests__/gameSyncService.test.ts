@@ -74,3 +74,5 @@ describe('GameSyncService', () => {
 
       await gameSyncService.syncPlayerGames(player, 'celo');
 
+      expect(progressList.length).toBeGreaterThan(0);
+      expect(progressList[progressList.length - 1]).toEqual({

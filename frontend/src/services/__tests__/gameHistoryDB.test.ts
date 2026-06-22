@@ -381,3 +381,5 @@ describe('GameHistoryDB Service', () => {
       syncedAt: 0
     };
 
+    beforeEach(async () => {
+      await gameHistoryDB.saveGame(sampleGame);

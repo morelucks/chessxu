@@ -4,3 +4,5 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { gameSyncService } from '../gameSyncService';
 import { gameHistoryDB } from '../gameHistoryDB';
 import celoService from '../../chess/services/celoService';
+import stacksService from '../../chess/services/stacksService';
+

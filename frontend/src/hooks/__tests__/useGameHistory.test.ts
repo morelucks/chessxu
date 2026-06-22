@@ -46,3 +46,4 @@ vi.mock('../../services/gameHistoryDB', () => {
   };
 });
 
+// Mock gameSyncService

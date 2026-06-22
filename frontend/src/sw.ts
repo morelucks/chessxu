@@ -2,3 +2,4 @@
 // Progressive Web App Offline Service Worker Implementation
 // This service worker enables offline capability for Chessxu.
 // It works in tandem with the offline-first IndexedDB database.
+// Goals:

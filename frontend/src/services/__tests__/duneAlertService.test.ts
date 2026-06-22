@@ -129,3 +129,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         body: 'Game #101 resolved. Result: You Won!',
       })
     );
+  });
+

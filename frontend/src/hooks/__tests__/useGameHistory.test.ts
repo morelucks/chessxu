@@ -62,3 +62,4 @@ vi.mock('../../services/gameSyncService', () => {
     }
   };
 });
+

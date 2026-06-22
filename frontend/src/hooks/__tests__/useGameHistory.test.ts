@@ -100,3 +100,4 @@ describe('useGameHistory hook', () => {
       draws: 0,
       ongoing: 1, // status: 0
     });
+  });

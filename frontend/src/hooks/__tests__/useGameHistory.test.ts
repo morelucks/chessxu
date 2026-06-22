@@ -150,3 +150,4 @@ describe('useGameHistory hook', () => {
 
     // Clear call log from initial load
     vi.mocked(gameHistoryDB.getPlayerGames).mockClear();
+

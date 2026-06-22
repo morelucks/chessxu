@@ -57,3 +57,4 @@
 // Caching strategy: Network-First for documents and routes
 // Fetch from network first
 // If network successful, update cache
+// If network fails, serve from cache if available

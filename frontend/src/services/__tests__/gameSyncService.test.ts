@@ -1,1 +1,1 @@
-// Test suite for gameSyncService
+// @vitest-environment jsdom

@@ -12,3 +12,4 @@ vi.mock('../../zustand/store', () => {
     address: '0x1111111111111111111111111111111111111111',
     activeChain: 'Celo',
   };
+  const mockUseAppStore = (selector: any) => selector(store);

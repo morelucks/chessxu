@@ -397,3 +397,5 @@ describe('GameHistoryDB Service', () => {
       expect(all).toHaveLength(0);
     });
   });
+
+  describe('Cache Statistics', () => {

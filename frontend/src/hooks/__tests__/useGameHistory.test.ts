@@ -71,3 +71,4 @@ describe('useGameHistory hook', () => {
   it('should load games initially', async () => {
     let result: any;
     await act(async () => {
+      const rendered = renderHook(() => useGameHistory());

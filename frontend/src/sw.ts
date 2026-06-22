@@ -25,3 +25,4 @@
 // Skip waiting to activate immediately
 // Set up activate event listener
 // Retrieve all cache keys
+// Delete any cache that doesn't match current CACHE_NAME

@@ -1,4 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// @vitest-environment jsdom
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { duneAlertService, DuneEventRow } from '../duneAlertService';
 import { useNotificationStore } from '../../zustand/notificationStore';
 
@@ -45,6 +47,20 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     vi.clearAllMocks();
     storeState.notifications = [];
     storeState.addNotification.mockResolvedValue(undefined);
+
+    // Mock global fetch to prevent actual network calls hanging during tests
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({}),
+    }));
+
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+    }
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it('should trigger game_joined alert when current user is the creator and another player joins', async () => {
@@ -210,5 +226,35 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         body: 'Leaderboard Rank Update: You moved UP to #3!',
       })
     );
+  });
+
+  it('should skip network polling and use cached events if polled within interval (multi-tab rate limiting)', async () => {
+    const type = 'contract_paused';
+    const now = Date.now();
+
+    // Set last poll and cache in localStorage to simulate recent poll by another tab
+    localStorage.setItem(`chessxu_dune_last_poll_${type}`, String(now));
+    localStorage.setItem(`chessxu_dune_cache_${type}`, JSON.stringify([
+      {
+        event_id: 'cached_evt_1',
+        timestamp: new Date().toISOString(),
+        type: 'contract_paused',
+        chain: 'Celo',
+        paused: true,
+      }
+    ]));
+
+    const evaluateSpy = vi.spyOn(duneAlertService, 'evaluateAlerts');
+
+    await duneAlertService.checkAlerts(currentUser, true);
+
+    // It should have evaluated the cached events
+    expect(evaluateSpy).toHaveBeenCalled();
+    const match = evaluateSpy.mock.calls.find(call => 
+      call[0]?.some((row: DuneEventRow) => row.event_id === 'cached_evt_1')
+    );
+    expect(match).toBeDefined();
+
+    evaluateSpy.mockRestore();
   });
 });

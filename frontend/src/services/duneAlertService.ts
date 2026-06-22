@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 import { getLatestResults } from './duneService';
 import { useNotificationStore } from '../zustand/notificationStore';
 import { DUNE_ALERTS_CONFIG } from '../config/duneAlerts';
@@ -35,6 +36,30 @@ export interface DuneEventRow {
   draws?: number;
   volume?: number;
 }
+
+// ---------------------------------------------------------------------------
+// Staggered Polling Intervals (milliseconds)
+// ---------------------------------------------------------------------------
+
+export const ALERT_POLL_INTERVALS: Record<string, number> = {
+  // Critical / high priority alerts checked frequently
+  contract_paused: 15 * 1000,
+  paymaster_balance_low: 15 * 1000,
+  
+  // Standard priority alerts
+  game_joined: 30 * 1000,
+  game_resolved: 30 * 1000,
+  opponent_resigned: 30 * 1000,
+  
+  // Medium priority alerts
+  unusual_activity: 60 * 1000,
+  leaderboard_rank: 5 * 60 * 1000,
+  
+  // Low priority / digest / milestones checked hourly/sub-hourly
+  daily_games_record: 15 * 60 * 1000,
+  wager_milestone: 30 * 60 * 1000,
+  weekly_digest: 60 * 60 * 1000,
+};
 
 // ---------------------------------------------------------------------------
 // Farcaster V2 Push Notification Mock Utility
@@ -131,12 +156,22 @@ class DuneAlertService {
   constructor() {
     if (typeof window !== 'undefined') {
       document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+      window.addEventListener('storage', this.handleStorageChange.bind(this));
     }
   }
 
   private handleVisibilityChange() {
     this.isTabActive = !document.hidden;
     console.log(`[DuneAlertService] Tab active state changed: ${this.isTabActive}`);
+  }
+
+  private handleStorageChange(event: StorageEvent) {
+    if (event.key === 'chessxu_notifications_updated') {
+      console.log('[DuneAlertService] Notifications updated by another tab, reloading...');
+      useNotificationStore.getState().loadNotifications().catch(err => {
+        console.error('Failed to reload notifications on storage change:', err);
+      });
+    }
   }
 
   /**
@@ -254,6 +289,10 @@ class DuneAlertService {
             severity: config.defaultSeverity,
             timestamp: Date.now(),
           });
+          // Notify other tabs via localStorage
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('chessxu_notifications_updated', String(Date.now()));
+          }
         }
 
         // 3. Dispatch to Farcaster Frame Push
@@ -270,30 +309,108 @@ class DuneAlertService {
   }
 
   /**
-   * Fetches latest event data from Dune or generates mocks if Dune is not available/configured.
+   * Utility to generate mock events for a specific alert type.
    */
-  async fetchEvents(currentUserAddress: string | null): Promise<DuneEventRow[]> {
-    const hasApiKey = !!import.meta.env.VITE_DUNE_API_KEY;
-    if (hasApiKey) {
-      try {
-        console.log('[DuneAlertService] Fetching real alert queries from Dune API...');
-        const results = await Promise.all(
-          Object.values(DUNE_ALERTS_CONFIG).map(config => 
-            getLatestResults<DuneEventRow>(config.queryId).catch(() => [] as DuneEventRow[])
-          )
-        );
-        return results.flat();
-      } catch (err) {
-        console.error('[DuneAlertService] Failed to fetch from Dune API:', err);
-      }
-    }
+  generateMockEventForType(type: string, currentUserAddress: string | null): DuneEventRow[] {
+    const addr = currentUserAddress || '0x9999999999999999999999999999999999999999';
+    const randId = () => Math.floor(Math.random() * 10000000).toString();
 
-    // Generate mock event rows for demo/test purposes
-    return this.generateMockEvents(currentUserAddress);
+    switch (type) {
+      case 'game_joined':
+        return [{
+          event_id: `mock_join_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'game_joined',
+          creator: addr,
+          joiner: '0x1234567890abcdef1234567890abcdef12345678',
+          gameId: 42,
+        }];
+      case 'game_resolved':
+        return [{
+          event_id: `mock_res_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'game_resolved',
+          playerW: addr,
+          playerB: '0x1234567890abcdef1234567890abcdef12345678',
+          gameId: 42,
+          status: 2,
+          winner: addr,
+        }];
+      case 'opponent_resigned':
+        return [{
+          event_id: `mock_resign_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'opponent_resigned',
+          winner: addr,
+          resignedPlayer: '0x1234567890abcdef1234567890abcdef12345678',
+          gameId: 43,
+        }];
+      case 'leaderboard_rank':
+        return [{
+          event_id: `mock_rank_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'leaderboard_rank',
+          player: addr,
+          rank: 5,
+          previousRank: 8,
+        }];
+      case 'wager_milestone':
+        return [{
+          event_id: `mock_wager_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'wager_milestone',
+          cumulativeVolume: 10000,
+        }];
+      case 'daily_games_record':
+        return [{
+          event_id: `mock_daily_rec_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'daily_games_record',
+          dailyCount: 156,
+          previousRecord: 150,
+        }];
+      case 'paymaster_balance_low':
+        return [{
+          event_id: `mock_paymaster_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'paymaster_balance_low',
+          balance: 0.45,
+        }];
+      case 'contract_paused':
+        return [{
+          event_id: `mock_pause_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'contract_paused',
+          chain: 'Celo',
+          paused: true,
+        }];
+      case 'unusual_activity':
+        return [{
+          event_id: `mock_activity_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'unusual_activity',
+          hourlyGames: 45,
+          averageHourlyGames: 12,
+        }];
+      case 'weekly_digest':
+        return [{
+          event_id: `mock_weekly_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'weekly_digest',
+          player: addr,
+          gamesPlayed: 14,
+          wins: 9,
+          losses: 4,
+          draws: 1,
+          volume: 350,
+        }];
+      default:
+        return [];
+    }
   }
 
   /**
-   * Utility to generate mock events on the fly.
+   * Utility to generate mock events on the fly (for backwards compatibility/demo).
    */
   generateMockEvents(currentUserAddress: string | null): DuneEventRow[] {
     const addr = currentUserAddress || '0x9999999999999999999999999999999999999999';
@@ -380,14 +497,13 @@ class DuneAlertService {
       }
     ];
 
-    // Pick 1-2 random mock events to return so they trigger progressively
     const count = Math.random() > 0.5 ? 2 : 1;
     const shuffled = [...mockData].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
   }
 
   /**
-   * Main check function called by the poller.
+   * Main check function called by the poller heartbeat.
    */
   async checkAlerts(currentUserAddress: string | null, isAdmin = false): Promise<void> {
     if (!this.isTabActive) {
@@ -395,27 +511,78 @@ class DuneAlertService {
       return;
     }
 
-    try {
-      const events = await this.fetchEvents(currentUserAddress);
-      await this.evaluateAlerts(events, currentUserAddress, isAdmin);
-    } catch (err) {
-      console.error('[DuneAlertService] Error checking alerts:', err);
+    const hasApiKey = typeof window !== 'undefined' && !!import.meta.env.VITE_DUNE_API_KEY;
+
+    for (const config of Object.values(DUNE_ALERTS_CONFIG)) {
+      const type = config.id;
+      const interval = ALERT_POLL_INTERVALS[type] || 60000;
+      const now = Date.now();
+
+      const lastPollKey = `chessxu_dune_last_poll_${type}`;
+      const cacheKey = `chessxu_dune_cache_${type}`;
+
+      let lastPoll = 0;
+      if (typeof window !== 'undefined') {
+        lastPoll = Number(localStorage.getItem(lastPollKey) || '0');
+      }
+
+      if (now - lastPoll < interval) {
+        // Multi-tab rate limiting: read from local cache to evaluate alerts
+        if (typeof window !== 'undefined') {
+          const cached = localStorage.getItem(cacheKey);
+          if (cached) {
+            try {
+              const events = JSON.parse(cached) as DuneEventRow[];
+              await this.evaluateAlerts(events, currentUserAddress, isAdmin);
+            } catch (e) {
+              console.error(`[DuneAlertService] Failed to parse cached events for ${type}:`, e);
+            }
+          }
+        }
+        continue;
+      }
+
+      // Claim the polling action to prevent concurrent fetches across tabs
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(lastPollKey, String(now));
+      }
+      console.log(`[DuneAlertService] Polling ${type} (interval: ${interval / 1000}s)`);
+
+      try {
+        let events: DuneEventRow[] = [];
+        if (hasApiKey) {
+          events = await getLatestResults<DuneEventRow>(config.queryId).catch(() => [] as DuneEventRow[]);
+        } else {
+          events = this.generateMockEventForType(type, currentUserAddress);
+        }
+
+        // Cache the newly fetched/mocked events
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(cacheKey, JSON.stringify(events));
+        }
+
+        // Evaluate the events
+        await this.evaluateAlerts(events, currentUserAddress, isAdmin);
+      } catch (err) {
+        console.error(`[DuneAlertService] Error polling alerts for ${type}:`, err);
+      }
     }
   }
 
   /**
    * Starts the polling loop.
    */
-  startPolling(currentUserAddress: string | null, isAdmin = false, intervalMs = 60000): void {
+  startPolling(currentUserAddress: string | null, isAdmin = false, _intervalMs = 60000): void {
     if (this.pollingIntervalId) return;
 
-    console.log(`[DuneAlertService] Starting alerts polling every ${intervalMs}ms...`);
+    console.log('[DuneAlertService] Starting staggered alerts scheduler...');
     // Run an initial check immediately
     void this.checkAlerts(currentUserAddress, isAdmin);
 
+    // Run the heartbeat scheduler every 5 seconds to support stagger
     this.pollingIntervalId = setInterval(() => {
       void this.checkAlerts(currentUserAddress, isAdmin);
-    }, intervalMs);
+    }, 5000);
   }
 
   /**
@@ -423,7 +590,7 @@ class DuneAlertService {
    */
   stopPolling(): void {
     if (this.pollingIntervalId) {
-      console.log('[DuneAlertService] Stopping alerts polling...');
+      console.log('[DuneAlertService] Stopping alerts scheduler...');
       clearInterval(this.pollingIntervalId);
       this.pollingIntervalId = null;
     }

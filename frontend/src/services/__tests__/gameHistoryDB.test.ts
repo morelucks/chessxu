@@ -151,3 +151,5 @@ const mockIndexedDB = {
         if (req.onupgradeneeded) {
           req.onupgradeneeded({
             target: { result: mockDBInstance }
+          } as any);
+        }

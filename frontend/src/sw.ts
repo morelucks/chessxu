@@ -21,3 +21,4 @@ self.addEventListener('install', (event: any) => {
       return cache.addAll(STATIC_ASSETS);
     }).then(() => {
       return (self as any).skipWaiting();
+    })

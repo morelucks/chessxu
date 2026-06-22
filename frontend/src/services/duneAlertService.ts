@@ -52,3 +52,9 @@ export const ALERT_POLL_INTERVALS: Record<string, number> = {
   opponent_resigned: 30 * 1000,
   
   // Medium priority alerts
+  unusual_activity: 60 * 1000,
+  leaderboard_rank: 5 * 60 * 1000,
+  
+  // Low priority / digest / milestones checked hourly/sub-hourly
+  daily_games_record: 15 * 60 * 1000,
+  wager_milestone: 30 * 60 * 1000,

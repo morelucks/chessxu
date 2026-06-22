@@ -163,3 +163,5 @@ const mockIndexedDB = {
 };
 
 // Stub global indexedDB
+vi.stubGlobal('indexedDB', mockIndexedDB);
+

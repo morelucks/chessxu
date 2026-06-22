@@ -145,3 +145,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         gameId: 101,
       },
     ];
+
+    await duneAlertService.evaluateAlerts(events, currentUser, false);

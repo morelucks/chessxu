@@ -114,3 +114,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         playerW: currentUser,
         playerB: '0x2222222222222222222222222222222222222222',
         gameId: 101,
+        status: 2,
+        winner: currentUser,

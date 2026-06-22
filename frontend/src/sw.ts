@@ -97,3 +97,4 @@ self.addEventListener('fetch', (event: any) => {
             cache.put(request, responseToCache);
           });
           return networkResponse;
+        }).catch(() => {

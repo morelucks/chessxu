@@ -45,3 +45,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    storeState.notifications = [];
+    storeState.addNotification.mockResolvedValue(undefined);

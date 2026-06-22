@@ -142,3 +142,9 @@ export async function sendWebhookNotification(
   } catch (err) {
     console.error('[Webhook] Failed to POST webhook:', err);
     return false;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Dune Alert Evaluator Service
+// ---------------------------------------------------------------------------

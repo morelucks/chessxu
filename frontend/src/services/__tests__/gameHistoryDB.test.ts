@@ -379,3 +379,5 @@ describe('GameHistoryDB Service', () => {
       timestamp: 1700000000000,
       lastUpdated: 0,
       syncedAt: 0
+    };
+

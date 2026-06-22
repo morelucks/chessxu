@@ -64,3 +64,9 @@ export const ALERT_POLL_INTERVALS: Record<string, number> = {
 // ---------------------------------------------------------------------------
 // Farcaster V2 Push Notification Mock Utility
 // ---------------------------------------------------------------------------
+
+export async function sendFrameNotification(
+  token: string,
+  url: string,
+  title: string,
+  body: string

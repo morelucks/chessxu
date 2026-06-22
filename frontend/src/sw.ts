@@ -123,3 +123,4 @@ self.addEventListener('fetch', (event: any) => {
             if (cachedResponse) {
               return cachedResponse;
             }
+            if (request.mode === 'navigate') {

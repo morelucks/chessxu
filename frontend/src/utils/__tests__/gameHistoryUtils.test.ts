@@ -179,3 +179,6 @@ describe('gameHistoryUtils', () => {
       expect(parsed.enPassant).toBe('e3');
       expect(parsed.halfmove).toBe('0');
       expect(parsed.fullmove).toBe('1');
+    });
+  });
+});

@@ -186,3 +186,5 @@ describe('GameHistoryDB Service', () => {
 
   describe('Database Initialization', () => {
     it('should initialize database successfully', async () => {
+      await expect(gameHistoryDB.init()).resolves.toBeUndefined();
+    });

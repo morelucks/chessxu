@@ -108,3 +108,4 @@ describe('useGameHistory hook', () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
     });
+

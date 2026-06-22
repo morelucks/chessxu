@@ -7,3 +7,5 @@ import { useNotificationStore } from '../../zustand/notificationStore';
 // Mock Zustand store
 vi.mock('../../zustand/notificationStore', () => {
   const mockStore = {
+    notifications: [] as any[],
+    enabledAlerts: {

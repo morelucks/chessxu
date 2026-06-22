@@ -391,3 +391,5 @@ describe('GameHistoryDB Service', () => {
       expect(saved).toBeNull();
     });
 
+    it('should clear all games in the database', async () => {
+      await gameHistoryDB.clearAll();

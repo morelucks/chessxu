@@ -19,3 +19,4 @@
 // Chess king image
 // Chess knight image
 // Chess queen image
+// Chess rook image

@@ -6,3 +6,5 @@ import { gameHistoryDB } from '../gameHistoryDB';
 import celoService from '../../chess/services/celoService';
 import stacksService from '../../chess/services/stacksService';
 
+// Mock gameHistoryDB
+vi.mock('../gameHistoryDB', () => {

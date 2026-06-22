@@ -67,3 +67,5 @@ describe('gameHistoryUtils', () => {
 
     it('returns Unknown for invalid status', () => {
       expect(getStatusText(99 as any)).toBe('Unknown');
+    });
+  });

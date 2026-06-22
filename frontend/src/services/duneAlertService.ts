@@ -154,3 +154,9 @@ class DuneAlertService {
   private isTabActive = true;
 
   constructor() {
+    if (typeof window !== 'undefined') {
+      document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+      window.addEventListener('storage', this.handleStorageChange.bind(this));
+    }
+  }
+

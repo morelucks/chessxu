@@ -592,3 +592,10 @@ class DuneAlertService {
     if (this.pollingIntervalId) {
       console.log('[DuneAlertService] Stopping alerts scheduler...');
       clearInterval(this.pollingIntervalId);
+      this.pollingIntervalId = null;
+    }
+  }
+}
+
+export const duneAlertService = new DuneAlertService();
+export default duneAlertService;

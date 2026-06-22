@@ -147,3 +147,6 @@ describe('gameHistoryUtils', () => {
   });
 
   describe('formatWager', () => {
+    it('returns correct label for zero wager', () => {
+      expect(formatWager('0', true, 'celo')).toBe('No wager');
+    });

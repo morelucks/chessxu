@@ -372,3 +372,5 @@ describe('GameSyncService', () => {
     });
 
     it('should sync if lastSync is older than one hour', async () => {
+      (gameSyncService as any).lastSyncTime = Date.now() - 90 * 60 * 1000; // 1.5 hours ago
+      const spy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({

@@ -160,3 +160,4 @@ describe('useGameHistory hook', () => {
 
   it('should handle errors gracefully during initial load', async () => {
     vi.mocked(gameHistoryDB.getPlayerGames).mockRejectedValueOnce(
+      new Error('DB Query Failed')

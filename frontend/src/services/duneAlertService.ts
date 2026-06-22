@@ -388,3 +388,9 @@ class DuneAlertService {
         return [{
           event_id: `mock_activity_${randId()}`,
           timestamp: new Date().toISOString(),
+          type: 'unusual_activity',
+          hourlyGames: 45,
+          averageHourlyGames: 12,
+        }];
+      case 'weekly_digest':
+        return [{

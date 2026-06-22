@@ -148,3 +148,4 @@ describe('useGameHistory hook', () => {
       result = rendered.result;
     });
 
+    // Clear call log from initial load

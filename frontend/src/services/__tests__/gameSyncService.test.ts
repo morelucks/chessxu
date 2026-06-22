@@ -131,3 +131,5 @@ describe('GameSyncService', () => {
       expect(result.success).toBe(true);
       expect(result.gamesAdded).toBe(2);
       expect(result.gamesUpdated).toBe(0);
+      expect(gameSyncService.lastSync).not.toBeNull();
+    });

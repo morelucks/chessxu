@@ -66,3 +66,5 @@ const mockObjectStore = {
     const values = Array.from(storeMap.values());
     const req = new MockIDBRequest();
     req.result = values;
+    setTimeout(() => {
+      if (req.onsuccess) req.onsuccess({ target: req } as any);

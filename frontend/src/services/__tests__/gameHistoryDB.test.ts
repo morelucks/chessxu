@@ -116,3 +116,5 @@ const mockObjectStore = {
             if (req.onsuccess) req.onsuccess({ target: req } as any);
           }
         };
+
+        if (values.length > 0) {

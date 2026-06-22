@@ -64,3 +64,5 @@ describe('GameSyncService', () => {
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(2);
       vi.mocked(celoService.getGame).mockResolvedValue({
         playerW: player,
+        playerB: '0xOther',
+        wager: 10n,

@@ -119,3 +119,4 @@ self.addEventListener('fetch', (event: any) => {
           return networkResponse;
         })
         .catch(() => {
+          return caches.match(request).then((cachedResponse) => {

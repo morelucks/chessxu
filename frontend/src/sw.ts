@@ -49,3 +49,4 @@
 // Caching strategy: Cache-First for static assets
 // Serve from cache if available
 // If cache hit, update cache in background
+// If cache miss, fetch from network

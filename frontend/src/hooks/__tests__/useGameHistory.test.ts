@@ -91,3 +91,4 @@ describe('useGameHistory hook', () => {
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
+    });

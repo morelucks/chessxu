@@ -173,3 +173,6 @@ describe('gameHistoryUtils', () => {
     it('parses standard FEN correctly', () => {
       const fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
       const parsed = parseFEN(fen);
+      expect(parsed.position).toBe('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR');
+      expect(parsed.turn).toBe('b');
+      expect(parsed.castling).toBe('KQkq');

@@ -135,3 +135,4 @@ describe('GameSyncService', () => {
     });
 
     it('should filter games where the player is not participant', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);

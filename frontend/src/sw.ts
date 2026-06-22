@@ -22,3 +22,4 @@ self.addEventListener('install', (event: any) => {
     }).then(() => {
       return (self as any).skipWaiting();
     })
+  );

@@ -14,3 +14,5 @@ vi.mock('../gameHistoryDB', () => {
       getPlayerGames: vi.fn().mockResolvedValue([]),
       saveGame: vi.fn().mockResolvedValue(undefined),
     }
+  };
+});

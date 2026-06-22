@@ -436,3 +436,9 @@ class DuneAlertService {
         winner: addr,
       },
       {
+        event_id: `mock_resign_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'opponent_resigned',
+        winner: addr,
+        resignedPlayer: '0x1234567890abcdef1234567890abcdef12345678',
+        gameId: 43,

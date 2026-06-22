@@ -118,3 +118,9 @@ export async function sendWebhookNotification(
         description: body,
         color: severity === 'critical' ? 16711680 : severity === 'high' ? 16753920 : 3447003,
         fields: Object.entries(details).map(([key, val]) => ({
+          name: key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+          value: String(val),
+          inline: true
+        })),
+        timestamp: new Date().toISOString(),
+        footer: {

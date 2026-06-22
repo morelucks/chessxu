@@ -118,3 +118,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         winner: currentUser,
       },
     ];
+
+    await duneAlertService.evaluateAlerts(events, currentUser, false);

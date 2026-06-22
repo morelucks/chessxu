@@ -171,3 +171,5 @@ vi.stubGlobal('indexedDB', mockIndexedDB);
 
 describe('GameHistoryDB Service', () => {
   beforeEach(() => {
+    storeMap.clear();
+    dbOpenShouldFail = false;

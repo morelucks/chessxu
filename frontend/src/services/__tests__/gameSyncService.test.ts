@@ -327,3 +327,5 @@ describe('GameSyncService', () => {
         status: 1,
       } as any);
 
+      const success = await gameSyncService.syncGame(10, 'celo');
+      expect(success).toBe(true);

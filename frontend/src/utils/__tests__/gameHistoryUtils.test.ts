@@ -61,3 +61,6 @@ describe('gameHistoryUtils', () => {
       expect(getStatusText(1)).toBe('Game in progress');
       expect(getStatusText(2)).toBe('White wins');
       expect(getStatusText(3)).toBe('Black wins');
+      expect(getStatusText(4)).toBe('Draw');
+      expect(getStatusText(5)).toBe('Cancelled');
+    });

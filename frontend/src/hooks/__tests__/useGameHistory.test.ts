@@ -61,3 +61,4 @@ vi.mock('../../services/gameSyncService', () => {
       autoSync: vi.fn().mockResolvedValue(undefined),
     }
   };
+});

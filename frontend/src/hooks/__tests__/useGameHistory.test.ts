@@ -19,3 +19,4 @@ vi.mock('../../zustand/store', () => {
   };
 });
 
+// Mock gameHistoryDB

@@ -92,3 +92,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     const events: DuneEventRow[] = [
       {
         event_id: 'evt_joined_2',
+        timestamp: new Date().toISOString(),
+        type: 'game_joined',

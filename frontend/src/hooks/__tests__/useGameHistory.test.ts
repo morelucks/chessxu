@@ -158,3 +158,4 @@ describe('useGameHistory hook', () => {
     expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledTimes(1);
   });
 
+  it('should handle errors gracefully during initial load', async () => {

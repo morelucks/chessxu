@@ -91,3 +91,5 @@ const mockObjectStore = {
     return req;
   }),
   index: vi.fn().mockImplementation((indexName: string) => {
+    return {
+      openCursor: vi.fn().mockImplementation((_query: any, _direction: string) => {

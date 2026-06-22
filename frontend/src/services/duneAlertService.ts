@@ -250,3 +250,9 @@ class DuneAlertService {
           isTriggered = true;
           title = '🚨 CRITICAL: Paymaster Balance Low';
           body = `ChessxuPaymaster gas balance is down to ${row.balance} CELO. Please top it up immediately.`;
+          details.current_balance = `${row.balance} CELO`;
+          details.threshold = '1.0 CELO';
+        }
+      } else if (type === 'contract_paused' && isAdmin) {
+        if (row.paused) {
+          isTriggered = true;

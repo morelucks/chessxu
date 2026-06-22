@@ -23,3 +23,6 @@ describe('gameHistoryUtils', () => {
     chain: 'celo',
     playerW: '0xWhiteAddress',
     playerB: '0xBlackAddress',
+    wager: '100000000000000000', // 0.1 CELO in Wei or standard units
+    isNative: true,
+    boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',

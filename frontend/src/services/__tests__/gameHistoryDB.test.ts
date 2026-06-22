@@ -298,3 +298,4 @@ describe('GameHistoryDB Service', () => {
         wager: '10',
         isNative: true,
         boardState: '...',
+        turn: 'w',

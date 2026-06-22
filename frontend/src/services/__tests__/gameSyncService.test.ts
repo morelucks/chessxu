@@ -86,3 +86,5 @@ describe('GameSyncService', () => {
       unsubscribe();
       progressList.length = 0;
       await gameSyncService.syncPlayerGames(player, 'celo');
+      expect(progressList).toHaveLength(0);
+    });

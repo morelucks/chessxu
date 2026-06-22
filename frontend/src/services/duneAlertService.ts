@@ -442,3 +442,9 @@ class DuneAlertService {
         winner: addr,
         resignedPlayer: '0x1234567890abcdef1234567890abcdef12345678',
         gameId: 43,
+      },
+      {
+        event_id: `mock_rank_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'leaderboard_rank',
+        player: addr,

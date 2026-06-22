@@ -348,3 +348,5 @@ describe('GameHistoryDB Service', () => {
     it('should filter games by player address and chain', async () => {
       const aliceCeloGames = await gameHistoryDB.getPlayerGames('0xAlice', 'celo');
       expect(aliceCeloGames).toHaveLength(1);
+      expect(aliceCeloGames[0].gameId).toBe(1);
+    });

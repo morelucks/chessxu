@@ -237,3 +237,5 @@ describe('GameHistoryDB Service', () => {
       expect(saved!.gameId).toBe(101);
       expect(saved!.lastUpdated).toBeGreaterThan(0);
       expect(saved!.syncedAt).toBeGreaterThan(0);
+    });
+

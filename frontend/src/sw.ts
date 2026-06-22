@@ -122,3 +122,4 @@ self.addEventListener('fetch', (event: any) => {
           return caches.match(request).then((cachedResponse) => {
             if (cachedResponse) {
               return cachedResponse;
+            }

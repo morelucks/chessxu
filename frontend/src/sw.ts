@@ -56,3 +56,4 @@
 // Fallback to index.html for navigation requests when offline
 // Caching strategy: Network-First for documents and routes
 // Fetch from network first
+// If network successful, update cache

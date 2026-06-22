@@ -109,3 +109,4 @@ describe('useGameHistory hook', () => {
       result = rendered.result;
     });
 
+    const game = result.current.getGame(1);

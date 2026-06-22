@@ -368,3 +368,5 @@ describe('GameHistoryDB Service', () => {
   describe('Deletion & Clear', () => {
     const sampleGame: CachedGame = {
       gameId: 500,
+      chain: 'celo',
+      playerW: '0xW',

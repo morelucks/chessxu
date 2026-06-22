@@ -175,3 +175,5 @@ describe('GameHistoryDB Service', () => {
     dbOpenShouldFail = false;
     mockDBInstance = new MockIDBDatabase();
     vi.clearAllMocks();
+    // Reset private fields on singleton instance to prevent cached promise leakage
+    (gameHistoryDB as any).db = null;

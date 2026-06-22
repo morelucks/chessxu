@@ -12,3 +12,6 @@ import {
   formatAddress,
   formatWager,
   isGameActive,
+  isGameCompleted,
+  parseFEN,
+} from '../gameHistoryUtils';

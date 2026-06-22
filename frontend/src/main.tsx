@@ -21,6 +21,7 @@ if ("serviceWorker" in navigator) {
       .then((registration) => {
         console.log("ServiceWorker registered successfully with scope: ", registration.scope);
       })
+      .catch((error) => {
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 

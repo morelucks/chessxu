@@ -159,3 +159,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         type: 'paymaster_balance_low',
         balance: 0.35,
       },
+    ];
+

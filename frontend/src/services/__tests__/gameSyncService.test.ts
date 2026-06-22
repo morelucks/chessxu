@@ -9,3 +9,5 @@ import stacksService from '../../chess/services/stacksService';
 // Mock gameHistoryDB
 vi.mock('../gameHistoryDB', () => {
   return {
+    gameHistoryDB: {
+      init: vi.fn().mockResolvedValue(undefined),

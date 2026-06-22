@@ -128,3 +128,4 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         type: 'game_resolved',
         body: 'Game #101 resolved. Result: You Won!',
       })
+    );

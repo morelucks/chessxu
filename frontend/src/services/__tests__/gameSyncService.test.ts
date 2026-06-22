@@ -232,3 +232,4 @@ describe('GameSyncService', () => {
           isNative: true,
           boardState: 'state',
           turn: 'w',
+          status: 2,

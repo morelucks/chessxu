@@ -42,3 +42,4 @@ vi.mock('../../services/gameHistoryDB', () => {
           chain: 'Celo',
         }
       ]),
+    }

@@ -44,3 +44,5 @@ describe('gameHistoryUtils', () => {
       expect(determinePlayerResult(3, false)).toBe('win');
     });
 
+    it('returns draw for any player when status is 4', () => {
+      expect(determinePlayerResult(4, true)).toBe('draw');

@@ -7,3 +7,4 @@ import { gameHistoryDB } from '../../services/gameHistoryDB';
 import { gameSyncService } from '../../services/gameSyncService';
 
 // Mock Zustand store
+vi.mock('../../zustand/store', () => {

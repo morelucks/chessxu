@@ -38,3 +38,4 @@ vi.mock('../../chess/services/stacksService', () => {
 });
 
 describe('GameSyncService', () => {
+  const player = '0xPlayerAddress';

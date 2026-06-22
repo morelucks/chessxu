@@ -97,3 +97,5 @@ const mockObjectStore = {
         if (indexName === 'timestampIndex') {
           // Sort by timestamp descending
           values.sort((a, b) => b.timestamp - a.timestamp);
+        }
+

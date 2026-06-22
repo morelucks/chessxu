@@ -29,3 +29,5 @@ vi.mock('../../zustand/notificationStore', () => {
     farcasterPushToken: 'mock-token',
     farcasterPushUrl: 'https://mock.farcaster/push',
     webhookUrl: 'https://mock.webhook/discord',
+    addNotification: vi.fn(),
+  };

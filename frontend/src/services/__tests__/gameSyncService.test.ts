@@ -28,3 +28,4 @@ vi.mock('../../chess/services/celoService', () => {
 });
 
 // Mock Stacks service
+vi.mock('../../chess/services/stacksService', () => {

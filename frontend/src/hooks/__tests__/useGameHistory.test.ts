@@ -1,1 +1,1 @@
-// Test suite for useGameHistory hook
+/* eslint-disable @typescript-eslint/no-explicit-any */

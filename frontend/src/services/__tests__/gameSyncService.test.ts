@@ -365,3 +365,5 @@ describe('GameSyncService', () => {
 
     it('should skip sync if lastSync is within the past hour', async () => {
       (gameSyncService as any).lastSyncTime = Date.now() - 30 * 60 * 1000; // 30 minutes ago
+      const spy = vi.spyOn(gameSyncService, 'syncPlayerGames');
+

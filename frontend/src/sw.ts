@@ -92,3 +92,4 @@ self.addEventListener('fetch', (event: any) => {
           if (!networkResponse || networkResponse.status !== 200) {
             return networkResponse;
           }
+          const responseToCache = networkResponse.clone();

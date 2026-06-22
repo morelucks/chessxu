@@ -395,3 +395,5 @@ describe('GameHistoryDB Service', () => {
       await gameHistoryDB.clearAll();
       const all = await gameHistoryDB.getAllGames();
       expect(all).toHaveLength(0);
+    });
+  });

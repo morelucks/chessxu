@@ -23,3 +23,5 @@ class MockIDBDatabase {
     contains: vi.fn().mockReturnValue(false),
   };
   createObjectStore = vi.fn().mockReturnValue({
+    createIndex: vi.fn(),
+  });

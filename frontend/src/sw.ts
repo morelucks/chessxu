@@ -47,3 +47,4 @@ self.addEventListener('fetch', (event: any) => {
 
   // Only handle GET requests
   if (request.method !== 'GET') return;
+

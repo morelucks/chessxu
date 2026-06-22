@@ -93,3 +93,4 @@ describe('useGameHistory hook', () => {
       result = rendered.result;
     });
 
+    expect(result.current.stats).toEqual({

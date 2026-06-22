@@ -176,3 +176,6 @@ describe('gameHistoryUtils', () => {
       expect(parsed.position).toBe('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR');
       expect(parsed.turn).toBe('b');
       expect(parsed.castling).toBe('KQkq');
+      expect(parsed.enPassant).toBe('e3');
+      expect(parsed.halfmove).toBe('0');
+      expect(parsed.fullmove).toBe('1');

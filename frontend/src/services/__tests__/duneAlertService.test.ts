@@ -84,3 +84,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         type: 'game_joined',
         severity: 'high',
         body: 'Player 0x2222 joined game #101',
+      })
+    );

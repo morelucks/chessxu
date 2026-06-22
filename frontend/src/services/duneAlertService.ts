@@ -310,3 +310,9 @@ class DuneAlertService {
 
   /**
    * Utility to generate mock events for a specific alert type.
+   */
+  generateMockEventForType(type: string, currentUserAddress: string | null): DuneEventRow[] {
+    const addr = currentUserAddress || '0x9999999999999999999999999999999999999999';
+    const randId = () => Math.floor(Math.random() * 10000000).toString();
+
+    switch (type) {

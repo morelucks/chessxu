@@ -173,3 +173,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         id: 'evt_paymaster_1',
         type: 'paymaster_balance_low',
         severity: 'critical',
+      })
+    );

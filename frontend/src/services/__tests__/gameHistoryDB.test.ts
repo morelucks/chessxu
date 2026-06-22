@@ -177,3 +177,5 @@ describe('GameHistoryDB Service', () => {
     vi.clearAllMocks();
     // Reset private fields on singleton instance to prevent cached promise leakage
     (gameHistoryDB as any).db = null;
+    (gameHistoryDB as any).initPromise = null;
+  });

@@ -6,3 +6,6 @@ import {
   getResultColor,
   isPlayerWhite,
   isPlayerBlack,
+  getOpponentAddress,
+  getPlayerColor,
+  calculatePlayerStats,

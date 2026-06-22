@@ -283,3 +283,5 @@ describe('GameSyncService', () => {
     it('should throw an error if sync is already in progress', async () => {
       (gameSyncService as any).isSyncing = true;
       await expect(gameSyncService.syncPlayerGames(player, 'celo')).rejects.toThrow('Sync already in progress');
+    });
+

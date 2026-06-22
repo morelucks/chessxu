@@ -153,3 +153,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
 
   it('should trigger paymaster_balance_low alert only if the user is admin', async () => {
     const events: DuneEventRow[] = [
+      {
+        event_id: 'evt_paymaster_1',

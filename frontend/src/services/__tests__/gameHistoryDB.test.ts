@@ -99,3 +99,5 @@ const mockObjectStore = {
           values.sort((a, b) => b.timestamp - a.timestamp);
         }
 
+        const req = new MockIDBRequest();
+        let cursorIndex = 0;

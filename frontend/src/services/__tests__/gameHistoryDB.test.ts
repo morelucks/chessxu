@@ -134,3 +134,5 @@ const mockObjectStore = {
 };
 
 // Mock IndexedDB open requests
+let dbOpenShouldFail = false;
+let mockDBInstance = new MockIDBDatabase();

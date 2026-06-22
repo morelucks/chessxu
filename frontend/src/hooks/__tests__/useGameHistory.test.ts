@@ -6,3 +6,4 @@ import { useGameHistory } from '../useGameHistory';
 import { gameHistoryDB } from '../../services/gameHistoryDB';
 import { gameSyncService } from '../../services/gameSyncService';
 
+// Mock Zustand store

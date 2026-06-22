@@ -9,3 +9,5 @@ vi.mock('../../zustand/notificationStore', () => {
   const mockStore = {
     notifications: [] as any[],
     enabledAlerts: {
+      game_joined: true,
+      game_resolved: true,

@@ -57,3 +57,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     if (typeof window !== 'undefined') {
       localStorage.clear();
     }
+  });
+

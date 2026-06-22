@@ -112,3 +112,5 @@ const mockObjectStore = {
               req.result = cursor;
             } else {
               req.result = null;
+            }
+            if (req.onsuccess) req.onsuccess({ target: req } as any);

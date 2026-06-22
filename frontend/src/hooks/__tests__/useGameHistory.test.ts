@@ -20,3 +20,4 @@ vi.mock('../../zustand/store', () => {
 });
 
 // Mock gameHistoryDB
+vi.mock('../../services/gameHistoryDB', () => {

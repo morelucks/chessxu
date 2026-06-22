@@ -51,3 +51,5 @@ describe('GameSyncService', () => {
   describe('Getters & Subscription', () => {
     it('should report syncing state and last sync time correctly', () => {
       expect(gameSyncService.syncing).toBe(false);
+      expect(gameSyncService.lastSync).toBeNull();
+    });

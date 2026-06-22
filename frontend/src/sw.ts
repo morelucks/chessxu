@@ -30,3 +30,4 @@ self.addEventListener('activate', (event: any) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
+        cacheNames

@@ -144,3 +144,6 @@ describe('gameHistoryUtils', () => {
       expect(formatAddress('')).toBe('—');
       expect(formatAddress('123')).toBe('123');
     });
+  });
+
+  describe('formatWager', () => {

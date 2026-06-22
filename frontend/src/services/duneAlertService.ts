@@ -562,3 +562,9 @@ class DuneAlertService {
         }
 
         // Evaluate the events
+        await this.evaluateAlerts(events, currentUserAddress, isAdmin);
+      } catch (err) {
+        console.error(`[DuneAlertService] Error polling alerts for ${type}:`, err);
+      }
+    }
+  }

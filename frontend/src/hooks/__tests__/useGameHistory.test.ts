@@ -95,3 +95,4 @@ describe('useGameHistory hook', () => {
 
     expect(result.current.stats).toEqual({
       totalGames: 2,
+      wins: 1, // status: 2 (White wins), user is playerW (White) -> win

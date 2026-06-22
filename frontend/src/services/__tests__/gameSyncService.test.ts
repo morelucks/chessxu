@@ -19,3 +19,5 @@ vi.mock('../gameHistoryDB', () => {
 
 // Mock Celo service
 vi.mock('../../chess/services/celoService', () => {
+  return {
+    default: {

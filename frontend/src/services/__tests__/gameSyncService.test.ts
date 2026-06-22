@@ -101,3 +101,5 @@ describe('GameSyncService', () => {
             wager: 100n,
             isNative: true,
             boardState: 'state2',
+            turn: 'w',
+            status: 2, // White wins

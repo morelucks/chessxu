@@ -236,3 +236,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     localStorage.setItem(`chessxu_dune_last_poll_${type}`, String(now));
     localStorage.setItem(`chessxu_dune_cache_${type}`, JSON.stringify([
       {
+        event_id: 'cached_evt_1',
+        timestamp: new Date().toISOString(),

@@ -37,3 +37,4 @@
 // Bypass Stacks mainnet/testnet RPC endpoints
 // Determine if request is for a static asset
 // Check if URL is in static assets list
+// Check if URL path includes compiled assets

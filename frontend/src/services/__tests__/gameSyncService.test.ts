@@ -61,3 +61,5 @@ describe('GameSyncService', () => {
       });
 
       // Mock Celo service responses to trigger processing loop
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(2);
+      vi.mocked(celoService.getGame).mockResolvedValue({

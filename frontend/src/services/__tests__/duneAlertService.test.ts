@@ -86,3 +86,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         body: 'Player 0x2222 joined game #101',
       })
     );
+  });
+

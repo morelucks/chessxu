@@ -344,3 +344,5 @@ describe('GameHistoryDB Service', () => {
       expect(aliceGames.map(g => g.gameId)).toContain(1);
       expect(aliceGames.map(g => g.gameId)).toContain(3);
     });
+
+    it('should filter games by player address and chain', async () => {

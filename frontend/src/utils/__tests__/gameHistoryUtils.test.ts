@@ -95,3 +95,6 @@ describe('gameHistoryUtils', () => {
 
       expect(isPlayerBlack(mockGame, '0xBlackAddress')).toBe(true);
       expect(isPlayerBlack(mockGame, '0xblackaddress')).toBe(true);
+      expect(isPlayerBlack(mockGame, '0xWhiteAddress')).toBe(false);
+    });
+

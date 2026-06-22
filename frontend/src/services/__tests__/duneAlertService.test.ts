@@ -31,3 +31,5 @@ vi.mock('../../zustand/notificationStore', () => {
     webhookUrl: 'https://mock.webhook/discord',
     addNotification: vi.fn(),
   };
+
+  return {

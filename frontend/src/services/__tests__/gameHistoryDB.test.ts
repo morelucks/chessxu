@@ -299,3 +299,5 @@ describe('GameHistoryDB Service', () => {
         isNative: true,
         boardState: '...',
         turn: 'w',
+        status: 1,
+        timestamp: 1700000010000,

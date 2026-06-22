@@ -12,6 +12,7 @@ if (typeof window !== "undefined") {
 
 // Register Service Worker for offline PWA support
 if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 

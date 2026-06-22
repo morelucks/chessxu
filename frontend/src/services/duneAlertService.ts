@@ -202,3 +202,9 @@ class DuneAlertService {
       if (type === 'game_joined' && currentUserAddress) {
         if (row.creator?.toLowerCase() === currentUserAddress.toLowerCase() &&
             row.joiner?.toLowerCase() !== currentUserAddress.toLowerCase()) {
+          isTriggered = true;
+          body = `Player ${row.joiner?.slice(0, 6)} joined game #${row.gameId}`;
+          details.game_id = row.gameId;
+          details.joiner = row.joiner;
+        }
+      } else if (type === 'game_resolved' && currentUserAddress) {

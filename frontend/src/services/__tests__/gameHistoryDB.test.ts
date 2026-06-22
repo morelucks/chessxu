@@ -109,3 +109,5 @@ const mockObjectStore = {
           continue: () => {
             cursorIndex++;
             if (cursorIndex < values.length) {
+              req.result = cursor;
+            } else {

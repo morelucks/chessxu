@@ -70,3 +70,4 @@ self.addEventListener('fetch', (event: any) => {
     url.pathname.endsWith('.png') || 
     url.pathname.endsWith('.jpg') || 
     url.pathname.endsWith('.svg') || 
+    url.pathname.endsWith('.ico') ||

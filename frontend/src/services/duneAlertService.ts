@@ -484,3 +484,9 @@ class DuneAlertService {
         hourlyGames: 45,
         averageHourlyGames: 12,
       },
+      {
+        event_id: `mock_weekly_${randId()}`,
+        timestamp: new Date().toISOString(),
+        type: 'weekly_digest',
+        player: addr,
+        gamesPlayed: 14,

@@ -52,5 +52,6 @@ export default defineConfig(({ command }) => {
         input: {
           main: path.resolve('./index.html'),
           sw: path.resolve('./src/sw.ts'),
+        },
   };
 });

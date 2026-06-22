@@ -154,3 +154,4 @@ describe('useGameHistory hook', () => {
     await act(async () => {
       await result.current.refresh();
     });
+

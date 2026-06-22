@@ -118,3 +118,5 @@ describe('GameSyncService', () => {
         }
         return null as any;
       });
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');

@@ -247,3 +247,5 @@ describe('GameHistoryDB Service', () => {
 
   describe('Batch Save Operations', () => {
     const sampleGames: CachedGame[] = [
+      {
+        gameId: 201,

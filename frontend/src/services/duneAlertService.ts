@@ -574,3 +574,9 @@ class DuneAlertService {
    */
   startPolling(currentUserAddress: string | null, isAdmin = false, _intervalMs = 60000): void {
     if (this.pollingIntervalId) return;
+
+    console.log('[DuneAlertService] Starting staggered alerts scheduler...');
+    // Run an initial check immediately
+    void this.checkAlerts(currentUserAddress, isAdmin);
+
+    // Run the heartbeat scheduler every 5 seconds to support stagger

@@ -268,3 +268,5 @@ describe('GameSyncService', () => {
         turn: 'w',
         status: 4, // Draw
       });
+
+      const result = await gameSyncService.syncPlayerGames(player, 'stacks');

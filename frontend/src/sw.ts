@@ -27,3 +27,4 @@
 // Retrieve all cache keys
 // Delete any cache that doesn't match current CACHE_NAME
 // Claim clients to start controlling them immediately
+// Set up fetch event listener

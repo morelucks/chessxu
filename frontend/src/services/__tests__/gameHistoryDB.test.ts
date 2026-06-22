@@ -105,3 +105,5 @@ const mockObjectStore = {
         const cursor = {
           get value() {
             return values[cursorIndex];
+          },
+          continue: () => {

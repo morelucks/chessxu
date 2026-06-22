@@ -399,3 +399,5 @@ describe('GameHistoryDB Service', () => {
   });
 
   describe('Cache Statistics', () => {
+    beforeEach(async () => {
+      await gameHistoryDB.saveGames([

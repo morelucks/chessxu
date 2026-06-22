@@ -155,3 +155,5 @@ const mockIndexedDB = {
         }
         if (req.onsuccess) {
           req.onsuccess({ target: req } as any);
+        }
+      }, 0);

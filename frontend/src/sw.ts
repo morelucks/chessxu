@@ -32,3 +32,4 @@
 // Filter request destination to bypass API and RPC nodes
 // Avoid caching third party RPC networks
 // Bypass Alchemy RPC endpoint
+// Bypass Infura RPC endpoint

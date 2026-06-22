@@ -544,3 +544,9 @@ class DuneAlertService {
 
       // Claim the polling action to prevent concurrent fetches across tabs
       if (typeof window !== 'undefined') {
+        localStorage.setItem(lastPollKey, String(now));
+      }
+      console.log(`[DuneAlertService] Polling ${type} (interval: ${interval / 1000}s)`);
+
+      try {
+        let events: DuneEventRow[] = [];

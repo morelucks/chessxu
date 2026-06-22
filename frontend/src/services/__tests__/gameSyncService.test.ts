@@ -96,3 +96,5 @@ describe('GameSyncService', () => {
       vi.mocked(celoService.getGame).mockImplementation(async (id) => {
         if (id === 2) {
           return {
+            playerW: player,
+            playerB: '0xBob',

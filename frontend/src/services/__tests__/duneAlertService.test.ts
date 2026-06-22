@@ -68,3 +68,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       {
         event_id: 'evt_joined_1',
         timestamp: new Date().toISOString(),
+        type: 'game_joined',
+        creator: currentUser,

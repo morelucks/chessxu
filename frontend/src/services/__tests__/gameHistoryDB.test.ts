@@ -214,3 +214,5 @@ describe('GameHistoryDB Service', () => {
     });
   });
 
+  describe('Single Game Save & Retrieval', () => {
+    const sampleGame: CachedGame = {

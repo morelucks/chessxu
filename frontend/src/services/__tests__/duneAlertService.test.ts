@@ -238,3 +238,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       {
         event_id: 'cached_evt_1',
         timestamp: new Date().toISOString(),
+        type: 'contract_paused',
+        chain: 'Celo',

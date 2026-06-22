@@ -126,3 +126,4 @@ describe('useGameHistory hook', () => {
 
     let syncResult: any;
     await act(async () => {
+      syncResult = await result.current.syncNow(true);

@@ -23,3 +23,4 @@ vi.mock('../../chess/services/celoService', () => {
     default: {
       getGameCount: vi.fn().mockResolvedValue(0),
       getGame: vi.fn().mockResolvedValue(null as any),
+    }

@@ -83,3 +83,4 @@ describe('useGameHistory hook', () => {
     expect(result.current.games).toHaveLength(2);
     expect(result.current.loading).toBe(false);
     expect(result.current.error).toBeNull();
+    expect(result.current.lastSync).toBe(123456789);

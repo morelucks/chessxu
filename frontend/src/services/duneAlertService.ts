@@ -100,3 +100,9 @@ export async function sendFrameNotification(
 export async function sendWebhookNotification(
   webhookUrl: string,
   alertType: string,
+  severity: string,
+  title: string,
+  body: string,
+  details: Record<string, any> = {}
+): Promise<boolean> {
+  if (!webhookUrl) return false;

@@ -54,3 +54,5 @@ describe('GameSyncService', () => {
       expect(gameSyncService.lastSync).toBeNull();
     });
 
+    it('should support subscribing to sync progress updates', async () => {
+      const progressList: any[] = [];

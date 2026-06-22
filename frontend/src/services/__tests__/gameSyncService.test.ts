@@ -155,3 +155,4 @@ describe('GameSyncService', () => {
       // Mock existing cached games
       vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
         {
+          gameId: 1,

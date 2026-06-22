@@ -432,3 +432,5 @@ describe('GameHistoryDB Service', () => {
       ]);
     });
 
+    it('should compute total, stack, celo, oldest, and newest stats correctly', async () => {
+      const stats = await gameHistoryDB.getStats();

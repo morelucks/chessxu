@@ -36,3 +36,5 @@ vi.mock('../../chess/services/stacksService', () => {
     }
   };
 });
+
+describe('GameSyncService', () => {

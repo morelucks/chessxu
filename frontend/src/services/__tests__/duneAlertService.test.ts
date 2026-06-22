@@ -59,3 +59,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     }
   });
 
+  afterEach(() => {
+    vi.unstubAllGlobals();

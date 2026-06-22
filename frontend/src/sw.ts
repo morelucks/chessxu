@@ -63,3 +63,4 @@ self.addEventListener('fetch', (event: any) => {
   // Caching strategy:
   // For static assets, chess assets, and styles, use cache-first
   const isStaticAsset = 
+    STATIC_ASSETS.includes(url.pathname) || 

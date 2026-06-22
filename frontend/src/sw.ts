@@ -35,3 +35,4 @@ self.addEventListener('activate', (event: any) => {
           .map((name) => caches.delete(name))
       );
     }).then(() => {
+      return (self as any).clients.claim();

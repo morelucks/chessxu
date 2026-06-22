@@ -356,3 +356,5 @@ describe('GameHistoryDB Service', () => {
       expect(aliceGames[0].gameId).toBe(3); // Newest timestamp (1700000030000)
       expect(aliceGames[1].gameId).toBe(1); // Oldest timestamp (1700000010000)
     });
+
+    it('should get recent games using cursor-based timestamp ordering', async () => {

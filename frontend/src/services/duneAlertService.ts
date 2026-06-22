@@ -286,3 +286,9 @@ class DuneAlertService {
             title,
             body,
             type,
+            severity: config.defaultSeverity,
+            timestamp: Date.now(),
+          });
+          // Notify other tabs via localStorage
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('chessxu_notifications_updated', String(Date.now()));

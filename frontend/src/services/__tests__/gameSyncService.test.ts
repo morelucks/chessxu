@@ -178,3 +178,5 @@ describe('GameSyncService', () => {
         isNative: true,
         boardState: 'newState',
         turn: 'b',
+        status: 1, // Still ongoing (status < 2)
+      } as any);

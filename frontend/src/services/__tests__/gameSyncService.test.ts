@@ -89,3 +89,5 @@ describe('GameSyncService', () => {
       expect(progressList).toHaveLength(0);
     });
   });
+
+  describe('syncPlayerGames on Celo', () => {

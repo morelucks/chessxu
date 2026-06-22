@@ -377,3 +377,5 @@ describe('GameSyncService', () => {
         success: true,
         gamesAdded: 0,
         gamesUpdated: 0,
+        errors: [],
+        duration: 0,

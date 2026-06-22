@@ -218,3 +218,5 @@ describe('GameSyncService', () => {
 
       const result = await gameSyncService.syncPlayerGames(player, 'celo', { forceRefresh: false });
       expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
+      expect(result.gamesUpdated).toBe(0);
+    });

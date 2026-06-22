@@ -18,3 +18,4 @@
 // Chess hero background image
 // Chess king image
 // Chess knight image
+// Chess queen image

@@ -304,3 +304,9 @@ class DuneAlertService {
         if (store.enabledChannels.webhook && store.webhookUrl && isAdmin) {
           await sendWebhookNotification(store.webhookUrl, type, config.defaultSeverity, title, body, details);
         }
+      }
+    }
+  }
+
+  /**
+   * Utility to generate mock events for a specific alert type.

@@ -35,3 +35,4 @@
 // Bypass Infura RPC endpoint
 // Bypass Celo mainnet/testnet RPC endpoints
 // Bypass Stacks mainnet/testnet RPC endpoints
+// Determine if request is for a static asset

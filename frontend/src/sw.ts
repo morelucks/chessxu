@@ -31,3 +31,4 @@ self.addEventListener('activate', (event: any) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
+          .filter((name) => name !== CACHE_NAME)

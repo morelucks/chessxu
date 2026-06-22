@@ -382,3 +382,5 @@ describe('GameSyncService', () => {
       });
 
       await gameSyncService.autoSync(player, 'celo');
+      expect(spy).toHaveBeenCalled();
+    });

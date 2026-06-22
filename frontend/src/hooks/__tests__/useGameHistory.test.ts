@@ -117,3 +117,4 @@ describe('useGameHistory hook', () => {
     expect(nonExistent).toBeUndefined();
   });
 
+  it('should support manual sync (syncNow)', async () => {

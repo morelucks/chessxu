@@ -184,3 +184,9 @@ class DuneAlertService {
   ): Promise<void> {
     const store = useNotificationStore.getState();
     const currentNotifIds = new Set(store.notifications.map(n => n.id));
+
+    for (const row of rows) {
+      const { type, event_id } = row;
+      const config = DUNE_ALERTS_CONFIG[type];
+      if (!config) continue;
+

@@ -52,3 +52,5 @@ const mockObjectStore = {
     }, 0);
     return req;
   }),
+  get: vi.fn().mockImplementation((keyArray: [string, number]) => {
+    const key = JSON.stringify(keyArray);

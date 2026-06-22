@@ -282,3 +282,5 @@ describe('GameHistoryDB Service', () => {
       const all = await gameHistoryDB.getAllGames();
       expect(all).toHaveLength(2);
     });
+
+    it('should resolve immediately if saving an empty array of games', async () => {

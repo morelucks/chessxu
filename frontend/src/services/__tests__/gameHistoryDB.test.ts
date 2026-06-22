@@ -188,3 +188,5 @@ describe('GameHistoryDB Service', () => {
     it('should initialize database successfully', async () => {
       await expect(gameHistoryDB.init()).resolves.toBeUndefined();
     });
+
+    it('should trigger onupgradeneeded and create object stores/indexes', async () => {

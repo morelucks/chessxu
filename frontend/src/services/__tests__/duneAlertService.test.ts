@@ -80,3 +80,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(storeState.addNotification).toHaveBeenCalledTimes(1);
     expect(storeState.addNotification).toHaveBeenCalledWith(
       expect.objectContaining({
+        id: 'evt_joined_1',
+        type: 'game_joined',

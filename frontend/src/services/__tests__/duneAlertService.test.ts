@@ -187,3 +187,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         paused: true,
       },
     ];
+
+    // Non-admin

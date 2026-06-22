@@ -29,3 +29,6 @@ describe('gameHistoryUtils', () => {
     turn: 'w',
     status: 1, // in progress
     timestamp: Date.now() - 3600000, // 1 hour ago
+    lastUpdated: Date.now(),
+    syncedAt: Date.now(),
+  };

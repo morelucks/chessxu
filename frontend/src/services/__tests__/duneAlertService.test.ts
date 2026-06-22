@@ -108,3 +108,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
   it('should trigger game_resolved alert when game is completed and user participated', async () => {
     const events: DuneEventRow[] = [
       {
+        event_id: 'evt_resolved_1',
+        timestamp: new Date().toISOString(),

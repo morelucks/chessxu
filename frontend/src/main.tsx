@@ -10,6 +10,7 @@ if (typeof window !== "undefined") {
   window.Buffer = window.Buffer || Buffer;
 }
 
+// Register Service Worker for offline PWA support
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 

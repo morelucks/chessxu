@@ -11,3 +11,5 @@ vi.mock('../../zustand/notificationStore', () => {
     enabledAlerts: {
       game_joined: true,
       game_resolved: true,
+      opponent_resigned: true,
+      leaderboard_rank: true,

@@ -35,3 +35,5 @@ vi.mock('../../zustand/notificationStore', () => {
   return {
     useNotificationStore: {
       getState: () => mockStore,
+    },
+  };

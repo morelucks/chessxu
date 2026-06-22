@@ -442,3 +442,5 @@ describe('GameHistoryDB Service', () => {
     });
 
     it('should return nulls if stats computed on an empty database', async () => {
+      await gameHistoryDB.clearAll();
+      const stats = await gameHistoryDB.getStats();

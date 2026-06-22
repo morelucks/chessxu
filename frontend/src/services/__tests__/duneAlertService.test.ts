@@ -25,3 +25,5 @@ vi.mock('../../zustand/notificationStore', () => {
       farcaster_push: true,
       webhook: true,
     },
+    farcasterPushEnabled: true,
+    farcasterPushToken: 'mock-token',

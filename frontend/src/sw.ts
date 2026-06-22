@@ -73,3 +73,4 @@ self.addEventListener('fetch', (event: any) => {
     url.pathname.endsWith('.ico') ||
     url.pathname.endsWith('.woff') ||
     url.pathname.endsWith('.woff2');
+

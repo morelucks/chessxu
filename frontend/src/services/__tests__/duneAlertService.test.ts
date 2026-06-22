@@ -214,3 +214,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         rank: 3,
         previousRank: 6, // Delta of 3
       },
+    ];
+

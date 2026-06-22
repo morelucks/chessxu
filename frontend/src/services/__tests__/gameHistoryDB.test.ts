@@ -210,3 +210,5 @@ describe('GameHistoryDB Service', () => {
       
       expect((gameHistoryDB as any).initPromise).toBe(internalPromise);
       await p1;
+      await p2;
+    });

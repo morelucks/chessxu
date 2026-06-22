@@ -46,3 +46,9 @@ export const ALERT_POLL_INTERVALS: Record<string, number> = {
   contract_paused: 15 * 1000,
   paymaster_balance_low: 15 * 1000,
   
+  // Standard priority alerts
+  game_joined: 30 * 1000,
+  game_resolved: 30 * 1000,
+  opponent_resigned: 30 * 1000,
+  
+  // Medium priority alerts

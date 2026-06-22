@@ -39,3 +39,5 @@ vi.mock('../../zustand/notificationStore', () => {
   };
 });
 
+describe('DuneAlertService - Alert Evaluation Logic', () => {
+  const storeState = useNotificationStore.getState() as any;

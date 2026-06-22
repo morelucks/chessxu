@@ -169,3 +169,5 @@ vi.stubGlobal('indexedDB', mockIndexedDB);
 // Test Suite
 // ---------------------------------------------------------------------------
 
+describe('GameHistoryDB Service', () => {
+  beforeEach(() => {

@@ -229,3 +229,5 @@ describe('GameHistoryDB Service', () => {
       lastUpdated: 0,
       syncedAt: 0
     };
+
+    it('should save game and populate lastUpdated/syncedAt timestamps', async () => {

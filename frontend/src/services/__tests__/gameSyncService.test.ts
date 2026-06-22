@@ -190,3 +190,5 @@ describe('GameSyncService', () => {
       // Mock existing cached completed game
       vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
         {
+          gameId: 1,
+          chain: 'celo',

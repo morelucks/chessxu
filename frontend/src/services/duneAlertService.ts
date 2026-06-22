@@ -262,3 +262,9 @@ class DuneAlertService {
           details.paused = true;
         }
       } else if (type === 'unusual_activity' && isAdmin) {
+        if (row.hourlyGames && row.averageHourlyGames && row.hourlyGames > 3 * row.averageHourlyGames) {
+          isTriggered = true;
+          title = '📈 Unusual Activity Spike';
+          body = `High activity: ${row.hourlyGames} games created in the last hour (7-day average: ${row.averageHourlyGames}/hr)`;
+          details.hourly_games = row.hourlyGames;
+          details.average_hourly = row.averageHourlyGames;

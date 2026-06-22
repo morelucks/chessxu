@@ -9,3 +9,6 @@ import {
   getOpponentAddress,
   getPlayerColor,
   calculatePlayerStats,
+  formatAddress,
+  formatWager,
+  isGameActive,

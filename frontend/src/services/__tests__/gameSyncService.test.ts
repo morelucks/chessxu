@@ -255,3 +255,5 @@ describe('GameSyncService', () => {
       expect(result.gamesUpdated).toBe(1);
     });
   });
+
+  describe('syncPlayerGames on Stacks', () => {

@@ -92,3 +92,6 @@ describe('gameHistoryUtils', () => {
       expect(isPlayerWhite(mockGame, '0xWhiteAddress')).toBe(true);
       expect(isPlayerWhite(mockGame, '0xwhiteaddress')).toBe(true); // case insensitivity
       expect(isPlayerWhite(mockGame, '0xBlackAddress')).toBe(false);
+
+      expect(isPlayerBlack(mockGame, '0xBlackAddress')).toBe(true);
+      expect(isPlayerBlack(mockGame, '0xblackaddress')).toBe(true);

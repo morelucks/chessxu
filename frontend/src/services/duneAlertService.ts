@@ -16,3 +16,9 @@ export interface DuneEventRow {
   playerW?: string;
   playerB?: string;
   gameId?: number;
+  status?: number;
+  winner?: string;
+  resignedPlayer?: string;
+  player?: string;
+  rank?: number;
+  previousRank?: number;

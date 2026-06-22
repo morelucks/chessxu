@@ -256,3 +256,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
     expect(match).toBeDefined();
 
     evaluateSpy.mockRestore();
+  });
+});

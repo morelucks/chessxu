@@ -156,3 +156,6 @@ describe('gameHistoryUtils', () => {
       expect(formatWager('10', true, 'stacks')).toBe('10 STX');
       expect(formatWager('100', false, 'stacks')).toBe('100 CHESS');
     });
+  });
+
+  describe('isGameActive and isGameCompleted', () => {

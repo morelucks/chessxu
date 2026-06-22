@@ -69,3 +69,4 @@ describe('useGameHistory hook', () => {
   });
 
   it('should load games initially', async () => {
+    let result: any;

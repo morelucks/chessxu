@@ -126,3 +126,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
       expect.objectContaining({
         id: 'evt_resolved_1',
         type: 'game_resolved',
+        body: 'Game #101 resolved. Result: You Won!',
+      })

@@ -344,3 +344,4 @@ describe('GameSyncService', () => {
     it('should return false on exception during single game sync', async () => {
       vi.mocked(celoService.getGame).mockRejectedValueOnce(new Error('Fetch Failed'));
 
+      const success = await gameSyncService.syncGame(10, 'celo');

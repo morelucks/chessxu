@@ -215,3 +215,5 @@ describe('GameSyncService', () => {
         turn: 'w',
         status: 2,
       } as any);
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo', { forceRefresh: false });

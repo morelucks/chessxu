@@ -287,3 +287,5 @@ describe('GameSyncService', () => {
 
     it('should handle fetch failures gracefully and report errors', async () => {
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
+      vi.mocked(celoService.getGame).mockRejectedValueOnce(new Error('RPC Error'));
+

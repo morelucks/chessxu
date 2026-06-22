@@ -39,3 +39,4 @@
 // Check if URL is in static assets list
 // Check if URL path includes compiled assets
 // Check if file extension is .js
+// Check if file extension is .css

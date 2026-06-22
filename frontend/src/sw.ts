@@ -14,3 +14,4 @@ const STATIC_ASSETS = [
   '/chess-rook.jpg',
 ];
 
+// Install event: cache static assets

@@ -101,3 +101,5 @@ const mockObjectStore = {
 
         const req = new MockIDBRequest();
         let cursorIndex = 0;
+
+        const cursor = {

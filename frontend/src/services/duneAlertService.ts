@@ -370,3 +370,9 @@ class DuneAlertService {
           previousRecord: 150,
         }];
       case 'paymaster_balance_low':
+        return [{
+          event_id: `mock_paymaster_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'paymaster_balance_low',
+          balance: 0.45,
+        }];

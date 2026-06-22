@@ -94,3 +94,9 @@ export async function sendFrameNotification(
 }
 
 // ---------------------------------------------------------------------------
+// Webhook Mock/Actual Dispatcher
+// ---------------------------------------------------------------------------
+
+export async function sendWebhookNotification(
+  webhookUrl: string,
+  alertType: string,

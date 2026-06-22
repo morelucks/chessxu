@@ -153,3 +153,6 @@ describe('gameHistoryUtils', () => {
 
     it('returns formatted wager with proper currency', () => {
       expect(formatWager('0.5', true, 'celo')).toBe('0.5 CELO');
+      expect(formatWager('10', true, 'stacks')).toBe('10 STX');
+      expect(formatWager('100', false, 'stacks')).toBe('100 CHESS');
+    });

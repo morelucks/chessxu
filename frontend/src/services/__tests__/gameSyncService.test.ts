@@ -108,3 +108,5 @@ describe('GameSyncService', () => {
         if (id === 1) {
           return {
             playerW: '0xBob',
+            playerB: player,
+            wager: 50n,

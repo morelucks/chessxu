@@ -17,3 +17,5 @@ vi.mock('../../zustand/notificationStore', () => {
       daily_games_record: true,
       paymaster_balance_low: true,
       contract_paused: true,
+      unusual_activity: true,
+      weekly_digest: true,

@@ -127,3 +127,4 @@ self.addEventListener('fetch', (event: any) => {
               return caches.match('/');
             }
             return new Response('Offline content not available', {
+              status: 503,

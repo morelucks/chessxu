@@ -286,3 +286,5 @@ describe('GameHistoryDB Service', () => {
     it('should resolve immediately if saving an empty array of games', async () => {
       await expect(gameHistoryDB.saveGames([])).resolves.toBeUndefined();
     });
+  });
+

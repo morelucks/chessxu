@@ -55,3 +55,4 @@ self.addEventListener('fetch', (event: any) => {
     url.host.includes('mainnet') || 
     url.host.includes('testnet') ||
     url.host.includes('infura') ||
+    url.host.includes('alchemy')

@@ -84,3 +84,4 @@ self.addEventListener('fetch', (event: any) => {
               caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
             }
           }).catch(() => {/* Ignore network update failure offline */});
+          return cachedResponse;

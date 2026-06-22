@@ -520,3 +520,9 @@ class DuneAlertService {
 
       const lastPollKey = `chessxu_dune_last_poll_${type}`;
       const cacheKey = `chessxu_dune_cache_${type}`;
+
+      let lastPoll = 0;
+      if (typeof window !== 'undefined') {
+        lastPoll = Number(localStorage.getItem(lastPollKey) || '0');
+      }
+

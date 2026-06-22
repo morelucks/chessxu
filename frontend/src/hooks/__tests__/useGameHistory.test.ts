@@ -128,3 +128,4 @@ describe('useGameHistory hook', () => {
     await act(async () => {
       syncResult = await result.current.syncNow(true);
     });
+

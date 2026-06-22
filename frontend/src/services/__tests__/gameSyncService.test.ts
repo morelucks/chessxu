@@ -285,3 +285,5 @@ describe('GameSyncService', () => {
       await expect(gameSyncService.syncPlayerGames(player, 'celo')).rejects.toThrow('Sync already in progress');
     });
 
+    it('should handle fetch failures gracefully and report errors', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);

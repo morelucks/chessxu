@@ -134,3 +134,4 @@ describe('useGameHistory hook', () => {
       'Celo',
       { maxGames: 50, forceRefresh: true }
     );
+    expect(syncResult).toEqual({

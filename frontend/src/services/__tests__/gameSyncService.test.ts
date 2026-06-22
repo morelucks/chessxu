@@ -273,3 +273,5 @@ describe('GameSyncService', () => {
 
       expect(stacksService.getGameCount).toHaveBeenCalled();
       expect(stacksService.getGameState).toHaveBeenCalledWith(1);
+      expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
+      expect(result.success).toBe(true);

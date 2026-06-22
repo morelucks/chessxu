@@ -1,1 +1,1 @@
-// Test suite for gameHistoryDB
+// @vitest-environment jsdom

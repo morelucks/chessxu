@@ -204,3 +204,5 @@ describe('GameHistoryDB Service', () => {
     });
 
     it('should reuse initialization promise if initialized consecutively', async () => {
+      const p1 = gameHistoryDB.init();
+      const internalPromise = (gameHistoryDB as any).initPromise;

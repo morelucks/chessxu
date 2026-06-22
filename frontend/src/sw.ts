@@ -98,3 +98,4 @@ self.addEventListener('fetch', (event: any) => {
           });
           return networkResponse;
         }).catch(() => {
+          // If offline and request is an HTML page (navigation), return the root index.html

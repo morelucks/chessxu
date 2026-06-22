@@ -32,3 +32,6 @@ describe('gameHistoryUtils', () => {
     lastUpdated: Date.now(),
     syncedAt: Date.now(),
   };
+
+  describe('determinePlayerResult', () => {
+    it('returns win for white player when white wins (status 2)', () => {

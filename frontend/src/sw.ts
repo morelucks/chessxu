@@ -15,3 +15,4 @@
 // Define Cache Name for versioning
 // Static shell assets listing
 // Include root, index.html, favicon, and chess images
+// Chess hero background image

@@ -280,3 +280,9 @@ class DuneAlertService {
 
       if (isTriggered) {
         // 2. Dispatch to In-App Toast
+        if (store.enabledChannels.in_app) {
+          await store.addNotification({
+            id: event_id,
+            title,
+            body,
+            type,

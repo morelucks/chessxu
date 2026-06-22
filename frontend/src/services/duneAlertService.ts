@@ -238,3 +238,9 @@ class DuneAlertService {
         isTriggered = true;
         body = `Platform milestone: Cumulative wager volume has crossed $${row.cumulativeVolume?.toLocaleString()} USD!`;
         details.cumulative_volume = `$${row.cumulativeVolume?.toLocaleString()}`;
+      } else if (type === 'daily_games_record') {
+        if (row.dailyCount && row.previousRecord && row.dailyCount > row.previousRecord) {
+          isTriggered = true;
+          body = `New Daily Games Record! We set a new record with ${row.dailyCount} games played today!`;
+          details.daily_count = row.dailyCount;
+          details.previous_record = row.previousRecord;

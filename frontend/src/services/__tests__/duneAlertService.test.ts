@@ -183,3 +183,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         event_id: 'evt_paused_1',
         timestamp: new Date().toISOString(),
         type: 'contract_paused',
+        chain: 'Stacks',
+        paused: true,

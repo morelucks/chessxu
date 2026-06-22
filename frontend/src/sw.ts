@@ -8,3 +8,4 @@
 // 3. Cache styles and styling files.
 // 4. Bypass dynamic API/RPC endpoints.
 // 5. Provide offline fallback for client-side routing.
+// Lifecycle steps:

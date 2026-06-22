@@ -7,3 +7,5 @@ import { gameHistoryDB, CachedGame } from '../gameHistoryDB';
 // Mock Classes for IndexedDB
 // ---------------------------------------------------------------------------
 
+class MockIDBRequest {
+  onsuccess: ((ev: any) => void) | null = null;

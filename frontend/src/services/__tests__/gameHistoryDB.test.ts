@@ -122,3 +122,5 @@ const mockObjectStore = {
         } else {
           req.result = null;
         }
+
+        setTimeout(() => {

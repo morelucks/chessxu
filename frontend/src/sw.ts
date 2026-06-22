@@ -3,3 +3,4 @@
 // This service worker enables offline capability for Chessxu.
 // It works in tandem with the offline-first IndexedDB database.
 // Goals:
+// 1. Cache static assets such as HTML, JS, CSS, and main assets.

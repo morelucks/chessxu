@@ -142,3 +142,5 @@ const mockIndexedDB = {
     const req = new MockIDBOpenDBRequest();
     if (dbOpenShouldFail) {
       req.error = new Error('Mock open database failure');
+      setTimeout(() => {
+        if (req.onerror) req.onerror({ target: req } as any);

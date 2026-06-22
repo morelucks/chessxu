@@ -165,3 +165,4 @@ describe('GameSyncService', () => {
           turn: 'w',
           status: 1, // Ongoing
           timestamp: 0,
+          lastUpdated: 0,

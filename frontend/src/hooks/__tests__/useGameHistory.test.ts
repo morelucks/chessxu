@@ -10,3 +10,4 @@ import { gameSyncService } from '../../services/gameSyncService';
 vi.mock('../../zustand/store', () => {
   const store = {
     address: '0x1111111111111111111111111111111111111111',
+    activeChain: 'Celo',

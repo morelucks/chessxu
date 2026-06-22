@@ -280,3 +280,5 @@ describe('GameHistoryDB Service', () => {
     it('should save multiple games in batch successfully', async () => {
       await gameHistoryDB.saveGames(sampleGames);
       const all = await gameHistoryDB.getAllGames();
+      expect(all).toHaveLength(2);
+    });

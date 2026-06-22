@@ -444,3 +444,5 @@ describe('GameHistoryDB Service', () => {
     it('should return nulls if stats computed on an empty database', async () => {
       await gameHistoryDB.clearAll();
       const stats = await gameHistoryDB.getStats();
+      expect(stats.totalGames).toBe(0);
+      expect(stats.oldestGame).toBeNull();

@@ -312,3 +312,5 @@ describe('GameSyncService', () => {
 
       expect(result.success).toBe(false);
       expect(result.errors).toContain('Game 1: Error: IndexedDB Write Failed');
+    });
+  });

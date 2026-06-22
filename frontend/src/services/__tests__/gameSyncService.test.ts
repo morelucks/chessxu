@@ -330,3 +330,5 @@ describe('GameSyncService', () => {
       const success = await gameSyncService.syncGame(10, 'celo');
       expect(success).toBe(true);
       expect(celoService.getGame).toHaveBeenCalledWith(10);
+      expect(gameHistoryDB.saveGame).toHaveBeenCalled();
+    });

@@ -60,5 +60,6 @@ export default defineConfig(({ command }) => {
             }
             return 'assets/[name]-[hash].js';
           },
+        },
   };
 });

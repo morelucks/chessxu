@@ -57,5 +57,6 @@ export default defineConfig(({ command }) => {
           entryFileNames: (chunkInfo) => {
             if (chunkInfo.name === 'sw') {
               return 'sw.js';
+            }
   };
 });

@@ -13,3 +13,5 @@ vi.mock('../../zustand/notificationStore', () => {
       game_resolved: true,
       opponent_resigned: true,
       leaderboard_rank: true,
+      wager_milestone: true,
+      daily_games_record: true,

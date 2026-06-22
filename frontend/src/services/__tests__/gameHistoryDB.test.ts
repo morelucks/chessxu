@@ -161,3 +161,5 @@ const mockIndexedDB = {
     return req;
   })
 };
+
+// Stub global indexedDB

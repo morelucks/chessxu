@@ -69,3 +69,6 @@ describe('gameHistoryUtils', () => {
       expect(getStatusText(99 as any)).toBe('Unknown');
     });
   });
+
+  describe('getStatusColor', () => {
+    it('returns a hex color string for valid statuses', () => {

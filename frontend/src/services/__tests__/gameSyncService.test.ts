@@ -170,3 +170,4 @@ describe('GameSyncService', () => {
         }
       ]);
 
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);

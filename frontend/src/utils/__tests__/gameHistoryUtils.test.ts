@@ -21,3 +21,5 @@ describe('gameHistoryUtils', () => {
   const mockGame: CachedGame = {
     gameId: 1,
     chain: 'celo',
+    playerW: '0xWhiteAddress',
+    playerB: '0xBlackAddress',

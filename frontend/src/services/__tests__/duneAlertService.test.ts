@@ -185,3 +185,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
         type: 'contract_paused',
         chain: 'Stacks',
         paused: true,
+      },
+    ];

@@ -15,3 +15,6 @@ import {
   isGameCompleted,
   parseFEN,
 } from '../gameHistoryUtils';
+import { CachedGame } from '../../services/gameHistoryDB';
+
+describe('gameHistoryUtils', () => {

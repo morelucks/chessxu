@@ -333,3 +333,5 @@ describe('GameHistoryDB Service', () => {
         syncedAt: 0
       }
     ];
+
+    beforeEach(async () => {

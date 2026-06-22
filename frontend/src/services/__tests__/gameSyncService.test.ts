@@ -84,3 +84,5 @@ describe('GameSyncService', () => {
 
       // Verify unsubscribe works
       unsubscribe();
+      progressList.length = 0;
+      await gameSyncService.syncPlayerGames(player, 'celo');

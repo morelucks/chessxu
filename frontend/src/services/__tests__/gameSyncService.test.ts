@@ -309,3 +309,4 @@ describe('GameSyncService', () => {
       vi.mocked(gameHistoryDB.saveGame).mockRejectedValueOnce(new Error('IndexedDB Write Failed'));
 
       const result = await gameSyncService.syncPlayerGames(player, 'celo');
+

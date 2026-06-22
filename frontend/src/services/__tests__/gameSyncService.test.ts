@@ -257,3 +257,4 @@ describe('GameSyncService', () => {
   });
 
   describe('syncPlayerGames on Stacks', () => {
+    it('should sync Stacks games successfully', async () => {

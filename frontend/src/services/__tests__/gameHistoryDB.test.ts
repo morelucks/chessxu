@@ -393,3 +393,5 @@ describe('GameHistoryDB Service', () => {
 
     it('should clear all games in the database', async () => {
       await gameHistoryDB.clearAll();
+      const all = await gameHistoryDB.getAllGames();
+      expect(all).toHaveLength(0);

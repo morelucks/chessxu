@@ -72,3 +72,6 @@ describe('gameHistoryUtils', () => {
 
   describe('getStatusColor', () => {
     it('returns a hex color string for valid statuses', () => {
+      expect(getStatusColor(0)).toBe('#fbbf24');
+      expect(getStatusColor(2)).toBe('#22c55e');
+      expect(getStatusColor(99 as any)).toBe('#94a3b8');

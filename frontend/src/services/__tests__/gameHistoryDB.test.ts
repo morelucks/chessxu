@@ -202,3 +202,5 @@ describe('GameHistoryDB Service', () => {
       dbOpenShouldFail = true;
       await expect(gameHistoryDB.init()).rejects.toThrow('Mock open database failure');
     });
+
+    it('should reuse initialization promise if initialized consecutively', async () => {

@@ -265,3 +265,5 @@ describe('GameSyncService', () => {
         wager: '500',
         'is-stx': true,
         'board-state': 'stacks-state',
+        turn: 'w',
+        status: 4, // Draw

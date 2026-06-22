@@ -83,3 +83,4 @@ describe('GameSyncService', () => {
       });
 
       // Verify unsubscribe works
+      unsubscribe();

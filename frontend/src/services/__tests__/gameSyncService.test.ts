@@ -379,3 +379,4 @@ describe('GameSyncService', () => {
         gamesUpdated: 0,
         errors: [],
         duration: 0,
+      });

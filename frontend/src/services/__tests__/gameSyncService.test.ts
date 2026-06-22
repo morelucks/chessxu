@@ -337,3 +337,5 @@ describe('GameSyncService', () => {
       vi.mocked(celoService.getGame).mockResolvedValueOnce(null as any);
 
       const success = await gameSyncService.syncGame(10, 'celo');
+      expect(success).toBe(false);
+      expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();

@@ -75,3 +75,4 @@ describe('useGameHistory hook', () => {
       result = rendered.result;
     });
 
+    expect(gameHistoryDB.init).toHaveBeenCalled();

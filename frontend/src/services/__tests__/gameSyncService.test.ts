@@ -375,3 +375,5 @@ describe('GameSyncService', () => {
       (gameSyncService as any).lastSyncTime = Date.now() - 90 * 60 * 1000; // 1.5 hours ago
       const spy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
         success: true,
+        gamesAdded: 0,
+        gamesUpdated: 0,

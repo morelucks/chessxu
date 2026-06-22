@@ -82,3 +82,4 @@ describe('useGameHistory hook', () => {
     );
     expect(result.current.games).toHaveLength(2);
     expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBeNull();

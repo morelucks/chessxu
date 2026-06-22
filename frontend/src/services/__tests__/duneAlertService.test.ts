@@ -66,3 +66,5 @@ describe('DuneAlertService - Alert Evaluation Logic', () => {
   it('should trigger game_joined alert when current user is the creator and another player joins', async () => {
     const events: DuneEventRow[] = [
       {
+        event_id: 'evt_joined_1',
+        timestamp: new Date().toISOString(),

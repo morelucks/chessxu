@@ -33,3 +33,5 @@ class MockIDBDatabase {
 
 class MockIDBTransaction {
   constructor(public mode: string) {}
+  objectStore(_name: string) {
+    return mockObjectStore;

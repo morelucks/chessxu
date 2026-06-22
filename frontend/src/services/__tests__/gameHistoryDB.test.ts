@@ -262,3 +262,5 @@ describe('GameHistoryDB Service', () => {
         syncedAt: 0
       },
       {
+        gameId: 202,
+        chain: 'stacks',

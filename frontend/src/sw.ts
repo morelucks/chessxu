@@ -91,3 +91,4 @@ self.addEventListener('fetch', (event: any) => {
         return fetch(request).then((networkResponse) => {
           if (!networkResponse || networkResponse.status !== 200) {
             return networkResponse;
+          }

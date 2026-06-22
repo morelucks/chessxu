@@ -340,3 +340,5 @@ describe('GameHistoryDB Service', () => {
 
     it('should filter games for a player address (case-insensitive)', async () => {
       const aliceGames = await gameHistoryDB.getPlayerGames('0xalice');
+      expect(aliceGames).toHaveLength(2);
+      expect(aliceGames.map(g => g.gameId)).toContain(1);

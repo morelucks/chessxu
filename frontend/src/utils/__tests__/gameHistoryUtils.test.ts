@@ -84,3 +84,6 @@ describe('gameHistoryUtils', () => {
       expect(getResultColor('loss')).toBe('#ef4444');
       expect(getResultColor('draw')).toBe('#94a3b8');
       expect(getResultColor(undefined as any)).toBe('#f59e0b');
+    });
+  });
+

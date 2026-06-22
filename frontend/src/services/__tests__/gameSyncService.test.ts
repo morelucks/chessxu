@@ -158,3 +158,5 @@ describe('GameSyncService', () => {
           gameId: 1,
           chain: 'celo',
           playerW: player,
+          playerB: '0xBob',
+          wager: '10',

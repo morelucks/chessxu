@@ -112,3 +112,9 @@ export async function sendWebhookNotification(
   const payload = {
     username: 'Chessxu Alerts',
     avatar_url: 'https://chessxu.io/logo.png',
+    embeds: [
+      {
+        title: title,
+        description: body,
+        color: severity === 'critical' ? 16711680 : severity === 'high' ? 16753920 : 3447003,
+        fields: Object.entries(details).map(([key, val]) => ({

@@ -294,3 +294,4 @@ describe('GameSyncService', () => {
       expect(result.success).toBe(true); // Loops continue despite warning logs
       expect(result.errors).toHaveLength(0); // Warn logs do not propagate to result.errors
     });
+

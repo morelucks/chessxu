@@ -394,3 +394,9 @@ class DuneAlertService {
         }];
       case 'weekly_digest':
         return [{
+          event_id: `mock_weekly_${randId()}`,
+          timestamp: new Date().toISOString(),
+          type: 'weekly_digest',
+          player: addr,
+          gamesPlayed: 14,
+          wins: 9,

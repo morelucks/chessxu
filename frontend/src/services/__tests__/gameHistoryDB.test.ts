@@ -190,3 +190,5 @@ describe('GameHistoryDB Service', () => {
     });
 
     it('should trigger onupgradeneeded and create object stores/indexes', async () => {
+      mockDBInstance.objectStoreNames.contains.mockReturnValue(false);
+      await gameHistoryDB.init();

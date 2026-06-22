@@ -105,3 +105,4 @@ describe('GameSyncService', () => {
             status: 2, // White wins
           } as any;
         }
+        if (id === 1) {

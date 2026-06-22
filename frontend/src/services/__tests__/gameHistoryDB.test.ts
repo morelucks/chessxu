@@ -179,3 +179,5 @@ describe('GameHistoryDB Service', () => {
     (gameHistoryDB as any).db = null;
     (gameHistoryDB as any).initPromise = null;
   });
+
+  afterEach(() => {

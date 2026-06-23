@@ -8,6 +8,8 @@
 import { gameHistoryDB, CachedGame } from './gameHistoryDB';
 import celoService from '../chess/services/celoService';
 import stacksService from '../chess/services/stacksService';
+import { getGameBlockTimestamp } from './blockTimestampService';
+import { CONTRACTS } from '../chess/blockchainConstants';
 
 export interface SyncProgress {
   total: number;
@@ -205,6 +207,9 @@ class GameSyncService {
 
           if (!isPlayerW && !isPlayerB) continue;
 
+          // Retrieve the true block timestamp for this game from the Celo chain
+          const blockTimestamp = await getGameBlockTimestamp('celo', gameId);
+
           // Convert to CachedGame format
           const cachedGame: CachedGame = {
             gameId,
@@ -218,7 +223,7 @@ class GameSyncService {
             status: gameData.status || 0,
             winner: this.determineWinner(gameData.status, isPlayerW),
             moveHistory: [], // TODO: Parse from events if available
-            timestamp: Date.now(), // TODO: Get from block timestamp
+            timestamp: blockTimestamp,
             lastUpdated: Date.now(),
             syncedAt: Date.now()
           };
@@ -266,6 +271,9 @@ class GameSyncService {
 
           if (!isPlayerW && !isPlayerB) continue;
 
+          // Retrieve the true block timestamp for this game from the Stacks chain
+          const blockTimestamp = await getGameBlockTimestamp('stacks', gameId, CONTRACTS.GAME);
+
           // Convert to CachedGame format
           const cachedGame: CachedGame = {
             gameId,
@@ -279,7 +287,7 @@ class GameSyncService {
             status: gameData.status || 0,
             winner: this.determineWinner(gameData.status, isPlayerW),
             moveHistory: [], // TODO: Parse from transaction history
-            timestamp: Date.now(), // TODO: Get from block timestamp
+            timestamp: blockTimestamp,
             lastUpdated: Date.now(),
             syncedAt: Date.now()
           };
@@ -325,6 +333,13 @@ class GameSyncService {
 
       if (!gameData) return false;
 
+      // Resolve the true block timestamp for this game
+      const blockTimestamp = await getGameBlockTimestamp(
+        chain,
+        gameId,
+        chain === 'stacks' ? CONTRACTS.GAME : undefined
+      );
+
       const cachedGame: CachedGame = {
         gameId,
         chain,
@@ -335,7 +350,7 @@ class GameSyncService {
         boardState: chain === 'celo' ? gameData.boardState : gameData['board-state'],
         turn: gameData.turn?.value || gameData.turn || 'w',
         status: gameData.status || 0,
-        timestamp: Date.now(),
+        timestamp: blockTimestamp,
         lastUpdated: Date.now(),
         syncedAt: Date.now()
       };

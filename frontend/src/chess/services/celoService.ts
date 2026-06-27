@@ -306,7 +306,7 @@ const celoService = {
   },
 
   /**
-   * Pays for daily access using native CELO instead of cUSD.
+   * Pays for daily access using native CELO instead of USDm.
    */
   payForDailyAccessWithCelo: async () => {
     const walletClient = celoService.getWalletClient();

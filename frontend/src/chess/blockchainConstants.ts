@@ -69,17 +69,17 @@ export const CELO_FEE_CURRENCIES = [
     decimals: 6,
   },
   {
-    symbol: "cUSD",
+    symbol: "USDm",
     tokenAddress: "0x765DE816845861e75A25fCA122bb6898B8B1282a",
     decimals: 18,
   },
   {
-    symbol: "cEUR",
+    symbol: "EURm",
     tokenAddress: "0xD8763CBa276a3738E6DE85b4b3bF5FDed6D6cA73",
     decimals: 18,
   },
   {
-    symbol: "cREAL",
+    symbol: "BRLm",
     tokenAddress: "0xe8537a3d056DA446677B9E9d6c5dB704EaAb4787",
     decimals: 18,
   },

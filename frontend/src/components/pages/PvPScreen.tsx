@@ -225,10 +225,10 @@ export default function PvPScreen() {
                           Unlock Celo Match Access
                         </h3>
                         <p className="mt-2 text-emerald-100/80 text-xs">
-                          Required for Celo match creation/joining. Price: {celo.network.DAILY_ACCESS_CUSD} cUSD or 0.05 CELO.
+                          Required for Celo match creation/joining. Price: {celo.network.DAILY_ACCESS_CUSD} USDm or 0.05 CELO.
                         </p>
                         <p className="mt-2 text-[10px] text-emerald-100/70">
-                          cUSD: {cusdBalance ? Number(cusdBalance).toFixed(2) : '--'} • CELO: {celoNativeBalance ? Number(celoNativeBalance).toFixed(4) : '--'}{expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}
+                          USDm: {cusdBalance ? Number(cusdBalance).toFixed(2) : '--'} • CELO: {celoNativeBalance ? Number(celoNativeBalance).toFixed(4) : '--'}{expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}
                         </p>
                       </div>
                       {hasAccess ? (
@@ -247,7 +247,7 @@ export default function PvPScreen() {
                             disabled={isPurchasing}
                             className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(52,211,153,0.3)] active:scale-95"
                           >
-                            {isPurchasing ? 'Processing...' : 'Pay With cUSD'}
+                            {isPurchasing ? 'Processing...' : 'Pay With USDm'}
                           </button>
                           <button
                             type="button"

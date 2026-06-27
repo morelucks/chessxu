@@ -73,7 +73,7 @@ const StakeSection = ({ appState }: StakeSectionProps) => {
                         </div>
                         <div className="stake-info">
                             <h4 className="stake-title">Active Stake</h4>
-                            <div className="stake-amount">{Number(stake.amount).toFixed(2)} {stake.isStx ? 'STX' : 'CHESS'}</div>
+                            <div className="stake-amount">{Number(stake.amount).toFixed(2)} {stake.isStx ? 'CELO' : 'CHESS'}</div>
                         </div>
                     </div>
                     <div className="stake-status">

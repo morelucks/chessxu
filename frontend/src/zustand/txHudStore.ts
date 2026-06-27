@@ -54,7 +54,7 @@ export const RECOVERY_TIPS: Record<RevertReason['code'], string[]> = {
   ],
   post_condition: [
     'The contract rejected the token transfer. Ensure your balance is sufficient.',
-    'Check that you are sending the correct token (STX vs CHESS).',
+    'Check that you are sending the correct token (CELO vs CHESS).',
   ],
   contract_error: [
     'Refresh the page and check the current game state before retrying.',

@@ -61,39 +61,10 @@ export function Header() {
       {/* Wallet Connection - Top Right */}
       <div className="absolute top-4 right-4 md:top-8 md:right-8 flex items-center gap-4">
         <NotificationCenter />
-        {!isAuthenticated && !isMiniPay && (
-          <div className="flex bg-slate-800/50 rounded-full p-1 border border-slate-700">
-            <button
-              onClick={() => setActiveChain('stacks')}
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
-                activeChain === 'stacks' 
-                  ? 'bg-orange-500 text-white shadow-lg' 
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Stacks
-            </button>
-            <button
-              onClick={() => setActiveChain('celo')}
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
-                activeChain === 'celo' 
-                  ? 'bg-emerald-500 text-white shadow-lg' 
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Celo
-            </button>
-          </div>
-        )}
-
         {!isAuthenticated ? (
           <button
             onClick={handleConnect}
-            className={`flex items-center gap-2 px-4 py-2 text-white rounded-full font-semibold transition-all shadow-lg active:scale-95 ${
-              activeChain === 'stacks'
-                ? 'bg-orange-600 hover:bg-orange-700 shadow-orange-500/20'
-                : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20'
-            }`}
+            className="flex items-center gap-2 px-4 py-2 text-white rounded-full font-semibold transition-all shadow-lg active:scale-95 bg-emerald-600 hover:bg-emerald-700 shadow-emerald-500/20"
           >
             <Wallet size={18} />
             <span>{isConnected ? "Connected" : isConnecting ? "Connecting..." : "Connect Wallet"}</span>
@@ -146,9 +117,9 @@ export function Header() {
         Chessxu
       </h1>
       <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto px-4 font-medium">
-        Onchain Chess with STX Wagers on{" "}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 font-bold">
-          Stacks
+        Onchain Chess on{" "}
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 font-bold">
+          Celo
         </span>
       </p>
     </div>

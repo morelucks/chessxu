@@ -227,7 +227,7 @@ Contract:  Clarity + Clarinet
 
 ### ⛽ Gasless Play & ERC-2771 Meta-Transactions (Celo)
 - **ERC-2771 Meta-Transactions**: Gas-sponsored transactions utilizing OpenZeppelin's `ERC2771Context` and trusted forwarder.
-- **Fee Abstraction**: Ability to pay gas fees in stablecoins (`cUSD`, `USDC`, `USDT`, `cEUR`, `cREAL`) using dynamic fee currency selection.
+- **Fee Abstraction**: Ability to pay gas fees in stablecoins (`USDm`, `USDC`, `USDT`, `EURm`, `BRLm`) using dynamic fee currency selection.
 - Detailed documentation is available in [GASLESS.md](GASLESS.md) and [GASLESS_V2.md](GASLESS_V2.md).
 
 ### 📱 Opera MiniPay & Farcaster Integrations

@@ -135,6 +135,6 @@ export async function selectSupportedFeeCurrency({
 
   throw new Error(
     'No supported fee currency has enough balance to cover gas. ' +
-    'Use MiniPay or Valora and ensure you hold cUSD, USDC, USDT, cEUR, or cREAL.',
+    'Use MiniPay or Valora and ensure you hold USDm, USDC, USDT, EURm, or BRLm.',
   );
 }

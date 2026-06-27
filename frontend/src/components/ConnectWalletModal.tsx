@@ -7,6 +7,7 @@ export const ConnectWalletModal: React.FC = () => {
   const isConnectModalOpen = useAppStore((s) => s.isConnectModalOpen);
   const setConnectModalOpen = useAppStore((s) => s.setConnectModalOpen);
   const miniPayDetected = useAppStore((s) => s.miniPayDetected);
+  const isFarcaster = useAppStore((s) => s.isFarcaster);
   const { connect } = useWalletAuth();
 
   // MiniPay is Celo-only — auto-select without showing the modal
@@ -19,9 +20,8 @@ export const ConnectWalletModal: React.FC = () => {
 
   if (!isConnectModalOpen) return null;
 
-  const handleSelectChain = async (chain: "celo") => {
+  const handleSelectChain = async (chain: "celo" | "stacks" | "farcaster") => {
     setConnectModalOpen(false);
-    // Trigger connection for Celo
     await connect({ chain });
   };
 
@@ -37,7 +37,7 @@ export const ConnectWalletModal: React.FC = () => {
             </div>
             <div>
               <h2 className="text-white font-bold text-base leading-tight">Connect Wallet</h2>
-              <p className="text-[10px] text-slate-400">Connect to the Celo network to play</p>
+              <p className="text-[10px] text-slate-400">Choose a wallet/network to connect and play</p>
             </div>
           </div>
           <button
@@ -51,6 +51,31 @@ export const ConnectWalletModal: React.FC = () => {
 
         {/* Options List */}
         <div className="flex flex-col gap-3">
+          {/* Farcaster Option */}
+          {isFarcaster && (
+            <button
+              onClick={() => handleSelectChain("farcaster")}
+              className="w-full text-left p-4 rounded-xl border border-violet-500/20 bg-violet-500/5 hover:bg-violet-500/10 hover:border-violet-500/30 transition-all flex items-center justify-between group relative overflow-hidden"
+            >
+              <div className="absolute right-0 top-0 w-24 h-24 bg-violet-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-violet-500/10 transition-all" />
+              <div className="flex items-center gap-3.5 z-10">
+                <div className="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-300 font-bold group-hover:scale-105 transition-transform">
+                  FC
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-white flex items-center gap-1.5">
+                    Farcaster Wallet
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+                  </span>
+                  <span className="text-[11px] text-slate-400 max-w-[240px] mt-0.5 leading-snug">
+                    Use your integrated Farcaster wallet or sign in.
+                  </span>
+                </div>
+              </div>
+              <ArrowRight size={16} className="text-slate-400 group-hover:text-violet-400 group-hover:translate-x-1 transition-all z-10" />
+            </button>
+          )}
+
           {/* Celo Option */}
           <button
             onClick={() => handleSelectChain("celo")}
@@ -73,12 +98,35 @@ export const ConnectWalletModal: React.FC = () => {
             </div>
             <ArrowRight size={16} className="text-slate-400 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all z-10" />
           </button>
+
+          {/* Stacks Option */}
+          <button
+            onClick={() => handleSelectChain("stacks")}
+            className="w-full text-left p-4 rounded-xl border border-purple-500/10 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-500/30 transition-all flex items-center justify-between group relative overflow-hidden"
+          >
+            <div className="absolute right-0 top-0 w-24 h-24 bg-purple-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-purple-500/10 transition-all" />
+            <div className="flex items-center gap-3.5 z-10">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-300 font-bold group-hover:scale-105 transition-transform">
+                STX
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-white flex items-center gap-1.5">
+                  Stacks Network
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+                </span>
+                <span className="text-[11px] text-slate-400 max-w-[240px] mt-0.5 leading-snug">
+                  Play using STX wagers. Uses Leather, Xverse, or Hiro wallets.
+                </span>
+              </div>
+            </div>
+            <ArrowRight size={16} className="text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all z-10" />
+          </button>
         </div>
 
         {/* Info footer */}
         <div className="flex items-center gap-2 p-3 bg-white/5 rounded-xl border border-white/5 text-[10px] text-slate-400 leading-snug">
           <Zap size={14} className="text-yellow-400 flex-shrink-0" />
-          <span>Celo supports gas-sponsored matches.</span>
+          <span>Select network depending on your preferred wager currency.</span>
         </div>
       </div>
     </div>

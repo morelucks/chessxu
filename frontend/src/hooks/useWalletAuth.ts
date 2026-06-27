@@ -15,7 +15,7 @@ function getSessionAddress() {
 interface ConnectOptions {
   onFinish?: (address: string | null) => void;
   onCancel?: () => void;
-  chain?: 'stacks' | 'celo';
+  chain?: 'stacks' | 'celo' | 'farcaster';
 }
 
 export function useWalletAuth() {
@@ -40,16 +40,20 @@ export function useWalletAuth() {
     const ethereum = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
     const isMiniPay = Boolean(miniPayDetected || (ethereum && ethereum.isMiniPay));
 
-    if (!chain && !isFarcaster && !isMiniPay) {
-      setConnectModalOpen(true);
-      return;
+    if (!chain) {
+      if (isMiniPay) {
+        chain = 'celo';
+      } else {
+        setConnectModalOpen(true);
+        return;
+      }
     }
 
     setIsLoading(true);
 
     try {
 
-      if (isFarcaster) {
+      if (chain === 'farcaster') {
         try {
           // Attempt the same logic as auto-login but manually triggered
           const ethProvider = await sdk.wallet.getEthereumProvider();
@@ -83,10 +87,13 @@ export function useWalletAuth() {
         } catch (error) {
           console.error("Farcaster sign-in failed:", error);
         }
+
+        setIsLoading(false);
+        onCancel?.();
+        return;
       }
 
       // Detect if we should use Celo (EVM environments) or Stacks
-      const ethereum = (window as any).ethereum;
       const targetChain = chain || (ethereum ? 'celo' : 'stacks');
 
       console.log(`Connecting to ${targetChain}...`);

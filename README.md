@@ -210,15 +210,31 @@ Contract:  Clarity + Clarinet
 
 ## 🌟 Key Features
 
-**⚡ Instant Feedback**
-- Playable purely in the browser with local move validation.
-- Background blockchain confirmation without interrupting gameplay.
+### 📴 Offline-First & Local Game History (IndexedDB)
+- **Local Storage Cache**: Game history is cached in browser IndexedDB, letting players browse and review past matches offline.
+- **Performance Optimized**: Reading from IndexedDB takes `< 10ms`, bypassing slow and rate-limited RPC queries.
+- **Analytics & Statistics**: Offline tracking of player wins, losses, draws, and overall win rates.
+- **Background Auto-Sync**: Automatic synchronization with blockchain events on application load with manual sync fallback.
+- **Move History Viewer**: Read previous moves, board status (FEN format), and navigate positions offline.
+- Detailed documentation is available in [GAME_HISTORY.md](frontend/GAME_HISTORY.md), [OFFLINE.md](frontend/OFFLINE.md), and [PERFORMANCE.md](frontend/PERFORMANCE.md).
 
-**🔧 Developer Experience**
-- Complete TypeScript integration for strict type-safety.
-- Separated boundaries between the `stacks-contracts` (and `celo-contracts`), and `frontend`.
-- Zero-error ESLint configuration and production-ready `npm run build` process.
+### ⏱️ On-Chain Block Timestamp Resolvers
+- **Accurate Timestamps**: Real-time resolution of game creation times by scanning blockchain transaction/event headers rather than browser fallbacks.
+- **Multi-Chain Resolvers**:
+  - **Celo**: Queries Celoscan v2 API or falls back to viem `getBlock` requests.
+  - **Stacks**: Resolves block timestamps from Hiro API event logs (`burn_block_time`).
+- **Smart Caching**: Local in-memory caching with TTL prevents duplicate network requests.
+
+### ⛽ Gasless Play & ERC-2771 Meta-Transactions (Celo)
+- **ERC-2771 Meta-Transactions**: Gas-sponsored transactions utilizing OpenZeppelin's `ERC2771Context` and trusted forwarder.
+- **Fee Abstraction**: Ability to pay gas fees in stablecoins (`cUSD`, `USDC`, `USDT`, `cEUR`, `cREAL`) using dynamic fee currency selection.
+- Detailed documentation is available in [GASLESS.md](GASLESS.md) and [GASLESS_V2.md](GASLESS_V2.md).
+
+### 📱 Opera MiniPay & Farcaster Integrations
+- **MiniPay Optimized**: Silent auto-connect and detection via `window.ethereum.isMiniPay` with integrated daily access gates. Detailed in [MINIPAY_INTEGRATION.md](MINIPAY_INTEGRATION.md).
+- **Farcaster Mini App**: Fully compatible as a Farcaster Mini App/Frame using `@farcaster/miniapp-sdk` and standard OpenGraph frames tags. Detailed in [FARCASTER_INTEGRATION.md](FARCASTER_INTEGRATION.md).
 
 ---
 
 **Ready to build the future of onchain gaming?** Jump into the `frontend/`, `stacks-contracts/` or `celo-contracts/` directories to begin! 🚀
+

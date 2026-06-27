@@ -111,7 +111,6 @@ export default function GameViewer({ game, onClose }: GameViewerProps) {
         <div className="game-title">
           <Trophy size={20} />
           <span>Game #{game.gameId}</span>
-          <span className="chain-badge">{game.chain}</span>
         </div>
       </div>
 
@@ -133,14 +132,14 @@ export default function GameViewer({ game, onClose }: GameViewerProps) {
 
             <div className="info-row">
               <span className="info-label">Chain</span>
-              <span className="info-value">{game.chain.toUpperCase()}</span>
+              <span className="info-value">CELO</span>
             </div>
 
             {game.wager !== '0' && (
               <div className="info-row">
                 <span className="info-label">Wager</span>
                 <span className="info-value">
-                  {game.wager} {game.isNative ? (game.chain === 'celo' ? 'CELO' : 'STX') : 'CHESS'}
+                  {game.wager} {game.isNative ? 'CELO' : 'CHESS'}
                 </span>
               </div>
             )}

@@ -144,7 +144,7 @@ export default function PvPScreen() {
                     <div className="space-y-2">
                         <h2 className="text-xl font-bold">Connect Wallet to Enter Arena</h2>
                         <p className="text-slate-400 text-sm max-w-xs mx-auto text-center">
-                            Connect Stacks or Celo wallet to play wagered matches, stake tokens, and build your on-chain chess reputation.
+                            Connect Celo wallet to play wagered matches, stake tokens, and build your on-chain chess reputation.
                         </p>
                     </div>
                     <button
@@ -161,7 +161,7 @@ export default function PvPScreen() {
                     <div className="p-3 bg-white/5 border border-white/5 rounded-xl text-center space-y-1">
                         <span className="text-lg">💰</span>
                         <p className="font-bold text-slate-200">On-Chain Stakes</p>
-                        <p className="text-slate-400 text-[10px]">Wager STX or CELO directly in smart contracts</p>
+                        <p className="text-slate-400 text-[10px]">Wager CELO directly in smart contracts</p>
                     </div>
                     <div className="p-3 bg-white/5 border border-white/5 rounded-xl text-center space-y-1">
                         <span className="text-lg">⚡</span>
@@ -188,8 +188,8 @@ export default function PvPScreen() {
                 {/* Network Status & Access */}
                 <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10">
                     <div className="flex items-center gap-3">
-                        <div className={`w-3 h-3 rounded-full ${activeChain === 'celo' ? 'bg-[#FCFF52]' : 'bg-[#F7821B]'}`} />
-                        <span className="text-sm font-medium">{activeChain === 'stacks' ? 'Stacks' : 'Celo'} Network</span>
+                        <div className="w-3 h-3 rounded-full bg-[#FCFF52]" />
+                        <span className="text-sm font-medium">Celo Network</span>
                     </div>
                     <div className="text-right">
                         <p className="text-[10px] text-slate-500 uppercase tracking-widest">Connected as</p>
@@ -197,27 +197,6 @@ export default function PvPScreen() {
                     </div>
                 </div>
 
-                {/* Network Switcher — hidden for MiniPay since it's always Celo */}
-                {!isMiniPay && (
-                <div className="flex gap-2">
-                    <button
-                        aria-label="Switch to Stacks network"
-                        onClick={() => setActiveChain('stacks')}
-                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition ${activeChain === 'stacks' ? 'bg-orange-500/20 text-orange-300 ring-1 ring-orange-500/40' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
-                    >
-                        <span className="w-2 h-2 rounded-full bg-[#F7821B]" />
-                        Play with Stacks
-                    </button>
-                    <button
-                        aria-label="Switch to Celo network"
-                        onClick={() => setActiveChain('celo')}
-                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition ${activeChain === 'celo' ? 'bg-yellow-500/20 text-yellow-300 ring-1 ring-yellow-500/40' : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'}`}
-                    >
-                        <span className="w-2 h-2 rounded-full bg-[#FCFF52]" />
-                        Play with Celo
-                    </button>
-                </div>
-                )}
 
                 {/* MiniPay Add Cash prompt — shown when balance is too low */}
                 {isMiniPay && cusdBalance !== null && Number(cusdBalance) < 0.01 && (
@@ -243,17 +222,13 @@ export default function PvPScreen() {
                       <div>
                         <p className="text-xs uppercase tracking-[0.2em] text-emerald-200/80">Daily Access</p>
                         <h3 className="mt-1 text-lg font-semibold text-white">
-                          {activeChain === 'stacks' ? 'Unlock Stacks Match Access' : 'Unlock Celo Match Access'}
+                          Unlock Celo Match Access
                         </h3>
                         <p className="mt-2 text-emerald-100/80 text-xs">
-                          {activeChain === 'stacks'
-                            ? "Required for Stacks match creation/joining. Price: 0.5 STX."
-                            : `Required for Celo match creation/joining. Price: ${celo.network.DAILY_ACCESS_CUSD} cUSD or 0.05 CELO.`}
+                          Required for Celo match creation/joining. Price: {celo.network.DAILY_ACCESS_CUSD} cUSD or 0.05 CELO.
                         </p>
                         <p className="mt-2 text-[10px] text-emerald-100/70">
-                          {activeChain === 'stacks'
-                            ? (expiresAt && hasAccess ? `Access active until ${new Date(expiresAt).toLocaleString()}` : 'Access not active')
-                            : `cUSD: ${cusdBalance ? Number(cusdBalance).toFixed(2) : '--'} • CELO: ${celoNativeBalance ? Number(celoNativeBalance).toFixed(4) : '--'}${expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}`}
+                          cUSD: {cusdBalance ? Number(cusdBalance).toFixed(2) : '--'} • CELO: {celoNativeBalance ? Number(celoNativeBalance).toFixed(4) : '--'}{expiresAt && hasAccess ? ` • active until ${new Date(expiresAt).toLocaleString()}` : ' • not active'}
                         </p>
                       </div>
                       {hasAccess ? (
@@ -263,15 +238,6 @@ export default function PvPScreen() {
                           className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black opacity-60 cursor-not-allowed text-xs"
                         >
                           Access Active
-                        </button>
-                      ) : activeChain === 'stacks' ? (
-                        <button
-                          type="button"
-                          onClick={() => purchaseAccess().catch(() => undefined)}
-                          disabled={isPurchasing}
-                          className="rounded-xl bg-emerald-400 px-5 py-3 font-bold text-black transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60 text-xs shadow-[0_0_15px_rgba(52,211,153,0.3)] active:scale-95"
-                        >
-                          {isPurchasing ? 'Processing...' : 'Pay With STX'}
                         </button>
                       ) : (
                         <div className="flex flex-col gap-2 min-w-[140px]">
@@ -314,7 +280,7 @@ export default function PvPScreen() {
                         </p>
                         <div className="mt-2 space-y-3">
                             <div>
-                                <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Wager ({activeChain === 'stacks' ? 'STX' : 'CELO'})</label>
+                                <label className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Wager (CELO)</label>
                                 <input 
                                     type="number" 
                                     value={wager}

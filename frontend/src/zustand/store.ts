@@ -67,7 +67,7 @@ const useAppStore = create<AppStore>()(
       address: null,
       stacksAddress: null,
       celoAddress: null,
-      activeChain: 'stacks',
+      activeChain: 'celo',
       isAuthenticated: false,
       isLoading: false,
       isFarcaster: false,

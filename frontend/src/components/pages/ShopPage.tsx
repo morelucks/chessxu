@@ -118,11 +118,7 @@ export default function ShopPage() {
 
   const getPriceString = (price: number) => {
     const converted = price / 1000;
-    if (activeChain === 'stacks') {
-      return `${converted} STX`;
-    } else {
-      return `${converted} CELO`;
-    }
+    return `${converted} CELO`;
   };
 
   const handleBuy = async (item: ShopItem) => {
@@ -136,7 +132,7 @@ export default function ShopPage() {
     const price = item.price / 1000;
     const balanceNum = parseFloat(walletBalance);
     if (balanceNum < price) {
-      triggerToast(`Insufficient ${activeChain === 'stacks' ? 'STX' : 'CELO'} balance!`, 'error');
+      triggerToast('Insufficient CELO balance!', 'error');
       return;
     }
 
@@ -287,14 +283,14 @@ export default function ShopPage() {
             <p className="shop-subtitle">Customize your chess game appearance with exclusive assets.</p>
             <div className="shop-notice">
               <Info size={14} className="text-indigo-400" />
-              <span>All custom assets are client-side only. Purchases are made on-chain using STX or CELO.</span>
+              <span>All custom assets are client-side only. Purchases are made on-chain using CELO.</span>
             </div>
           </div>
           <div className="shop-balance-card">
-            <span className="balance-label">Your Balance ({activeChain.toUpperCase()})</span>
+            <span className="balance-label">Your Balance (CELO)</span>
             {address ? (
               <>
-                <div className="balance-value">{walletBalance} {activeChain === 'stacks' ? 'STX' : 'CELO'}</div>
+                <div className="balance-value">{walletBalance} CELO</div>
                 <button onClick={refreshWalletBalance} disabled={isLoadingBalance} className="shop-faucet-btn" style={{ marginTop: '8px' }}>
                   {isLoadingBalance ? <Loader2 className="animate-spin" size={13} /> : <Gift size={13} />}
                   <span>{isLoadingBalance ? 'Refreshing...' : 'Refresh Balance'}</span>

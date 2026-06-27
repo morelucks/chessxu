@@ -26,10 +26,7 @@ interface TxCardProps {
 
 function explorerUrl(tx: TxEntry): string | null {
   if (!tx.txId) return null;
-  if (tx.chain === 'celo') {
-    return `https://celoscan.io/tx/${tx.txId}`;
-  }
-  return `https://explorer.hiro.so/txid/${tx.txId}?chain=mainnet`;
+  return `https://celoscan.io/tx/${tx.txId}`;
 }
 
 function elapsed(from: number): string {
@@ -41,13 +38,11 @@ function elapsed(from: number): string {
 }
 
 function chainLabel(chain: 'stacks' | 'celo'): string {
-  return chain === 'celo' ? 'Celo' : 'Stacks';
+  return 'Celo';
 }
 
 function chainColor(chain: 'stacks' | 'celo'): string {
-  return chain === 'celo'
-    ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
-    : 'bg-orange-500/20 text-orange-300 border-orange-500/30';
+  return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
 }
 
 function stageBorderColor(stage: TxStage): string {

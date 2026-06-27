@@ -136,7 +136,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         playerSub = `Farcaster • ${elo} ELO`;
     } else if (address) {
         playerName = formatAddress(address);
-        playerSub = `${activeChain === 'stacks' ? 'Stacks' : 'Celo'} • ${elo} ELO`;
+        playerSub = `Celo • ${elo} ELO`;
     } else {
         playerSub = `Local Player • ${elo} ELO`;
     }

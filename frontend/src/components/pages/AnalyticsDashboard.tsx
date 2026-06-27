@@ -49,14 +49,14 @@ const SECTIONS: Section[] = [
     label: 'Overview',
     icon: <BarChart3 size={14} />,
     description:
-      'High-level platform health — total games created, cumulative wager volume, unique wallet count, and average wager size across both chains.',
+      'High-level platform health — total games created, cumulative wager volume, unique wallet count, and average wager size.',
   },
   {
     id: 'activity',
     label: 'Activity',
     icon: <Activity size={14} />,
     description:
-      'Daily and cumulative time-series charts for game creation and wager volume on Stacks and Celo.',
+      'Daily and cumulative time-series charts for game creation and wager volume on Celo.',
   },
   {
     id: 'players',
@@ -74,17 +74,10 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'token_gas',
-    label: 'Token & Gas',
+    label: 'Gas Sponsorship',
     icon: <Coins size={14} />,
     description:
-      'CHESS SIP-010 token transfer volume on Stacks and gas sponsorship stats from the ChessxuPaymaster on Celo.',
-  },
-  {
-    id: 'chain_comparison',
-    label: 'Chain Comparison',
-    icon: <GitCompareArrows size={14} />,
-    description:
-      'Side-by-side metrics comparing Stacks and Celo activity, volume, and player engagement.',
+      'Gas sponsorship stats from the ChessxuPaymaster on Celo.',
   },
 ];
 
@@ -104,32 +97,32 @@ const KPI_CARDS: KpiCard[] = [
     iconClass: 'analytics-kpi__icon--games',
     value: '—',
     label: 'Total Games',
-    chainClass: 'analytics-kpi__chain--both',
-    chainLabel: 'Stacks + Celo',
+    chainClass: 'analytics-kpi__chain--celo',
+    chainLabel: 'Celo',
   },
   {
     icon: <TrendingUp size={20} />,
     iconClass: 'analytics-kpi__icon--volume',
     value: '—',
     label: 'Total Volume',
-    chainClass: 'analytics-kpi__chain--both',
-    chainLabel: 'Stacks + Celo',
+    chainClass: 'analytics-kpi__chain--celo',
+    chainLabel: 'Celo',
   },
   {
     icon: <Users size={20} />,
     iconClass: 'analytics-kpi__icon--players',
     value: '—',
     label: 'Unique Players',
-    chainClass: 'analytics-kpi__chain--both',
-    chainLabel: 'Stacks + Celo',
+    chainClass: 'analytics-kpi__chain--celo',
+    chainLabel: 'Celo',
   },
   {
     icon: <Target size={20} />,
     iconClass: 'analytics-kpi__icon--wager',
     value: '—',
     label: 'Avg Wager',
-    chainClass: 'analytics-kpi__chain--both',
-    chainLabel: 'Stacks + Celo',
+    chainClass: 'analytics-kpi__chain--celo',
+    chainLabel: 'Celo',
   },
 ];
 
@@ -142,10 +135,8 @@ function queriesBySection(sectionId: string): DuneQueryDef[] {
 
 /** Pretty chain label. */
 function chainBadge(chain: DuneQueryDef['chain']) {
-  const cls = `analytics-query-item__chain analytics-query-item__chain--${chain}`;
-  const label =
-    chain === 'both' ? 'Both' : chain === 'stacks' ? 'Stacks' : 'Celo';
-  return <span className={cls}>{label}</span>;
+  const cls = `analytics-query-item__chain analytics-query-item__chain--celo`;
+  return <span className={cls}>Celo</span>;
 }
 
 // ── Component ───────────────────────────────────────────────────────
@@ -167,7 +158,7 @@ export default function AnalyticsDashboard() {
             📊 Analytics Dashboard
           </h1>
           <p className="analytics-header__subtitle">
-            Real-time on-chain metrics for Chessxu across Stacks and Celo.
+            Real-time on-chain metrics for Chessxu on Celo.
             Powered by{' '}
             <a
               href="https://dune.com"
@@ -249,9 +240,6 @@ export default function AnalyticsDashboard() {
             Open on Dune
           </a>
           <div className="analytics-actions__chain-badges">
-            <span className="analytics-chain-badge analytics-chain-badge--stacks">
-              ⬡ Stacks
-            </span>
             <span className="analytics-chain-badge analytics-chain-badge--celo">
               ◈ Celo
             </span>

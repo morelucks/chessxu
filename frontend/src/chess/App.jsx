@@ -40,7 +40,7 @@ const Leaderboard = ({ results, onClear }) => {
                 {stake && stake.amount ? (
                     <div className="stake-badge">
                         <span className="stake-badge__label">Current Stake</span>
-                        <span className="stake-badge__amount">{Number(stake.amount).toFixed(2)} STX</span>
+                        <span className="stake-badge__amount">{Number(stake.amount).toFixed(2)} CELO</span>
                         {stake.status && (
                             <span className={`stake-badge__status stake-badge__status--${stake.status}`}>
                                 {stake.status}

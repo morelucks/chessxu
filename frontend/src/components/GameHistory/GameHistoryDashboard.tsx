@@ -261,7 +261,6 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
                   <div className="game-details">
                     <div className="game-id">
                       Game #{game.gameId}
-                      <span className="chain-badge">{game.chain}</span>
                     </div>
                     <div className="game-date">{formatDate(game.timestamp)}</div>
                   </div>
@@ -289,7 +288,7 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
                 {game.wager !== '0' && (
                   <div className="wager-info">
                     <Trophy size={14} />
-                    <span>{game.wager} {game.isNative ? (game.chain === 'celo' ? 'CELO' : 'STX') : 'CHESS'}</span>
+                    <span>{game.wager} {game.isNative ? 'CELO' : 'CHESS'}</span>
                   </div>
                 )}
               </div>

@@ -202,7 +202,7 @@ export default function ProfilePage() {
           <StatCard
             icon={<Swords size={18} />}
             label="Active Chain"
-            value={activeChain === "celo" ? "🟡 Celo" : "🟠 Stacks"}
+            value="🟡 Celo"
             accent="#60a5fa"
           />
           <StatCard
@@ -239,25 +239,7 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {stacksAddress && (
-              <div className="profile-address-row">
-                <div className="profile-address-label">
-                  <span className="profile-chain-dot" style={{ background: "#F7821B" }} />
-                  Stacks / STX
-                </div>
-                <CopyBadge value={stacksAddress} label="Stacks address" />
-                <a
-                  href={`https://explorer.hiro.so/address/${stacksAddress}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="profile-scan-link"
-                >
-                  <ExternalLink size={13} />
-                </a>
-              </div>
-            )}
-
-            {!celoAddress && !stacksAddress && (
+            {!celoAddress && (
               <p className="profile-empty-msg">No wallet connected yet.</p>
             )}
           </div>

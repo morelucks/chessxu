@@ -161,10 +161,10 @@ export function formatAddress(address: string, prefixLen = 6, suffixLen = 4): st
 /**
  * Format wager amount
  */
-export function formatWager(wager: string, isNative: boolean, chain: 'stacks' | 'celo'): string {
+export function formatWager(wager: string, isNative: boolean, _chain: 'stacks' | 'celo'): string {
   if (wager === '0') return 'No wager';
   
-  const currency = isNative ? (chain === 'celo' ? 'CELO' : 'STX') : 'CHESS';
+  const currency = isNative ? 'CELO' : 'CHESS';
   
   // Convert from smallest unit if needed
   const amount = parseFloat(wager);

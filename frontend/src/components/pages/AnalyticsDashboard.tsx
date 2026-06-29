@@ -14,7 +14,7 @@
  * @see https://github.com/morelucks/chessxu/issues/163
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {
   BarChart3,
   ExternalLink,
@@ -149,6 +149,16 @@ export default function AnalyticsDashboard() {
     setIframeLoaded(true);
   }, []);
 
+  useEffect(() => {
+    // Safety timeout: if the iframe doesn't fire onLoad within 6 seconds
+    // (due to slow network, adblockers, or sandboxing), automatically
+    // reveal the dashboard so the user isn't stuck with a spinner.
+    const timer = setTimeout(() => {
+      setIframeLoaded(true);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="analytics-page" id="analytics-dashboard">
       <div className="analytics-page__inner">
@@ -221,9 +231,16 @@ export default function AnalyticsDashboard() {
             className="analytics-embed__iframe"
             title="Chessxu Dune Analytics Dashboard"
             onLoad={handleIframeLoad}
-            style={{ display: iframeLoaded ? 'block' : 'none' }}
+            style={{
+              position: iframeLoaded ? 'relative' : 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: iframeLoaded ? undefined : '100%',
+              opacity: iframeLoaded ? 1 : 0,
+              pointerEvents: iframeLoaded ? 'auto' : 'none',
+            }}
             sandbox="allow-scripts allow-same-origin allow-popups"
-            loading="lazy"
           />
         </div>
 

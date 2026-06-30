@@ -34,14 +34,14 @@ export const CONTRACTS = {
 
 /** Public Dune dashboard URL (set after the dashboard is published). */
 export const DUNE_DASHBOARD_URL =
-  'https://dune.com/morelucks/chessxu-analytics';
+  'https://dune.com/chessxu/chessxu-analytics';
 
 /**
  * Dune embed base – append the dashboard slug to get the embed URL.
  * The `?embed=true` query-param removes the Dune chrome.
  */
 export const DUNE_EMBED_URL =
-  'https://dune.com/embeds/morelucks/chessxu-analytics';
+  'https://dune.com/embeds/chessxu/chessxu-analytics';
 
 // ---------------------------------------------------------------------------
 // Individual query definitions

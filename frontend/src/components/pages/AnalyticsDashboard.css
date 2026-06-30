@@ -463,6 +463,104 @@
   color: #93c5fd;
 }
 
+/* ── Embed Grid & Cards ───────────────────────────────────────────── */
+.analytics-embed-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .analytics-embed-grid {
+    grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
+  }
+}
+
+.analytics-embed-card {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.analytics-embed-card:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.analytics-embed-card__header {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.analytics-embed-card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 4px 0;
+}
+
+.analytics-embed-card__description {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.analytics-embed-card__body {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 480px;
+  background: #0f172a;
+}
+
+/* ── Pending / Empty States ───────────────────────────────────────── */
+.analytics-embed__pending {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.analytics-embed__pending-icon {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+  animation: analyticsBounce 2s infinite ease-in-out;
+}
+
+@keyframes analyticsBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.analytics-embed__pending-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 8px 0;
+}
+
+.analytics-embed__pending-text {
+  font-size: 0.8rem;
+  color: #64748b;
+  max-width: 280px;
+  margin: 0;
+  line-height: 1.5;
+}
+
 /* ── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .analytics-page {

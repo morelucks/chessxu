@@ -80,14 +80,14 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     label: 'Daily Active Games',
     description:
       'Count of create-game / createGame calls per day across both chains.',
-    queryId: 0, // TODO: replace with real Dune query ID
+    queryId: 7844635,
     chain: 'both',
     section: 'overview',
   },
   cumulative_games: {
     label: 'Cumulative Games Created',
     description: 'Running total of games created over time.',
-    queryId: 0,
+    queryId: 7844664,
     chain: 'both',
     section: 'overview',
   },
@@ -97,7 +97,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     label: 'Daily Wager Volume',
     description:
       'Total STX / CELO wagered per day from create-game + join-game events.',
-    queryId: 0,
+    queryId: 7844675,
     chain: 'both',
     section: 'activity',
   },
@@ -114,14 +114,14 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     label: 'Unique Players',
     description:
       'Distinct wallet addresses interacting with the contract (daily / cumulative).',
-    queryId: 0,
+    queryId: 7844871,
     chain: 'both',
     section: 'players',
   },
   top_players: {
     label: 'Top Players by Games Played',
     description: 'Leaderboard of most active wallets.',
-    queryId: 0,
+    queryId: 7844693,
     chain: 'both',
     section: 'players',
   },
@@ -155,7 +155,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
   paymaster_sponsorship: {
     label: 'Paymaster Sponsorship Volume',
     description: 'Gas sponsored via ChessxuPaymaster on Celo.',
-    queryId: 0,
+    queryId: 7844709,
     chain: 'celo',
     section: 'token_gas',
   },
@@ -180,7 +180,7 @@ SELECT
   COUNT(*)                      AS games_created
 FROM celo.transactions
 WHERE "to" = 0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E
-  AND SUBSTRING(data, 1, 10) = '0x'  -- createGame selector
+  AND bytearray_substring(data, 1, 4) = 0x6bfca566  -- createGame selector
   AND success = true
 GROUP BY 1
 ORDER BY 1;
@@ -198,6 +198,7 @@ FROM (
     COUNT(*)                      AS games_created
   FROM celo.transactions
   WHERE "to" = 0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E
+    AND bytearray_substring(data, 1, 4) = 0x6bfca566  -- createGame selector
     AND success = true
   GROUP BY 1
 ) sub
@@ -212,6 +213,7 @@ SELECT
   SUM(value / 1e18)             AS daily_volume_celo
 FROM celo.transactions
 WHERE "to" = 0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E
+  AND bytearray_substring(data, 1, 4) = 0x6bfca566  -- createGame selector
   AND success = true
   AND value > 0
 GROUP BY 1

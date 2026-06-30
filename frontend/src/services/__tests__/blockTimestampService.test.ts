@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { getGameBlockTimestamp } from '../blockTimestampService';
+import { getGameBlockTimestamp, clearCache } from '../blockTimestampService';
 import celoService from '../../chess/services/celoService';
 
 // Mock celoService getPublicClient
@@ -27,11 +27,7 @@ describe('BlockTimestampService', () => {
     vi.stubGlobal('fetch', fetchMock);
     
     // Clear the cache manually since it's a module-level variable
-    const blockTimestampModule = require('../blockTimestampService');
-    // Access private cache map to reset between tests
-    if (blockTimestampModule.cache) {
-      blockTimestampModule.cache.clear();
-    }
+    clearCache();
   });
 
   afterEach(() => {
@@ -45,7 +41,7 @@ describe('BlockTimestampService', () => {
         message: 'OK',
         result: [
           {
-            input: '0x6bfca5660000000000000000000000000000000000000000000000000000000000000064', // createGame selector
+            input: '0x2d913e350000000000000000000000000000000000000000000000000000000000000064', // createGame selector
             isError: '0',
             timeStamp: '1680000000',
           },

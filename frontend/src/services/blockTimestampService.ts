@@ -61,6 +61,10 @@ function setCached(chain: 'celo' | 'stacks', gameId: number, timestamp: number):
   cache.set(cacheKey(chain, gameId), { timestamp, cachedAt: Date.now() });
 }
 
+export function clearCache(): void {
+  cache.clear();
+}
+
 // ---------------------------------------------------------------------------
 // Celo timestamp resolution
 // ---------------------------------------------------------------------------
@@ -288,4 +292,4 @@ export async function getGameBlockTimestamp(
   return getStacksGameTimestamp(gameId, contractId);
 }
 
-export default { getGameBlockTimestamp };
+export default { getGameBlockTimestamp, clearCache };

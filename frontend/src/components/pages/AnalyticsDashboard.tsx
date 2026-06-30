@@ -14,7 +14,7 @@
  * @see https://github.com/morelucks/chessxu/issues/163
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState } from 'react';
 import {
   BarChart3,
   ExternalLink,
@@ -22,14 +22,12 @@ import {
   Users,
   Trophy,
   Coins,
-  GitCompareArrows,
   TrendingUp,
   Gamepad2,
   Target,
 } from 'lucide-react';
 import {
   DUNE_DASHBOARD_URL,
-  DUNE_EMBED_URL,
   DUNE_QUERIES,
   type DuneQueryDef,
 } from '../../config/duneQueries';
@@ -134,7 +132,7 @@ function queriesBySection(sectionId: string): DuneQueryDef[] {
 }
 
 /** Pretty chain label. */
-function chainBadge(chain: DuneQueryDef['chain']) {
+function chainBadge() {
   const cls = `analytics-query-item__chain analytics-query-item__chain--celo`;
   return <span className={cls}>Celo</span>;
 }
@@ -143,21 +141,6 @@ function chainBadge(chain: DuneQueryDef['chain']) {
 
 export default function AnalyticsDashboard() {
   const [activeSection, setActiveSection] = useState('overview');
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
-  const handleIframeLoad = useCallback(() => {
-    setIframeLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    // Safety timeout: if the iframe doesn't fire onLoad within 6 seconds
-    // (due to slow network, adblockers, or sandboxing), automatically
-    // reveal the dashboard so the user isn't stuck with a spinner.
-    const timer = setTimeout(() => {
-      setIframeLoaded(true);
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="analytics-page" id="analytics-dashboard">
@@ -216,32 +199,42 @@ export default function AnalyticsDashboard() {
           ))}
         </div>
 
-        {/* ── Dune Embed ─────────────────────────────────────────── */}
-        <div className="analytics-embed">
-          {!iframeLoaded && (
-            <div className="analytics-embed__loading">
-              <div className="analytics-embed__spinner" />
-              <span className="analytics-embed__loading-text">
-                Loading Dune dashboard…
-              </span>
-            </div>
-          )}
-          <iframe
-            src={`${DUNE_EMBED_URL}`}
-            className="analytics-embed__iframe"
-            title="Chessxu Dune Analytics Dashboard"
-            onLoad={handleIframeLoad}
-            style={{
-              position: iframeLoaded ? 'relative' : 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: iframeLoaded ? undefined : '100%',
-              opacity: iframeLoaded ? 1 : 0,
-              pointerEvents: iframeLoaded ? 'auto' : 'none',
-            }}
-            sandbox="allow-scripts allow-same-origin allow-popups"
-          />
+        {/* ── Dune Embed Grid ─────────────────────────────────────── */}
+        <div className="analytics-embed-grid">
+          {queriesBySection(activeSection).map((query) => {
+            const hasEmbed = query.queryId > 0 && query.vizId && query.vizId > 0;
+            const embedUrl = hasEmbed
+              ? `https://dune.com/embeds/${query.queryId}/${query.vizId}`
+              : null;
+
+            return (
+              <div className="analytics-embed-card" key={query.label} id={`analytics-card-${query.queryId}`}>
+                <div className="analytics-embed-card__header">
+                  <h3 className="analytics-embed-card__title">{query.label}</h3>
+                  <p className="analytics-embed-card__description">{query.description}</p>
+                </div>
+                <div className="analytics-embed-card__body">
+                  {embedUrl ? (
+                    <iframe
+                      src={embedUrl}
+                      className="analytics-embed__iframe"
+                      title={query.label}
+                      sandbox="allow-scripts allow-same-origin allow-popups"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="analytics-embed__pending">
+                      <div className="analytics-embed__pending-icon">⏳</div>
+                      <h4 className="analytics-embed__pending-title">Query Configuration Pending</h4>
+                      <p className="analytics-embed__pending-text">
+                        This visualization is currently being set up on Dune Analytics. Please check back soon!
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* ── External Links ─────────────────────────────────────── */}
@@ -299,7 +292,7 @@ export default function AnalyticsDashboard() {
                         <span className="analytics-query-item__name">
                           {q.label}
                         </span>
-                        {chainBadge(q.chain)}
+                        {chainBadge()}
                       </div>
                     ))}
                   </div>

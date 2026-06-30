@@ -54,6 +54,8 @@ export interface DuneQueryDef {
   description: string;
   /** Dune query ID – set once the query is published. */
   queryId: number;
+  /** Dune visualization ID – set once the visualization is created on Dune. */
+  vizId?: number;
   /** Which chain(s) this query targets. */
   chain: 'stacks' | 'celo' | 'both';
   /** Dashboard section this query belongs to. */
@@ -71,7 +73,8 @@ export interface DuneQueryDef {
  *
  * ╔══════════════════════════════════════════════════════════════════╗
  * ║  After creating each query on dune.com, update the `queryId`   ║
- * ║  field here so the embed URLs and future Dune API calls work.  ║
+ * ║  and `vizId` fields here so the embed URLs and future Dune     ║
+ * ║  API calls work.                                                 ║
  * ╚══════════════════════════════════════════════════════════════════╝
  */
 export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
@@ -81,6 +84,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     description:
       'Count of create-game / createGame calls per day across both chains.',
     queryId: 7844635,
+    vizId: 11817852,
     chain: 'both',
     section: 'overview',
   },
@@ -88,6 +92,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     label: 'Cumulative Games Created',
     description: 'Running total of games created over time.',
     queryId: 7844664,
+    vizId: 11817881,
     chain: 'both',
     section: 'overview',
   },
@@ -98,6 +103,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     description:
       'Total STX / CELO wagered per day from create-game + join-game events.',
     queryId: 7844675,
+    vizId: 11817892,
     chain: 'both',
     section: 'activity',
   },
@@ -115,6 +121,15 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     description:
       'Distinct wallet addresses interacting with the contract (daily / cumulative).',
     queryId: 7844871,
+    vizId: 11818105,
+    chain: 'both',
+    section: 'players',
+  },
+  unique_players_table: {
+    label: 'Unique Players Table',
+    description: 'Tabular view of daily unique player addresses.',
+    queryId: 7844871,
+    vizId: 11818097,
     chain: 'both',
     section: 'players',
   },
@@ -122,6 +137,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     label: 'Top Players by Games Played',
     description: 'Leaderboard of most active wallets.',
     queryId: 7844693,
+    vizId: 11817910,
     chain: 'both',
     section: 'players',
   },
@@ -156,6 +172,7 @@ export const DUNE_QUERIES: Record<string, DuneQueryDef> = {
     label: 'Paymaster Sponsorship Volume',
     description: 'Gas sponsored via ChessxuPaymaster on Celo.',
     queryId: 7844709,
+    vizId: 11817926,
     chain: 'celo',
     section: 'token_gas',
   },

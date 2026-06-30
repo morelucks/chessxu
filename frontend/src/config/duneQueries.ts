@@ -180,7 +180,7 @@ SELECT
   COUNT(*)                      AS games_created
 FROM celo.transactions
 WHERE "to" = 0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E
-  AND SUBSTRING(data, 1, 10) = '0x'  -- createGame selector
+  AND bytearray_substring(data, 1, 4) = 0x6bfca566  -- createGame selector
   AND success = true
 GROUP BY 1
 ORDER BY 1;
@@ -198,6 +198,7 @@ FROM (
     COUNT(*)                      AS games_created
   FROM celo.transactions
   WHERE "to" = 0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E
+    AND bytearray_substring(data, 1, 4) = 0x6bfca566  -- createGame selector
     AND success = true
   GROUP BY 1
 ) sub
@@ -212,6 +213,7 @@ SELECT
   SUM(value / 1e18)             AS daily_volume_celo
 FROM celo.transactions
 WHERE "to" = 0xf4776929EB56F8C0fC41f87Cc7c4aEa4702de02E
+  AND bytearray_substring(data, 1, 4) = 0x6bfca566  -- createGame selector
   AND success = true
   AND value > 0
 GROUP BY 1

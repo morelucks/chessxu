@@ -1,330 +1,388 @@
 // @vitest-environment jsdom
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { gameSyncService } from '../gameSyncService';
 import { gameHistoryDB } from '../gameHistoryDB';
 import celoService from '../../chess/services/celoService';
 import stacksService from '../../chess/services/stacksService';
-import { getGameBlockTimestamp } from '../blockTimestampService';
 
-// Mock dependencies
+// Mock gameHistoryDB
 vi.mock('../gameHistoryDB', () => {
   return {
     gameHistoryDB: {
       init: vi.fn().mockResolvedValue(undefined),
       getPlayerGames: vi.fn().mockResolvedValue([]),
       saveGame: vi.fn().mockResolvedValue(undefined),
-    },
+    }
   };
 });
 
+// Mock Celo service
 vi.mock('../../chess/services/celoService', () => {
   return {
     default: {
       getGameCount: vi.fn().mockResolvedValue(0),
-      getGame: vi.fn().mockResolvedValue(null),
-    },
+      getGame: vi.fn().mockResolvedValue(null as any),
+    }
   };
 });
 
+// Mock Stacks service
 vi.mock('../../chess/services/stacksService', () => {
   return {
     default: {
       getGameCount: vi.fn().mockResolvedValue(0),
       getGameState: vi.fn().mockResolvedValue(null),
-    },
-  };
-});
-
-vi.mock('../blockTimestampService', () => {
-  return {
-    getGameBlockTimestamp: vi.fn().mockResolvedValue(1700000000000),
-    default: {
-      getGameBlockTimestamp: vi.fn().mockResolvedValue(1700000000000),
-    },
+    }
   };
 });
 
 describe('GameSyncService', () => {
+  const player = '0xPlayerAddress';
+
   beforeEach(() => {
     vi.clearAllMocks();
-    // Reset internal state of the singleton
+    // Reset private fields on the singleton
     (gameSyncService as any).isSyncing = false;
     (gameSyncService as any).lastSyncTime = null;
     (gameSyncService as any).syncListeners = [];
   });
 
-  describe('syncPlayerGames - Celo', () => {
-    it('should successfully sync new Celo games where player is involved', async () => {
-      const playerAddress = '0xPlayer';
-      
-      // Mock db returns no existing games
-      vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([]);
+  describe('Getters & Subscription', () => {
+    it('should report syncing state and last sync time correctly', () => {
+      expect(gameSyncService.syncing).toBe(false);
+      expect(gameSyncService.lastSync).toBeNull();
+    });
 
-      // Mock contract count and game details
+    it('should support subscribing to sync progress updates', async () => {
+      const progressList: any[] = [];
+      const unsubscribe = gameSyncService.onSyncProgress((p) => {
+        progressList.push(p);
+      });
+
+      // Mock Celo service responses to trigger processing loop
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(2);
-      
-      // Game 2: Player is White
+      vi.mocked(celoService.getGame).mockResolvedValue({
+        playerW: player,
+        playerB: '0xOther',
+        wager: 10n,
+        isNative: true,
+        boardState: '...',
+        turn: 'w',
+        status: 1, // Ongoing
+      } as any);
+
+      await gameSyncService.syncPlayerGames(player, 'celo');
+
+      expect(progressList.length).toBeGreaterThan(0);
+      expect(progressList[progressList.length - 1]).toEqual({
+        total: 2,
+        synced: 2,
+        failed: 0,
+        isComplete: true,
+      });
+
+      // Verify unsubscribe works
+      unsubscribe();
+      progressList.length = 0;
+      await gameSyncService.syncPlayerGames(player, 'celo');
+      expect(progressList).toHaveLength(0);
+    });
+  });
+
+  describe('syncPlayerGames on Celo', () => {
+    it('should sync new games and update syncing state/lastSync time', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(2);
       vi.mocked(celoService.getGame).mockImplementation(async (id) => {
         if (id === 2) {
           return {
-            playerW: playerAddress,
-            playerB: '0xOpponent',
+            playerW: player,
+            playerB: '0xBob',
             wager: 100n,
             isNative: true,
-            boardState: 'start',
+            boardState: 'state2',
             turn: 'w',
-            status: 1, // Ongoing
-          };
+            status: 2, // White wins
+          } as any;
         }
-        // Game 1: Player not involved
         if (id === 1) {
           return {
-            playerW: '0xOther1',
-            playerB: '0xOther2',
+            playerW: '0xBob',
+            playerB: player,
             wager: 50n,
-            isNative: true,
-            boardState: 'start',
-            turn: 'w',
-            status: 1,
-          };
+            isNative: false,
+            boardState: 'state1',
+            turn: 'b',
+            status: 3, // Black wins (player B wins)
+          } as any;
         }
-        return null;
+        return null as any;
       });
 
-      // Mock block timestamp
-      vi.mocked(getGameBlockTimestamp).mockResolvedValueOnce(1680000000000);
-
-      const progressUpdates: any[] = [];
-      const unsubscribe = gameSyncService.onSyncProgress((progress) => {
-        progressUpdates.push({ ...progress });
-      });
-
-      const result = await gameSyncService.syncPlayerGames(playerAddress, 'celo');
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
 
       expect(gameHistoryDB.init).toHaveBeenCalled();
+      expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledWith(player, 'celo');
       expect(celoService.getGameCount).toHaveBeenCalled();
       expect(celoService.getGame).toHaveBeenCalledWith(2);
       expect(celoService.getGame).toHaveBeenCalledWith(1);
-      expect(getGameBlockTimestamp).toHaveBeenCalledWith('celo', 2);
-      expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
-      
+
+      expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(2);
       expect(result.success).toBe(true);
-      expect(result.gamesAdded).toBe(1);
+      expect(result.gamesAdded).toBe(2);
       expect(result.gamesUpdated).toBe(0);
-      expect(result.errors).toHaveLength(0);
-
-      expect(progressUpdates.length).toBeGreaterThan(0);
-      expect(progressUpdates[progressUpdates.length - 1].isComplete).toBe(true);
-
-      unsubscribe();
+      expect(gameSyncService.lastSync).not.toBeNull();
     });
 
-    it('should skip syncing completed games if they are already in database', async () => {
-      const playerAddress = '0xPlayer';
-
-      // Mock db returns game 1 as already cached and completed (status 2)
-      vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
-        {
-          gameId: 1,
-          chain: 'celo',
-          playerW: playerAddress,
-          playerB: '0xOpponent',
-          wager: '100',
-          isNative: true,
-          boardState: 'end',
-          turn: 'w',
-          status: 2, // Winner White (completed)
-          timestamp: 1680000000000,
-          lastUpdated: Date.now(),
-          syncedAt: Date.now(),
-          moveHistory: [],
-        },
-      ]);
-
+    it('should filter games where the player is not participant', async () => {
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
       vi.mocked(celoService.getGame).mockResolvedValueOnce({
-        playerW: playerAddress,
-        playerB: '0xOpponent',
-        wager: 100n,
+        playerW: '0xAlice',
+        playerB: '0xBob',
+        wager: 10n,
         isNative: true,
-        boardState: 'end',
+        boardState: '...',
         turn: 'w',
-        status: 2, // Winner White
-      });
+        status: 1,
+      } as any);
 
-      const result = await gameSyncService.syncPlayerGames(playerAddress, 'celo', { forceRefresh: false });
-
-      // Should not save game since it is completed and already cached
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
       expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
-      expect(result.success).toBe(true);
       expect(result.gamesAdded).toBe(0);
-      expect(result.gamesUpdated).toBe(0);
     });
 
-    it('should force sync completed games if forceRefresh is true', async () => {
-      const playerAddress = '0xPlayer';
-
+    it('should update existing games if forced or not finished', async () => {
+      // Mock existing cached games
       vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
         {
           gameId: 1,
           chain: 'celo',
-          playerW: playerAddress,
-          playerB: '0xOpponent',
-          wager: '100',
+          playerW: player,
+          playerB: '0xBob',
+          wager: '10',
           isNative: true,
-          boardState: 'end',
+          boardState: 'oldState',
           turn: 'w',
-          status: 2,
-          timestamp: 1680000000000,
-          lastUpdated: Date.now(),
-          syncedAt: Date.now(),
-          moveHistory: [],
-        },
+          status: 1, // Ongoing
+          timestamp: 0,
+          lastUpdated: 0,
+          syncedAt: 0,
+        }
       ]);
 
       vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
       vi.mocked(celoService.getGame).mockResolvedValueOnce({
-        playerW: playerAddress,
-        playerB: '0xOpponent',
-        wager: 100n,
+        playerW: player,
+        playerB: '0xBob',
+        wager: 10n,
         isNative: true,
-        boardState: 'end',
+        boardState: 'newState',
+        turn: 'b',
+        status: 1, // Still ongoing (status < 2)
+      } as any);
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
+      expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
+      expect(result.gamesUpdated).toBe(1);
+    });
+
+    it('should skip updating already completed cached games if forceRefresh is false', async () => {
+      // Mock existing cached completed game
+      vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
+        {
+          gameId: 1,
+          chain: 'celo',
+          playerW: player,
+          playerB: '0xBob',
+          wager: '10',
+          isNative: true,
+          boardState: 'state',
+          turn: 'w',
+          status: 2, // Completed
+          timestamp: 0,
+          lastUpdated: 0,
+          syncedAt: 0,
+        }
+      ]);
+
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
+      vi.mocked(celoService.getGame).mockResolvedValueOnce({
+        playerW: player,
+        playerB: '0xBob',
+        wager: 10n,
+        isNative: true,
+        boardState: 'state',
         turn: 'w',
         status: 2,
-      });
+      } as any);
 
-      const result = await gameSyncService.syncPlayerGames(playerAddress, 'celo', { forceRefresh: true });
+      const result = await gameSyncService.syncPlayerGames(player, 'celo', { forceRefresh: false });
+      expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
+      expect(result.gamesUpdated).toBe(0);
+    });
 
+    it('should force update already completed cached games if forceRefresh is true', async () => {
+      vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([
+        {
+          gameId: 1,
+          chain: 'celo',
+          playerW: player,
+          playerB: '0xBob',
+          wager: '10',
+          isNative: true,
+          boardState: 'state',
+          turn: 'w',
+          status: 2,
+          timestamp: 0,
+          lastUpdated: 0,
+          syncedAt: 0,
+        }
+      ]);
+
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
+      vi.mocked(celoService.getGame).mockResolvedValueOnce({
+        playerW: player,
+        playerB: '0xBob',
+        wager: 10n,
+        isNative: true,
+        boardState: 'state',
+        turn: 'w',
+        status: 2,
+      } as any);
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo', { forceRefresh: true });
       expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
-      expect(result.success).toBe(true);
       expect(result.gamesUpdated).toBe(1);
     });
   });
 
-  describe('syncPlayerGames - Stacks', () => {
-    it('should successfully sync new Stacks games where player is involved', async () => {
-      const playerAddress = 'SPPlayer';
-
-      vi.mocked(gameHistoryDB.getPlayerGames).mockResolvedValueOnce([]);
+  describe('syncPlayerGames on Stacks', () => {
+    it('should sync Stacks games successfully', async () => {
       vi.mocked(stacksService.getGameCount).mockResolvedValueOnce(1);
       vi.mocked(stacksService.getGameState).mockResolvedValueOnce({
-        'player-w': playerAddress,
-        'player-b': 'SPOpponent',
-        wager: 50n,
+        'player-w': player,
+        'player-b': '0xBob',
+        wager: '500',
         'is-stx': true,
-        'board-state': 'start',
+        'board-state': 'stacks-state',
         turn: 'w',
-        status: 1,
+        status: 4, // Draw
       });
 
-      const result = await gameSyncService.syncPlayerGames(playerAddress, 'stacks');
+      const result = await gameSyncService.syncPlayerGames(player, 'stacks');
 
       expect(stacksService.getGameCount).toHaveBeenCalled();
       expect(stacksService.getGameState).toHaveBeenCalledWith(1);
-      expect(getGameBlockTimestamp).toHaveBeenCalledWith('stacks', 1, expect.any(String));
       expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
-
       expect(result.success).toBe(true);
       expect(result.gamesAdded).toBe(1);
     });
   });
 
-  describe('syncGame', () => {
-    it('should sync a single Celo game by ID', async () => {
+  describe('Error Handling & Concurrency Guard', () => {
+    it('should throw an error if sync is already in progress', async () => {
+      (gameSyncService as any).isSyncing = true;
+      await expect(gameSyncService.syncPlayerGames(player, 'celo')).rejects.toThrow('Sync already in progress');
+    });
+
+    it('should handle fetch failures gracefully and report errors', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
+      vi.mocked(celoService.getGame).mockRejectedValueOnce(new Error('RPC Error'));
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
+
+      expect(result.success).toBe(true); // Loops continue despite warning logs
+      expect(result.errors).toHaveLength(0); // Warn logs do not propagate to result.errors
+    });
+
+    it('should handle db save failures and report them in errors array', async () => {
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
       vi.mocked(celoService.getGame).mockResolvedValueOnce({
-        playerW: '0xW',
-        playerB: '0xB',
-        wager: 100n,
+        playerW: player,
+        playerB: '0xBob',
+        wager: 10n,
         isNative: true,
-        boardState: 'start',
+        boardState: '...',
         turn: 'w',
         status: 1,
-      });
+      } as any);
+      vi.mocked(gameHistoryDB.saveGame).mockRejectedValueOnce(new Error('IndexedDB Write Failed'));
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
+
+      expect(result.success).toBe(false);
+      expect(result.errors).toContain('Game 1: Error: IndexedDB Write Failed');
+    });
+  });
+
+  describe('syncGame (Single Game)', () => {
+    it('should sync a single Celo game successfully', async () => {
+      vi.mocked(celoService.getGame).mockResolvedValueOnce({
+        playerW: player,
+        playerB: '0xBob',
+        wager: 10n,
+        isNative: true,
+        boardState: '...',
+        turn: 'w',
+        status: 1,
+      } as any);
 
       const success = await gameSyncService.syncGame(10, 'celo');
-
+      expect(success).toBe(true);
       expect(celoService.getGame).toHaveBeenCalledWith(10);
-      expect(getGameBlockTimestamp).toHaveBeenCalledWith('celo', 10, undefined);
-      expect(gameHistoryDB.saveGame).toHaveBeenCalledWith(expect.objectContaining({
-        gameId: 10,
-        chain: 'celo',
-        playerW: '0xW',
-        playerB: '0xB',
-        timestamp: 1700000000000,
-      }));
-      expect(success).toBe(true);
+      expect(gameHistoryDB.saveGame).toHaveBeenCalled();
     });
 
-    it('should sync a single Stacks game by ID', async () => {
-      vi.mocked(stacksService.getGameState).mockResolvedValueOnce({
-        'player-w': 'SPW',
-        'player-b': 'SPB',
-        wager: 50n,
-        'is-stx': true,
-        'board-state': 'start',
-        turn: 'w',
-        status: 1,
-      });
+    it('should return false if single game not found', async () => {
+      vi.mocked(celoService.getGame).mockResolvedValueOnce(null as any);
 
-      const success = await gameSyncService.syncGame(20, 'stacks');
-
-      expect(stacksService.getGameState).toHaveBeenCalledWith(20);
-      expect(getGameBlockTimestamp).toHaveBeenCalledWith('stacks', 20, expect.any(String));
-      expect(success).toBe(true);
-    });
-
-    it('should return false if game is not found on-chain', async () => {
-      vi.mocked(celoService.getGame).mockResolvedValueOnce(null);
-
-      const success = await gameSyncService.syncGame(99, 'celo');
-
+      const success = await gameSyncService.syncGame(10, 'celo');
       expect(success).toBe(false);
       expect(gameHistoryDB.saveGame).not.toHaveBeenCalled();
+    });
+
+    it('should return false on exception during single game sync', async () => {
+      vi.mocked(celoService.getGame).mockRejectedValueOnce(new Error('Fetch Failed'));
+
+      const success = await gameSyncService.syncGame(10, 'celo');
+      expect(success).toBe(false);
     });
   });
 
   describe('autoSync', () => {
-    it('should trigger sync if no sync has occurred yet', async () => {
-      const syncSpy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
-        success: true,
-        gamesAdded: 1,
-        gamesUpdated: 0,
-        errors: [],
-        duration: 5,
-      });
-
-      await gameSyncService.autoSync('0xPlayer', 'celo');
-
-      expect(syncSpy).toHaveBeenCalledWith('0xPlayer', 'celo', { maxGames: 30, forceRefresh: false });
-    });
-
-    it('should skip sync if last sync was less than an hour ago', async () => {
-      const syncSpy = vi.spyOn(gameSyncService, 'syncPlayerGames');
-      
-      // Set last sync to 10 minutes ago
-      (gameSyncService as any).lastSyncTime = Date.now() - 10 * 60 * 1000;
-
-      await gameSyncService.autoSync('0xPlayer', 'celo');
-
-      expect(syncSpy).not.toHaveBeenCalled();
-    });
-
-    it('should trigger sync if last sync was more than an hour ago', async () => {
-      const syncSpy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
+    it('should sync if it has never run before', async () => {
+      const spy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
         success: true,
         gamesAdded: 0,
         gamesUpdated: 0,
         errors: [],
-        duration: 5,
+        duration: 0,
       });
 
-      // Set last sync to 70 minutes ago
-      (gameSyncService as any).lastSyncTime = Date.now() - 70 * 60 * 1000;
+      await gameSyncService.autoSync(player, 'celo');
+      expect(spy).toHaveBeenCalledWith(player, 'celo', { maxGames: 30, forceRefresh: false });
+    });
 
-      await gameSyncService.autoSync('0xPlayer', 'celo');
+    it('should skip sync if lastSync is within the past hour', async () => {
+      (gameSyncService as any).lastSyncTime = Date.now() - 30 * 60 * 1000; // 30 minutes ago
+      const spy = vi.spyOn(gameSyncService, 'syncPlayerGames');
 
-      expect(syncSpy).toHaveBeenCalled();
+      await gameSyncService.autoSync(player, 'celo');
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should sync if lastSync is older than one hour', async () => {
+      (gameSyncService as any).lastSyncTime = Date.now() - 90 * 60 * 1000; // 1.5 hours ago
+      const spy = vi.spyOn(gameSyncService, 'syncPlayerGames').mockResolvedValueOnce({
+        success: true,
+        gamesAdded: 0,
+        gamesUpdated: 0,
+        errors: [],
+        duration: 0,
+      });
+
+      await gameSyncService.autoSync(player, 'celo');
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

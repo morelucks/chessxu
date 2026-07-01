@@ -147,27 +147,27 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 
     return (
         <AppContext.Provider value={providerState}>
-            <div className="flex-1 flex flex-col md:flex-row overflow-visible">
+            <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-hidden">
                 {/* Left Sidebar - Chess Game Controls (Desktop only, mobile moved below board) */}
                 <div className={`hidden md:flex w-80 flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-r border-slate-800 p-4 overflow-y-auto shadow-inner`}>
                     <ChessSidebar />
                 </div>
 
                 {/* Main Chess Area (Mobile: Board -> Profiles -> Controls) */}
-                <div className="flex-1 flex flex-col items-center justify-start p-2 md:p-4 overflow-y-auto">
-                    <div className="w-full max-w-[500px] flex flex-col gap-3">
+                <div className="flex-1 min-h-0 flex flex-col items-center justify-start p-1.5 md:p-4 overflow-y-auto">
+                    <div className="w-full max-w-[500px] flex flex-col gap-1.5 md:gap-3">
                         
-                        {/* Top: Opponent Profile */}
-                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-xl shadow-inner border border-white/5">
+                        {/* Top: Opponent Profile — compact on mobile */}
+                        <div className="flex items-center justify-between p-2 md:p-3 rounded-lg md:rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
+                            <div className="flex items-center gap-2 md:gap-3">
+                                <div className="w-7 h-7 md:w-10 md:h-10 bg-slate-800 rounded-md md:rounded-lg flex items-center justify-center text-base md:text-xl shadow-inner border border-white/5">
                                     {opponentAvatar}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-white font-bold text-sm">
+                                    <span className="text-white font-bold text-xs md:text-sm">
                                         {opponentName}
                                     </span>
-                                    <span className="text-xs text-slate-400">
+                                    <span className="text-[10px] md:text-xs text-slate-400">
                                         {opponentSub}
                                     </span>
                                 </div>
@@ -181,14 +181,14 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                         </div>
 
                         {/* The Board Container */}
-                        <div className="w-full aspect-square bg-slate-950/40 backdrop-blur-md rounded-xl shadow-2xl relative flex items-center justify-center border border-white/5 overflow-hidden">
+                        <div className="w-full aspect-square bg-slate-950/40 backdrop-blur-md rounded-lg md:rounded-xl shadow-2xl relative flex items-center justify-center border border-white/5 overflow-hidden">
                             <ChessBoardOnly />
                         </div>
 
-                        {/* Bottom: Player Profile */}
-                        <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-xl shadow-inner border border-white/5 overflow-hidden">
+                        {/* Bottom: Player Profile — compact on mobile */}
+                        <div className="flex items-center justify-between p-2 md:p-3 rounded-lg md:rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
+                            <div className="flex items-center gap-2 md:gap-3">
+                                <div className="w-7 h-7 md:w-10 md:h-10 bg-slate-800 rounded-md md:rounded-lg flex items-center justify-center text-base md:text-xl shadow-inner border border-white/5 overflow-hidden">
                                     {playerAvatarUrl ? (
                                         <img src={playerAvatarUrl} alt={playerName} className="w-full h-full object-cover" />
                                     ) : (
@@ -196,10 +196,10 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                     )}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-white font-bold text-sm text-indigo-200">
+                                    <span className="text-white font-bold text-xs md:text-sm text-indigo-200">
                                         {playerName}
                                     </span>
-                                    <span className="text-xs text-slate-400">
+                                    <span className="text-[10px] md:text-xs text-slate-400">
                                         {playerSub}
                                     </span>
                                 </div>
@@ -213,9 +213,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                         </div>
 
                         {/* Mobile Action Controls (Under the board on mobile) */}
-                        <div className="md:hidden flex flex-col gap-4 mt-2">
-                            {/* We re-use ChessSidebar here on mobile so it sits naturally below the board like chess.com */}
-                            <div className="bg-slate-900/60 rounded-xl p-3 border border-white/5">
+                        <div className="md:hidden flex flex-col gap-3 mt-1">
+                            <div className="bg-slate-900/60 rounded-xl p-2.5 border border-white/5">
                                 <ChessSidebar />
                             </div>
                         </div>

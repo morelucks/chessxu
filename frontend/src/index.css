@@ -97,3 +97,39 @@
   50% { transform: scale(1.05); }
 }
 
+/* ─── MiniPay Viewport Utilities ─── */
+/* MiniPay runs inside Opera's in-app browser with a constrained viewport.
+   Use dvh (dynamic viewport height) to respect the actual visible area
+   and env(safe-area-inset-*) to avoid OS chrome overlaps. */
+
+.minipay-viewport {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+}
+
+/* Safe-area padding helpers for pages with content near edges */
+.safe-area-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Ensure touch targets meet minimum 44px for mobile */
+@media (max-width: 768px) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent overscroll bounce on MiniPay */
+@media (max-width: 768px) {
+  html, body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+

@@ -43,9 +43,9 @@ function App() {
       <FarcasterMiniAppReady />
       <ConnectWalletModal />
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen bg-slate-950 text-white">
+        <div className="flex flex-col h-[100dvh] bg-slate-950 text-white overflow-hidden">
           <DesktopNav />
-          <div className="flex flex-col flex-grow pb-24 md:pb-0">
+          <div className="flex flex-col flex-1 min-h-0 pb-20 md:pb-0 overflow-y-auto">
             <Routes>
               <Route path="/" element={<ChessScreen />} />
               <Route path="/puzzle" element={<PuzzleScreen />} />

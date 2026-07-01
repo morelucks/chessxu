@@ -111,46 +111,46 @@ export default function PvPScreen() {
   };
 
   return (
-    <div className="flex-grow bg-slate-950 text-white flex flex-col p-4 pt-8 overflow-y-auto">
-      <div className={`max-w-4xl mx-auto w-full space-y-6 pb-24 ${!isConnected ? 'flex-grow flex flex-col justify-center' : ''}`}>
-        <div className="text-center space-y-2 mb-8">
-            <h1 className="text-3xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+    <div className="flex-1 min-h-0 bg-slate-950 text-white flex flex-col p-3 md:p-4 pt-4 md:pt-8 overflow-y-auto">
+      <div className={`max-w-4xl mx-auto w-full space-y-4 md:space-y-6 pb-8 ${!isConnected ? 'flex-grow flex flex-col justify-center' : ''}`}>
+        <div className="text-center space-y-1 md:space-y-2 mb-4 md:mb-8">
+            <h1 className="text-2xl md:text-3xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 PvP Matchmaking
             </h1>
-            <p className="text-slate-400 text-sm">Create or join a game with on-chain staking</p>
+            <p className="text-slate-400 text-xs md:text-sm">Create or join a game with on-chain staking</p>
             {celo.gasSponsored && activeChain === 'celo' && (
-              <p className="text-emerald-400 text-xs font-medium animate-pulse mt-1">
+              <p className="text-emerald-400 text-[10px] md:text-xs font-medium animate-pulse mt-1">
                 ✨ All game transactions are gasless — no CELO or stablecoins needed
               </p>
             )}
         </div>
 
         {!isConnected ? (
-            <div className="flex-grow flex flex-col items-center justify-center max-w-md mx-auto w-full space-y-8 animate-in fade-in zoom-in-95 duration-500">
-                {/* Chess Battle Graphic / Icon */}
-                <div className="relative flex justify-center items-center h-28 w-full">
-                    <div className="absolute w-24 h-24 bg-indigo-500/20 rounded-full blur-xl animate-pulse" />
-                    <div className="relative flex items-center gap-6">
-                        <span className="text-5xl transform -rotate-12 filter drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]">👑</span>
-                        <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-bold text-lg shadow-lg">VS</div>
-                        <span className="text-5xl transform rotate-12 filter drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]">⚔️</span>
+            <div className="flex-grow flex flex-col items-center justify-center max-w-md mx-auto w-full space-y-5 md:space-y-8 animate-in fade-in zoom-in-95 duration-500">
+                {/* Chess Battle Graphic / Icon — smaller on mobile */}
+                <div className="relative flex justify-center items-center h-20 md:h-28 w-full">
+                    <div className="absolute w-16 md:w-24 h-16 md:h-24 bg-indigo-500/20 rounded-full blur-xl animate-pulse" />
+                    <div className="relative flex items-center gap-4 md:gap-6">
+                        <span className="text-4xl md:text-5xl transform -rotate-12 filter drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]">👑</span>
+                        <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-bold text-base md:text-lg shadow-lg">VS</div>
+                        <span className="text-4xl md:text-5xl transform rotate-12 filter drop-shadow-[0_0_8px_rgba(236,72,153,0.5)]">⚔️</span>
                     </div>
                 </div>
 
-                <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-8 text-center space-y-6 backdrop-blur-xl w-full">
-                    <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto text-purple-400">
-                        <Wallet size={32} />
+                <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-5 md:p-8 text-center space-y-4 md:space-y-6 backdrop-blur-xl w-full">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto text-purple-400">
+                        <Wallet size={24} />
                     </div>
-                    <div className="space-y-2">
-                        <h2 className="text-xl font-bold">Connect Wallet to Enter Arena</h2>
-                        <p className="text-slate-400 text-sm max-w-xs mx-auto text-center">
+                    <div className="space-y-1 md:space-y-2">
+                        <h2 className="text-lg md:text-xl font-bold">Connect Wallet to Enter Arena</h2>
+                        <p className="text-slate-400 text-xs md:text-sm max-w-xs mx-auto text-center">
                             Connect Celo wallet to play wagered matches, stake tokens, and build your on-chain chess reputation.
                         </p>
                     </div>
                     <button
                         onClick={() => connect()}
                         disabled={isConnecting}
-                        className="w-full max-w-xs py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition disabled:opacity-50 shadow-lg shadow-purple-500/20"
+                        className="w-full max-w-xs py-3 md:py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition disabled:opacity-50 shadow-lg shadow-purple-500/20 text-sm md:text-base"
                     >
                         {isConnecting ? "Connecting..." : "Connect Wallet"}
                     </button>

@@ -2,13 +2,21 @@
 
 .profile-root {
   position: relative;
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
   background: linear-gradient(135deg, #0a0e1a 0%, #0d1220 50%, #0a0e1a 100%);
   overflow-x: hidden;
-  padding: 1.5rem 1rem 7rem; /* bottom padding for BottomNav */
+  overflow-y: auto;
+  padding: 1.5rem 1rem 5rem; /* bottom padding for BottomNav */
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .profile-root {
+    padding: 1rem 0.75rem 3rem;
+  }
 }
 
 .profile-bg-glow {
@@ -81,6 +89,21 @@
   padding: 3px;
   margin-bottom: 0.5rem;
   box-shadow: 0 0 24px currentColor;
+}
+
+@media (max-width: 768px) {
+  .profile-hero-card {
+    padding: 1.25rem 1rem 1rem;
+  }
+  .profile-avatar-ring {
+    width: 72px;
+    height: 72px;
+    border-width: 2px;
+    padding: 2px;
+  }
+  .profile-display-name {
+    font-size: 1.25rem;
+  }
 }
 
 .profile-avatar-img {

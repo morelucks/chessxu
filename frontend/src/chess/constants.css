@@ -29,8 +29,23 @@
     }
 }
 
+/* MiniPay browser viewport — ensure the board fits with player bars
+   and bottom nav all visible without scrolling */
+@media (max-width: 430px) {
+    :root {
+        --tile-size: min(11vw, 48px);
+    }
+}
+
 @media (max-width: 360px) {
     :root {
         --tile-size: 10.5vw;
+    }
+}
+
+/* Very small MiniPay devices */
+@media (max-height: 700px) and (max-width: 430px) {
+    :root {
+        --tile-size: min(10.5vw, 42px);
     }
 }

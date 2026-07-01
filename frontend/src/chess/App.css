@@ -33,6 +33,18 @@ html,body {
   .App { grid-template-columns: 1fr; }
 }
 
+/* MiniPay mobile compact layout */
+@media (max-width: 768px) {
+  .App {
+    padding: 6px;
+    grid-template-columns: 1fr;
+  }
+  .game-area {
+    gap: 8px;
+    padding: 6px;
+  }
+}
+
 .btn {
   background: var(--primary-button-bg);
   color: white;

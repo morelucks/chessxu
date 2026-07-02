@@ -269,3 +269,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // King PST rewards castled position (ranks 1-2, files a/b/g/h)
 // Piece shuffle before root search breaks symmetry in opening positions
 // getStandardNotation supports: quiet, captures, castling, pawn moves
+// evaluateBoard is O(n) where n = number of pieces on the board

@@ -67,3 +67,5 @@ const AiSuggestionsPanel = ({ appState }) => {
                         </div>
                     ) : (
                         <div className="ai-card" aria-live="polite">
+                            <div className="ai-card__header">
+                                <span className="ai-badge">Best Move</span>

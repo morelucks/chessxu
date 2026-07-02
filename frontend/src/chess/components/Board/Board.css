@@ -68,3 +68,7 @@
 
 /* ── AI Hint Tile Highlighting ─────────────────────────────────────────────── */
 /* Source tile: purple pulse  |  Target tile: cyan pulse                        */
+@keyframes pulse-hint-source {
+    0%,100% { box-shadow: inset 0 0 12px 2px rgba(139,92,246,0.4); }
+    50%      { box-shadow: inset 0 0 20px 4px rgba(139,92,246,0.8); }
+}

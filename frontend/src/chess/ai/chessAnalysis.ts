@@ -149,3 +149,4 @@ export function getMoveDescription(piece: string, fromX: number, fromY: number, 
 }
 
 export function getStandardNotation(piece: string, fromX: number, fromY: number, toX: number, toY: number, isCapture: boolean): string {
+    if (piece.endsWith('k') && Math.abs(fromY - toY) === 2) {

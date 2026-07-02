@@ -58,3 +58,4 @@
     .ai-panel { padding: 10px 12px; }
     .ai-card__notation { font-size: 1.2rem; }
 }
+/* Panel uses CSS custom properties for consistent dark-theme integration */

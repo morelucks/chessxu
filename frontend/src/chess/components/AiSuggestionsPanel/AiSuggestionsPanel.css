@@ -21,3 +21,6 @@
 }
 .ai-panel__icon { font-size: 1.25rem; line-height: 1; }
 .ai-panel__title { margin: 0; font-size: 0.9rem; font-weight: 600; color: #e2e8f0; letter-spacing: 0.02em; }
+
+/* ── Toggle rows ── */
+.ai-panel__controls { display: flex; flex-direction: column; gap: 10px; }

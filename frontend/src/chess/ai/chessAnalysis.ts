@@ -174,3 +174,6 @@ interface RawMove {
 }
 
 // ── Move generation ─────────────────────────────────────────────────────────
+function getAllValidMoves(
+    position: string[][],
+    turn: string,

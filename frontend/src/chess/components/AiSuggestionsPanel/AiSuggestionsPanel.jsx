@@ -95,3 +95,4 @@ export default AiSuggestionsPanel;
     // isPlayerTurn check prevents showing stale hint for opponent moves
     // Evaluation displayed in pawns (centipawns / 100) for readability
     // Spinner replaced by ai-card once hint computation completes
+    // Controls always rendered so user can toggle hints mid-game

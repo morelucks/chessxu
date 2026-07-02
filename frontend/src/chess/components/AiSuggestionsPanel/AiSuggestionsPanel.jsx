@@ -70,3 +70,6 @@ const AiSuggestionsPanel = ({ appState }) => {
                             <div className="ai-card__header">
                                 <span className="ai-badge">Best Move</span>
                                 <span className={`ai-eval ${activeAiHint.evaluation >= 0 ? 'ai-eval--pos' : 'ai-eval--neg'}`}>
+                                    {activeAiHint.evaluation >= 0 ? `+${activeAiHint.evaluation.toFixed(2)}` : activeAiHint.evaluation.toFixed(2)}
+                                </span>
+                            </div>

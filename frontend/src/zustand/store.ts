@@ -31,12 +31,29 @@ export interface AuthState {
   isConnectModalOpen: boolean;
 }
 
+export interface AiHint {
+  piece: string;
+  fromX: number;
+  fromY: number;
+  toX: number;
+  toY: number;
+  notation: string;
+  description: string;
+  evaluation: number;
+}
+
 export interface GameState {
   activeGameId: number | null;
   isGameStarted: boolean;
   elo: number;
   chessBalance: number;
   timeControlMs: number | null;
+  /** Whether the AI hint feature is enabled */
+  isAiHintsEnabled: boolean;
+  /** Whether to overlay hint arrows/colours on the board tiles */
+  showHintOnBoard: boolean;
+  /** Currently active hint (null when computing or feature is off) */
+  activeAiHint: AiHint | null;
 }
 
 export interface AppStore extends AuthState, GameState {
@@ -57,6 +74,9 @@ export interface AppStore extends AuthState, GameState {
   setChessBalance: (balance: number) => void;
   setTimeControlMs: (ms: number | null) => void;
   setConnectModalOpen: (open: boolean) => void;
+  setAiHintsEnabled: (enabled: boolean) => void;
+  setShowHintOnBoard: (show: boolean) => void;
+  setActiveAiHint: (hint: AiHint | null) => void;
   logout: () => void;
 }
 
@@ -83,6 +103,9 @@ const useAppStore = create<AppStore>()(
       elo: 1200,
       chessBalance: 0,
       timeControlMs: null,
+      isAiHintsEnabled: false,
+      showHintOnBoard: false,
+      activeAiHint: null,
 
       // Actions
       setAddress: (address: string | null) => {
@@ -125,6 +148,9 @@ const useAppStore = create<AppStore>()(
       setChessBalance: (chessBalance: number) => set({ chessBalance }),
       setTimeControlMs: (timeControlMs: number | null) => set({ timeControlMs }),
       setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
+      setAiHintsEnabled: (isAiHintsEnabled: boolean) => set({ isAiHintsEnabled }),
+      setShowHintOnBoard: (showHintOnBoard: boolean) => set({ showHintOnBoard }),
+      setActiveAiHint: (activeAiHint: AiHint | null) => set({ activeAiHint }),
       logout: () => {
         userSession.signUserOut();
         set({ 
@@ -142,7 +168,10 @@ const useAppStore = create<AppStore>()(
             isGameStarted: false,
             elo: 1200,
             chessBalance: 0,
-            timeControlMs: null
+            timeControlMs: null,
+            isAiHintsEnabled: false,
+            showHintOnBoard: false,
+            activeAiHint: null,
         });
       },
     }),

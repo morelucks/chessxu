@@ -11,3 +11,4 @@ const PIECE_VALUES: Record<string, number> = {
     n: 320,
     b: 330,
     r: 500,
+    q: 900,

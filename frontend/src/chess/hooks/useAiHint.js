@@ -14,3 +14,6 @@ import { getBestMove } from '../ai/chessAnalysis';
 const useAiHint = (appState, depth = 3) => {
     const isAiHintsEnabled = useAppStore((s) => s.isAiHintsEnabled);
     const setActiveAiHint  = useAppStore((s) => s.setActiveAiHint);
+
+    // Ref to cancel stale async computations on re-render
+    const activeRunRef = useRef(0);

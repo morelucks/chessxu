@@ -130,3 +130,10 @@ export interface SuggestedMove {
     description: string;
     evaluation: number;
 }
+
+export interface SearchOptions {
+    position: string[][];
+    turn: string;
+    castleDirection: { w: string; b: string };
+    prevPosition?: string[][];
+}

@@ -18,6 +18,7 @@ import { useUser } from './contexts/UserContext';
 import useAppStore from '../zustand/store';
 import useSoundSettings from './hooks/useSoundSettings';
 import useChessSound from './hooks/useChessSound';
+import AiSuggestionsPanel from './components/AiSuggestionsPanel/AiSuggestionsPanel';
 
 // Leaderboard Component
 const Leaderboard = ({ results, onClear }) => {
@@ -205,6 +206,7 @@ function App() {
                     />
                     <MovesList/>
                     <TakeBack/>
+                    <AiSuggestionsPanel appState={appState} />
                     <Leaderboard results={leaderboardResults} onClear={handleClearLeaderboard} />
                 </Control>
                 

@@ -23,6 +23,10 @@ const Board = () => {
     const { appState, dispatch } = useAppContext();
     const position = appState.position[appState.position.length - 1]
 
+    // AI hint overlay — sourced from the global zustand store
+    const showHintOnBoard = useAppStore(state => state.showHintOnBoard);
+    const activeAiHint    = useAppStore(state => state.activeAiHint);
+
     const checkTile = (() => {
         const isInCheck =  (arbiter.isPlayerInCheck({
             positionAfterMove : position,
@@ -47,6 +51,15 @@ const Board = () => {
 
         if (checkTile && checkTile[0] === i && checkTile[1] === j) {
             c+= ' checked'
+        }
+
+        // AI hint: highlight the suggested from/to squares
+        if (showHintOnBoard && activeAiHint) {
+            if (activeAiHint.fromX === i && activeAiHint.fromY === j) {
+                c += ' hint-source';
+            } else if (activeAiHint.toX === i && activeAiHint.toY === j) {
+                c += ' hint-target';
+            }
         }
 
         return c

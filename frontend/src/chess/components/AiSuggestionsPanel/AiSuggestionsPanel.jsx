@@ -74,3 +74,4 @@ const AiSuggestionsPanel = ({ appState }) => {
                                 </span>
                             </div>
                             <div className="ai-card__notation">{activeAiHint.notation}</div>
+                            <div className="ai-card__description">{activeAiHint.description}</div>

@@ -1,317 +1,50 @@
-/*
-npm
-Npm: Npm download concentration
-NPM Package Downloads
-Npm: Npm download uniform
-Npm: Npm excluded packages quality
-Npm: Npm monorepo collapsed
-Npm: Npm download sparse burst
-Npm: Npm excluded packages
-*/
-import type { OnChainGameState } from '../types/chess';
-import { openContractCall } from '@stacks/connect';
-import { 
-  uintCV, 
-  boolCV, 
-  stringAsciiCV, 
-  PostConditionMode,
-  Pc,
-  fetchCallReadOnlyFunction,
-  principalCV,
-  cvToValue
-} from '@stacks/transactions';
-import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 import useAppStore from '../zustand/store';
-import { useToaster } from '../components/ui/toasts/ToasterProvider';
-import { useTransactionTracker } from './useTransactionTracker';
-import { CONTRACTS, NETWORK, CLARITY_ERRORS, LEADERBOARD_ERRORS } from '../chess/blockchainConstants';
-
-const [CONTRACT_ADDRESS, CONTRACT_NAME] = CONTRACTS.GAME.split('.');
-const [TOKEN_ADDRESS, TOKEN_NAME] = CONTRACTS.TOKEN.split('.');
-const [LEADERBOARD_ADDRESS, LEADERBOARD_NAME] = CONTRACTS.LEADERBOARD.split('.');
 
 export const useStacksChess = () => {
   const address = useAppStore((state) => state.address);
-  const { addToast } = useToaster();
-  const { trackTransaction } = useTransactionTracker();
-  const network = NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
 
   const createGame = async (wager: number, isStxMode: boolean) => {
-    if (!address) return;
-
-    const postConditions = [];
-    if (wager > 0) {
-        if (isStxMode) {
-            postConditions.push(
-                Pc.principal(address).willSendEq(BigInt(wager)).ustx()
-            );
-        } else {
-            postConditions.push(
-                Pc.principal(address).willSendEq(BigInt(wager)).ft(
-                    `${TOKEN_ADDRESS}.${TOKEN_NAME}`,
-                    'chessxu-token'
-                )
-            );
-        }
-    }
-
-    await openContractCall({
-      contractAddress: CONTRACT_ADDRESS,
-      contractName: CONTRACT_NAME,
-      functionName: 'create-game',
-      functionArgs: [uintCV(wager), boolCV(isStxMode)],
-      postConditionMode: PostConditionMode.Deny,
-      postConditions,
-      network,
-      onFinish: (data) => {
-        addToast({
-          txId: data.txId,
-          status: 'success',
-          message: 'Game creation transaction broadcasted'
-        });
-        trackTransaction(data.txId, 'Create Game', 'stacks');
-        console.log('Transaction broadcasted:', data.txId);
-      },
-      onCancel: () => {
-        console.log('Create game transaction cancelled');
-      },
-    });
+    console.log('Stub createGame called');
   };
 
   const joinGame = async (gameId: number, wager: number, isStxMode: boolean) => {
-    if (!address) return;
-
-    const postConditions = [];
-    if (wager > 0) {
-        if (isStxMode) {
-            postConditions.push(
-                Pc.principal(address).willSendEq(BigInt(wager)).ustx()
-            );
-        } else {
-            postConditions.push(
-                Pc.principal(address).willSendEq(BigInt(wager)).ft(
-                    `${TOKEN_ADDRESS}.${TOKEN_NAME}`,
-                    'chessxu-token'
-                )
-            );
-        }
-    }
-
-    await openContractCall({
-      contractAddress: CONTRACT_ADDRESS,
-      contractName: CONTRACT_NAME,
-      functionName: 'join-game',
-      functionArgs: [uintCV(gameId)],
-      postConditionMode: PostConditionMode.Deny,
-      postConditions,
-      network,
-      onFinish: (data) => {
-        addToast({
-          txId: data.txId,
-          status: 'success',
-          message: 'Join game transaction broadcasted'
-        });
-        trackTransaction(data.txId, 'Join Game', 'stacks');
-        console.log('Join Game transaction broadcasted:', data.txId);
-      },
-      onCancel: () => {
-        console.log('Join game transaction cancelled');
-      },
-    });
+    console.log('Stub joinGame called');
   };
 
   const submitMove = async (gameId: number, move: string, boardState: string) => {
-    if (!address) return;
-
-    await openContractCall({
-      contractAddress: CONTRACT_ADDRESS,
-      contractName: CONTRACT_NAME,
-      functionName: 'submit-move',
-      functionArgs: [
-        uintCV(gameId),
-        stringAsciiCV(move),
-        stringAsciiCV(boardState)
-      ],
-      postConditionMode: PostConditionMode.Allow,
-      network,
-      onFinish: (data) => {
-        addToast({
-          txId: data.txId,
-          status: 'success',
-          message: 'Move submission broadcasted'
-        });
-        trackTransaction(data.txId, 'Submit Move', 'stacks');
-        
-        let attempts = 0;
-        const checkMove = async () => {
-          attempts++;
-          const updatedGame = (await getGame(gameId)) as OnChainGameState | null;
-          if (updatedGame?.['last-move']?.value !== String(move)) {
-            if (attempts < 12) setTimeout(checkMove, 5000);
-          }
-        };
-        setTimeout(checkMove, 5000);
-      },
-    });
+    console.log('Stub submitMove called');
   };
 
   const resign = async (gameId: number) => {
-    if (!address) return;
-
-    await openContractCall({
-        contractAddress: CONTRACT_ADDRESS,
-        contractName: CONTRACT_NAME,
-        functionName: 'resign',
-        functionArgs: [uintCV(gameId)],
-        postConditionMode: PostConditionMode.Allow,
-        network,
-        onFinish: (data) => {
-          addToast({
-            txId: data.txId,
-            status: 'success',
-            message: 'Resignation transaction broadcasted'
-          });
-          trackTransaction(data.txId, 'Resign', 'stacks');
-          console.log('Resigned:', data.txId);
-        },
-        onCancel: () => {
-          console.log('Resignation cancelled');
-        }
-      });
+    console.log('Stub resign called');
   };
 
   const getGame = async (gameId: number) => {
-    const options = {
-      contractAddress: CONTRACT_ADDRESS,
-      contractName: CONTRACT_NAME,
-      functionName: 'get-game',
-      functionArgs: [uintCV(gameId)],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      return result;
-    } catch (e) {
-      console.error('Error fetching game:', e);
-      return null;
-    }
+    return null;
   };
 
   const getLastGameId = async () => {
-    const options = {
-      contractAddress: CONTRACT_ADDRESS,
-      contractName: CONTRACT_NAME,
-      functionName: 'get-last-game-id',
-      functionArgs: [],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      return Number(cvToValue(result));
-    } catch (e) {
-      console.error('Error fetching last game ID:', e);
-      return 0;
-    }
+    return 0;
   };
 
   const getTokenBalance = async (userAddress: string) => {
-    const options = {
-      contractAddress: TOKEN_ADDRESS,
-      contractName: TOKEN_NAME,
-      functionName: 'get-balance',
-      functionArgs: [principalCV(userAddress)],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      return Number(cvToValue(result).value);
-    } catch (e) {
-      console.error('Error fetching token balance:', e);
-      return 0;
-    }
+    return 0;
   };
 
   const getPlayerStats = async (playerAddress: string) => {
-    const options = {
-      contractAddress: LEADERBOARD_ADDRESS,
-      contractName: LEADERBOARD_NAME,
-      functionName: 'get-player-stats',
-      functionArgs: [principalCV(playerAddress)],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      const val = cvToValue(result) as { value: unknown } | null;
-      return val ? val.value : null;
-    } catch (e) {
-      console.error('Error fetching player stats:', e);
-      return null;
-    }
+    return null;
   };
 
   const getPlayerElo = async (playerAddress: string) => {
-    const options = {
-      contractAddress: LEADERBOARD_ADDRESS,
-      contractName: LEADERBOARD_NAME,
-      functionName: 'get-player-elo',
-      functionArgs: [principalCV(playerAddress)],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      return Number(cvToValue(result));
-    } catch (e) {
-      console.error('Error fetching player ELO:', e);
-      return 1200;
-    }
+    return 1200;
   };
 
   const getGlobalStats = async () => {
-    const options = {
-      contractAddress: LEADERBOARD_ADDRESS,
-      contractName: LEADERBOARD_NAME,
-      functionName: 'get-global-stats',
-      functionArgs: [],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      return cvToValue(result);
-    } catch (e) {
-      console.error('Error fetching global stats:', e);
-      return null;
-    }
+    return null;
   };
 
   const getExpectedScore = async (playerA: string, playerB: string) => {
-    const options = {
-      contractAddress: LEADERBOARD_ADDRESS,
-      contractName: LEADERBOARD_NAME,
-      functionName: 'get-expected-score',
-      functionArgs: [principalCV(playerA), principalCV(playerB)],
-      network,
-      senderAddress: address || CONTRACT_ADDRESS,
-    };
-
-    try {
-      const result = await fetchCallReadOnlyFunction(options);
-      return Number(cvToValue(result));
-    } catch (e) {
-      console.error('Error fetching expected score:', e);
-      return 500;
-    }
+    return 500;
   };
 
   const getWinProbability = (rawScore: number) => {
@@ -323,43 +56,16 @@ export const useStacksChess = () => {
   };
 
   const handleContractError = (error: string) => {
-    const errorCode = error.match(/\(err u(\d+)\)/)?.[1] || 
-                      error.match(/Aborted: (\d+)/)?.[1];
-    
-    if (errorCode) {
-      const code = parseInt(errorCode);
-      const message = (CLARITY_ERRORS as Record<number, string>)[code] ||
-                      (LEADERBOARD_ERRORS as Record<number, string>)[code];
-      if (message) return message;
-    }
     return error;
   };
 
   const resolveGame = async (gameId: number, newStatus: number) => {
-    if (!address) return;
-
-    await openContractCall({
-      contractAddress: CONTRACT_ADDRESS,
-      contractName: CONTRACT_NAME,
-      functionName: 'resolve-game',
-      functionArgs: [uintCV(gameId), uintCV(newStatus)],
-      postConditionMode: PostConditionMode.Allow,
-      network,
-      onFinish: (data) => {
-        addToast({
-          txId: data.txId,
-          status: 'success',
-          message: 'Game resolution transaction broadcasted'
-        });
-        trackTransaction(data.txId, 'Resolve Game', 'stacks');
-        console.log('Resolved game:', data.txId);
-      },
-    });
+    console.log('Stub resolveGame called');
   };
 
-  const isPlayerWhite = (game: OnChainGameState | null, playerAddress: string) =>
+  const isPlayerWhite = (game: any, playerAddress: string) =>
     game?.['player-w'] === playerAddress;
-  const isPlayerBlack = (game: OnChainGameState | null, playerAddress: string) =>
+  const isPlayerBlack = (game: any, playerAddress: string) =>
     game?.['player-b']?.value === playerAddress;
 
   const getGameStatusString = (status: number) => {
@@ -382,7 +88,7 @@ export const useStacksChess = () => {
     return `${wager / 1000000} CHESS`;
   };
 
-  const isMyTurn = (game: OnChainGameState | null, playerAddress: string) => {
+  const isMyTurn = (game: any, playerAddress: string) => {
     if (!game || !playerAddress) return false;
     const currentTurn = typeof game.turn === 'string' ? game.turn : game.turn?.value;
     const isWhite = isPlayerWhite(game, playerAddress);
@@ -390,10 +96,7 @@ export const useStacksChess = () => {
     return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
   };
 
-  /**
-   * Returns the opponent's principal address given the current game state.
-   */
-  const getOpponentAddress = (game: OnChainGameState | null, playerAddress: string) => {
+  const getOpponentAddress = (game: any, playerAddress: string) => {
     if (!game || !playerAddress) return null;
     const isWhite = isPlayerWhite(game, playerAddress);
     return isWhite ? (game['player-b']?.value || null) : game['player-w'];
@@ -401,7 +104,7 @@ export const useStacksChess = () => {
 
   return { 
     address, 
-    network, 
+    network: null, 
     createGame, 
     joinGame, 
     submitMove, 

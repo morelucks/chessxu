@@ -26,6 +26,7 @@ import ChessSidebar from './ChessSidebar';
 import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
+import { getBestMove } from '../chess/ai/chessAnalysis';
 
 /**
  * Wrapper providing AppContext with typed reducer for the chess board UI.
@@ -65,6 +66,39 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         initialGameState
     );
     const [isReady, setIsReady] = useState(false);
+
+    const isAiHintsEnabled = useAppStore((state) => state.isAiHintsEnabled);
+    const setActiveAiHint = useAppStore((state) => state.setActiveAiHint);
+
+    // Calculate AI Suggestions/Hints
+    useEffect(() => {
+        if (!isAiHintsEnabled || appState.status !== 'Ongoing') {
+            setActiveAiHint(null);
+            return;
+        }
+
+        // Only suggest when it's the player's turn
+        const isPlayerTurn = appState.turn === appState.playerColor;
+        if (!isPlayerTurn) {
+            setActiveAiHint(null);
+            return;
+        }
+
+        const currentPosition = appState.position[appState.position.length - 1];
+        try {
+            const bestMove = getBestMove({
+                position: currentPosition,
+                turn: appState.turn,
+                castleDirection: appState.castleDirection,
+                prevPosition: appState.position.length > 1 ? appState.position[appState.position.length - 2] : undefined
+            }, 3);
+            
+            setActiveAiHint(bestMove);
+        } catch (error) {
+            console.error('Error calculating AI hint:', error);
+            setActiveAiHint(null);
+        }
+    }, [isAiHintsEnabled, appState.position, appState.turn, appState.status, appState.playerColor, appState.castleDirection, setActiveAiHint]);
 
     // Save game mode to localStorage whenever it changes
     useEffect(() => {

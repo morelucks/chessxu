@@ -31,13 +31,34 @@ export default defineConfig(({ command }) => {
     return {};
   };
 
+  const findReactRouterChunk = (dir: string) => {
+    const absoluteDir = path.resolve(dir);
+    if (!fs.existsSync(absoluteDir)) return "";
+    const files = fs.readdirSync(absoluteDir);
+    let largestFile = "";
+    let largestSize = 0;
+    for (const file of files) {
+      if (file.startsWith("chunk-") && file.endsWith(".mjs")) {
+        const filePath = path.join(absoluteDir, file);
+        const stat = fs.statSync(filePath);
+        if (stat.size > largestSize) {
+          largestSize = stat.size;
+          largestFile = filePath;
+        }
+      }
+    }
+    return largestFile;
+  };
+
+  const reactRouterPath = isDev
+    ? findReactRouterChunk("./node_modules/react-router/dist/development")
+    : findReactRouterChunk("./node_modules/react-router/dist/production");
+
   return {
     plugins: [react(), wasm()],
     resolve: {
       alias: [
-        { find: /^@stacks\/connect-react$/, replacement: path.resolve('./node_modules/@stacks/connect-react/dist/index.js') },
-        { find: /^@stacks\/connect$/, replacement: path.resolve('./node_modules/@stacks/connect/dist/index.js') },
-        { find: /^react-router$/, replacement: path.resolve('./node_modules/react-router/dist/development/index.js') },
+        { find: /^react-router$/, replacement: reactRouterPath },
       ],
     },
     server: {

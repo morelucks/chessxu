@@ -4,7 +4,6 @@ import useAppStore from "../../zustand/store";
 
 import { Wallet, Sword, Users } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useStacksChess } from "../../hooks/useStacksChess";
 import { useCeloChess } from "../../hooks/useCeloChess";
 import useMiniPayAccess from "../../hooks/useMiniPayAccess";
 import GaslessBadge from "../ui/GaslessBadge";
@@ -18,12 +17,10 @@ export default function PvPScreen() {
   }, []);
 
   const activeChain = useAppStore((state) => state.activeChain);
-  const setActiveChain = useAppStore((state) => state.setActiveChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const setTimeControlMs = useAppStore((state) => state.setTimeControlMs);
   const miniPayDetected = useAppStore((state) => state.miniPayDetected);
   
-  const stacks = useStacksChess();
   const celo = useCeloChess();
   const { cusdBalance, celoNativeBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, purchaseAccessWithCelo, requiresAccess } = useMiniPayAccess();
 
@@ -54,26 +51,15 @@ export default function PvPScreen() {
       return;
     }
 
-    const parsedWager = Number.parseFloat(wager);
     setIsCreatingMatch(true);
     setTimeControlMs(selectedTime);
 
-    if (activeChain === 'celo') {
-      celo.createGame(wager, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    } else {
-      const wagerMicroStx = Number.isFinite(parsedWager) && parsedWager > 0 ? Math.floor(parsedWager * 1_000_000) : 0;
-      stacks.createGame(wagerMicroStx, true)
-        .then(() => {
-          setIsCreatingMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsCreatingMatch(false));
-    }
+    celo.createGame(wager, true)
+      .then(() => {
+        setIsCreatingMatch(false);
+        navigate("/");
+      })
+      .catch(() => setIsCreatingMatch(false));
   };
 
   const handleJoinMatch = () => {
@@ -93,21 +79,12 @@ export default function PvPScreen() {
 
     setIsJoiningMatch(true);
     
-    if (activeChain === 'celo') {
-      celo.joinGame(gameId, "0", true)
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    } else {
-      stacks.joinGame(gameId, 0, true)
-        .then(() => {
-          setIsJoiningMatch(false);
-          navigate("/");
-        })
-        .catch(() => setIsJoiningMatch(false));
-    }
+    celo.joinGame(gameId, "0", true)
+      .then(() => {
+        setIsJoiningMatch(false);
+        navigate("/");
+      })
+      .catch(() => setIsJoiningMatch(false));
   };
 
   return (

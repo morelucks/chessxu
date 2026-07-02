@@ -1,30 +1,26 @@
-/**
- * Chess Analysis Engine — #187 AI Hints
- */
-
 import arbiter from '../arbiter/arbiter';
 import { getPieces } from '../arbiter/getMoves';
 
-// ── Piece values (centipawns) ──────────────────────────────────────────────
+// Standard values for pieces
 const PIECE_VALUES: Record<string, number> = {
-    p: 100,
-    n: 320,
-    b: 330,
-    r: 500,
-    q: 900,
-    k: 20000,
+    'p': 100,
+    'n': 320,
+    'b': 330,
+    'r': 500,
+    'q': 900,
+    'k': 20000
 };
 
-// ── Piece-Square Tables ────────────────────────────────────────────────────
+// Piece-Square Tables (PST) from White's perspective
 const pawnPST = [
-    [  0,  0,  0,  0,  0,  0,  0,  0],
-    [ 50, 50, 50, 50, 50, 50, 50, 50],
-    [ 10, 10, 20, 30, 30, 20, 10, 10],
-    [  5,  5, 10, 25, 25, 10,  5,  5],
-    [  0,  0,  0, 20, 20,  0,  0,  0],
-    [  5, -5,-10,  0,  0,-10, -5,  5],
-    [  5, 10, 10,-20,-20, 10, 10,  5],
-    [  0,  0,  0,  0,  0,  0,  0,  0],
+    [0,  0,  0,  0,  0,  0,  0,  0],
+    [50, 50, 50, 50, 50, 50, 50, 50],
+    [10, 10, 20, 30, 30, 20, 10, 10],
+    [5,  5, 10, 25, 25, 10,  5,  5],
+    [0,  0,  0, 20, 20,  0,  0,  0],
+    [5, -5,-10,  0,  0,-10, -5,  5],
+    [5, 10, 10,-20,-20, 10, 10,  5],
+    [0,  0,  0,  0,  0,  0,  0,  0]
 ];
 
 const knightPST = [
@@ -35,7 +31,7 @@ const knightPST = [
     [-30,  0, 15, 20, 20, 15,  0,-30],
     [-30,  5, 10, 15, 15, 10,  5,-30],
     [-40,-20,  0,  5,  5,  0,-20,-40],
-    [-50,-40,-30,-30,-30,-30,-40,-50],
+    [-50,-40,-30,-30,-30,-30,-40,-50]
 ];
 
 const bishopPST = [
@@ -46,29 +42,29 @@ const bishopPST = [
     [-10,  0, 10, 10, 10, 10,  0,-10],
     [-10, 10, 10, 10, 10, 10, 10,-10],
     [-10,  5,  0,  0,  0,  0,  5,-10],
-    [-20,-10,-10,-10,-10,-10,-10,-20],
+    [-20,-10,-10,-10,-10,-10,-10,-20]
 ];
 
 const rookPST = [
-    [  0,  0,  0,  0,  0,  0,  0,  0],
-    [  5, 10, 10, 10, 10, 10, 10,  5],
-    [ -5,  0,  0,  0,  0,  0,  0, -5],
-    [ -5,  0,  0,  0,  0,  0,  0, -5],
-    [ -5,  0,  0,  0,  0,  0,  0, -5],
-    [ -5,  0,  0,  0,  0,  0,  0, -5],
-    [ -5,  0,  0,  0,  0,  0,  0, -5],
-    [  0,  0,  0,  5,  5,  0,  0,  0],
+    [0,  0,  0,  0,  0,  0,  0,  0],
+    [5, 10, 10, 10, 10, 10, 10,  5],
+    [-5,  0,  0,  0,  0,  0,  0, -5],
+    [-5,  0,  0,  0,  0,  0,  0, -5],
+    [-5,  0,  0,  0,  0,  0,  0, -5],
+    [-5,  0,  0,  0,  0,  0,  0, -5],
+    [-5,  0,  0,  0,  0,  0,  0, -5],
+    [0,  0,  0,  5,  5,  0,  0,  0]
 ];
 
 const queenPST = [
     [-20,-10,-10, -5, -5,-10,-10,-20],
     [-10,  0,  0,  0,  0,  0,  0,-10],
     [-10,  0,  5,  5,  5,  5,  0,-10],
-    [ -5,  0,  5,  5,  5,  5,  0, -5],
-    [  0,  0,  5,  5,  5,  5,  0, -5],
+    [-5,  0,  5,  5,  5,  5,  0, -5],
+    [0,  0,  5,  5,  5,  5,  0, -5],
     [-10,  5,  5,  5,  5,  5,  5,-10],
     [-10,  0,  5,  0,  0,  5,  0,-10],
-    [-20,-10,-10, -5, -5,-10,-10,-20],
+    [-20,-10,-10, -5, -5,-10,-10,-20]
 ];
 
 const kingPST = [
@@ -78,15 +74,16 @@ const kingPST = [
     [-30,-40,-40,-50,-50,-40,-40,-30],
     [-20,-30,-30,-40,-40,-30,-30,-20],
     [-10,-20,-20,-20,-20,-20,-20,-10],
-    [ 20, 20,  0,  0,  0,  0, 20, 20],
-    [ 20, 30, 10,  0,  0, 10, 30, 20],
+    [20, 20,  0,  0,  0,  0, 20, 20],
+    [20, 30, 10,  0,  0, 10, 30, 20]
 ];
 
-// ── PST lookup helper ───────────────────────────────────────────────────────
+// Helper to get PST value for a piece
 function getPstValue(piece: string, x: number, y: number): number {
     const type = piece[1];
     const isWhite = piece[0] === 'w';
-    const row = isWhite ? (7 - x) : x;
+    const row = isWhite ? x : 7 - x;
+
     switch (type) {
         case 'p': return pawnPST[row][y];
         case 'n': return knightPST[row][y];
@@ -94,32 +91,34 @@ function getPstValue(piece: string, x: number, y: number): number {
         case 'r': return rookPST[row][y];
         case 'q': return queenPST[row][y];
         case 'k': return kingPST[row][y];
-        default:  return 0;
+        default: return 0;
     }
 }
 
-// ── Static board evaluator ──────────────────────────────────────────────────
-export function evaluateBoard(position: string[][]): number {
+// Static evaluation of the board state
+export function evaluateBoard(position: any[][]): number {
     let score = 0;
     for (let r = 0; r < 8; r++) {
         for (let f = 0; f < 8; f++) {
             const piece = position[r][f];
-            if (!piece) continue;
-            const sign = piece[0] === 'w' ? 1 : -1;
-            score += sign * ((PIECE_VALUES[piece[1]] ?? 0) + getPstValue(piece, r, f));
+            if (piece) {
+                const colorMultiplier = piece[0] === 'w' ? 1 : -1;
+                const value = PIECE_VALUES[piece[1]] || 0;
+                const pstBonus = getPstValue(piece, r, f);
+                score += colorMultiplier * (value + pstBonus);
+            }
         }
     }
     return score;
 }
 
-// ── Algebraic notation helpers ──────────────────────────────────────────────
+// Convert row and file indices to standard algebraic notation (e.g. e4)
 export function toAlgebraic(x: number, y: number): string {
-    const files = ['a','b','c','d','e','f','g','h'];
-    const ranks = ['1','2','3','4','5','6','7','8'];
-    return `${files[y] ?? '?'}${ranks[x] ?? '?'}`;
+    const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    const ranks = ['1', '2', '3', '4', '5', '6', '7', '8'];
+    return `${files[y]}${ranks[x]}`;
 }
 
-// ── Public types ────────────────────────────────────────────────────────────
 export interface SuggestedMove {
     piece: string;
     fromX: number;
@@ -131,150 +130,220 @@ export interface SuggestedMove {
     evaluation: number;
 }
 
-export interface SearchOptions {
-    position: string[][];
-    turn: string;
-    castleDirection: { w: string; b: string };
-    prevPosition?: string[][];
-}
-
+// Get descriptive helper text for a suggestion
 export function getMoveDescription(piece: string, fromX: number, fromY: number, toX: number, toY: number): string {
-    const from = toAlgebraic(fromX, fromY);
-    const to   = toAlgebraic(toX,   toY);
+    const fromSquare = toAlgebraic(fromX, fromY);
+    const toSquare = toAlgebraic(toX, toY);
+
+    // Special moves detection
     if (piece.endsWith('k') && Math.abs(fromY - toY) === 2) {
         return toY > fromY ? 'Castles Kingside' : 'Castles Queenside';
     }
-    const names: Record<string,string> = { p:'Pawn',n:'Knight',b:'Bishop',r:'Rook',q:'Queen',k:'King' };
-    return `${names[piece[1]] ?? 'Piece'} to ${to} (${from} → ${to})`;
+
+    const pieceNames: Record<string, string> = {
+        'p': 'Pawn',
+        'n': 'Knight',
+        'b': 'Bishop',
+        'r': 'Rook',
+        'q': 'Queen',
+        'k': 'King'
+    };
+    const pName = pieceNames[piece[1]] || 'Piece';
+    return `${pName} to ${toSquare} (${fromSquare} → ${toSquare})`;
 }
 
+// Generate the standard chess notation (e.g. Nf3, O-O)
 export function getStandardNotation(piece: string, fromX: number, fromY: number, toX: number, toY: number, isCapture: boolean): string {
     if (piece.endsWith('k') && Math.abs(fromY - toY) === 2) {
         return toY > fromY ? 'O-O' : 'O-O-O';
     }
+
     const type = piece[1].toUpperCase();
-    const target = toAlgebraic(toX, toY);
+    const targetSquare = toAlgebraic(toX, toY);
+
     if (type === 'P') {
         if (isCapture) {
-            const files = ['a','b','c','d','e','f','g','h'];
-            return `${files[fromY]}x${target}`;
+            const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+            return `${files[fromY]}x${targetSquare}`;
         }
-        return target;
+        return targetSquare;
     }
-    return `${type}${isCapture ? 'x' : ''}${target}`;
+
+    return `${type}${isCapture ? 'x' : ''}${targetSquare}`;
 }
 
-// ── Internal move type ──────────────────────────────────────────────────────
-interface RawMove {
-    piece: string;
-    rank: number;
-    file: number;
-    x: number;
-    y: number;
+// Interface for search options
+export interface SearchOptions {
+    position: any[][];
+    turn: string;
+    castleDirection: { w: string; b: string };
+    prevPosition?: any[][];
 }
 
-// ── Move generation ─────────────────────────────────────────────────────────
-function getAllValidMoves(
-    position: string[][],
-    turn: string,
-    castleDirection: { w: string; b: string },
-    prevPosition?: string[][],
-): RawMove[] {
+// Get all possible moves for a player
+function getAllValidMoves(position: any[][], turn: string, castleDirection: { w: string; b: string }, prevPosition?: any[][]) {
     const pieces = getPieces(position, turn);
-    const moves: RawMove[] = [];
+    const moves: Array<{ piece: string; rank: number; file: number; x: number; y: number }> = [];
+
     pieces.forEach(p => {
-        const dir = castleDirection[turn as keyof typeof castleDirection];
-        const valid: [number, number][] = arbiter.getValidMoves({
-            position, castleDirection: dir, prevPosition,
-            piece: p.piece, rank: p.rank, file: p.file,
+        const valid = arbiter.getValidMoves({
+            position,
+            castleDirection: castleDirection[turn === 'w' ? 'white' : 'black'] || castleDirection[turn],
+            prevPosition,
+            piece: p.piece,
+            rank: p.rank,
+            file: p.file
         });
+
         valid.forEach(([x, y]) => {
-            moves.push({ piece: p.piece, rank: p.rank, file: p.file, x, y });
+            moves.push({
+                piece: p.piece,
+                rank: p.rank,
+                file: p.file,
+                x,
+                y
+            });
         });
     });
+
     return moves;
 }
 
-// ── Minimax with alpha-beta pruning ─────────────────────────────────────────
-function minimax(
-    position: string[][],
-    depth: number,
-    alpha: number,
-    beta: number,
-    maximising: boolean,
-    castleDirection: { w: string; b: string },
-    prevPosition?: string[][],
-): number {
-    if (depth === 0) return evaluateBoard(position);
-    const turn = maximising ? 'w' : 'b';
-    const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
-    if (moves.length === 0) {
-        const inCheck = arbiter.isPlayerInCheck({ positionAfterMove: position, player: turn });
-        if (inCheck) return maximising ? -150000 - depth : 150000 + depth;
-        return 0;
-    }
-    if (maximising) {
-        let best = -Infinity;
-        for (const m of moves) {
-            const next = arbiter.performMove({ position, piece: m.piece, rank: m.rank, file: m.file, x: m.x, y: m.y });
-            best = Math.max(best, minimax(next, depth-1, alpha, beta, false, castleDirection, position));
-            alpha = Math.max(alpha, best);
-            if (beta <= alpha) break;
-        }
-        return best;
-    } else {
-        let best = Infinity;
-        for (const m of moves) {
-            const next = arbiter.performMove({ position, piece: m.piece, rank: m.rank, file: m.file, x: m.x, y: m.y });
-            best = Math.min(best, minimax(next, depth-1, alpha, beta, true, castleDirection, position));
-            beta = Math.min(beta, best);
-            if (beta <= alpha) break;
-        }
-        return best;
-    }
-}
-
-// ── Public API ───────────────────────────────────────────────────────────────
-/**
- * getBestMove — compute the best move for the active player.
- * Uses minimax with alpha-beta pruning at the given depth.
- */
+// Minimax with Alpha-Beta pruning
 export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | null {
     const { position, turn, castleDirection, prevPosition } = options;
     const isWhite = turn === 'w';
+
     const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
     if (moves.length === 0) return null;
-    moves.sort(() => Math.random() - 0.5);
-    let bestMove: RawMove | null = null;
+
+    let bestMove: { piece: string; rank: number; file: number; x: number; y: number } | null = null;
     let bestValue = isWhite ? -Infinity : Infinity;
-    for (const m of moves) {
-        const next = arbiter.performMove({ position, piece: m.piece, rank: m.rank, file: m.file, x: m.x, y: m.y });
-        const value = minimax(next, depth-1, -Infinity, Infinity, !isWhite, castleDirection, position);
-        if (isWhite ? value > bestValue : value < bestValue) {
-            bestValue = value;
-            bestMove = m;
+
+    // Shuffle moves slightly to prevent playing the exact same move in equal positions
+    moves.sort(() => Math.random() - 0.5);
+
+    for (const move of moves) {
+        const nextPosition = arbiter.performMove({
+            position,
+            piece: move.piece,
+            rank: move.rank,
+            file: move.file,
+            x: move.x,
+            y: move.y
+        });
+
+        // Minimax evaluation
+        const value = minimax(
+            nextPosition,
+            depth - 1,
+            -Infinity,
+            Infinity,
+            !isWhite,
+            castleDirection,
+            position
+        );
+
+        if (isWhite) {
+            if (value > bestValue) {
+                bestValue = value;
+                bestMove = move;
+            }
+        } else {
+            if (value < bestValue) {
+                bestValue = value;
+                bestMove = move;
+            }
         }
     }
+
     if (!bestMove) return null;
+
     const isCapture = !!position[bestMove.x][bestMove.y];
     const notation = getStandardNotation(bestMove.piece, bestMove.rank, bestMove.file, bestMove.x, bestMove.y, isCapture);
     const description = getMoveDescription(bestMove.piece, bestMove.rank, bestMove.file, bestMove.x, bestMove.y);
-    const evaluation = (isWhite ? bestValue : -bestValue) / 100;
-    return { piece: bestMove.piece, fromX: bestMove.rank, fromY: bestMove.file, toX: bestMove.x, toY: bestMove.y, notation, description, evaluation };
+
+    // Normalize evaluation relative to the active player (+ means player is better, - means worse)
+    const relativeEval = isWhite ? bestValue / 100 : -bestValue / 100;
+
+    return {
+        piece: bestMove.piece,
+        fromX: bestMove.rank,
+        fromY: bestMove.file,
+        toX: bestMove.x,
+        toY: bestMove.y,
+        notation,
+        description,
+        evaluation: relativeEval
+    };
 }
-// Evaluation: positive = White better, negative = Black better (centipawns/100)
-// getBestMove depth=3 searches ~4k nodes avg on a typical middlegame position
-// Alpha-beta prunes ~60% of nodes vs pure minimax at same depth
-// PST values based on Tomasz Michniewski simplified evaluation tables
-// King PST rewards castled position (ranks 1-2, files a/b/g/h)
-// Piece shuffle before root search breaks symmetry in opening positions
-// getStandardNotation supports: quiet, captures, castling, pawn moves
-// evaluateBoard is O(n) where n = number of pieces on the board
-// PST arrays indexed [rank][file] from rank-8 (index 0) to rank-1 (index 7)
-// SuggestedMove.evaluation normalised to pawns for human-readable display
-// getBestMove returns null when player has no legal moves (checkmate/stalemate)
-// minimax checks all legal moves -- same legality as arbiter.getValidMoves
-// toAlgebraic maps [row,col] to standard chess square notation (a1-h8)
-// Mate scores use +/-150000 to dominate any material evaluation
-// getRookMoves and getBishopMoves already defined in arbiter getMoves.js
-// All exported functions are pure -- no side effects or global mutation
+
+function minimax(
+    position: any[][],
+    depth: number,
+    alpha: number,
+    beta: number,
+    isMaximizingPlayer: boolean,
+    castleDirection: { w: string; b: string },
+    prevPosition?: any[][]
+): number {
+    const turn = isMaximizingPlayer ? 'w' : 'b';
+    const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
+
+    // Terminal states
+    if (moves.length === 0) {
+        const opponent = turn === 'w' ? 'b' : 'w';
+        const isCheck = arbiter.isPlayerInCheck({
+            positionAfterMove: position,
+            player: turn
+        });
+
+        if (isCheck) {
+            // Checkmate: return large positive/negative values based on who gets checkmated
+            return isMaximizingPlayer ? -150000 - depth : 150000 + depth;
+        } else {
+            // Stalemate (Draw)
+            return 0;
+        }
+    }
+
+    if (depth === 0) {
+        return evaluateBoard(position);
+    }
+
+    if (isMaximizingPlayer) {
+        let maxEval = -Infinity;
+        for (const move of moves) {
+            const nextPosition = arbiter.performMove({
+                position,
+                piece: move.piece,
+                rank: move.rank,
+                file: move.file,
+                x: move.x,
+                y: move.y
+            });
+            const evaluation = minimax(nextPosition, depth - 1, alpha, beta, false, castleDirection, position);
+            maxEval = Math.max(maxEval, evaluation);
+            alpha = Math.max(alpha, evaluation);
+            if (beta <= alpha) break; // Beta prune
+        }
+        return maxEval;
+    } else {
+        let minEval = Infinity;
+        for (const move of moves) {
+            const nextPosition = arbiter.performMove({
+                position,
+                piece: move.piece,
+                rank: move.rank,
+                file: move.file,
+                x: move.x,
+                y: move.y
+            });
+            const evaluation = minimax(nextPosition, depth - 1, alpha, beta, true, castleDirection, position);
+            minEval = Math.min(minEval, evaluation);
+            beta = Math.min(beta, evaluation);
+            if (beta <= alpha) break; // Alpha prune
+        }
+        return minEval;
+    }
+}

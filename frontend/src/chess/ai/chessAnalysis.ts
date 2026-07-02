@@ -240,3 +240,4 @@ function minimax(
  * Uses minimax with alpha-beta pruning at the given depth.
  */
 export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | null {
+    const { position, turn, castleDirection, prevPosition } = options;

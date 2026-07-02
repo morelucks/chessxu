@@ -137,3 +137,5 @@ export interface SearchOptions {
     castleDirection: { w: string; b: string };
     prevPosition?: string[][];
 }
+
+export function getMoveDescription(piece: string, fromX: number, fromY: number, toX: number, toY: number): string {

@@ -56,3 +56,5 @@ const AiSuggestionsPanel = ({ appState }) => {
             {/* Suggestion content */}
             {isAiHintsEnabled && (
                 <div className="ai-panel__content">
+                    {!isOngoing ? (
+                        <p className="ai-panel__status">Start a game to see suggestions.</p>

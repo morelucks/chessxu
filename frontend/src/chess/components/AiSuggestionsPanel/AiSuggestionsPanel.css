@@ -1,1 +1,5 @@
 /* AiSuggestionsPanel styles — AI hint panel for #187 */
+
+/* ── Container ── */
+.ai-panel {
+    background-color: var(--game-selection-bg, #3e4451);

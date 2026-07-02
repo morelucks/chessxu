@@ -41,3 +41,10 @@ const useAiHint = (appState, depth = 3) => {
         // Defer heavy minimax work to next event-loop tick
         const timerId = setTimeout(() => {
             if (runId !== activeRunRef.current) return; // stale run
+            try {
+                const hint = getBestMove({
+                    position:        currentPosition,
+                    turn:            appState.turn,
+                    castleDirection: appState.castleDirection,
+                    prevPosition,
+                }, depth);

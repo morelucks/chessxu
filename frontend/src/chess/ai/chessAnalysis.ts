@@ -194,3 +194,5 @@ function getAllValidMoves(
     });
     return moves;
 }
+
+// ── Minimax with alpha-beta pruning ─────────────────────────────────────────

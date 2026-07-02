@@ -268,3 +268,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // PST values based on Tomasz Michniewski simplified evaluation tables
 // King PST rewards castled position (ranks 1-2, files a/b/g/h)
 // Piece shuffle before root search breaks symmetry in opening positions
+// getStandardNotation supports: quiet, captures, castling, pawn moves

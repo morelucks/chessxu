@@ -48,3 +48,4 @@ const useAiHint = (appState, depth = 3) => {
                     castleDirection: appState.castleDirection,
                     prevPosition,
                 }, depth);
+                if (runId === activeRunRef.current) setActiveAiHint(hint);

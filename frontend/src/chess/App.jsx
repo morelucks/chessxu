@@ -19,6 +19,7 @@ import useAppStore from '../zustand/store';
 import useSoundSettings from './hooks/useSoundSettings';
 import useChessSound from './hooks/useChessSound';
 import AiSuggestionsPanel from './components/AiSuggestionsPanel/AiSuggestionsPanel';
+import useAiHint from './hooks/useAiHint';
 
 // Leaderboard Component
 const Leaderboard = ({ results, onClear }) => {
@@ -91,6 +92,9 @@ function App() {
     // Sound feedback system
     const { isMuted, volume, toggleMute, setVolume, play: playSound } = useSoundSettings();
     useChessSound(appState, playSound);
+
+    // AI hint computation — writes result to the global Zustand store
+    useAiHint(appState);
 
     const providerState = {
         appState,

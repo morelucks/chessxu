@@ -12,3 +12,4 @@ const AiSuggestionsPanel = ({ appState }) => {
     const isAiHintsEnabled   = useAppStore((s) => s.isAiHintsEnabled);
     const setAiHintsEnabled  = useAppStore((s) => s.setAiHintsEnabled);
     const showHintOnBoard    = useAppStore((s) => s.showHintOnBoard);
+    const setShowHintOnBoard = useAppStore((s) => s.setShowHintOnBoard);

@@ -35,3 +35,6 @@ const AiSuggestionsPanel = ({ appState }) => {
                             checked={isAiHintsEnabled}
                             onChange={(e) => setAiHintsEnabled(e.target.checked)}
                             aria-checked={isAiHintsEnabled} />
+                        <span className="ai-switch__track" />
+                    </span>
+                </label>

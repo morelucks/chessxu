@@ -245,3 +245,5 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
     const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
     if (moves.length === 0) return null;
     moves.sort(() => Math.random() - 0.5);
+    let bestMove: RawMove | null = null;
+    let bestValue = isWhite ? -Infinity : Infinity;

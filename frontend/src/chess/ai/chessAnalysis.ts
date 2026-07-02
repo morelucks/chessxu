@@ -262,3 +262,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
     const evaluation = (isWhite ? bestValue : -bestValue) / 100;
     return { piece: bestMove.piece, fromX: bestMove.rank, fromY: bestMove.file, toX: bestMove.x, toY: bestMove.y, notation, description, evaluation };
 }
+// Evaluation: positive = White better, negative = Black better (centipawns/100)

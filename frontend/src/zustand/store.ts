@@ -72,6 +72,9 @@ export interface AppStore extends AuthState, GameState {
   setChessBalance: (balance: number) => void;
   setTimeControlMs: (ms: number | null) => void;
   setConnectModalOpen: (open: boolean) => void;
+  setAiHintsEnabled: (enabled: boolean) => void;
+  setShowHintOnBoard: (show: boolean) => void;
+  setActiveAiHint: (hint: AiHint | null) => void;
   logout: () => void;
 }
 

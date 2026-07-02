@@ -60,3 +60,8 @@ const AiSuggestionsPanel = ({ appState }) => {
                         <p className="ai-panel__status">Start a game to see suggestions.</p>
                     ) : !isPlayerTurn ? (
                         <p className="ai-panel__status">Waiting for your turn… ⏱️</p>
+                    ) : !activeAiHint ? (
+                        <div className="ai-panel__loading" aria-live="polite">
+                            <span className="ai-spinner" aria-hidden="true" />
+                            <span>Analysing board…</span>
+                        </div>

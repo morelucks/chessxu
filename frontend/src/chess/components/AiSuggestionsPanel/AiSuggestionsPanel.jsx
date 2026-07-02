@@ -52,3 +52,7 @@ const AiSuggestionsPanel = ({ appState }) => {
                     </label>
                 )}
             </div>
+
+            {/* Suggestion content */}
+            {isAiHintsEnabled && (
+                <div className="ai-panel__content">

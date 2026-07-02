@@ -5,3 +5,8 @@
     background-color: var(--game-selection-bg, #3e4451);
     border-radius: 10px;
     padding: 14px 16px;
+    color: var(--text-color, #abb2bf);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

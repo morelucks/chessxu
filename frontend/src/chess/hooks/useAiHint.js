@@ -34,3 +34,6 @@ const useAiHint = (appState, depth = 3) => {
         const prevPosition = appState.position.length > 1
             ? appState.position[appState.position.length - 2]
             : undefined;
+
+        // Tag this run; discard results from a superseded render
+        const runId = ++activeRunRef.current;

@@ -8,3 +8,4 @@ import { getPieces } from '../arbiter/getMoves';
 // ── Piece values (centipawns) ──────────────────────────────────────────────
 const PIECE_VALUES: Record<string, number> = {
     p: 100,
+    n: 320,

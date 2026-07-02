@@ -180,3 +180,5 @@ function getAllValidMoves(
     castleDirection: { w: string; b: string },
     prevPosition?: string[][],
 ): RawMove[] {
+    const pieces = getPieces(position, turn);
+    const moves: RawMove[] = [];

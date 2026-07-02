@@ -211,3 +211,5 @@ function minimax(
     if (moves.length === 0) {
         const inCheck = arbiter.isPlayerInCheck({ positionAfterMove: position, player: turn });
         if (inCheck) return maximising ? -150000 - depth : 150000 + depth;
+        return 0;
+    }

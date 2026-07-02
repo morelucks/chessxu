@@ -165,3 +165,4 @@ export default Board    // hint-source/hint-target cleared automatically when sh
     // hint-source uses purple (violet-500) matching app --highlight variable
     // hint-target uses cyan (sky-500) to visually distinguish destination
     // hint overlay animations run at 2s to stay subtle and non-distracting
+    // hint classes use box-shadow inset for non-destructive tile styling

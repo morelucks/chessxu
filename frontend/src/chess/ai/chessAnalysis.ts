@@ -165,3 +165,10 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
 }
 
 // ── Internal move type ──────────────────────────────────────────────────────
+interface RawMove {
+    piece: string;
+    rank: number;
+    file: number;
+    x: number;
+    y: number;
+}

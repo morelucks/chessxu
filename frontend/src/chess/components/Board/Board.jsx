@@ -161,4 +161,4 @@ const Board = () => {
     
 }
 
-export default Board
+export default Board    // hint-source/hint-target cleared automatically when showHintOnBoard=false

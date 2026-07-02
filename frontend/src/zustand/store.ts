@@ -166,7 +166,10 @@ const useAppStore = create<AppStore>()(
             isGameStarted: false,
             elo: 1200,
             chessBalance: 0,
-            timeControlMs: null
+            timeControlMs: null,
+            isAiHintsEnabled: false,
+            showHintOnBoard: false,
+            activeAiHint: null,
         });
       },
     }),

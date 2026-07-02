@@ -25,3 +25,6 @@ const AiSuggestionsPanel = ({ appState }) => {
                 <span className="ai-panel__icon" aria-hidden="true">🧠</span>
                 <h3 className="ai-panel__title">AI Suggestions</h3>
             </div>
+
+            {/* Enable / disable toggle */}
+            <div className="ai-panel__controls">

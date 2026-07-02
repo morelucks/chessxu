@@ -213,3 +213,5 @@ function minimax(
         if (inCheck) return maximising ? -150000 - depth : 150000 + depth;
         return 0;
     }
+    if (maximising) {
+        let best = -Infinity;

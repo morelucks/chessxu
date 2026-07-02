@@ -80,3 +80,5 @@ const AiSuggestionsPanel = ({ appState }) => {
                                     ? '✨ Strong advantage — keep the pressure on.'
                                     : activeAiHint.evaluation <= -2
                                     ? '⚠️ Opponent has the edge — play defensively.'
+                                    : '⚖️ Equal position — control the centre carefully.'}
+                            </div>

@@ -87,3 +87,4 @@
 
 .hint-target {
     animation: pulse-hint-target 2s ease-in-out infinite;
+    background-color: rgba(6,182,212,0.18) !important;

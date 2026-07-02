@@ -166,3 +166,4 @@ export default Board    // hint-source/hint-target cleared automatically when sh
     // hint-target uses cyan (sky-500) to visually distinguish destination
     // hint overlay animations run at 2s to stay subtle and non-distracting
     // hint classes use box-shadow inset for non-destructive tile styling
+    // hint overlay visible even when piece is selected (z-order safe)

@@ -111,3 +111,5 @@ export function evaluateBoard(position: string[][]): number {
     }
     return score;
 }
+
+// ── Algebraic notation helpers ──────────────────────────────────────────────

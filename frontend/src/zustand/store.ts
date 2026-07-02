@@ -146,6 +146,9 @@ const useAppStore = create<AppStore>()(
       setChessBalance: (chessBalance: number) => set({ chessBalance }),
       setTimeControlMs: (timeControlMs: number | null) => set({ timeControlMs }),
       setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
+      setAiHintsEnabled: (isAiHintsEnabled: boolean) => set({ isAiHintsEnabled }),
+      setShowHintOnBoard: (showHintOnBoard: boolean) => set({ showHintOnBoard }),
+      setActiveAiHint: (activeAiHint: AiHint | null) => set({ activeAiHint }),
       logout: () => {
         userSession.signUserOut();
         set({ 

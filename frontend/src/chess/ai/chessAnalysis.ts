@@ -163,3 +163,5 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
     }
     return `${type}${isCapture ? 'x' : ''}${target}`;
 }
+
+// ── Internal move type ──────────────────────────────────────────────────────

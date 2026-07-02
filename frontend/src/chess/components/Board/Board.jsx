@@ -24,6 +24,10 @@ const Board = () => {
     const { appState, dispatch } = useAppContext();
     const position = appState.position[appState.position.length - 1]
 
+    // AI hint state from global store
+    const showHintOnBoard = useAppStore(state => state.showHintOnBoard)
+    const activeAiHint    = useAppStore(state => state.activeAiHint)
+
     const checkTile = (() => {
         const isInCheck =  (arbiter.isPlayerInCheck({
             positionAfterMove : position,

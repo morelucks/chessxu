@@ -250,3 +250,8 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
     for (const m of moves) {
         const next = arbiter.performMove({ position, piece: m.piece, rank: m.rank, file: m.file, x: m.x, y: m.y });
         const value = minimax(next, depth-1, -Infinity, Infinity, !isWhite, castleDirection, position);
+        if (isWhite ? value > bestValue : value < bestValue) {
+            bestValue = value;
+            bestMove = m;
+        }
+    }

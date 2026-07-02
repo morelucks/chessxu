@@ -16,3 +16,4 @@ const AiSuggestionsPanel = ({ appState }) => {
     const activeAiHint       = useAppStore((s) => s.activeAiHint);
 
     const isOngoing    = appState?.status === 'Ongoing';
+    const isPlayerTurn = appState?.turn === (appState?.playerColor ?? 'w');

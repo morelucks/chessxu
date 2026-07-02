@@ -39,3 +39,4 @@
 /* ── Content area ── */
 .ai-panel__content { display: flex; flex-direction: column; gap: 8px; }
 .ai-panel__status { font-size:0.82rem; color:#718096; text-align:center; padding:8px 0; margin:0; }
+.ai-panel__loading { display:flex; align-items:center; gap:10px; font-size:0.82rem; color:#718096; padding:6px 0; }

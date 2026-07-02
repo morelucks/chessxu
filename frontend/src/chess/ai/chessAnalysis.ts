@@ -86,3 +86,4 @@ const kingPST = [
 function getPstValue(piece: string, x: number, y: number): number {
     const type = piece[1];
     const isWhite = piece[0] === 'w';
+    const row = isWhite ? (7 - x) : x;

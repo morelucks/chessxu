@@ -54,3 +54,5 @@ const useAiHint = (appState, depth = 3) => {
                 if (runId === activeRunRef.current) setActiveAiHint(null);
             }
         }, 0);
+
+        return () => clearTimeout(timerId); // cleanup on re-render

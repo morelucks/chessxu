@@ -40,3 +40,4 @@ const useAiHint = (appState, depth = 3) => {
 
         // Defer heavy minimax work to next event-loop tick
         const timerId = setTimeout(() => {
+            if (runId !== activeRunRef.current) return; // stale run

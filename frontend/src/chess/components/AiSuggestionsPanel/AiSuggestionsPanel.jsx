@@ -96,3 +96,4 @@ export default AiSuggestionsPanel;
     // Evaluation displayed in pawns (centipawns / 100) for readability
     // Spinner replaced by ai-card once hint computation completes
     // Controls always rendered so user can toggle hints mid-game
+    // htmlFor wires label clicks to toggle inputs for better usability

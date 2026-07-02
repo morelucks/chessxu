@@ -217,3 +217,4 @@ function minimax(
         let best = -Infinity;
         for (const m of moves) {
             const next = arbiter.performMove({ position, piece: m.piece, rank: m.rank, file: m.file, x: m.x, y: m.y });
+            best = Math.max(best, minimax(next, depth-1, alpha, beta, false, castleDirection, position));

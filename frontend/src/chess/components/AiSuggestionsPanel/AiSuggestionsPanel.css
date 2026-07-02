@@ -50,3 +50,4 @@
 .ai-eval { font-size:0.8rem; font-weight:700; padding:2px 8px; border-radius:999px; }
 .ai-eval--pos { background:rgba(152,195,121,0.15); color:#98c379; }
 .ai-eval--neg { background:rgba(224,108,117,0.15); color:#e06c75; }
+.ai-card__notation { font-size:1.4rem; font-weight:700; color:#e2e8f0; letter-spacing:0.03em; }

@@ -93,6 +93,9 @@ function App() {
     const { isMuted, volume, toggleMute, setVolume, play: playSound } = useSoundSettings();
     useChessSound(appState, playSound);
 
+    // AI hint computation — writes result to the global Zustand store
+    useAiHint(appState);
+
     const providerState = {
         appState,
         dispatch

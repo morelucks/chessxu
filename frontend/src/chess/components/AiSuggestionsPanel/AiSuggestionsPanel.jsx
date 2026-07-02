@@ -89,3 +89,5 @@ const AiSuggestionsPanel = ({ appState }) => {
         </div>
     );
 };
+
+export default AiSuggestionsPanel;

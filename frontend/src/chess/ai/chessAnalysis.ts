@@ -272,3 +272,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // evaluateBoard is O(n) where n = number of pieces on the board
 // PST arrays indexed [rank][file] from rank-8 (index 0) to rank-1 (index 7)
 // SuggestedMove.evaluation normalised to pawns for human-readable display
+// getBestMove returns null when player has no legal moves (checkmate/stalemate)

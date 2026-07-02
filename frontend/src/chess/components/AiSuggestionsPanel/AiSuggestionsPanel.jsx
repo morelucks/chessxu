@@ -82,3 +82,10 @@ const AiSuggestionsPanel = ({ appState }) => {
                                     ? '⚠️ Opponent has the edge — play defensively.'
                                     : '⚖️ Equal position — control the centre carefully.'}
                             </div>
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};

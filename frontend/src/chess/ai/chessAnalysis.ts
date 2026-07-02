@@ -9,3 +9,4 @@ import { getPieces } from '../arbiter/getMoves';
 const PIECE_VALUES: Record<string, number> = {
     p: 100,
     n: 320,
+    b: 330,

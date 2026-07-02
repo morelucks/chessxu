@@ -39,3 +39,4 @@ const knightPST = [
 ];
 
 const bishopPST = [
+    [-20,-10,-10,-10,-10,-10,-10,-20],

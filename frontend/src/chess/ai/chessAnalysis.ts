@@ -185,3 +185,4 @@ function getAllValidMoves(
     pieces.forEach(p => {
         const dir = castleDirection[turn as keyof typeof castleDirection];
         const valid: [number, number][] = arbiter.getValidMoves({
+            position, castleDirection: dir, prevPosition,

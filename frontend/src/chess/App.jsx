@@ -18,6 +18,8 @@ import { useUser } from './contexts/UserContext';
 import useAppStore from '../zustand/store';
 import useSoundSettings from './hooks/useSoundSettings';
 import useChessSound from './hooks/useChessSound';
+import AiSuggestionsPanel from './components/AiSuggestionsPanel/AiSuggestionsPanel';
+import useAiHint from './hooks/useAiHint';
 
 // Leaderboard Component
 const Leaderboard = ({ results, onClear }) => {

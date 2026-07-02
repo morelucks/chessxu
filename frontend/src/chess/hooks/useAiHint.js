@@ -11,3 +11,4 @@ import { getBestMove } from '../ai/chessAnalysis';
  * @param {object} appState  - chess reducer state
  * @param {number} [depth=3]  - minimax search depth
  */
+const useAiHint = (appState, depth = 3) => {

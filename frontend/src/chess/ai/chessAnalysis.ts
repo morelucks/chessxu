@@ -97,3 +97,5 @@ function getPstValue(piece: string, x: number, y: number): number {
         default:  return 0;
     }
 }
+
+// ── Static board evaluator ──────────────────────────────────────────────────

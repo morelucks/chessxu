@@ -93,3 +93,7 @@ function getPstValue(piece: string, x: number, y: number): number {
         case 'b': return bishopPST[row][y];
         case 'r': return rookPST[row][y];
         case 'q': return queenPST[row][y];
+        case 'k': return kingPST[row][y];
+        default:  return 0;
+    }
+}

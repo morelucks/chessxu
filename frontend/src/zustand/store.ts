@@ -25,6 +25,18 @@ export interface AuthState {
   isConnectModalOpen: boolean;
 }
 
+// ── AI Hint state types ──────────────────────────────────────────────────────
+export interface AiHint {
+  piece: string;
+  fromX: number;
+  fromY: number;
+  toX: number;
+  toY: number;
+  notation: string;
+  description: string;
+  evaluation: number;
+}
+
 export interface GameState {
   activeGameId: number | null;
   isGameStarted: boolean;
@@ -33,6 +45,7 @@ export interface GameState {
   timeControlMs: number | null;
   isAiHintsEnabled: boolean;
   showHintOnBoard: boolean;
+  activeAiHint: AiHint | null;
   activeAiHint: {
     piece: string;
     fromX: number;

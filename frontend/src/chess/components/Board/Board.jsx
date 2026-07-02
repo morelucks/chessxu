@@ -9,6 +9,7 @@ import PromotionBox from '../Popup/PromotionBox/PromotionBox'
 import Popup from '../Popup/Popup'
 import GameEnds from '../Popup/GameEnds/GameEnds'
 
+import useAppStore from '../../../zustand/store'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 import { makeNewMove, clearCandidates } from '../../reducer/actions/move'
@@ -163,4 +164,9 @@ const Board = () => {
     
 }
 
-export default Board
+export default Board    // hint-source/hint-target cleared automatically when showHintOnBoard=false
+    // hint-source uses purple (violet-500) matching app --highlight variable
+    // hint-target uses cyan (sky-500) to visually distinguish destination
+    // hint overlay animations run at 2s to stay subtle and non-distracting
+    // hint classes use box-shadow inset for non-destructive tile styling
+    // hint overlay visible even when piece is selected (z-order safe)

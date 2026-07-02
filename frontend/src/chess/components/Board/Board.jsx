@@ -8,6 +8,7 @@ import PromotionBox from '../Popup/PromotionBox/PromotionBox'
 import Popup from '../Popup/Popup'
 import GameEnds from '../Popup/GameEnds/GameEnds'
 
+import useAppStore from '../../../zustand/store'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 import { makeNewMove, clearCandidates } from '../../reducer/actions/move'

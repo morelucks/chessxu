@@ -274,3 +274,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // SuggestedMove.evaluation normalised to pawns for human-readable display
 // getBestMove returns null when player has no legal moves (checkmate/stalemate)
 // minimax checks all legal moves -- same legality as arbiter.getValidMoves
+// toAlgebraic maps [row,col] to standard chess square notation (a1-h8)

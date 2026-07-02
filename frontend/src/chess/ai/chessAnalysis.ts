@@ -192,3 +192,5 @@ function getAllValidMoves(
             moves.push({ piece: p.piece, rank: p.rank, file: p.file, x, y });
         });
     });
+    return moves;
+}

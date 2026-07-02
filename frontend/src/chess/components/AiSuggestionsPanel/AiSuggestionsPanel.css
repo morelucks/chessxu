@@ -60,3 +60,4 @@
 }
 /* Panel uses CSS custom properties for consistent dark-theme integration */
 /* Toggle switch is keyboard-navigable via focus-visible outline */
+/* ai-spinner uses border-top trick for single-colour rotating arc */

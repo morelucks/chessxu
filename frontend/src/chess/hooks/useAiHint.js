@@ -24,3 +24,8 @@ const useAiHint = (appState, depth = 3) => {
             setActiveAiHint(null);
             return;
         }
+
+        // Only suggest on the player's own turn
+        const playerColor  = appState.playerColor ?? 'w';
+        const isPlayerTurn = appState.turn === playerColor;
+        if (!isPlayerTurn) { setActiveAiHint(null); return; }

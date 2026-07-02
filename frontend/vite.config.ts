@@ -31,11 +31,15 @@ export default defineConfig(({ command }) => {
     return {};
   };
 
+  const reactRouterPath = isDev
+    ? path.resolve('./node_modules/react-router/dist/development/chunk-UIGDSWPH.mjs')
+    : path.resolve('./node_modules/react-router/dist/production/chunk-RZ6LZWMW.mjs');
+
   return {
     plugins: [react(), wasm()],
     resolve: {
       alias: [
-        { find: /^react-router$/, replacement: path.resolve('./node_modules/react-router/dist/development/index.js') },
+        { find: /^react-router$/, replacement: reactRouterPath },
       ],
     },
     server: {

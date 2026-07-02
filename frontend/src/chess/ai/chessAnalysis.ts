@@ -208,3 +208,5 @@ function minimax(
     if (depth === 0) return evaluateBoard(position);
     const turn = maximising ? 'w' : 'b';
     const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
+    if (moves.length === 0) {
+        const inCheck = arbiter.isPlayerInCheck({ positionAfterMove: position, player: turn });

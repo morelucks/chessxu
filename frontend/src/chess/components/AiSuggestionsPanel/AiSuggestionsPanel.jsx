@@ -22,3 +22,4 @@ const AiSuggestionsPanel = ({ appState }) => {
         <div className="ai-panel" role="region" aria-label="AI Suggestions">
             {/* Header */}
             <div className="ai-panel__header">
+                <span className="ai-panel__icon" aria-hidden="true">🧠</span>

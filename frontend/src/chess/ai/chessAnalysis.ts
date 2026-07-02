@@ -154,3 +154,4 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
     }
     const type = piece[1].toUpperCase();
     const target = toAlgebraic(toX, toY);
+    if (type === 'P') {

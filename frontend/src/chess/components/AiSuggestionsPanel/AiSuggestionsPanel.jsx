@@ -14,3 +14,5 @@ const AiSuggestionsPanel = ({ appState }) => {
     const showHintOnBoard    = useAppStore((s) => s.showHintOnBoard);
     const setShowHintOnBoard = useAppStore((s) => s.setShowHintOnBoard);
     const activeAiHint       = useAppStore((s) => s.activeAiHint);
+
+    const isOngoing    = appState?.status === 'Ongoing';

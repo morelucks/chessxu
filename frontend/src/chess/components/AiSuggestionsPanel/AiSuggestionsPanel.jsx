@@ -73,3 +73,4 @@ const AiSuggestionsPanel = ({ appState }) => {
                                     {activeAiHint.evaluation >= 0 ? `+${activeAiHint.evaluation.toFixed(2)}` : activeAiHint.evaluation.toFixed(2)}
                                 </span>
                             </div>
+                            <div className="ai-card__notation">{activeAiHint.notation}</div>

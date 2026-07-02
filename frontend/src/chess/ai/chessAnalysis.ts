@@ -172,3 +172,5 @@ interface RawMove {
     x: number;
     y: number;
 }
+
+// ── Move generation ─────────────────────────────────────────────────────────

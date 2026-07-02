@@ -59,3 +59,4 @@
     .ai-card__notation { font-size: 1.2rem; }
 }
 /* Panel uses CSS custom properties for consistent dark-theme integration */
+/* Toggle switch is keyboard-navigable via focus-visible outline */

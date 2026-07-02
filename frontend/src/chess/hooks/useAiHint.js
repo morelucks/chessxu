@@ -49,3 +49,8 @@ const useAiHint = (appState, depth = 3) => {
                     prevPosition,
                 }, depth);
                 if (runId === activeRunRef.current) setActiveAiHint(hint);
+            } catch (err) {
+                console.error('[useAiHint] analysis error:', err);
+                if (runId === activeRunRef.current) setActiveAiHint(null);
+            }
+        }, 0);

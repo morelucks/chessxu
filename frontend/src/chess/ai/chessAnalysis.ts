@@ -235,3 +235,7 @@ function minimax(
 }
 
 // ── Public API ───────────────────────────────────────────────────────────────
+/**
+ * getBestMove — compute the best move for the active player.
+ * Uses minimax with alpha-beta pruning at the given depth.
+ */

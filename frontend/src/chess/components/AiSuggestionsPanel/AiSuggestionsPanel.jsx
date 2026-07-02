@@ -4,3 +4,7 @@
 
 import useAppStore from '../../../zustand/store';
 import './AiSuggestionsPanel.css';
+
+/**
+ * @param {{ appState: object }} props
+ */

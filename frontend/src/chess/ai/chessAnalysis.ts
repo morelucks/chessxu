@@ -239,3 +239,4 @@ function minimax(
  * getBestMove — compute the best move for the active player.
  * Uses minimax with alpha-beta pruning at the given depth.
  */
+export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | null {

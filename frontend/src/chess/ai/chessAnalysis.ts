@@ -3,3 +3,4 @@
  */
 
 import arbiter from '../arbiter/arbiter';
+import { getPieces } from '../arbiter/getMoves';

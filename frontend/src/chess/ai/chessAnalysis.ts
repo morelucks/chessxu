@@ -276,3 +276,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // minimax checks all legal moves -- same legality as arbiter.getValidMoves
 // toAlgebraic maps [row,col] to standard chess square notation (a1-h8)
 // Mate scores use +/-150000 to dominate any material evaluation
+// getRookMoves and getBishopMoves already defined in arbiter getMoves.js

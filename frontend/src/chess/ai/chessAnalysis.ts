@@ -255,3 +255,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
             bestMove = m;
         }
     }
+    if (!bestMove) return null;

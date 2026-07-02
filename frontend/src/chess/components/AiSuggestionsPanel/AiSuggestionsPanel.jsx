@@ -38,3 +38,6 @@ const AiSuggestionsPanel = ({ appState }) => {
                         <span className="ai-switch__track" />
                     </span>
                 </label>
+
+                {isAiHintsEnabled && (
+                    <label className="ai-toggle-row" htmlFor="ai-board-overlay-toggle">

@@ -30,3 +30,4 @@ const AiSuggestionsPanel = ({ appState }) => {
             <div className="ai-panel__controls">
                 <label className="ai-toggle-row" htmlFor="ai-hints-toggle">
                     <span className="ai-toggle-label">Enable AI Hints</span>
+                    <span className="ai-switch">

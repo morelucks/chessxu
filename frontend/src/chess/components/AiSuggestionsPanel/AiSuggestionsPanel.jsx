@@ -17,3 +17,6 @@ const AiSuggestionsPanel = ({ appState }) => {
 
     const isOngoing    = appState?.status === 'Ongoing';
     const isPlayerTurn = appState?.turn === (appState?.playerColor ?? 'w');
+
+    return (
+        <div className="ai-panel" role="region" aria-label="AI Suggestions">

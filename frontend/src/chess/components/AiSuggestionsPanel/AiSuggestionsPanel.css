@@ -53,3 +53,8 @@
 .ai-card__notation { font-size:1.4rem; font-weight:700; color:#e2e8f0; letter-spacing:0.03em; }
 .ai-card__description { font-size:0.8rem; color:#a0aec0; }
 .ai-card__tip { font-size:0.78rem; color:#718096; border-top:1px solid rgba(255,255,255,0.06); padding-top:8px; line-height:1.45; }
+
+@media (max-width: 768px) {
+    .ai-panel { padding: 10px 12px; }
+    .ai-card__notation { font-size: 1.2rem; }
+}

@@ -270,3 +270,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // Piece shuffle before root search breaks symmetry in opening positions
 // getStandardNotation supports: quiet, captures, castling, pawn moves
 // evaluateBoard is O(n) where n = number of pieces on the board
+// PST arrays indexed [rank][file] from rank-8 (index 0) to rank-1 (index 7)

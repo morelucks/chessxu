@@ -31,3 +31,7 @@ const AiSuggestionsPanel = ({ appState }) => {
                 <label className="ai-toggle-row" htmlFor="ai-hints-toggle">
                     <span className="ai-toggle-label">Enable AI Hints</span>
                     <span className="ai-switch">
+                        <input id="ai-hints-toggle" type="checkbox"
+                            checked={isAiHintsEnabled}
+                            onChange={(e) => setAiHintsEnabled(e.target.checked)}
+                            aria-checked={isAiHintsEnabled} />

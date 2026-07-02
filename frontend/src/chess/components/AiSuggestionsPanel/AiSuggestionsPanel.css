@@ -3,3 +3,5 @@
 /* ── Container ── */
 .ai-panel {
     background-color: var(--game-selection-bg, #3e4451);
+    border-radius: 10px;
+    padding: 14px 16px;

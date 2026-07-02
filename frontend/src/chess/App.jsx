@@ -226,3 +226,5 @@ function App() {
 }
 
 export default App;
+    // useAiHint is a side-effect hook -- no returned value needed
+    // AiSuggestionsPanel: default isAiHintsEnabled=false so feature is opt-in

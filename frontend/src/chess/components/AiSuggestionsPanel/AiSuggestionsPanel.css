@@ -1,10 +1,6 @@
-/* =============================================================
-   AiSuggestionsPanel — AI hint sidebar panel styles
-   Follows the app's existing dark theme (--bg-color, --text-color,
-   --primary-button-bg, --game-selection-bg CSS variables).
-   ============================================================= */
+/* AiSuggestionsPanel styles — AI hint panel for #187 */
 
-/* ── Container ─────────────────────────────────────────────── */
+/* ── Container ── */
 .ai-panel {
     background-color: var(--game-selection-bg, #3e4451);
     border-radius: 10px;
@@ -15,215 +11,59 @@
     gap: 12px;
 }
 
-/* ── Header ────────────────────────────────────────────────── */
+/* ── Header ── */
 .ai-panel__header {
     display: flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
     padding-bottom: 10px;
 }
+.ai-panel__icon { font-size: 1.25rem; line-height: 1; }
+.ai-panel__title { margin: 0; font-size: 0.9rem; font-weight: 600; color: #e2e8f0; letter-spacing: 0.02em; }
 
-.ai-panel__icon {
-    font-size: 1.25rem;
-    line-height: 1;
-}
+/* ── Toggle rows ── */
+.ai-panel__controls { display: flex; flex-direction: column; gap: 10px; }
+.ai-toggle-row { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+.ai-toggle-label { font-size: 0.85rem; color: var(--text-color, #abb2bf); }
 
-.ai-panel__title {
-    margin: 0;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #e2e8f0;
-    letter-spacing: 0.02em;
-}
+/* Toggle switch track */
+.ai-switch { position: relative; display: inline-flex; width: 40px; height: 22px; flex-shrink: 0; }
+.ai-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ai-switch__track { position: absolute; inset: 0; border-radius: 999px; background: #4b5563; transition: background 0.2s ease; cursor: pointer; }
+.ai-switch__track::after { content:''; position:absolute; left:3px; top:3px; width:16px; height:16px; border-radius:50%; background:#fff; transition:transform 0.2s ease; }
+.ai-switch input:checked + .ai-switch__track { background: var(--primary-button-bg, #61afef); }
+.ai-switch input:checked + .ai-switch__track::after { transform: translateX(18px); }
+.ai-switch input:focus-visible + .ai-switch__track { outline: 2px solid var(--primary-button-bg,#61afef); outline-offset: 2px; }
 
-/* ── Toggle rows ───────────────────────────────────────────── */
-.ai-panel__controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+/* ── Content area ── */
+.ai-panel__content { display: flex; flex-direction: column; gap: 8px; }
+.ai-panel__status { font-size:0.82rem; color:#718096; text-align:center; padding:8px 0; margin:0; }
+.ai-panel__loading { display:flex; align-items:center; gap:10px; font-size:0.82rem; color:#718096; padding:6px 0; }
+.ai-spinner { display:inline-block; width:16px; height:16px; border:2px solid rgba(97,175,239,0.25); border-top-color:var(--primary-button-bg,#61afef); border-radius:50%; animation:ai-spin 0.7s linear infinite; flex-shrink:0; }
+@keyframes ai-spin { to { transform: rotate(360deg); } }
 
-.ai-toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    user-select: none;
-}
+/* ── Recommendation card ── */
+.ai-card { background:rgba(97,175,239,0.07); border:1px solid rgba(97,175,239,0.18); border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:8px; }
+.ai-card__header { display:flex; align-items:center; justify-content:space-between; }
+.ai-badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--primary-button-bg,#61afef); background:rgba(97,175,239,0.12); border-radius:4px; padding:2px 7px; }
+.ai-eval { font-size:0.8rem; font-weight:700; padding:2px 8px; border-radius:999px; }
+.ai-eval--pos { background:rgba(152,195,121,0.15); color:#98c379; }
+.ai-eval--neg { background:rgba(224,108,117,0.15); color:#e06c75; }
+.ai-card__notation { font-size:1.4rem; font-weight:700; color:#e2e8f0; letter-spacing:0.03em; }
+.ai-card__description { font-size:0.8rem; color:#a0aec0; }
+.ai-card__tip { font-size:0.78rem; color:#718096; border-top:1px solid rgba(255,255,255,0.06); padding-top:8px; line-height:1.45; }
 
-.ai-toggle-label {
-    font-size: 0.85rem;
-    color: var(--text-color, #abb2bf);
-}
-
-/* Toggle switch */
-.ai-switch {
-    position: relative;
-    display: inline-flex;
-    width: 40px;
-    height: 22px;
-    flex-shrink: 0;
-}
-
-.ai-switch input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.ai-switch__track {
-    position: absolute;
-    inset: 0;
-    border-radius: 999px;
-    background: #4b5563;
-    transition: background 0.2s ease;
-    cursor: pointer;
-}
-
-.ai-switch__track::after {
-    content: '';
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #fff;
-    transition: transform 0.2s ease;
-}
-
-.ai-switch input:checked + .ai-switch__track {
-    background: var(--primary-button-bg, #61afef);
-}
-
-.ai-switch input:checked + .ai-switch__track::after {
-    transform: translateX(18px);
-}
-
-.ai-switch input:focus-visible + .ai-switch__track {
-    outline: 2px solid var(--primary-button-bg, #61afef);
-    outline-offset: 2px;
-}
-
-/* ── Suggestion content area ───────────────────────────────── */
-.ai-panel__content {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.ai-panel__status {
-    font-size: 0.82rem;
-    color: #718096;
-    text-align: center;
-    padding: 8px 0;
-    margin: 0;
-}
-
-/* Loading spinner row */
-.ai-panel__loading {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.82rem;
-    color: #718096;
-    padding: 6px 0;
-}
-
-.ai-spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(97, 175, 239, 0.25);
-    border-top-color: var(--primary-button-bg, #61afef);
-    border-radius: 50%;
-    animation: ai-spin 0.7s linear infinite;
-    flex-shrink: 0;
-}
-
-@keyframes ai-spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ── Recommendation card ───────────────────────────────────── */
-.ai-card {
-    background: rgba(97, 175, 239, 0.07);
-    border: 1px solid rgba(97, 175, 239, 0.18);
-    border-radius: 8px;
-    padding: 12px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.ai-card__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* "Best Move" label badge */
-.ai-badge {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--primary-button-bg, #61afef);
-    background: rgba(97, 175, 239, 0.12);
-    border-radius: 4px;
-    padding: 2px 7px;
-}
-
-/* Evaluation score */
-.ai-eval {
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 999px;
-}
-
-.ai-eval--pos {
-    background: rgba(152, 195, 121, 0.15);
-    color: #98c379;
-}
-
-.ai-eval--neg {
-    background: rgba(224, 108, 117, 0.15);
-    color: #e06c75;
-}
-
-/* Algebraic notation */
-.ai-card__notation {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #e2e8f0;
-    letter-spacing: 0.03em;
-}
-
-/* Human-readable description */
-.ai-card__description {
-    font-size: 0.8rem;
-    color: #a0aec0;
-}
-
-/* Contextual tip */
-.ai-card__tip {
-    font-size: 0.78rem;
-    color: #718096;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding-top: 8px;
-    line-height: 1.45;
-}
-
-/* ── Responsive tweaks ─────────────────────────────────────── */
 @media (max-width: 768px) {
-    .ai-panel {
-        padding: 10px 12px;
-    }
-
-    .ai-card__notation {
-        font-size: 1.2rem;
-    }
+    .ai-panel { padding: 10px 12px; }
+    .ai-card__notation { font-size: 1.2rem; }
 }
+/* Panel uses CSS custom properties for consistent dark-theme integration */
+/* Toggle switch is keyboard-navigable via focus-visible outline */
+/* ai-spinner uses border-top trick for single-colour rotating arc */
+/* ai-eval--pos and ai-eval--neg use app colour palette #98c379 / #e06c75 */
+/* Responsive breakpoint at 768px reduces padding and notation font-size */
+/* .ai-card border uses rgba(97,175,239,0.18) matching --primary-button-bg alpha */
+/* Toggle uses CSS-only animation -- no JS required for visual feedback */
+/* All rules scoped to .ai-panel to avoid global CSS conflicts */
+/* ai-card gap:8px matches the outer ai-panel gap for visual rhythm */

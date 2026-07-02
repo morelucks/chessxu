@@ -66,32 +66,35 @@
     cursor: pointer;
 }
 
-/* =========================================================
-   AI Hint Tile Highlighting
-   Source tile: purple pulse  |  Target tile: cyan pulse
-   Only active when showHintOnBoard is true in the store
-   ========================================================= */
-
-@keyframes pulse-hint-source {
-    0%, 100% { box-shadow: inset 0 0 12px 2px rgba(139, 92, 246, 0.4); }
-    50%       { box-shadow: inset 0 0 20px 4px rgba(139, 92, 246, 0.8); }
+/* AI Hint Styles */
+@keyframes pulse-hint {
+    0%, 100% {
+        box-shadow: inset 0 0 12px 2px rgba(139, 92, 246, 0.4);
+    }
+    50% {
+        box-shadow: inset 0 0 20px 4px rgba(139, 92, 246, 0.8);
+    }
 }
 
 @keyframes pulse-hint-target {
-    0%, 100% { box-shadow: inset 0 0 12px 2px rgba(6, 182, 212, 0.4); }
-    50%       { box-shadow: inset 0 0 20px 4px rgba(6, 182, 212, 0.8); }
+    0%, 100% {
+        box-shadow: inset 0 0 12px 2px rgba(6, 182, 212, 0.4);
+    }
+    50% {
+        box-shadow: inset 0 0 20px 4px rgba(6, 182, 212, 0.8);
+    }
 }
 
 .hint-source {
-    animation: pulse-hint-source 2s ease-in-out infinite;
-    background-color: rgba(139, 92, 246, 0.18) !important;
-    border: 2px dashed rgba(139, 92, 246, 0.65) !important;
+    animation: pulse-hint 2s infinite ease-in-out;
+    background-color: rgba(139, 92, 246, 0.15) !important;
+    border: 2px dashed rgba(139, 92, 246, 0.6) !important;
     box-sizing: border-box;
 }
 
 .hint-target {
-    animation: pulse-hint-target 2s ease-in-out infinite;
-    background-color: rgba(6, 182, 212, 0.18) !important;
-    border: 2px dashed rgba(6, 182, 212, 0.65) !important;
+    animation: pulse-hint-target 2s infinite ease-in-out;
+    background-color: rgba(6, 182, 212, 0.15) !important;
+    border: 2px dashed rgba(6, 182, 212, 0.6) !important;
     box-sizing: border-box;
 }

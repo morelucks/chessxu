@@ -1,12 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AppConfig, UserSession } from '@stacks/connect';
 
-// Stacks Configuration
-const appConfig = new AppConfig(['store_write', 'publish_data']);
-export const userSession = new UserSession({ appConfig });
-
-export type ChainType = 'stacks' | 'celo';
+export type ChainType = 'celo';
 
 export interface FarcasterUser {
   fid: number;
@@ -18,7 +13,6 @@ export interface FarcasterUser {
 
 export interface AuthState {
   address: string | null; // Currently active chain address
-  stacksAddress: string | null;
   celoAddress: string | null;
   activeChain: ChainType;
   isAuthenticated: boolean;
@@ -31,6 +25,7 @@ export interface AuthState {
   isConnectModalOpen: boolean;
 }
 
+// ── AI Hint state types ──────────────────────────────────────────────────────
 export interface AiHint {
   piece: string;
   fromX: number;
@@ -48,18 +43,24 @@ export interface GameState {
   elo: number;
   chessBalance: number;
   timeControlMs: number | null;
-  /** Whether the AI hint feature is enabled */
   isAiHintsEnabled: boolean;
-  /** Whether to overlay hint arrows/colours on the board tiles */
   showHintOnBoard: boolean;
-  /** Currently active hint (null when computing or feature is off) */
   activeAiHint: AiHint | null;
+  activeAiHint: {
+    piece: string;
+    fromX: number;
+    fromY: number;
+    toX: number;
+    toY: number;
+    notation: string;
+    description: string;
+    evaluation: number;
+  } | null;
 }
 
 export interface AppStore extends AuthState, GameState {
   // Actions
   setAddress: (address: string | null) => void;
-  setStacksAddress: (address: string | null) => void;
   setCeloAddress: (address: string | null) => void;
   setActiveChain: (chain: ChainType) => void;
   setIsLoading: (isLoading: boolean) => void;
@@ -76,7 +77,7 @@ export interface AppStore extends AuthState, GameState {
   setConnectModalOpen: (open: boolean) => void;
   setAiHintsEnabled: (enabled: boolean) => void;
   setShowHintOnBoard: (show: boolean) => void;
-  setActiveAiHint: (hint: AiHint | null) => void;
+  setActiveAiHint: (hint: any | null) => void;
   logout: () => void;
 }
 
@@ -85,7 +86,6 @@ const useAppStore = create<AppStore>()(
     (set, get) => ({
       // Authentication State
       address: null,
-      stacksAddress: null,
       celoAddress: null,
       activeChain: 'celo',
       isAuthenticated: false,
@@ -109,31 +109,14 @@ const useAppStore = create<AppStore>()(
 
       // Actions
       setAddress: (address: string | null) => {
-        const { activeChain } = get();
-        if (activeChain === 'stacks') {
-            set({ stacksAddress: address, address, isAuthenticated: !!address });
-        } else {
-            set({ celoAddress: address, address, isAuthenticated: !!address });
-        }
-      },
-      setStacksAddress: (stacksAddress: string | null) => {
-        const { activeChain } = get();
-        set({ stacksAddress });
-        if (activeChain === 'stacks') {
-            set({ address: stacksAddress, isAuthenticated: !!stacksAddress });
-        }
+        set({ celoAddress: address, address, isAuthenticated: !!address });
       },
       setCeloAddress: (celoAddress: string | null) => {
-        const { activeChain } = get();
-        set({ celoAddress });
-        if (activeChain === 'celo') {
-            set({ address: celoAddress, isAuthenticated: !!celoAddress });
-        }
+        set({ celoAddress, address: celoAddress, isAuthenticated: !!celoAddress });
       },
       setActiveChain: (activeChain: ChainType) => {
-        const { stacksAddress, celoAddress } = get();
-        const address = activeChain === 'stacks' ? stacksAddress : celoAddress;
-        set({ activeChain, address, isAuthenticated: !!address });
+        const { celoAddress } = get();
+        set({ activeChain, address: celoAddress, isAuthenticated: !!celoAddress });
       },
       setIsLoading: (isLoading: boolean) => set({ isLoading }),
       setIsFarcaster: (isFarcaster: boolean) => set({ isFarcaster }),
@@ -150,12 +133,10 @@ const useAppStore = create<AppStore>()(
       setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
       setAiHintsEnabled: (isAiHintsEnabled: boolean) => set({ isAiHintsEnabled }),
       setShowHintOnBoard: (showHintOnBoard: boolean) => set({ showHintOnBoard }),
-      setActiveAiHint: (activeAiHint: AiHint | null) => set({ activeAiHint }),
+      setActiveAiHint: (activeAiHint: any | null) => set({ activeAiHint }),
       logout: () => {
-        userSession.signUserOut();
         set({ 
             address: null, 
-            stacksAddress: null, 
             celoAddress: null, 
             isAuthenticated: false, 
             isFarcaster: false,

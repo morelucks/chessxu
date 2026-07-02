@@ -37,3 +37,6 @@ const useAiHint = (appState, depth = 3) => {
 
         // Tag this run; discard results from a superseded render
         const runId = ++activeRunRef.current;
+
+        // Defer heavy minimax work to next event-loop tick
+        const timerId = setTimeout(() => {

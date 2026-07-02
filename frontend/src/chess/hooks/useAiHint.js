@@ -12,3 +12,4 @@ import { getBestMove } from '../ai/chessAnalysis';
  * @param {number} [depth=3]  - minimax search depth
  */
 const useAiHint = (appState, depth = 3) => {
+    const isAiHintsEnabled = useAppStore((s) => s.isAiHintsEnabled);

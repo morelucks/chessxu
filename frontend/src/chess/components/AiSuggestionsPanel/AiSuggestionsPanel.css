@@ -48,3 +48,4 @@
 .ai-card__header { display:flex; align-items:center; justify-content:space-between; }
 .ai-badge { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--primary-button-bg,#61afef); background:rgba(97,175,239,0.12); border-radius:4px; padding:2px 7px; }
 .ai-eval { font-size:0.8rem; font-weight:700; padding:2px 8px; border-radius:999px; }
+.ai-eval--pos { background:rgba(152,195,121,0.15); color:#98c379; }

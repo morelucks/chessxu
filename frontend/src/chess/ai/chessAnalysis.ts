@@ -206,3 +206,4 @@ function minimax(
     prevPosition?: string[][],
 ): number {
     if (depth === 0) return evaluateBoard(position);
+    const turn = maximising ? 'w' : 'b';

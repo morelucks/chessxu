@@ -105,3 +105,4 @@ export function evaluateBoard(position: string[][]): number {
         for (let f = 0; f < 8; f++) {
             const piece = position[r][f];
             if (!piece) continue;
+            const sign = piece[0] === 'w' ? 1 : -1;

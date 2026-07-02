@@ -124,3 +124,6 @@ export interface SuggestedMove {
     piece: string;
     fromX: number;
     fromY: number;
+    toX: number;
+    toY: number;
+    notation: string;

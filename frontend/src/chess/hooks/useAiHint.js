@@ -29,3 +29,5 @@ const useAiHint = (appState, depth = 3) => {
         const playerColor  = appState.playerColor ?? 'w';
         const isPlayerTurn = appState.turn === playerColor;
         if (!isPlayerTurn) { setActiveAiHint(null); return; }
+
+        const currentPosition = appState.position[appState.position.length - 1];

@@ -92,3 +92,4 @@ const AiSuggestionsPanel = ({ appState }) => {
 
 export default AiSuggestionsPanel;
     // aria-live on ai-card ensures screen readers announce hint changes
+    // isPlayerTurn check prevents showing stale hint for opponent moves

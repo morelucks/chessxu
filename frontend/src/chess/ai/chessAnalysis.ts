@@ -144,3 +144,6 @@ export function getMoveDescription(piece: string, fromX: number, fromY: number, 
     if (piece.endsWith('k') && Math.abs(fromY - toY) === 2) {
         return toY > fromY ? 'Castles Kingside' : 'Castles Queenside';
     }
+    const names: Record<string,string> = { p:'Pawn',n:'Knight',b:'Bishop',r:'Rook',q:'Queen',k:'King' };
+    return `${names[piece[1]] ?? 'Piece'} to ${to} (${from} → ${to})`;
+}

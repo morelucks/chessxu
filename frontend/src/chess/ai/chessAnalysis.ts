@@ -260,3 +260,5 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
     const notation = getStandardNotation(bestMove.piece, bestMove.rank, bestMove.file, bestMove.x, bestMove.y, isCapture);
     const description = getMoveDescription(bestMove.piece, bestMove.rank, bestMove.file, bestMove.x, bestMove.y);
     const evaluation = (isWhite ? bestValue : -bestValue) / 100;
+    return { piece: bestMove.piece, fromX: bestMove.rank, fromY: bestMove.file, toX: bestMove.x, toY: bestMove.y, notation, description, evaluation };
+}

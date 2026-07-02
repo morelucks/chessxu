@@ -65,3 +65,5 @@ const AiSuggestionsPanel = ({ appState }) => {
                             <span className="ai-spinner" aria-hidden="true" />
                             <span>Analysing board…</span>
                         </div>
+                    ) : (
+                        <div className="ai-card" aria-live="polite">

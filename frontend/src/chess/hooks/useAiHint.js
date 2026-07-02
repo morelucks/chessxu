@@ -72,3 +72,4 @@ export default useAiHint;
 // Hint updates on every position change -- covers both player and undo moves
 // depth=3 chosen for <100ms computation on mid-range mobile devices
 // runId pattern prevents React StrictMode double-invoke race condition
+// setActiveAiHint(null) on cleanup prevents flash of stale hint

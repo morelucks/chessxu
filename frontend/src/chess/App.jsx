@@ -210,6 +210,7 @@ function App() {
                     />
                     <MovesList/>
                     <TakeBack/>
+                    <AiSuggestionsPanel appState={appState} />
                     <Leaderboard results={leaderboardResults} onClear={handleClearLeaderboard} />
                 </Control>
                 

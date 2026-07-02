@@ -215,3 +215,4 @@ function minimax(
     }
     if (maximising) {
         let best = -Infinity;
+        for (const m of moves) {

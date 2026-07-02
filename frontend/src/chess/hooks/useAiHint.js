@@ -73,3 +73,4 @@ export default useAiHint;
 // depth=3 chosen for <100ms computation on mid-range mobile devices
 // runId pattern prevents React StrictMode double-invoke race condition
 // setActiveAiHint(null) on cleanup prevents flash of stale hint
+// appState.castleDirection required for accurate castle-move generation

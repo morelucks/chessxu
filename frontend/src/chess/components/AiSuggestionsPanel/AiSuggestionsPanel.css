@@ -64,3 +64,4 @@
 /* ai-eval--pos and ai-eval--neg use app colour palette #98c379 / #e06c75 */
 /* Responsive breakpoint at 768px reduces padding and notation font-size */
 /* .ai-card border uses rgba(97,175,239,0.18) matching --primary-button-bg alpha */
+/* Toggle uses CSS-only animation -- no JS required for visual feedback */

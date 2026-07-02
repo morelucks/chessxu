@@ -79,3 +79,4 @@ export default useAiHint;
 // Feature can be toggled mid-game without restarting -- state persists
 // useEffect deps array is exhaustive to satisfy react-hooks/exhaustive-deps
 // Hook is lightweight -- adds no visible UI of its own
+// Timeout id stored in closure -- not in state -- to avoid re-renders

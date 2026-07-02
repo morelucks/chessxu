@@ -17,3 +17,5 @@ const useAiHint = (appState, depth = 3) => {
 
     // Ref to cancel stale async computations on re-render
     const activeRunRef = useRef(0);
+
+    useEffect(() => {

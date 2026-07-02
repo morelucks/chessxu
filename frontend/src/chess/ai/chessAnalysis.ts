@@ -118,3 +118,5 @@ export function toAlgebraic(x: number, y: number): string {
     const ranks = ['1','2','3','4','5','6','7','8'];
     return `${files[y] ?? '?'}${ranks[x] ?? '?'}`;
 }
+
+// ── Public types ────────────────────────────────────────────────────────────

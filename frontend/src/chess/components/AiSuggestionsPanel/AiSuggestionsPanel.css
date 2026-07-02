@@ -42,3 +42,6 @@
 .ai-panel__loading { display:flex; align-items:center; gap:10px; font-size:0.82rem; color:#718096; padding:6px 0; }
 .ai-spinner { display:inline-block; width:16px; height:16px; border:2px solid rgba(97,175,239,0.25); border-top-color:var(--primary-button-bg,#61afef); border-radius:50%; animation:ai-spin 0.7s linear infinite; flex-shrink:0; }
 @keyframes ai-spin { to { transform: rotate(360deg); } }
+
+/* ── Recommendation card ── */
+.ai-card { background:rgba(97,175,239,0.07); border:1px solid rgba(97,175,239,0.18); border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:8px; }

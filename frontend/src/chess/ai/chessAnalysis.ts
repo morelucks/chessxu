@@ -83,3 +83,4 @@ const kingPST = [
 ];
 
 // ── PST lookup helper ───────────────────────────────────────────────────────
+function getPstValue(piece: string, x: number, y: number): number {

@@ -54,6 +54,11 @@ const Board = () => {
             c+= ' checked'
         }
 
+        if (showHintOnBoard && activeAiHint) {
+            if (activeAiHint.fromX === i && activeAiHint.fromY === j) c += ' hint-source'
+            else if (activeAiHint.toX === i && activeAiHint.toY === j) c += ' hint-target'
+        }
+
         return c
     }
 

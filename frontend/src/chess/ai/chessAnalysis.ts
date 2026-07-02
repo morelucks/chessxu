@@ -89,3 +89,5 @@ function getPstValue(piece: string, x: number, y: number): number {
     const row = isWhite ? (7 - x) : x;
     switch (type) {
         case 'p': return pawnPST[row][y];
+        case 'n': return knightPST[row][y];
+        case 'b': return bishopPST[row][y];

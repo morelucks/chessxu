@@ -244,3 +244,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
     const isWhite = turn === 'w';
     const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
     if (moves.length === 0) return null;
+    moves.sort(() => Math.random() - 0.5);

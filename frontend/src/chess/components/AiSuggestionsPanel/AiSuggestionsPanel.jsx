@@ -42,3 +42,13 @@ const AiSuggestionsPanel = ({ appState }) => {
                 {isAiHintsEnabled && (
                     <label className="ai-toggle-row" htmlFor="ai-board-overlay-toggle">
                         <span className="ai-toggle-label">Highlight on Board</span>
+                        <span className="ai-switch">
+                            <input id="ai-board-overlay-toggle" type="checkbox"
+                                checked={showHintOnBoard}
+                                onChange={(e) => setShowHintOnBoard(e.target.checked)}
+                                aria-checked={showHintOnBoard} />
+                            <span className="ai-switch__track" />
+                        </span>
+                    </label>
+                )}
+            </div>

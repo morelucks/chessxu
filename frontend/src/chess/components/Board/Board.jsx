@@ -1,5 +1,6 @@
 import './Board.css'
 import { useAppContext }from '../../contexts/Context'
+import useAppStore from '../../../zustand/store'
 
 import Ranks from './bits/Ranks'
 import Files from './bits/Files'
@@ -22,6 +23,9 @@ const Board = () => {
 
     const { appState, dispatch } = useAppContext();
     const position = appState.position[appState.position.length - 1]
+
+    const showHintOnBoard = useAppStore(state => state.showHintOnBoard);
+    const activeAiHint = useAppStore(state => state.activeAiHint);
 
     const checkTile = (() => {
         const isInCheck =  (arbiter.isPlayerInCheck({
@@ -47,6 +51,14 @@ const Board = () => {
 
         if (checkTile && checkTile[0] === i && checkTile[1] === j) {
             c+= ' checked'
+        }
+
+        if (showHintOnBoard && activeAiHint) {
+            if (activeAiHint.fromX === i && activeAiHint.fromY === j) {
+                c += ' hint-source'
+            } else if (activeAiHint.toX === i && activeAiHint.toY === j) {
+                c += ' hint-target'
+            }
         }
 
         return c

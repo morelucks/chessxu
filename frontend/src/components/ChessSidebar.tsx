@@ -21,7 +21,6 @@ import PlayerEloCard from './PlayerEloCard';
 import GameStatusBanner from './GameStatusBanner';
 import ResignButton from './ResignButton';
 import { useGameState } from '../chess/hooks/useGameState';
-import { useStacksChess } from '../hooks/useStacksChess';
 import useAppStore from '../zustand/store';
 import './ChessSidebar.css';
 
@@ -279,9 +278,7 @@ export default function ChessSidebar() {
             : null;
     const [leaderboardResults, setLeaderboardResults] = useState<LeaderboardResult[]>([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
-    const { isMyTurn } = useStacksChess();
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
-    isMyTurn(gameState, address || ''); // just evaluating the hook if side effects are expected
 
     // Always clear any persisted active stake on refresh/mount
     useEffect(() => {

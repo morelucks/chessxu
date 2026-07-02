@@ -35,8 +35,6 @@ export default defineConfig(({ command }) => {
     plugins: [react(), wasm()],
     resolve: {
       alias: [
-        { find: /^@stacks\/connect-react$/, replacement: path.resolve('./node_modules/@stacks/connect-react/dist/index.js') },
-        { find: /^@stacks\/connect$/, replacement: path.resolve('./node_modules/@stacks/connect/dist/index.js') },
         { find: /^react-router$/, replacement: path.resolve('./node_modules/react-router/dist/development/index.js') },
       ],
     },

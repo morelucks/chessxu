@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Gamepad2, Palette, Sparkles, Award, ShoppingBag, Coins, Gift, Info, Check, Loader2 } from 'lucide-react';
 import useAppStore from '../../zustand/store';
 import './ShopPage.css';
-import { openSTXTransfer } from '@stacks/connect';
-import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
-import { NETWORK, CHESSXU_DEPLOYER, CELO_CONFIG } from '../../chess/blockchainConstants';
+import { CELO_CONFIG } from '../../chess/blockchainConstants';
 import celoService from '../../chess/services/celoService';
 import { formatEther, parseEther } from 'viem';
 
@@ -75,18 +73,8 @@ export default function ShopPage() {
     if (!address) return;
     setIsLoadingBalance(true);
     try {
-      if (activeChain === 'stacks') {
-        const apiHost = NETWORK === 'mainnet' ? 'https://api.mainnet.hiro.so' : 'https://api.testnet.hiro.so';
-        const res = await fetch(`${apiHost}/extended/v1/address/${address}/balances`);
-        if (res.ok) {
-          const data = await res.json();
-          const stxMicro = data.stx?.balance || '0';
-          setWalletBalance((parseInt(stxMicro) / 1_000_000).toFixed(4));
-        }
-      } else {
-        const nativeBalance = await celoService.getNativeBalance(address as `0x${string}`);
-        setWalletBalance(parseFloat(formatEther(nativeBalance)).toFixed(4));
-      }
+      const nativeBalance = await celoService.getNativeBalance(address as `0x${string}`);
+      setWalletBalance(parseFloat(formatEther(nativeBalance)).toFixed(4));
     } catch (err) {
       console.error('Error fetching balance:', err);
     } finally {
@@ -139,59 +127,31 @@ export default function ShopPage() {
     setBuyingItemId(item.id);
 
     try {
-      if (activeChain === 'stacks') {
-        const stacksNetwork = NETWORK === 'mainnet' ? STACKS_MAINNET : STACKS_TESTNET;
-        const microStx = (price * 1_000_000).toString();
+      await celoService.ensureCorrectNetwork();
+      const walletClient = celoService.getWalletClient();
+      const [account] = await walletClient.requestAddresses();
+      const value = parseEther(price.toString());
 
-        await new Promise<string>((resolve, reject) => {
-          openSTXTransfer({
-            recipient: CHESSXU_DEPLOYER,
-            amount: microStx,
-            memo: `Purchase ${item.name}`,
-            network: stacksNetwork,
-            onFinish: (data) => {
-              resolve(data.txId);
-            },
-            onCancel: () => {
-              reject(new Error('Transaction cancelled by user.'));
-            }
-          });
-        });
+      const txHash = await walletClient.sendTransaction({
+        to: CELO_CONFIG.PAYMENT_RECIPIENT as `0x${string}`,
+        value,
+        account,
+        ...celoService.getTxOptions(),
+      });
 
-        const nextOwned = [...ownedItems, item.id];
-        setOwnedItems(nextOwned);
-        localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
-        triggerToast(`Successfully purchased ${item.name}!`, 'success');
+      triggerToast('Transaction submitted. Verifying payment...', 'success');
 
-        // Delay checking next balance
-        setTimeout(() => refreshWalletBalance(), 5000);
-      } else {
-        await celoService.ensureCorrectNetwork();
-        const walletClient = celoService.getWalletClient();
-        const [account] = await walletClient.requestAddresses();
-        const value = parseEther(price.toString());
-
-        const txHash = await walletClient.sendTransaction({
-          to: CELO_CONFIG.PAYMENT_RECIPIENT as `0x${string}`,
-          value,
-          account,
-          ...celoService.getTxOptions(),
-        });
-
-        triggerToast('Transaction submitted. Verifying payment...', 'success');
-
-        const receipt = await celoService.waitForTransactionReceipt(txHash);
-        if (receipt.status !== 'success') {
-          throw new Error('Transaction execution failed on-chain.');
-        }
-
-        const nextOwned = [...ownedItems, item.id];
-        setOwnedItems(nextOwned);
-        localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
-        triggerToast(`Successfully purchased ${item.name}!`, 'success');
-
-        await refreshWalletBalance();
+      const receipt = await celoService.waitForTransactionReceipt(txHash);
+      if (receipt.status !== 'success') {
+        throw new Error('Transaction execution failed on-chain.');
       }
+
+      const nextOwned = [...ownedItems, item.id];
+      setOwnedItems(nextOwned);
+      localStorage.setItem('chessxu-owned-items', JSON.stringify(nextOwned));
+      triggerToast(`Successfully purchased ${item.name}!`, 'success');
+
+      await refreshWalletBalance();
     } catch (error: any) {
       console.error('Purchase error:', error);
       const msg = error?.message || 'Transaction failed.';

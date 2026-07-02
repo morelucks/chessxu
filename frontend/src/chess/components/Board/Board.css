@@ -84,3 +84,6 @@
     border: 2px dashed rgba(139,92,246,0.65) !important;
     box-sizing: border-box;
 }
+
+.hint-target {
+    animation: pulse-hint-target 2s ease-in-out infinite;

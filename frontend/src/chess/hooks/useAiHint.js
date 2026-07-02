@@ -75,3 +75,4 @@ export default useAiHint;
 // setActiveAiHint(null) on cleanup prevents flash of stale hint
 // appState.castleDirection required for accurate castle-move generation
 // useAiHint can be reused in any component with access to chess appState
+// prevPosition passed for correct en-passant candidate generation

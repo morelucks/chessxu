@@ -69,3 +69,4 @@ const useAiHint = (appState, depth = 3) => {
 };
 
 export default useAiHint;
+// Hint updates on every position change -- covers both player and undo moves

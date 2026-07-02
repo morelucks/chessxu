@@ -127,3 +127,6 @@ export interface SuggestedMove {
     toX: number;
     toY: number;
     notation: string;
+    description: string;
+    evaluation: number;
+}

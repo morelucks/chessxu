@@ -1,39 +1,22 @@
-import { showConnect } from "@stacks/connect";
-import useAppStore, { userSession } from "../zustand/store";
+import useAppStore from "../zustand/store";
 import celoService from "../chess/services/celoService";
 import { sdk } from "@farcaster/miniapp-sdk";
-
-function getSessionAddress() {
-  if (!userSession.isUserSignedIn()) {
-    return null;
-  }
-
-  const userData = userSession.loadUserData();
-  return userData.profile.stxAddress.mainnet || userData.profile.stxAddress.testnet || null;
-}
 
 interface ConnectOptions {
   onFinish?: (address: string | null) => void;
   onCancel?: () => void;
-  chain?: 'stacks' | 'celo' | 'farcaster';
+  chain?: 'celo' | 'farcaster';
 }
 
 export function useWalletAuth() {
   const address = useAppStore((state) => state.address);
   const isLoading = useAppStore((state) => state.isLoading);
   const setAddress = useAppStore((state) => state.setAddress);
-  const setStacksAddress = useAppStore((state) => state.setStacksAddress);
   const setCeloAddress = useAppStore((state) => state.setCeloAddress);
   const setActiveChain = useAppStore((state) => state.setActiveChain);
   const setIsLoading = useAppStore((state) => state.setIsLoading);
   const logout = useAppStore((state) => state.logout);
   const setConnectModalOpen = useAppStore((state) => state.setConnectModalOpen);
-
-  const syncAddressFromSession = () => {
-    const nextAddress = getSessionAddress();
-    setAddress(nextAddress);
-    return nextAddress;
-  };
 
   const connect = async ({ onFinish, onCancel, chain }: ConnectOptions = {}) => {
     const { isFarcaster, miniPayDetected } = useAppStore.getState();
@@ -93,59 +76,19 @@ export function useWalletAuth() {
         return;
       }
 
-      // Detect if we should use Celo (EVM environments) or Stacks
-      const targetChain = chain || (ethereum ? 'celo' : 'stacks');
-
-      console.log(`Connecting to ${targetChain}...`);
-
-      if (targetChain === 'celo') {
-        try {
-          if (!ethereum) {
-            throw new Error("No EVM wallet found (like MetaMask or Farcaster)");
-          }
-          const celoAddr = await celoService.connectWallet();
-          setCeloAddress(celoAddr);
-          setAddress(celoAddr);
-          setActiveChain('celo');
-          setIsLoading(false);
-          onFinish?.(celoAddr);
-        } catch (error) {
-          console.error("Celo connection failed:", error);
-          setIsLoading(false);
-          onCancel?.();
-        }
-        return;
-      }
-
-      // Default to Stacks
+      // Celo connection (default)
       try {
-        // Set activeChain BEFORE syncing address so setAddress stores
-        // the value in the correct slot (stacksAddress, not celoAddress).
-        setActiveChain('stacks');
-
-        showConnect({
-          userSession,
-          appDetails: {
-            name: "Chessxu",
-            icon: window.location.origin + "/favicon.ico",
-          },
-          onFinish: () => {
-            const nextAddress = syncAddressFromSession();
-            // Explicitly populate stacksAddress in case setAddress
-            // resolved before the activeChain update propagated.
-            if (nextAddress) {
-              setStacksAddress(nextAddress);
-            }
-            setIsLoading(false);
-            onFinish?.(nextAddress);
-          },
-          onCancel: () => {
-            setIsLoading(false);
-            onCancel?.();
-          },
-        });
-      } catch (stacksError) {
-        console.error("Stacks showConnect error:", stacksError);
+        if (!ethereum) {
+          throw new Error("No EVM wallet found (like MetaMask or Farcaster)");
+        }
+        const celoAddr = await celoService.connectWallet();
+        setCeloAddress(celoAddr);
+        setAddress(celoAddr);
+        setActiveChain('celo');
+        setIsLoading(false);
+        onFinish?.(celoAddr);
+      } catch (error) {
+        console.error("Celo connection failed:", error);
         setIsLoading(false);
         onCancel?.();
       }
@@ -162,7 +105,5 @@ export function useWalletAuth() {
     isConnecting: isLoading,
     connect,
     disconnect: logout,
-    syncAddressFromSession,
   };
 }
-

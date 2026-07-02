@@ -35,3 +35,6 @@
 .ai-switch input:checked + .ai-switch__track { background: var(--primary-button-bg, #61afef); }
 .ai-switch input:checked + .ai-switch__track::after { transform: translateX(18px); }
 .ai-switch input:focus-visible + .ai-switch__track { outline: 2px solid var(--primary-button-bg,#61afef); outline-offset: 2px; }
+
+/* ── Content area ── */
+.ai-panel__content { display: flex; flex-direction: column; gap: 8px; }

@@ -224,3 +224,4 @@ function minimax(
         return best;
     } else {
         let best = Infinity;
+        for (const m of moves) {

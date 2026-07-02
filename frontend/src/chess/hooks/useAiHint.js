@@ -61,3 +61,9 @@ const useAiHint = (appState, depth = 3) => {
         appState?.position,
         appState?.turn,
         appState?.status,
+        appState?.playerColor,
+        appState?.castleDirection,
+        setActiveAiHint,
+        depth,
+    ]);
+};

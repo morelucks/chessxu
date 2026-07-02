@@ -147,3 +147,5 @@ export function getMoveDescription(piece: string, fromX: number, fromY: number, 
     const names: Record<string,string> = { p:'Pawn',n:'Knight',b:'Bishop',r:'Rook',q:'Queen',k:'King' };
     return `${names[piece[1]] ?? 'Piece'} to ${to} (${from} → ${to})`;
 }
+
+export function getStandardNotation(piece: string, fromX: number, fromY: number, toX: number, toY: number, isCapture: boolean): string {

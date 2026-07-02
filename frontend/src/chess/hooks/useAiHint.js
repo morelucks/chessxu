@@ -78,3 +78,4 @@ export default useAiHint;
 // prevPosition passed for correct en-passant candidate generation
 // Feature can be toggled mid-game without restarting -- state persists
 // useEffect deps array is exhaustive to satisfy react-hooks/exhaustive-deps
+// Hook is lightweight -- adds no visible UI of its own

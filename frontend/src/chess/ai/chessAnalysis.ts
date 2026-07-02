@@ -10,3 +10,4 @@ const PIECE_VALUES: Record<string, number> = {
     p: 100,
     n: 320,
     b: 330,
+    r: 500,

@@ -20,3 +20,5 @@ const AiSuggestionsPanel = ({ appState }) => {
 
     return (
         <div className="ai-panel" role="region" aria-label="AI Suggestions">
+            {/* Header */}
+            <div className="ai-panel__header">

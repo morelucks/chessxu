@@ -182,3 +182,5 @@ function getAllValidMoves(
 ): RawMove[] {
     const pieces = getPieces(position, turn);
     const moves: RawMove[] = [];
+    pieces.forEach(p => {
+        const dir = castleDirection[turn as keyof typeof castleDirection];

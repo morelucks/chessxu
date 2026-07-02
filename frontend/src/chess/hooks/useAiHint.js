@@ -67,3 +67,5 @@ const useAiHint = (appState, depth = 3) => {
         depth,
     ]);
 };
+
+export default useAiHint;

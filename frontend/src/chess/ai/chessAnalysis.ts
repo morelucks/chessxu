@@ -230,3 +230,6 @@ function minimax(
             beta = Math.min(beta, best);
             if (beta <= alpha) break;
         }
+        return best;
+    }
+}

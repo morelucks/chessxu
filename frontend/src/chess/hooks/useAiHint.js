@@ -31,3 +31,6 @@ const useAiHint = (appState, depth = 3) => {
         if (!isPlayerTurn) { setActiveAiHint(null); return; }
 
         const currentPosition = appState.position[appState.position.length - 1];
+        const prevPosition = appState.position.length > 1
+            ? appState.position[appState.position.length - 2]
+            : undefined;

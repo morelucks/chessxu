@@ -177,3 +177,6 @@ interface RawMove {
 function getAllValidMoves(
     position: string[][],
     turn: string,
+    castleDirection: { w: string; b: string },
+    prevPosition?: string[][],
+): RawMove[] {

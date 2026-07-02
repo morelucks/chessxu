@@ -113,3 +113,8 @@ export function evaluateBoard(position: string[][]): number {
 }
 
 // ── Algebraic notation helpers ──────────────────────────────────────────────
+export function toAlgebraic(x: number, y: number): string {
+    const files = ['a','b','c','d','e','f','g','h'];
+    const ranks = ['1','2','3','4','5','6','7','8'];
+    return `${files[y] ?? '?'}${ranks[x] ?? '?'}`;
+}

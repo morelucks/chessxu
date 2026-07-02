@@ -188,3 +188,7 @@ function getAllValidMoves(
             position, castleDirection: dir, prevPosition,
             piece: p.piece, rank: p.rank, file: p.file,
         });
+        valid.forEach(([x, y]) => {
+            moves.push({ piece: p.piece, rank: p.rank, file: p.file, x, y });
+        });
+    });

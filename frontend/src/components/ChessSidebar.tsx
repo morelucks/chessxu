@@ -179,6 +179,90 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
     );
 };
 
+// AI Suggestions Component
+const AiSuggestionsPanel = ({ appState }: { appState: any }) => {
+    const isAiHintsEnabled = useAppStore((s) => s.isAiHintsEnabled);
+    const setAiHintsEnabled = useAppStore((s) => s.setAiHintsEnabled);
+    const showHintOnBoard = useAppStore((s) => s.showHintOnBoard);
+    const setShowHintOnBoard = useAppStore((s) => s.setShowHintOnBoard);
+    const activeAiHint = useAppStore((s) => s.activeAiHint);
+
+    const isOngoing = appState.status === 'Ongoing';
+    const isPlayerTurn = appState.turn === appState.playerColor;
+
+    return (
+        <div className="chess-ai-suggestions">
+            <h3 className="chess-sidebar-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: 'none', paddingBottom: 0, margin: 0 }}>
+                <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#e2e8f0' }}>AI Suggestions</span>
+                <span style={{ fontSize: '1rem' }}>🧠</span>
+            </h3>
+
+            <div className="ai-controls">
+                <div className="ai-control-row">
+                    <span className="ai-control-label">Enable AI Hints</span>
+                    <label className="switch">
+                        <input 
+                            type="checkbox" 
+                            checked={isAiHintsEnabled} 
+                            onChange={(e) => setAiHintsEnabled(e.target.checked)} 
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+
+                {isAiHintsEnabled && (
+                    <div className="ai-control-row">
+                        <span className="ai-control-label">Highlight on Board</span>
+                        <label className="switch">
+                            <input 
+                                type="checkbox" 
+                                checked={showHintOnBoard} 
+                                onChange={(e) => setShowHintOnBoard(e.target.checked)} 
+                            />
+                            <span className="slider"></span>
+                        </label>
+                    </div>
+                )}
+            </div>
+
+            {isAiHintsEnabled && (
+                <div className="ai-suggestion-content">
+                    {!isOngoing ? (
+                        <p className="ai-status-msg">Start a game to see suggestions.</p>
+                    ) : !isPlayerTurn ? (
+                        <p className="ai-status-msg">Waiting for your turn... ⏱️</p>
+                    ) : !activeAiHint ? (
+                        <div className="ai-loading">
+                            <div className="ai-spinner"></div>
+                            <span>Analyzing board...</span>
+                        </div>
+                    ) : (
+                        <div className="ai-recommendation-card">
+                            <div className="ai-rec-header">
+                                <span className="ai-badge">Best Move</span>
+                                <span className={`ai-eval-badge ${activeAiHint.evaluation >= 0 ? 'eval-positive' : 'eval-negative'}`}>
+                                    {activeAiHint.evaluation >= 0 ? `+${activeAiHint.evaluation.toFixed(2)}` : activeAiHint.evaluation.toFixed(2)}
+                                </span>
+                            </div>
+                            <div className="ai-move-notation">{activeAiHint.notation}</div>
+                            <div className="ai-move-description">{activeAiHint.description}</div>
+                            <div className="ai-move-tip">
+                                {activeAiHint.evaluation >= 2 ? (
+                                    "✨ Strong advantage. Continue pressing your opponent."
+                                ) : activeAiHint.evaluation <= -2 ? (
+                                    "⚠️ Opponent has the upper hand. Play defensively."
+                                ) : (
+                                    "⚖️ Equal position. Expand carefully and control the center."
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
 // Main Chess Sidebar Component
 /**
  * Main chess sidebar that renders controls, stake info and leaderboard tabs.
@@ -273,6 +357,7 @@ export default function ChessSidebar() {
                         onShowStakingModal={setShowStakingModal}
                     />
                     <TakeBackButton />
+                    <AiSuggestionsPanel appState={appState} />
                     {/* Resign only shown in PvP with an active game */}
                     {gameMode === 'pvp' && <ResignButton />}
                     {/* Stake section always visible under controls */}

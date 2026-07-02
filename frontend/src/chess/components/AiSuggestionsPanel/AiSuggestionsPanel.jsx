@@ -76,3 +76,5 @@ const AiSuggestionsPanel = ({ appState }) => {
                             <div className="ai-card__notation">{activeAiHint.notation}</div>
                             <div className="ai-card__description">{activeAiHint.description}</div>
                             <div className="ai-card__tip">
+                                {activeAiHint.evaluation >= 2
+                                    ? '✨ Strong advantage — keep the pressure on.'

@@ -8,3 +8,4 @@ import './AiSuggestionsPanel.css';
 /**
  * @param {{ appState: object }} props
  */
+const AiSuggestionsPanel = ({ appState }) => {

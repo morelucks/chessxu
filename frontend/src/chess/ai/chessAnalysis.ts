@@ -267,3 +267,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // Alpha-beta prunes ~60% of nodes vs pure minimax at same depth
 // PST values based on Tomasz Michniewski simplified evaluation tables
 // King PST rewards castled position (ranks 1-2, files a/b/g/h)
+// Piece shuffle before root search breaks symmetry in opening positions

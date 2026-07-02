@@ -247,3 +247,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
     moves.sort(() => Math.random() - 0.5);
     let bestMove: RawMove | null = null;
     let bestValue = isWhite ? -Infinity : Infinity;
+    for (const m of moves) {

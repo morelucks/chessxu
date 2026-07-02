@@ -196,3 +196,6 @@ function getAllValidMoves(
 }
 
 // ── Minimax with alpha-beta pruning ─────────────────────────────────────────
+function minimax(
+    position: string[][],
+    depth: number,

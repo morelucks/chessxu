@@ -80,3 +80,4 @@
 
 .hint-source {
     animation: pulse-hint-source 2s ease-in-out infinite;
+    background-color: rgba(139,92,246,0.18) !important;

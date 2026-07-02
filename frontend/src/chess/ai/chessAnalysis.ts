@@ -256,3 +256,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
         }
     }
     if (!bestMove) return null;
+    const isCapture = !!position[bestMove.x][bestMove.y];

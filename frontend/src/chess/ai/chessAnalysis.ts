@@ -202,3 +202,6 @@ function minimax(
     alpha: number,
     beta: number,
     maximising: boolean,
+    castleDirection: { w: string; b: string },
+    prevPosition?: string[][],
+): number {

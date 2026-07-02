@@ -19,3 +19,8 @@ const useAiHint = (appState, depth = 3) => {
     const activeRunRef = useRef(0);
 
     useEffect(() => {
+        // Clear hint when feature is off or game not ongoing
+        if (!isAiHintsEnabled || !appState || appState.status !== 'Ongoing') {
+            setActiveAiHint(null);
+            return;
+        }

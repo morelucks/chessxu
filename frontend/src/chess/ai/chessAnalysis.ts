@@ -221,3 +221,6 @@ function minimax(
             alpha = Math.max(alpha, best);
             if (beta <= alpha) break;
         }
+        return best;
+    } else {
+        let best = Infinity;

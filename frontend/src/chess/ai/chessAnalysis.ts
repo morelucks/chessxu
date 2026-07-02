@@ -157,3 +157,5 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
     if (type === 'P') {
         if (isCapture) {
             const files = ['a','b','c','d','e','f','g','h'];
+            return `${files[fromY]}x${target}`;
+        }

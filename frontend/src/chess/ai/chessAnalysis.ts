@@ -14,3 +14,5 @@ const PIECE_VALUES: Record<string, number> = {
     q: 900,
     k: 20000,
 };
+
+// ── Piece-Square Tables ────────────────────────────────────────────────────

@@ -101,3 +101,5 @@ function getPstValue(piece: string, x: number, y: number): number {
 // ── Static board evaluator ──────────────────────────────────────────────────
 export function evaluateBoard(position: string[][]): number {
     let score = 0;
+    for (let r = 0; r < 8; r++) {
+        for (let f = 0; f < 8; f++) {

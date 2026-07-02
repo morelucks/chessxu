@@ -277,3 +277,4 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 // toAlgebraic maps [row,col] to standard chess square notation (a1-h8)
 // Mate scores use +/-150000 to dominate any material evaluation
 // getRookMoves and getBishopMoves already defined in arbiter getMoves.js
+// All exported functions are pure -- no side effects or global mutation

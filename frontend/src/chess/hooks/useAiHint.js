@@ -74,3 +74,4 @@ export default useAiHint;
 // runId pattern prevents React StrictMode double-invoke race condition
 // setActiveAiHint(null) on cleanup prevents flash of stale hint
 // appState.castleDirection required for accurate castle-move generation
+// useAiHint can be reused in any component with access to chess appState

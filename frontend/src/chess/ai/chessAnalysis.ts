@@ -107,3 +107,7 @@ export function evaluateBoard(position: string[][]): number {
             if (!piece) continue;
             const sign = piece[0] === 'w' ? 1 : -1;
             score += sign * ((PIECE_VALUES[piece[1]] ?? 0) + getPstValue(piece, r, f));
+        }
+    }
+    return score;
+}

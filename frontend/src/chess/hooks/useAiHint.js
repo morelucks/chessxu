@@ -56,3 +56,8 @@ const useAiHint = (appState, depth = 3) => {
         }, 0);
 
         return () => clearTimeout(timerId); // cleanup on re-render
+    }, [
+        isAiHintsEnabled,
+        appState?.position,
+        appState?.turn,
+        appState?.status,

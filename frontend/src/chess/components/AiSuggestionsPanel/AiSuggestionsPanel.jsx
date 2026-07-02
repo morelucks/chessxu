@@ -28,3 +28,4 @@ const AiSuggestionsPanel = ({ appState }) => {
 
             {/* Enable / disable toggle */}
             <div className="ai-panel__controls">
+                <label className="ai-toggle-row" htmlFor="ai-hints-toggle">

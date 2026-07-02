@@ -226,3 +226,4 @@ function App() {
 }
 
 export default App;
+    // useAiHint is a side-effect hook -- no returned value needed

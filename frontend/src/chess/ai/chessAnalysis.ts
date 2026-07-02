@@ -120,3 +120,7 @@ export function toAlgebraic(x: number, y: number): string {
 }
 
 // ── Public types ────────────────────────────────────────────────────────────
+export interface SuggestedMove {
+    piece: string;
+    fromX: number;
+    fromY: number;

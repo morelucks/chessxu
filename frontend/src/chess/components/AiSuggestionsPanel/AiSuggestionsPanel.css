@@ -34,3 +34,4 @@
 .ai-switch__track::after { content:''; position:absolute; left:3px; top:3px; width:16px; height:16px; border-radius:50%; background:#fff; transition:transform 0.2s ease; }
 .ai-switch input:checked + .ai-switch__track { background: var(--primary-button-bg, #61afef); }
 .ai-switch input:checked + .ai-switch__track::after { transform: translateX(18px); }
+.ai-switch input:focus-visible + .ai-switch__track { outline: 2px solid var(--primary-button-bg,#61afef); outline-offset: 2px; }

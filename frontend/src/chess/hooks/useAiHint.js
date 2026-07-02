@@ -6,3 +6,8 @@
 import { useEffect, useRef } from 'react';
 import useAppStore from '../../zustand/store';
 import { getBestMove } from '../ai/chessAnalysis';
+
+/**
+ * @param {object} appState  - chess reducer state
+ * @param {number} [depth=3]  - minimax search depth
+ */

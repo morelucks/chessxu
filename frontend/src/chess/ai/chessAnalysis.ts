@@ -139,3 +139,5 @@ export interface SearchOptions {
 }
 
 export function getMoveDescription(piece: string, fromX: number, fromY: number, toX: number, toY: number): string {
+    const from = toAlgebraic(fromX, fromY);
+    const to   = toAlgebraic(toX,   toY);

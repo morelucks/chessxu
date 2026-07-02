@@ -98,3 +98,4 @@ export default AiSuggestionsPanel;
     // Controls always rendered so user can toggle hints mid-game
     // htmlFor wires label clicks to toggle inputs for better usability
     // ai-badge label 'Best Move' kept short for compact sidebar layout
+    // aria-label on region helps screen reader navigation landmarks

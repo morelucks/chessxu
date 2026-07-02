@@ -161,3 +161,5 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
         }
         return target;
     }
+    return `${type}${isCapture ? 'x' : ''}${target}`;
+}

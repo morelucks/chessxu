@@ -199,3 +199,6 @@ function getAllValidMoves(
 function minimax(
     position: string[][],
     depth: number,
+    alpha: number,
+    beta: number,
+    maximising: boolean,

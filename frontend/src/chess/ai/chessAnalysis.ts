@@ -241,3 +241,4 @@ function minimax(
  */
 export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | null {
     const { position, turn, castleDirection, prevPosition } = options;
+    const isWhite = turn === 'w';

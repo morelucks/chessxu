@@ -205,3 +205,4 @@ function minimax(
     castleDirection: { w: string; b: string },
     prevPosition?: string[][],
 ): number {
+    if (depth === 0) return evaluateBoard(position);

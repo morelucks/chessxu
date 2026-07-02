@@ -66,3 +66,4 @@
 /* .ai-card border uses rgba(97,175,239,0.18) matching --primary-button-bg alpha */
 /* Toggle uses CSS-only animation -- no JS required for visual feedback */
 /* All rules scoped to .ai-panel to avoid global CSS conflicts */
+/* ai-card gap:8px matches the outer ai-panel gap for visual rhythm */

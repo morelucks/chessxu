@@ -16,3 +16,4 @@ const PIECE_VALUES: Record<string, number> = {
 };
 
 // ── Piece-Square Tables ────────────────────────────────────────────────────
+const pawnPST = [

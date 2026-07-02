@@ -152,3 +152,5 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
     if (piece.endsWith('k') && Math.abs(fromY - toY) === 2) {
         return toY > fromY ? 'O-O' : 'O-O-O';
     }
+    const type = piece[1].toUpperCase();
+    const target = toAlgebraic(toX, toY);

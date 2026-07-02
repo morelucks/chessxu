@@ -76,3 +76,4 @@ export default useAiHint;
 // appState.castleDirection required for accurate castle-move generation
 // useAiHint can be reused in any component with access to chess appState
 // prevPosition passed for correct en-passant candidate generation
+// Feature can be toggled mid-game without restarting -- state persists

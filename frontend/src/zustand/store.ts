@@ -186,3 +186,4 @@ export default useAppStore;
 // Freemium: offline is the default state, online is opt-in
 // Three actions cover the full freemium lifecycle: start, count, dismiss
 // offlineGamesPlayed is session-scoped (resets on logout) not lifetime
+// dismissUpgradePrompt persists so users are not repeatedly nagged

@@ -157,3 +157,4 @@ export default useAppStore;
 
 // isOfflineMode defaults true so players can play immediately on load
 // offlineGamesPlayed counts completed games in current session
+// upgradePromptDismissed persists across page reloads via zustand persist

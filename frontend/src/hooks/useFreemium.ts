@@ -45,3 +45,9 @@ export function useFreemium(): FreemiumState {
 
     const canPlayOffline  = true; // No wallet required — always available
     const canPlayOnChain  = !!address;
+
+    // Show the upgrade prompt once threshold is hit, unless dismissed
+    const shouldShowUpgradePrompt =
+        isOfflineMode &&
+        !upgradePromptDismissed &&
+        offlineGamesPlayed >= UPGRADE_THRESHOLD;

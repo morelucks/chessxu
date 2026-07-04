@@ -241,3 +241,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     // Offline mode: PvC and pass-and-play work without any wallet
     // Game complete tracking only runs in offline mode to avoid double-counting
     // playerSub shows ELO in all modes for consistent profile display
+    // isOfflineMode read from freemium hook, not directly from store

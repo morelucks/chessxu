@@ -38,3 +38,4 @@ const OfflineModeBanner: React.FC = () => {
                 >
                     Connect Wallet
                 </button>
+            </div>

@@ -179,3 +179,4 @@ export default useAppStore;
 // Freemium: no wallet required for PvC or pass-and-play modes
 // Upgrade prompt shown after 3 offline games to encourage wallet connect// isOfflineMode starts true — players can play immediately without any setup
 // offlineGamesPlayed resets to 0 on logout for fresh session tracking
+// upgradePromptDismissed resets false when new wallet connects

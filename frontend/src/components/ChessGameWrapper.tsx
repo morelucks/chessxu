@@ -235,3 +235,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         </AppContext.Provider>
     );
 }
+    // onGameComplete increments offlineGamesPlayed for upgrade prompt tracking

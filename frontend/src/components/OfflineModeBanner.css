@@ -14,3 +14,11 @@
     font-size: 0.78rem;
     color: #fbbf24;
 }
+
+.offline-banner__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #fbbf24;
+    flex-shrink: 0;
+    animation: offline-pulse 2s ease-in-out infinite;
+}

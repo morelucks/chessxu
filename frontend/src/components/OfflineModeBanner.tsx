@@ -6,3 +6,4 @@
  */
 
 import React from 'react';
+import { useFreemium, UPGRADE_THRESHOLD } from '../hooks/useFreemium';

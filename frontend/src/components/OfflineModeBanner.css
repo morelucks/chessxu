@@ -31,3 +31,16 @@
 .offline-banner__label { font-weight: 700; letter-spacing: 0.03em; flex-shrink: 0; }
 
 .offline-banner__games { margin-left: auto; opacity: 0.8; font-size: 0.72rem; }
+
+.offline-banner__connect-btn {
+    flex-shrink: 0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(251,191,36,0.15);
+    border: 1px solid rgba(251,191,36,0.35);
+    color: #fbbf24;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}

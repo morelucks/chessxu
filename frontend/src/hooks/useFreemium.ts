@@ -85,3 +85,4 @@ export default useFreemium;
 // Hook can be called in any component without prop-drilling wallet state
 // All FreemiumState fields are read-only from consumer perspective
 // This satisfies issue #186: lower barrier to entry for new players
+// UPGRADE_THRESHOLD exported so banner and other components stay in sync

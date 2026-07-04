@@ -328,3 +328,4 @@ export default function ChessSidebar() {
 }
     // FreemiumUpgradeSection only renders in offline mode (returns null otherwise)
     // Connect button in FreemiumUpgradeSection opens the ConnectWalletModal
+    // Upgrade section placed before AI panel so wallet CTA is visible first

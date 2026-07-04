@@ -37,6 +37,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     const activeChain = useAppStore((state) => state.activeChain);
     const farcasterUser = useAppStore((state) => state.farcasterUser);
     const elo = useAppStore((state) => state.elo);
+    const { onGameComplete, isOfflineMode, canPlayOnChain } = useFreemium();
 
     // Create initial state directly to avoid any import issues
     const initialGameState: GameState = {

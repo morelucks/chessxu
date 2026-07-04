@@ -27,3 +27,4 @@ const OfflineModeBanner: React.FC = () => {
             {/* Compact status strip */}
             <div className="offline-banner__strip">
                 <span className="offline-banner__dot" aria-hidden="true" />
+                <span className="offline-banner__label">Offline Mode</span>

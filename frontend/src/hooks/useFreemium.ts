@@ -70,3 +70,5 @@ export function useFreemium(): FreemiumState {
         dismissUpgradePrompt,
     };
 }
+
+export default useFreemium;

@@ -78,3 +78,4 @@ export default useFreemium;
 // onGameComplete is memoised to prevent unnecessary re-renders
 // upgradePromptDismissed persists via zustand-persist across page reloads
 // dismissUpgradePrompt lets users opt out without connecting a wallet
+// useFreemium is the single source of truth for freemium model decisions

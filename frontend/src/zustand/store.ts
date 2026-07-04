@@ -137,6 +137,9 @@ const useAppStore = create<AppStore>()(
       setElo: (elo: number) => set({ elo }),
       setChessBalance: (chessBalance: number) => set({ chessBalance }),
       setTimeControlMs: (timeControlMs: number | null) => set({ timeControlMs }),
+      setOfflineMode: (isOfflineMode: boolean) => set({ isOfflineMode }),
+      incrementOfflineGames: () => set((s) => ({ offlineGamesPlayed: s.offlineGamesPlayed + 1 })),
+      dismissUpgradePrompt: () => set({ upgradePromptDismissed: true }),
       setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
       logout: () => {
         userSession.signUserOut();

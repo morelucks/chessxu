@@ -14,3 +14,4 @@ import './OfflineModeBanner.css';
  * Compact status bar shown inside ChessScreen when user is offline.
  * Full upgrade prompt appears after UPGRADE_THRESHOLD games.
  */
+const OfflineModeBanner: React.FC = () => {

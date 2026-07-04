@@ -80,3 +80,9 @@ const OfflineModeBanner: React.FC = () => {
                     >
                         Connect Wallet &amp; Play On-Chain
                     </button>
+                    <button
+                        className="offline-banner__keep-offline-btn"
+                        onClick={dismissUpgradePrompt}
+                    >
+                        Keep playing offline
+                    </button>

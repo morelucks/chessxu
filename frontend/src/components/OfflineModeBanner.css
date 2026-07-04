@@ -1,1 +1,4 @@
 /* OfflineModeBanner styles — freemium offline-first model #186 */
+
+/* ── Outer container ── */
+.offline-banner { display: flex; flex-direction: column; gap: 0; width: 100%; }

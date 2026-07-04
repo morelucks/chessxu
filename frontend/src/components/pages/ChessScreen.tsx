@@ -16,6 +16,7 @@ export default function ChessScreen() {
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
+  const { isOfflineMode } = useFreemium();
 
   // MiniPay is always Celo — no chain alternation needed
   const displayChain = activeChain || 'celo';

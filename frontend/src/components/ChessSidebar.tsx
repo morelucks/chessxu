@@ -327,3 +327,4 @@ export default function ChessSidebar() {
     );
 }
     // FreemiumUpgradeSection only renders in offline mode (returns null otherwise)
+    // Connect button in FreemiumUpgradeSection opens the ConnectWalletModal

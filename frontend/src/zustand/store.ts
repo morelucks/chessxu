@@ -92,6 +92,9 @@ const useAppStore = create<AppStore>()(
       elo: 1200,
       chessBalance: 0,
       timeControlMs: null,
+      isOfflineMode: true,
+      offlineGamesPlayed: 0,
+      upgradePromptDismissed: false,
 
       // Actions
       // When address changes, sync offline mode: offline iff no address

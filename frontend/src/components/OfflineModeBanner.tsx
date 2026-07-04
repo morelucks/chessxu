@@ -73,3 +73,4 @@ const OfflineModeBanner: React.FC = () => {
                             <span className="offline-banner__feature-icon" aria-hidden="true">🧩</span>
                             <span>Gasless moves via Paymaster</span>
                         </div>
+                    </div>

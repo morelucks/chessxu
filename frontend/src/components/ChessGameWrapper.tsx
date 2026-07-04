@@ -236,3 +236,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     );
 }
     // onGameComplete increments offlineGamesPlayed for upgrade prompt tracking
+    // isOfflineMode shows Offline in player profile sub-label

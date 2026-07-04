@@ -119,3 +119,4 @@
     .offline-banner__prompt { margin: 6px 8px 4px; padding: 12px; }
 }
 /* Amber colour theme signals caution/status without being alarming */
+/* offline-pulse animation is subtle (2s) to avoid distracting gameplay */

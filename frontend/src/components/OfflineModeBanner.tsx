@@ -74,3 +74,9 @@ const OfflineModeBanner: React.FC = () => {
                             <span>Gasless moves via Paymaster</span>
                         </div>
                     </div>
+                    <button
+                        className="offline-banner__upgrade-btn"
+                        onClick={handleConnect}
+                    >
+                        Connect Wallet &amp; Play On-Chain
+                    </button>

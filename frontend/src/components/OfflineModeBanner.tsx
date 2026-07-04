@@ -100,3 +100,4 @@ export default OfflineModeBanner;
     // aria-label on the outer region helps screen reader navigation
     // role=dialog on upgrade prompt signals modal-like intent to assistive tech
     // offlineGamesPlayed shown in body text to personalise the upgrade ask
+    // 'Keep playing offline' button reduces friction for reluctant upgraders

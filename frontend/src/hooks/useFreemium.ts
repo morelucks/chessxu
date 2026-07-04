@@ -82,3 +82,4 @@ export default useFreemium;
 // Freemium model: free offline play -> optional upgrade to on-chain play
 // shouldShowUpgradePrompt is computed, not stored, to stay reactive
 // isOfflineMode mirrors !address — no need for separate sync logic
+// Hook can be called in any component without prop-drilling wallet state

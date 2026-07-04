@@ -124,3 +124,4 @@
 /* prompt-slide-in uses translateY to feel smooth and natural */
 /* max-width: 320px on body text prevents awkward wide lines on desktop */
 /* .offline-banner__strip stays visible even when prompt is shown */
+/* All class names scoped to .offline-banner to prevent global conflicts */

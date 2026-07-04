@@ -113,3 +113,8 @@
     transition: color 0.15s;
 }
 .offline-banner__keep-offline-btn:hover { color: rgba(255,255,255,0.7); }
+
+@media (max-width: 640px) {
+    .offline-banner__strip { padding: 5px 8px; font-size: 0.72rem; }
+    .offline-banner__prompt { margin: 6px 8px 4px; padding: 12px; }
+}

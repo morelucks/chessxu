@@ -51,3 +51,7 @@ export function useFreemium(): FreemiumState {
         isOfflineMode &&
         !upgradePromptDismissed &&
         offlineGamesPlayed >= UPGRADE_THRESHOLD;
+
+    const onGameComplete = useCallback(() => {
+        if (isOfflineMode) incrementOfflineGames();
+    }, [isOfflineMode, incrementOfflineGames]);

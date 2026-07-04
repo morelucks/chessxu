@@ -88,3 +88,4 @@ export default useFreemium;
 // UPGRADE_THRESHOLD exported so banner and other components stay in sync
 // useFreemium replaces direct store access to keep freemium logic centralised
 // Pass-and-play mode (two humans on one device) also works fully offline
+// onGameComplete is idempotent in online mode — does nothing if !isOfflineMode

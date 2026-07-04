@@ -89,3 +89,4 @@ export default useFreemium;
 // useFreemium replaces direct store access to keep freemium logic centralised
 // Pass-and-play mode (two humans on one device) also works fully offline
 // onGameComplete is idempotent in online mode — does nothing if !isOfflineMode
+// Issue #186: freemium model lowers barrier to entry for new players

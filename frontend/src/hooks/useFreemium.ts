@@ -27,3 +27,6 @@ export interface FreemiumState {
     isOfflineMode: boolean;
     /** Call when an offline game completes to track progress */
     onGameComplete: () => void;
+    /** Dismiss the upgrade prompt */
+    dismissUpgradePrompt: () => void;
+}

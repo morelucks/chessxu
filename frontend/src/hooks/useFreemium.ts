@@ -25,3 +25,5 @@ export interface FreemiumState {
     offlineGamesPlayed: number;
     /** True when the user has no wallet connected */
     isOfflineMode: boolean;
+    /** Call when an offline game completes to track progress */
+    onGameComplete: () => void;

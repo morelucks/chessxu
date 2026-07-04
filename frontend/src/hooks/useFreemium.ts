@@ -86,3 +86,4 @@ export default useFreemium;
 // All FreemiumState fields are read-only from consumer perspective
 // This satisfies issue #186: lower barrier to entry for new players
 // UPGRADE_THRESHOLD exported so banner and other components stay in sync
+// useFreemium replaces direct store access to keep freemium logic centralised

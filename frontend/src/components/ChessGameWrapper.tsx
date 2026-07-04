@@ -145,7 +145,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         playerSub = isOfflineMode ? `Offline • ${elo} ELO` : `Local Player • ${elo} ELO`;
     }
 
-    const opponentName = appState.gameMode === 'pvc' ? 'Stockfish AI' : 'Opponent';
+    // PvP is locked in offline mode — show lock indicator
+    const opponentName = appState.gameMode === 'pvc' ? 'Stockfish AI' : (isOfflineMode ? 'Connect Wallet for PvP' : 'Opponent');
     const opponentSub = appState.gameMode === 'pvc' ? 'Engine Level 5 • 1500 ELO' : 'Waiting...';
     const opponentAvatar = appState.gameMode === 'pvc' ? '🤖' : '👤';
 

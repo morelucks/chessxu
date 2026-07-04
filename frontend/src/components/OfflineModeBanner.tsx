@@ -91,3 +91,5 @@ const OfflineModeBanner: React.FC = () => {
         </div>
     );
 };
+
+export default OfflineModeBanner;

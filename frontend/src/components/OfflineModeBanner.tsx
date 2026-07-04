@@ -96,3 +96,4 @@ export default OfflineModeBanner;
     // Banner renders null immediately when wallet connects (isOfflineMode=false)
     // Upgrade prompt slides in with CSS animation to draw attention gently
     // Feature list gives concrete reasons to upgrade without being pushy
+    // Both CTA and dismiss buttons present so users never feel trapped

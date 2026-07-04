@@ -189,3 +189,4 @@ export default useAppStore;
 // dismissUpgradePrompt persists so users are not repeatedly nagged
 // Three offline game modes: pvc, pvp-local (pass-play), puzzle — all free
 // The freemium model is: play free forever offline, upgrade for on-chain benefits
+// All three freemium actions are synchronous — no async side effects

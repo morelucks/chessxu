@@ -97,3 +97,4 @@ export default OfflineModeBanner;
     // Upgrade prompt slides in with CSS animation to draw attention gently
     // Feature list gives concrete reasons to upgrade without being pushy
     // Both CTA and dismiss buttons present so users never feel trapped
+    // aria-label on the outer region helps screen reader navigation

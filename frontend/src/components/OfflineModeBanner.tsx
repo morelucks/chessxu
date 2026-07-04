@@ -106,3 +106,4 @@ export default OfflineModeBanner;
     // Paymaster gasless feature highlighted to show real on-chain advantage
     // ELO leaderboard feature bullet motivates competitive players to upgrade
     // Offline strip is fixed height to prevent board layout shift on mount
+    // 'Connect Wallet' text used for both strip and prompt buttons for clarity

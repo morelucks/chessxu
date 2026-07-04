@@ -1,0 +1,9 @@
+/**
+ * useFreemium — freemium model hook for #186
+ *
+ * Exposes helpers for the offline-first freemium model:
+ * - canPlayOffline: always true (no wallet required for PvC / pass-and-play)
+ * - canPlayOnChain: true only when wallet is connected
+ * - shouldShowUpgradePrompt: true after UPGRADE_THRESHOLD offline games
+ * - onGameComplete: call when an offline game ends
+ */

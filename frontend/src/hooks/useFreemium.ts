@@ -42,3 +42,5 @@ export function useFreemium(): FreemiumState {
     const upgradePromptDismissed = useAppStore((s) => s.upgradePromptDismissed);
     const incrementOfflineGames  = useAppStore((s) => s.incrementOfflineGames);
     const storeDismiss           = useAppStore((s) => s.dismissUpgradePrompt);
+
+    const canPlayOffline  = true; // No wallet required — always available

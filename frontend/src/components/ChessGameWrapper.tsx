@@ -142,7 +142,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         playerName = formatAddress(address);
         playerSub = `Celo • ${elo} ELO`;
     } else {
-        playerSub = `Local Player • ${elo} ELO`;
+        playerSub = isOfflineMode ? `Offline • ${elo} ELO` : `Local Player • ${elo} ELO`;
     }
 
     const opponentName = appState.gameMode === 'pvc' ? 'Stockfish AI' : 'Opponent';

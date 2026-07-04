@@ -29,3 +29,5 @@ const OfflineModeBanner: React.FC = () => {
                 <span className="offline-banner__dot" aria-hidden="true" />
                 <span className="offline-banner__label">Offline Mode</span>
                 <span className="offline-banner__games" aria-label={`${offlineGamesPlayed} of ${UPGRADE_THRESHOLD} free games played`}>
+                    {offlineGamesPlayed}/{UPGRADE_THRESHOLD} free games
+                </span>

@@ -113,3 +113,4 @@ export default function ChessScreen() {
   // The compact strip always shows; the upgrade prompt is conditional
   // Freemium: wallet connect is encouraged but never required for PvC
   // isOfflineMode is derived from store — updates reactively on wallet connect
+  // useFreemium called at screen level so banner and screen share same state

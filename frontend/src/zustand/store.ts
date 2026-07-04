@@ -187,3 +187,4 @@ export default useAppStore;
 // Three actions cover the full freemium lifecycle: start, count, dismiss
 // offlineGamesPlayed is session-scoped (resets on logout) not lifetime
 // dismissUpgradePrompt persists so users are not repeatedly nagged
+// Three offline game modes: pvc, pvp-local (pass-play), puzzle — all free

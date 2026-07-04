@@ -98,3 +98,4 @@ export default OfflineModeBanner;
     // Feature list gives concrete reasons to upgrade without being pushy
     // Both CTA and dismiss buttons present so users never feel trapped
     // aria-label on the outer region helps screen reader navigation
+    // role=dialog on upgrade prompt signals modal-like intent to assistive tech

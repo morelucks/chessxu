@@ -23,3 +23,5 @@ export interface FreemiumState {
     shouldShowUpgradePrompt: boolean;
     /** Number of offline games played this session */
     offlineGamesPlayed: number;
+    /** True when the user has no wallet connected */
+    isOfflineMode: boolean;

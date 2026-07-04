@@ -31,3 +31,8 @@ const OfflineModeBanner: React.FC = () => {
                 <span className="offline-banner__games" aria-label={`${offlineGamesPlayed} of ${UPGRADE_THRESHOLD} free games played`}>
                     {offlineGamesPlayed}/{UPGRADE_THRESHOLD} free games
                 </span>
+                <button
+                    className="offline-banner__connect-btn"
+                    onClick={handleConnect}
+                    aria-label="Connect wallet to unlock on-chain features"
+                >

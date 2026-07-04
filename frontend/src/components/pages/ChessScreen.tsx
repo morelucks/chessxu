@@ -54,6 +54,7 @@ export default function ChessScreen() {
                   className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold transition shadow-md hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
                   onClick={() => connect()}
                   disabled={isConnecting}
+                  aria-label="Connect wallet to enable on-chain features"
                 >
                   {isConnecting ? "..." : "Connect"}
                 </button>

@@ -243,3 +243,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     // playerSub shows ELO in all modes for consistent profile display
     // isOfflineMode read from freemium hook, not directly from store
     // FreemiumUpgradeSection in sidebar gives persistent visibility on desktop
+    // Freemium design: show what on-chain play looks like before requiring wallet

@@ -72,3 +72,4 @@ export function useFreemium(): FreemiumState {
 }
 
 export default useFreemium;
+// UPGRADE_THRESHOLD=3 is low enough to show value quickly without blocking play

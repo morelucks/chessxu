@@ -2,6 +2,8 @@
 import ChessGameWrapper from "../ChessGameWrapper";
 
 import { useState, useEffect } from "react";
+import OfflineModeBanner from "../OfflineModeBanner";
+import { useFreemium } from "../../hooks/useFreemium";
 import { useNavigate } from "react-router-dom";
 import useAppStore from "../../zustand/store";
 import { useWalletAuth } from "../../hooks/useWalletAuth";

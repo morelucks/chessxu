@@ -101,3 +101,15 @@
 }
 .offline-banner__upgrade-btn:hover { opacity: 0.92; transform: translateY(-1px); }
 .offline-banner__upgrade-btn:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
+
+.offline-banner__keep-offline-btn {
+    background: none; border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.75rem;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    padding: 2px;
+    transition: color 0.15s;
+}
+.offline-banner__keep-offline-btn:hover { color: rgba(255,255,255,0.7); }

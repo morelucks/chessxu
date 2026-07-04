@@ -159,3 +159,4 @@ export default useAppStore;
 // offlineGamesPlayed counts completed games in current session
 // upgradePromptDismissed persists across page reloads via zustand persist
 // Freemium: no wallet required for PvC or pass-and-play modes
+// Upgrade prompt shown after 3 offline games to encourage wallet connect

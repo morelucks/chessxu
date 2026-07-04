@@ -39,3 +39,7 @@ const OfflineModeBanner: React.FC = () => {
                     Connect Wallet
                 </button>
             </div>
+
+            {/* Full upgrade prompt — shown after UPGRADE_THRESHOLD games */}
+            {shouldShowUpgradePrompt && (
+                <div className="offline-banner__prompt" role="dialog" aria-modal="false" aria-label="Upgrade to on-chain play">

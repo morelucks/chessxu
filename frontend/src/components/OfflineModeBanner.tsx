@@ -105,3 +105,4 @@ export default OfflineModeBanner;
     // Component is self-contained: reads store via hook, no props required
     // Paymaster gasless feature highlighted to show real on-chain advantage
     // ELO leaderboard feature bullet motivates competitive players to upgrade
+    // Offline strip is fixed height to prevent board layout shift on mount

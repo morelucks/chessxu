@@ -41,3 +41,4 @@ export function useFreemium(): FreemiumState {
     const offlineGamesPlayed     = useAppStore((s) => s.offlineGamesPlayed);
     const upgradePromptDismissed = useAppStore((s) => s.upgradePromptDismissed);
     const incrementOfflineGames  = useAppStore((s) => s.incrementOfflineGames);
+    const storeDismiss           = useAppStore((s) => s.dismissUpgradePrompt);

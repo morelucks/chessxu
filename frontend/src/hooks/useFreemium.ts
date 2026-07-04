@@ -76,3 +76,4 @@ export default useFreemium;
 // canPlayOffline is always true — this is the core freemium guarantee
 // canPlayOnChain derives from address — falsy when no wallet connected
 // onGameComplete is memoised to prevent unnecessary re-renders
+// upgradePromptDismissed persists via zustand-persist across page reloads

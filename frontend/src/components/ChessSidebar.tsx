@@ -326,3 +326,4 @@ export default function ChessSidebar() {
         </div>
     );
 }
+    // FreemiumUpgradeSection only renders in offline mode (returns null otherwise)

@@ -17,3 +17,5 @@ import './OfflineModeBanner.css';
 const OfflineModeBanner: React.FC = () => {
     const { isOfflineMode, offlineGamesPlayed, shouldShowUpgradePrompt, dismissUpgradePrompt } = useFreemium();
     const { connect } = useWalletAuth();
+
+    if (!isOfflineMode) return null;

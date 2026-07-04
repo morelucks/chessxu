@@ -4,3 +4,5 @@
  * Shown to users who are playing without a wallet.
  * Displays their progress and an optional upgrade prompt.
  */
+
+import React from 'react';

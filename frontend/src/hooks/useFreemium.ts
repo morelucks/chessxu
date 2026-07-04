@@ -80,3 +80,4 @@ export default useFreemium;
 // dismissUpgradePrompt lets users opt out without connecting a wallet
 // useFreemium is the single source of truth for freemium model decisions
 // Freemium model: free offline play -> optional upgrade to on-chain play
+// shouldShowUpgradePrompt is computed, not stored, to stay reactive

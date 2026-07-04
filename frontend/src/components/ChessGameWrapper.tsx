@@ -106,6 +106,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
             Status.insufficient
         ].includes(appState.status)) {
             dispatch({ type: actionTypes.SAVE_GAME_RESULT });
+            // Track completed game for freemium upgrade prompt
+            onGameComplete();
         }
     }, [appState.status, dispatch]);
 

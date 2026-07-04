@@ -111,3 +111,4 @@ export default function ChessScreen() {
   // No wallet gate: ChessGameWrapper always renders for offline play
   // FreemiumUpgradeSection is also in ChessSidebar for desktop sidebar access
   // The compact strip always shows; the upgrade prompt is conditional
+  // Freemium: wallet connect is encouraged but never required for PvC

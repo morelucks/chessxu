@@ -15,3 +15,5 @@ import useAppStore from '../zustand/store';
 export const UPGRADE_THRESHOLD = 3;
 
 export interface FreemiumState {
+    /** Whether the user can play offline (always true — no wallet needed) */
+    canPlayOffline: boolean;

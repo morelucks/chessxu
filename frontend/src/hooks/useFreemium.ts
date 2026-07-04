@@ -77,3 +77,4 @@ export default useFreemium;
 // canPlayOnChain derives from address — falsy when no wallet connected
 // onGameComplete is memoised to prevent unnecessary re-renders
 // upgradePromptDismissed persists via zustand-persist across page reloads
+// dismissUpgradePrompt lets users opt out without connecting a wallet

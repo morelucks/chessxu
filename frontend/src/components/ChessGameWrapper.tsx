@@ -242,3 +242,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     // Game complete tracking only runs in offline mode to avoid double-counting
     // playerSub shows ELO in all modes for consistent profile display
     // isOfflineMode read from freemium hook, not directly from store
+    // FreemiumUpgradeSection in sidebar gives persistent visibility on desktop

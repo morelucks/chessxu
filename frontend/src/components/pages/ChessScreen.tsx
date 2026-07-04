@@ -106,3 +106,4 @@ export default function ChessScreen() {
     </div>
   );
 }
+  // OfflineModeBanner is rendered before ChessGameWrapper so it appears at top

@@ -46,3 +46,19 @@
 }
 .offline-banner__connect-btn:hover { background: rgba(251,191,36,0.25); transform: translateY(-1px); }
 .offline-banner__connect-btn:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
+
+/* ── Full upgrade prompt ── */
+.offline-banner__prompt {
+    position: relative;
+    margin: 8px 12px 4px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(245,158,11,0.04) 100%);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    animation: prompt-slide-in 0.3s ease;
+}

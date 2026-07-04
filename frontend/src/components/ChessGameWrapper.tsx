@@ -26,6 +26,7 @@ import ChessSidebar from './ChessSidebar';
 import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
+import { useFreemium } from '../hooks/useFreemium';
 
 /**
  * Wrapper providing AppContext with typed reducer for the chess board UI.

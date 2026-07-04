@@ -123,3 +123,4 @@
 /* upgrade-btn uses dark text on amber for WCAG AA contrast compliance */
 /* prompt-slide-in uses translateY to feel smooth and natural */
 /* max-width: 320px on body text prevents awkward wide lines on desktop */
+/* .offline-banner__strip stays visible even when prompt is shown */

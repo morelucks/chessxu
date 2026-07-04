@@ -21,3 +21,6 @@ const OfflineModeBanner: React.FC = () => {
     if (!isOfflineMode) return null;
 
     const handleConnect = () => connect();
+
+    return (
+        <div className="offline-banner" role="banner" aria-label="Offline mode status">

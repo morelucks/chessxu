@@ -86,3 +86,8 @@ const OfflineModeBanner: React.FC = () => {
                     >
                         Keep playing offline
                     </button>
+                </div>
+            )}
+        </div>
+    );
+};

@@ -2,6 +2,8 @@
 import ChessGameWrapper from "../ChessGameWrapper";
 
 import { useState, useEffect } from "react";
+import OfflineModeBanner from "../OfflineModeBanner";
+import { useFreemium } from "../../hooks/useFreemium";
 import { useNavigate } from "react-router-dom";
 import useAppStore from "../../zustand/store";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
@@ -14,6 +16,7 @@ export default function ChessScreen() {
   const activeChain = useAppStore((state) => state.activeChain);
   const activeGameId = useAppStore((state) => state.activeGameId);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
+  const { isOfflineMode } = useFreemium();
 
   // MiniPay is always Celo — no chain alternation needed
   const displayChain = activeChain || 'celo';
@@ -38,7 +41,7 @@ export default function ChessScreen() {
                 <div className="text-[10px] text-slate-300 font-medium flex items-center gap-1.5 transition-all duration-500">
                   <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                   <div className={`w-1.5 h-1.5 rounded-full bg-[#FCFF52]`} />
-                  <span className="min-w-[65px]">Celo Network</span>
+                  <span className="min-w-[65px]">{isOfflineMode ? "Offline" : "Celo Network"}</span>
                   {address && <span className="ml-0.5 opacity-60 font-mono hidden sm:inline">• {address.slice(0, 4)}…</span>}
                 </div>
               </div>
@@ -51,6 +54,7 @@ export default function ChessScreen() {
                   className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold transition shadow-md hover:shadow-emerald-500/25 disabled:opacity-50 active:scale-95 border border-emerald-400/20"
                   onClick={() => connect()}
                   disabled={isConnecting}
+                  aria-label="Connect wallet to enable on-chain features"
                 >
                   {isConnecting ? "..." : "Connect"}
                 </button>
@@ -94,8 +98,20 @@ export default function ChessScreen() {
         </div>
       </div>
 
+      {/* Offline Mode Banner — visible only when no wallet is connected */}
+      <OfflineModeBanner />
+
       {/* Main Content Area */}
       <ChessGameWrapper />
     </div>
   );
 }
+  // OfflineModeBanner is rendered before ChessGameWrapper so it appears at top
+  // isOfflineMode drives the nav label: 'Offline' vs 'Celo Network'
+  // No wallet gate: ChessGameWrapper always renders for offline play
+  // FreemiumUpgradeSection is also in ChessSidebar for desktop sidebar access
+  // The compact strip always shows; the upgrade prompt is conditional
+  // Freemium: wallet connect is encouraged but never required for PvC
+  // isOfflineMode is derived from store — updates reactively on wallet connect
+  // useFreemium called at screen level so banner and screen share same state
+  // Offline mode: both PvC and puzzle work; PvP requires wallet connection

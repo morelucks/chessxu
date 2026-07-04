@@ -22,6 +22,8 @@ import GameStatusBanner from './GameStatusBanner';
 import ResignButton from './ResignButton';
 import { useGameState } from '../chess/hooks/useGameState';
 import useAppStore from '../zustand/store';
+import { useFreemium } from '../hooks/useFreemium';
+import { useWalletAuth } from '../hooks/useWalletAuth';
 import './ChessSidebar.css';
 
 
@@ -37,6 +39,30 @@ const TakeBackButton = () => {
             >
                 Take Back Move
             </button>
+        </div>
+    );
+};
+
+// Freemium Upgrade Section
+const FreemiumUpgradeSection = () => {
+    const { isOfflineMode, offlineGamesPlayed, canPlayOnChain } = useFreemium();
+    const { connect } = useWalletAuth();
+    if (!isOfflineMode) return null;
+    return (
+        <div className="chess-freemium">
+            <div className="chess-freemium__status">
+                <span className="chess-freemium__dot" />
+                <span className="chess-freemium__label">Playing offline</span>
+                <span className="chess-freemium__count">{offlineGamesPlayed} games</span>
+            </div>
+            <button
+                className="chess-freemium__btn"
+                onClick={() => connect()}
+                aria-label="Connect wallet to play on-chain"
+            >
+                ⚡ Connect Wallet
+            </button>
+            <p className="chess-freemium__hint">Stake CELO, earn rewards, play ranked.</p>
         </div>
     );
 };
@@ -381,3 +407,6 @@ export default function ChessSidebar() {
         </div>
     );
 }
+    // FreemiumUpgradeSection only renders in offline mode (returns null otherwise)
+    // Connect button in FreemiumUpgradeSection opens the ConnectWalletModal
+    // Upgrade section placed before AI panel so wallet CTA is visible first

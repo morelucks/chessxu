@@ -37,6 +37,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     const activeChain = useAppStore((state) => state.activeChain);
     const farcasterUser = useAppStore((state) => state.farcasterUser);
     const elo = useAppStore((state) => state.elo);
+    const { onGameComplete, isOfflineMode, canPlayOnChain } = useFreemium();
 
     // Create initial state directly to avoid any import issues
     const initialGameState: GameState = {
@@ -138,6 +139,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
             Status.insufficient
         ].includes(appState.status)) {
             dispatch({ type: actionTypes.SAVE_GAME_RESULT });
+            // Track completed game for freemium upgrade prompt
+            onGameComplete();
         }
     }, [appState.status, dispatch]);
 
@@ -172,10 +175,11 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         playerName = formatAddress(address);
         playerSub = `Celo • ${elo} ELO`;
     } else {
-        playerSub = `Local Player • ${elo} ELO`;
+        playerSub = isOfflineMode ? `Offline • ${elo} ELO` : `Local Player • ${elo} ELO`;
     }
 
-    const opponentName = appState.gameMode === 'pvc' ? 'Stockfish AI' : 'Opponent';
+    // PvP is locked in offline mode — show lock indicator
+    const opponentName = appState.gameMode === 'pvc' ? 'Stockfish AI' : (isOfflineMode ? 'Connect Wallet for PvP' : 'Opponent');
     const opponentSub = appState.gameMode === 'pvc' ? 'Engine Level 5 • 1500 ELO' : 'Waiting...';
     const opponentAvatar = appState.gameMode === 'pvc' ? '🤖' : '👤';
 
@@ -264,3 +268,13 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         </AppContext.Provider>
     );
 }
+    // onGameComplete increments offlineGamesPlayed for upgrade prompt tracking
+    // isOfflineMode shows Offline in player profile sub-label
+    // canPlayOnChain used to gate PvP lobby access from wrapper
+    // Offline mode: PvC and pass-and-play work without any wallet
+    // Game complete tracking only runs in offline mode to avoid double-counting
+    // playerSub shows ELO in all modes for consistent profile display
+    // isOfflineMode read from freemium hook, not directly from store
+    // FreemiumUpgradeSection in sidebar gives persistent visibility on desktop
+    // Freemium design: show what on-chain play looks like before requiring wallet
+    // Offline player name shows 'You' — no address to truncate

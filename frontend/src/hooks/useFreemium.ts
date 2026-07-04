@@ -30,3 +30,8 @@ export interface FreemiumState {
     /** Dismiss the upgrade prompt */
     dismissUpgradePrompt: () => void;
 }
+
+/**
+ * Hook that provides the freemium model state and helpers.
+ * Components use this to decide what to render without reaching into the store directly.
+ */

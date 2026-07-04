@@ -127,3 +127,4 @@
 /* All class names scoped to .offline-banner to prevent global conflicts */
 /* animation: offline-pulse uses scale not opacity-only to improve perception */
 /* .offline-banner__strip uses 8px gap for consistent spacing with body text */
+/* upgrade-btn box-shadow creates visual elevation to signal primary action */

@@ -37,6 +37,12 @@ export interface GameState {
   elo: number;
   chessBalance: number;
   timeControlMs: number | null;
+  /** True when playing offline without a wallet */
+  isOfflineMode: boolean;
+  /** Offline games completed this session */
+  offlineGamesPlayed: number;
+  /** Whether the upgrade prompt has been dismissed */
+  upgradePromptDismissed: boolean;
 }
 
 export interface AppStore extends AuthState, GameState {

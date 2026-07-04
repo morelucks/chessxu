@@ -21,3 +21,5 @@ export interface FreemiumState {
     canPlayOnChain: boolean;
     /** Whether the upgrade prompt should currently be visible */
     shouldShowUpgradePrompt: boolean;
+    /** Number of offline games played this session */
+    offlineGamesPlayed: number;

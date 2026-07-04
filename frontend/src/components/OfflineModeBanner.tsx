@@ -52,3 +52,7 @@ const OfflineModeBanner: React.FC = () => {
                     </button>
                     <div className="offline-banner__prompt-icon" aria-hidden="true">&#x265F;</div>
                     <h3 className="offline-banner__prompt-title">Ready to play for real?</h3>
+                    <p className="offline-banner__prompt-body">
+                        You&apos;ve played {offlineGamesPlayed} free games.
+                        Connect your wallet to stake CELO, earn rewards, and climb the leaderboard.
+                    </p>

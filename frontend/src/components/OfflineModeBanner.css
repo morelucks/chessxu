@@ -79,3 +79,4 @@
 .offline-banner__dismiss:hover { color: #fff; }
 
 .offline-banner__prompt-icon { font-size: 2rem; line-height: 1; }
+.offline-banner__prompt-title { margin: 0; font-size: 1rem; font-weight: 700; color: #f5f5f5; }

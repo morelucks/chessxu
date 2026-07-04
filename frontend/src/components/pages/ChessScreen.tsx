@@ -110,3 +110,4 @@ export default function ChessScreen() {
   // isOfflineMode drives the nav label: 'Offline' vs 'Celo Network'
   // No wallet gate: ChessGameWrapper always renders for offline play
   // FreemiumUpgradeSection is also in ChessSidebar for desktop sidebar access
+  // The compact strip always shows; the upgrade prompt is conditional

@@ -103,7 +103,7 @@ const useAppStore = create<AppStore>()(
         if (activeChain === 'stacks') {
             set({ stacksAddress: address, address, isAuthenticated: !!address });
         } else {
-            set({ celoAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address });
+            set({ celoAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
         }
       },
       setStacksAddress: (stacksAddress: string | null) => {

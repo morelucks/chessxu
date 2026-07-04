@@ -9,3 +9,8 @@ import React from 'react';
 import { useFreemium, UPGRADE_THRESHOLD } from '../hooks/useFreemium';
 import { useWalletAuth } from '../hooks/useWalletAuth';
 import './OfflineModeBanner.css';
+
+/**
+ * Compact status bar shown inside ChessScreen when user is offline.
+ * Full upgrade prompt appears after UPGRADE_THRESHOLD games.
+ */

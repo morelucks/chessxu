@@ -97,6 +97,9 @@ export default function ChessScreen() {
         </div>
       </div>
 
+      {/* Offline Mode Banner — visible only when no wallet is connected */}
+      <OfflineModeBanner />
+
       {/* Main Content Area */}
       <ChessGameWrapper />
     </div>

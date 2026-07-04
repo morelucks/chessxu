@@ -19,3 +19,5 @@ const OfflineModeBanner: React.FC = () => {
     const { connect } = useWalletAuth();
 
     if (!isOfflineMode) return null;
+
+    const handleConnect = () => connect();

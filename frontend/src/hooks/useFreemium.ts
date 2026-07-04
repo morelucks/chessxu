@@ -44,3 +44,4 @@ export function useFreemium(): FreemiumState {
     const storeDismiss           = useAppStore((s) => s.dismissUpgradePrompt);
 
     const canPlayOffline  = true; // No wallet required — always available
+    const canPlayOnChain  = !!address;

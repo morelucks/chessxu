@@ -63,6 +63,9 @@ export interface AppStore extends AuthState, GameState {
   setChessBalance: (balance: number) => void;
   setTimeControlMs: (ms: number | null) => void;
   setConnectModalOpen: (open: boolean) => void;
+  setOfflineMode: (offline: boolean) => void;
+  incrementOfflineGames: () => void;
+  dismissUpgradePrompt: () => void;
   logout: () => void;
 }
 

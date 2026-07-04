@@ -36,3 +36,4 @@ export interface FreemiumState {
  * Components use this to decide what to render without reaching into the store directly.
  */
 export function useFreemium(): FreemiumState {
+    const address               = useAppStore((s) => s.address);

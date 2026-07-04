@@ -181,3 +181,4 @@ export default useAppStore;
 // offlineGamesPlayed resets to 0 on logout for fresh session tracking
 // upgradePromptDismissed resets false when new wallet connects
 // incrementOfflineGames uses functional update to avoid stale closure
+// setOfflineMode can also be called manually to force offline/online state

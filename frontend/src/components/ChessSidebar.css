@@ -505,3 +505,4 @@
 .chess-freemium__hint { margin: 0; font-size: 0.72rem; color: #94a3b8; text-align: center; }
 /* .chess-freemium uses amber to match OfflineModeBanner for visual consistency */
 /* offline-pulse keyframe defined in OfflineModeBanner.css and reused here */
+/* .chess-freemium border matches sidebar card pattern for visual consistency */

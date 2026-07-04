@@ -43,3 +43,10 @@ const OfflineModeBanner: React.FC = () => {
             {/* Full upgrade prompt — shown after UPGRADE_THRESHOLD games */}
             {shouldShowUpgradePrompt && (
                 <div className="offline-banner__prompt" role="dialog" aria-modal="false" aria-label="Upgrade to on-chain play">
+                    <button
+                        className="offline-banner__dismiss"
+                        onClick={dismissUpgradePrompt}
+                        aria-label="Dismiss upgrade prompt"
+                    >
+                        &times;
+                    </button>

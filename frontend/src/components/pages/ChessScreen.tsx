@@ -41,7 +41,7 @@ export default function ChessScreen() {
                 <div className="text-[10px] text-slate-300 font-medium flex items-center gap-1.5 transition-all duration-500">
                   <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                   <div className={`w-1.5 h-1.5 rounded-full bg-[#FCFF52]`} />
-                  <span className="min-w-[65px]">Celo Network</span>
+                  <span className="min-w-[65px]">{isOfflineMode ? "Offline" : "Celo Network"}</span>
                   {address && <span className="ml-0.5 opacity-60 font-mono hidden sm:inline">• {address.slice(0, 4)}…</span>}
                 </div>
               </div>

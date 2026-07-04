@@ -104,3 +104,4 @@ export default OfflineModeBanner;
     // Game counter (x/3) shows progress toward upgrade threshold transparently
     // Component is self-contained: reads store via hook, no props required
     // Paymaster gasless feature highlighted to show real on-chain advantage
+    // ELO leaderboard feature bullet motivates competitive players to upgrade

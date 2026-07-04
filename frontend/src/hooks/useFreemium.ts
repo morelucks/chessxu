@@ -38,3 +38,4 @@ export interface FreemiumState {
 export function useFreemium(): FreemiumState {
     const address               = useAppStore((s) => s.address);
     const isOfflineMode          = useAppStore((s) => s.isOfflineMode);
+    const offlineGamesPlayed     = useAppStore((s) => s.offlineGamesPlayed);

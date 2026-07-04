@@ -55,3 +55,7 @@ export function useFreemium(): FreemiumState {
     const onGameComplete = useCallback(() => {
         if (isOfflineMode) incrementOfflineGames();
     }, [isOfflineMode, incrementOfflineGames]);
+
+    const dismissUpgradePrompt = useCallback(() => {
+        storeDismiss();
+    }, [storeDismiss]);

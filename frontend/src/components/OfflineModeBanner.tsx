@@ -65,3 +65,7 @@ const OfflineModeBanner: React.FC = () => {
                             <span className="offline-banner__feature-icon" aria-hidden="true">🏆</span>
                             <span>Climb the on-chain leaderboard</span>
                         </div>
+                        <div className="offline-banner__feature">
+                            <span className="offline-banner__feature-icon" aria-hidden="true">💰</span>
+                            <span>Win real CELO rewards</span>
+                        </div>

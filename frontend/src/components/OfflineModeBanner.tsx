@@ -36,3 +36,5 @@ const OfflineModeBanner: React.FC = () => {
                     onClick={handleConnect}
                     aria-label="Connect wallet to unlock on-chain features"
                 >
+                    Connect Wallet
+                </button>

@@ -299,6 +299,7 @@ export default function ChessSidebar() {
                         onShowStakingModal={setShowStakingModal}
                     />
                     <TakeBackButton />
+                    <FreemiumUpgradeSection />
                     {/* Resign only shown in PvP with an active game */}
                     {gameMode === 'pvp' && <ResignButton />}
                     {/* Stake section always visible under controls */}

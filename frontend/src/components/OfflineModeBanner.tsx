@@ -95,3 +95,4 @@ const OfflineModeBanner: React.FC = () => {
 export default OfflineModeBanner;
     // Banner renders null immediately when wallet connects (isOfflineMode=false)
     // Upgrade prompt slides in with CSS animation to draw attention gently
+    // Feature list gives concrete reasons to upgrade without being pushy

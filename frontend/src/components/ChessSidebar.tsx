@@ -44,6 +44,30 @@ const TakeBackButton = () => {
     );
 };
 
+// Freemium Upgrade Section
+const FreemiumUpgradeSection = () => {
+    const { isOfflineMode, offlineGamesPlayed, canPlayOnChain } = useFreemium();
+    const { connect } = useWalletAuth();
+    if (!isOfflineMode) return null;
+    return (
+        <div className="chess-freemium">
+            <div className="chess-freemium__status">
+                <span className="chess-freemium__dot" />
+                <span className="chess-freemium__label">Playing offline</span>
+                <span className="chess-freemium__count">{offlineGamesPlayed} games</span>
+            </div>
+            <button
+                className="chess-freemium__btn"
+                onClick={() => connect()}
+                aria-label="Connect wallet to play on-chain"
+            >
+                ⚡ Connect Wallet
+            </button>
+            <p className="chess-freemium__hint">Stake CELO, earn rewards, play ranked.</p>
+        </div>
+    );
+};
+
 // Stake section (always visible under Controls)
 /**
  * Section displaying active player stake information

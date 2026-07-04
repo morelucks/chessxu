@@ -51,3 +51,4 @@ const OfflineModeBanner: React.FC = () => {
                         &times;
                     </button>
                     <div className="offline-banner__prompt-icon" aria-hidden="true">&#x265F;</div>
+                    <h3 className="offline-banner__prompt-title">Ready to play for real?</h3>

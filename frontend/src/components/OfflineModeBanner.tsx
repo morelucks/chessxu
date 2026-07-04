@@ -56,3 +56,4 @@ const OfflineModeBanner: React.FC = () => {
                         You&apos;ve played {offlineGamesPlayed} free games.
                         Connect your wallet to stake CELO, earn rewards, and climb the leaderboard.
                     </p>
+                    <div className="offline-banner__prompt-features">

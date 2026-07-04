@@ -19,3 +19,5 @@ export interface FreemiumState {
     canPlayOffline: boolean;
     /** Whether the user can play on-chain (requires wallet) */
     canPlayOnChain: boolean;
+    /** Whether the upgrade prompt should currently be visible */
+    shouldShowUpgradePrompt: boolean;

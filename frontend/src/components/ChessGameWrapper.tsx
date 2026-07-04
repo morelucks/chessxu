@@ -239,3 +239,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     // isOfflineMode shows Offline in player profile sub-label
     // canPlayOnChain used to gate PvP lobby access from wrapper
     // Offline mode: PvC and pass-and-play work without any wallet
+    // Game complete tracking only runs in offline mode to avoid double-counting

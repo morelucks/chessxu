@@ -85,6 +85,7 @@ const useAppStore = create<AppStore>()(
       timeControlMs: null,
 
       // Actions
+      // When address changes, sync offline mode: offline iff no address
       setAddress: (address: string | null) => {
         const { activeChain } = get();
         if (activeChain === 'stacks') {

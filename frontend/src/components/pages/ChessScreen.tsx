@@ -108,3 +108,4 @@ export default function ChessScreen() {
 }
   // OfflineModeBanner is rendered before ChessGameWrapper so it appears at top
   // isOfflineMode drives the nav label: 'Offline' vs 'Celo Network'
+  // No wallet gate: ChessGameWrapper always renders for offline play

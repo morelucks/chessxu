@@ -496,3 +496,4 @@
 
 /* ── Freemium upgrade section ── */
 .chess-freemium { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.chess-freemium__status { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #fbbf24; }

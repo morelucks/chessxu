@@ -84,3 +84,4 @@ export default useFreemium;
 // isOfflineMode mirrors !address — no need for separate sync logic
 // Hook can be called in any component without prop-drilling wallet state
 // All FreemiumState fields are read-only from consumer perspective
+// This satisfies issue #186: lower barrier to entry for new players

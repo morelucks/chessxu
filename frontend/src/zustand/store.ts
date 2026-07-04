@@ -188,3 +188,4 @@ export default useAppStore;
 // offlineGamesPlayed is session-scoped (resets on logout) not lifetime
 // dismissUpgradePrompt persists so users are not repeatedly nagged
 // Three offline game modes: pvc, pvp-local (pass-play), puzzle — all free
+// The freemium model is: play free forever offline, upgrade for on-chain benefits

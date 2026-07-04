@@ -102,3 +102,4 @@ export default OfflineModeBanner;
     // offlineGamesPlayed shown in body text to personalise the upgrade ask
     // 'Keep playing offline' button reduces friction for reluctant upgraders
     // Game counter (x/3) shows progress toward upgrade threshold transparently
+    // Component is self-contained: reads store via hook, no props required

@@ -112,3 +112,4 @@ export default function ChessScreen() {
   // FreemiumUpgradeSection is also in ChessSidebar for desktop sidebar access
   // The compact strip always shows; the upgrade prompt is conditional
   // Freemium: wallet connect is encouraged but never required for PvC
+  // isOfflineMode is derived from store — updates reactively on wallet connect

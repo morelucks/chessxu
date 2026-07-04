@@ -184,3 +184,4 @@ export default useAppStore;
 // setOfflineMode can also be called manually to force offline/online state
 // Freemium state is persisted by zustand-persist for cross-session continuity
 // Freemium: offline is the default state, online is opt-in
+// Three actions cover the full freemium lifecycle: start, count, dismiss

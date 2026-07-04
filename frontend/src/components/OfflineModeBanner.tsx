@@ -99,3 +99,4 @@ export default OfflineModeBanner;
     // Both CTA and dismiss buttons present so users never feel trapped
     // aria-label on the outer region helps screen reader navigation
     // role=dialog on upgrade prompt signals modal-like intent to assistive tech
+    // offlineGamesPlayed shown in body text to personalise the upgrade ask

@@ -2,3 +2,10 @@
 
 /* ── Outer container ── */
 .offline-banner { display: flex; flex-direction: column; gap: 0; width: 100%; }
+
+/* ── Compact status strip ── */
+.offline-banner__strip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;

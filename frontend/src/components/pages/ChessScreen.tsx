@@ -114,3 +114,4 @@ export default function ChessScreen() {
   // Freemium: wallet connect is encouraged but never required for PvC
   // isOfflineMode is derived from store — updates reactively on wallet connect
   // useFreemium called at screen level so banner and screen share same state
+  // Offline mode: both PvC and puzzle work; PvP requires wallet connection

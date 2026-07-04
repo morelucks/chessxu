@@ -81,3 +81,4 @@ export default useFreemium;
 // useFreemium is the single source of truth for freemium model decisions
 // Freemium model: free offline play -> optional upgrade to on-chain play
 // shouldShowUpgradePrompt is computed, not stored, to stay reactive
+// isOfflineMode mirrors !address — no need for separate sync logic

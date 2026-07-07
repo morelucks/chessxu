@@ -364,3 +364,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): optimize piece image size and weight on mobile viewports
 * chore(theme): organize utility helper exports to fix minor alignment issues
 * chore(wrapper): remove legacy comments from codebase in wood styling
+* refactor(sidebar): streamline customizer theme classes for better readability standards

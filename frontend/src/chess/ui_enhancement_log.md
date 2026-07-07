@@ -156,3 +156,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(pieces): streamline theme classes definition with proper ARIA roles
 * chore(board): clean up debug logging in reducer to prevent clipping on small displays
 * chore(theme): organize utility exports in helpers to fix alignment glitch
+* style(sidebar): tweak scrollbar alignment in move history for neon glow consistency

@@ -327,3 +327,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): improve class name assignments in Board with proper layout structure
 * refactor(theme): extract clock timer functions to hook in slate customizer
 * refactor(history): refactor captured pieces tally structure for better responsive flow
+* docs(sidebar): add detailed comments for theme switcher in wood styling

@@ -207,3 +207,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(pieces): clean up unused CSS variables in constants for modern aesthetics
 * perf(sidebar): optimize changed squares loop search for WCAG readability standards
 * refactor(theme): clean up component props passing for slate theme
+* style(pieces): tweak tile hover scaling and glow for neon glow consistency

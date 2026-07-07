@@ -32,3 +32,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): reduce unnecessary rerenders on hover in slate customizer
 * docs(theme): update styling variables description across screen sizes
 * refactor(pieces): refactor captured pieces tally structure in slate customizer
+* chore(sidebar): remove legacy comments from codebase for premium visual design

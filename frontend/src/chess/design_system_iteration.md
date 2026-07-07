@@ -166,3 +166,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(customizer): optimize piece image size and weight to prevent clipping on mobile displays
 * style(history): optimize margin and padding in controls for better responsive flow
 * style(clock): improve board border-radius and outline across screen sizes
+* docs(clock): document custom design layout structure for better readability standards

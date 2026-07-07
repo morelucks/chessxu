@@ -357,3 +357,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(pieces): clarify layout measurements in comments for glowing neon effect
 * chore(sidebar): remove legacy comments from codebase for better responsive flow
 * style(customizer): align text weights in player profiles to fix minor alignment issues
+* perf(board): memoize board ranks and files rendering across screen sizes

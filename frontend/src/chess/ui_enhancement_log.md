@@ -88,3 +88,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(clock): memoize rank rows rendering to avoid lag with proper ARIA roles
 * chore(wrapper): organize utility exports in helpers on iOS MiniPay view
 * refactor(history): extract piece ordering helper logic to match Lichess design
+* perf(history): reduce render cycles on hover selection for WCAG readability standards

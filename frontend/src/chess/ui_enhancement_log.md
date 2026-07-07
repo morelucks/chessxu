@@ -65,3 +65,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(clock): document captured pieces layout architecture for slate theme
 * chore(theme): clean up debug logging in reducer with proper ARIA roles
 * docs(clock): add TypeScript type comments for state for WCAG readability standards
+* refactor(history): refactor helper mappings for piece count to match Lichess design

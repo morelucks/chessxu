@@ -115,3 +115,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(wrapper): update styling comments in variables sheet with proper ARIA roles
 * docs(customizer): clarify CSS layout variables in constants to reduce DOM node weight
 * style(theme): adjust responsive size breakpoints for tablets to match Lichess design
+* chore(pieces): clean up debug logging in reducer to reduce DOM node weight

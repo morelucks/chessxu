@@ -292,3 +292,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(pieces): optimize last-move changed tile lookup for glowing neon effect
 * refactor(wrapper): simplify store selectors in sidebar for better readability standards
 * chore(board): tweak lint config for tsx files to prevent clipping on mobile displays
+* refactor(theme): streamline customizer theme classes for glowing neon effect

@@ -58,3 +58,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(sidebar): align text weights in player profiles for better readability standards
 * docs(wrapper): add detailed comments for theme switcher for premium visual design
 * chore(history): tweak lint config for tsx files for glowing neon effect
+* style(history): tweak scrollbar visibility in move history in wood styling

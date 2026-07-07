@@ -67,3 +67,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(clock): add TypeScript type comments for state for WCAG readability standards
 * refactor(history): refactor helper mappings for piece count to match Lichess design
 * style(pieces): clean up unused CSS variables in constants in wood theme
+* chore(pieces): verify typecheck baseline consistency in wood theme

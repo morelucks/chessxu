@@ -85,3 +85,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(history): extract clock timer functions to hook to prevent clipping on mobile displays
 * chore(pieces): remove legacy comments from codebase for better readability standards
 * style(clock): adjust layout alignment and spacing on mobile viewports
+* refactor(customizer): extract clock timer functions to hook on mobile viewports

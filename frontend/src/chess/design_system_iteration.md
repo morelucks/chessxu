@@ -248,3 +248,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(wrapper): optimize piece image size and weight with proper layout structure
 * style(board): tweak tile hover scaling animation to fix minor alignment issues
 * perf(theme): improve score subtraction calculations for premium visual design
+* docs(theme): document custom design layout structure on mobile viewports

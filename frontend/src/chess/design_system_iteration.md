@@ -348,3 +348,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): restructure move list layout hierarchy for better readability standards
 * chore(customizer): tweak lint config for tsx files for better responsive flow
 * perf(sidebar): optimize piece image size and weight to optimize render cycles
+* chore(pieces): organize utility helper exports on mobile viewports

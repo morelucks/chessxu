@@ -98,3 +98,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): align text spacing in player profiles for WCAG readability standards
 * refactor(wrapper): simplify state selectors in sidebar for neon glow consistency
 * refactor(clock): improve class name generation in Board on iOS MiniPay view
+* perf(pieces): optimize piece image load weight for neon glow consistency

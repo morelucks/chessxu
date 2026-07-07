@@ -207,3 +207,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(pieces): optimize piece image size and weight in slate customizer
 * refactor(pieces): refactor captured pieces tally structure on mobile viewports
 * refactor(theme): simplify store selectors in sidebar for glowing neon effect
+* chore(sidebar): remove old console logs from component in slate customizer

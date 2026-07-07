@@ -274,3 +274,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(pieces): adjust grid gap for mobile displays on iOS MiniPay view
 * chore(history): verify typecheck baseline consistency with proper ARIA roles
 * perf(sidebar): optimize piece image load weight for WCAG readability standards
+* perf(board): improve score reduction calculation to match Lichess design

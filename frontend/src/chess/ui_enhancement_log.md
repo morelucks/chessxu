@@ -313,3 +313,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(clock): restructure move history grid columns across all screens
 * chore(pieces): tweak linting rules settings for TS for neon glow consistency
 * docs(customizer): clarify CSS layout variables in constants for neon glow consistency
+* refactor(wrapper): simplify state selectors in sidebar to reduce DOM node weight

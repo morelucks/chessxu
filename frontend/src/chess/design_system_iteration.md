@@ -23,3 +23,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(pieces): simplify store selectors in sidebar to optimize render cycles
 * chore(clock): remove legacy comments from codebase for glowing neon effect
 * refactor(sidebar): simplify store selectors in sidebar in wood styling
+* refactor(theme): extract piece sorting helper functionality with proper layout structure

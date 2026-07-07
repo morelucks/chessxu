@@ -313,3 +313,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(board): extract clock timer functions to hook to prevent clipping on mobile displays
 * docs(sidebar): clarify layout measurements in comments in wood styling
 * style(sidebar): refine neon border shadow and highlights for better responsive flow
+* style(history): adjust layout alignment and spacing for glowing neon effect

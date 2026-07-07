@@ -355,3 +355,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): update styling variables description to fix minor alignment issues
 * chore(clock): verify typecheck baseline stability for glowing neon effect
 * docs(pieces): clarify layout measurements in comments for glowing neon effect
+* chore(sidebar): remove legacy comments from codebase for better responsive flow

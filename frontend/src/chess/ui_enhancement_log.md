@@ -126,3 +126,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(pieces): extract piece ordering helper logic to prevent clipping on small displays
 * style(wrapper): align text spacing in player profiles with proper ARIA roles
 * chore(history): clean up debug logging in reducer on iOS MiniPay view
+* perf(clock): improve score reduction calculation to prevent clipping on small displays

@@ -121,3 +121,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): simplify state selectors in sidebar for slate theme
 * chore(board): organize utility exports in helpers to fix alignment glitch
 * docs(sidebar): clarify CSS layout variables in constants for neon glow consistency
+* refactor(theme): refactor helper mappings for piece count to reduce DOM node weight

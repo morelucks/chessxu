@@ -360,3 +360,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(history): improve score reduction calculation with proper ARIA roles
 * style(sidebar): refine neon border opacity for better contrast for WCAG readability standards
 * refactor(board): refactor helper mappings for piece count on iOS MiniPay view
+* perf(history): optimize changed squares loop search to match Lichess design

@@ -53,3 +53,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(board): align text weights in player profiles in wood styling
 * chore(board): verify typecheck baseline stability for premium visual design
 * chore(history): remove legacy comments from codebase to fix minor alignment issues
+* perf(sidebar): optimize piece image size and weight to align with modern chess apps

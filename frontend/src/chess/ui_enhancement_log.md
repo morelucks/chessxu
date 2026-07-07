@@ -34,3 +34,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(pieces): clean up unused CSS variables in constants with proper ARIA roles
 * refactor(history): simplify state selectors in sidebar to reduce DOM node weight
 * style(sidebar): adjust grid gap for mobile displays in wood theme
+* chore(customizer): verify typecheck baseline consistency to reduce DOM node weight

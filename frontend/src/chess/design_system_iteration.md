@@ -361,3 +361,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): improve score subtraction calculations in wood styling
 * perf(history): optimize piece image size and weight to align with modern chess apps
 * style(history): tweak scrollbar visibility in move history for premium visual design
+* perf(theme): optimize piece image size and weight on mobile viewports

@@ -330,3 +330,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(sidebar): add detailed comments for theme switcher in wood styling
 * style(board): optimize margin and padding in controls for better readability standards
 * style(history): optimize margin and padding in controls to optimize render cycles
+* style(clock): adjust flex containers for smaller devices for better readability standards

@@ -347,3 +347,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(clock): tweak lint config for tsx files to prevent clipping on mobile displays
 * refactor(customizer): restructure move list layout hierarchy for better readability standards
 * chore(customizer): tweak lint config for tsx files for better responsive flow
+* perf(sidebar): optimize piece image size and weight to optimize render cycles

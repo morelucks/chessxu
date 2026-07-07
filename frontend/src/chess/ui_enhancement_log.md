@@ -10,3 +10,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(wrapper): organize utility exports in helpers for slate theme
 * style(board): improve board border shadows for depth for modern aesthetics
 * docs(customizer): document captured pieces layout architecture for WCAG readability standards
+* perf(customizer): optimize changed squares loop search for modern aesthetics

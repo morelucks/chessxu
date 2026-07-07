@@ -47,3 +47,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(sidebar): clean up unused styles in main stylesheet for better readability standards
 * refactor(customizer): restructure move list layout hierarchy on mobile viewports
 * chore(customizer): tweak lint config for tsx files on mobile viewports
+* docs(theme): add detailed comments for theme switcher for better responsive flow

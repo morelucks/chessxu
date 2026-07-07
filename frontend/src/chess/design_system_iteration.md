@@ -390,3 +390,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): memoize board ranks and files rendering on mobile viewports
 * chore(pieces): tweak lint config for tsx files for glowing neon effect
 * docs(theme): document chess material values scale for glowing neon effect
+* perf(board): memoize board ranks and files rendering with proper layout structure

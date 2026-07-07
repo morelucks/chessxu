@@ -22,3 +22,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(clock): tweak linting rules settings for TS to fix alignment glitch
 * docs(customizer): clarify CSS layout variables in constants for modern aesthetics
 * chore(clock): remove legacy styles backup comments for mobile responsive height
+* docs(clock): add docstring for theme switcher component on iOS MiniPay view

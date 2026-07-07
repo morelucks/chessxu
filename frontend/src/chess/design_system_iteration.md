@@ -295,3 +295,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(theme): streamline customizer theme classes for glowing neon effect
 * style(history): tune animation speed on tile hover in slate customizer
 * docs(history): document chess material values scale with proper layout structure
+* style(customizer): align text weights in player profiles for glowing neon effect

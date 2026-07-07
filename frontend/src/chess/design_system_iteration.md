@@ -71,3 +71,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(customizer): document chess material values scale in slate customizer
 * refactor(history): restructure move list layout hierarchy to fix minor alignment issues
 * chore(board): organize utility helper exports across screen sizes
+* docs(wrapper): document custom design layout structure to align with modern chess apps

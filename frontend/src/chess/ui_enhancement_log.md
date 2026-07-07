@@ -352,3 +352,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(clock): clean up debug logging in reducer with proper ARIA roles
 * style(wrapper): improve board border shadows for depth for neon glow consistency
 * style(pieces): tweak scrollbar alignment in move history for modern aesthetics
+* refactor(pieces): restructure move history grid columns for mobile responsive height

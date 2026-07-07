@@ -181,3 +181,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(sidebar): update styling comments in variables sheet to reduce DOM node weight
 * chore(sidebar): verify typecheck baseline consistency for WCAG readability standards
 * style(sidebar): align text spacing in player profiles for mobile responsive height
+* style(clock): align text spacing in player profiles with proper ARIA roles

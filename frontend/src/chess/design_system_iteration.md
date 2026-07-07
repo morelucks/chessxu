@@ -80,3 +80,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(customizer): add detailed comments for theme switcher across screen sizes
 * perf(board): reduce unnecessary rerenders on hover in slate customizer
 * refactor(sidebar): restructure move list layout hierarchy in slate customizer
+* style(pieces): optimize margin and padding in controls across screen sizes

@@ -56,3 +56,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(pieces): tweak scrollbar alignment in move history to prevent clipping on small displays
 * refactor(history): improve class name generation in Board for slate theme
 * docs(customizer): document advantage point values scale on iOS MiniPay view
+* chore(theme): verify typecheck baseline consistency to reduce DOM node weight

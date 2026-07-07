@@ -150,3 +150,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): add detailed comments for theme switcher for premium visual design
 * refactor(wrapper): refactor captured pieces tally structure for premium visual design
 * chore(wrapper): organize utility helper exports to optimize render cycles
+* perf(theme): memoize board ranks and files rendering for glowing neon effect

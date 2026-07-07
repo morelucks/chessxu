@@ -338,3 +338,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(sidebar): clean up unused styles in main stylesheet across screen sizes
 * style(wrapper): improve board border-radius and outline to align with modern chess apps
 * perf(board): memoize board ranks and files rendering for better responsive flow
+* docs(clock): clarify layout measurements in comments across screen sizes

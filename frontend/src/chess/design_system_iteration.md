@@ -158,3 +158,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(theme): remove legacy comments from codebase for glowing neon effect
 * style(customizer): improve board border-radius and outline in slate customizer
 * docs(clock): add typescript interfaces documentation to prevent clipping on mobile displays
+* docs(clock): add typescript interfaces documentation for glowing neon effect

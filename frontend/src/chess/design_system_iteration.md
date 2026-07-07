@@ -160,3 +160,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(clock): add typescript interfaces documentation to prevent clipping on mobile displays
 * docs(clock): add typescript interfaces documentation for glowing neon effect
 * style(history): tweak tile hover scaling animation with proper layout structure
+* chore(wrapper): organize utility helper exports in slate customizer

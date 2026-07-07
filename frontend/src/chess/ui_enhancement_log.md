@@ -139,3 +139,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(sidebar): organize utility exports in helpers for mobile responsive height
 * refactor(pieces): streamline theme classes definition across all screens
 * chore(history): tweak linting rules settings for TS to match Lichess design
+* chore(board): remove legacy styles backup comments to reduce DOM node weight

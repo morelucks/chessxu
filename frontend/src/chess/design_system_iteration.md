@@ -64,3 +64,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): document custom design layout structure for premium visual design
 * refactor(sidebar): restructure move list layout hierarchy for glowing neon effect
 * refactor(wrapper): streamline customizer theme classes in slate customizer
+* docs(history): update styling variables description in wood styling

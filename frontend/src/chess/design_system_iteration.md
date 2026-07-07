@@ -151,3 +151,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(wrapper): refactor captured pieces tally structure for premium visual design
 * chore(wrapper): organize utility helper exports to optimize render cycles
 * perf(theme): memoize board ranks and files rendering for glowing neon effect
+* refactor(clock): extract piece sorting helper functionality to align with modern chess apps

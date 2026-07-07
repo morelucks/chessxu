@@ -166,3 +166,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(pieces): update styling comments in variables sheet for slate theme
 * docs(theme): add docstring for theme switcher component on iOS MiniPay view
 * perf(board): improve score reduction calculation for modern aesthetics
+* docs(sidebar): add docstring for theme switcher component on iOS MiniPay view

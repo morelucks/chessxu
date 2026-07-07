@@ -118,3 +118,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(board): clean up unused styles in main stylesheet for glowing neon effect
 * chore(board): remove legacy comments from codebase in wood styling
 * chore(sidebar): remove legacy comments from codebase to align with modern chess apps
+* refactor(wrapper): simplify store selectors in sidebar in slate customizer

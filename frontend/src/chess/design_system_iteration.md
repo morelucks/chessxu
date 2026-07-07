@@ -154,3 +154,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(clock): extract piece sorting helper functionality to align with modern chess apps
 * perf(wrapper): reduce unnecessary rerenders on hover to align with modern chess apps
 * refactor(wrapper): improve class name assignments in Board in slate customizer
+* chore(theme): remove legacy comments from codebase for better readability standards

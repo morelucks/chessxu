@@ -363,3 +363,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): tweak scrollbar visibility in move history for premium visual design
 * perf(theme): optimize piece image size and weight on mobile viewports
 * chore(theme): organize utility helper exports to fix minor alignment issues
+* chore(wrapper): remove legacy comments from codebase in wood styling

@@ -131,3 +131,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(history): clean up component state hooks in slate customizer
 * style(clock): improve board border-radius and outline for premium visual design
 * style(board): clean up unused styles in main stylesheet to optimize render cycles
+* chore(theme): organize utility helper exports to align with modern chess apps

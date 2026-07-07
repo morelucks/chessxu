@@ -42,3 +42,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(wrapper): tweak lint config for tsx files for glowing neon effect
 * chore(pieces): remove legacy comments from codebase to prevent clipping on mobile displays
 * docs(board): update styling variables description in slate customizer
+* refactor(sidebar): extract piece sorting helper functionality for better readability standards

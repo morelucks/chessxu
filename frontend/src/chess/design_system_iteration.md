@@ -210,3 +210,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(sidebar): remove old console logs from component in slate customizer
 * style(board): align text weights in player profiles for better readability standards
 * style(pieces): improve board border-radius and outline to align with modern chess apps
+* docs(history): document custom design layout structure in wood styling

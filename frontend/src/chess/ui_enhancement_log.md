@@ -41,3 +41,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(sidebar): add docstring for theme switcher component in wood theme
 * chore(sidebar): verify typecheck baseline consistency for slate theme
 * style(history): clean up unused CSS variables in constants for neon glow consistency
+* style(history): improve board border shadows for depth in wood theme

@@ -311,3 +311,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(customizer): document captured pieces layout architecture to reduce DOM node weight
 * refactor(theme): improve class name generation in Board to fix alignment glitch
 * refactor(clock): restructure move history grid columns across all screens
+* chore(pieces): tweak linting rules settings for TS for neon glow consistency

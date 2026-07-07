@@ -150,3 +150,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(history): optimize changed squares loop search in wood theme
 * style(theme): tweak scrollbar alignment in move history for WCAG readability standards
 * style(theme): tweak tile hover scaling and glow to reduce DOM node weight
+* perf(board): reduce render cycles on hover selection for WCAG readability standards

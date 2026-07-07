@@ -176,3 +176,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(sidebar): refactor helper mappings for piece count to match Lichess design
 * chore(sidebar): tweak linting rules settings for TS for mobile responsive height
 * chore(history): organize utility exports in helpers for modern aesthetics
+* refactor(customizer): simplify state selectors in sidebar to reduce DOM node weight

@@ -162,3 +162,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): tweak tile hover scaling animation with proper layout structure
 * chore(wrapper): organize utility helper exports in slate customizer
 * docs(customizer): add typescript interfaces documentation in wood styling
+* perf(sidebar): memoize board ranks and files rendering for glowing neon effect

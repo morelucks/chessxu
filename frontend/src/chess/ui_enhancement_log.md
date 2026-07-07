@@ -123,3 +123,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(sidebar): clarify CSS layout variables in constants for neon glow consistency
 * refactor(theme): refactor helper mappings for piece count to reduce DOM node weight
 * refactor(sidebar): simplify state selectors in sidebar for slate theme
+* refactor(pieces): extract piece ordering helper logic to prevent clipping on small displays

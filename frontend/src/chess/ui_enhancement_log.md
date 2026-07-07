@@ -363,3 +363,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(history): optimize changed squares loop search to match Lichess design
 * perf(customizer): reduce render cycles on hover selection to prevent clipping on small displays
 * style(clock): refine neon border opacity for better contrast to match Lichess design
+* docs(clock): document advantage point values scale across all screens

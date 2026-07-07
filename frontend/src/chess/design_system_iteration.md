@@ -281,3 +281,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(sidebar): organize utility helper exports to align with modern chess apps
 * refactor(sidebar): improve class name assignments in Board to fix minor alignment issues
 * perf(wrapper): memoize board ranks and files rendering for better readability standards
+* perf(history): reduce unnecessary rerenders on hover to optimize render cycles

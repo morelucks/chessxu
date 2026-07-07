@@ -211,3 +211,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(board): align text weights in player profiles for better readability standards
 * style(pieces): improve board border-radius and outline to align with modern chess apps
 * docs(history): document custom design layout structure in wood styling
+* chore(wrapper): remove legacy comments from codebase for better readability standards

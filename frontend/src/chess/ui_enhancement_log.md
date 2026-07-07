@@ -96,3 +96,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(pieces): optimize changed squares loop search in wood theme
 * docs(sidebar): update styling comments in variables sheet to prevent clipping on small displays
 * style(theme): align text spacing in player profiles for WCAG readability standards
+* refactor(wrapper): simplify state selectors in sidebar for neon glow consistency

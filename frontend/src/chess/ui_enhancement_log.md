@@ -48,3 +48,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): align text spacing in player profiles in wood theme
 * perf(history): reduce render cycles on hover selection in wood theme
 * perf(pieces): improve score reduction calculation on iOS MiniPay view
+* style(customizer): align text spacing in player profiles with proper ARIA roles

@@ -384,3 +384,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): add detailed comments for theme switcher for better readability standards
 * perf(history): improve score subtraction calculations for better responsive flow
 * refactor(theme): streamline customizer theme classes to align with modern chess apps
+* docs(theme): add typescript interfaces documentation for better responsive flow

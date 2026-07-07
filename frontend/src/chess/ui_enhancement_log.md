@@ -269,3 +269,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(customizer): optimize piece image load weight on iOS MiniPay view
 * style(history): adjust responsive size breakpoints for tablets for modern aesthetics
 * docs(wrapper): document advantage point values scale to prevent clipping on small displays
+* refactor(history): refactor helper mappings for piece count across all screens

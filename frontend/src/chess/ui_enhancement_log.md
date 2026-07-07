@@ -218,3 +218,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(customizer): clean up component props passing on iOS MiniPay view
 * chore(board): remove legacy styles backup comments on iOS MiniPay view
 * chore(clock): organize utility exports in helpers in wood theme
+* style(customizer): tweak tile hover scaling and glow to fix alignment glitch

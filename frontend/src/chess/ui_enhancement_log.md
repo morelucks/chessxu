@@ -298,3 +298,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(customizer): adjust responsive size breakpoints for tablets for neon glow consistency
 * chore(customizer): organize utility exports in helpers for mobile responsive height
 * docs(theme): document advantage point values scale for slate theme
+* refactor(theme): streamline theme classes definition with proper ARIA roles

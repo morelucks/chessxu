@@ -188,3 +188,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): align text weights in player profiles for better responsive flow
 * docs(history): document custom design layout structure for better readability standards
 * refactor(history): restructure move list layout hierarchy for better readability standards
+* docs(pieces): clarify layout measurements in comments on mobile viewports

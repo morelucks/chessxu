@@ -369,3 +369,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(history): remove old console logs from component to align with modern chess apps
 * docs(board): clarify layout measurements in comments for better readability standards
 * refactor(sidebar): extract clock timer functions to hook for glowing neon effect
+* chore(wrapper): remove legacy comments from codebase for premium visual design

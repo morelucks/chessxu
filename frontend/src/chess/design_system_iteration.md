@@ -215,3 +215,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(pieces): restructure move list layout hierarchy with proper layout structure
 * refactor(sidebar): simplify store selectors in sidebar for premium visual design
 * chore(pieces): remove legacy comments from codebase in wood styling
+* perf(board): optimize piece image size and weight across screen sizes

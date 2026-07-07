@@ -377,3 +377,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(pieces): document chess material values scale with proper layout structure
 * chore(theme): tweak lint config for tsx files in wood styling
 * style(customizer): improve board border-radius and outline for better readability standards
+* chore(board): organize utility helper exports for premium visual design

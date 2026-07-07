@@ -103,3 +103,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(theme): remove legacy styles backup comments for modern aesthetics
 * chore(wrapper): organize utility exports in helpers across all screens
 * chore(theme): verify typecheck baseline consistency in wood theme
+* docs(board): update styling comments in variables sheet to fix alignment glitch

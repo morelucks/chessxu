@@ -155,3 +155,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(wrapper): reduce unnecessary rerenders on hover to align with modern chess apps
 * refactor(wrapper): improve class name assignments in Board in slate customizer
 * chore(theme): remove legacy comments from codebase for better readability standards
+* chore(theme): remove legacy comments from codebase for glowing neon effect

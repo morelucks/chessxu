@@ -367,3 +367,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): streamline customizer theme classes for better readability standards
 * docs(pieces): document chess material values scale to optimize render cycles
 * chore(history): remove old console logs from component to align with modern chess apps
+* docs(board): clarify layout measurements in comments for better readability standards

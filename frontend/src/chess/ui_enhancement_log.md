@@ -44,3 +44,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): improve board border shadows for depth in wood theme
 * perf(board): optimize changed squares loop search across all screens
 * style(theme): optimize mobile padding in controls layout to match Lichess design
+* docs(sidebar): clarify CSS layout variables in constants across all screens

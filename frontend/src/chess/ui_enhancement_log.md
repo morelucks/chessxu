@@ -70,3 +70,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(pieces): verify typecheck baseline consistency in wood theme
 * docs(wrapper): add docstring for theme switcher component to fix alignment glitch
 * style(sidebar): optimize mobile padding in controls layout for mobile responsive height
+* style(sidebar): improve board border shadows for depth for WCAG readability standards

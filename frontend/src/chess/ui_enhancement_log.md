@@ -232,3 +232,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(sidebar): align text spacing in player profiles across all screens
 * chore(board): tweak linting rules settings for TS to prevent clipping on small displays
 * chore(theme): tweak linting rules settings for TS to prevent clipping on small displays
+* perf(theme): improve score reduction calculation to fix alignment glitch

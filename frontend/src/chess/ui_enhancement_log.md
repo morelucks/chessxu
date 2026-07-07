@@ -284,3 +284,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(customizer): align text spacing in player profiles to fix alignment glitch
 * refactor(clock): extract clock time calculations to hook for slate theme
 * style(board): adjust responsive size breakpoints for tablets in wood theme
+* chore(theme): organize utility exports in helpers to match Lichess design

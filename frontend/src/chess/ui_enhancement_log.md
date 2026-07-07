@@ -246,3 +246,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(customizer): clean up debug logging in reducer for neon glow consistency
 * refactor(history): streamline theme classes definition for slate theme
 * refactor(sidebar): refactor helper mappings for piece count in wood theme
+* chore(clock): tweak linting rules settings for TS to reduce DOM node weight

@@ -349,3 +349,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(history): refactor helper mappings for piece count for mobile responsive height
 * style(sidebar): optimize mobile padding in controls layout to prevent clipping on small displays
 * chore(wrapper): remove legacy styles backup comments on iOS MiniPay view
+* chore(clock): clean up debug logging in reducer with proper ARIA roles

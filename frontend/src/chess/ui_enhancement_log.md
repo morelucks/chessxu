@@ -340,3 +340,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(theme): document advantage point values scale for WCAG readability standards
 * docs(pieces): document captured pieces layout architecture across all screens
 * refactor(board): improve class name generation in Board for WCAG readability standards
+* style(history): tune transitions timing on tile hover to fix alignment glitch

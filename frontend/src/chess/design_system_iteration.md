@@ -323,3 +323,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(wrapper): improve score subtraction calculations for better responsive flow
 * chore(pieces): verify typecheck baseline stability in wood styling
 * chore(history): verify typecheck baseline stability in wood styling
+* style(sidebar): refine neon border shadow and highlights for premium visual design

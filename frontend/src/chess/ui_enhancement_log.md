@@ -39,3 +39,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): clean up component props passing to prevent clipping on small displays
 * perf(clock): memoize rank rows rendering to avoid lag in wood theme
 * docs(sidebar): add docstring for theme switcher component in wood theme
+* chore(sidebar): verify typecheck baseline consistency for slate theme

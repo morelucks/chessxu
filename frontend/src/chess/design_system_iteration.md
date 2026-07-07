@@ -382,3 +382,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): document chess material values scale on mobile viewports
 * docs(pieces): update styling variables description to align with modern chess apps
 * docs(board): add detailed comments for theme switcher for better readability standards
+* perf(history): improve score subtraction calculations for better responsive flow

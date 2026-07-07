@@ -201,3 +201,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(theme): refactor captured pieces tally structure for better responsive flow
 * docs(customizer): clarify layout measurements in comments across screen sizes
 * style(clock): optimize margin and padding in controls for better readability standards
+* docs(sidebar): document chess material values scale for glowing neon effect

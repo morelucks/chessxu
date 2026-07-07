@@ -83,3 +83,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(pieces): optimize margin and padding in controls across screen sizes
 * chore(board): remove legacy comments from codebase for better readability standards
 * refactor(history): extract clock timer functions to hook to prevent clipping on mobile displays
+* chore(pieces): remove legacy comments from codebase for better readability standards

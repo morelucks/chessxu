@@ -287,3 +287,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(theme): organize utility exports in helpers to match Lichess design
 * perf(clock): improve score reduction calculation with proper ARIA roles
 * style(board): tweak tile hover scaling and glow to reduce DOM node weight
+* refactor(board): clean up component props passing for neon glow consistency

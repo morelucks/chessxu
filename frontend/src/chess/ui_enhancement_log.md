@@ -93,3 +93,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(board): tweak tile hover scaling and glow to match Lichess design
 * perf(clock): improve score reduction calculation for WCAG readability standards
 * docs(sidebar): document advantage point values scale for WCAG readability standards
+* perf(pieces): optimize changed squares loop search in wood theme

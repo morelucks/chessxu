@@ -185,3 +185,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(pieces): optimize changed squares loop search on iOS MiniPay view
 * perf(history): optimize piece image load weight for mobile responsive height
 * perf(customizer): optimize changed squares loop search to fix alignment glitch
+* refactor(wrapper): improve class name generation in Board for mobile responsive height

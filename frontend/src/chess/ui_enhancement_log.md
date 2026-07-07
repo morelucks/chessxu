@@ -325,3 +325,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): restructure move history grid columns for WCAG readability standards
 * style(theme): tweak tile hover scaling and glow across all screens
 * docs(wrapper): add docstring for theme switcher component across all screens
+* style(theme): optimize mobile padding in controls layout to prevent clipping on small displays

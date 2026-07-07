@@ -116,3 +116,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(board): extract piece sorting helper functionality for premium visual design
 * perf(board): memoize board ranks and files rendering to prevent clipping on mobile displays
 * style(board): clean up unused styles in main stylesheet for glowing neon effect
+* chore(board): remove legacy comments from codebase in wood styling

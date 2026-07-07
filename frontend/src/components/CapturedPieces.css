@@ -1,0 +1,62 @@
+/* Captured Pieces Display Styles */
+
+.captured-pieces-container {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.captured-piece {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    opacity: 0.8;
+    transition: transform 0.15s ease;
+}
+
+.captured-piece:hover {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+/* Piece Background Images targeting local chess asset directory */
+.captured-piece.bp { background-image: url('../chess/assets/bp.png'); }
+.captured-piece.bn { background-image: url('../chess/assets/bn.png'); }
+.captured-piece.bb { background-image: url('../chess/assets/bb.png'); }
+.captured-piece.br { background-image: url('../chess/assets/br.png'); }
+.captured-piece.bq { background-image: url('../chess/assets/bq.png'); }
+
+.captured-piece.wp { background-image: url('../chess/assets/wp.png'); }
+.captured-piece.wn { background-image: url('../chess/assets/wn.png'); }
+.captured-piece.wb { background-image: url('../chess/assets/wb.png'); }
+.captured-piece.wr { background-image: url('../chess/assets/wr.png'); }
+.captured-piece.wq { background-image: url('../chess/assets/wq.png'); }
+
+.material-advantage {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #10b981; /* emerald-500 */
+    margin-left: 0.35rem;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.05rem 0.25rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Mobile responsive compact styling */
+@media (max-width: 768px) {
+    .captured-piece {
+        width: 16px;
+        height: 16px;
+    }
+    .material-advantage {
+        font-size: 0.65rem;
+        padding: 0 0.15rem;
+    }
+}

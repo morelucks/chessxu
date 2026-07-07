@@ -27,6 +27,7 @@ import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
 import { useFreemium } from '../hooks/useFreemium';
+import './CapturedPieces.css';
 
 /**
  * Wrapper providing AppContext with typed reducer for the chess board UI.
@@ -84,6 +85,77 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
         appState,
         dispatch
     };
+
+    const position = appState.position[appState.position.length - 1];
+
+    // Helper to calculate captured pieces
+    const getCapturedPieces = (pos: string[][]) => {
+        if (!pos) return { w: [], b: [] };
+        const currentCount: Record<string, number> = {};
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                const piece = pos[r]?.[c];
+                if (piece) {
+                    currentCount[piece] = (currentCount[piece] || 0) + 1;
+                }
+            }
+        }
+
+        const startingSet: Record<string, number> = {
+            wp: 8, wr: 2, wn: 2, wb: 2, wq: 1,
+            bp: 8, br: 2, bn: 2, bb: 2, bq: 1
+        };
+
+        const captured: { w: string[]; b: string[] } = {
+            w: [],
+            b: []
+        };
+
+        Object.keys(startingSet).forEach(piece => {
+            const count = startingSet[piece];
+            const current = currentCount[piece] || 0;
+            const capturedCount = count - current;
+            if (capturedCount > 0) {
+                for (let i = 0; i < capturedCount; i++) {
+                    if (piece.startsWith('w')) {
+                        captured.w.push(piece);
+                    } else {
+                        captured.b.push(piece);
+                    }
+                }
+            }
+        });
+
+        const pieceOrder: Record<string, number> = { p: 1, n: 2, b: 3, r: 4, q: 5 };
+        const sortFunc = (a: string, b: string) => pieceOrder[a[1]] - pieceOrder[b[1]];
+        captured.w.sort(sortFunc);
+        captured.b.sort(sortFunc);
+
+        return captured;
+    };
+
+    const getPieceValue = (p: string) => {
+        const type = p[1];
+        if (type === 'p') return 1;
+        if (type === 'n') return 3;
+        if (type === 'b') return 3;
+        if (type === 'r') return 5;
+        if (type === 'q') return 9;
+        return 0;
+    };
+
+    const captured = getCapturedPieces(position);
+    const whiteScore = captured.b.reduce((sum, p) => sum + getPieceValue(p), 0);
+    const blackScore = captured.w.reduce((sum, p) => sum + getPieceValue(p), 0);
+
+    const whiteAdvantage = whiteScore - blackScore;
+    const blackAdvantage = blackScore - whiteScore;
+
+    const opponentCapturedPieces = appState.playerColor === 'w' ? captured.w : captured.b;
+    const opponentAdvantage = appState.playerColor === 'w' ? blackAdvantage : whiteAdvantage;
+
+    const playerCapturedPieces = appState.playerColor === 'w' ? captured.b : captured.w;
+    const playerAdvantage = appState.playerColor === 'w' ? whiteAdvantage : blackAdvantage;
 
     // Handle computer moves for PvC mode and Puzzle mode
     useEffect(() => {
@@ -175,6 +247,16 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                     <span className="text-[10px] md:text-xs text-slate-400">
                                         {opponentSub}
                                     </span>
+                                    {opponentCapturedPieces.length > 0 && (
+                                        <div className="captured-pieces-container">
+                                            {opponentCapturedPieces.map((piece, idx) => (
+                                                <div key={idx} className={`captured-piece ${piece}`} />
+                                            ))}
+                                            {opponentAdvantage > 0 && (
+                                                <span className="material-advantage">+{opponentAdvantage}</span>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <ChessClock 
@@ -207,6 +289,16 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                                     <span className="text-[10px] md:text-xs text-slate-400">
                                         {playerSub}
                                     </span>
+                                    {playerCapturedPieces.length > 0 && (
+                                        <div className="captured-pieces-container">
+                                            {playerCapturedPieces.map((piece, idx) => (
+                                                <div key={idx} className={`captured-piece ${piece}`} />
+                                            ))}
+                                            {playerAdvantage > 0 && (
+                                                <span className="material-advantage">+{playerAdvantage}</span>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <ChessClock 

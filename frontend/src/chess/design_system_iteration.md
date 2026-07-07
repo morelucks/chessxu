@@ -231,3 +231,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): optimize last-move changed tile lookup in wood styling
 * chore(board): verify typecheck baseline stability across screen sizes
 * docs(customizer): document custom design layout structure in slate customizer
+* style(customizer): clean up unused styles in main stylesheet for premium visual design

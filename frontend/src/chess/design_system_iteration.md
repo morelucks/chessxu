@@ -246,3 +246,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(clock): add detailed comments for theme switcher to optimize render cycles
 * perf(pieces): improve score subtraction calculations to fix minor alignment issues
 * perf(wrapper): optimize piece image size and weight with proper layout structure
+* style(board): tweak tile hover scaling animation to fix minor alignment issues

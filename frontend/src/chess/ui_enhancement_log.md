@@ -248,3 +248,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(sidebar): refactor helper mappings for piece count in wood theme
 * chore(clock): tweak linting rules settings for TS to reduce DOM node weight
 * style(customizer): adjust grid gap for mobile displays in wood theme
+* chore(theme): verify typecheck baseline consistency for neon glow consistency

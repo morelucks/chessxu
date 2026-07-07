@@ -146,3 +146,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): clean up component props passing for slate theme
 * chore(customizer): remove legacy styles backup comments for mobile responsive height
 * style(pieces): clean up unused CSS variables in constants on iOS MiniPay view
+* chore(customizer): tweak linting rules settings for TS in wood theme

@@ -30,3 +30,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(wrapper): optimize mobile padding in controls layout for modern aesthetics
 * chore(clock): organize utility exports in helpers with proper ARIA roles
 * chore(sidebar): verify typecheck baseline consistency to prevent clipping on small displays
+* refactor(board): restructure move history grid columns to fix alignment glitch

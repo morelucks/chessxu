@@ -45,3 +45,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): extract piece sorting helper functionality for better readability standards
 * perf(sidebar): memoize board ranks and files rendering with proper layout structure
 * style(sidebar): clean up unused styles in main stylesheet for better readability standards
+* refactor(customizer): restructure move list layout hierarchy on mobile viewports

@@ -112,3 +112,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(board): adjust flex containers for smaller devices with proper layout structure
 * perf(sidebar): optimize last-move changed tile lookup for glowing neon effect
 * chore(board): tweak lint config for tsx files in wood styling
+* refactor(theme): refactor captured pieces tally structure to align with modern chess apps

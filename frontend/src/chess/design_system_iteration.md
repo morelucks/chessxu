@@ -373,3 +373,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(pieces): clean up unused styles in main stylesheet for premium visual design
 * perf(theme): memoize board ranks and files rendering to optimize render cycles
 * perf(theme): optimize last-move changed tile lookup for premium visual design
+* perf(pieces): improve score subtraction calculations to optimize render cycles

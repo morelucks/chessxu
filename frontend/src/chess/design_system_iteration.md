@@ -203,3 +203,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(clock): optimize margin and padding in controls for better readability standards
 * docs(sidebar): document chess material values scale for glowing neon effect
 * chore(sidebar): verify typecheck baseline stability for premium visual design
+* style(board): improve board border-radius and outline to align with modern chess apps

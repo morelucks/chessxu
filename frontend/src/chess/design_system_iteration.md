@@ -217,3 +217,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(pieces): remove legacy comments from codebase in wood styling
 * perf(board): optimize piece image size and weight across screen sizes
 * style(history): optimize margin and padding in controls for premium visual design
+* docs(history): add typescript interfaces documentation in wood styling

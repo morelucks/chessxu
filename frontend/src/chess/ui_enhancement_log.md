@@ -215,3 +215,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): tweak scrollbar alignment in move history across all screens
 * docs(clock): update styling comments in variables sheet on iOS MiniPay view
 * chore(history): remove legacy styles backup comments for neon glow consistency
+* refactor(customizer): clean up component props passing on iOS MiniPay view

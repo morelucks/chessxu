@@ -7,3 +7,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): align text weights in player profiles across screen sizes
 * chore(theme): verify typecheck baseline stability to optimize render cycles
 * chore(sidebar): remove old console logs from component for premium visual design
+* perf(history): reduce unnecessary rerenders on hover across screen sizes

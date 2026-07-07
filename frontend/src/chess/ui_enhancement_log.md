@@ -233,3 +233,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(board): tweak linting rules settings for TS to prevent clipping on small displays
 * chore(theme): tweak linting rules settings for TS to prevent clipping on small displays
 * perf(theme): improve score reduction calculation to fix alignment glitch
+* chore(theme): organize utility exports in helpers for neon glow consistency

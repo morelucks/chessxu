@@ -14,3 +14,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): simplify store selectors in sidebar in wood styling
 * docs(wrapper): add typescript interfaces documentation to prevent clipping on mobile displays
 * chore(customizer): remove old console logs from component to align with modern chess apps
+* refactor(wrapper): extract piece sorting helper functionality with proper layout structure

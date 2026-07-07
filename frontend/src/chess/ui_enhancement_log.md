@@ -392,3 +392,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(customizer): extract piece ordering helper logic in wood theme
 * chore(wrapper): remove legacy styles backup comments in wood theme
 * refactor(clock): refactor helper mappings for piece count for slate theme
+* refactor(sidebar): refactor helper mappings for piece count to reduce DOM node weight

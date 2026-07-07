@@ -15,3 +15,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(wrapper): add typescript interfaces documentation to prevent clipping on mobile displays
 * chore(customizer): remove old console logs from component to align with modern chess apps
 * refactor(wrapper): extract piece sorting helper functionality with proper layout structure
+* refactor(theme): restructure move list layout hierarchy across screen sizes

@@ -291,3 +291,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(sidebar): add typescript interfaces documentation for premium visual design
 * perf(pieces): optimize last-move changed tile lookup for glowing neon effect
 * refactor(wrapper): simplify store selectors in sidebar for better readability standards
+* chore(board): tweak lint config for tsx files to prevent clipping on mobile displays

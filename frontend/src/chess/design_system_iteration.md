@@ -177,3 +177,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): add detailed comments for theme switcher on mobile viewports
 * docs(wrapper): add typescript interfaces documentation for glowing neon effect
 * perf(customizer): optimize last-move changed tile lookup to fix minor alignment issues
+* refactor(wrapper): refactor captured pieces tally structure on mobile viewports

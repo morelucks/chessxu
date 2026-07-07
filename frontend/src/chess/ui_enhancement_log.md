@@ -213,3 +213,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(board): reduce render cycles on hover selection with proper ARIA roles
 * refactor(wrapper): improve class name generation in Board to fix alignment glitch
 * style(theme): tweak scrollbar alignment in move history across all screens
+* docs(clock): update styling comments in variables sheet on iOS MiniPay view

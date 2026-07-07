@@ -323,3 +323,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(clock): optimize changed squares loop search for WCAG readability standards
 * chore(board): tweak linting rules settings for TS for modern aesthetics
 * refactor(board): restructure move history grid columns for WCAG readability standards
+* style(theme): tweak tile hover scaling and glow across all screens

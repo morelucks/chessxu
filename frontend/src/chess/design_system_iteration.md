@@ -237,3 +237,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): update styling variables description to fix minor alignment issues
 * perf(pieces): memoize board ranks and files rendering in slate customizer
 * refactor(board): extract clock timer functions to hook in wood styling
+* refactor(theme): streamline customizer theme classes to fix minor alignment issues

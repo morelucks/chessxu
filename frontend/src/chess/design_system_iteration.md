@@ -199,3 +199,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(wrapper): remove old console logs from component to optimize render cycles
 * style(history): adjust layout alignment and spacing for better readability standards
 * refactor(theme): refactor captured pieces tally structure for better responsive flow
+* docs(customizer): clarify layout measurements in comments across screen sizes

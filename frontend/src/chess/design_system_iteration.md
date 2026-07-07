@@ -206,3 +206,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(board): improve board border-radius and outline to align with modern chess apps
 * perf(pieces): optimize piece image size and weight in slate customizer
 * refactor(pieces): refactor captured pieces tally structure on mobile viewports
+* refactor(theme): simplify store selectors in sidebar for glowing neon effect

@@ -168,3 +168,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(board): improve score reduction calculation for modern aesthetics
 * docs(sidebar): add docstring for theme switcher component on iOS MiniPay view
 * docs(clock): clarify CSS layout variables in constants across all screens
+* perf(theme): optimize piece image load weight to fix alignment glitch

@@ -79,3 +79,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): document chess material values scale to fix minor alignment issues
 * docs(customizer): add detailed comments for theme switcher across screen sizes
 * perf(board): reduce unnecessary rerenders on hover in slate customizer
+* refactor(sidebar): restructure move list layout hierarchy in slate customizer

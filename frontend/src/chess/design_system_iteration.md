@@ -356,3 +356,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(clock): verify typecheck baseline stability for glowing neon effect
 * docs(pieces): clarify layout measurements in comments for glowing neon effect
 * chore(sidebar): remove legacy comments from codebase for better responsive flow
+* style(customizer): align text weights in player profiles to fix minor alignment issues

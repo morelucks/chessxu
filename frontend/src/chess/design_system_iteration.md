@@ -74,3 +74,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(wrapper): document custom design layout structure to align with modern chess apps
 * docs(history): document chess material values scale to align with modern chess apps
 * perf(wrapper): improve score subtraction calculations for premium visual design
+* docs(history): document chess material values scale for better readability standards

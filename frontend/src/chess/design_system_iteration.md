@@ -35,3 +35,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(sidebar): remove legacy comments from codebase for premium visual design
 * style(clock): refine neon border shadow and highlights to align with modern chess apps
 * perf(board): memoize board ranks and files rendering to align with modern chess apps
+* docs(pieces): document custom design layout structure with proper layout structure

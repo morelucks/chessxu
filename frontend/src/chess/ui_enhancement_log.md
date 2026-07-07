@@ -252,3 +252,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(sidebar): improve score reduction calculation to prevent clipping on small displays
 * chore(sidebar): verify typecheck baseline consistency on iOS MiniPay view
 * style(customizer): tweak tile hover scaling and glow to match Lichess design
+* perf(wrapper): reduce render cycles on hover selection for slate theme

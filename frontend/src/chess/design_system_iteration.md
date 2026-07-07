@@ -57,3 +57,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): extract piece sorting helper functionality for better responsive flow
 * style(sidebar): align text weights in player profiles for better readability standards
 * docs(wrapper): add detailed comments for theme switcher for premium visual design
+* chore(history): tweak lint config for tsx files for glowing neon effect

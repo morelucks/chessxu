@@ -27,3 +27,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(wrapper): optimize changed squares loop search for mobile responsive height
 * perf(sidebar): improve score reduction calculation for WCAG readability standards
 * style(history): tweak scrollbar alignment in move history for WCAG readability standards
+* style(wrapper): optimize mobile padding in controls layout for modern aesthetics

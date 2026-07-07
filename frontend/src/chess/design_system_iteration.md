@@ -352,3 +352,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(history): remove legacy comments from codebase in slate customizer
 * perf(sidebar): optimize last-move changed tile lookup to align with modern chess apps
 * perf(history): reduce unnecessary rerenders on hover to prevent clipping on mobile displays
+* docs(theme): update styling variables description to fix minor alignment issues

@@ -179,3 +179,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(customizer): optimize last-move changed tile lookup to fix minor alignment issues
 * refactor(wrapper): refactor captured pieces tally structure on mobile viewports
 * refactor(wrapper): extract clock timer functions to hook to align with modern chess apps
+* docs(customizer): clarify layout measurements in comments for premium visual design

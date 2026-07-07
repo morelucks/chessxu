@@ -86,3 +86,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(pieces): remove legacy comments from codebase for better readability standards
 * style(clock): adjust layout alignment and spacing on mobile viewports
 * refactor(customizer): extract clock timer functions to hook on mobile viewports
+* docs(pieces): clarify layout measurements in comments to optimize render cycles

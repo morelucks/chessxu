@@ -180,3 +180,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(history): tweak linting rules settings for TS for neon glow consistency
 * docs(sidebar): update styling comments in variables sheet to reduce DOM node weight
 * chore(sidebar): verify typecheck baseline consistency for WCAG readability standards
+* style(sidebar): align text spacing in player profiles for mobile responsive height

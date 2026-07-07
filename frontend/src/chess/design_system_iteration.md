@@ -254,3 +254,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(pieces): tune animation speed on tile hover in wood styling
 * refactor(clock): simplify store selectors in sidebar for glowing neon effect
 * refactor(customizer): simplify store selectors in sidebar for glowing neon effect
+* chore(theme): tweak lint config for tsx files to optimize render cycles

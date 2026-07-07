@@ -174,3 +174,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(pieces): organize utility exports in helpers in wood theme
 * perf(theme): memoize rank rows rendering to avoid lag for slate theme
 * refactor(sidebar): refactor helper mappings for piece count to match Lichess design
+* chore(sidebar): tweak linting rules settings for TS for mobile responsive height

@@ -394,3 +394,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(history): improve class name assignments in Board to fix minor alignment issues
 * docs(history): document custom design layout structure on mobile viewports
 * docs(board): update styling variables description in wood styling
+* docs(customizer): document chess material values scale to prevent clipping on mobile displays

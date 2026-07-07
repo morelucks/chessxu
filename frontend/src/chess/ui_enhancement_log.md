@@ -220,3 +220,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(clock): organize utility exports in helpers in wood theme
 * style(customizer): tweak tile hover scaling and glow to fix alignment glitch
 * refactor(theme): clean up component props passing to prevent clipping on small displays
+* refactor(theme): extract piece ordering helper logic with proper ARIA roles

@@ -36,3 +36,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(sidebar): adjust grid gap for mobile displays in wood theme
 * chore(customizer): verify typecheck baseline consistency to reduce DOM node weight
 * refactor(sidebar): extract clock time calculations to hook for WCAG readability standards
+* refactor(board): clean up component props passing to prevent clipping on small displays

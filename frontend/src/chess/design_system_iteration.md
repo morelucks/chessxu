@@ -146,3 +146,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): add typescript interfaces documentation for glowing neon effect
 * docs(wrapper): update styling variables description for premium visual design
 * docs(clock): clarify layout measurements in comments with proper layout structure
+* style(pieces): tweak tile hover scaling animation in slate customizer

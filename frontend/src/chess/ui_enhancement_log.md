@@ -278,3 +278,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(pieces): simplify state selectors in sidebar in wood theme
 * refactor(clock): extract piece ordering helper logic for mobile responsive height
 * chore(wrapper): tweak linting rules settings for TS for modern aesthetics
+* docs(theme): add TypeScript type comments for state for WCAG readability standards

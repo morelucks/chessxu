@@ -189,3 +189,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): document custom design layout structure for better readability standards
 * refactor(history): restructure move list layout hierarchy for better readability standards
 * docs(pieces): clarify layout measurements in comments on mobile viewports
+* chore(pieces): remove old console logs from component to align with modern chess apps

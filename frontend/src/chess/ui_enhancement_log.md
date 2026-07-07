@@ -265,3 +265,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(sidebar): memoize rank rows rendering to avoid lag for slate theme
 * refactor(clock): improve class name generation in Board in wood theme
 * docs(board): update styling comments in variables sheet for neon glow consistency
+* refactor(wrapper): streamline theme classes definition on iOS MiniPay view

@@ -206,3 +206,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): optimize mobile padding in controls layout to reduce DOM node weight
 * style(pieces): clean up unused CSS variables in constants for modern aesthetics
 * perf(sidebar): optimize changed squares loop search for WCAG readability standards
+* refactor(theme): clean up component props passing for slate theme

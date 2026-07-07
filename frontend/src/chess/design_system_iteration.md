@@ -302,3 +302,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(pieces): tweak tile hover scaling animation to align with modern chess apps
 * style(theme): tweak scrollbar visibility in move history for glowing neon effect
 * chore(pieces): remove old console logs from component for glowing neon effect
+* perf(sidebar): improve score subtraction calculations to align with modern chess apps

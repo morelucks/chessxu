@@ -256,3 +256,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): simplify store selectors in sidebar for glowing neon effect
 * chore(theme): tweak lint config for tsx files to optimize render cycles
 * chore(history): organize utility helper exports with proper layout structure
+* refactor(board): restructure move list layout hierarchy on mobile viewports

@@ -375,3 +375,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): optimize last-move changed tile lookup for premium visual design
 * perf(pieces): improve score subtraction calculations to optimize render cycles
 * docs(pieces): document chess material values scale with proper layout structure
+* chore(theme): tweak lint config for tsx files in wood styling

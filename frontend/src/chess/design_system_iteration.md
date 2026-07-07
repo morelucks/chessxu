@@ -164,3 +164,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(customizer): add typescript interfaces documentation in wood styling
 * perf(sidebar): memoize board ranks and files rendering for glowing neon effect
 * perf(customizer): optimize piece image size and weight to prevent clipping on mobile displays
+* style(history): optimize margin and padding in controls for better responsive flow

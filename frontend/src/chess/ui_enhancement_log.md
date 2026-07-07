@@ -316,3 +316,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(wrapper): simplify state selectors in sidebar to reduce DOM node weight
 * docs(board): document captured pieces layout architecture for WCAG readability standards
 * refactor(clock): simplify state selectors in sidebar for modern aesthetics
+* perf(theme): memoize rank rows rendering to avoid lag with proper ARIA roles

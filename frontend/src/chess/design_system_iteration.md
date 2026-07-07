@@ -224,3 +224,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(clock): extract clock timer functions to hook to prevent clipping on mobile displays
 * docs(board): document chess material values scale to optimize render cycles
 * docs(history): update styling variables description for premium visual design
+* chore(customizer): remove legacy comments from codebase to fix minor alignment issues

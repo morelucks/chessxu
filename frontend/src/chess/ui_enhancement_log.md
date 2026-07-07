@@ -365,3 +365,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(clock): refine neon border opacity for better contrast to match Lichess design
 * docs(clock): document advantage point values scale across all screens
 * docs(board): update styling comments in variables sheet on iOS MiniPay view
+* perf(theme): optimize piece image load weight on iOS MiniPay view

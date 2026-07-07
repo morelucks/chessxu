@@ -16,3 +16,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(customizer): streamline theme classes definition to prevent clipping on small displays
 * perf(wrapper): improve score reduction calculation for slate theme
 * refactor(sidebar): improve class name generation in Board to reduce DOM node weight
+* style(board): tweak tile hover scaling and glow to fix alignment glitch

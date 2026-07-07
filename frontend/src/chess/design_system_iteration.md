@@ -88,3 +88,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): extract clock timer functions to hook on mobile viewports
 * docs(pieces): clarify layout measurements in comments to optimize render cycles
 * chore(customizer): remove legacy comments from codebase to align with modern chess apps
+* refactor(sidebar): extract piece sorting helper functionality to align with modern chess apps

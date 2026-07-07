@@ -55,3 +55,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(history): reduce render cycles on hover selection with proper ARIA roles
 * style(pieces): tweak scrollbar alignment in move history to prevent clipping on small displays
 * refactor(history): improve class name generation in Board for slate theme
+* docs(customizer): document advantage point values scale on iOS MiniPay view

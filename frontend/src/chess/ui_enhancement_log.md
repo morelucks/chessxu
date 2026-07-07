@@ -337,3 +337,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(history): add TypeScript type comments for state for mobile responsive height
 * style(history): clean up unused CSS variables in constants to reduce DOM node weight
 * refactor(sidebar): restructure move history grid columns to reduce DOM node weight
+* docs(theme): document advantage point values scale for WCAG readability standards

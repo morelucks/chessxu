@@ -37,3 +37,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): memoize board ranks and files rendering to align with modern chess apps
 * docs(pieces): document custom design layout structure with proper layout structure
 * perf(customizer): memoize board ranks and files rendering to optimize render cycles
+* refactor(theme): streamline customizer theme classes for better readability standards

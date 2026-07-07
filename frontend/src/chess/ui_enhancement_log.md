@@ -390,3 +390,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(wrapper): restructure move history grid columns with proper ARIA roles
 * perf(theme): optimize changed squares loop search with proper ARIA roles
 * refactor(customizer): extract piece ordering helper logic in wood theme
+* chore(wrapper): remove legacy styles backup comments in wood theme

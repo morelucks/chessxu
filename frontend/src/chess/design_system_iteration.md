@@ -109,3 +109,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(wrapper): improve class name assignments in Board in wood styling
 * style(history): clean up unused styles in main stylesheet to optimize render cycles
 * docs(pieces): clarify layout measurements in comments for better readability standards
+* style(board): adjust flex containers for smaller devices with proper layout structure

@@ -144,3 +144,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(clock): verify typecheck baseline stability to align with modern chess apps
 * docs(pieces): clarify layout measurements in comments to align with modern chess apps
 * docs(theme): add typescript interfaces documentation for glowing neon effect
+* docs(wrapper): update styling variables description for premium visual design

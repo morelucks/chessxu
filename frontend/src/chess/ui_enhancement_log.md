@@ -124,3 +124,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): refactor helper mappings for piece count to reduce DOM node weight
 * refactor(sidebar): simplify state selectors in sidebar for slate theme
 * refactor(pieces): extract piece ordering helper logic to prevent clipping on small displays
+* style(wrapper): align text spacing in player profiles with proper ARIA roles

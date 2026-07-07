@@ -214,3 +214,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(wrapper): remove legacy comments from codebase for better readability standards
 * refactor(pieces): restructure move list layout hierarchy with proper layout structure
 * refactor(sidebar): simplify store selectors in sidebar for premium visual design
+* chore(pieces): remove legacy comments from codebase in wood styling

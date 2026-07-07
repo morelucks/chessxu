@@ -175,3 +175,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(wrapper): extract clock timer functions to hook across screen sizes
 * perf(wrapper): reduce unnecessary rerenders on hover in wood styling
 * docs(theme): add detailed comments for theme switcher on mobile viewports
+* docs(wrapper): add typescript interfaces documentation for glowing neon effect

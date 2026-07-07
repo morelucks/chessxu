@@ -31,3 +31,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(board): clean up component state hooks in wood styling
 * perf(theme): reduce unnecessary rerenders on hover in slate customizer
 * docs(theme): update styling variables description across screen sizes
+* refactor(pieces): refactor captured pieces tally structure in slate customizer

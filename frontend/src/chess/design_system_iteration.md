@@ -77,3 +77,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): document chess material values scale for better readability standards
 * perf(history): memoize board ranks and files rendering across screen sizes
 * docs(theme): document chess material values scale to fix minor alignment issues
+* docs(customizer): add detailed comments for theme switcher across screen sizes

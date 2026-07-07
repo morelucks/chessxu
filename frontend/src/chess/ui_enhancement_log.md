@@ -321,3 +321,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(customizer): verify typecheck baseline consistency for WCAG readability standards
 * style(board): tweak scrollbar alignment in move history for neon glow consistency
 * perf(clock): optimize changed squares loop search for WCAG readability standards
+* chore(board): tweak linting rules settings for TS for modern aesthetics

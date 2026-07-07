@@ -261,3 +261,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(history): document captured pieces layout architecture to fix alignment glitch
 * refactor(wrapper): clean up component props passing across all screens
 * perf(theme): memoize rank rows rendering to avoid lag on iOS MiniPay view
+* style(board): tweak tile hover scaling and glow for neon glow consistency

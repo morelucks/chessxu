@@ -307,3 +307,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(history): improve score subtraction calculations on mobile viewports
 * docs(clock): document chess material values scale to prevent clipping on mobile displays
 * refactor(board): simplify store selectors in sidebar for premium visual design
+* chore(history): organize utility helper exports across screen sizes

@@ -283,3 +283,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(customizer): improve class name generation in Board in wood theme
 * style(customizer): align text spacing in player profiles to fix alignment glitch
 * refactor(clock): extract clock time calculations to hook for slate theme
+* style(board): adjust responsive size breakpoints for tablets in wood theme

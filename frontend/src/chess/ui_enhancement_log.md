@@ -203,3 +203,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(customizer): add docstring for theme switcher component to reduce DOM node weight
 * chore(board): verify typecheck baseline consistency on iOS MiniPay view
 * refactor(pieces): extract piece ordering helper logic across all screens
+* style(theme): optimize mobile padding in controls layout to reduce DOM node weight

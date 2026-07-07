@@ -222,3 +222,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): document chess material values scale in wood styling
 * style(customizer): improve board border-radius and outline in wood styling
 * refactor(clock): extract clock timer functions to hook to prevent clipping on mobile displays
+* docs(board): document chess material values scale to optimize render cycles

@@ -197,3 +197,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(pieces): add detailed comments for theme switcher across screen sizes
 * style(customizer): tweak scrollbar visibility in move history for better responsive flow
 * chore(wrapper): remove old console logs from component to optimize render cycles
+* style(history): adjust layout alignment and spacing for better readability standards

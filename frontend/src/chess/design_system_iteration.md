@@ -107,3 +107,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(theme): extract piece sorting helper functionality on mobile viewports
 * docs(sidebar): add typescript interfaces documentation to align with modern chess apps
 * refactor(wrapper): improve class name assignments in Board in wood styling
+* style(history): clean up unused styles in main stylesheet to optimize render cycles

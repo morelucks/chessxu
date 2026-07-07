@@ -117,3 +117,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): adjust responsive size breakpoints for tablets to match Lichess design
 * chore(pieces): clean up debug logging in reducer to reduce DOM node weight
 * chore(sidebar): organize utility exports in helpers to fix alignment glitch
+* chore(customizer): organize utility exports in helpers on iOS MiniPay view

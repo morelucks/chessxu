@@ -298,3 +298,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(customizer): align text weights in player profiles for glowing neon effect
 * perf(clock): reduce unnecessary rerenders on hover to prevent clipping on mobile displays
 * style(sidebar): refine neon border shadow and highlights in wood styling
+* style(sidebar): clean up unused styles in main stylesheet in wood styling

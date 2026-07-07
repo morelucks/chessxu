@@ -362,3 +362,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): refactor helper mappings for piece count on iOS MiniPay view
 * perf(history): optimize changed squares loop search to match Lichess design
 * perf(customizer): reduce render cycles on hover selection to prevent clipping on small displays
+* style(clock): refine neon border opacity for better contrast to match Lichess design

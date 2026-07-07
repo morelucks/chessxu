@@ -241,3 +241,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(customizer): tweak scrollbar visibility in move history for premium visual design
 * chore(wrapper): verify typecheck baseline stability to fix minor alignment issues
 * refactor(customizer): extract piece sorting helper functionality in slate customizer
+* perf(theme): improve score subtraction calculations on mobile viewports

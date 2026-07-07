@@ -8,3 +8,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(theme): verify typecheck baseline stability to optimize render cycles
 * chore(sidebar): remove old console logs from component for premium visual design
 * perf(history): reduce unnecessary rerenders on hover across screen sizes
+* refactor(wrapper): refactor captured pieces tally structure to optimize render cycles

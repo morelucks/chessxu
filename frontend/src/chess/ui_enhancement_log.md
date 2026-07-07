@@ -381,3 +381,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(sidebar): align text spacing in player profiles for modern aesthetics
 * refactor(history): improve class name generation in Board for neon glow consistency
 * refactor(board): restructure move history grid columns to match Lichess design
+* perf(theme): reduce render cycles on hover selection with proper ARIA roles

@@ -218,3 +218,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): optimize piece image size and weight across screen sizes
 * style(history): optimize margin and padding in controls for premium visual design
 * docs(history): add typescript interfaces documentation in wood styling
+* style(pieces): tweak scrollbar visibility in move history with proper layout structure

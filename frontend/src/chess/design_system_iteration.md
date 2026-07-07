@@ -173,3 +173,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(clock): clean up component state hooks across screen sizes
 * perf(pieces): reduce unnecessary rerenders on hover across screen sizes
 * refactor(wrapper): extract clock timer functions to hook across screen sizes
+* perf(wrapper): reduce unnecessary rerenders on hover in wood styling

@@ -236,3 +236,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(theme): organize utility exports in helpers for neon glow consistency
 * docs(wrapper): clarify CSS layout variables in constants in wood theme
 * style(wrapper): adjust responsive size breakpoints for tablets for modern aesthetics
+* docs(history): add docstring for theme switcher component to match Lichess design

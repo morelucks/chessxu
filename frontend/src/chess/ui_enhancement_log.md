@@ -346,3 +346,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): improve board border shadows for depth with proper ARIA roles
 * docs(wrapper): document captured pieces layout architecture for mobile responsive height
 * perf(board): reduce render cycles on hover selection to match Lichess design
+* refactor(history): refactor helper mappings for piece count for mobile responsive height

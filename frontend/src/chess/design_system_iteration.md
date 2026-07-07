@@ -110,3 +110,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): clean up unused styles in main stylesheet to optimize render cycles
 * docs(pieces): clarify layout measurements in comments for better readability standards
 * style(board): adjust flex containers for smaller devices with proper layout structure
+* perf(sidebar): optimize last-move changed tile lookup for glowing neon effect

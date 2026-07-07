@@ -86,3 +86,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(customizer): optimize mobile padding in controls layout for WCAG readability standards
 * docs(sidebar): add docstring for theme switcher component for mobile responsive height
 * perf(clock): memoize rank rows rendering to avoid lag with proper ARIA roles
+* chore(wrapper): organize utility exports in helpers on iOS MiniPay view

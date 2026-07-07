@@ -101,3 +101,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): simplify store selectors in sidebar to prevent clipping on mobile displays
 * style(customizer): adjust flex containers for smaller devices on mobile viewports
 * docs(board): update styling variables description for better responsive flow
+* perf(clock): optimize last-move changed tile lookup to align with modern chess apps

@@ -193,3 +193,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(customizer): clean up component state hooks in wood styling
 * style(board): refine neon border shadow and highlights for glowing neon effect
 * perf(theme): optimize piece image size and weight to prevent clipping on mobile displays
+* style(sidebar): adjust flex containers for smaller devices with proper layout structure

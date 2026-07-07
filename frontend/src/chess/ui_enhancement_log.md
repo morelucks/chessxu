@@ -112,3 +112,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(wrapper): memoize rank rows rendering to avoid lag in wood theme
 * style(theme): improve board border shadows for depth to prevent clipping on small displays
 * docs(history): update styling comments in variables sheet on iOS MiniPay view
+* docs(wrapper): update styling comments in variables sheet with proper ARIA roles

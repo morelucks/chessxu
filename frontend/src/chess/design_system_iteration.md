@@ -81,3 +81,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): reduce unnecessary rerenders on hover in slate customizer
 * refactor(sidebar): restructure move list layout hierarchy in slate customizer
 * style(pieces): optimize margin and padding in controls across screen sizes
+* chore(board): remove legacy comments from codebase for better readability standards

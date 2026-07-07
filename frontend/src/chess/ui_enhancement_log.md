@@ -138,3 +138,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(pieces): optimize changed squares loop search for neon glow consistency
 * chore(sidebar): organize utility exports in helpers for mobile responsive height
 * refactor(pieces): streamline theme classes definition across all screens
+* chore(history): tweak linting rules settings for TS to match Lichess design

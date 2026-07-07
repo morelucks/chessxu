@@ -284,3 +284,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(history): reduce unnecessary rerenders on hover to optimize render cycles
 * perf(board): optimize piece image size and weight on mobile viewports
 * refactor(pieces): simplify store selectors in sidebar for better responsive flow
+* perf(pieces): optimize last-move changed tile lookup for better responsive flow

@@ -102,3 +102,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(customizer): improve score reduction calculation with proper ARIA roles
 * chore(theme): remove legacy styles backup comments for modern aesthetics
 * chore(wrapper): organize utility exports in helpers across all screens
+* chore(theme): verify typecheck baseline consistency in wood theme

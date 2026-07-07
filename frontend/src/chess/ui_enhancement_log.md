@@ -258,3 +258,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(sidebar): extract piece ordering helper logic to reduce DOM node weight
 * perf(customizer): optimize piece image load weight across all screens
 * refactor(clock): extract clock time calculations to hook to reduce DOM node weight
+* docs(history): document captured pieces layout architecture to fix alignment glitch

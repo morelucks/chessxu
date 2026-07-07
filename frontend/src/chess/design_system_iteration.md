@@ -349,3 +349,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(customizer): tweak lint config for tsx files for better responsive flow
 * perf(sidebar): optimize piece image size and weight to optimize render cycles
 * chore(pieces): organize utility helper exports on mobile viewports
+* chore(history): remove legacy comments from codebase in slate customizer

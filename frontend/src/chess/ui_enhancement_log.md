@@ -81,3 +81,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(wrapper): tweak scrollbar alignment in move history to fix alignment glitch
 * perf(board): reduce render cycles on hover selection for slate theme
 * docs(theme): document advantage point values scale to fix alignment glitch
+* perf(pieces): memoize rank rows rendering to avoid lag for modern aesthetics

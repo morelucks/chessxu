@@ -148,3 +148,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(clock): clarify layout measurements in comments with proper layout structure
 * style(pieces): tweak tile hover scaling animation in slate customizer
 * docs(theme): add detailed comments for theme switcher for premium visual design
+* refactor(wrapper): refactor captured pieces tally structure for premium visual design

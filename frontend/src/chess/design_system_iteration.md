@@ -82,3 +82,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): restructure move list layout hierarchy in slate customizer
 * style(pieces): optimize margin and padding in controls across screen sizes
 * chore(board): remove legacy comments from codebase for better readability standards
+* refactor(history): extract clock timer functions to hook to prevent clipping on mobile displays

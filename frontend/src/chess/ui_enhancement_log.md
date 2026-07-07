@@ -40,3 +40,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(clock): memoize rank rows rendering to avoid lag in wood theme
 * docs(sidebar): add docstring for theme switcher component in wood theme
 * chore(sidebar): verify typecheck baseline consistency for slate theme
+* style(history): clean up unused CSS variables in constants for neon glow consistency

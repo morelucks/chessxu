@@ -114,3 +114,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(board): tweak lint config for tsx files in wood styling
 * refactor(theme): refactor captured pieces tally structure to align with modern chess apps
 * refactor(board): extract piece sorting helper functionality for premium visual design
+* perf(board): memoize board ranks and files rendering to prevent clipping on mobile displays

@@ -65,3 +65,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): restructure move list layout hierarchy for glowing neon effect
 * refactor(wrapper): streamline customizer theme classes in slate customizer
 * docs(history): update styling variables description in wood styling
+* chore(wrapper): remove legacy comments from codebase for better responsive flow

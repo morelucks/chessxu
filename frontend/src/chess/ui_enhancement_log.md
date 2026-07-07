@@ -105,3 +105,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(theme): verify typecheck baseline consistency in wood theme
 * docs(board): update styling comments in variables sheet to fix alignment glitch
 * chore(board): clean up debug logging in reducer for modern aesthetics
+* perf(pieces): reduce render cycles on hover selection on iOS MiniPay view

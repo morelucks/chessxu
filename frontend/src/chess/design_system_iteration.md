@@ -139,3 +139,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(sidebar): add detailed comments for theme switcher to fix minor alignment issues
 * docs(customizer): update styling variables description to prevent clipping on mobile displays
 * perf(clock): reduce unnecessary rerenders on hover with proper layout structure
+* chore(clock): remove legacy comments from codebase to fix minor alignment issues

@@ -354,3 +354,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(history): reduce unnecessary rerenders on hover to prevent clipping on mobile displays
 * docs(theme): update styling variables description to fix minor alignment issues
 * chore(clock): verify typecheck baseline stability for glowing neon effect
+* docs(pieces): clarify layout measurements in comments for glowing neon effect

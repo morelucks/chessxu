@@ -23,6 +23,7 @@ const Board = () => {
     const files = Array(8).fill().map((x,i) => i+1)
 
     const { appState, dispatch } = useAppContext();
+    const boardTheme = useAppStore((state) => state.boardTheme);
     const position = appState.position[appState.position.length - 1]
 
     const showHintOnBoard = useAppStore(state => state.showHintOnBoard);
@@ -134,7 +135,7 @@ const Board = () => {
         dispatch(clearCandidates())
     }
 
-    return <div className='board'>
+    return <div className={`board theme-${boardTheme}`}>
 
         <Ranks ranks={ranks}/>
 

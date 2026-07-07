@@ -182,3 +182,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(customizer): clarify layout measurements in comments for premium visual design
 * chore(theme): verify typecheck baseline stability with proper layout structure
 * refactor(board): extract piece sorting helper functionality to prevent clipping on mobile displays
+* chore(board): remove old console logs from component for glowing neon effect

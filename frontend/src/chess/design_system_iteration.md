@@ -257,3 +257,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(theme): tweak lint config for tsx files to optimize render cycles
 * chore(history): organize utility helper exports with proper layout structure
 * refactor(board): restructure move list layout hierarchy on mobile viewports
+* refactor(sidebar): restructure move list layout hierarchy to optimize render cycles

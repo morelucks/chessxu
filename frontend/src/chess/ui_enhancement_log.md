@@ -42,3 +42,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(sidebar): verify typecheck baseline consistency for slate theme
 * style(history): clean up unused CSS variables in constants for neon glow consistency
 * style(history): improve board border shadows for depth in wood theme
+* perf(board): optimize changed squares loop search across all screens

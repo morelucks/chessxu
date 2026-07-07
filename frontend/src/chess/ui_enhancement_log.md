@@ -272,3 +272,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(history): refactor helper mappings for piece count across all screens
 * docs(theme): update styling comments in variables sheet for mobile responsive height
 * style(pieces): adjust grid gap for mobile displays on iOS MiniPay view
+* chore(history): verify typecheck baseline consistency with proper ARIA roles

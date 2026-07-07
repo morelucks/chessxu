@@ -149,3 +149,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(customizer): tweak linting rules settings for TS in wood theme
 * perf(history): optimize changed squares loop search in wood theme
 * style(theme): tweak scrollbar alignment in move history for WCAG readability standards
+* style(theme): tweak tile hover scaling and glow to reduce DOM node weight

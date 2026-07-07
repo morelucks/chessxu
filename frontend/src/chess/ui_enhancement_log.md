@@ -280,3 +280,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(wrapper): tweak linting rules settings for TS for modern aesthetics
 * docs(theme): add TypeScript type comments for state for WCAG readability standards
 * docs(customizer): add TypeScript type comments for state across all screens
+* refactor(customizer): improve class name generation in Board in wood theme

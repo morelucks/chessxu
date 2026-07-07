@@ -242,3 +242,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(theme): improve score reduction calculation for WCAG readability standards
 * refactor(theme): extract clock time calculations to hook to fix alignment glitch
 * refactor(sidebar): restructure move history grid columns to fix alignment glitch
+* docs(theme): add TypeScript type comments for state to reduce DOM node weight

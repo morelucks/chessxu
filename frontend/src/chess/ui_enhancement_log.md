@@ -338,3 +338,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): clean up unused CSS variables in constants to reduce DOM node weight
 * refactor(sidebar): restructure move history grid columns to reduce DOM node weight
 * docs(theme): document advantage point values scale for WCAG readability standards
+* docs(pieces): document captured pieces layout architecture across all screens

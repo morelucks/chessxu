@@ -46,3 +46,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): optimize mobile padding in controls layout to match Lichess design
 * docs(sidebar): clarify CSS layout variables in constants across all screens
 * style(history): align text spacing in player profiles in wood theme
+* perf(history): reduce render cycles on hover selection in wood theme

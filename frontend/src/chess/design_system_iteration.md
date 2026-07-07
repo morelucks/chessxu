@@ -353,3 +353,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(sidebar): optimize last-move changed tile lookup to align with modern chess apps
 * perf(history): reduce unnecessary rerenders on hover to prevent clipping on mobile displays
 * docs(theme): update styling variables description to fix minor alignment issues
+* chore(clock): verify typecheck baseline stability for glowing neon effect

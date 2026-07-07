@@ -10,3 +10,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(history): reduce unnecessary rerenders on hover across screen sizes
 * refactor(wrapper): refactor captured pieces tally structure to optimize render cycles
 * style(board): refine neon border shadow and highlights in wood styling
+* docs(board): update styling variables description for glowing neon effect

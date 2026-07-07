@@ -287,3 +287,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(pieces): optimize last-move changed tile lookup for better responsive flow
 * refactor(history): restructure move list layout hierarchy across screen sizes
 * docs(customizer): clarify layout measurements in comments for better responsive flow
+* style(customizer): tune animation speed on tile hover on mobile viewports

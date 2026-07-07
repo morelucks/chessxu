@@ -335,3 +335,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(theme): memoize rank rows rendering to avoid lag for WCAG readability standards
 * perf(history): improve score reduction calculation across all screens
 * docs(history): add TypeScript type comments for state for mobile responsive height
+* style(history): clean up unused CSS variables in constants to reduce DOM node weight

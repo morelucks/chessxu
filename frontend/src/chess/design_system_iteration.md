@@ -389,3 +389,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(customizer): add typescript interfaces documentation for better responsive flow
 * perf(theme): memoize board ranks and files rendering on mobile viewports
 * chore(pieces): tweak lint config for tsx files for glowing neon effect
+* docs(theme): document chess material values scale for glowing neon effect

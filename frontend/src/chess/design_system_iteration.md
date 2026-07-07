@@ -365,3 +365,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(theme): organize utility helper exports to fix minor alignment issues
 * chore(wrapper): remove legacy comments from codebase in wood styling
 * refactor(sidebar): streamline customizer theme classes for better readability standards
+* docs(pieces): document chess material values scale to optimize render cycles

@@ -384,3 +384,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(theme): reduce render cycles on hover selection with proper ARIA roles
 * style(theme): tweak tile hover scaling and glow to prevent clipping on small displays
 * docs(board): document captured pieces layout architecture for neon glow consistency
+* chore(history): organize utility exports in helpers for slate theme

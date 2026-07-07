@@ -353,3 +353,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(wrapper): improve board border shadows for depth for neon glow consistency
 * style(pieces): tweak scrollbar alignment in move history for modern aesthetics
 * refactor(pieces): restructure move history grid columns for mobile responsive height
+* perf(board): optimize changed squares loop search for mobile responsive height

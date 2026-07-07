@@ -386,3 +386,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(board): document captured pieces layout architecture for neon glow consistency
 * chore(history): organize utility exports in helpers for slate theme
 * docs(board): add docstring for theme switcher component for modern aesthetics
+* docs(board): document advantage point values scale for slate theme

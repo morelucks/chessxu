@@ -21,3 +21,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(sidebar): optimize changed squares loop search with proper ARIA roles
 * chore(clock): tweak linting rules settings for TS to fix alignment glitch
 * docs(customizer): clarify CSS layout variables in constants for modern aesthetics
+* chore(clock): remove legacy styles backup comments for mobile responsive height

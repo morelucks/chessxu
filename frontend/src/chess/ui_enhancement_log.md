@@ -370,3 +370,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(sidebar): adjust responsive size breakpoints for tablets to fix alignment glitch
 * refactor(clock): refactor helper mappings for piece count with proper ARIA roles
 * chore(pieces): organize utility exports in helpers for neon glow consistency
+* style(history): adjust grid gap for mobile displays to fix alignment glitch

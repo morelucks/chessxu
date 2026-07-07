@@ -30,3 +30,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): extract clock timer functions to hook in slate customizer
 * refactor(board): clean up component state hooks in wood styling
 * perf(theme): reduce unnecessary rerenders on hover in slate customizer
+* docs(theme): update styling variables description across screen sizes

@@ -279,3 +279,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(history): refactor captured pieces tally structure for better readability standards
 * style(sidebar): tweak scrollbar visibility in move history across screen sizes
 * chore(sidebar): organize utility helper exports to align with modern chess apps
+* refactor(sidebar): improve class name assignments in Board to fix minor alignment issues

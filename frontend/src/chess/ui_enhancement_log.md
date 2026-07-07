@@ -240,3 +240,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): refactor helper mappings for piece count for modern aesthetics
 * chore(history): clean up debug logging in reducer in wood theme
 * perf(theme): improve score reduction calculation for WCAG readability standards
+* refactor(theme): extract clock time calculations to hook to fix alignment glitch

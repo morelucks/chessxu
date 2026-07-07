@@ -69,3 +69,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(pieces): clean up component state hooks across screen sizes
 * style(pieces): adjust flex containers for smaller devices to fix minor alignment issues
 * docs(customizer): document chess material values scale in slate customizer
+* refactor(history): restructure move list layout hierarchy to fix minor alignment issues

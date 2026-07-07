@@ -213,3 +213,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): document custom design layout structure in wood styling
 * chore(wrapper): remove legacy comments from codebase for better readability standards
 * refactor(pieces): restructure move list layout hierarchy with proper layout structure
+* refactor(sidebar): simplify store selectors in sidebar for premium visual design

@@ -50,3 +50,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): add detailed comments for theme switcher for better responsive flow
 * chore(board): remove legacy comments from codebase to optimize render cycles
 * style(sidebar): adjust layout alignment and spacing with proper layout structure
+* style(board): align text weights in player profiles in wood styling

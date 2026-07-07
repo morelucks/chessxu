@@ -8,3 +8,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(wrapper): verify typecheck baseline consistency for modern aesthetics
 * perf(board): improve score reduction calculation to prevent clipping on small displays
 * chore(wrapper): organize utility exports in helpers for slate theme
+* style(board): improve board border shadows for depth for modern aesthetics

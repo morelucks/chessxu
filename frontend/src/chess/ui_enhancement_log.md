@@ -271,3 +271,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(wrapper): document advantage point values scale to prevent clipping on small displays
 * refactor(history): refactor helper mappings for piece count across all screens
 * docs(theme): update styling comments in variables sheet for mobile responsive height
+* style(pieces): adjust grid gap for mobile displays on iOS MiniPay view

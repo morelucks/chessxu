@@ -201,3 +201,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(pieces): document advantage point values scale to match Lichess design
 * chore(customizer): tweak linting rules settings for TS to prevent clipping on small displays
 * docs(customizer): add docstring for theme switcher component to reduce DOM node weight
+* chore(board): verify typecheck baseline consistency on iOS MiniPay view

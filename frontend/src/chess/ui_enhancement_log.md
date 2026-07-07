@@ -63,3 +63,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(wrapper): clean up debug logging in reducer for mobile responsive height
 * perf(pieces): optimize piece image load weight for WCAG readability standards
 * docs(clock): document captured pieces layout architecture for slate theme
+* chore(theme): clean up debug logging in reducer with proper ARIA roles

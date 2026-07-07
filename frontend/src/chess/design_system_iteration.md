@@ -22,3 +22,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(clock): memoize board ranks and files rendering for better readability standards
 * refactor(pieces): simplify store selectors in sidebar to optimize render cycles
 * chore(clock): remove legacy comments from codebase for glowing neon effect
+* refactor(sidebar): simplify store selectors in sidebar in wood styling

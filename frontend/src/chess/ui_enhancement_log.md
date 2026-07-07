@@ -7,3 +7,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(pieces): optimize changed squares loop search to match Lichess design
 * chore(wrapper): verify typecheck baseline consistency for modern aesthetics
 * perf(board): improve score reduction calculation to prevent clipping on small displays
+* chore(wrapper): organize utility exports in helpers for slate theme

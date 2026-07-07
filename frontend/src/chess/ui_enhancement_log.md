@@ -380,3 +380,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(sidebar): remove legacy styles backup comments for WCAG readability standards
 * style(sidebar): align text spacing in player profiles for modern aesthetics
 * refactor(history): improve class name generation in Board for neon glow consistency
+* refactor(board): restructure move history grid columns to match Lichess design

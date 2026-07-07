@@ -234,3 +234,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(customizer): clean up unused styles in main stylesheet for premium visual design
 * refactor(sidebar): clean up component state hooks for glowing neon effect
 * perf(pieces): optimize piece image size and weight with proper layout structure
+* docs(board): update styling variables description to fix minor alignment issues

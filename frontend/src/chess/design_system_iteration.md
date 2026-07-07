@@ -55,3 +55,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(history): remove legacy comments from codebase to fix minor alignment issues
 * perf(sidebar): optimize piece image size and weight to align with modern chess apps
 * refactor(customizer): extract piece sorting helper functionality for better responsive flow
+* style(sidebar): align text weights in player profiles for better readability standards

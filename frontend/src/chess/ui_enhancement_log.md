@@ -356,3 +356,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(board): optimize changed squares loop search for mobile responsive height
 * style(board): adjust grid gap for mobile displays with proper ARIA roles
 * chore(clock): verify typecheck baseline consistency to reduce DOM node weight
+* docs(pieces): clarify CSS layout variables in constants to fix alignment glitch

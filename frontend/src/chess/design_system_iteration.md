@@ -117,3 +117,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): memoize board ranks and files rendering to prevent clipping on mobile displays
 * style(board): clean up unused styles in main stylesheet for glowing neon effect
 * chore(board): remove legacy comments from codebase in wood styling
+* chore(sidebar): remove legacy comments from codebase to align with modern chess apps

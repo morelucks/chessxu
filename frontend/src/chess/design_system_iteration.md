@@ -300,3 +300,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(sidebar): refine neon border shadow and highlights in wood styling
 * style(sidebar): clean up unused styles in main stylesheet in wood styling
 * style(pieces): tweak tile hover scaling animation to align with modern chess apps
+* style(theme): tweak scrollbar visibility in move history for glowing neon effect

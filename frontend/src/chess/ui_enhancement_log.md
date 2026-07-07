@@ -91,3 +91,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(history): reduce render cycles on hover selection for WCAG readability standards
 * style(customizer): refine neon border opacity for better contrast on iOS MiniPay view
 * style(board): tweak tile hover scaling and glow to match Lichess design
+* perf(clock): improve score reduction calculation for WCAG readability standards

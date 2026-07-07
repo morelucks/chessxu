@@ -18,3 +18,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(theme): restructure move list layout hierarchy across screen sizes
 * refactor(sidebar): refactor captured pieces tally structure to fix minor alignment issues
 * docs(history): add detailed comments for theme switcher to prevent clipping on mobile displays
+* docs(board): document custom design layout structure across screen sizes

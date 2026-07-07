@@ -392,3 +392,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): document chess material values scale for glowing neon effect
 * perf(board): memoize board ranks and files rendering with proper layout structure
 * refactor(history): improve class name assignments in Board to fix minor alignment issues
+* docs(history): document custom design layout structure on mobile viewports

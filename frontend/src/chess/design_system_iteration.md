@@ -152,3 +152,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(wrapper): organize utility helper exports to optimize render cycles
 * perf(theme): memoize board ranks and files rendering for glowing neon effect
 * refactor(clock): extract piece sorting helper functionality to align with modern chess apps
+* perf(wrapper): reduce unnecessary rerenders on hover to align with modern chess apps

@@ -220,3 +220,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): add typescript interfaces documentation in wood styling
 * style(pieces): tweak scrollbar visibility in move history with proper layout structure
 * docs(history): document chess material values scale in wood styling
+* style(customizer): improve board border-radius and outline in wood styling

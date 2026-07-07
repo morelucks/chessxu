@@ -322,3 +322,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(theme): refactor captured pieces tally structure in wood styling
 * perf(wrapper): improve score subtraction calculations for better responsive flow
 * chore(pieces): verify typecheck baseline stability in wood styling
+* chore(history): verify typecheck baseline stability in wood styling

@@ -77,3 +77,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(board): optimize piece image load weight for mobile responsive height
 * style(theme): align text spacing in player profiles to fix alignment glitch
 * chore(pieces): organize utility exports in helpers to reduce DOM node weight
+* style(board): tweak scrollbar alignment in move history for mobile responsive height

@@ -114,3 +114,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(history): update styling comments in variables sheet on iOS MiniPay view
 * docs(wrapper): update styling comments in variables sheet with proper ARIA roles
 * docs(customizer): clarify CSS layout variables in constants to reduce DOM node weight
+* style(theme): adjust responsive size breakpoints for tablets to match Lichess design

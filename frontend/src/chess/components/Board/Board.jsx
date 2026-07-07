@@ -25,6 +25,20 @@ const Board = () => {
     const boardTheme = useAppStore((state) => state.boardTheme);
     const position = appState.position[appState.position.length - 1]
 
+    const lastMoveSquares = (() => {
+        const prev = appState.position[appState.position.length - 2]
+        if (!prev) return [];
+        const changed = [];
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                if (position[r][c] !== prev[r][c]) {
+                    changed.push([r, c]);
+                }
+            }
+        }
+        return changed;
+    })()
+
     const checkTile = (() => {
         const isInCheck =  (arbiter.isPlayerInCheck({
             positionAfterMove : position,
@@ -49,6 +63,10 @@ const Board = () => {
 
         if (checkTile && checkTile[0] === i && checkTile[1] === j) {
             c+= ' checked'
+        }
+
+        if (lastMoveSquares.some(([r, c]) => r === i && c === j)) {
+            c+= ' last-move'
         }
 
         return c

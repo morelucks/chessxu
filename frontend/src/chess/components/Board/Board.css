@@ -74,6 +74,7 @@
     --dark-tile: #b58863;
     --highlight: rgba(245, 158, 11, 0.5); /* golden amber */
     --check: rgba(239, 68, 68, 0.85);
+    --last-move-bg: rgba(254, 240, 138, 0.45); /* soft warm yellow */
 }
 .board.theme-classic-wood .ranks, 
 .board.theme-classic-wood .files {
@@ -86,6 +87,7 @@
     --dark-tile: #0b0b14;
     --highlight: rgba(236, 72, 153, 0.65); /* neon pink */
     --check: rgba(244, 63, 94, 0.9); /* rose/pink neon check */
+    --last-move-bg: rgba(6, 182, 212, 0.35); /* soft glowing cyan */
 }
 .board.theme-modern-neon .tiles {
     border: 2px solid rgba(236, 72, 153, 0.6);
@@ -112,6 +114,7 @@
     --dark-tile: #cbd5e1;
     --highlight: rgba(59, 130, 246, 0.45); /* soft blue */
     --check: rgba(239, 68, 68, 0.7);
+    --last-move-bg: rgba(59, 130, 246, 0.25); /* soft blue last move */
 }
 .board.theme-light .ranks, 
 .board.theme-light .files {
@@ -124,8 +127,14 @@
     --dark-tile: #1e293b;
     --highlight: rgba(168, 85, 247, 0.5); /* purple-500 */
     --check: rgba(239, 68, 68, 0.8);
+    --last-move-bg: rgba(99, 102, 241, 0.35); /* soft indigo last move */
 }
 .board.theme-dark .ranks, 
 .board.theme-dark .files {
     color: #94a3b8 !important;
+}
+
+/* Tile Highlight logic for Last Move */
+.tile.last-move {
+    background-color: var(--last-move-bg) !important;
 }

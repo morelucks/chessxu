@@ -226,3 +226,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(wrapper): verify typecheck baseline consistency to fix alignment glitch
 * style(wrapper): align text spacing in player profiles for modern aesthetics
 * perf(theme): memoize rank rows rendering to avoid lag across all screens
+* refactor(history): simplify state selectors in sidebar with proper ARIA roles

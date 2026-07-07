@@ -159,3 +159,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(sidebar): tweak scrollbar alignment in move history for neon glow consistency
 * chore(theme): verify typecheck baseline consistency for mobile responsive height
 * chore(clock): clean up debug logging in reducer for WCAG readability standards
+* style(board): clean up unused CSS variables in constants for neon glow consistency

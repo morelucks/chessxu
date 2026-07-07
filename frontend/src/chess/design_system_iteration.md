@@ -94,3 +94,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(board): adjust layout alignment and spacing in wood styling
 * docs(customizer): document custom design layout structure to prevent clipping on mobile displays
 * chore(wrapper): tweak lint config for tsx files in wood styling
+* refactor(sidebar): refactor captured pieces tally structure with proper layout structure

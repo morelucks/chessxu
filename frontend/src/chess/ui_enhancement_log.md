@@ -221,3 +221,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(customizer): tweak tile hover scaling and glow to fix alignment glitch
 * refactor(theme): clean up component props passing to prevent clipping on small displays
 * refactor(theme): extract piece ordering helper logic with proper ARIA roles
+* refactor(board): restructure move history grid columns for mobile responsive height

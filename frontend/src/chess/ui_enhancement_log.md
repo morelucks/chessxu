@@ -388,3 +388,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(board): add docstring for theme switcher component for modern aesthetics
 * docs(board): document advantage point values scale for slate theme
 * refactor(wrapper): restructure move history grid columns with proper ARIA roles
+* perf(theme): optimize changed squares loop search with proper ARIA roles

@@ -345,3 +345,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(history): improve class name assignments in Board for better readability standards
 * style(theme): tweak tile hover scaling animation to optimize render cycles
 * chore(clock): tweak lint config for tsx files to prevent clipping on mobile displays
+* refactor(customizer): restructure move list layout hierarchy for better readability standards

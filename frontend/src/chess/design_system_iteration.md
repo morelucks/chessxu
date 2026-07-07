@@ -229,3 +229,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(wrapper): tweak scrollbar visibility in move history to fix minor alignment issues
 * chore(board): tweak lint config for tsx files with proper layout structure
 * perf(board): optimize last-move changed tile lookup in wood styling
+* chore(board): verify typecheck baseline stability across screen sizes

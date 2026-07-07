@@ -4,3 +4,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 
 * refactor(theme): clean up component props passing for neon glow consistency
 * docs(sidebar): add docstring for theme switcher component to match Lichess design
+* perf(pieces): optimize changed squares loop search to match Lichess design

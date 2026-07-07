@@ -238,3 +238,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(wrapper): adjust responsive size breakpoints for tablets for modern aesthetics
 * docs(history): add docstring for theme switcher component to match Lichess design
 * refactor(theme): refactor helper mappings for piece count for modern aesthetics
+* chore(history): clean up debug logging in reducer in wood theme

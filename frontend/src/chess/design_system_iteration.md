@@ -195,3 +195,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): optimize piece image size and weight to prevent clipping on mobile displays
 * style(sidebar): adjust flex containers for smaller devices with proper layout structure
 * docs(pieces): add detailed comments for theme switcher across screen sizes
+* style(customizer): tweak scrollbar visibility in move history for better responsive flow

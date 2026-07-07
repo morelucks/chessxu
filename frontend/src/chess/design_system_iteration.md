@@ -103,3 +103,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): update styling variables description for better responsive flow
 * perf(clock): optimize last-move changed tile lookup to align with modern chess apps
 * perf(history): reduce unnecessary rerenders on hover for better readability standards
+* style(sidebar): improve board border-radius and outline for better responsive flow

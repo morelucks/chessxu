@@ -39,3 +39,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(customizer): memoize board ranks and files rendering to optimize render cycles
 * refactor(theme): streamline customizer theme classes for better readability standards
 * docs(wrapper): document custom design layout structure across screen sizes
+* chore(wrapper): tweak lint config for tsx files for glowing neon effect

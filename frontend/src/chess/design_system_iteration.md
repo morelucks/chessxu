@@ -271,3 +271,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): memoize board ranks and files rendering to fix minor alignment issues
 * perf(theme): memoize board ranks and files rendering for better readability standards
 * chore(theme): tweak lint config for tsx files for glowing neon effect
+* style(theme): align text weights in player profiles for premium visual design

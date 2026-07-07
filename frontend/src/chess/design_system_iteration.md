@@ -305,3 +305,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(sidebar): improve score subtraction calculations to align with modern chess apps
 * docs(clock): document custom design layout structure on mobile viewports
 * perf(history): improve score subtraction calculations on mobile viewports
+* docs(clock): document chess material values scale to prevent clipping on mobile displays

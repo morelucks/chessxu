@@ -228,3 +228,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(theme): memoize rank rows rendering to avoid lag across all screens
 * refactor(history): simplify state selectors in sidebar with proper ARIA roles
 * perf(sidebar): optimize changed squares loop search to prevent clipping on small displays
+* style(clock): refine neon border opacity for better contrast to reduce DOM node weight

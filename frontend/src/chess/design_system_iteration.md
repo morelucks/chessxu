@@ -264,3 +264,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(board): improve class name assignments in Board on mobile viewports
 * style(wrapper): improve board border-radius and outline to fix minor alignment issues
 * style(history): optimize margin and padding in controls in slate customizer
+* docs(history): add detailed comments for theme switcher for better readability standards

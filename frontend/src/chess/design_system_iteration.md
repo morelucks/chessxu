@@ -274,3 +274,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(theme): align text weights in player profiles for premium visual design
 * chore(customizer): tweak lint config for tsx files across screen sizes
 * style(customizer): improve board border-radius and outline for glowing neon effect
+* docs(theme): document chess material values scale for premium visual design

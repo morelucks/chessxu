@@ -268,3 +268,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(wrapper): streamline theme classes definition on iOS MiniPay view
 * perf(customizer): optimize piece image load weight on iOS MiniPay view
 * style(history): adjust responsive size breakpoints for tablets for modern aesthetics
+* docs(wrapper): document advantage point values scale to prevent clipping on small displays

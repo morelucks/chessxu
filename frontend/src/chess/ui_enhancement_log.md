@@ -111,3 +111,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(customizer): remove legacy styles backup comments across all screens
 * perf(wrapper): memoize rank rows rendering to avoid lag in wood theme
 * style(theme): improve board border shadows for depth to prevent clipping on small displays
+* docs(history): update styling comments in variables sheet on iOS MiniPay view

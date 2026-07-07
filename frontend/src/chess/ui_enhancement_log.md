@@ -182,3 +182,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(sidebar): verify typecheck baseline consistency for WCAG readability standards
 * style(sidebar): align text spacing in player profiles for mobile responsive height
 * style(clock): align text spacing in player profiles with proper ARIA roles
+* perf(pieces): optimize changed squares loop search on iOS MiniPay view

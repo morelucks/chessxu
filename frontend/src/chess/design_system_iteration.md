@@ -242,3 +242,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(wrapper): verify typecheck baseline stability to fix minor alignment issues
 * refactor(customizer): extract piece sorting helper functionality in slate customizer
 * perf(theme): improve score subtraction calculations on mobile viewports
+* refactor(board): extract piece sorting helper functionality for better readability standards

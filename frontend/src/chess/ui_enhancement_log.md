@@ -290,3 +290,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): clean up component props passing for neon glow consistency
 * refactor(wrapper): improve class name generation in Board with proper ARIA roles
 * chore(sidebar): verify typecheck baseline consistency across all screens
+* style(board): tune transitions timing on tile hover to match Lichess design

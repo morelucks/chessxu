@@ -227,3 +227,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(customizer): remove legacy comments from codebase to fix minor alignment issues
 * docs(board): add typescript interfaces documentation for better responsive flow
 * style(wrapper): tweak scrollbar visibility in move history to fix minor alignment issues
+* chore(board): tweak lint config for tsx files with proper layout structure

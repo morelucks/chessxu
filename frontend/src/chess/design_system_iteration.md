@@ -312,3 +312,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(clock): refine neon border shadow and highlights in slate customizer
 * refactor(board): extract clock timer functions to hook to prevent clipping on mobile displays
 * docs(sidebar): clarify layout measurements in comments in wood styling
+* style(sidebar): refine neon border shadow and highlights for better responsive flow

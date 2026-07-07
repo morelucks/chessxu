@@ -369,3 +369,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(clock): clean up unused CSS variables in constants on iOS MiniPay view
 * style(sidebar): adjust responsive size breakpoints for tablets to fix alignment glitch
 * refactor(clock): refactor helper mappings for piece count with proper ARIA roles
+* chore(pieces): organize utility exports in helpers for neon glow consistency

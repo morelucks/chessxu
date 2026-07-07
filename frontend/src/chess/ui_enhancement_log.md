@@ -235,3 +235,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(theme): improve score reduction calculation to fix alignment glitch
 * chore(theme): organize utility exports in helpers for neon glow consistency
 * docs(wrapper): clarify CSS layout variables in constants in wood theme
+* style(wrapper): adjust responsive size breakpoints for tablets for modern aesthetics

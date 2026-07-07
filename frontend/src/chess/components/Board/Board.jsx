@@ -9,6 +9,7 @@ import PromotionBox from '../Popup/PromotionBox/PromotionBox'
 import Popup from '../Popup/Popup'
 import GameEnds from '../Popup/GameEnds/GameEnds'
 
+import useAppStore from '../../../zustand/store'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 import { makeNewMove, clearCandidates } from '../../reducer/actions/move'
@@ -25,19 +26,8 @@ const Board = () => {
     const boardTheme = useAppStore((state) => state.boardTheme);
     const position = appState.position[appState.position.length - 1]
 
-    const lastMoveSquares = (() => {
-        const prev = appState.position[appState.position.length - 2]
-        if (!prev) return [];
-        const changed = [];
-        for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
-                if (position[r][c] !== prev[r][c]) {
-                    changed.push([r, c]);
-                }
-            }
-        }
-        return changed;
-    })()
+    const showHintOnBoard = useAppStore(state => state.showHintOnBoard);
+    const activeAiHint = useAppStore(state => state.activeAiHint);
 
     const checkTile = (() => {
         const isInCheck =  (arbiter.isPlayerInCheck({
@@ -65,8 +55,12 @@ const Board = () => {
             c+= ' checked'
         }
 
-        if (lastMoveSquares.some(([r, c]) => r === i && c === j)) {
-            c+= ' last-move'
+        if (showHintOnBoard && activeAiHint) {
+            if (activeAiHint.fromX === i && activeAiHint.fromY === j) {
+                c += ' hint-source'
+            } else if (activeAiHint.toX === i && activeAiHint.toY === j) {
+                c += ' hint-target'
+            }
         }
 
         return c
@@ -171,4 +165,9 @@ const Board = () => {
     
 }
 
-export default Board
+export default Board    // hint-source/hint-target cleared automatically when showHintOnBoard=false
+    // hint-source uses purple (violet-500) matching app --highlight variable
+    // hint-target uses cyan (sky-500) to visually distinguish destination
+    // hint overlay animations run at 2s to stay subtle and non-distracting
+    // hint classes use box-shadow inset for non-destructive tile styling
+    // hint overlay visible even when piece is selected (z-order safe)

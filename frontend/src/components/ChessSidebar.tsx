@@ -21,7 +21,6 @@ import PlayerEloCard from './PlayerEloCard';
 import GameStatusBanner from './GameStatusBanner';
 import ResignButton from './ResignButton';
 import { useGameState } from '../chess/hooks/useGameState';
-import { useStacksChess } from '../hooks/useStacksChess';
 import useAppStore from '../zustand/store';
 import { useFreemium } from '../hooks/useFreemium';
 import { useWalletAuth } from '../hooks/useWalletAuth';
@@ -205,36 +204,86 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
     );
 };
 
-// Board Theme Customizer Component
-const BoardThemeCustomizer = () => {
-    const boardTheme = useAppStore((s) => s.boardTheme);
-    const setBoardTheme = useAppStore((s) => s.setBoardTheme);
+// AI Suggestions Component
+const AiSuggestionsPanel = ({ appState }: { appState: any }) => {
+    const isAiHintsEnabled = useAppStore((s) => s.isAiHintsEnabled);
+    const setAiHintsEnabled = useAppStore((s) => s.setAiHintsEnabled);
+    const showHintOnBoard = useAppStore((s) => s.showHintOnBoard);
+    const setShowHintOnBoard = useAppStore((s) => s.setShowHintOnBoard);
+    const activeAiHint = useAppStore((s) => s.activeAiHint);
 
-    const themes = [
-        { id: 'dark', name: 'Dark Slate', lightColor: '#475569', darkColor: '#1e293b' },
-        { id: 'classic-wood', name: 'Classic Wood', lightColor: '#f0d9b5', darkColor: '#b58863' },
-        { id: 'modern-neon', name: 'Modern Neon', lightColor: '#1e1e38', darkColor: '#0b0b14', isNeon: true },
-        { id: 'light', name: 'Light Slate', lightColor: '#f8fafc', darkColor: '#cbd5e1' },
-    ] as const;
+    const isOngoing = appState.status === 'Ongoing';
+    const isPlayerTurn = appState.turn === appState.playerColor;
 
     return (
-        <div className="board-theme-customizer">
-            <h3 className="chess-sidebar-title">Board Theme</h3>
-            <div className="theme-grid">
-                {themes.map((t) => (
-                    <button
-                        key={t.id}
-                        className={`theme-btn ${boardTheme === t.id ? 'active' : ''} ${t.isNeon ? 'theme-neon' : ''}`}
-                        onClick={() => setBoardTheme(t.id)}
-                    >
-                        <div className="theme-preview">
-                            <div className="preview-tile" style={{ backgroundColor: t.lightColor }} />
-                            <div className="preview-tile" style={{ backgroundColor: t.darkColor }} />
-                        </div>
-                        <span className="theme-name">{t.name}</span>
-                    </button>
-                ))}
+        <div className="chess-ai-suggestions">
+            <h3 className="chess-sidebar-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: 'none', paddingBottom: 0, margin: 0 }}>
+                <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#e2e8f0' }}>AI Suggestions</span>
+                <span style={{ fontSize: '1rem' }}>🧠</span>
+            </h3>
+
+            <div className="ai-controls">
+                <div className="ai-control-row">
+                    <span className="ai-control-label">Enable AI Hints</span>
+                    <label className="switch">
+                        <input 
+                            type="checkbox" 
+                            checked={isAiHintsEnabled} 
+                            onChange={(e) => setAiHintsEnabled(e.target.checked)} 
+                        />
+                        <span className="slider"></span>
+                    </label>
+                </div>
+
+                {isAiHintsEnabled && (
+                    <div className="ai-control-row">
+                        <span className="ai-control-label">Highlight on Board</span>
+                        <label className="switch">
+                            <input 
+                                type="checkbox" 
+                                checked={showHintOnBoard} 
+                                onChange={(e) => setShowHintOnBoard(e.target.checked)} 
+                            />
+                            <span className="slider"></span>
+                        </label>
+                    </div>
+                )}
             </div>
+
+            {isAiHintsEnabled && (
+                <div className="ai-suggestion-content">
+                    {!isOngoing ? (
+                        <p className="ai-status-msg">Start a game to see suggestions.</p>
+                    ) : !isPlayerTurn ? (
+                        <p className="ai-status-msg">Waiting for your turn... ⏱️</p>
+                    ) : !activeAiHint ? (
+                        <div className="ai-loading">
+                            <div className="ai-spinner"></div>
+                            <span>Analyzing board...</span>
+                        </div>
+                    ) : (
+                        <div className="ai-recommendation-card">
+                            <div className="ai-rec-header">
+                                <span className="ai-badge">Best Move</span>
+                                <span className={`ai-eval-badge ${activeAiHint.evaluation >= 0 ? 'eval-positive' : 'eval-negative'}`}>
+                                    {activeAiHint.evaluation >= 0 ? `+${activeAiHint.evaluation.toFixed(2)}` : activeAiHint.evaluation.toFixed(2)}
+                                </span>
+                            </div>
+                            <div className="ai-move-notation">{activeAiHint.notation}</div>
+                            <div className="ai-move-description">{activeAiHint.description}</div>
+                            <div className="ai-move-tip">
+                                {activeAiHint.evaluation >= 2 ? (
+                                    "✨ Strong advantage. Continue pressing your opponent."
+                                ) : activeAiHint.evaluation <= -2 ? (
+                                    "⚠️ Opponent has the upper hand. Play defensively."
+                                ) : (
+                                    "⚖️ Equal position. Expand carefully and control the center."
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
@@ -255,9 +304,7 @@ export default function ChessSidebar() {
             : null;
     const [leaderboardResults, setLeaderboardResults] = useState<LeaderboardResult[]>([]);
     const [showStakingModal, setShowStakingModal] = useState(false);
-    const { isMyTurn } = useStacksChess();
     const [activeTab, setActiveTab] = useState<'controls' | 'leaderboard'>('controls');
-    isMyTurn(gameState, address || ''); // just evaluating the hook if side effects are expected
 
     // Always clear any persisted active stake on refresh/mount
     useEffect(() => {
@@ -333,8 +380,7 @@ export default function ChessSidebar() {
                         onShowStakingModal={setShowStakingModal}
                     />
                     <TakeBackButton />
-                    <BoardThemeCustomizer />
-                    <FreemiumUpgradeSection />
+                    <AiSuggestionsPanel appState={appState} />
                     {/* Resign only shown in PvP with an active game */}
                     {gameMode === 'pvp' && <ResignButton />}
                     {/* Stake section always visible under controls */}

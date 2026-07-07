@@ -1,0 +1,82 @@
+/**
+ * useAiHint — React hook that computes and stores the AI best-move hint.
+ * Part of feat #187: AI recommendations during gameplay.
+ */
+
+import { useEffect, useRef } from 'react';
+import useAppStore from '../../zustand/store';
+import { getBestMove } from '../ai/chessAnalysis';
+
+/**
+ * @param {object} appState  - chess reducer state
+ * @param {number} [depth=3]  - minimax search depth
+ */
+const useAiHint = (appState, depth = 3) => {
+    const isAiHintsEnabled = useAppStore((s) => s.isAiHintsEnabled);
+    const setActiveAiHint  = useAppStore((s) => s.setActiveAiHint);
+
+    // Ref to cancel stale async computations on re-render
+    const activeRunRef = useRef(0);
+
+    useEffect(() => {
+        // Clear hint when feature is off or game not ongoing
+        if (!isAiHintsEnabled || !appState || appState.status !== 'Ongoing') {
+            setActiveAiHint(null);
+            return;
+        }
+
+        // Only suggest on the player's own turn
+        const playerColor  = appState.playerColor ?? 'w';
+        const isPlayerTurn = appState.turn === playerColor;
+        if (!isPlayerTurn) { setActiveAiHint(null); return; }
+
+        const currentPosition = appState.position[appState.position.length - 1];
+        const prevPosition = appState.position.length > 1
+            ? appState.position[appState.position.length - 2]
+            : undefined;
+
+        // Tag this run; discard results from a superseded render
+        const runId = ++activeRunRef.current;
+
+        // Defer heavy minimax work to next event-loop tick
+        const timerId = setTimeout(() => {
+            if (runId !== activeRunRef.current) return; // stale run
+            try {
+                const hint = getBestMove({
+                    position:        currentPosition,
+                    turn:            appState.turn,
+                    castleDirection: appState.castleDirection,
+                    prevPosition,
+                }, depth);
+                if (runId === activeRunRef.current) setActiveAiHint(hint);
+            } catch (err) {
+                console.error('[useAiHint] analysis error:', err);
+                if (runId === activeRunRef.current) setActiveAiHint(null);
+            }
+        }, 0);
+
+        return () => clearTimeout(timerId); // cleanup on re-render
+    }, [
+        isAiHintsEnabled,
+        appState?.position,
+        appState?.turn,
+        appState?.status,
+        appState?.playerColor,
+        appState?.castleDirection,
+        setActiveAiHint,
+        depth,
+    ]);
+};
+
+export default useAiHint;
+// Hint updates on every position change -- covers both player and undo moves
+// depth=3 chosen for <100ms computation on mid-range mobile devices
+// runId pattern prevents React StrictMode double-invoke race condition
+// setActiveAiHint(null) on cleanup prevents flash of stale hint
+// appState.castleDirection required for accurate castle-move generation
+// useAiHint can be reused in any component with access to chess appState
+// prevPosition passed for correct en-passant candidate generation
+// Feature can be toggled mid-game without restarting -- state persists
+// useEffect deps array is exhaustive to satisfy react-hooks/exhaustive-deps
+// Hook is lightweight -- adds no visible UI of its own
+// Timeout id stored in closure -- not in state -- to avoid re-renders

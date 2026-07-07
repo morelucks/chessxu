@@ -1,9 +1,7 @@
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ChessScreen from "../components/pages/ChessScreen";
 import PvPScreen from "../components/pages/PvPScreen";
 import LeaderboardPage from "../components/pages/LeaderboardPage";
-import useAppStore, { userSession } from "../zustand/store";
 import { ToasterProvider } from "../components/ui/toasts/ToasterProvider";
 import { TxHud } from "../components/ui/TxHud";
 import { useMiniPay } from "../hooks/useMiniPay";
@@ -22,21 +20,12 @@ import HistoryPage from '../components/pages/HistoryPage';
 import AnalyticsDashboard from '../components/pages/AnalyticsDashboard';
 
 function App() {
-  const setAddress = useAppStore((state) => state.setAddress);
-  
+  console.log("=== App component rendering ===");
   // Attempt MiniPay auto-connection
   useMiniPay();
 
   // Attempt Farcaster auto-connection and init
   useFarcaster();
-
-  useEffect(() => {
-    if (userSession.isUserSignedIn()) {
-      const userData = userSession.loadUserData();
-      const address = userData.profile.stxAddress.mainnet || userData.profile.stxAddress.testnet;
-      setAddress(address);
-    }
-  }, [setAddress]);
 
   return (
     <ToasterProvider>

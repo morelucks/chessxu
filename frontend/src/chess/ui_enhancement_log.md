@@ -196,3 +196,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(wrapper): memoize rank rows rendering to avoid lag on iOS MiniPay view
 * docs(theme): document captured pieces layout architecture on iOS MiniPay view
 * docs(theme): update styling comments in variables sheet for slate theme
+* style(theme): improve board border shadows for depth to reduce DOM node weight

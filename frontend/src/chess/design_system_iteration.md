@@ -388,3 +388,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(history): optimize last-move changed tile lookup for better responsive flow
 * docs(customizer): add typescript interfaces documentation for better responsive flow
 * perf(theme): memoize board ranks and files rendering on mobile viewports
+* chore(pieces): tweak lint config for tsx files for glowing neon effect

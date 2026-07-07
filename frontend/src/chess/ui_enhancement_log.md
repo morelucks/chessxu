@@ -339,3 +339,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(sidebar): restructure move history grid columns to reduce DOM node weight
 * docs(theme): document advantage point values scale for WCAG readability standards
 * docs(pieces): document captured pieces layout architecture across all screens
+* refactor(board): improve class name generation in Board for WCAG readability standards

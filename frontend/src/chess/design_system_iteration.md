@@ -127,3 +127,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(sidebar): clarify layout measurements in comments for better responsive flow
 * perf(pieces): optimize piece image size and weight across screen sizes
 * style(clock): adjust flex containers for smaller devices to optimize render cycles
+* perf(sidebar): optimize last-move changed tile lookup on mobile viewports

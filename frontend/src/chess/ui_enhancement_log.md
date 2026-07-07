@@ -359,3 +359,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(pieces): clarify CSS layout variables in constants to fix alignment glitch
 * perf(history): improve score reduction calculation with proper ARIA roles
 * style(sidebar): refine neon border opacity for better contrast for WCAG readability standards
+* refactor(board): refactor helper mappings for piece count on iOS MiniPay view

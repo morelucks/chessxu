@@ -33,3 +33,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(theme): update styling variables description across screen sizes
 * refactor(pieces): refactor captured pieces tally structure in slate customizer
 * chore(sidebar): remove legacy comments from codebase for premium visual design
+* style(clock): refine neon border shadow and highlights to align with modern chess apps

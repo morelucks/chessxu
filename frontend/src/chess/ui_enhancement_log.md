@@ -164,3 +164,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(wrapper): improve class name generation in Board to match Lichess design
 * style(board): tune transitions timing on tile hover for mobile responsive height
 * docs(pieces): update styling comments in variables sheet for slate theme
+* docs(theme): add docstring for theme switcher component on iOS MiniPay view

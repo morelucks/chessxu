@@ -191,3 +191,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(pieces): clean up component props passing for slate theme
 * chore(board): remove legacy styles backup comments to match Lichess design
 * style(sidebar): tune transitions timing on tile hover in wood theme
+* perf(board): optimize changed squares loop search with proper ARIA roles

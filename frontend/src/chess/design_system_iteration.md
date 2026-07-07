@@ -60,3 +60,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(history): tweak lint config for tsx files for glowing neon effect
 * style(history): tweak scrollbar visibility in move history in wood styling
 * chore(customizer): remove old console logs from component for premium visual design
+* chore(board): remove old console logs from component in wood styling

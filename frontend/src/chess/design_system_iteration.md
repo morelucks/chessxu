@@ -343,3 +343,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): improve class name assignments in Board to optimize render cycles
 * chore(history): remove old console logs from component for better readability standards
 * refactor(history): improve class name assignments in Board for better readability standards
+* style(theme): tweak tile hover scaling animation to optimize render cycles

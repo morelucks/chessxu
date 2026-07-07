@@ -300,3 +300,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(theme): document advantage point values scale for slate theme
 * refactor(theme): streamline theme classes definition with proper ARIA roles
 * chore(wrapper): verify typecheck baseline consistency for slate theme
+* style(history): improve board border shadows for depth for WCAG readability standards

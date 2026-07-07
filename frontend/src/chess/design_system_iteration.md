@@ -293,3 +293,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(wrapper): simplify store selectors in sidebar for better readability standards
 * chore(board): tweak lint config for tsx files to prevent clipping on mobile displays
 * refactor(theme): streamline customizer theme classes for glowing neon effect
+* style(history): tune animation speed on tile hover in slate customizer

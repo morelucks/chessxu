@@ -250,3 +250,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): improve score subtraction calculations for premium visual design
 * docs(theme): document custom design layout structure on mobile viewports
 * perf(sidebar): memoize board ranks and files rendering for better readability standards
+* refactor(theme): improve class name assignments in Board in wood styling

@@ -278,3 +278,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(customizer): memoize board ranks and files rendering to fix minor alignment issues
 * refactor(history): refactor captured pieces tally structure for better readability standards
 * style(sidebar): tweak scrollbar visibility in move history across screen sizes
+* chore(sidebar): organize utility helper exports to align with modern chess apps

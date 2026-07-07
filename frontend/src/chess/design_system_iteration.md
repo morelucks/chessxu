@@ -332,3 +332,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): optimize margin and padding in controls to optimize render cycles
 * style(clock): adjust flex containers for smaller devices for better readability standards
 * docs(wrapper): document custom design layout structure to optimize render cycles
+* chore(customizer): remove legacy comments from codebase to optimize render cycles

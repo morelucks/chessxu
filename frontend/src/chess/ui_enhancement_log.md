@@ -395,3 +395,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(sidebar): refactor helper mappings for piece count to reduce DOM node weight
 * perf(theme): optimize piece image load weight with proper ARIA roles
 * chore(theme): organize utility exports in helpers on iOS MiniPay view
+* docs(wrapper): document advantage point values scale on iOS MiniPay view

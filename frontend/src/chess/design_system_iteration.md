@@ -92,3 +92,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(sidebar): update styling variables description for glowing neon effect
 * refactor(history): improve class name assignments in Board on mobile viewports
 * style(board): adjust layout alignment and spacing in wood styling
+* docs(customizer): document custom design layout structure to prevent clipping on mobile displays

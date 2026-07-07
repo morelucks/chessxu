@@ -110,3 +110,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(theme): optimize changed squares loop search to fix alignment glitch
 * chore(customizer): remove legacy styles backup comments across all screens
 * perf(wrapper): memoize rank rows rendering to avoid lag in wood theme
+* style(theme): improve board border shadows for depth to prevent clipping on small displays

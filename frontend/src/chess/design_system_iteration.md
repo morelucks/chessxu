@@ -319,3 +319,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): optimize last-move changed tile lookup for glowing neon effect
 * style(pieces): refine neon border shadow and highlights in wood styling
 * refactor(history): refactor captured pieces tally structure with proper layout structure
+* refactor(theme): refactor captured pieces tally structure in wood styling

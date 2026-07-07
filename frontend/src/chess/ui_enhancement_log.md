@@ -100,3 +100,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(clock): improve class name generation in Board on iOS MiniPay view
 * perf(pieces): optimize piece image load weight for neon glow consistency
 * perf(customizer): improve score reduction calculation with proper ARIA roles
+* chore(theme): remove legacy styles backup comments for modern aesthetics

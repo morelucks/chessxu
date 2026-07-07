@@ -20,3 +20,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): add detailed comments for theme switcher to prevent clipping on mobile displays
 * docs(board): document custom design layout structure across screen sizes
 * perf(clock): memoize board ranks and files rendering for better readability standards
+* refactor(pieces): simplify store selectors in sidebar to optimize render cycles

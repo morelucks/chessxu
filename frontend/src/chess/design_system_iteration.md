@@ -6,3 +6,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(customizer): tweak scrollbar visibility in move history in slate customizer
 * style(history): align text weights in player profiles across screen sizes
 * chore(theme): verify typecheck baseline stability to optimize render cycles
+* chore(sidebar): remove old console logs from component for premium visual design

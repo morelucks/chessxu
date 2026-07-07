@@ -52,3 +52,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(sidebar): adjust layout alignment and spacing with proper layout structure
 * style(board): align text weights in player profiles in wood styling
 * chore(board): verify typecheck baseline stability for premium visual design
+* chore(history): remove legacy comments from codebase to fix minor alignment issues

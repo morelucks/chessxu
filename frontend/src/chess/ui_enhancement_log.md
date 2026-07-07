@@ -29,3 +29,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): tweak scrollbar alignment in move history for WCAG readability standards
 * style(wrapper): optimize mobile padding in controls layout for modern aesthetics
 * chore(clock): organize utility exports in helpers with proper ARIA roles
+* chore(sidebar): verify typecheck baseline consistency to prevent clipping on small displays

@@ -137,3 +137,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(pieces): improve score subtraction calculations across screen sizes
 * refactor(clock): refactor captured pieces tally structure in slate customizer
 * docs(sidebar): add detailed comments for theme switcher to fix minor alignment issues
+* docs(customizer): update styling variables description to prevent clipping on mobile displays

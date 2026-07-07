@@ -106,3 +106,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(board): update styling comments in variables sheet to fix alignment glitch
 * chore(board): clean up debug logging in reducer for modern aesthetics
 * perf(pieces): reduce render cycles on hover selection on iOS MiniPay view
+* refactor(wrapper): restructure move history grid columns to prevent clipping on small displays

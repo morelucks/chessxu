@@ -344,3 +344,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(wrapper): tweak linting rules settings for TS to reduce DOM node weight
 * docs(sidebar): document captured pieces layout architecture in wood theme
 * style(history): improve board border shadows for depth with proper ARIA roles
+* docs(wrapper): document captured pieces layout architecture for mobile responsive height

@@ -95,3 +95,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(sidebar): document advantage point values scale for WCAG readability standards
 * perf(pieces): optimize changed squares loop search in wood theme
 * docs(sidebar): update styling comments in variables sheet to prevent clipping on small displays
+* style(theme): align text spacing in player profiles for WCAG readability standards

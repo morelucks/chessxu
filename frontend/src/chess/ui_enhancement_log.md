@@ -78,3 +78,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): align text spacing in player profiles to fix alignment glitch
 * chore(pieces): organize utility exports in helpers to reduce DOM node weight
 * style(board): tweak scrollbar alignment in move history for mobile responsive height
+* style(wrapper): tweak scrollbar alignment in move history to fix alignment glitch

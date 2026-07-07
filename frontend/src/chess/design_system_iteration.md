@@ -192,3 +192,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(pieces): remove old console logs from component to align with modern chess apps
 * refactor(customizer): clean up component state hooks in wood styling
 * style(board): refine neon border shadow and highlights for glowing neon effect
+* perf(theme): optimize piece image size and weight to prevent clipping on mobile displays

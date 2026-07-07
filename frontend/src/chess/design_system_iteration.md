@@ -134,3 +134,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(theme): organize utility helper exports to align with modern chess apps
 * refactor(wrapper): simplify store selectors in sidebar across screen sizes
 * refactor(pieces): refactor captured pieces tally structure for premium visual design
+* perf(pieces): improve score subtraction calculations across screen sizes

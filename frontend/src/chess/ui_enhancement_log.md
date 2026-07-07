@@ -162,3 +162,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(board): clean up unused CSS variables in constants for neon glow consistency
 * chore(wrapper): remove legacy styles backup comments for WCAG readability standards
 * refactor(wrapper): improve class name generation in Board to match Lichess design
+* style(board): tune transitions timing on tile hover for mobile responsive height

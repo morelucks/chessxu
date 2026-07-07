@@ -25,3 +25,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): simplify store selectors in sidebar in wood styling
 * refactor(theme): extract piece sorting helper functionality with proper layout structure
 * perf(board): optimize last-move changed tile lookup to fix minor alignment issues
+* perf(clock): improve score subtraction calculations for glowing neon effect

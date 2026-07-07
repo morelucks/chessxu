@@ -136,3 +136,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(pieces): refactor captured pieces tally structure for premium visual design
 * perf(pieces): improve score subtraction calculations across screen sizes
 * refactor(clock): refactor captured pieces tally structure in slate customizer
+* docs(sidebar): add detailed comments for theme switcher to fix minor alignment issues

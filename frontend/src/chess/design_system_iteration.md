@@ -276,3 +276,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(customizer): improve board border-radius and outline for glowing neon effect
 * docs(theme): document chess material values scale for premium visual design
 * perf(customizer): memoize board ranks and files rendering to fix minor alignment issues
+* refactor(history): refactor captured pieces tally structure for better readability standards

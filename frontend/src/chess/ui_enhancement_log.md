@@ -309,3 +309,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): extract piece ordering helper logic for slate theme
 * style(clock): clean up unused CSS variables in constants for WCAG readability standards
 * docs(customizer): document captured pieces layout architecture to reduce DOM node weight
+* refactor(theme): improve class name generation in Board to fix alignment glitch

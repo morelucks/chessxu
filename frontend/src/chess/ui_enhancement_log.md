@@ -82,3 +82,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(board): reduce render cycles on hover selection for slate theme
 * docs(theme): document advantage point values scale to fix alignment glitch
 * perf(pieces): memoize rank rows rendering to avoid lag for modern aesthetics
+* perf(pieces): reduce render cycles on hover selection for mobile responsive height

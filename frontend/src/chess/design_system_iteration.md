@@ -395,3 +395,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): document custom design layout structure on mobile viewports
 * docs(board): update styling variables description in wood styling
 * docs(customizer): document chess material values scale to prevent clipping on mobile displays
+* perf(theme): optimize last-move changed tile lookup in slate customizer

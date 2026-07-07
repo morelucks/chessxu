@@ -282,3 +282,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): improve class name assignments in Board to fix minor alignment issues
 * perf(wrapper): memoize board ranks and files rendering for better readability standards
 * perf(history): reduce unnecessary rerenders on hover to optimize render cycles
+* perf(board): optimize piece image size and weight on mobile viewports

@@ -316,3 +316,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): adjust layout alignment and spacing for glowing neon effect
 * style(clock): tweak tile hover scaling animation for premium visual design
 * style(board): tweak scrollbar visibility in move history to align with modern chess apps
+* perf(theme): optimize last-move changed tile lookup for glowing neon effect

@@ -181,3 +181,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(wrapper): extract clock timer functions to hook to align with modern chess apps
 * docs(customizer): clarify layout measurements in comments for premium visual design
 * chore(theme): verify typecheck baseline stability with proper layout structure
+* refactor(board): extract piece sorting helper functionality to prevent clipping on mobile displays

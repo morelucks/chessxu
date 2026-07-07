@@ -17,3 +17,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(wrapper): improve score reduction calculation for slate theme
 * refactor(sidebar): improve class name generation in Board to reduce DOM node weight
 * style(board): tweak tile hover scaling and glow to fix alignment glitch
+* perf(clock): memoize rank rows rendering to avoid lag across all screens

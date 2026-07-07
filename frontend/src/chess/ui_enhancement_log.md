@@ -276,3 +276,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(sidebar): optimize piece image load weight for WCAG readability standards
 * perf(board): improve score reduction calculation to match Lichess design
 * refactor(pieces): simplify state selectors in sidebar in wood theme
+* refactor(clock): extract piece ordering helper logic for mobile responsive height

@@ -378,3 +378,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(customizer): improve class name generation in Board to prevent clipping on small displays
 * docs(board): add TypeScript type comments for state for WCAG readability standards
 * chore(sidebar): remove legacy styles backup comments for WCAG readability standards
+* style(sidebar): align text spacing in player profiles for modern aesthetics

@@ -205,3 +205,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(pieces): extract piece ordering helper logic across all screens
 * style(theme): optimize mobile padding in controls layout to reduce DOM node weight
 * style(pieces): clean up unused CSS variables in constants for modern aesthetics
+* perf(sidebar): optimize changed squares loop search for WCAG readability standards

@@ -261,3 +261,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(wrapper): reduce unnecessary rerenders on hover for better responsive flow
 * docs(pieces): document custom design layout structure in wood styling
 * style(board): optimize margin and padding in controls in slate customizer
+* refactor(board): improve class name assignments in Board on mobile viewports

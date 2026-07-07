@@ -15,3 +15,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(board): tweak linting rules settings for TS in wood theme
 * refactor(customizer): streamline theme classes definition to prevent clipping on small displays
 * perf(wrapper): improve score reduction calculation for slate theme
+* refactor(sidebar): improve class name generation in Board to reduce DOM node weight

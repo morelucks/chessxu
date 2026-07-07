@@ -1,5 +1,6 @@
 import './Board.css'
 import { useAppContext }from '../../contexts/Context'
+import useAppStore from '../../../zustand/store'
 
 import Ranks from './bits/Ranks'
 import Files from './bits/Files'
@@ -21,6 +22,7 @@ const Board = () => {
     const files = Array(8).fill().map((x,i) => i+1)
 
     const { appState, dispatch } = useAppContext();
+    const boardTheme = useAppStore((state) => state.boardTheme);
     const position = appState.position[appState.position.length - 1]
 
     const checkTile = (() => {
@@ -121,7 +123,7 @@ const Board = () => {
         dispatch(clearCandidates())
     }
 
-    return <div className='board'>
+    return <div className={`board theme-${boardTheme}`}>
 
         <Ranks ranks={ranks}/>
 

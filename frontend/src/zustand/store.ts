@@ -43,6 +43,7 @@ export interface GameState {
   offlineGamesPlayed: number;
   /** Whether the upgrade prompt has been dismissed */
   upgradePromptDismissed: boolean;
+  boardTheme: 'classic-wood' | 'modern-neon' | 'light' | 'dark';
 }
 
 export interface AppStore extends AuthState, GameState {
@@ -66,6 +67,7 @@ export interface AppStore extends AuthState, GameState {
   setOfflineMode: (offline: boolean) => void;
   incrementOfflineGames: () => void;
   dismissUpgradePrompt: () => void;
+  setBoardTheme: (theme: 'classic-wood' | 'modern-neon' | 'light' | 'dark') => void;
   logout: () => void;
 }
 
@@ -95,6 +97,7 @@ const useAppStore = create<AppStore>()(
       isOfflineMode: true,
       offlineGamesPlayed: 0,
       upgradePromptDismissed: false,
+      boardTheme: 'dark',
 
       // Actions
       // When address changes, sync offline mode: offline iff no address
@@ -141,6 +144,7 @@ const useAppStore = create<AppStore>()(
       incrementOfflineGames: () => set((s) => ({ offlineGamesPlayed: s.offlineGamesPlayed + 1 })),
       dismissUpgradePrompt: () => set({ upgradePromptDismissed: true }),
       setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
+      setBoardTheme: (boardTheme) => set({ boardTheme }),
       logout: () => {
         userSession.signUserOut();
         set({ 
@@ -162,6 +166,7 @@ const useAppStore = create<AppStore>()(
             isOfflineMode: true,
             offlineGamesPlayed: 0,
             upgradePromptDismissed: false,
+            boardTheme: 'dark',
         });
       },
     }),

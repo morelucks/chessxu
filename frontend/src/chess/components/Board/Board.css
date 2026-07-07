@@ -65,3 +65,67 @@
 .highlight, .attacking {
     cursor: pointer;
 }
+
+/* Board Themes Customizer Rules */
+
+/* Classic Wood Theme */
+.board.theme-classic-wood {
+    --light-tile: #f0d9b5;
+    --dark-tile: #b58863;
+    --highlight: rgba(245, 158, 11, 0.5); /* golden amber */
+    --check: rgba(239, 68, 68, 0.85);
+}
+.board.theme-classic-wood .ranks, 
+.board.theme-classic-wood .files {
+    color: #b58863 !important;
+}
+
+/* Modern Neon Theme */
+.board.theme-modern-neon {
+    --light-tile: #1e1e38;
+    --dark-tile: #0b0b14;
+    --highlight: rgba(236, 72, 153, 0.65); /* neon pink */
+    --check: rgba(244, 63, 94, 0.9); /* rose/pink neon check */
+}
+.board.theme-modern-neon .tiles {
+    border: 2px solid rgba(236, 72, 153, 0.6);
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4), inset 0 0 15px rgba(59, 130, 246, 0.3);
+}
+.board.theme-modern-neon .ranks, 
+.board.theme-modern-neon .files {
+    color: #ec4899 !important;
+    text-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+}
+/* Neon custom target indicator */
+.board.theme-modern-neon .highlight:after {
+    background: #ec4899;
+    box-shadow: 0 0 8px #ec4899;
+}
+.board.theme-modern-neon .attacking:after {
+    border-color: #06b6d4;
+    box-shadow: 0 0 8px #06b6d4;
+}
+
+/* Light Theme */
+.board.theme-light {
+    --light-tile: #f8fafc;
+    --dark-tile: #cbd5e1;
+    --highlight: rgba(59, 130, 246, 0.45); /* soft blue */
+    --check: rgba(239, 68, 68, 0.7);
+}
+.board.theme-light .ranks, 
+.board.theme-light .files {
+    color: #64748b !important;
+}
+
+/* Dark Theme (slate default) */
+.board.theme-dark {
+    --light-tile: #475569;
+    --dark-tile: #1e293b;
+    --highlight: rgba(168, 85, 247, 0.5); /* purple-500 */
+    --check: rgba(239, 68, 68, 0.8);
+}
+.board.theme-dark .ranks, 
+.board.theme-dark .files {
+    color: #94a3b8 !important;
+}

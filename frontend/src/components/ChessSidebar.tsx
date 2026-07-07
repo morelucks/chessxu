@@ -205,6 +205,40 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
     );
 };
 
+// Board Theme Customizer Component
+const BoardThemeCustomizer = () => {
+    const boardTheme = useAppStore((s) => s.boardTheme);
+    const setBoardTheme = useAppStore((s) => s.setBoardTheme);
+
+    const themes = [
+        { id: 'dark', name: 'Dark Slate', lightColor: '#475569', darkColor: '#1e293b' },
+        { id: 'classic-wood', name: 'Classic Wood', lightColor: '#f0d9b5', darkColor: '#b58863' },
+        { id: 'modern-neon', name: 'Modern Neon', lightColor: '#1e1e38', darkColor: '#0b0b14', isNeon: true },
+        { id: 'light', name: 'Light Slate', lightColor: '#f8fafc', darkColor: '#cbd5e1' },
+    ] as const;
+
+    return (
+        <div className="board-theme-customizer">
+            <h3 className="chess-sidebar-title">Board Theme</h3>
+            <div className="theme-grid">
+                {themes.map((t) => (
+                    <button
+                        key={t.id}
+                        className={`theme-btn ${boardTheme === t.id ? 'active' : ''} ${t.isNeon ? 'theme-neon' : ''}`}
+                        onClick={() => setBoardTheme(t.id)}
+                    >
+                        <div className="theme-preview">
+                            <div className="preview-tile" style={{ backgroundColor: t.lightColor }} />
+                            <div className="preview-tile" style={{ backgroundColor: t.darkColor }} />
+                        </div>
+                        <span className="theme-name">{t.name}</span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 // Main Chess Sidebar Component
 /**
  * Main chess sidebar that renders controls, stake info and leaderboard tabs.
@@ -299,6 +333,7 @@ export default function ChessSidebar() {
                         onShowStakingModal={setShowStakingModal}
                     />
                     <TakeBackButton />
+                    <BoardThemeCustomizer />
                     <FreemiumUpgradeSection />
                     {/* Resign only shown in PvP with an active game */}
                     {gameMode === 'pvp' && <ResignButton />}

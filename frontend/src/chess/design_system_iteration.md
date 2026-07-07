@@ -13,3 +13,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): update styling variables description for glowing neon effect
 * refactor(customizer): simplify store selectors in sidebar in wood styling
 * docs(wrapper): add typescript interfaces documentation to prevent clipping on mobile displays
+* chore(customizer): remove old console logs from component to align with modern chess apps

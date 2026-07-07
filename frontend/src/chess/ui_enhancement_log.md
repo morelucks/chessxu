@@ -152,3 +152,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(theme): tweak tile hover scaling and glow to reduce DOM node weight
 * perf(board): reduce render cycles on hover selection for WCAG readability standards
 * perf(sidebar): improve score reduction calculation to fix alignment glitch
+* refactor(board): extract piece ordering helper logic to reduce DOM node weight

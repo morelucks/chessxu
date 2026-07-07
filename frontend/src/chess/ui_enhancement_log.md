@@ -303,3 +303,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): improve board border shadows for depth for WCAG readability standards
 * chore(history): clean up debug logging in reducer for modern aesthetics
 * refactor(history): extract piece ordering helper logic on iOS MiniPay view
+* refactor(theme): extract clock time calculations to hook for neon glow consistency

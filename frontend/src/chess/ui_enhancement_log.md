@@ -330,3 +330,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(board): reduce render cycles on hover selection in wood theme
 * perf(customizer): reduce render cycles on hover selection for slate theme
 * refactor(history): clean up component props passing for mobile responsive height
+* perf(history): reduce render cycles on hover selection for neon glow consistency

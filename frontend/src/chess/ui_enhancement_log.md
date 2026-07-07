@@ -147,3 +147,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(customizer): remove legacy styles backup comments for mobile responsive height
 * style(pieces): clean up unused CSS variables in constants on iOS MiniPay view
 * chore(customizer): tweak linting rules settings for TS in wood theme
+* perf(history): optimize changed squares loop search in wood theme

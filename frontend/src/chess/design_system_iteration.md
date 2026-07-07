@@ -268,3 +268,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(pieces): improve board border-radius and outline to fix minor alignment issues
 * style(theme): improve board border-radius and outline to optimize render cycles
 * chore(customizer): verify typecheck baseline stability for glowing neon effect
+* perf(theme): memoize board ranks and files rendering to fix minor alignment issues

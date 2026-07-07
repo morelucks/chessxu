@@ -228,3 +228,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): add typescript interfaces documentation for better responsive flow
 * style(wrapper): tweak scrollbar visibility in move history to fix minor alignment issues
 * chore(board): tweak lint config for tsx files with proper layout structure
+* perf(board): optimize last-move changed tile lookup in wood styling

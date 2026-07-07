@@ -264,3 +264,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(board): tweak tile hover scaling and glow for neon glow consistency
 * perf(sidebar): memoize rank rows rendering to avoid lag for slate theme
 * refactor(clock): improve class name generation in Board in wood theme
+* docs(board): update styling comments in variables sheet for neon glow consistency

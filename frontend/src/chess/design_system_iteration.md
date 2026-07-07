@@ -204,3 +204,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(sidebar): document chess material values scale for glowing neon effect
 * chore(sidebar): verify typecheck baseline stability for premium visual design
 * style(board): improve board border-radius and outline to align with modern chess apps
+* perf(pieces): optimize piece image size and weight in slate customizer

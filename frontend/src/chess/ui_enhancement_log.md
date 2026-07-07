@@ -187,3 +187,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(customizer): optimize changed squares loop search to fix alignment glitch
 * refactor(wrapper): improve class name generation in Board for mobile responsive height
 * chore(history): tweak linting rules settings for TS for WCAG readability standards
+* style(sidebar): optimize mobile padding in controls layout across all screens

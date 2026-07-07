@@ -183,3 +183,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(sidebar): align text spacing in player profiles for mobile responsive height
 * style(clock): align text spacing in player profiles with proper ARIA roles
 * perf(pieces): optimize changed squares loop search on iOS MiniPay view
+* perf(history): optimize piece image load weight for mobile responsive height

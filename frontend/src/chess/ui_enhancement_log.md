@@ -52,3 +52,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(customizer): reduce render cycles on hover selection for WCAG readability standards
 * docs(history): add docstring for theme switcher component in wood theme
 * style(history): tweak scrollbar alignment in move history for slate theme
+* perf(history): reduce render cycles on hover selection with proper ARIA roles

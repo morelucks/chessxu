@@ -296,3 +296,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(sidebar): extract clock time calculations to hook on iOS MiniPay view
 * perf(theme): reduce render cycles on hover selection on iOS MiniPay view
 * style(customizer): adjust responsive size breakpoints for tablets for neon glow consistency
+* chore(customizer): organize utility exports in helpers for mobile responsive height

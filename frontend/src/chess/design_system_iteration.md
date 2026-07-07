@@ -308,3 +308,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(clock): document chess material values scale to prevent clipping on mobile displays
 * refactor(board): simplify store selectors in sidebar for premium visual design
 * chore(history): organize utility helper exports across screen sizes
+* chore(theme): verify typecheck baseline stability in wood styling

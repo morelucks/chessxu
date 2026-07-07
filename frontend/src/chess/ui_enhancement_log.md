@@ -373,3 +373,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(history): adjust grid gap for mobile displays to fix alignment glitch
 * refactor(clock): refactor helper mappings for piece count to fix alignment glitch
 * refactor(board): refactor helper mappings for piece count to match Lichess design
+* perf(customizer): optimize changed squares loop search to reduce DOM node weight

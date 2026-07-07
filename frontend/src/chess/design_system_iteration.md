@@ -128,3 +128,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(pieces): optimize piece image size and weight across screen sizes
 * style(clock): adjust flex containers for smaller devices to optimize render cycles
 * perf(sidebar): optimize last-move changed tile lookup on mobile viewports
+* refactor(history): clean up component state hooks in slate customizer

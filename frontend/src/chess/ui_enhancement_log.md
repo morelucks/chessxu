@@ -37,3 +37,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(customizer): verify typecheck baseline consistency to reduce DOM node weight
 * refactor(sidebar): extract clock time calculations to hook for WCAG readability standards
 * refactor(board): clean up component props passing to prevent clipping on small displays
+* perf(clock): memoize rank rows rendering to avoid lag in wood theme

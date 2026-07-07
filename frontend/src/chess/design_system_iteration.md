@@ -54,3 +54,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(board): verify typecheck baseline stability for premium visual design
 * chore(history): remove legacy comments from codebase to fix minor alignment issues
 * perf(sidebar): optimize piece image size and weight to align with modern chess apps
+* refactor(customizer): extract piece sorting helper functionality for better responsive flow

@@ -386,3 +386,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(theme): streamline customizer theme classes to align with modern chess apps
 * docs(theme): add typescript interfaces documentation for better responsive flow
 * perf(history): optimize last-move changed tile lookup for better responsive flow
+* docs(customizer): add typescript interfaces documentation for better responsive flow

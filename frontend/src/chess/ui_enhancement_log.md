@@ -6,3 +6,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(sidebar): add docstring for theme switcher component to match Lichess design
 * perf(pieces): optimize changed squares loop search to match Lichess design
 * chore(wrapper): verify typecheck baseline consistency for modern aesthetics
+* perf(board): improve score reduction calculation to prevent clipping on small displays

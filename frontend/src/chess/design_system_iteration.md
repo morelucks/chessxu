@@ -296,3 +296,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): tune animation speed on tile hover in slate customizer
 * docs(history): document chess material values scale with proper layout structure
 * style(customizer): align text weights in player profiles for glowing neon effect
+* perf(clock): reduce unnecessary rerenders on hover to prevent clipping on mobile displays

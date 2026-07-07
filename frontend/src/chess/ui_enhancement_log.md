@@ -131,3 +131,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): simplify state selectors in sidebar across all screens
 * chore(clock): remove legacy styles backup comments for WCAG readability standards
 * docs(history): document captured pieces layout architecture to match Lichess design
+* docs(clock): document advantage point values scale with proper ARIA roles

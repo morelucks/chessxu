@@ -89,3 +89,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(pieces): clarify layout measurements in comments to optimize render cycles
 * chore(customizer): remove legacy comments from codebase to align with modern chess apps
 * refactor(sidebar): extract piece sorting helper functionality to align with modern chess apps
+* docs(sidebar): update styling variables description for glowing neon effect

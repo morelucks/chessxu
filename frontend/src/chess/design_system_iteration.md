@@ -67,3 +67,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(history): update styling variables description in wood styling
 * chore(wrapper): remove legacy comments from codebase for better responsive flow
 * refactor(pieces): clean up component state hooks across screen sizes
+* style(pieces): adjust flex containers for smaller devices to fix minor alignment issues

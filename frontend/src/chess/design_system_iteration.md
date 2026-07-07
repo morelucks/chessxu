@@ -335,3 +335,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(customizer): remove legacy comments from codebase to optimize render cycles
 * style(clock): tweak tile hover scaling animation with proper layout structure
 * perf(clock): reduce unnecessary rerenders on hover to optimize render cycles
+* style(sidebar): clean up unused styles in main stylesheet across screen sizes

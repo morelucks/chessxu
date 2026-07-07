@@ -136,3 +136,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(customizer): refine neon border opacity for better contrast for mobile responsive height
 * style(board): adjust responsive size breakpoints for tablets to fix alignment glitch
 * perf(pieces): optimize changed squares loop search for neon glow consistency
+* chore(sidebar): organize utility exports in helpers for mobile responsive height

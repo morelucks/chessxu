@@ -294,3 +294,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): restructure move history grid columns in wood theme
 * style(board): refine neon border opacity for better contrast for mobile responsive height
 * refactor(sidebar): extract clock time calculations to hook on iOS MiniPay view
+* perf(theme): reduce render cycles on hover selection on iOS MiniPay view

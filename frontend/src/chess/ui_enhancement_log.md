@@ -200,3 +200,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(theme): clean up debug logging in reducer to match Lichess design
 * docs(pieces): document advantage point values scale to match Lichess design
 * chore(customizer): tweak linting rules settings for TS to prevent clipping on small displays
+* docs(customizer): add docstring for theme switcher component to reduce DOM node weight

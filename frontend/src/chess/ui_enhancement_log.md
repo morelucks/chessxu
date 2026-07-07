@@ -142,3 +142,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(board): remove legacy styles backup comments to reduce DOM node weight
 * style(pieces): adjust responsive size breakpoints for tablets on iOS MiniPay view
 * chore(board): tweak linting rules settings for TS for neon glow consistency
+* refactor(pieces): simplify state selectors in sidebar to prevent clipping on small displays

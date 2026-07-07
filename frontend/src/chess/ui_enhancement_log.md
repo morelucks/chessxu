@@ -255,3 +255,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * perf(wrapper): reduce render cycles on hover selection for slate theme
 * style(customizer): adjust grid gap for mobile displays to match Lichess design
 * chore(board): organize utility exports in helpers with proper ARIA roles
+* refactor(sidebar): extract piece ordering helper logic to reduce DOM node weight

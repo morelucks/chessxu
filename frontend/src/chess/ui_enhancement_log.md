@@ -375,3 +375,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(board): refactor helper mappings for piece count to match Lichess design
 * perf(customizer): optimize changed squares loop search to reduce DOM node weight
 * perf(pieces): memoize rank rows rendering to avoid lag on iOS MiniPay view
+* refactor(customizer): improve class name generation in Board to prevent clipping on small displays

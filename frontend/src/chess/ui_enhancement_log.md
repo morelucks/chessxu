@@ -74,3 +74,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): refactor helper mappings for piece count in wood theme
 * chore(clock): remove legacy styles backup comments on iOS MiniPay view
 * style(pieces): improve board border shadows for depth for slate theme
+* perf(board): optimize piece image load weight for mobile responsive height

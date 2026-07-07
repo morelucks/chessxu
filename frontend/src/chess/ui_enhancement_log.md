@@ -293,3 +293,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * style(board): tune transitions timing on tile hover to match Lichess design
 * refactor(theme): restructure move history grid columns in wood theme
 * style(board): refine neon border opacity for better contrast for mobile responsive height
+* refactor(sidebar): extract clock time calculations to hook on iOS MiniPay view

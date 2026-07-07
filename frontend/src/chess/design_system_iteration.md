@@ -93,3 +93,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(history): improve class name assignments in Board on mobile viewports
 * style(board): adjust layout alignment and spacing in wood styling
 * docs(customizer): document custom design layout structure to prevent clipping on mobile displays
+* chore(wrapper): tweak lint config for tsx files in wood styling

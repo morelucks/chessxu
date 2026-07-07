@@ -14,3 +14,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(board): clarify CSS layout variables in constants with proper ARIA roles
 * chore(board): tweak linting rules settings for TS in wood theme
 * refactor(customizer): streamline theme classes definition to prevent clipping on small displays
+* perf(wrapper): improve score reduction calculation for slate theme

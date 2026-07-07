@@ -259,3 +259,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(board): restructure move list layout hierarchy on mobile viewports
 * refactor(sidebar): restructure move list layout hierarchy to optimize render cycles
 * perf(wrapper): reduce unnecessary rerenders on hover for better responsive flow
+* docs(pieces): document custom design layout structure in wood styling

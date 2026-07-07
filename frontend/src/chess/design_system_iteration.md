@@ -337,3 +337,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(clock): reduce unnecessary rerenders on hover to optimize render cycles
 * style(sidebar): clean up unused styles in main stylesheet across screen sizes
 * style(wrapper): improve board border-radius and outline to align with modern chess apps
+* perf(board): memoize board ranks and files rendering for better responsive flow

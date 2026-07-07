@@ -24,3 +24,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(clock): remove legacy styles backup comments for mobile responsive height
 * docs(clock): add docstring for theme switcher component on iOS MiniPay view
 * style(history): align text spacing in player profiles across all screens
+* perf(wrapper): optimize changed squares loop search for mobile responsive height

@@ -91,3 +91,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(sidebar): extract piece sorting helper functionality to align with modern chess apps
 * docs(sidebar): update styling variables description for glowing neon effect
 * refactor(history): improve class name assignments in Board on mobile viewports
+* style(board): adjust layout alignment and spacing in wood styling

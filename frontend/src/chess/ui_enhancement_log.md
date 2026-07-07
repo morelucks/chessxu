@@ -83,3 +83,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(theme): document advantage point values scale to fix alignment glitch
 * perf(pieces): memoize rank rows rendering to avoid lag for modern aesthetics
 * perf(pieces): reduce render cycles on hover selection for mobile responsive height
+* style(customizer): optimize mobile padding in controls layout for WCAG readability standards

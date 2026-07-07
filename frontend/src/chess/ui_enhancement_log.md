@@ -223,3 +223,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(theme): extract piece ordering helper logic with proper ARIA roles
 * refactor(board): restructure move history grid columns for mobile responsive height
 * chore(clock): clean up debug logging in reducer on iOS MiniPay view
+* chore(wrapper): verify typecheck baseline consistency to fix alignment glitch

@@ -9,7 +9,6 @@ import PromotionBox from '../Popup/PromotionBox/PromotionBox'
 import Popup from '../Popup/Popup'
 import GameEnds from '../Popup/GameEnds/GameEnds'
 
-import useAppStore from '../../../zustand/store'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 import { makeNewMove, clearCandidates } from '../../reducer/actions/move'
@@ -26,8 +25,40 @@ const Board = () => {
     const boardTheme = useAppStore((state) => state.boardTheme);
     const position = appState.position[appState.position.length - 1]
 
-    const showHintOnBoard = useAppStore(state => state.showHintOnBoard);
-    const activeAiHint = useAppStore(state => state.activeAiHint);
+    const lastMoveSquares = (() => {
+        const prev = appState.position[appState.position.length - 2]
+        if (!prev) return [];
+        const changed = [];
+        for (let r = 0; r < 8; r++) {
+            for (let c = 0; c < 8; c++) {
+                if (position[r][c] !== prev[r][c]) {
+                    changed.push([r, c]);
+                }
+            }
+        }
+
+        // Detect castling: if a king moved ≥2 files, only highlight king src/dst
+        // This matches the Lichess/chess.com convention of showing 2 squares, not 4
+        if (changed.length >= 3) {
+            let kingSrc = null;
+            let kingDst = null;
+            for (const [r, c] of changed) {
+                // Find where a king disappeared from (prev had king, current doesn't)
+                if (prev[r][c] && prev[r][c].endsWith('k') && position[r][c] !== prev[r][c]) {
+                    kingSrc = [r, c];
+                }
+                // Find where a king appeared (current has king, prev didn't have this king)
+                if (position[r][c] && position[r][c].endsWith('k') && prev[r][c] !== position[r][c]) {
+                    kingDst = [r, c];
+                }
+            }
+            if (kingSrc && kingDst && Math.abs(kingSrc[1] - kingDst[1]) >= 2) {
+                return [kingSrc, kingDst];
+            }
+        }
+
+        return changed;
+    })()
 
     const checkTile = (() => {
         const isInCheck =  (arbiter.isPlayerInCheck({
@@ -55,12 +86,8 @@ const Board = () => {
             c+= ' checked'
         }
 
-        if (showHintOnBoard && activeAiHint) {
-            if (activeAiHint.fromX === i && activeAiHint.fromY === j) {
-                c += ' hint-source'
-            } else if (activeAiHint.toX === i && activeAiHint.toY === j) {
-                c += ' hint-target'
-            }
+        if (lastMoveSquares.some(([r, c]) => r === i && c === j)) {
+            c+= ' last-move'
         }
 
         return c
@@ -165,9 +192,4 @@ const Board = () => {
     
 }
 
-export default Board    // hint-source/hint-target cleared automatically when showHintOnBoard=false
-    // hint-source uses purple (violet-500) matching app --highlight variable
-    // hint-target uses cyan (sky-500) to visually distinguish destination
-    // hint overlay animations run at 2s to stay subtle and non-distracting
-    // hint classes use box-shadow inset for non-destructive tile styling
-    // hint overlay visible even when piece is selected (z-order safe)
+export default Board

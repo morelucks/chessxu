@@ -15,7 +15,7 @@ interface ChessAction {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload?: any;
 }
-import React, { useReducer, useEffect, useState } from 'react';
+import React, { useReducer, useEffect, useState, useMemo } from 'react';
 import { reducer } from '../chess/reducer/reducer';
 import { Status } from '../chess/constants';
 import { createPosition, createPuzzlePosition } from '../chess/helper';
@@ -26,7 +26,89 @@ import ChessSidebar from './ChessSidebar';
 import MoveHistorySidebar from './MoveHistorySidebar';
 import ChessClock from './ChessClock';
 import useAppStore from '../zustand/store';
-import { getBestMove } from '../chess/ai/chessAnalysis';
+import { useFreemium } from '../hooks/useFreemium';
+import './CapturedPieces.css';
+
+/** Standard starting piece counts (kings excluded — they can never be captured) */
+const STARTING_SET: Record<string, number> = {
+    wp: 8, wr: 2, wn: 2, wb: 2, wq: 1,
+    bp: 8, br: 2, bn: 2, bb: 2, bq: 1
+};
+
+/** Piece ordering for display: pawns first, queens last */
+const PIECE_ORDER: Record<string, number> = { p: 1, n: 2, b: 3, r: 4, q: 5 };
+
+/** Standard material point values */
+const PIECE_VALUES: Record<string, number> = { p: 1, n: 3, b: 3, r: 5, q: 9 };
+
+/**
+ * Calculate captured pieces from the current board position.
+ * Handles pawn promotion correctly: if a piece type exceeds its starting count,
+ * the surplus is attributed to promoted pawns, reducing the "captured pawns" tally.
+ */
+function getCapturedPieces(pos: string[][]): { w: string[]; b: string[] } {
+    if (!pos) return { w: [], b: [] };
+
+    // Count every piece currently on the board
+    const currentCount: Record<string, number> = {};
+    for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+            const piece = pos[r]?.[c];
+            if (piece) {
+                currentCount[piece] = (currentCount[piece] || 0) + 1;
+            }
+        }
+    }
+
+    const captured: { w: string[]; b: string[] } = { w: [], b: [] };
+
+    // Track promoted pawns per color to offset pawn capture counts
+    const promotedPawns: Record<string, number> = { w: 0, b: 0 };
+
+    // First pass: count promotions (pieces that exceed their starting count)
+    Object.keys(STARTING_SET).forEach(piece => {
+        const current = currentCount[piece] || 0;
+        const starting = STARTING_SET[piece];
+        if (current > starting) {
+            // Extra pieces beyond starting count = promoted pawns
+            const color = piece[0] === 'w' ? 'w' : 'b';
+            promotedPawns[color] += current - starting;
+        }
+    });
+
+    // Second pass: calculate actual captures, adjusting pawns for promotions
+    Object.keys(STARTING_SET).forEach(piece => {
+        const starting = STARTING_SET[piece];
+        const current = currentCount[piece] || 0;
+        let capturedCount = starting - current;
+
+        // If this is a pawn, subtract promoted pawns (they weren't truly captured)
+        if (piece.endsWith('p') && capturedCount > 0) {
+            const color = piece[0] === 'w' ? 'w' : 'b';
+            const promoOffset = Math.min(capturedCount, promotedPawns[color]);
+            capturedCount -= promoOffset;
+            promotedPawns[color] -= promoOffset;
+        }
+
+        if (capturedCount > 0) {
+            const bucket = piece.startsWith('w') ? 'w' : 'b';
+            for (let i = 0; i < capturedCount; i++) {
+                captured[bucket].push(piece);
+            }
+        }
+    });
+
+    const sortFunc = (a: string, b: string) => PIECE_ORDER[a[1]] - PIECE_ORDER[b[1]];
+    captured.w.sort(sortFunc);
+    captured.b.sort(sortFunc);
+
+    return captured;
+}
+
+/** Get the material point value of a piece (e.g. 'wp' → 1, 'bq' → 9) */
+function getPieceValue(p: string): number {
+    return PIECE_VALUES[p[1]] || 0;
+}
 
 /**
  * Wrapper providing AppContext with typed reducer for the chess board UI.
@@ -68,39 +150,6 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     );
     const [isReady, setIsReady] = useState(false);
 
-    const isAiHintsEnabled = useAppStore((state) => state.isAiHintsEnabled);
-    const setActiveAiHint = useAppStore((state) => state.setActiveAiHint);
-
-    // Calculate AI Suggestions/Hints
-    useEffect(() => {
-        if (!isAiHintsEnabled || appState.status !== 'Ongoing') {
-            setActiveAiHint(null);
-            return;
-        }
-
-        // Only suggest when it's the player's turn
-        const isPlayerTurn = appState.turn === appState.playerColor;
-        if (!isPlayerTurn) {
-            setActiveAiHint(null);
-            return;
-        }
-
-        const currentPosition = appState.position[appState.position.length - 1];
-        try {
-            const bestMove = getBestMove({
-                position: currentPosition,
-                turn: appState.turn,
-                castleDirection: appState.castleDirection,
-                prevPosition: appState.position.length > 1 ? appState.position[appState.position.length - 2] : undefined
-            }, 3);
-            
-            setActiveAiHint(bestMove);
-        } catch (error) {
-            console.error('Error calculating AI hint:', error);
-            setActiveAiHint(null);
-        }
-    }, [isAiHintsEnabled, appState.position, appState.turn, appState.status, appState.playerColor, appState.castleDirection, setActiveAiHint]);
-
     // Save game mode to localStorage whenever it changes
     useEffect(() => {
         localStorage.setItem('currentGameMode', appState.gameMode);
@@ -120,74 +169,22 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 
     const position = appState.position[appState.position.length - 1];
 
-    // Helper to calculate captured pieces
-    const getCapturedPieces = (pos: string[][]) => {
-        if (!pos) return { w: [], b: [] };
-        const currentCount: Record<string, number> = {};
-        for (let r = 0; r < 8; r++) {
-            for (let c = 0; c < 8; c++) {
-                const piece = pos[r]?.[c];
-                if (piece) {
-                    currentCount[piece] = (currentCount[piece] || 0) + 1;
-                }
-            }
-        }
+    // Memoize captured pieces computation — only recalculates when the position changes
+    const { playerCapturedPieces, opponentCapturedPieces, playerAdvantage, opponentAdvantage } = useMemo(() => {
+        const captured = getCapturedPieces(position);
+        const whiteScore = captured.b.reduce((sum, p) => sum + getPieceValue(p), 0);
+        const blackScore = captured.w.reduce((sum, p) => sum + getPieceValue(p), 0);
 
-        const startingSet: Record<string, number> = {
-            wp: 8, wr: 2, wn: 2, wb: 2, wq: 1,
-            bp: 8, br: 2, bn: 2, bb: 2, bq: 1
+        const whiteAdv = whiteScore - blackScore;
+        const blackAdv = blackScore - whiteScore;
+
+        return {
+            playerCapturedPieces: appState.playerColor === 'w' ? captured.b : captured.w,
+            opponentCapturedPieces: appState.playerColor === 'w' ? captured.w : captured.b,
+            playerAdvantage: appState.playerColor === 'w' ? whiteAdv : blackAdv,
+            opponentAdvantage: appState.playerColor === 'w' ? blackAdv : whiteAdv,
         };
-
-        const captured: { w: string[]; b: string[] } = {
-            w: [],
-            b: []
-        };
-
-        Object.keys(startingSet).forEach(piece => {
-            const count = startingSet[piece];
-            const current = currentCount[piece] || 0;
-            const capturedCount = count - current;
-            if (capturedCount > 0) {
-                for (let i = 0; i < capturedCount; i++) {
-                    if (piece.startsWith('w')) {
-                        captured.w.push(piece);
-                    } else {
-                        captured.b.push(piece);
-                    }
-                }
-            }
-        });
-
-        const pieceOrder: Record<string, number> = { p: 1, n: 2, b: 3, r: 4, q: 5 };
-        const sortFunc = (a: string, b: string) => pieceOrder[a[1]] - pieceOrder[b[1]];
-        captured.w.sort(sortFunc);
-        captured.b.sort(sortFunc);
-
-        return captured;
-    };
-
-    const getPieceValue = (p: string) => {
-        const type = p[1];
-        if (type === 'p') return 1;
-        if (type === 'n') return 3;
-        if (type === 'b') return 3;
-        if (type === 'r') return 5;
-        if (type === 'q') return 9;
-        return 0;
-    };
-
-    const captured = getCapturedPieces(position);
-    const whiteScore = captured.b.reduce((sum, p) => sum + getPieceValue(p), 0);
-    const blackScore = captured.w.reduce((sum, p) => sum + getPieceValue(p), 0);
-
-    const whiteAdvantage = whiteScore - blackScore;
-    const blackAdvantage = blackScore - whiteScore;
-
-    const opponentCapturedPieces = appState.playerColor === 'w' ? captured.w : captured.b;
-    const opponentAdvantage = appState.playerColor === 'w' ? blackAdvantage : whiteAdvantage;
-
-    const playerCapturedPieces = appState.playerColor === 'w' ? captured.b : captured.w;
-    const playerAdvantage = appState.playerColor === 'w' ? whiteAdvantage : blackAdvantage;
+    }, [position, appState.playerColor]);
 
     // Handle computer moves for PvC mode and Puzzle mode
     useEffect(() => {

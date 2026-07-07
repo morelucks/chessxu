@@ -370,3 +370,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * docs(board): clarify layout measurements in comments for better readability standards
 * refactor(sidebar): extract clock timer functions to hook for glowing neon effect
 * chore(wrapper): remove legacy comments from codebase for premium visual design
+* style(pieces): clean up unused styles in main stylesheet for premium visual design

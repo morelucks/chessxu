@@ -53,3 +53,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(history): add docstring for theme switcher component in wood theme
 * style(history): tweak scrollbar alignment in move history for slate theme
 * perf(history): reduce render cycles on hover selection with proper ARIA roles
+* style(pieces): tweak scrollbar alignment in move history to prevent clipping on small displays

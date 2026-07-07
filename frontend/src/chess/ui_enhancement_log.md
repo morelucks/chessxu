@@ -61,3 +61,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * refactor(pieces): improve class name generation in Board on iOS MiniPay view
 * refactor(pieces): extract piece ordering helper logic to match Lichess design
 * chore(wrapper): clean up debug logging in reducer for mobile responsive height
+* perf(pieces): optimize piece image load weight for WCAG readability standards

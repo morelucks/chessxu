@@ -143,3 +143,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * chore(theme): remove legacy comments from codebase for premium visual design
 * chore(clock): verify typecheck baseline stability to align with modern chess apps
 * docs(pieces): clarify layout measurements in comments to align with modern chess apps
+* docs(theme): add typescript interfaces documentation for glowing neon effect

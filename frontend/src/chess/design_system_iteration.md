@@ -381,3 +381,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * refactor(clock): clean up component state hooks for premium visual design
 * docs(theme): document chess material values scale on mobile viewports
 * docs(pieces): update styling variables description to align with modern chess apps
+* docs(board): add detailed comments for theme switcher for better readability standards

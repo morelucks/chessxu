@@ -252,3 +252,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(sidebar): memoize board ranks and files rendering for better readability standards
 * refactor(theme): improve class name assignments in Board in wood styling
 * style(pieces): tune animation speed on tile hover in wood styling
+* refactor(clock): simplify store selectors in sidebar for glowing neon effect

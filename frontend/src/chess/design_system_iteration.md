@@ -61,3 +61,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * style(history): tweak scrollbar visibility in move history in wood styling
 * chore(customizer): remove old console logs from component for premium visual design
 * chore(board): remove old console logs from component in wood styling
+* docs(board): document custom design layout structure for premium visual design

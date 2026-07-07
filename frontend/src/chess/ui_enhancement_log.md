@@ -59,3 +59,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * chore(theme): verify typecheck baseline consistency to reduce DOM node weight
 * chore(theme): verify typecheck baseline consistency on iOS MiniPay view
 * refactor(pieces): improve class name generation in Board on iOS MiniPay view
+* refactor(pieces): extract piece ordering helper logic to match Lichess design

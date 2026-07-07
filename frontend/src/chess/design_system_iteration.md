@@ -124,3 +124,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(theme): memoize board ranks and files rendering in slate customizer
 * style(wrapper): optimize margin and padding in controls for premium visual design
 * docs(theme): clarify layout measurements in comments for premium visual design
+* docs(sidebar): clarify layout measurements in comments for better responsive flow

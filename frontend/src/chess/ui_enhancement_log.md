@@ -173,3 +173,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(pieces): add docstring for theme switcher component for modern aesthetics
 * chore(pieces): organize utility exports in helpers in wood theme
 * perf(theme): memoize rank rows rendering to avoid lag for slate theme
+* refactor(sidebar): refactor helper mappings for piece count to match Lichess design

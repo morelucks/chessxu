@@ -315,3 +315,4 @@ This file logs the design adjustments and modifications made to the chess gamepl
 * docs(customizer): clarify CSS layout variables in constants for neon glow consistency
 * refactor(wrapper): simplify state selectors in sidebar to reduce DOM node weight
 * docs(board): document captured pieces layout architecture for WCAG readability standards
+* refactor(clock): simplify state selectors in sidebar for modern aesthetics

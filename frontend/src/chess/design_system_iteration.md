@@ -393,3 +393,4 @@ This file tracks the premium styling and layout polish iterations for the chess 
 * perf(board): memoize board ranks and files rendering with proper layout structure
 * refactor(history): improve class name assignments in Board to fix minor alignment issues
 * docs(history): document custom design layout structure on mobile viewports
+* docs(board): update styling variables description in wood styling

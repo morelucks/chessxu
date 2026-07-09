@@ -119,7 +119,16 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     const activeChain = useAppStore((state) => state.activeChain);
     const farcasterUser = useAppStore((state) => state.farcasterUser);
     const elo = useAppStore((state) => state.elo);
+    const boardTheme = useAppStore((state) => state.boardTheme);
+    const setBoardTheme = useAppStore((state) => state.setBoardTheme);
     const { onGameComplete, isOfflineMode, canPlayOnChain } = useFreemium();
+
+    const themes = [
+        { id: 'dark', name: 'Dark Slate', lightColor: '#475569', darkColor: '#1e293b' },
+        { id: 'classic-wood', name: 'Classic Wood', lightColor: '#f0d9b5', darkColor: '#b58863' },
+        { id: 'modern-neon', name: 'Modern Neon', lightColor: '#1e1e38', darkColor: '#0b0b14' },
+        { id: 'light', name: 'Light Slate', lightColor: '#f8fafc', darkColor: '#cbd5e1' },
+    ] as const;
 
     // Create initial state directly to avoid any import issues
     const initialGameState: GameState = {
@@ -263,37 +272,57 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                 <div className="flex-1 min-h-0 flex flex-col items-center justify-start p-1.5 md:p-4 overflow-y-auto">
                     <div className="w-full max-w-[500px] flex flex-col gap-1.5 md:gap-3">
                         
-                        {/* Top: Opponent Profile — compact on mobile */}
-                        <div className="flex items-center justify-between p-2 md:p-3 rounded-lg md:rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
-                            <div className="flex items-center gap-2 md:gap-3">
-                                <div className="w-7 h-7 md:w-10 md:h-10 bg-slate-800 rounded-md md:rounded-lg flex items-center justify-center text-base md:text-xl shadow-inner border border-white/5">
-                                    {opponentAvatar}
+                        {/* Top: Opponent Profile + Board Theme Row */}
+                        <div className="flex flex-row gap-2 w-full items-stretch">
+                            {/* Opponent Profile */}
+                            <div className="flex-1 min-w-0 flex items-center justify-between p-2 md:p-3 rounded-lg md:rounded-xl bg-slate-900/60 border border-white/5 shadow-md">
+                                <div className="flex items-center gap-2 md:gap-3">
+                                    <div className="w-7 h-7 md:w-10 md:h-10 bg-slate-800 rounded-md md:rounded-lg flex items-center justify-center text-base md:text-xl shadow-inner border border-white/5">
+                                        {opponentAvatar}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-white font-bold text-xs md:text-sm">
+                                            {opponentName}
+                                        </span>
+                                        <span className="text-[10px] md:text-xs text-slate-400">
+                                            {opponentSub}
+                                        </span>
+                                        {opponentCapturedPieces.length > 0 && (
+                                            <div className="captured-pieces-container">
+                                                {opponentCapturedPieces.map((piece, idx) => (
+                                                    <div key={idx} className={`captured-piece ${piece}`} />
+                                                ))}
+                                                {opponentAdvantage > 0 && (
+                                                    <span className="material-advantage">+{opponentAdvantage}</span>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className="text-white font-bold text-xs md:text-sm">
-                                        {opponentName}
-                                    </span>
-                                    <span className="text-[10px] md:text-xs text-slate-400">
-                                        {opponentSub}
-                                    </span>
-                                    {opponentCapturedPieces.length > 0 && (
-                                        <div className="captured-pieces-container">
-                                            {opponentCapturedPieces.map((piece, idx) => (
-                                                <div key={idx} className={`captured-piece ${piece}`} />
-                                            ))}
-                                            {opponentAdvantage > 0 && (
-                                                <span className="material-advantage">+{opponentAdvantage}</span>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
+                                <ChessClock 
+                                    color={appState.playerColor === 'w' ? 'b' : 'w'} 
+                                    timeMs={appState.playerColor === 'w' ? (appState.blackTimeMs ?? null) : (appState.whiteTimeMs ?? null)} 
+                                    isActive={appState.status === Status.ongoing && appState.turn === (appState.playerColor === 'w' ? 'b' : 'w')} 
+                                    onTimeout={handleTimeout} 
+                                />
                             </div>
-                            <ChessClock 
-                                color={appState.playerColor === 'w' ? 'b' : 'w'} 
-                                timeMs={appState.playerColor === 'w' ? (appState.blackTimeMs ?? null) : (appState.whiteTimeMs ?? null)} 
-                                isActive={appState.status === Status.ongoing && appState.turn === (appState.playerColor === 'w' ? 'b' : 'w')} 
-                                onTimeout={handleTimeout} 
-                            />
+
+                            {/* Board Theme Selector */}
+                            <div className="compact-theme-selector flex-shrink-0">
+                                {themes.map((t) => (
+                                    <button
+                                        key={t.id}
+                                        className={`compact-theme-btn compact-theme-btn--${t.id} theme--${t.id} ${boardTheme === t.id ? 'active' : ''}`}
+                                        onClick={() => setBoardTheme(t.id)}
+                                        title={t.name}
+                                    >
+                                        <div className="compact-theme-preview">
+                                            <div className="compact-theme-preview-half" style={{ backgroundColor: t.lightColor }} />
+                                            <div className="compact-theme-preview-half" style={{ backgroundColor: t.darkColor }} />
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
                         {/* The Board Container */}

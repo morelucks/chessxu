@@ -60,3 +60,79 @@
         padding: 0 0.15rem;
     }
 }
+
+/* Compact Theme Selector next to Opponent Profile */
+.compact-theme-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.25rem;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.compact-theme-btn {
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(30, 41, 59, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    padding: 0;
+}
+
+.compact-theme-btn:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.compact-theme-btn:focus,
+.compact-theme-btn:focus-visible {
+    outline: none;
+}
+
+.compact-theme-preview {
+    display: flex;
+    width: 1.125rem;
+    height: 0.625rem;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.compact-theme-preview-half {
+    flex: 1;
+}
+
+/* Active Border Styles for Compact Buttons */
+.compact-theme-btn.active.theme--dark {
+    border-color: #64748b;
+    background: rgba(71, 85, 105, 0.15);
+    box-shadow: 0 0 8px rgba(100, 116, 139, 0.3);
+}
+
+.compact-theme-btn.active.theme--classic-wood {
+    border-color: #b58863;
+    background: rgba(181, 136, 99, 0.15);
+    box-shadow: 0 0 8px rgba(181, 136, 99, 0.3);
+}
+
+.compact-theme-btn.active.theme--modern-neon {
+    border-color: #ec4899;
+    background: rgba(236, 72, 153, 0.12);
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.4);
+}
+
+.compact-theme-btn.active.theme--light {
+    border-color: #cbd5e1;
+    background: rgba(203, 213, 225, 0.15);
+    box-shadow: 0 0 8px rgba(203, 213, 225, 0.3);
+}

@@ -59,6 +59,7 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: [
         { find: /^react-router$/, replacement: reactRouterPath },
+        { find: /^@stacks\/connect$/, replacement: path.resolve("./node_modules/@stacks/connect/dist/index.js") },
       ],
     },
     server: {

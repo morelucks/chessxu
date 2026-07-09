@@ -224,7 +224,7 @@ const BoardThemeCustomizer = () => {
                 {themes.map((t) => (
                     <button
                         key={t.id}
-                        className={`theme-btn ${boardTheme === t.id ? 'active' : ''} ${t.isNeon ? 'theme-neon' : ''}`}
+                        className={`theme-btn theme-btn--${t.id} ${boardTheme === t.id ? 'active' : ''}`}
                         onClick={() => setBoardTheme(t.id)}
                     >
                         <div className="theme-preview">

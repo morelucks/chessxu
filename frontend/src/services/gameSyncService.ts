@@ -222,7 +222,7 @@ class GameSyncService {
             turn: gameData.turn || 'w',
             status: gameData.status || 0,
             winner: this.determineWinner(gameData.status, isPlayerW),
-            moveHistory: [], // TODO: Parse from events if available
+            moveHistory: await this.fetchCeloMoveHistory(gameId),
             timestamp: blockTimestamp,
             lastUpdated: Date.now(),
             syncedAt: Date.now()
@@ -238,6 +238,50 @@ class GameSyncService {
     }
 
     return games;
+  }
+
+  /**
+   * Fetch move history for a Celo game ID from blockchain logs/events
+   */
+  private async fetchCeloMoveHistory(gameId: number): Promise<string[]> {
+    try {
+      const publicClient = celoService.getPublicClient();
+      const contractAddress = celoService.getContractAddress();
+
+      const MOVE_SUBMITTED_EVENT = {
+        type: 'event',
+        name: 'MoveSubmitted',
+        inputs: [
+          { type: 'uint256', name: 'gameId', indexed: true },
+          { type: 'string', name: 'moveStr', indexed: false },
+          { type: 'string', name: 'boardState', indexed: false }
+        ]
+      } as const;
+
+      const logs = await publicClient.getLogs({
+        address: contractAddress,
+        event: MOVE_SUBMITTED_EVENT,
+        args: {
+          gameId: BigInt(gameId)
+        },
+        fromBlock: 0n
+      });
+
+      // Sort logs by block number and log index to keep correct chronological order
+      const sortedLogs = [...logs].sort((a, b) => {
+        if (a.blockNumber === b.blockNumber) {
+          return (a.logIndex || 0) - (b.logIndex || 0);
+        }
+        return Number((a.blockNumber || 0n) - (b.blockNumber || 0n));
+      });
+
+      return sortedLogs
+        .map(log => log.args.moveStr)
+        .filter((moveStr): moveStr is string => typeof moveStr === 'string');
+    } catch (error) {
+      console.warn(`Failed to fetch move history for Celo game ${gameId}:`, error);
+      return [];
+    }
   }
 
   /**
@@ -350,6 +394,7 @@ class GameSyncService {
         boardState: chain === 'celo' ? gameData.boardState : gameData['board-state'],
         turn: gameData.turn?.value || gameData.turn || 'w',
         status: gameData.status || 0,
+        moveHistory: chain === 'celo' ? await this.fetchCeloMoveHistory(gameId) : [],
         timestamp: blockTimestamp,
         lastUpdated: Date.now(),
         syncedAt: Date.now()

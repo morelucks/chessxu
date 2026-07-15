@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { gameSyncService } from '../gameSyncService';
 import { gameHistoryDB } from '../gameHistoryDB';
 import celoService from '../../chess/services/celoService';
@@ -19,10 +19,17 @@ vi.mock('../gameHistoryDB', () => {
 
 // Mock Celo service
 vi.mock('../../chess/services/celoService', () => {
+  const mockPublicClient = {
+    getBlock: vi.fn().mockResolvedValue({ timestamp: 1690000000n }),
+    getLogs: vi.fn().mockResolvedValue([]),
+  };
   return {
     default: {
       getGameCount: vi.fn().mockResolvedValue(0),
       getGame: vi.fn().mockResolvedValue(null as any),
+      getContractAddress: vi.fn().mockReturnValue('0x5FbDB2315678afecb367f032d93F642f64180aa3'),
+      getPublicClient: vi.fn().mockReturnValue(mockPublicClient),
+      publicClient: mockPublicClient,
     }
   };
 });
@@ -42,10 +49,20 @@ describe('GameSyncService', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    // Stub global fetch to return no results for Celoscan lookup immediately
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      json: async () => ({ status: '0', message: 'Error' })
+    }));
     // Reset private fields on the singleton
     (gameSyncService as any).isSyncing = false;
     (gameSyncService as any).lastSyncTime = null;
     (gameSyncService as any).syncListeners = [];
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   describe('Getters & Subscription', () => {
@@ -253,6 +270,47 @@ describe('GameSyncService', () => {
       const result = await gameSyncService.syncPlayerGames(player, 'celo', { forceRefresh: true });
       expect(gameHistoryDB.saveGame).toHaveBeenCalledTimes(1);
       expect(result.gamesUpdated).toBe(1);
+    });
+
+    it('should query and parse MoveSubmitted logs for Celo games', async () => {
+      // Mock Celo event logs for MoveSubmitted
+      const mockLogs = [
+        {
+          blockNumber: 100n,
+          logIndex: 0,
+          args: { gameId: 1n, moveStr: 'e2e4', boardState: 'state1' }
+        },
+        {
+          blockNumber: 101n,
+          logIndex: 0,
+          args: { gameId: 1n, moveStr: 'e7e5', boardState: 'state2' }
+        }
+      ];
+      
+      const publicClient = celoService.getPublicClient();
+      vi.mocked(publicClient.getLogs).mockResolvedValueOnce(mockLogs as any);
+
+      vi.mocked(celoService.getGameCount).mockResolvedValueOnce(1);
+      vi.mocked(celoService.getGame).mockResolvedValueOnce({
+        playerW: player,
+        playerB: '0xBob',
+        wager: 10n,
+        isNative: true,
+        boardState: 'state2',
+        turn: 'w',
+        status: 1, // Ongoing
+      } as any);
+
+      const result = await gameSyncService.syncPlayerGames(player, 'celo');
+
+      expect(result.success).toBe(true);
+      expect(gameHistoryDB.saveGame).toHaveBeenCalledWith(
+        expect.objectContaining({
+          gameId: 1,
+          chain: 'celo',
+          moveHistory: ['e2e4', 'e7e5']
+        })
+      );
     });
   });
 

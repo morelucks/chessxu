@@ -47,16 +47,16 @@ export function useWalletAuth() {
   const syncAddressFromSession = () => {
     const nextAddress = getSessionAddress();
     setAddress(nextAddress);
-              onFinish?.(accounts[0]);
-              return;
-            }
-          }
-        } catch (warn) {
-           console.warn("[Farcaster] Wallet connect failed during manual trigger:", warn);
-        }
+    return nextAddress;
+  };
 
-        try {
-          const nonce = crypto.randomUUID();
+  const connect = async ({ onFinish, onCancel, chain }: ConnectOptions = {}) => {
+    const { isFarcaster, miniPayDetected } = useAppStore.getState();
+    const ethereum = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
+    const isMiniPay = Boolean(miniPayDetected || (ethereum && ethereum.isMiniPay));
+
+    if (!chain) {
+      if (isMiniPay) {
           await sdk.actions.signIn({ nonce });
           const context = await sdk.context;
           const fid = context?.user?.fid;

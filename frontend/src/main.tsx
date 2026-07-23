@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Connect } from "@stacks/connect-react";
+import { PrivyProvider } from "@privy-io/react-auth";
 import App from "./app/app";
 import "./index.css";
 import { Buffer } from "buffer";
-
-console.log("=== main.tsx starting ===");
-
+import { userSession } from "./zustand/store";
 if (typeof window !== "undefined") {
   window.Buffer = window.Buffer || Buffer;
 }

@@ -351,6 +351,7 @@ class GameSyncService {
 
   /**
    * Determine winner based on game status
+   */
   private determineWinner(status: number, isPlayerWhite: boolean): string | undefined {
     if (status === 2) return isPlayerWhite ? 'win' : 'loss'; // White wins
     if (status === 3) return isPlayerWhite ? 'loss' : 'win'; // Black wins
@@ -363,7 +364,7 @@ class GameSyncService {
    */
   async syncGame(
     gameId: number,
-    chain: 'stacks' | 'celo'
+    chain: ChainType
   ): Promise<boolean> {
     try {
       await gameHistoryDB.init();
@@ -411,7 +412,7 @@ class GameSyncService {
   /**
    * Auto-sync on application load
    */
-  async autoSync(playerAddress: string, chain: 'stacks' | 'celo'): Promise<void> {
+  async autoSync(playerAddress: string, chain: ChainType): Promise<void> {
     // Check if we should sync (e.g., not synced in last hour)
     const ONE_HOUR = 60 * 60 * 1000;
     const shouldSync = !this.lastSyncTime || (Date.now() - this.lastSyncTime) > ONE_HOUR;

@@ -7,16 +7,16 @@ import { sdk } from "@farcaster/miniapp-sdk";
 
 function getSessionAddress() {
   if (!userSession.isUserSignedIn()) {
+    return null;
+  }
 
-export function useWalletAuth() {
-  const address = useAppStore((state) => state.address);
-  const isLoading = useAppStore((state) => state.isLoading);
-  const setAddress = useAppStore((state) => state.setAddress);
-  const setCeloAddress = useAppStore((state) => state.setCeloAddress);
-  const setActiveChain = useAppStore((state) => state.setActiveChain);
-  const setIsLoading = useAppStore((state) => state.setIsLoading);
-  const logout = useAppStore((state) => state.logout);
-  const setConnectModalOpen = useAppStore((state) => state.setConnectModalOpen);
+  const userData = userSession.loadUserData();
+  return userData.profile.stxAddress.mainnet || userData.profile.stxAddress.testnet || null;
+}
+
+interface ConnectOptions {
+  onFinish?: (address: string | null) => void;
+  onCancel?: () => void;
 
   const connect = async ({ onFinish, onCancel, chain }: ConnectOptions = {}) => {
     const { isFarcaster, miniPayDetected } = useAppStore.getState();

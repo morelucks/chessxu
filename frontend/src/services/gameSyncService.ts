@@ -86,6 +86,7 @@ class GameSyncService {
       gamesAdded: 0,
       gamesUpdated: 0,
       errors: [],
+      duration: 0
     };
 
     try {
@@ -163,7 +164,7 @@ class GameSyncService {
    */
   private async fetchPlayerGamesFromChain(
     playerAddress: string,
-    chain: 'stacks' | 'celo',
+    chain: ChainType,
     maxGames: number
   ): Promise<CachedGame[]> {
     const games: CachedGame[] = [];
@@ -173,7 +174,6 @@ class GameSyncService {
       games.push(...await this.fetchCeloGames(playerAddress, maxGames));
     } else {
       // Fetch from Stacks blockchain
-      games.push(...await this.fetchStacksGames(playerAddress, maxGames));
     }
 
     return games;

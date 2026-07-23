@@ -129,23 +129,23 @@ const useAppStore = create<AppStore>()(
         }
       },
       setPrivyAddress: (privyAddress: string | null) => {
+        const { activeChain } = get();
+        set({ privyAddress });
+        if (activeChain === 'privy') {
+            set({ address: privyAddress, isAuthenticated: !!privyAddress });
+        }
+      },
+      setActiveChain: (activeChain: ChainType) => {
+        const { stacksAddress, celoAddress, privyAddress } = get();
+        let address = null;
+        if (activeChain === 'stacks') address = stacksAddress;
+        else if (activeChain === 'celo') address = celoAddress;
+        else address = privyAddress;
+        set({ activeChain, address, isAuthenticated: !!address });
+      },
+      setIsLoading: (isLoading: boolean) => set({ isLoading }),
       setIsFarcaster: (isFarcaster: boolean) => set({ isFarcaster }),
       setFarcasterUser: (farcasterUser: FarcasterUser | null) => set({ farcasterUser }),
-      setMiniPayDetected: (miniPayDetected: boolean) => set({ miniPayDetected }),
-      setMiniPayAccess: (miniPayAccessExpiresAt: string | null, miniPayLastPaymentTx: string | null = null) =>
-        set({ miniPayAccessExpiresAt, miniPayLastPaymentTx }),
-      clearMiniPayAccess: () => set({ miniPayAccessExpiresAt: null, miniPayLastPaymentTx: null }),
-      setActiveGameId: (activeGameId: number | null) => set({ activeGameId }),
-      setGameStarted: (isGameStarted: boolean) => set({ isGameStarted }),
-      setElo: (elo: number) => set({ elo }),
-      setChessBalance: (chessBalance: number) => set({ chessBalance }),
-      setTimeControlMs: (timeControlMs: number | null) => set({ timeControlMs }),
-      setOfflineMode: (isOfflineMode: boolean) => set({ isOfflineMode }),
-      incrementOfflineGames: () => set((s) => ({ offlineGamesPlayed: s.offlineGamesPlayed + 1 })),
-      dismissUpgradePrompt: () => set({ upgradePromptDismissed: true }),
-      setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
-      setBoardTheme: (boardTheme) => set({ boardTheme }),
-      logout: () => {
         userSession.signUserOut();
         set({ 
             address: null, 

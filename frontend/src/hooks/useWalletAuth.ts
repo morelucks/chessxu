@@ -37,16 +37,16 @@ export function useWalletAuth() {
   // Sync Privy user wallet address when authenticated via Privy
   useEffect(() => {
     if (privyAuthenticated && privyUser?.wallet?.address) {
-        try {
-          // Attempt the same logic as auto-login but manually triggered
-          const ethProvider = await sdk.wallet.getEthereumProvider();
-          if (ethProvider) {
-            const accounts = (await ethProvider.request({ method: "eth_requestAccounts" })) as string[];
-            if (accounts?.[0]) {
-              setCeloAddress(accounts[0]);
-              setAddress(accounts[0]);
-              setActiveChain("celo");
-              setIsLoading(false);
+      const privyAddr = privyUser.wallet.address;
+      setPrivyAddress(privyAddr);
+      setActiveChain('privy');
+      setAddress(privyAddr);
+    }
+  }, [privyAuthenticated, privyUser, setPrivyAddress, setActiveChain, setAddress]);
+
+  const syncAddressFromSession = () => {
+    const nextAddress = getSessionAddress();
+    setAddress(nextAddress);
               onFinish?.(accounts[0]);
               return;
             }

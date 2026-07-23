@@ -20,7 +20,7 @@ export const ConnectWalletModal: React.FC = () => {
 
   if (!isConnectModalOpen) return null;
 
-  const handleSelectChain = async (chain: "stacks" | "celo" | "privy" | "farcaster") => {
+  const handleSelectChain = async (chain: "celo" | "privy" | "farcaster") => {
     setConnectModalOpen(false);
     await connect({ chain });
   };
@@ -99,28 +99,6 @@ export const ConnectWalletModal: React.FC = () => {
             </button>
           )}
 
-          {/* Stacks Option */}
-          <button
-            onClick={() => handleSelectChain("stacks")}
-            className="w-full text-left p-4 rounded-xl border border-orange-500/10 bg-orange-500/5 hover:bg-orange-500/10 hover:border-orange-500/30 transition-all flex items-center justify-between group relative overflow-hidden"
-          >
-            <div className="absolute right-0 top-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-orange-500/10 transition-all" />
-            <div className="flex items-center gap-3.5 z-10">
-              <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold group-hover:scale-105 transition-transform">
-                STX
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold text-white flex items-center gap-1.5">
-                  Stacks Network
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                </span>
-                <span className="text-[11px] text-slate-400 max-w-[240px] mt-0.5 leading-snug">
-                  Play with STX wagers. Uses Hiro, Leather, or Xverse wallets.
-                </span>
-              </div>
-            </div>
-            <ArrowRight size={16} className="text-slate-400 group-hover:text-orange-400 group-hover:translate-x-1 transition-all z-10" />
-          </button>
 
           {/* Celo Option */}
           <button

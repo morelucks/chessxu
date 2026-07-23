@@ -37,12 +37,16 @@ function elapsed(from: number): string {
   return `${Math.floor(mins / 60)}h ago`;
 }
 
-function chainLabel(chain: 'stacks' | 'celo'): string {
-  return 'Celo';
+function chainLabel(chain: 'stacks' | 'celo' | 'privy'): string {
+  if (chain === 'celo') return 'Celo';
+  if (chain === 'privy') return 'Privy';
+  return 'Stacks';
 }
 
-function chainColor(chain: 'stacks' | 'celo'): string {
-  return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+function chainColor(chain: 'stacks' | 'celo' | 'privy'): string {
+  if (chain === 'celo') return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+  if (chain === 'privy') return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30';
+  return 'bg-orange-500/20 text-orange-300 border-orange-500/30';
 }
 
 function stageBorderColor(stage: TxStage): string {
@@ -52,10 +56,6 @@ function stageBorderColor(stage: TxStage): string {
     case TxStage.Reverted:
       return 'border-red-500/30';
     case TxStage.Pending:
-      return 'border-blue-500/30';
-    default:
-      return 'border-white/10';
-  }
 }
 
 export const TxCard: React.FC<TxCardProps> = ({ tx, onDismiss }) => {

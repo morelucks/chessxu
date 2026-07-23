@@ -6,3 +6,7 @@ export const privyConfig: { appId: string; config: PrivyClientConfig } = {
   appId: PRIVY_APP_ID,
   config: {
     appearance: {
+      theme: 'dark',
+      accentColor: '#6366f1',
+      logo: '/logo.png',
+      showWalletLoginFirst: true,

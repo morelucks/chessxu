@@ -10,3 +10,7 @@ export const privyConfig: { appId: string; config: PrivyClientConfig } = {
       accentColor: '#6366f1',
       logo: '/logo.png',
       showWalletLoginFirst: true,
+    },
+    loginMethods: ['wallet', 'email', 'farcaster', 'google'],
+    embeddedWallets: {
+      ethereum: {

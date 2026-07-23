@@ -263,6 +263,7 @@ class GameSyncService {
         address: contractAddress,
         event: MOVE_SUBMITTED_EVENT,
         args: {
+          gameId: BigInt(gameId)
         },
         fromBlock: 0n
       });
@@ -350,7 +351,6 @@ class GameSyncService {
 
   /**
    * Determine winner based on game status
-   */
   private determineWinner(status: number, isPlayerWhite: boolean): string | undefined {
     if (status === 2) return isPlayerWhite ? 'win' : 'loss'; // White wins
     if (status === 3) return isPlayerWhite ? 'loss' : 'win'; // Black wins

@@ -27,16 +27,16 @@ export function useWalletAuth() {
   const setStacksAddress = useAppStore((state) => state.setStacksAddress);
   const setCeloAddress = useAppStore((state) => state.setCeloAddress);
   const setPrivyAddress = useAppStore((state) => state.setPrivyAddress);
-        setConnectModalOpen(true);
-        return;
-      }
-    }
+  const setActiveChain = useAppStore((state) => state.setActiveChain);
+  const setIsLoading = useAppStore((state) => state.setIsLoading);
+  const storeLogout = useAppStore((state) => state.logout);
+  const setConnectModalOpen = useAppStore((state) => state.setConnectModalOpen);
 
-    setIsLoading(true);
+  const { login: privyLogin, logout: privyLogout, user: privyUser, authenticated: privyAuthenticated } = usePrivy();
 
-    try {
-
-      if (chain === 'farcaster') {
+  // Sync Privy user wallet address when authenticated via Privy
+  useEffect(() => {
+    if (privyAuthenticated && privyUser?.wallet?.address) {
         try {
           // Attempt the same logic as auto-login but manually triggered
           const ethProvider = await sdk.wallet.getEthereumProvider();

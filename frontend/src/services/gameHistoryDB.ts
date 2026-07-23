@@ -160,6 +160,8 @@ class GameHistoryDB {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {
+      const transaction = db.transaction([GAMES_STORE], 'readonly');
+      const store = transaction.objectStore(GAMES_STORE);
       const request = store.get([chain, gameId]);
 
       request.onsuccess = () => resolve(request.result || null);
@@ -170,7 +172,7 @@ class GameHistoryDB {
   /**
    * Get all games for a specific player
    */
-  async getPlayerGames(playerAddress: string, chain?: 'stacks' | 'celo'): Promise<CachedGame[]> {
+  async getPlayerGames(playerAddress: string, chain?: ChainType): Promise<CachedGame[]> {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {
@@ -239,8 +241,6 @@ class GameHistoryDB {
       const transaction = db.transaction([GAMES_STORE], 'readonly');
       const store = transaction.objectStore(GAMES_STORE);
       const request = store.getAll();
-
-      request.onsuccess = () => resolve(request.result || []);
       request.onerror = () => reject(request.error);
     });
   }

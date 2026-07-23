@@ -107,3 +107,92 @@ export function useWalletAuth() {
           if (fid) {
              const farcasterAddr = `fc:${fid}`;
              setAddress(farcasterAddr);
+             setIsLoading(false);
+             onFinish?.(farcasterAddr);
+             return;
+          }
+        } catch (error) {
+          console.error("Farcaster sign-in failed:", error);
+        }
+
+        setIsLoading(false);
+        onCancel?.();
+        return;
+      }
+
+      const targetChain = chain || (ethereum ? 'celo' : 'stacks');
+
+      if (targetChain === 'celo') {
+        try {
+          if (!ethereum) {
+            throw new Error("No EVM wallet found (like MetaMask or Farcaster)");
+          }
+          const celoAddr = await celoService.connectWallet();
+          setCeloAddress(celoAddr);
+          setAddress(celoAddr);
+          setActiveChain('celo');
+          setIsLoading(false);
+          onFinish?.(celoAddr);
+        } catch (error) {
+          console.error("Celo connection failed:", error);
+          setIsLoading(false);
+          onCancel?.();
+        }
+        return;
+      }
+
+      // Default to Stacks
+      try {
+        setActiveChain('stacks');
+
+        showConnect({
+          userSession,
+          appDetails: {
+            name: "Chessxu",
+            icon: window.location.origin + "/favicon.ico",
+          },
+          onFinish: () => {
+            const nextAddress = syncAddressFromSession();
+            if (nextAddress) {
+              setStacksAddress(nextAddress);
+            }
+            setIsLoading(false);
+            onFinish?.(nextAddress);
+          },
+          onCancel: () => {
+            setIsLoading(false);
+            onCancel?.();
+          },
+        });
+      } catch (stacksError) {
+        console.error("Stacks showConnect error:", stacksError);
+        setIsLoading(false);
+        onCancel?.();
+      }
+    } catch (globalError) {
+      console.error("Global connection error:", globalError);
+      setIsLoading(false);
+      onCancel?.();
+    }
+  };
+
+  const disconnect = async () => {
+    if (privyAuthenticated) {
+      try {
+        await privyLogout();
+      } catch (err) {
+        console.warn("Privy logout error:", err);
+      }
+    }
+    storeLogout();
+  };
+
+  return {
+    address,
+    isConnected: !!address,
+    isConnecting: isLoading,
+    connect,
+    disconnect,
+    syncAddressFromSession,
+  };
+}

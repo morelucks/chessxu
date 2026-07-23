@@ -114,6 +114,10 @@ export const TxCard: React.FC<TxCardProps> = ({ tx, onDismiss }) => {
           <p className="text-xs font-semibold text-red-300 flex items-center gap-1.5">
             <RefreshCw size={12} />
             {tx.revertReason.message}
+          </p>
+
+          {tips.length > 0 && (
+            <div>
               <button
                 onClick={() => setTipsOpen((o) => !o)}
                 className="flex items-center gap-1 text-[10px] text-slate-400 hover:text-white transition-colors"
@@ -139,10 +143,6 @@ export const TxCard: React.FC<TxCardProps> = ({ tx, onDismiss }) => {
       )}
 
       {/* Footer: copy + explorer */}
-      <div className="flex items-center justify-between pt-1 border-t border-white/5">
-        <button
-          onClick={handleCopy}
-          disabled={!tx.txId}
           className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-white transition-colors py-1 px-2 rounded-lg hover:bg-white/5 disabled:opacity-40"
           aria-label="Copy transaction ID"
         >

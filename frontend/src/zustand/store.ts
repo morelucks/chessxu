@@ -162,23 +162,23 @@ const useAppStore = create<AppStore>()(
       setBoardTheme: (boardTheme) => set({ boardTheme }),
       logout: () => {
         userSession.signUserOut();
+        set({ 
+            address: null, 
+            stacksAddress: null, 
+            celoAddress: null,
+            privyAddress: null,
+            isAuthenticated: false, 
+            isFarcaster: false,
+            farcasterUser: null,
+            miniPayDetected: false,
+            miniPayAccessExpiresAt: null,
+            miniPayLastPaymentTx: null,
+            isConnectModalOpen: false,
+            activeGameId: null, 
+            isGameStarted: false,
+            elo: 1200,
+            chessBalance: 0,
             timeControlMs: null,
-            isOfflineMode: true,
-            offlineGamesPlayed: 0,
-            upgradePromptDismissed: false,
-            boardTheme: 'dark',
-        });
-      },
-    }),
-    {
-      name: 'chessxu-storage',
-    }
-  )
-);
-
-export default useAppStore;
-
-// isOfflineMode defaults true so players can play immediately on load
 // offlineGamesPlayed counts completed games in current session
 // upgradePromptDismissed persists across page reloads via zustand persist
 // Freemium: no wallet required for PvC or pass-and-play modes

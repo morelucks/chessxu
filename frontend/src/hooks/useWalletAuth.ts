@@ -87,16 +87,16 @@ export function useWalletAuth() {
           if (ethProvider) {
             const accounts = (await ethProvider.request({ method: "eth_requestAccounts" })) as string[];
             if (accounts?.[0]) {
-      } catch (error) {
-        console.error("Celo connection failed:", error);
-        setIsLoading(false);
-        onCancel?.();
-      }
-    } catch (globalError) {
-      console.error("Global connection error:", globalError);
-      setIsLoading(false);
-      onCancel?.();
-    }
+              setCeloAddress(accounts[0]);
+              setAddress(accounts[0]);
+              setActiveChain("celo");
+              setIsLoading(false);
+              onFinish?.(accounts[0]);
+              return;
+            }
+          }
+        } catch (warn) {
+           console.warn("[Farcaster] Wallet connect failed during manual trigger:", warn);
   };
 
   return {

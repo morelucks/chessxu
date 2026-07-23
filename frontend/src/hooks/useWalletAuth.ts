@@ -57,16 +57,16 @@ export function useWalletAuth() {
 
     if (!chain) {
       if (isMiniPay) {
-          await sdk.actions.signIn({ nonce });
-          const context = await sdk.context;
-          const fid = context?.user?.fid;
-          if (fid) {
-             const farcasterAddr = `fc:${fid}`;
-             setAddress(farcasterAddr);
-             setIsLoading(false);
-             onFinish?.(farcasterAddr);
-             return;
-          }
+        chain = 'celo';
+      } else {
+        setConnectModalOpen(true);
+        return;
+      }
+    }
+
+    setIsLoading(true);
+
+    try {
         } catch (error) {
           console.error("Farcaster sign-in failed:", error);
         }

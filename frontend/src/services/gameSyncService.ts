@@ -8,6 +8,7 @@
 import { gameHistoryDB, CachedGame } from './gameHistoryDB';
 import celoService from '../chess/services/celoService';
 import stacksService from '../chess/services/stacksService';
+import { ChainType } from '../zustand/store';
 import { getGameBlockTimestamp } from './blockTimestampService';
 import { CONTRACTS } from '../chess/blockchainConstants';
 
@@ -67,7 +68,7 @@ class GameSyncService {
    */
   async syncPlayerGames(
     playerAddress: string,
-    chain: 'stacks' | 'celo',
+    chain: ChainType,
     options: {
       maxGames?: number;
       forceRefresh?: boolean;
@@ -85,7 +86,6 @@ class GameSyncService {
       gamesAdded: 0,
       gamesUpdated: 0,
       errors: [],
-      duration: 0
     };
 
     try {

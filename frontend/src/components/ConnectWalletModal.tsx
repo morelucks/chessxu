@@ -20,7 +20,7 @@ export const ConnectWalletModal: React.FC = () => {
 
   if (!isConnectModalOpen) return null;
 
-  const handleSelectChain = async (chain: "celo" | "farcaster") => {
+  const handleSelectChain = async (chain: "stacks" | "celo" | "privy" | "farcaster") => {
     setConnectModalOpen(false);
     await connect({ chain });
   };

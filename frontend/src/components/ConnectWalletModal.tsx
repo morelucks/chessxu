@@ -83,17 +83,17 @@ export const ConnectWalletModal: React.FC = () => {
               <div className="absolute right-0 top-0 w-24 h-24 bg-violet-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-violet-500/10 transition-all" />
               <div className="flex items-center gap-3.5 z-10">
                 <div className="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-300 font-bold group-hover:scale-105 transition-transform">
-              <div className="w-10 h-10 rounded-xl bg-yellow-500/20 flex items-center justify-center text-yellow-300 font-bold group-hover:scale-105 transition-transform">
-                CELO
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold text-white flex items-center gap-1.5">
-                  Celo Network
-                  <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                </span>
-                <span className="text-[11px] text-slate-400 max-w-[240px] mt-0.5 leading-snug">
-                  Supports zero-gas matches. Uses MetaMask, Valora, or Web3 wallets.
-                </span>
+                  FC
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-white flex items-center gap-1.5">
+                    Farcaster Wallet
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+                  </span>
+                  <span className="text-[11px] text-slate-400 max-w-[240px] mt-0.5 leading-snug">
+                    Use your integrated Farcaster wallet or sign in.
+                  </span>
+                </div>
               </div>
             </div>
             <ArrowRight size={16} className="text-slate-400 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all z-10" />

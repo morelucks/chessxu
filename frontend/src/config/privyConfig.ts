@@ -14,3 +14,8 @@ export const privyConfig: { appId: string; config: PrivyClientConfig } = {
     loginMethods: ['wallet', 'email', 'farcaster', 'google'],
     embeddedWallets: {
       ethereum: {
+        createOnLogin: 'users-without-wallets',
+      },
+    },
+  },
+};

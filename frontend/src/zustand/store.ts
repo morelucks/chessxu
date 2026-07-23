@@ -179,19 +179,19 @@ const useAppStore = create<AppStore>()(
             elo: 1200,
             chessBalance: 0,
             timeControlMs: null,
-// offlineGamesPlayed counts completed games in current session
-// upgradePromptDismissed persists across page reloads via zustand persist
-// Freemium: no wallet required for PvC or pass-and-play modes
-// Upgrade prompt shown after 3 offline games to encourage wallet connect// isOfflineMode starts true — players can play immediately without any setup
-// offlineGamesPlayed resets to 0 on logout for fresh session tracking
-// upgradePromptDismissed resets false when new wallet connects
-// incrementOfflineGames uses functional update to avoid stale closure
-// setOfflineMode can also be called manually to force offline/online state
-// Freemium state is persisted by zustand-persist for cross-session continuity
-// Freemium: offline is the default state, online is opt-in
-// Three actions cover the full freemium lifecycle: start, count, dismiss
-// offlineGamesPlayed is session-scoped (resets on logout) not lifetime
-// dismissUpgradePrompt persists so users are not repeatedly nagged
-// Three offline game modes: pvc, pvp-local (pass-play), puzzle — all free
-// The freemium model is: play free forever offline, upgrade for on-chain benefits
-// All three freemium actions are synchronous — no async side effects
+            isOfflineMode: true,
+            offlineGamesPlayed: 0,
+            upgradePromptDismissed: false,
+            boardTheme: 'dark',
+        });
+      },
+    }),
+    {
+      name: 'chessxu-storage',
+    }
+  )
+);
+
+export default useAppStore;
+
+// isOfflineMode defaults true so players can play immediately on load

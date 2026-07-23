@@ -262,7 +262,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 
     return (
         <AppContext.Provider value={providerState}>
-            <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-hidden">
+            <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+                <div className="flex-1 min-h-0 w-full max-w-[1280px] mx-auto flex flex-col md:flex-row overflow-hidden">
                 {/* Left Sidebar - Chess Game Controls (Desktop only, mobile moved below board) */}
                 <div className={`hidden md:flex w-80 flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-r border-slate-800 p-4 overflow-y-auto shadow-inner`}>
                     <ChessSidebar />
@@ -381,6 +382,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                 <div className={`hidden md:block w-64 flex-shrink-0 bg-slate-800/30 border-l border-slate-700 p-4 overflow-hidden`}>
                     <MoveHistorySidebar />
                 </div>
+            </div>
             </div>
         </AppContext.Provider>
     );

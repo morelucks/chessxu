@@ -25,7 +25,7 @@ export default function ChessScreen() {
     <div className="flex-1 min-h-0 bg-slate-900 flex flex-col overflow-hidden">
       {/* Header — compact on mobile for MiniPay */}
       <div className="flex-shrink-0 z-10 p-2 md:p-4 pt-3 md:pt-6">
-        <div className="mx-auto max-w-5xl rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-lg overflow-hidden relative">
+        <div className="mx-auto max-w-[1280px] rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-lg overflow-hidden relative">
           {/* Subtle glow effects inside the banner */}
           <div className="absolute -left-10 -top-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
           

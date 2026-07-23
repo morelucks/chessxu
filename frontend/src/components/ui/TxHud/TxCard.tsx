@@ -56,6 +56,10 @@ function stageBorderColor(stage: TxStage): string {
     case TxStage.Reverted:
       return 'border-red-500/30';
     case TxStage.Pending:
+      return 'border-blue-500/30';
+    default:
+      return 'border-white/10';
+  }
 }
 
 export const TxCard: React.FC<TxCardProps> = ({ tx, onDismiss }) => {
@@ -81,10 +85,6 @@ export const TxCard: React.FC<TxCardProps> = ({ tx, onDismiss }) => {
     >
       {/* Header row */}
       <div className="flex items-start justify-between gap-2">
-        <div className="flex flex-col gap-0.5 min-w-0">
-          <span className="text-sm font-bold text-white truncate">{tx.label}</span>
-          <span className="text-[10px] text-slate-500">{elapsed(tx.initiatedAt)}</span>
-        </div>
         <div className="flex items-center gap-1.5 shrink-0">
           <span
             className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${chainColor(tx.chain)}`}

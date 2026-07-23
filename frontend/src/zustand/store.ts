@@ -63,6 +63,8 @@ export interface AppStore extends AuthState, GameState {
   setActiveGameId: (gameId: number | null) => void;
   setGameStarted: (started: boolean) => void;
   setElo: (elo: number) => void;
+  setChessBalance: (balance: number) => void;
+  setTimeControlMs: (ms: number | null) => void;
   setConnectModalOpen: (open: boolean) => void;
   setOfflineMode: (offline: boolean) => void;
   incrementOfflineGames: () => void;
@@ -78,8 +80,6 @@ const useAppStore = create<AppStore>()(
       address: null,
       stacksAddress: null,
       celoAddress: null,
-      activeChain: 'celo',
-      isAuthenticated: false,
       isLoading: false,
       isFarcaster: false,
       farcasterUser: null,

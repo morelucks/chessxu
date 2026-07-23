@@ -67,16 +67,16 @@ export function useWalletAuth() {
     setIsLoading(true);
 
     try {
-        } catch (error) {
-          console.error("Farcaster sign-in failed:", error);
-        }
-
-        setIsLoading(false);
-        onCancel?.();
-        return;
-      }
-
-      // Celo connection (default)
+      if (chain === 'privy') {
+        try {
+          setActiveChain('privy');
+          privyLogin();
+          setIsLoading(false);
+          onFinish?.(privyUser?.wallet?.address || null);
+        } catch (privyErr) {
+          console.error("Privy connect error:", privyErr);
+          setIsLoading(false);
+          onCancel?.();
       try {
         if (!ethereum) {
           throw new Error("No EVM wallet found (like MetaMask or Farcaster)");

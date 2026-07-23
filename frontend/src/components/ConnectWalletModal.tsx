@@ -95,16 +95,16 @@ export const ConnectWalletModal: React.FC = () => {
                   </span>
                 </div>
               </div>
-            </div>
-            <ArrowRight size={16} className="text-slate-400 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all z-10" />
-          </button>
+              <ArrowRight size={16} className="text-slate-400 group-hover:text-violet-400 group-hover:translate-x-1 transition-all z-10" />
+            </button>
+          )}
 
-        </div>
-
-        {/* Info footer */}
-        <div className="flex items-center gap-2 p-3 bg-white/5 rounded-xl border border-white/5 text-[10px] text-slate-400 leading-snug">
-          <Zap size={14} className="text-yellow-400 flex-shrink-0" />
-          <span>Connect your wallet to start playing on-chain chess.</span>
+          {/* Stacks Option */}
+          <button
+            onClick={() => handleSelectChain("stacks")}
+            className="w-full text-left p-4 rounded-xl border border-orange-500/10 bg-orange-500/5 hover:bg-orange-500/10 hover:border-orange-500/30 transition-all flex items-center justify-between group relative overflow-hidden"
+          >
+            <div className="absolute right-0 top-0 w-24 h-24 bg-orange-500/5 rounded-full blur-2xl pointer-events-none group-hover:bg-orange-500/10 transition-all" />
         </div>
       </div>
     </div>

@@ -143,6 +143,10 @@ export const TxCard: React.FC<TxCardProps> = ({ tx, onDismiss }) => {
       )}
 
       {/* Footer: copy + explorer */}
+      <div className="flex items-center justify-between pt-1 border-t border-white/5">
+        <button
+          onClick={handleCopy}
+          disabled={!tx.txId}
           className="flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-white transition-colors py-1 px-2 rounded-lg hover:bg-white/5 disabled:opacity-40"
           aria-label="Copy transaction ID"
         >

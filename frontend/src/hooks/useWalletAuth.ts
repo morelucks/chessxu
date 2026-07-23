@@ -1,12 +1,12 @@
-import useAppStore from "../zustand/store";
+import { useEffect } from "react";
+import { showConnect } from "@stacks/connect";
+import { usePrivy } from "@privy-io/react-auth";
+import useAppStore, { userSession } from "../zustand/store";
 import celoService from "../chess/services/celoService";
 import { sdk } from "@farcaster/miniapp-sdk";
 
-interface ConnectOptions {
-  onFinish?: (address: string | null) => void;
-  onCancel?: () => void;
-  chain?: 'celo' | 'farcaster';
-}
+function getSessionAddress() {
+  if (!userSession.isUserSignedIn()) {
 
 export function useWalletAuth() {
   const address = useAppStore((state) => state.address);

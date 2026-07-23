@@ -77,16 +77,16 @@ export function useWalletAuth() {
           console.error("Privy connect error:", privyErr);
           setIsLoading(false);
           onCancel?.();
-      try {
-        if (!ethereum) {
-          throw new Error("No EVM wallet found (like MetaMask or Farcaster)");
         }
-        const celoAddr = await celoService.connectWallet();
-        setCeloAddress(celoAddr);
-        setAddress(celoAddr);
-        setActiveChain('celo');
-        setIsLoading(false);
-        onFinish?.(celoAddr);
+        return;
+      }
+
+      if (chain === 'farcaster') {
+        try {
+          const ethProvider = await sdk.wallet.getEthereumProvider();
+          if (ethProvider) {
+            const accounts = (await ethProvider.request({ method: "eth_requestAccounts" })) as string[];
+            if (accounts?.[0]) {
       } catch (error) {
         console.error("Celo connection failed:", error);
         setIsLoading(false);

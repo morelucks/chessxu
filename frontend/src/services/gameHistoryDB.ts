@@ -79,6 +79,8 @@ class GameHistoryDB {
       };
     });
 
+    return this.initPromise;
+  }
 
   /**
    * Ensure database is initialized before operations
@@ -154,12 +156,10 @@ class GameHistoryDB {
   /**
    * Get a specific game from cache
    */
-  async getGame(chain: 'stacks' | 'celo', gameId: number): Promise<CachedGame | null> {
+  async getGame(chain: ChainType, gameId: number): Promise<CachedGame | null> {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {
-      const transaction = db.transaction([GAMES_STORE], 'readonly');
-      const store = transaction.objectStore(GAMES_STORE);
       const request = store.get([chain, gameId]);
 
       request.onsuccess = () => resolve(request.result || null);

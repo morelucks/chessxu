@@ -241,6 +241,8 @@ class GameHistoryDB {
       const transaction = db.transaction([GAMES_STORE], 'readonly');
       const store = transaction.objectStore(GAMES_STORE);
       const request = store.getAll();
+
+      request.onsuccess = () => resolve(request.result || []);
       request.onerror = () => reject(request.error);
     });
   }
@@ -248,7 +250,7 @@ class GameHistoryDB {
   /**
    * Delete a specific game from cache
    */
-  async deleteGame(chain: 'stacks' | 'celo', gameId: number): Promise<void> {
+  async deleteGame(chain: ChainType, gameId: number): Promise<void> {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {

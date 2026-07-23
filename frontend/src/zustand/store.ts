@@ -113,6 +113,11 @@ const useAppStore = create<AppStore>()(
         } else {
             set({ privyAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
         }
+      },
+      setStacksAddress: (stacksAddress: string | null) => {
+        const { activeChain } = get();
+        set({ stacksAddress });
+        if (activeChain === 'stacks') {
             set({ address: stacksAddress, isAuthenticated: !!stacksAddress });
         }
       },
@@ -123,12 +128,7 @@ const useAppStore = create<AppStore>()(
             set({ address: celoAddress, isAuthenticated: !!celoAddress });
         }
       },
-      setActiveChain: (activeChain: ChainType) => {
-        const { stacksAddress, celoAddress } = get();
-        const address = activeChain === 'stacks' ? stacksAddress : celoAddress;
-        set({ activeChain, address, isAuthenticated: !!address });
-      },
-      setIsLoading: (isLoading: boolean) => set({ isLoading }),
+      setPrivyAddress: (privyAddress: string | null) => {
       setIsFarcaster: (isFarcaster: boolean) => set({ isFarcaster }),
       setFarcasterUser: (farcasterUser: FarcasterUser | null) => set({ farcasterUser }),
       setMiniPayDetected: (miniPayDetected: boolean) => set({ miniPayDetected }),

@@ -174,6 +174,7 @@ class GameSyncService {
       games.push(...await this.fetchCeloGames(playerAddress, maxGames));
     } else {
       // Fetch from Stacks blockchain
+      games.push(...await this.fetchStacksGames(playerAddress, maxGames));
     }
 
     return games;
@@ -262,7 +263,6 @@ class GameSyncService {
         address: contractAddress,
         event: MOVE_SUBMITTED_EVENT,
         args: {
-          gameId: BigInt(gameId)
         },
         fromBlock: 0n
       });

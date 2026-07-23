@@ -62,17 +62,17 @@ export const ConnectWalletModal: React.FC = () => {
                 PRIVY
               </div>
               <div className="flex flex-col">
-                <div className="flex flex-col">
-                  <span className="text-sm font-bold text-white flex items-center gap-1.5">
-                    Farcaster Wallet
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-                  </span>
-                  <span className="text-[11px] text-slate-400 max-w-[240px] mt-0.5 leading-snug">
-                    Use your integrated Farcaster wallet or sign in.
-                  </span>
-                </div>
+                <span className="text-sm font-bold text-white flex items-center gap-1.5">
+                  Privy WalletConnect
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                </span>
+                <span className="text-[11px] text-slate-300 max-w-[240px] mt-0.5 leading-snug">
+                  Fast login via WalletConnect, Email, Socials, or Embedded Wallet.
+                </span>
               </div>
-              <ArrowRight size={16} className="text-slate-400 group-hover:text-violet-400 group-hover:translate-x-1 transition-all z-10" />
+            </div>
+            <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all z-10" />
+          </button>
             </button>
           )}
 

@@ -47,10 +47,12 @@ export interface GameState {
   boardTheme: 'classic-wood' | 'modern-neon' | 'light' | 'dark';
 }
 
+export interface AppStore extends AuthState, GameState {
   // Actions
   setAddress: (address: string | null) => void;
   setStacksAddress: (address: string | null) => void;
   setCeloAddress: (address: string | null) => void;
+  setPrivyAddress: (address: string | null) => void;
   setActiveChain: (chain: ChainType) => void;
   setIsLoading: (isLoading: boolean) => void;
   setIsFarcaster: (isFarcaster: boolean) => void;
@@ -61,8 +63,6 @@ export interface GameState {
   setActiveGameId: (gameId: number | null) => void;
   setGameStarted: (started: boolean) => void;
   setElo: (elo: number) => void;
-  setChessBalance: (balance: number) => void;
-  setTimeControlMs: (ms: number | null) => void;
   setConnectModalOpen: (open: boolean) => void;
   setOfflineMode: (offline: boolean) => void;
   incrementOfflineGames: () => void;

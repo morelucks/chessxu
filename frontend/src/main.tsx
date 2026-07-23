@@ -32,6 +32,29 @@ if ("serviceWorker" in navigator) {
 }
 
 const rootElement = document.getElementById("root");
-    <App />
+if (!rootElement) throw new Error("Root element not found");
+
+createRoot(rootElement).render(
+  <StrictMode>
+    <PrivyProvider
+      appId={PRIVY_APP_ID}
+      config={privyConfig.config}
+    >
+      <Connect
+        authOptions={{
+          appDetails: {
+            name: "Chessxu",
+            icon: window.location.origin + "/logo.png",
+          },
+          redirectTo: "/",
+          onFinish: () => {
+            window.location.reload();
+          },
+          userSession,
+        }}
+      >
+        <App />
+      </Connect>
+    </PrivyProvider>
   </StrictMode>
 );

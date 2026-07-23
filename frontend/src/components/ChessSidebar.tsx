@@ -172,8 +172,23 @@ const Leaderboard = ({ results, onClear }: { results: LeaderboardResult[]; onCle
 
 // Game Mode Selection Component
 const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameModeSelectionProps) => {
+    const { isOfflineMode, offlineGamesPlayed } = useFreemium();
+    const { connect } = useWalletAuth();
+
     const handlePlayerVsComputer = () => {
+        if (isOfflineMode && offlineGamesPlayed >= 3) {
+            connect();
+            return;
+        }
         onNewGame('pvc');
+    };
+
+    const handleNewGame = () => {
+        if (isOfflineMode && offlineGamesPlayed >= 3) {
+            connect();
+            return;
+        }
+        onNewGame(gameMode);
     };
 
     return (
@@ -196,7 +211,7 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
                 </button>
                 <button 
                     className="btn-new-game" 
-                    onClick={() => onNewGame(gameMode)}
+                    onClick={handleNewGame}
                 >
                     New Game
                 </button>

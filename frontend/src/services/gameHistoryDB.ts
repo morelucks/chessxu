@@ -13,9 +13,11 @@ const GAMES_STORE = 'games';
 const PLAYER_INDEX = 'playerIndex';
 const TIMESTAMP_INDEX = 'timestampIndex';
 
+import { ChainType } from '../zustand/store';
+
 export interface CachedGame {
   gameId: number;
-  chain: 'stacks' | 'celo';
+  chain: ChainType;
   playerW: string;
   playerB: string;
   wager: string;
@@ -77,8 +79,6 @@ class GameHistoryDB {
       };
     });
 
-    return this.initPromise;
-  }
 
   /**
    * Ensure database is initialized before operations

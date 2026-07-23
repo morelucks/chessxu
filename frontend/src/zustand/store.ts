@@ -20,6 +20,7 @@ export interface AuthState {
   address: string | null; // Currently active chain address
   stacksAddress: string | null;
   celoAddress: string | null;
+  privyAddress: string | null;
   activeChain: ChainType;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -29,7 +30,6 @@ export interface AuthState {
   miniPayAccessExpiresAt: string | null;
   miniPayLastPaymentTx: string | null;
   isConnectModalOpen: boolean;
-}
 
 export interface GameState {
   activeGameId: number | null;

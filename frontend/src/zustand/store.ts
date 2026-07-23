@@ -96,6 +96,9 @@ const useAppStore = create<AppStore>()(
       isGameStarted: false,
       elo: 1200,
       chessBalance: 0,
+      timeControlMs: null,
+      isOfflineMode: true,
+      offlineGamesPlayed: 0,
       upgradePromptDismissed: false,
       boardTheme: 'dark',
 
@@ -104,15 +107,12 @@ const useAppStore = create<AppStore>()(
       setAddress: (address: string | null) => {
         const { activeChain } = get();
         if (activeChain === 'stacks') {
-            set({ stacksAddress: address, address, isAuthenticated: !!address });
-        } else {
+            set({ stacksAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
+        } else if (activeChain === 'celo') {
             set({ celoAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
+        } else {
+            set({ privyAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
         }
-      },
-      setStacksAddress: (stacksAddress: string | null) => {
-        const { activeChain } = get();
-        set({ stacksAddress });
-        if (activeChain === 'stacks') {
             set({ address: stacksAddress, isAuthenticated: !!stacksAddress });
         }
       },

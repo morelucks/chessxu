@@ -30,6 +30,7 @@ export interface AuthState {
   miniPayAccessExpiresAt: string | null;
   miniPayLastPaymentTx: string | null;
   isConnectModalOpen: boolean;
+}
 
 export interface GameState {
   activeGameId: number | null;
@@ -46,7 +47,6 @@ export interface GameState {
   boardTheme: 'classic-wood' | 'modern-neon' | 'light' | 'dark';
 }
 
-export interface AppStore extends AuthState, GameState {
   // Actions
   setAddress: (address: string | null) => void;
   setStacksAddress: (address: string | null) => void;

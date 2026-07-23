@@ -17,16 +17,16 @@ function getSessionAddress() {
 interface ConnectOptions {
   onFinish?: (address: string | null) => void;
   onCancel?: () => void;
+  chain?: 'stacks' | 'celo' | 'privy' | 'farcaster';
+}
 
-  const connect = async ({ onFinish, onCancel, chain }: ConnectOptions = {}) => {
-    const { isFarcaster, miniPayDetected } = useAppStore.getState();
-    const ethereum = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
-    const isMiniPay = Boolean(miniPayDetected || (ethereum && ethereum.isMiniPay));
-
-    if (!chain) {
-      if (isMiniPay) {
-        chain = 'celo';
-      } else {
+export function useWalletAuth() {
+  const address = useAppStore((state) => state.address);
+  const isLoading = useAppStore((state) => state.isLoading);
+  const setAddress = useAppStore((state) => state.setAddress);
+  const setStacksAddress = useAppStore((state) => state.setStacksAddress);
+  const setCeloAddress = useAppStore((state) => state.setCeloAddress);
+  const setPrivyAddress = useAppStore((state) => state.setPrivyAddress);
         setConnectModalOpen(true);
         return;
       }

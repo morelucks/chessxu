@@ -36,7 +36,7 @@ export interface TxEntry {
   txId: string;
   /** Short description shown in the HUD (e.g. "Create Game", "Submit Move") */
   label: string;
-  chain: 'stacks' | 'celo';
+  chain: 'stacks' | 'celo' | 'privy';
   stage: TxStage;
   initiatedAt: number;
   confirmedAt?: number;

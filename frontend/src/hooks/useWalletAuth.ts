@@ -97,13 +97,13 @@ export function useWalletAuth() {
           }
         } catch (warn) {
            console.warn("[Farcaster] Wallet connect failed during manual trigger:", warn);
-  };
+        }
 
-  return {
-    address,
-    isConnected: !!address,
-    isConnecting: isLoading,
-    connect,
-    disconnect: logout,
-  };
-}
+        try {
+          const nonce = crypto.randomUUID();
+          await sdk.actions.signIn({ nonce });
+          const context = await sdk.context;
+          const fid = context?.user?.fid;
+          if (fid) {
+             const farcasterAddr = `fc:${fid}`;
+             setAddress(farcasterAddr);

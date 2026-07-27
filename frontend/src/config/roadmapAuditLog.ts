@@ -30,3 +30,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 25, title: "feat(roadmap): create frontendRoadmap.ts configuration and task registry" },
   { id: 26, title: "feat(roadmap): export RoadmapPriority, RoadmapCategory, and RoadmapTask types" },
   { id: 27, title: "feat(roadmap): define FRONTEND_ROADMAP_TASKS metadata array" },
+  { id: 28, title: "feat(roadmap): export ROADMAP_SUMMARY statistics helper" },

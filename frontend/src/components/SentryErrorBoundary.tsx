@@ -8,3 +8,5 @@ interface State { hasError: boolean; error: Error | null; eventId: string | null
 export class SentryErrorBoundary extends Component<Props, State> {
 // Sentry error boundary render handler
   public state: State = { hasError: false, error: null, eventId: null };
+// Sentry error boundary render handler
+  public static getDerivedStateFromError(error: Error): State { return { hasError: true, error, eventId: null }; }

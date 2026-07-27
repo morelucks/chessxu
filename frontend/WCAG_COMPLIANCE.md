@@ -50,3 +50,4 @@ This document details the accessibility features implemented for the Chessxu che
 | Down Arrow | Move cursor down one rank |
 | Left Arrow | Move cursor left one file |
 | Right Arrow | Move cursor right one file |
+| Enter / Space | Select square / execute move |

@@ -135,3 +135,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 130, title: "refactor(Piece.jsx): optimize GPU hardware acceleration via will-change property" },
   { id: 131, title: "refactor(arbiter): optimize selection highlight filter and transform keyframe sync" },
   { id: 132, title: "refactor(Pieces.jsx): optimize pawn move and capture transition smoothness" },
+  { id: 133, title: "refactor(ChessGameWrapper): optimize CSS transform transition easing curve tuning" },

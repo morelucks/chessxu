@@ -12,3 +12,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 7, title: "docs(roadmap): define Mermaid architecture flow for roadmap implementation order" },
   { id: 8, title: "docs(roadmap): detail #208 Error Boundary requirement for React rendering resilience" },
   { id: 9, title: "docs(roadmap): detail #209 strict TypeScript migration and type safety rules" },
+  { id: 10, title: "docs(roadmap): detail #210 ARIA accessibility grid roles and screen reader guidelines" },

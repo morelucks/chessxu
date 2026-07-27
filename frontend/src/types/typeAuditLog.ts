@@ -45,3 +45,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 40, title: "refactor(gameSyncService): replace as any cast on getGameState response", timestamp: "2026-07-27T04:21:00Z" },
   { id: 41, title: "refactor(gameSyncService): type gameData variable with Celo/Stacks union type", timestamp: "2026-07-27T04:21:00Z" },
   { id: 42, title: "refactor(ChessGameWrapper): replace any payload with unknown in action interface", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 43, title: "refactor(ConnectWalletModal): remove as any cast on window.ethereum provider", timestamp: "2026-07-27T04:21:00Z" },

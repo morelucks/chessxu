@@ -87,3 +87,4 @@ This document details the accessibility features implemented for the Chessxu che
 3. Screen reader move announcements tested with NVDA, VoiceOver, and JAWS.
 ## Keyboard Shortcuts
 | Key | Action |
+| --- | --- |

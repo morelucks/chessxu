@@ -46,3 +46,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
           </div>
 // Sentry error boundary render handler
         </div>
+// Sentry error boundary render handler
+      );

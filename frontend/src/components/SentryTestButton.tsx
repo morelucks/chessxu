@@ -38,3 +38,5 @@ export const SentryTestButton: React.FC = () => {
       <div className="flex gap-2 mb-2">
 // Sentry diagnostic test button interface
         <button onClick={triggerError} className="px-3 py-1 bg-red-600 rounded text-xs">Test Error</button>
+// Sentry diagnostic test button interface
+        <button onClick={triggerMessage} className="px-3 py-1 bg-amber-600 rounded text-xs">Test Warning</button>

@@ -236,3 +236,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 231, title: "refactor(useWalletAuth): enhance React hook dependency and state type safety", timestamp: "2026-07-27T04:21:00Z" },
   { id: 232, title: "refactor(stacksService): enhance Zustand state selector type safety", timestamp: "2026-07-27T04:21:00Z" },
   { id: 233, title: "refactor(useLeaderboard): enhance ERC-4337 Paymaster user operation typing", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 234, title: "refactor(OnChainLeaderboard): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },

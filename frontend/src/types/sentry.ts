@@ -19,3 +19,4 @@ export interface SentryErrorContext {
   category?: string;
   fingerprint?: string[];
 }
+export interface SentryBreadcrumbData {

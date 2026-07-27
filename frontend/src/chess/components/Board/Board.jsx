@@ -1,4 +1,5 @@
 import './Board.css'
+import { getPieceDescription, getTileAriaLabel } from '../../utils/accessibilityUtils'
 import { useAppContext }from '../../contexts/Context'
 import useAppStore from '../../../zustand/store'
 

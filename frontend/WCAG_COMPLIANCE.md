@@ -68,3 +68,4 @@ This document details the accessibility features implemented for the Chessxu che
 | Key | Action |
 | --- | --- |
 | Up Arrow | Move cursor up one rank |
+| Down Arrow | Move cursor down one rank |

@@ -32,3 +32,4 @@ export interface SentryFeedbackOptions {
   submitButtonLabel?: string;
   cancelButtonLabel?: string;
   confirmMessage?: string;
+  colorScheme?: "dark" | "light" | "system";

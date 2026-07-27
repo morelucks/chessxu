@@ -56,3 +56,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
   }
 // Sentry error boundary render handler
 }
+// Sentry error boundary render handler
+interface Props { children: ReactNode; fallback?: ReactNode; }

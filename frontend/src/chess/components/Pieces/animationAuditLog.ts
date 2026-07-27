@@ -195,3 +195,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 190, title: "refactor(Pieces.css): optimize drag and drop transform coordinate calculation" },
   { id: 191, title: "refactor(Board.jsx): optimize Vite CSS asset bundling for piece stylesheets" },
   { id: 192, title: "refactor(gameReducer): optimize rook and queen file/rank glide performance" },
+  { id: 193, title: "refactor(Piece.jsx): optimize React DOM key preservation for piece state updates" },

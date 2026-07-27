@@ -155,3 +155,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 150, title: "refactor(blockTimestampService): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },
   { id: 151, title: "refactor(useWalletAuth): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },
   { id: 152, title: "refactor(stacksService): enhance MiniPay auto-connect provider property validation", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 153, title: "refactor(useLeaderboard): enhance IndexedDB offline cache schema validation", timestamp: "2026-07-27T04:21:00Z" },

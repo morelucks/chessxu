@@ -17,3 +17,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 12, title: "docs(roadmap): detail #212 state management consolidation into Zustand slices" },
   { id: 13, title: "docs(roadmap): detail #213 celoService refactoring into modular service files" },
   { id: 14, title: "docs(roadmap): detail #214 Vitest unit test coverage for arbiter and chess logic" },
+  { id: 15, title: "docs(roadmap): detail #215 Vite bundle optimization and dynamic code splitting" },

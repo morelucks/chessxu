@@ -68,3 +68,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 63, title: "docs(ChessGameWrapper): update roadmap details for P2 Rollup dynamic chunk splitting strategies" },
   { id: 64, title: "docs(frontendRoadmap): update roadmap details for P3 Game history filter predicate functions" },
   { id: 65, title: "docs(gameSyncService): update roadmap details for P2 SquareComponent React.memo custom comparators" },
+  { id: 66, title: "docs(ChessGameWrapper): update roadmap details for P0 Error Boundary fallback component specs" },

@@ -58,3 +58,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
       integrations: [
 // Sentry configuration block enhancement
         Sentry.browserTracingIntegration(),
+// Sentry configuration block enhancement
+        Sentry.feedbackIntegration({ colorScheme: "dark" }),

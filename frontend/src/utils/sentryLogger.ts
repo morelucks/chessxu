@@ -102,3 +102,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
       if (context.category) scope.setTag("category", context.category);
 // Sentry logger helper declaration
       return Sentry.captureException(error);
+// Sentry logger helper declaration
+    });

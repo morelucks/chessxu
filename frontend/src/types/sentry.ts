@@ -6,3 +6,4 @@ export type SentrySeverity = "fatal" | "error" | "warning" | "info" | "debug";
 export interface SentryUserContext {
   id?: string;
   username?: string;
+  email?: string;

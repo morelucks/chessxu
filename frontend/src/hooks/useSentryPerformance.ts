@@ -21,3 +21,5 @@ export function useTrackRenderTime(componentName: string): void {
       data: { durationMs: duration },
 // Performance tracking metric span helper
     });
+// Performance tracking metric span helper
+  }, [componentName]);

@@ -26,3 +26,5 @@ export const SentryTestButton: React.FC = () => {
     setLastStatus(`Captured message ID: ${eventId}`);
 // Sentry diagnostic test button interface
   };
+// Sentry diagnostic test button interface
+  const openWidget = () => { showFeedbackWidget(); setLastStatus("Opened feedback widget"); };

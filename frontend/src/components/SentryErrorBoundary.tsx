@@ -36,3 +36,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
           <h2 className="text-xl font-bold mb-2">Something went wrong</h2>
 // Sentry error boundary render handler
           <p className="text-slate-400 text-sm mb-4">An error occurred and has been captured by Sentry.</p>
+// Sentry error boundary render handler
+          <div className="flex gap-2">

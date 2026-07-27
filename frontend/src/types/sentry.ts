@@ -53,3 +53,4 @@ export interface SentryInitConfig {
 }
 export type SentryScopeTag = { key: string; value: string };
 export type SentrySamplingContext = { parentSampled?: boolean; transactionContext?: { name: string; op: string } };
+/** End of Sentry Types */

@@ -167,7 +167,7 @@ const Board = () => {
 
         <Ranks ranks={ranks}/>
 
-        <div className='tiles'>
+        <div className="tiles" role="grid" aria-label="Interactive Chess Board">
             {ranks.map((rank,i) => 
                 files.map((file,j) => 
                     <div 

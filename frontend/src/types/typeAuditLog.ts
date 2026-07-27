@@ -36,3 +36,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 31, title: "refactor(useStacksChess): type getOpponentAddress parameter with OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },
   { id: 32, title: "refactor(useWalletAuth): remove as any cast on window.ethereum provider", timestamp: "2026-07-27T04:21:00Z" },
   { id: 33, title: "refactor(useWalletAuth): clean up unused isFarcaster variable in connect flow", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 34, title: "refactor(duneAlertService): remove top-level eslint-disable no-explicit-any", timestamp: "2026-07-27T04:21:00Z" },

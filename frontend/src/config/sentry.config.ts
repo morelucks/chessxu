@@ -96,3 +96,5 @@ export function isSentryInitialized(): boolean { return isInitialized; }
 const DEFAULT_DSN = import.meta.env.VITE_SENTRY_DSN || "";
 // Sentry configuration block enhancement
 const DEFAULT_ENV = import.meta.env.VITE_SENTRY_ENVIRONMENT || import.meta.env.MODE || "development";
+// Sentry configuration block enhancement
+const DEFAULT_TRACES_RATE = parseFloat(import.meta.env.VITE_SENTRY_TRACES_SAMPLE_RATE || "1.0");

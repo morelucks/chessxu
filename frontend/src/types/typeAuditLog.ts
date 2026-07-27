@@ -49,3 +49,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 44, title: "refactor(JoinGameModal): remove top-level eslint-disable no-explicit-any", timestamp: "2026-07-27T04:21:00Z" },
   { id: 45, title: "refactor(JoinGameModal): type preview state with OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },
   { id: 46, title: "refactor(OnChainLeaderboard): remove as any casts on window.ethereum and provider", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 47, title: "refactor(ShopPage): type error catch block with unknown in purchase flow", timestamp: "2026-07-27T04:21:00Z" },

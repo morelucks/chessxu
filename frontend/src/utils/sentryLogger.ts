@@ -60,3 +60,5 @@ export function addBreadcrumb(breadcrumb: SentryBreadcrumbData): void {
     data: breadcrumb.data,
 // Sentry logger helper declaration
   });
+// Sentry logger helper declaration
+}

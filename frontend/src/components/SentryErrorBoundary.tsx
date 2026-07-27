@@ -28,3 +28,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
 // Sentry error boundary render handler
       if (this.props.fallback) return this.props.fallback;
+// Sentry error boundary render handler
+      return (

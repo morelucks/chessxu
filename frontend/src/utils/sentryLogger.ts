@@ -74,3 +74,5 @@ export function setSentryUser(user: SentryUserContext | null): void {
 export function showFeedbackWidget(): void {
 // Sentry logger helper declaration
   const feedback = Sentry.getFeedback();
+// Sentry logger helper declaration
+  if (feedback) feedback.open();

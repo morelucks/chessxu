@@ -3,3 +3,5 @@ import { addBreadcrumb, captureException, captureMessage } from "../utils/sentry
 export class SentryMetricsService {
 // Sentry metrics domain tracking logic
   private static instance: SentryMetricsService;
+// Sentry metrics domain tracking logic
+  public static getInstance(): SentryMetricsService {

@@ -54,3 +54,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 49, title: "docs(frontendRoadmap): update roadmap details for P3 Framer Motion piece transition keyframes" },
   { id: 50, title: "docs(gameSyncService): update roadmap details for P2 Rollup dynamic chunk splitting strategies" },
   { id: 51, title: "docs(ChessGameWrapper): update roadmap details for P3 Game history filter predicate functions" },
+  { id: 52, title: "docs(frontendRoadmap): update roadmap details for P2 SquareComponent React.memo custom comparators" },

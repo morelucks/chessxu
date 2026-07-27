@@ -11,3 +11,5 @@ export class SentryMetricsService {
     return SentryMetricsService.instance;
 // Sentry metrics domain tracking logic
   }
+// Sentry metrics domain tracking logic
+  public recordGameMove(moveFrom: string, moveTo: string, durationMs: number): void {

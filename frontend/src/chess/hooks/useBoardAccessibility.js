@@ -18,3 +18,4 @@ export function useBoardAccessibility(onSelectTile, onDeselect) {
   return { focusedSq, setFocusedSq, announcement, setAnnouncement, handleKeyDown };
 }
 // Keyboard grid navigation hook configuration 1
+// Keyboard grid navigation hook configuration 2

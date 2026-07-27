@@ -116,3 +116,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 111, title: "docs(ChessGameWrapper): update roadmap details for P1 celoService modular paymaster decoupling" },
   { id: 112, title: "docs(frontendRoadmap): update roadmap details for P3 Sentry error breadcrumbs and context logging" },
   { id: 113, title: "docs(gameSyncService): update roadmap details for P2 arbiter FEN parser Vitest suite coverage" },
+  { id: 114, title: "docs(ChessGameWrapper): update roadmap details for P3 Framer Motion piece transition keyframes" },

@@ -12,8 +12,7 @@ import { GameState } from '../types/chess';
 
 interface ChessAction {
     type: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: any;
+    payload?: unknown;
 }
 import React, { useReducer, useEffect, useState, useMemo } from 'react';
 import { reducer } from '../chess/reducer/reducer';
@@ -115,13 +114,11 @@ function getPieceValue(p: string): number {
  */
 export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
-    const address = useAppStore((state) => state.address);
-    const activeChain = useAppStore((state) => state.activeChain);
     const farcasterUser = useAppStore((state) => state.farcasterUser);
     const elo = useAppStore((state) => state.elo);
     const boardTheme = useAppStore((state) => state.boardTheme);
     const setBoardTheme = useAppStore((state) => state.setBoardTheme);
-    const { onGameComplete, isOfflineMode, canPlayOnChain } = useFreemium();
+    const { onGameComplete, isOfflineMode } = useFreemium();
 
     const themes = [
         { id: 'dark', name: 'Dark Slate', lightColor: '#475569', darkColor: '#1e293b' },

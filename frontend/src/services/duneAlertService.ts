@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 import { getLatestResults } from './duneService';
 import { useNotificationStore } from '../zustand/notificationStore';
 import { DUNE_ALERTS_CONFIG } from '../config/duneAlerts';
@@ -103,7 +102,7 @@ export async function sendWebhookNotification(
   severity: string,
   title: string,
   body: string,
-  details: Record<string, any> = {}
+  details: Record<string, unknown> = {}
 ): Promise<boolean> {
   if (!webhookUrl) return false;
   console.log(`[Webhook] Dispatching alert to ${webhookUrl}:`, { alertType, severity, title, body });
@@ -197,7 +196,7 @@ class DuneAlertService {
       let isTriggered = false;
       let title = config.name;
       let body = config.description;
-      const details: Record<string, any> = {};
+      const details: Record<string, unknown> = {};
 
       if (type === 'game_joined' && currentUserAddress) {
         if (row.creator?.toLowerCase() === currentUserAddress.toLowerCase() &&
@@ -572,10 +571,10 @@ class DuneAlertService {
   /**
    * Starts the polling loop.
    */
-  startPolling(currentUserAddress: string | null, isAdmin = false, _intervalMs = 60000): void {
+  startPolling(currentUserAddress: string | null, isAdmin = false, intervalMs = 60000): void {
     if (this.pollingIntervalId) return;
 
-    console.log('[DuneAlertService] Starting staggered alerts scheduler...');
+    console.log(`[DuneAlertService] Starting staggered alerts scheduler (${intervalMs}ms)...`);
     // Run an initial check immediately
     void this.checkAlerts(currentUserAddress, isAdmin);
 

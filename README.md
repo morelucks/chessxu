@@ -124,6 +124,17 @@ graph TD
 
 ---
 
+## 📋 Frontend Improvement Roadmap 2025
+
+The project tracks frontend security, stability, architecture, performance, testing, and UX improvements across 17 prioritized issues (#208–#224). Full documentation is available in [FRONTEND_ROADMAP_2025.md](docs/FRONTEND_ROADMAP_2025.md).
+
+- 🔴 **P0 Critical (Security & Stability)**: Error Boundaries (#208), Strict TypeScript (#209), ARIA Accessibility (#210)
+- 🟠 **P1 High (Architecture)**: TS Migration (#211), State Consolidation (#212), Service Modularization (#213)
+- 🟡 **P2 Medium (Testing & Performance)**: Test Coverage (#214), Code Splitting (#215), Memoization (#216), Code Cleanup (#217)
+- 🔵 **P3 UX & Polish**: UI Skeletons (#218), Retries (#219), Playwright E2E (#220), Sentry Monitoring (#224)
+
+---
+
 ## 📝 Deployed Contracts (Mainnet)
 
 ### Stacks Mainnet

@@ -152,9 +152,10 @@ export default function ShopPage() {
       triggerToast(`Successfully purchased ${item.name}!`, 'success');
 
       await refreshWalletBalance();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Purchase error:', error);
-      const msg = error?.message || 'Transaction failed.';
+      const err = error as { message?: string };
+      const msg = err?.message || 'Transaction failed.';
       triggerToast(msg.includes('cancelled') ? 'Transaction cancelled.' : msg, 'error');
     } finally {
       setBuyingItemId(null);
@@ -271,7 +272,7 @@ export default function ShopPage() {
           {['all', 'boards', 'pieces', 'badges'].map((cat) => (
             <button
               key={cat}
-              onClick={() => setSelectedCategory(cat as any)}
+              onClick={() => setSelectedCategory(cat as 'all' | 'boards' | 'pieces' | 'badges')}
               className={`shop-nav-tab ${selectedCategory === cat ? 'active' : ''}`}
             >
               {cat.toUpperCase()}

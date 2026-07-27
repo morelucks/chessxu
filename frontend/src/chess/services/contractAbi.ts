@@ -228,5 +228,30 @@ export const CHESSXU_ABI = [
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "gameId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "moveStr",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "boardState",
+        "type": "string"
+      }
+    ],
+    "name": "MoveSubmitted",
+    "type": "event"
   }
 ] as const;

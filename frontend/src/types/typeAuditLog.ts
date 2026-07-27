@@ -319,3 +319,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 314, title: "refactor(OnChainLeaderboard): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },
   { id: 315, title: "refactor(useCeloChess): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },
   { id: 316, title: "refactor(ConnectWalletModal): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 317, title: "refactor(duneAlertService): enhance MiniPay auto-connect provider property validation", timestamp: "2026-07-27T04:21:00Z" },

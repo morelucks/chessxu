@@ -13,3 +13,4 @@ export interface SentryUserContext {
   ip_address?: string;
 }
 export interface SentryErrorContext {
+  tags?: Record<string, string | number | boolean>;

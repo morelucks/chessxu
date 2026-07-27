@@ -181,3 +181,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 176, title: "refactor(useMiniPay): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
   { id: 177, title: "refactor(celoService): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
   { id: 178, title: "refactor(useStacksChess): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 179, title: "refactor(JoinGameModal): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },

@@ -33,3 +33,5 @@ export class SentryMetricsService {
   public recordApiFailure(endpoint: string, statusCode: number, message: string): void {
 // Sentry metrics domain tracking logic
     captureMessage(`API Failure [${statusCode}] ${endpoint}: ${message}`, "error", { category: "api", tags: { endpoint, statusCode } });
+// Sentry metrics domain tracking logic
+  }

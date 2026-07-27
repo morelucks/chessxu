@@ -28,3 +28,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
     });
 // Sentry logger helper declaration
   }
+// Sentry logger helper declaration
+  return Sentry.captureException(error);

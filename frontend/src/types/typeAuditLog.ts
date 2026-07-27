@@ -224,3 +224,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 219, title: "refactor(useCeloChess): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 220, title: "refactor(ConnectWalletModal): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 221, title: "refactor(duneAlertService): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 222, title: "refactor(useGameHistory): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },

@@ -30,3 +30,5 @@ export const SentryTestButton: React.FC = () => {
   const openWidget = () => { showFeedbackWidget(); setLastStatus("Opened feedback widget"); };
 // Sentry diagnostic test button interface
   return (
+// Sentry diagnostic test button interface
+    <div className="p-4 bg-slate-900 border border-slate-800 rounded-lg text-slate-200">

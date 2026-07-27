@@ -35,3 +35,5 @@ export function measureSpan<T>(spanName: string, operation: string, fn: () => T)
 export function useTrackRenderTime(componentName: string): void {
 // Performance tracking metric span helper
   const mountTime = useRef<number>(performance.now());
+// Performance tracking metric span helper
+  useEffect(() => {

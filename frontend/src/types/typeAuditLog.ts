@@ -25,3 +25,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 20, title: "refactor(useLeaderboard): remove top-level eslint-disable no-explicit-any", timestamp: "2026-07-27T04:21:00Z" },
   { id: 21, title: "refactor(useLeaderboard): define PlayerStatsData interface for player stats", timestamp: "2026-07-27T04:21:00Z" },
   { id: 22, title: "refactor(useLeaderboard): define GlobalStatsData interface for global stats", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 23, title: "refactor(useLeaderboard): type usePlayerStats hook state and error handling", timestamp: "2026-07-27T04:21:00Z" },

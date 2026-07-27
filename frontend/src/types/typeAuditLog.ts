@@ -171,3 +171,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 166, title: "refactor(blockTimestampService): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },
   { id: 167, title: "refactor(useWalletAuth): enhance MiniPay auto-connect provider property validation", timestamp: "2026-07-27T04:21:00Z" },
   { id: 168, title: "refactor(stacksService): enhance IndexedDB offline cache schema validation", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 169, title: "refactor(useLeaderboard): enhance EIP-1193 window provider interface narrowing", timestamp: "2026-07-27T04:21:00Z" },

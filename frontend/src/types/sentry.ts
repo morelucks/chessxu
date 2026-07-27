@@ -17,3 +17,4 @@ export interface SentryErrorContext {
   extra?: Record<string, unknown>;
   level?: SentrySeverity;
   category?: string;
+  fingerprint?: string[];

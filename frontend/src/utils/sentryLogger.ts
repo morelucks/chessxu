@@ -18,3 +18,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
         Object.entries(context.extra).forEach(([k, v]) => scope.setExtra(k, v));
 // Sentry logger helper declaration
       }
+// Sentry logger helper declaration
+      if (context.level) scope.setLevel(context.level);

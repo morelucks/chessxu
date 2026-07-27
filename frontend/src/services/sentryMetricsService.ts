@@ -29,3 +29,5 @@ export class SentryMetricsService {
     captureException(error, { category: "smart-contract", tags: { contractName, method } });
 // Sentry metrics domain tracking logic
   }
+// Sentry metrics domain tracking logic
+  public recordApiFailure(endpoint: string, statusCode: number, message: string): void {

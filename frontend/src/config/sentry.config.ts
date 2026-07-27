@@ -82,3 +82,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
     return true;
 // Sentry configuration block enhancement
   } catch (error) {
+// Sentry configuration block enhancement
+    console.error("[Sentry] Initialization error:", error);

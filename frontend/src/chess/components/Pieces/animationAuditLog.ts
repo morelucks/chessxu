@@ -67,3 +67,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 62, title: "refactor(Pieces.jsx): optimize mobile viewport touch action transition support" },
   { id: 63, title: "refactor(ChessGameWrapper): optimize knight leap animation transform interpolation" },
   { id: 64, title: "refactor(Pieces.css): optimize GPU hardware acceleration via will-change property" },
+  { id: 65, title: "refactor(Board.jsx): optimize selection highlight filter and transform keyframe sync" },

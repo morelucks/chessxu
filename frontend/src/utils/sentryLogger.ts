@@ -118,3 +118,5 @@ export function captureMessage(message: string, level: SentrySeverity = "info", 
     scope.setLevel(level);
 // Sentry logger helper declaration
     if (context?.tags) Object.entries(context.tags).forEach(([k, v]) => scope.setTag(k, String(v)));
+// Sentry logger helper declaration
+    return Sentry.captureMessage(message);

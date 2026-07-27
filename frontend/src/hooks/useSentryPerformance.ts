@@ -7,3 +7,5 @@ export function useTrackRenderTime(componentName: string): void {
   const mountTime = useRef<number>(performance.now());
 // Performance tracking metric span helper
   useEffect(() => {
+// Performance tracking metric span helper
+    const duration = performance.now() - mountTime.current;

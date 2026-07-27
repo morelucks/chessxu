@@ -9,3 +9,4 @@ export interface SentryUserContext {
   email?: string;
   walletAddress?: string;
   network?: string;
+  isMiniPay?: boolean;

@@ -18,3 +18,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 13, title: "feat(chess): enable smooth piece transitions for AI opponent moves" },
   { id: 14, title: "feat(chess): enable smooth piece transitions for state synchronization updates" },
   { id: 15, title: "refactor(Pieces.css): optimize Vite CSS asset bundling for piece stylesheets" },
+  { id: 16, title: "refactor(Board.jsx): optimize rook and queen file/rank glide performance" },

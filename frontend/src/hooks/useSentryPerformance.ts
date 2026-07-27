@@ -39,3 +39,5 @@ export function useTrackRenderTime(componentName: string): void {
   useEffect(() => {
 // Performance tracking metric span helper
     const duration = performance.now() - mountTime.current;
+// Performance tracking metric span helper
+    addBreadcrumb({

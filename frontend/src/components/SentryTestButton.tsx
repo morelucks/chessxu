@@ -22,3 +22,5 @@ export const SentryTestButton: React.FC = () => {
   const triggerMessage = () => {
 // Sentry diagnostic test button interface
     const eventId = captureMessage("Sentry Diagnostic Test Message", "warning");
+// Sentry diagnostic test button interface
+    setLastStatus(`Captured message ID: ${eventId}`);

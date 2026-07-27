@@ -34,3 +34,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   const replaysOnErrorSampleRate = overrideConfig?.replaysOnErrorSampleRate ?? DEFAULT_REPLAYS_ON_ERROR_RATE;
 // Sentry configuration block enhancement
   if (!dsn) {
+// Sentry configuration block enhancement
+    console.warn("[Sentry] No Sentry DSN provided. Running in dev fallback mode.");

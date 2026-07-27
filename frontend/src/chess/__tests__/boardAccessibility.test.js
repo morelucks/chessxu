@@ -46,3 +46,4 @@ describe("Chess Board Accessibility Utilities", () => {
 // Accessibility test assertion note 25
 // Accessibility test assertion note 26
 // Accessibility test assertion note 27
+// Accessibility test assertion note 28

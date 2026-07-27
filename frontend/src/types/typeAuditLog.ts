@@ -52,3 +52,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 47, title: "refactor(ShopPage): type error catch block with unknown in purchase flow", timestamp: "2026-07-27T04:21:00Z" },
   { id: 48, title: "refactor(ShopPage): type category parameter assertion in tab selector", timestamp: "2026-07-27T04:21:00Z" },
   { id: 49, title: "refactor(CTASection): remove as any cast on window.ethereum provider", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 50, title: "refactor(HeroSection): remove as any cast on window.ethereum provider", timestamp: "2026-07-27T04:21:00Z" },

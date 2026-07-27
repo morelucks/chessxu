@@ -41,3 +41,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 36, title: "refactor(notificationDB): replace Record<string, any> in AppNotification interface", timestamp: "2026-07-27T04:21:00Z" },
   { id: 37, title: "refactor(blockTimestampService): import CeloscanTxResult interface", timestamp: "2026-07-27T04:21:00Z" },
   { id: 38, title: "refactor(blockTimestampService): replace any[] cast in Celoscan result filter", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 39, title: "refactor(gameSyncService): import CeloGameStruct and OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },

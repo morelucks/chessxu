@@ -18,3 +18,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 13, title: "docs(roadmap): detail #213 celoService refactoring into modular service files" },
   { id: 14, title: "docs(roadmap): detail #214 Vitest unit test coverage for arbiter and chess logic" },
   { id: 15, title: "docs(roadmap): detail #215 Vite bundle optimization and dynamic code splitting" },
+  { id: 16, title: "docs(roadmap): detail #216 React.memo square component re-render optimization" },

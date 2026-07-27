@@ -16,3 +16,5 @@ const DEFAULT_REPLAYS_ON_ERROR_RATE = parseFloat(import.meta.env.VITE_SENTRY_REP
 export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean {
 // Sentry configuration block enhancement
   if (isInitialized) {
+// Sentry configuration block enhancement
+    console.warn("[Sentry] SDK is already initialized.");

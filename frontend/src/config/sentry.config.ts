@@ -64,3 +64,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
         Sentry.replayIntegration({ maskAllText: false }),
 // Sentry configuration block enhancement
       ],
+// Sentry configuration block enhancement
+      beforeSend(event) {

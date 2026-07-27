@@ -44,3 +44,5 @@ export function captureMessage(message: string, level: SentrySeverity = "info", 
     return Sentry.captureMessage(message);
 // Sentry logger helper declaration
   });
+// Sentry logger helper declaration
+}

@@ -69,3 +69,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 64, title: "refactor(Pieces.css): optimize GPU hardware acceleration via will-change property" },
   { id: 65, title: "refactor(Board.jsx): optimize selection highlight filter and transform keyframe sync" },
   { id: 66, title: "refactor(gameReducer): optimize pawn move and capture transition smoothness" },
+  { id: 67, title: "refactor(Piece.jsx): optimize CSS transform transition easing curve tuning" },

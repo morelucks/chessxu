@@ -64,3 +64,5 @@ export function addBreadcrumb(breadcrumb: SentryBreadcrumbData): void {
 }
 // Sentry logger helper declaration
 export function setSentryUser(user: SentryUserContext | null): void {
+// Sentry logger helper declaration
+  if (!user) { Sentry.setUser(null); return; }

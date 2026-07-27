@@ -17,3 +17,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 12, title: "refactor(celo): type executeWithPaymaster abi and args parameters", timestamp: "2026-07-27T04:21:00Z" },
   { id: 13, title: "refactor(celo): type executeWithFallback writeContract parameters", timestamp: "2026-07-27T04:21:00Z" },
   { id: 14, title: "refactor(celo): type getGame return value as Promise<CeloGameStruct>", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 15, title: "refactor(celo): type getGameState alias return value", timestamp: "2026-07-27T04:21:00Z" },

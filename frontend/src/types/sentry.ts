@@ -43,3 +43,4 @@ export interface SentryPerformanceMetric {
   tags?: Record<string, string>;
 }
 export interface SentryInitConfig {
+  dsn: string;

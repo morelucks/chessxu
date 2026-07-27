@@ -16,3 +16,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 11, title: "feat(chess): enable smooth piece glide animations for drag-and-drop moves" },
   { id: 12, title: "feat(chess): enable smooth piece glide animations for click-to-move actions" },
   { id: 13, title: "feat(chess): enable smooth piece transitions for AI opponent moves" },
+  { id: 14, title: "feat(chess): enable smooth piece transitions for state synchronization updates" },

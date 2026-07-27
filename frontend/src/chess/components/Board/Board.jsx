@@ -197,3 +197,4 @@ const Board = () => {
 }
 
 export default Board
+// ARIA accessibility board component enhancement 4

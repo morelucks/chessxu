@@ -15,3 +15,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 10, title: "refactor(celo): use unknown error type in switchToCelo catch block", timestamp: "2026-07-27T04:21:00Z" },
   { id: 11, title: "refactor(celo): use unknown error type in waitForTransactionReceipt", timestamp: "2026-07-27T04:21:00Z" },
   { id: 12, title: "refactor(celo): type executeWithPaymaster abi and args parameters", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 13, title: "refactor(celo): type executeWithFallback writeContract parameters", timestamp: "2026-07-27T04:21:00Z" },

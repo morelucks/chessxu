@@ -28,3 +28,4 @@ export interface SentryBreadcrumbData {
 }
 export interface SentryFeedbackOptions {
   title?: string;
+  subtitle?: string;

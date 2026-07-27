@@ -76,3 +76,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
   }
 // Sentry error boundary render handler
   private handleReportFeedback = (): void => { showFeedbackWidget(); };
+// Sentry error boundary render handler
+  private handleReset = (): void => { this.setState({ hasError: false, error: null, eventId: null }); };

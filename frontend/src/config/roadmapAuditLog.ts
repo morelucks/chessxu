@@ -9,3 +9,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 4, title: "docs(roadmap): document Priority 2 testing coverage and performance issues" },
   { id: 5, title: "docs(roadmap): document Priority 3 UX polish, animations, and monitoring issues" },
   { id: 6, title: "docs(roadmap): add executive summary matrix and effort estimation breakdown" },
+  { id: 7, title: "docs(roadmap): define Mermaid architecture flow for roadmap implementation order" },

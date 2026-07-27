@@ -55,3 +55,5 @@ export function useTrackRenderTime(componentName: string): void {
   }, [componentName]);
 // Performance tracking metric span helper
 }
+// Performance tracking metric span helper
+export function measureSpan<T>(spanName: string, operation: string, fn: () => T): T {

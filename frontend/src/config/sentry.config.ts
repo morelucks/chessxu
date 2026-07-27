@@ -28,3 +28,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   const environment = overrideConfig?.environment || DEFAULT_ENV;
 // Sentry configuration block enhancement
   const tracesSampleRate = overrideConfig?.tracesSampleRate ?? DEFAULT_TRACES_RATE;
+// Sentry configuration block enhancement
+  const replaysSessionSampleRate = overrideConfig?.replaysSessionSampleRate ?? DEFAULT_REPLAYS_SESSION_RATE;

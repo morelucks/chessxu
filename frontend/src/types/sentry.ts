@@ -27,3 +27,4 @@ export interface SentryBreadcrumbData {
   timestamp?: number;
 }
 export interface SentryFeedbackOptions {
+  title?: string;

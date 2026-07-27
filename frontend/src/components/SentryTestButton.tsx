@@ -12,3 +12,5 @@ export const SentryTestButton: React.FC = () => {
     catch (err) {
 // Sentry diagnostic test button interface
       const eventId = captureException(err, { category: "test" });
+// Sentry diagnostic test button interface
+      setLastStatus(`Captured error ID: ${eventId}`);

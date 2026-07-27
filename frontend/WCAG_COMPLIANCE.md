@@ -54,3 +54,4 @@ This document details the accessibility features implemented for the Chessxu che
 | Escape | Cancel piece selection |
 
 ## ARIA Attributes
+- `role="grid"` on board container

@@ -175,6 +175,9 @@ const Board = () => {
                         i={i}
                         j={j}
                         className={`${getClassName(7-i,j)}`}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={getTileAriaLabel(7-i, j, position[7-i]?.[j], false, false, checkTile && checkTile[0] === 7-i && checkTile[1] === j)}
                         onClick={() => handleTileClick(7-i, j)}>
                     </div>
                 ))}

@@ -18,3 +18,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   if (isInitialized) {
 // Sentry configuration block enhancement
     console.warn("[Sentry] SDK is already initialized.");
+// Sentry configuration block enhancement
+    return true;

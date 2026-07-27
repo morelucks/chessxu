@@ -52,3 +52,4 @@ export interface SentryInitConfig {
   enableUserFeedback?: boolean;
 }
 export type SentryScopeTag = { key: string; value: string };
+export type SentrySamplingContext = { parentSampled?: boolean; transactionContext?: { name: string; op: string } };

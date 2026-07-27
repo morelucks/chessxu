@@ -52,3 +52,5 @@ This document details the accessibility features implemented for the Chessxu che
 | Right Arrow | Move cursor right one file |
 | Enter / Space | Select square / execute move |
 | Escape | Cancel piece selection |
+
+## ARIA Attributes

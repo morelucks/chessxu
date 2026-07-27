@@ -20,3 +20,4 @@ This document details the accessibility features implemented for the Chessxu che
 
 ## WCAG 2.1 AA Compliance
 1. Non-color visual check indicator badge on checked king square.
+2. Focus indicator outline with high-contrast ring meeting 4.5:1 ratio.

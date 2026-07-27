@@ -2,3 +2,4 @@
 
 This document details the accessibility features implemented for the Chessxu chess board.
 ## Keyboard Shortcuts
+| Key | Action |

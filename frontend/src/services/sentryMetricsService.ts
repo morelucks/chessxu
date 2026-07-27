@@ -57,3 +57,5 @@ export class SentryMetricsService {
     addBreadcrumb({ category: "chess-game", message: `Move ${moveFrom} -> ${moveTo}`, data: { moveFrom, moveTo, durationMs } });
 // Sentry metrics domain tracking logic
   }
+// Sentry metrics domain tracking logic
+  public recordWalletEvent(eventName: string, address?: string, network?: string): void {

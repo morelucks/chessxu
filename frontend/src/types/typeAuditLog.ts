@@ -379,3 +379,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 374, title: "refactor(blockTimestampService): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },
   { id: 375, title: "refactor(useWalletAuth): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },
   { id: 376, title: "refactor(stacksService): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 377, title: "refactor(useLeaderboard): enhance MiniPay auto-connect provider property validation", timestamp: "2026-07-27T04:21:00Z" },

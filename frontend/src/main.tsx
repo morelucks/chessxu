@@ -35,3 +35,5 @@ createRoot(rootElement).render(
     <App />
   </StrictMode>
 );
+
+// Sentry application initialization hook

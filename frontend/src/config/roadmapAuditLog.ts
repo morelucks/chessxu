@@ -14,3 +14,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 9, title: "docs(roadmap): detail #209 strict TypeScript migration and type safety rules" },
   { id: 10, title: "docs(roadmap): detail #210 ARIA accessibility grid roles and screen reader guidelines" },
   { id: 11, title: "docs(roadmap): detail #211 legacy JS/JSX to TS/TSX component conversion rules" },
+  { id: 12, title: "docs(roadmap): detail #212 state management consolidation into Zustand slices" },

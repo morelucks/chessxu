@@ -131,3 +131,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 126, title: "refactor(ChessGameWrapper): optimize rook and queen file/rank glide performance" },
   { id: 127, title: "refactor(Pieces.css): optimize React DOM key preservation for piece state updates" },
   { id: 128, title: "refactor(Board.jsx): optimize mobile viewport touch action transition support" },
+  { id: 129, title: "refactor(gameReducer): optimize knight leap animation transform interpolation" },

@@ -73,3 +73,5 @@ export function useTrackRenderTime(componentName: string): void {
     addBreadcrumb({
 // Performance tracking metric span helper
       category: "performance",
+// Performance tracking metric span helper
+      message: `${componentName} mounted in ${duration.toFixed(2)}ms`,

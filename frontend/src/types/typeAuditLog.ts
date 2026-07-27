@@ -374,3 +374,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 369, title: "refactor(celoService): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 370, title: "refactor(useStacksChess): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 371, title: "refactor(JoinGameModal): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 372, title: "refactor(notificationDB): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },

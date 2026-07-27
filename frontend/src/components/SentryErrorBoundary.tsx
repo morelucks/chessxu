@@ -30,3 +30,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) return this.props.fallback;
 // Sentry error boundary render handler
       return (
+// Sentry error boundary render handler
+        <div className="p-6 m-4 bg-slate-900 border border-slate-800 rounded-xl text-slate-100">

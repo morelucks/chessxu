@@ -9,3 +9,4 @@ This integration provides real-time error tracking, user feedback, and performan
 - `VITE_SENTRY_TRACES_SAMPLE_RATE`: Tracing sample rate (0.0 to 1.0).
 ## Acceptance Criteria Verification
 1. Sentry SDK integrated via `@sentry/react`.
+2. Source maps configured in `vite.config.ts`.

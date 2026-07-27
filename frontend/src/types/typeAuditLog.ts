@@ -300,3 +300,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 295, title: "refactor(useWalletAuth): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 296, title: "refactor(stacksService): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
   { id: 297, title: "refactor(useLeaderboard): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 298, title: "refactor(OnChainLeaderboard): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },

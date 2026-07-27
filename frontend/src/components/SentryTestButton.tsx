@@ -56,3 +56,5 @@ export const SentryTestButton: React.FC = () => {
 export const SentryTestButton: React.FC = () => {
 // Sentry diagnostic test button interface
   const [lastStatus, setLastStatus] = useState<string | null>(null);
+// Sentry diagnostic test button interface
+  const triggerError = () => {

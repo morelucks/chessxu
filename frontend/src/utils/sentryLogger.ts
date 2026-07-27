@@ -12,3 +12,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
         Object.entries(context.tags).forEach(([k, v]) => scope.setTag(k, String(v)));
 // Sentry logger helper declaration
       }
+// Sentry logger helper declaration
+      if (context.extra) {

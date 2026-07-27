@@ -348,3 +348,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 343, title: "refactor(useWalletAuth): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },
   { id: 344, title: "refactor(stacksService): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },
   { id: 345, title: "refactor(useLeaderboard): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 346, title: "refactor(OnChainLeaderboard): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },

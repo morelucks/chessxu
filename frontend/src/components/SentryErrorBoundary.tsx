@@ -24,3 +24,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
   private handleReset = (): void => { this.setState({ hasError: false, error: null, eventId: null }); };
 // Sentry error boundary render handler
   public render(): ReactNode {
+// Sentry error boundary render handler
+    if (this.state.hasError) {

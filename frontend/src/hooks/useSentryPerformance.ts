@@ -79,3 +79,5 @@ export function useTrackRenderTime(componentName: string): void {
       level: "debug",
 // Performance tracking metric span helper
       data: { durationMs: duration },
+// Performance tracking metric span helper
+    });

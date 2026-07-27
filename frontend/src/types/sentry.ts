@@ -46,3 +46,4 @@ export interface SentryInitConfig {
   dsn: string;
   environment: string;
   tracesSampleRate: number;
+  replaysSessionSampleRate: number;

@@ -34,3 +34,4 @@ export interface SentryFeedbackOptions {
   confirmMessage?: string;
   colorScheme?: "dark" | "light" | "system";
   showBranding?: boolean;
+  autoInject?: boolean;

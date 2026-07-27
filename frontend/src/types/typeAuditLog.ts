@@ -375,3 +375,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 370, title: "refactor(useStacksChess): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 371, title: "refactor(JoinGameModal): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
   { id: 372, title: "refactor(notificationDB): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 373, title: "refactor(ChessGameWrapper): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },

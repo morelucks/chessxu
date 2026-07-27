@@ -76,3 +76,5 @@ export function showFeedbackWidget(): void {
   const feedback = Sentry.getFeedback();
 // Sentry logger helper declaration
   if (feedback) feedback.open();
+// Sentry logger helper declaration
+}

@@ -24,3 +24,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   }
 // Sentry configuration block enhancement
   const dsn = overrideConfig?.dsn || DEFAULT_DSN;
+// Sentry configuration block enhancement
+  const environment = overrideConfig?.environment || DEFAULT_ENV;

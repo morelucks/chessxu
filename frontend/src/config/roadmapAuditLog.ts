@@ -34,3 +34,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 29, title: "docs(readme): add Frontend Improvement Roadmap 2025 section to README.md" },
   { id: 30, title: "docs(ChessGameWrapper): update roadmap details for P3 automated transaction retry queue handlers" },
   { id: 31, title: "docs(frontendRoadmap): update roadmap details for P1 Zustand global store slice consolidation" },
+  { id: 32, title: "docs(gameSyncService): update roadmap details for P3 Playwright end-to-end match flow fixtures" },

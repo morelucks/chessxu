@@ -28,3 +28,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 23, title: "refactor(useLeaderboard): type usePlayerStats hook state and error handling", timestamp: "2026-07-27T04:21:00Z" },
   { id: 24, title: "refactor(useLeaderboard): type useGlobalStats hook state and error handling", timestamp: "2026-07-27T04:21:00Z" },
   { id: 25, title: "refactor(useMiniPay): remove top-level eslint-disable no-explicit-any", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 26, title: "refactor(useMiniPay): type MiniPay provider detection via EIP1193Provider", timestamp: "2026-07-27T04:21:00Z" },

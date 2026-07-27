@@ -5,3 +5,5 @@ import { addBreadcrumb } from "../utils/sentryLogger";
 export function useTrackRenderTime(componentName: string): void {
 // Performance tracking metric span helper
   const mountTime = useRef<number>(performance.now());
+// Performance tracking metric span helper
+  useEffect(() => {

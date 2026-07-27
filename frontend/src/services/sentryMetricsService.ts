@@ -45,3 +45,5 @@ export class SentryMetricsService {
   private static instance: SentryMetricsService;
 // Sentry metrics domain tracking logic
   public static getInstance(): SentryMetricsService {
+// Sentry metrics domain tracking logic
+    if (!SentryMetricsService.instance) { SentryMetricsService.instance = new SentryMetricsService(); }

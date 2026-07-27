@@ -97,3 +97,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 92, title: "refactor(Pieces.css): optimize Vite CSS asset bundling for piece stylesheets" },
   { id: 93, title: "refactor(Board.jsx): optimize rook and queen file/rank glide performance" },
   { id: 94, title: "refactor(gameReducer): optimize React DOM key preservation for piece state updates" },
+  { id: 95, title: "refactor(Piece.jsx): optimize mobile viewport touch action transition support" },

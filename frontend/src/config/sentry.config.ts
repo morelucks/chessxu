@@ -32,3 +32,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   const replaysSessionSampleRate = overrideConfig?.replaysSessionSampleRate ?? DEFAULT_REPLAYS_SESSION_RATE;
 // Sentry configuration block enhancement
   const replaysOnErrorSampleRate = overrideConfig?.replaysOnErrorSampleRate ?? DEFAULT_REPLAYS_ON_ERROR_RATE;
+// Sentry configuration block enhancement
+  if (!dsn) {

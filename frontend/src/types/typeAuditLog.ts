@@ -317,3 +317,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 312, title: "refactor(stacksService): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
   { id: 313, title: "refactor(useLeaderboard): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },
   { id: 314, title: "refactor(OnChainLeaderboard): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 315, title: "refactor(useCeloChess): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },

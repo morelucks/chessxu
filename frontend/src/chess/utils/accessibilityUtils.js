@@ -85,3 +85,4 @@ export function formatMoveAnnouncement(pieceCode, fromSq, toSq, isCapture, isChe
 // Accessibility helper documentation note 47
 // Accessibility helper documentation note 48
 // Accessibility helper documentation note 49
+// Accessibility helper documentation note 50

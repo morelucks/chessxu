@@ -80,11 +80,11 @@ export default function OnChainLeaderboard() {
           <div className="onchain-lb__empty-icon">🏆</div>
           <p className="onchain-lb__empty-title">Rankings Locked</p>
           <p className="onchain-lb__empty-desc">
-            {typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay)
+            {typeof window !== 'undefined' && (window.ethereum?.isMiniPay || window.provider?.isMiniPay)
               ? "Initializing on-chain stats..."
               : "Connect wallet to see your global ELO ranking and stats on the leaderboard."}
           </p>
-          {!(typeof window !== 'undefined' && ((window as any).ethereum?.isMiniPay || (window as any).provider?.isMiniPay)) && (
+          {!(typeof window !== 'undefined' && (window.ethereum?.isMiniPay || window.provider?.isMiniPay)) && (
             <button onClick={() => connect()} className="onchain-lb__empty-btn">
               Connect Wallet
             </button>

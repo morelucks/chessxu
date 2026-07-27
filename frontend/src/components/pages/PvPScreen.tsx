@@ -25,7 +25,7 @@ export default function PvPScreen() {
   const { cusdBalance, celoNativeBalance, expiresAt, hasAccess, isPurchasing, purchaseAccess, purchaseAccessWithCelo, requiresAccess } = useMiniPayAccess();
 
   // MiniPay users are always on Celo — skip daily access when gas is sponsored
-  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
+  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && window.ethereum?.isMiniPay);
   const effectiveRequiresAccess = isMiniPay && celo.gasSponsored ? false : requiresAccess;
 
   const timeControls = [

@@ -1,5 +1,4 @@
 // @vitest-environment jsdom
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { getGameBlockTimestamp, clearCache } from '../blockTimestampService';
 import celoService from '../../chess/services/celoService';

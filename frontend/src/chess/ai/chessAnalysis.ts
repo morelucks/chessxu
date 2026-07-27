@@ -96,7 +96,7 @@ function getPstValue(piece: string, x: number, y: number): number {
 }
 
 // Static evaluation of the board state
-export function evaluateBoard(position: any[][]): number {
+export function evaluateBoard(position: string[][]): number {
     let score = 0;
     for (let r = 0; r < 8; r++) {
         for (let f = 0; f < 8; f++) {
@@ -174,14 +174,14 @@ export function getStandardNotation(piece: string, fromX: number, fromY: number,
 
 // Interface for search options
 export interface SearchOptions {
-    position: any[][];
+    position: string[][];
     turn: string;
     castleDirection: { w: string; b: string };
-    prevPosition?: any[][];
+    prevPosition?: string[][];
 }
 
 // Get all possible moves for a player
-function getAllValidMoves(position: any[][], turn: string, castleDirection: { w: string; b: string }, prevPosition?: any[][]) {
+function getAllValidMoves(position: string[][], turn: string, castleDirection: { w: string; b: string }, prevPosition?: string[][]) {
     const pieces = getPieces(position, turn);
     const moves: Array<{ piece: string; rank: number; file: number; x: number; y: number }> = [];
 
@@ -279,20 +279,19 @@ export function getBestMove(options: SearchOptions, depth = 3): SuggestedMove | 
 }
 
 function minimax(
-    position: any[][],
+    position: string[][],
     depth: number,
     alpha: number,
     beta: number,
     isMaximizingPlayer: boolean,
     castleDirection: { w: string; b: string },
-    prevPosition?: any[][]
+    prevPosition?: string[][]
 ): number {
     const turn = isMaximizingPlayer ? 'w' : 'b';
     const moves = getAllValidMoves(position, turn, castleDirection, prevPosition);
 
     // Terminal states
     if (moves.length === 0) {
-        const opponent = turn === 'w' ? 'b' : 'w';
         const isCheck = arbiter.isPlayerInCheck({
             positionAfterMove: position,
             player: turn

@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onStartPlaying, isConnecting, isConnected }: HeroSectionProps) {
   const miniPayDetected = useAppStore((s) => s.miniPayDetected);
-  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
+  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && window.ethereum?.isMiniPay);
   return (
     <section className="container mx-auto px-6 py-24 max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

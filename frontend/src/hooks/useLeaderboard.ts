@@ -1,10 +1,23 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { useStacksChess } from './useStacksChess';
 
+export interface PlayerStatsData {
+  gamesPlayed?: number;
+  wins?: number;
+  losses?: number;
+  draws?: number;
+  [key: string]: unknown;
+}
+
+export interface GlobalStatsData {
+  totalGames?: number;
+  activePlayers?: number;
+  [key: string]: unknown;
+}
+
 export function usePlayerStats(address: string | null) {
   const { getPlayerStats, getPlayerElo, formatElo } = useStacksChess();
-  const [stats, setStats] = useState<any>(null);
+  const [stats, setStats] = useState<PlayerStatsData | null>(null);
   const [elo, setElo] = useState<string>('1200');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,10 +31,11 @@ export function usePlayerStats(address: string | null) {
         getPlayerStats(address),
         getPlayerElo(address),
       ]);
-      setStats(playerStats);
+      setStats(playerStats as PlayerStatsData | null);
       setElo(formatElo(playerElo));
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch player stats');
+    } catch (err: unknown) {
+      const errorObj = err as Error;
+      setError(errorObj?.message || 'Failed to fetch player stats');
     } finally {
       setLoading(false);
     }
@@ -38,7 +52,7 @@ export function usePlayerStats(address: string | null) {
 
 export function useGlobalStats() {
   const { getGlobalStats } = useStacksChess();
-  const [globalStats, setGlobalStats] = useState<any>(null);
+  const [globalStats, setGlobalStats] = useState<GlobalStatsData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -47,9 +61,10 @@ export function useGlobalStats() {
     setError(null);
     try {
       const data = await getGlobalStats();
-      setGlobalStats(data);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch global stats');
+      setGlobalStats(data as GlobalStatsData | null);
+    } catch (err: unknown) {
+      const errorObj = err as Error;
+      setError(errorObj?.message || 'Failed to fetch global stats');
     } finally {
       setLoading(false);
     }

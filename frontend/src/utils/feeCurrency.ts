@@ -13,6 +13,7 @@
  *     balance against the estimated fee cost.
  *  4. Return the first currency that can cover the fee.
  */
+import { PublicClient } from 'viem';
 import { CELO_FEE_CURRENCIES } from '../chess/blockchainConstants';
 
 // ---------- ABI fragments ----------
@@ -26,22 +27,10 @@ const ERC20_BALANCE_ABI = [
   },
 ] as const;
 
-// ---------- Constants ----------
-/** 20 % safety margin on gas estimates */
-const GAS_SAFETY_NUMERATOR = BigInt(12);
-const GAS_SAFETY_DENOMINATOR = BigInt(10);
-
-/** Extra gas the fee-abstraction debit/credit calls consume */
-const FEE_ABSTRACTION_GAS_OVERHEAD = BigInt(50_000);
-
 // ---------- Helpers ----------
-const pow10 = (exp: number): bigint => {
-  let v = 1n;
-  for (let i = 0; i < exp; i++) v *= 10n;
-  return v;
-};
 
-/** Normalize an amount to 18 decimals so that comparisons are apples-to-apples */
+const pow10 = (exponent: number): bigint => 10n ** BigInt(exponent);
+
 const normalizeTo18 = (amount: bigint, decimals: number): bigint => {
   if (decimals === 18) return amount;
   return decimals < 18
@@ -51,8 +40,7 @@ const normalizeTo18 = (amount: bigint, decimals: number): bigint => {
 
 // ---------- Public API ----------
 export interface SelectFeeCurrencyParams {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  publicClient: any;
+  publicClient: PublicClient | { estimateGas: (args: unknown) => Promise<bigint>; readContract: (args: unknown) => Promise<unknown> };
   account: `0x${string}`;
   to: `0x${string}`;
   data?: `0x${string}`;

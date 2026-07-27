@@ -66,7 +66,7 @@ describe('gameHistoryUtils', () => {
     });
 
     it('returns Unknown for invalid status', () => {
-      expect(getStatusText(99 as any)).toBe('Unknown');
+      expect(getStatusText(99 as unknown as number)).toBe('Unknown');
     });
   });
 
@@ -74,7 +74,7 @@ describe('gameHistoryUtils', () => {
     it('returns a hex color string for valid statuses', () => {
       expect(getStatusColor(0)).toBe('#fbbf24');
       expect(getStatusColor(2)).toBe('#22c55e');
-      expect(getStatusColor(99 as any)).toBe('#94a3b8');
+      expect(getStatusColor(99 as unknown as number)).toBe('#94a3b8');
     });
   });
 
@@ -83,7 +83,7 @@ describe('gameHistoryUtils', () => {
       expect(getResultColor('win')).toBe('#22c55e');
       expect(getResultColor('loss')).toBe('#ef4444');
       expect(getResultColor('draw')).toBe('#94a3b8');
-      expect(getResultColor(undefined as any)).toBe('#f59e0b');
+      expect(getResultColor(undefined as unknown as string)).toBe('#f59e0b');
     });
   });
 

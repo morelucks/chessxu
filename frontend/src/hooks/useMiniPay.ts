@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import useAppStore from '../zustand/store';
 import celoService from '../chess/services/celoService';
@@ -12,7 +11,7 @@ export const useMiniPay = () => {
   useEffect(() => {
     const checkAndConnectMiniPay = async () => {
       const provider = typeof window !== 'undefined' ? window.ethereum : undefined;
-      const detected = Boolean(provider && (provider as any).isMiniPay);
+      const detected = Boolean(provider && provider.isMiniPay);
       setMiniPayDetected(detected);
 
       // Check if the current environment is MiniPay

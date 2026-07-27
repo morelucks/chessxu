@@ -15,6 +15,7 @@
 
 import celoService from '../chess/services/celoService';
 import { CELO_CONFIG, NETWORK } from '../chess/blockchainConstants';
+import { CeloscanTxResult } from '../types/celo';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -109,7 +110,7 @@ async function getCeloGameTimestamp(gameId: number): Promise<number> {
     // createGame selector: first 4 bytes of keccak256("createGame(uint256,bool)")
     // = 0x2d913e35  (pre-computed)
     const CREATE_GAME_SELECTOR = '0x2d913e35';
-    const createGameTxs = (data.result as any[]).filter(
+    const createGameTxs = (data.result as CeloscanTxResult[]).filter(
       (tx) => tx.input?.startsWith(CREATE_GAME_SELECTOR) && tx.isError === '0'
     );
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Chessxu Celo Service Layer
  * 
@@ -50,6 +49,8 @@ import {
   waitForUserOpReceipt,
   UserOperation,
 } from './paymasterClient';
+import { CeloGameStruct, GasSponsorshipInfo } from '../../types/celo';
+
 
 
 /**
@@ -64,7 +65,7 @@ const celoService = {
   /**
    * Returns gas sponsorship metadata for the current session
    */
-  getGasSponsorshipInfo: () => ({
+  getGasSponsorshipInfo: (): GasSponsorshipInfo => ({
     isSponsored: true,
     sponsor: 'Chessxu Foundation',
     method: 'Paymaster',
@@ -99,7 +100,7 @@ const celoService = {
       return null;
     }
 
-    return (window as any).ethereum || (window as any).provider || null;
+    return window.ethereum || window.provider || null;
   },
 
   /**
@@ -176,7 +177,7 @@ const celoService = {
       throw new Error(celoService.ERROR_MESSAGES.WALLET_NOT_FOUND);
     }
 
-    const rawChainId = await provider.request({ method: 'eth_chainId' });
+    const rawChainId = (await provider.request({ method: 'eth_chainId' })) as string;
     return Number.parseInt(rawChainId, 16);
   },
 
@@ -193,8 +194,9 @@ const celoService = {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: chainHex }],
       });
-    } catch (error: any) {
-      if (error?.code !== 4902) {
+    } catch (error: unknown) {
+      const err = error as { code?: number };
+      if (err?.code !== 4902) {
         throw error;
       }
 
@@ -343,8 +345,9 @@ const celoService = {
         if (receipt) {
           return receipt;
         }
-      } catch (error: any) {
-        if (error?.name !== 'TransactionReceiptNotFoundError') {
+      } catch (error: unknown) {
+        const err = error as { name?: string };
+        if (err?.name !== 'TransactionReceiptNotFoundError') {
           throw error;
         }
       }
@@ -387,9 +390,9 @@ const celoService = {
    */
   executeWithPaymaster: async (
     targetAddress: `0x${string}`,
-    abi: any,
+    abi: typeof CHESSXU_ABI | typeof erc20Abi,
     functionName: string,
-    args: any[],
+    args: readonly unknown[],
     value: bigint = 0n,
   ): Promise<`0x${string}`> => {
     const walletClient = celoService.getWalletClient();
@@ -593,9 +596,9 @@ const celoService = {
    */
   executeWithFallback: async (
     targetAddress: `0x${string}`,
-    abi: any,
+    abi: typeof CHESSXU_ABI | typeof erc20Abi,
     functionName: string,
-    args: any[],
+    args: readonly unknown[],
     value: bigint = 0n,
   ): Promise<`0x${string}`> => {
     if (celoService.gasSponsored) {
@@ -610,23 +613,23 @@ const celoService = {
     const [address] = await walletClient.requestAddresses();
     
     const data = encodeFunctionData({
-      abi,
-      functionName,
-      args,
+      abi: abi as typeof CHESSXU_ABI,
+      functionName: functionName as never,
+      args: args as never,
     });
 
     const feeCurrency = await celoService.selectFeeCurrency(address, targetAddress, data, value);
 
     return await walletClient.writeContract({
       address: targetAddress,
-      abi,
-      functionName: 'executeWithFallback' === functionName ? '' : functionName, // fallback targets the exact same function name
-      args,
+      abi: abi as typeof CHESSXU_ABI,
+      functionName: ('executeWithFallback' === functionName ? '' : functionName) as never, // fallback targets the exact same function name
+      args: args as never,
       account: address,
       value,
       ...(feeCurrency ? { feeCurrency } : {}),
       ...celoService.getTxOptions(),
-    } as any);
+    } as Parameters<typeof walletClient.writeContract>[0]);
   },
 
   // --- Write Operations ---
@@ -706,20 +709,21 @@ const celoService = {
    * Fetches the current game state from the blockchain
    * @param {number} gameId - The ID of the game to fetch
    */
-  getGame: async (gameId: number) => {
-    return await celoService.getPublicClient().readContract({
+  getGame: async (gameId: number): Promise<CeloGameStruct> => {
+    const result = await celoService.getPublicClient().readContract({
       address: celoService.getContractAddress(),
       abi: CHESSXU_ABI,
       functionName: 'getGame',
       args: [BigInt(gameId)],
     });
+    return result as unknown as CeloGameStruct;
   },
 
   /**
    * Fetches the current game state (alias for consistency)
    * @param {number} gameId - The ID of the game to fetch
    */
-  getGameState: async (gameId: number) => {
+  getGameState: async (gameId: number): Promise<CeloGameStruct> => {
     return await celoService.getGame(gameId);
   },
 
@@ -749,7 +753,7 @@ const celoService = {
    * @param {number} gameId - The game ID
    */
   isNative: async (gameId: number) => {
-    const game = await celoService.getGame(gameId) as any;
+    const game = await celoService.getGame(gameId);
     return game.isNative;
   },
 
@@ -758,7 +762,7 @@ const celoService = {
    * @param {number} gameId - The game ID
    */
   getWager: async (gameId: number) => {
-    const game = await celoService.getGame(gameId) as any;
+    const game = await celoService.getGame(gameId);
     return game.wager;
   },
 
@@ -775,10 +779,10 @@ const celoService = {
    * @param {number} gameId - The game ID
    */
   getGamePlayers: async (gameId: number) => {
-    const game = await celoService.getGame(gameId) as any;
+    const game = await celoService.getGame(gameId);
     return {
-      white: game.white,
-      black: game.black,
+      white: game.playerW || game.white || '',
+      black: game.playerB || game.black || '',
     };
   },
 
@@ -787,8 +791,8 @@ const celoService = {
    * @param {number} gameId - The game ID
    */
   isGameOver: async (gameId: number) => {
-    const game = await celoService.getGame(gameId) as any;
-    return game.winner > 0;
+    const game = await celoService.getGame(gameId);
+    return game.status > 1 || (game.winner !== undefined && game.winner > 0);
   },
 
   /**
@@ -812,7 +816,6 @@ const celoService = {
    * Returns the token balance (XU) of an address
    * @param {string} address - The wallet address
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTokenBalance: async (_address: `0x${string}`) => {
     // This assumes the contract implements a balance method or uses an ERC20 token
     return 0n;

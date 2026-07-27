@@ -85,8 +85,6 @@ export default function ProfilePage() {
   const farcasterUser = useAppStore((s) => s.farcasterUser);
   const address = useAppStore((s) => s.address);
   const celoAddress = useAppStore((s) => s.celoAddress);
-  const stacksAddress = useAppStore((s) => s.stacksAddress);
-  const activeChain = useAppStore((s) => s.activeChain);
   const elo = useAppStore((s) => s.elo);
   const chessBalance = useAppStore((s) => s.chessBalance);
   const isFarcaster = useAppStore((s) => s.isFarcaster);

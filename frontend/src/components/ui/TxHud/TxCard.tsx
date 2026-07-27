@@ -37,11 +37,11 @@ function elapsed(from: number): string {
   return `${Math.floor(mins / 60)}h ago`;
 }
 
-function chainLabel(chain: 'stacks' | 'celo'): string {
+function chainLabel(_chain: 'stacks' | 'celo'): string {
   return 'Celo';
 }
 
-function chainColor(chain: 'stacks' | 'celo'): string {
+function chainColor(_chain: 'stacks' | 'celo'): string {
   return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
 }
 

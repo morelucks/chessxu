@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatUnits } from 'viem';
 import { useToaster } from '../components/ui/toasts/ToasterProvider';
-import { CELO_CONFIG, NETWORK } from '../chess/blockchainConstants';
+import { CELO_CONFIG } from '../chess/blockchainConstants';
 import celoService from '../chess/services/celoService';
 import useAppStore from '../zustand/store';
 

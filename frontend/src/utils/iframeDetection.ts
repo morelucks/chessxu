@@ -10,8 +10,7 @@ export const isInsideIframe = () => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const sendIframeMessage = (type: string, payload?: any) => {
+export const sendIframeMessage = (type: string, payload?: unknown) => {
   if (!isInsideIframe()) return;
   
   try {

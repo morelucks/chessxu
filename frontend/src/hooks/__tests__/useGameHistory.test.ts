@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
@@ -12,7 +11,7 @@ vi.mock('../../zustand/store', () => {
     address: '0x1111111111111111111111111111111111111111',
     activeChain: 'Celo',
   };
-  const mockUseAppStore = (selector: any) => selector(store);
+  const mockUseAppStore = (selector: (s: typeof store) => unknown) => selector(store);
   return {
     default: mockUseAppStore,
     useAppStore: mockUseAppStore,
@@ -69,7 +68,7 @@ describe('useGameHistory hook', () => {
   });
 
   it('should load games initially', async () => {
-    let result: any;
+    let result: ReturnType<typeof renderHook<ReturnType<typeof useGameHistory>>>['result'];
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
@@ -80,20 +79,20 @@ describe('useGameHistory hook', () => {
       '0x1111111111111111111111111111111111111111',
       'Celo'
     );
-    expect(result.current.games).toHaveLength(2);
-    expect(result.current.loading).toBe(false);
-    expect(result.current.error).toBeNull();
-    expect(result.current.lastSync).toBe(123456789);
+    expect(result!.current.games).toHaveLength(2);
+    expect(result!.current.loading).toBe(false);
+    expect(result!.current.error).toBeNull();
+    expect(result!.current.lastSync).toBe(123456789);
   });
 
   it('should calculate correct stats', async () => {
-    let result: any;
+    let result: ReturnType<typeof renderHook<ReturnType<typeof useGameHistory>>>['result'];
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
     });
 
-    expect(result.current.stats).toEqual({
+    expect(result!.current.stats).toEqual({
       totalGames: 2,
       wins: 1, // status: 2 (White wins), user is playerW (White) -> win
       losses: 0,
@@ -103,30 +102,30 @@ describe('useGameHistory hook', () => {
   });
 
   it('should retrieve a specific game by ID', async () => {
-    let result: any;
+    let result: ReturnType<typeof renderHook<ReturnType<typeof useGameHistory>>>['result'];
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
     });
 
-    const game = result.current.getGame(1);
+    const game = result!.current.getGame(1);
     expect(game).toBeDefined();
     expect(game?.gameId).toBe(1);
 
-    const nonExistent = result.current.getGame(99);
+    const nonExistent = result!.current.getGame(99);
     expect(nonExistent).toBeUndefined();
   });
 
   it('should support manual sync (syncNow)', async () => {
-    let result: any;
+    let result: ReturnType<typeof renderHook<ReturnType<typeof useGameHistory>>>['result'];
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
     });
 
-    let syncResult: any;
+    let syncResult: { added: number; updated: number; failed: number } | undefined;
     await act(async () => {
-      syncResult = await result.current.syncNow(true);
+      syncResult = await result!.current.syncNow(true);
     });
 
     expect(gameSyncService.syncPlayerGames).toHaveBeenCalledWith(
@@ -142,7 +141,7 @@ describe('useGameHistory hook', () => {
   });
 
   it('should support manual refresh', async () => {
-    let result: any;
+    let result: ReturnType<typeof renderHook<ReturnType<typeof useGameHistory>>>['result'];
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
@@ -152,7 +151,7 @@ describe('useGameHistory hook', () => {
     vi.mocked(gameHistoryDB.getPlayerGames).mockClear();
 
     await act(async () => {
-      await result.current.refresh();
+      await result!.current.refresh();
     });
 
     expect(gameHistoryDB.getPlayerGames).toHaveBeenCalledTimes(1);
@@ -163,14 +162,14 @@ describe('useGameHistory hook', () => {
       new Error('DB Query Failed')
     );
 
-    let result: any;
+    let result: ReturnType<typeof renderHook<ReturnType<typeof useGameHistory>>>['result'];
     await act(async () => {
       const rendered = renderHook(() => useGameHistory());
       result = rendered.result;
     });
 
-    expect(result.current.loading).toBe(false);
-    expect(result.current.error).toBe('DB Query Failed');
-    expect(result.current.games).toEqual([]);
+    expect(result!.current.loading).toBe(false);
+    expect(result!.current.error).toBe('DB Query Failed');
+    expect(result!.current.games).toEqual([]);
   });
 });

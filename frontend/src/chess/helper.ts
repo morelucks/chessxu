@@ -1,5 +1,5 @@
 import { puzzleFENs } from './puzzles';
-import type { Position, Piece, PieceType, Coordinate } from '../types/chess';
+import type { Position } from '../types/chess';
 
 /**
  * Convert file number to character (a-h)

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../../contexts/Context';
 import { setupNewGame } from '../../../reducer/actions/game';
-import { saveStakeData, getDummyBalance, resetDummyBalance } from '../../../helper/stakeStorage';
-import { winProbabilityPercent, projectEloAfterWin } from '../../../utils/eloUtils';
+import { saveStakeData } from '../../../helper/stakeStorage';
+import { winProbabilityPercent } from '../../../utils/eloUtils';
 import { useCeloChess } from '../../../../hooks/useCeloChess';
 import useAppStore from '../../../../zustand/store';
 import celoService from '../../../services/celoService';
 import './StakingModal.css';
 
 const StakingModal = ({ onClosePopup }) => {
-    const { appState: { gameMode }, dispatch } = useAppContext();
+    const { dispatch } = useAppContext();
     const celo = useCeloChess();
     const address = useAppStore((state) => state.address);
     const [stakeAmount, setStakeAmount] = useState('');

@@ -12,7 +12,7 @@ import {
   getKingPosition
 } from './getMoves';
 import { movePiece, movePawn } from './move';
-import type { Position, Piece, PieceColor, Coordinate, CastleDirection, CastleRights } from '../../types/chess';
+import type { Position, Piece, PieceColor, Coordinate, CastleRights } from '../../types/chess';
 
 interface MoveParams {
   position: Position;

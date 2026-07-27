@@ -4,11 +4,11 @@ import { getComputerMove } from '../ai/chessAI';
 import arbiter from '../arbiter/arbiter';
 import { saveGameResult } from '../helper/localStorage';
 import { createPosition, createPuzzlePosition } from '../helper';
-import type { GameState, PieceColor, Coordinate, PromotionSquare, CastleDirection } from '../../types/chess';
+import type { GameState, PieceColor, CastleDirection } from '../../types/chess';
 
 interface Action {
   type: string;
-  payload?: any;
+  payload?: unknown;
 }
 
 /**

@@ -18,3 +18,5 @@ export const SentryTestButton: React.FC = () => {
     }
 // Sentry diagnostic test button interface
   };
+// Sentry diagnostic test button interface
+  const triggerMessage = () => {

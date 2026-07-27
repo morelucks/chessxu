@@ -21,3 +21,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 16, title: "refactor(celo): replace as any cast in isNative helper function", timestamp: "2026-07-27T04:21:00Z" },
   { id: 17, title: "refactor(celo): replace as any cast in getWager helper function", timestamp: "2026-07-27T04:21:00Z" },
   { id: 18, title: "refactor(celo): replace as any cast in getGamePlayers helper function", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 19, title: "refactor(celo): replace as any cast in isGameOver helper function", timestamp: "2026-07-27T04:21:00Z" },

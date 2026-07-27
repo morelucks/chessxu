@@ -24,3 +24,4 @@ export interface SentryBreadcrumbData {
   message: string;
   level?: SentrySeverity;
   data?: Record<string, unknown>;
+  timestamp?: number;

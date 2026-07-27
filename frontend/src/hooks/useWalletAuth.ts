@@ -19,8 +19,8 @@ export function useWalletAuth() {
   const setConnectModalOpen = useAppStore((state) => state.setConnectModalOpen);
 
   const connect = async ({ onFinish, onCancel, chain }: ConnectOptions = {}) => {
-    const { isFarcaster, miniPayDetected } = useAppStore.getState();
-    const ethereum = typeof window !== 'undefined' ? (window as any).ethereum : undefined;
+    const { miniPayDetected } = useAppStore.getState();
+    const ethereum = typeof window !== 'undefined' ? window.ethereum : undefined;
     const isMiniPay = Boolean(miniPayDetected || (ethereum && ethereum.isMiniPay));
 
     if (!chain) {

@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { duneAlertService, DuneEventRow } from '../duneAlertService';
 import { useNotificationStore } from '../../zustand/notificationStore';
+import { AppNotification } from '../notificationDB';
 
 // Mock Zustand store
 vi.mock('../../zustand/notificationStore', () => {
   const mockStore = {
-    notifications: [] as any[],
+    notifications: [] as AppNotification[],
     enabledAlerts: {
       game_joined: true,
       game_resolved: true,
@@ -22,14 +22,15 @@ vi.mock('../../zustand/notificationStore', () => {
     },
     enabledChannels: {
       in_app: true,
-      farcaster_push: true,
-      webhook: true,
+      farcaster_push: false,
+      webhook: false,
     },
-    farcasterPushEnabled: true,
-    farcasterPushToken: 'mock-token',
-    farcasterPushUrl: 'https://mock.farcaster/push',
-    webhookUrl: 'https://mock.webhook/discord',
+    farcasterPushEnabled: false,
+    farcasterPushToken: null,
+    farcasterPushUrl: null,
+    webhookUrl: '',
     addNotification: vi.fn(),
+    loadNotifications: vi.fn().mockResolvedValue(undefined),
   };
 
   return {
@@ -40,7 +41,7 @@ vi.mock('../../zustand/notificationStore', () => {
 });
 
 describe('DuneAlertService - Alert Evaluation Logic', () => {
-  const storeState = useNotificationStore.getState() as any;
+  const storeState = useNotificationStore.getState() as unknown as { notifications: AppNotification[]; addNotification: ReturnType<typeof vi.fn> };
   const currentUser = '0x1111111111111111111111111111111111111111';
 
   beforeEach(() => {

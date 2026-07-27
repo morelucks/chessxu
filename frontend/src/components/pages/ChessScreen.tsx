@@ -1,7 +1,5 @@
-// Import the chess components
 import ChessGameWrapper from "../ChessGameWrapper";
 
-import { useState, useEffect } from "react";
 import OfflineModeBanner from "../OfflineModeBanner";
 import { useFreemium } from "../../hooks/useFreemium";
 import { useNavigate } from "react-router-dom";
@@ -17,9 +15,6 @@ export default function ChessScreen() {
   const activeGameId = useAppStore((state) => state.activeGameId);
   const { hasAccess, expiresAt, requiresAccess } = useMiniPayAccess();
   const { isOfflineMode } = useFreemium();
-
-  // MiniPay is always Celo — no chain alternation needed
-  const displayChain = activeChain || 'celo';
 
   return (
     <div className="flex-1 min-h-0 bg-slate-900 flex flex-col overflow-hidden">

@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useStacksChess } from '../hooks/useStacksChess';
 import useAppStore from '../zustand/store';
+import { OnChainGameState } from '../types/chess';
 
 interface Props { onClose: () => void; }
 
 export default function JoinGameModal({ onClose }: Props) {
   const [gameId, setGameId] = useState('');
   const [joining, setJoining] = useState(false);
-  const [preview, setPreview] = useState<any>(null);
+  const [preview, setPreview] = useState<OnChainGameState | null>(null);
   const { joinGame, getGame, getWagerDisplay, getTokenBalance } = useStacksChess();
   const address = useAppStore((state) => state.address);
   const [balance, setBalance] = useState(0);

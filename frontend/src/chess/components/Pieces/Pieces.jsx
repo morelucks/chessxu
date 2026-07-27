@@ -97,23 +97,33 @@ const Pieces = () => {
     
     const onDragOver = e => {e.preventDefault()}
 
+    // Collect piece elements with stable keys based on piece type & instance count to enable smooth CSS transform glide animations
+    const counts = {};
+    const pieceElements = [];
+    currentPosition.forEach((r, rank) => {
+        r.forEach((f, file) => {
+            const piece = currentPosition[rank][file];
+            if (piece) {
+                counts[piece] = (counts[piece] || 0) + 1;
+                const key = `${piece}-${counts[piece]}`;
+                pieceElements.push(
+                    <Piece 
+                        key={key} 
+                        rank={rank}
+                        file={file}
+                        piece={piece}
+                    />
+                );
+            }
+        });
+    });
+
     return <div 
         className='pieces' 
         ref={ref} 
         onDrop={onDrop} 
         onDragOver={onDragOver} > 
-        {currentPosition.map((r,rank) => 
-            r.map((f,file) => 
-                currentPosition[rank][file]
-                ?   <Piece 
-                        key={rank+'-'+file} 
-                        rank = {rank}
-                        file = {file}
-                        piece = {currentPosition[rank][file]}
-                    />
-                :   null
-            )   
-        )}
+        {pieceElements}
     </div>
 }
 

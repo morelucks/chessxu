@@ -50,3 +50,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
       environment,
 // Sentry configuration block enhancement
       tracesSampleRate,
+// Sentry configuration block enhancement
+      replaysSessionSampleRate,

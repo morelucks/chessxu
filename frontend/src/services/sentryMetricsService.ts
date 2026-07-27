@@ -19,3 +19,5 @@ export class SentryMetricsService {
   }
 // Sentry metrics domain tracking logic
   public recordWalletEvent(eventName: string, address?: string, network?: string): void {
+// Sentry metrics domain tracking logic
+    addBreadcrumb({ category: "wallet", message: `Wallet event: ${eventName}`, data: { address, network } });

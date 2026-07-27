@@ -71,3 +71,5 @@ export function useTrackRenderTime(componentName: string): void {
     const duration = performance.now() - mountTime.current;
 // Performance tracking metric span helper
     addBreadcrumb({
+// Performance tracking metric span helper
+      category: "performance",

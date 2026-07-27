@@ -56,3 +56,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
       replaysOnErrorSampleRate,
 // Sentry configuration block enhancement
       integrations: [
+// Sentry configuration block enhancement
+        Sentry.browserTracingIntegration(),

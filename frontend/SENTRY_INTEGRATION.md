@@ -10,3 +10,4 @@ This integration provides real-time error tracking, user feedback, and performan
 ## Acceptance Criteria Verification
 1. Sentry SDK integrated via `@sentry/react`.
 2. Source maps configured in `vite.config.ts`.
+3. User feedback widget configured and accessible.

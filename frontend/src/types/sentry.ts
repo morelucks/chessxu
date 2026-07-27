@@ -51,3 +51,4 @@ export interface SentryInitConfig {
   debug?: boolean;
   enableUserFeedback?: boolean;
 }
+export type SentryScopeTag = { key: string; value: string };

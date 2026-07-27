@@ -116,3 +116,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 111, title: "refactor(Pieces.jsx): optimize CSS transform transition easing curve tuning" },
   { id: 112, title: "refactor(ChessGameWrapper): optimize king castling dual piece transition timing" },
   { id: 113, title: "refactor(Pieces.css): optimize drag and drop transform coordinate calculation" },
+  { id: 114, title: "refactor(Board.jsx): optimize Vite CSS asset bundling for piece stylesheets" },

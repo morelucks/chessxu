@@ -10,3 +10,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 5, title: "refactor(celo): import CeloGameStruct and GasSponsorshipInfo in celoService", timestamp: "2026-07-27T04:21:00Z" },
   { id: 6, title: "refactor(celo): remove top-level eslint-disable no-explicit-any directive", timestamp: "2026-07-27T04:21:00Z" },
   { id: 7, title: "refactor(celo): add explicit GasSponsorshipInfo return type to getGasSponsorshipInfo", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 8, title: "refactor(celo): update getProvider to return typed EIP-1193 provider", timestamp: "2026-07-27T04:21:00Z" },

@@ -48,3 +48,4 @@ export interface SentryInitConfig {
   tracesSampleRate: number;
   replaysSessionSampleRate: number;
   replaysOnErrorSampleRate: number;
+  debug?: boolean;

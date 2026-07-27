@@ -7,3 +7,4 @@ export interface SentryUserContext {
   id?: string;
   username?: string;
   email?: string;
+  walletAddress?: string;

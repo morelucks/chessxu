@@ -32,3 +32,5 @@ export const SentryTestButton: React.FC = () => {
   return (
 // Sentry diagnostic test button interface
     <div className="p-4 bg-slate-900 border border-slate-800 rounded-lg text-slate-200">
+// Sentry diagnostic test button interface
+      <h3 className="font-semibold text-sm mb-2">Sentry Controls</h3>

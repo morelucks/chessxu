@@ -12,3 +12,4 @@ export interface SentryUserContext {
   isMiniPay?: boolean;
   ip_address?: string;
 }
+export interface SentryErrorContext {

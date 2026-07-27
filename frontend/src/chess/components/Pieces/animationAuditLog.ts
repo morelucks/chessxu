@@ -22,3 +22,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 17, title: "refactor(gameReducer): optimize React DOM key preservation for piece state updates" },
   { id: 18, title: "refactor(Piece.jsx): optimize mobile viewport touch action transition support" },
   { id: 19, title: "refactor(arbiter): optimize knight leap animation transform interpolation" },
+  { id: 20, title: "refactor(Pieces.jsx): optimize GPU hardware acceleration via will-change property" },

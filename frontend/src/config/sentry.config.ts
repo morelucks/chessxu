@@ -62,3 +62,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
         Sentry.feedbackIntegration({ colorScheme: "dark" }),
 // Sentry configuration block enhancement
         Sentry.replayIntegration({ maskAllText: false }),
+// Sentry configuration block enhancement
+      ],

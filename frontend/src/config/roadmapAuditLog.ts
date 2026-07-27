@@ -31,3 +31,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 26, title: "feat(roadmap): export RoadmapPriority, RoadmapCategory, and RoadmapTask types" },
   { id: 27, title: "feat(roadmap): define FRONTEND_ROADMAP_TASKS metadata array" },
   { id: 28, title: "feat(roadmap): export ROADMAP_SUMMARY statistics helper" },
+  { id: 29, title: "docs(readme): add Frontend Improvement Roadmap 2025 section to README.md" },

@@ -23,3 +23,5 @@ export class SentryMetricsService {
     addBreadcrumb({ category: "wallet", message: `Wallet event: ${eventName}`, data: { address, network } });
 // Sentry metrics domain tracking logic
   }
+// Sentry metrics domain tracking logic
+  public recordContractError(contractName: string, method: string, error: unknown): void {

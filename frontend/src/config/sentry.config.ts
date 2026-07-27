@@ -48,3 +48,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
       dsn,
 // Sentry configuration block enhancement
       environment,
+// Sentry configuration block enhancement
+      tracesSampleRate,

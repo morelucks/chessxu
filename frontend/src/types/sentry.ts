@@ -45,3 +45,4 @@ export interface SentryPerformanceMetric {
 export interface SentryInitConfig {
   dsn: string;
   environment: string;
+  tracesSampleRate: number;

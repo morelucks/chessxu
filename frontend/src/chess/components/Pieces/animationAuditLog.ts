@@ -6,3 +6,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 1, title: "feat(chess): add transform transition to .piece class in Pieces.css" },
   { id: 2, title: "feat(chess): configure cubic-bezier cubic-bezier(0.4, 0, 0.2, 1) transition easing" },
   { id: 3, title: "feat(chess): add will-change transform hint to optimize GPU rendering for piece movement" },
+  { id: 4, title: "feat(chess): implement stable piece identity keys in Pieces.jsx to enable DOM reuse" },

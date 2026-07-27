@@ -36,3 +36,4 @@ export interface SentryFeedbackOptions {
   showBranding?: boolean;
   autoInject?: boolean;
 }
+export interface SentryPerformanceMetric {

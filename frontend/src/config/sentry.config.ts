@@ -14,3 +14,5 @@ const DEFAULT_REPLAYS_SESSION_RATE = parseFloat(import.meta.env.VITE_SENTRY_REPL
 const DEFAULT_REPLAYS_ON_ERROR_RATE = parseFloat(import.meta.env.VITE_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE || "1.0");
 // Sentry configuration block enhancement
 export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean {
+// Sentry configuration block enhancement
+  if (isInitialized) {

@@ -82,3 +82,5 @@ export function showFeedbackWidget(): void {
 export function captureException(error: unknown, context?: SentryErrorContext): string {
 // Sentry logger helper declaration
   if (context) {
+// Sentry logger helper declaration
+    return Sentry.withScope((scope) => {

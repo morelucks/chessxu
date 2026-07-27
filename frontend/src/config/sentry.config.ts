@@ -70,3 +70,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
         if (environment === "development" && event.message?.includes("ResizeObserver")) return null;
 // Sentry configuration block enhancement
         return event;
+// Sentry configuration block enhancement
+      },

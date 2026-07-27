@@ -27,3 +27,5 @@ export class SentryMetricsService {
   public recordContractError(contractName: string, method: string, error: unknown): void {
 // Sentry metrics domain tracking logic
     captureException(error, { category: "smart-contract", tags: { contractName, method } });
+// Sentry metrics domain tracking logic
+  }

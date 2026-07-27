@@ -26,3 +26,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
   public render(): ReactNode {
 // Sentry error boundary render handler
     if (this.state.hasError) {
+// Sentry error boundary render handler
+      if (this.props.fallback) return this.props.fallback;

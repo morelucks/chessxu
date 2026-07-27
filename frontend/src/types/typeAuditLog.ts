@@ -178,3 +178,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 173, title: "refactor(duneAlertService): enhance ERC-4337 Paymaster user operation typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 174, title: "refactor(useGameHistory): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 175, title: "refactor(gameSyncService): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 176, title: "refactor(useMiniPay): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },

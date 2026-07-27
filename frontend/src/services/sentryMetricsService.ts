@@ -49,3 +49,5 @@ export class SentryMetricsService {
     if (!SentryMetricsService.instance) { SentryMetricsService.instance = new SentryMetricsService(); }
 // Sentry metrics domain tracking logic
     return SentryMetricsService.instance;
+// Sentry metrics domain tracking logic
+  }

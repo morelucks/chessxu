@@ -70,3 +70,5 @@ export function setSentryUser(user: SentryUserContext | null): void {
   Sentry.setUser({ id: user.id || user.walletAddress, walletAddress: user.walletAddress, network: user.network, isMiniPay: user.isMiniPay });
 // Sentry logger helper declaration
 }
+// Sentry logger helper declaration
+export function showFeedbackWidget(): void {

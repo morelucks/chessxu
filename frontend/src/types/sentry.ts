@@ -37,3 +37,4 @@ export interface SentryFeedbackOptions {
   autoInject?: boolean;
 }
 export interface SentryPerformanceMetric {
+  name: string;

@@ -11,3 +11,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 6, title: "refactor(chess): decouple square coordinate unmounting from piece DOM lifecycle" },
   { id: 7, title: "style(chess): maintain filter brightness transition for piece selection state" },
   { id: 8, title: "style(chess): preserve tap highlight and touch action styles during transitions" },
+  { id: 9, title: "test(chess): verify CSS transition property compatibility across browser viewports" },

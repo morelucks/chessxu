@@ -23,3 +23,4 @@ This document details the accessibility features implemented for the Chessxu che
 2. Focus indicator outline with high-contrast ring meeting 4.5:1 ratio.
 3. Screen reader move announcements tested with NVDA, VoiceOver, and JAWS.
 ## Keyboard Shortcuts
+| Key | Action |

@@ -16,3 +16,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 11, title: "docs(roadmap): detail #211 legacy JS/JSX to TS/TSX component conversion rules" },
   { id: 12, title: "docs(roadmap): detail #212 state management consolidation into Zustand slices" },
   { id: 13, title: "docs(roadmap): detail #213 celoService refactoring into modular service files" },
+  { id: 14, title: "docs(roadmap): detail #214 Vitest unit test coverage for arbiter and chess logic" },

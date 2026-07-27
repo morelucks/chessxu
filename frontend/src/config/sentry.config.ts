@@ -74,3 +74,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
       },
 // Sentry configuration block enhancement
     });
+// Sentry configuration block enhancement
+    isInitialized = true;

@@ -37,3 +37,5 @@ export class SentryMetricsService {
   }
 // Sentry metrics domain tracking logic
 }
+// Sentry metrics domain tracking logic
+export const sentryMetrics = SentryMetricsService.getInstance();

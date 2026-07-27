@@ -37,3 +37,4 @@ This document details the accessibility features implemented for the Chessxu che
 - `role="button"` and `tabIndex={0}` on each square tile
 - `aria-label`: Full description e.g. "Square e4, White Pawn"
 - `aria-pressed`: Reflects piece selection status
+- `aria-live="polite"`: Screen reader status announcement for moves

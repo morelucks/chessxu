@@ -55,3 +55,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 50, title: "refactor(HeroSection): remove as any cast on window.ethereum provider", timestamp: "2026-07-27T04:21:00Z" },
   { id: 51, title: "refactor(PvPScreen): remove as any cast on window.ethereum provider", timestamp: "2026-07-27T04:21:00Z" },
   { id: 52, title: "refactor(header): remove unused activeChain and isMiniPay state variables", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 53, title: "refactor(iframeDetection): remove eslint-disable and type payload as unknown", timestamp: "2026-07-27T04:21:00Z" },

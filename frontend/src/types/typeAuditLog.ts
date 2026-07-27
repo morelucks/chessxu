@@ -480,3 +480,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 475, title: "refactor(useCeloChess): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 476, title: "refactor(ConnectWalletModal): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
   { id: 477, title: "refactor(duneAlertService): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 478, title: "refactor(useGameHistory): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },

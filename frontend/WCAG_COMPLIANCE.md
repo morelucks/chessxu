@@ -67,3 +67,4 @@ This document details the accessibility features implemented for the Chessxu che
 ## Keyboard Shortcuts
 | Key | Action |
 | --- | --- |
+| Up Arrow | Move cursor up one rank |

@@ -65,5 +65,5 @@
     "@sentry/vite-plugin": "^2.0.0"
   },
   "description": "Chessxu Web Application with Sentry Error Tracking Support",
-  "author": "morelucks"
+  "author": "morelucks <luckykamshak@gmail.com>"
 }

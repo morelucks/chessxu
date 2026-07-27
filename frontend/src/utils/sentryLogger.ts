@@ -48,3 +48,5 @@ export function captureMessage(message: string, level: SentrySeverity = "info", 
 }
 // Sentry logger helper declaration
 export function addBreadcrumb(breadcrumb: SentryBreadcrumbData): void {
+// Sentry logger helper declaration
+  Sentry.addBreadcrumb({

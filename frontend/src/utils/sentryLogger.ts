@@ -34,3 +34,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
 }
 // Sentry logger helper declaration
 export function captureMessage(message: string, level: SentrySeverity = "info", context?: SentryErrorContext): string {
+// Sentry logger helper declaration
+  return Sentry.withScope((scope) => {

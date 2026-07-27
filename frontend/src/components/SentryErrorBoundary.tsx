@@ -44,3 +44,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
             <button onClick={this.handleReportFeedback} className="px-4 py-2 bg-slate-800 border border-slate-700 rounded text-sm">Submit Feedback</button>
 // Sentry error boundary render handler
           </div>
+// Sentry error boundary render handler
+        </div>

@@ -44,3 +44,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   try {
 // Sentry configuration block enhancement
     Sentry.init({
+// Sentry configuration block enhancement
+      dsn,

@@ -290,3 +290,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 285, title: "refactor(duneAlertService): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },
   { id: 286, title: "refactor(useGameHistory): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },
   { id: 287, title: "refactor(gameSyncService): enhance MiniPay auto-connect provider property validation", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 288, title: "refactor(useMiniPay): enhance IndexedDB offline cache schema validation", timestamp: "2026-07-27T04:21:00Z" },

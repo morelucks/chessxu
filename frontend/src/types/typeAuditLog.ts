@@ -39,3 +39,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 34, title: "refactor(duneAlertService): remove top-level eslint-disable no-explicit-any", timestamp: "2026-07-27T04:21:00Z" },
   { id: 35, title: "refactor(duneAlertService): replace Record<string, any> with Record<string, unknown>", timestamp: "2026-07-27T04:21:00Z" },
   { id: 36, title: "refactor(notificationDB): replace Record<string, any> in AppNotification interface", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 37, title: "refactor(blockTimestampService): import CeloscanTxResult interface", timestamp: "2026-07-27T04:21:00Z" },

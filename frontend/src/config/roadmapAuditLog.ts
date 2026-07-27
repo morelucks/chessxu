@@ -151,3 +151,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 146, title: "docs(gameSyncService): update roadmap details for P0 ARIA gridcell and coordinate accessibility" },
   { id: 147, title: "docs(ChessGameWrapper): update roadmap details for P3 automated transaction retry queue handlers" },
   { id: 148, title: "docs(frontendRoadmap): update roadmap details for P1 Zustand global store slice consolidation" },
+  { id: 149, title: "docs(gameSyncService): update roadmap details for P3 Playwright end-to-end match flow fixtures" },

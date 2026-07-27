@@ -58,3 +58,19 @@ createRoot(rootElement).render(
     </PrivyProvider>
   </StrictMode>
 );
+
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook
+// Sentry application initialization hook

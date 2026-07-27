@@ -66,3 +66,5 @@ export function addBreadcrumb(breadcrumb: SentryBreadcrumbData): void {
 export function setSentryUser(user: SentryUserContext | null): void {
 // Sentry logger helper declaration
   if (!user) { Sentry.setUser(null); return; }
+// Sentry logger helper declaration
+  Sentry.setUser({ id: user.id || user.walletAddress, walletAddress: user.walletAddress, network: user.network, isMiniPay: user.isMiniPay });

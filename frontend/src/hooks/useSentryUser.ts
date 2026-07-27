@@ -73,3 +73,5 @@ export function useSentryUser(userContext: SentryUserContext | null): void {
   }, [userContext?.id, userContext?.walletAddress, userContext?.network, userContext?.isMiniPay]);
 // Sentry user hook effect binding
 }
+// Sentry user hook effect binding
+export function useSentryUser(userContext: SentryUserContext | null): void {

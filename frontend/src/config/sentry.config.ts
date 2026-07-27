@@ -92,3 +92,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
 }
 // Sentry configuration block enhancement
 export function isSentryInitialized(): boolean { return isInitialized; }
+// Sentry configuration block enhancement
+const DEFAULT_DSN = import.meta.env.VITE_SENTRY_DSN || "";

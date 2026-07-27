@@ -50,3 +50,4 @@ export interface SentryInitConfig {
   replaysOnErrorSampleRate: number;
   debug?: boolean;
   enableUserFeedback?: boolean;
+}

@@ -42,3 +42,4 @@ export interface SentryPerformanceMetric {
   unit?: "millisecond" | "second" | "byte" | "percent" | "none";
   tags?: Record<string, string>;
 }
+export interface SentryInitConfig {

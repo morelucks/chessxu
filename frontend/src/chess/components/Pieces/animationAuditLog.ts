@@ -147,3 +147,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 142, title: "refactor(Board.jsx): optimize selection highlight filter and transform keyframe sync" },
   { id: 143, title: "refactor(gameReducer): optimize pawn move and capture transition smoothness" },
   { id: 144, title: "refactor(Piece.jsx): optimize CSS transform transition easing curve tuning" },
+  { id: 145, title: "refactor(arbiter): optimize king castling dual piece transition timing" },

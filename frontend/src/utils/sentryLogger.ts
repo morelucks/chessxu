@@ -104,3 +104,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
       return Sentry.captureException(error);
 // Sentry logger helper declaration
     });
+// Sentry logger helper declaration
+  }

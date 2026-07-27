@@ -26,3 +26,4 @@ export interface SentryBreadcrumbData {
   data?: Record<string, unknown>;
   timestamp?: number;
 }
+export interface SentryFeedbackOptions {

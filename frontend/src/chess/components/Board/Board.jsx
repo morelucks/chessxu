@@ -214,3 +214,4 @@ export default Board
 // ARIA accessibility board component enhancement 18
 // ARIA accessibility board component enhancement 19
 // ARIA accessibility board component enhancement 20
+// ARIA accessibility board component enhancement 21

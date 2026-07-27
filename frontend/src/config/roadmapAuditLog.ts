@@ -188,3 +188,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 183, title: "docs(ChessGameWrapper): update roadmap details for P0 Error Boundary fallback component specs" },
   { id: 184, title: "docs(frontendRoadmap): update roadmap details for P3 Skeleton loader placeholder component design" },
   { id: 185, title: "docs(gameSyncService): update roadmap details for P0 ARIA gridcell and coordinate accessibility" },
+  { id: 186, title: "docs(ChessGameWrapper): update roadmap details for P3 automated transaction retry queue handlers" },

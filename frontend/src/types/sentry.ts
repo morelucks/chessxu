@@ -16,3 +16,4 @@ export interface SentryErrorContext {
   tags?: Record<string, string | number | boolean>;
   extra?: Record<string, unknown>;
   level?: SentrySeverity;
+  category?: string;

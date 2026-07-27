@@ -284,3 +284,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 279, title: "refactor(useWalletAuth): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 280, title: "refactor(stacksService): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 281, title: "refactor(useLeaderboard): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 282, title: "refactor(OnChainLeaderboard): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },

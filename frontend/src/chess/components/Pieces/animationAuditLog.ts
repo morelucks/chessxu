@@ -13,3 +13,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 8, title: "style(chess): preserve tap highlight and touch action styles during transitions" },
   { id: 9, title: "test(chess): verify CSS transition property compatibility across browser viewports" },
   { id: 10, title: "refactor(chess): optimize transform translate recalculations on board re-renders" },
+  { id: 11, title: "feat(chess): enable smooth piece glide animations for drag-and-drop moves" },

@@ -219,3 +219,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 214, title: "refactor(blockTimestampService): enhance EIP-1193 window provider interface narrowing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 215, title: "refactor(useWalletAuth): enhance ESLint strict rule enforcement for TypeScript", timestamp: "2026-07-27T04:21:00Z" },
   { id: 216, title: "refactor(stacksService): enhance React hook dependency and state type safety", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 217, title: "refactor(useLeaderboard): enhance Zustand state selector type safety", timestamp: "2026-07-27T04:21:00Z" },

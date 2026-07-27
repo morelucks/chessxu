@@ -13,9 +13,11 @@ const GAMES_STORE = 'games';
 const PLAYER_INDEX = 'playerIndex';
 const TIMESTAMP_INDEX = 'timestampIndex';
 
+import { ChainType } from '../zustand/store';
+
 export interface CachedGame {
   gameId: number;
-  chain: 'stacks' | 'celo';
+  chain: ChainType;
   playerW: string;
   playerB: string;
   wager: string;
@@ -154,7 +156,7 @@ class GameHistoryDB {
   /**
    * Get a specific game from cache
    */
-  async getGame(chain: 'stacks' | 'celo', gameId: number): Promise<CachedGame | null> {
+  async getGame(chain: ChainType, gameId: number): Promise<CachedGame | null> {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {
@@ -170,7 +172,7 @@ class GameHistoryDB {
   /**
    * Get all games for a specific player
    */
-  async getPlayerGames(playerAddress: string, chain?: 'stacks' | 'celo'): Promise<CachedGame[]> {
+  async getPlayerGames(playerAddress: string, chain?: ChainType): Promise<CachedGame[]> {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {
@@ -248,7 +250,7 @@ class GameHistoryDB {
   /**
    * Delete a specific game from cache
    */
-  async deleteGame(chain: 'stacks' | 'celo', gameId: number): Promise<void> {
+  async deleteGame(chain: ChainType, gameId: number): Promise<void> {
     const db = await this.ensureDB();
     
     return new Promise((resolve, reject) => {

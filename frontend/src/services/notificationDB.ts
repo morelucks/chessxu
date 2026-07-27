@@ -20,7 +20,7 @@ export interface AppNotification {
   timestamp: number;
   read: boolean;
   link?: string;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
 }
 
 class NotificationDB {

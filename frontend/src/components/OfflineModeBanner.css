@@ -1,18 +1,28 @@
 /* OfflineModeBanner styles — freemium offline-first model #186 */
 
-/* ── Outer container ── */
-.offline-banner { display: flex; flex-direction: column; gap: 0; width: 100%; }
+/* ── Outer container — see .offline-banner below ── */
 
 /* ── Compact status strip ── */
 .offline-banner__strip {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 12px;
-    background: rgba(251, 191, 36, 0.08);
-    border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+    padding: 6px 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
     font-size: 0.78rem;
     color: #fbbf24;
+}
+
+/* Full-width background applied to the parent */
+.offline-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    background: rgba(251, 191, 36, 0.08);
+    border-bottom: 1px solid rgba(251, 191, 36, 0.2);
 }
 
 .offline-banner__dot {

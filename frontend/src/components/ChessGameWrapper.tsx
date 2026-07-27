@@ -12,8 +12,7 @@ import { GameState } from '../types/chess';
 
 interface ChessAction {
     type: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: any;
+    payload?: unknown;
 }
 import React, { useReducer, useEffect, useState, useMemo } from 'react';
 import { reducer } from '../chess/reducer/reducer';
@@ -115,13 +114,11 @@ function getPieceValue(p: string): number {
  */
 export default function ChessGameWrapper({ isPuzzle = false }) {
     const timeControlMs = useAppStore((state) => state.timeControlMs);
-    const address = useAppStore((state) => state.address);
-    const activeChain = useAppStore((state) => state.activeChain);
     const farcasterUser = useAppStore((state) => state.farcasterUser);
     const elo = useAppStore((state) => state.elo);
     const boardTheme = useAppStore((state) => state.boardTheme);
     const setBoardTheme = useAppStore((state) => state.setBoardTheme);
-    const { onGameComplete, isOfflineMode, canPlayOnChain } = useFreemium();
+    const { onGameComplete, isOfflineMode } = useFreemium();
 
     const themes = [
         { id: 'dark', name: 'Dark Slate', lightColor: '#475569', darkColor: '#1e293b' },
@@ -262,7 +259,8 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 
     return (
         <AppContext.Provider value={providerState}>
-            <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-hidden">
+            <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+                <div className="flex-1 min-h-0 w-full max-w-[1280px] mx-auto flex flex-col md:flex-row overflow-hidden">
                 {/* Left Sidebar - Chess Game Controls (Desktop only, mobile moved below board) */}
                 <div className={`hidden md:flex w-80 flex-shrink-0 bg-slate-900/40 backdrop-blur-md border-r border-slate-800 p-4 overflow-y-auto shadow-inner`}>
                     <ChessSidebar />
@@ -381,6 +379,7 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
                 <div className={`hidden md:block w-64 flex-shrink-0 bg-slate-800/30 border-l border-slate-700 p-4 overflow-hidden`}>
                     <MoveHistorySidebar />
                 </div>
+            </div>
             </div>
         </AppContext.Provider>
     );

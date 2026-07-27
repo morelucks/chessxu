@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Service worker for offline support
+declare const self: ServiceWorkerGlobalScope;
+
 const CACHE_NAME = 'chessxu-cache-v1';
 
 // Static assets to cache immediately on install
@@ -15,18 +16,18 @@ const STATIC_ASSETS = [
 ];
 
 // Install event: cache static assets
-self.addEventListener('install', (event: any) => {
+self.addEventListener('install', (event: ExtendableEvent) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS);
     }).then(() => {
-      return (self as any).skipWaiting();
+      return self.skipWaiting();
     })
   );
 });
 
 // Activate event: clean up old caches
-self.addEventListener('activate', (event: any) => {
+self.addEventListener('activate', (event: ExtendableEvent) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -35,13 +36,13 @@ self.addEventListener('activate', (event: any) => {
           .map((name) => caches.delete(name))
       );
     }).then(() => {
-      return (self as any).clients.claim();
+      return self.clients.claim();
     })
   );
 });
 
 // Fetch event: serve cached assets when offline or for speed
-self.addEventListener('fetch', (event: any) => {
+self.addEventListener('fetch', (event: FetchEvent) => {
   const request = event.request;
   const url = new URL(request.url);
 

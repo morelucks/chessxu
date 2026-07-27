@@ -8,8 +8,11 @@
 import { gameHistoryDB, CachedGame } from './gameHistoryDB';
 import celoService from '../chess/services/celoService';
 import stacksService from '../chess/services/stacksService';
+import { ChainType } from '../zustand/store';
 import { getGameBlockTimestamp } from './blockTimestampService';
 import { CONTRACTS } from '../chess/blockchainConstants';
+import { CeloGameStruct } from '../types/celo';
+import { OnChainGameState } from '../types/chess';
 
 export interface SyncProgress {
   total: number;
@@ -67,7 +70,7 @@ class GameSyncService {
    */
   async syncPlayerGames(
     playerAddress: string,
-    chain: 'stacks' | 'celo',
+    chain: ChainType,
     options: {
       maxGames?: number;
       forceRefresh?: boolean;
@@ -163,7 +166,7 @@ class GameSyncService {
    */
   private async fetchPlayerGamesFromChain(
     playerAddress: string,
-    chain: 'stacks' | 'celo',
+    chain: ChainType,
     maxGames: number
   ): Promise<CachedGame[]> {
     const games: CachedGame[] = [];
@@ -222,7 +225,7 @@ class GameSyncService {
             turn: gameData.turn || 'w',
             status: gameData.status || 0,
             winner: this.determineWinner(gameData.status, isPlayerW),
-            moveHistory: [], // TODO: Parse from events if available
+            moveHistory: await this.fetchCeloMoveHistory(gameId),
             timestamp: blockTimestamp,
             lastUpdated: Date.now(),
             syncedAt: Date.now()
@@ -238,6 +241,50 @@ class GameSyncService {
     }
 
     return games;
+  }
+
+  /**
+   * Fetch move history for a Celo game ID from blockchain logs/events
+   */
+  private async fetchCeloMoveHistory(gameId: number): Promise<string[]> {
+    try {
+      const publicClient = celoService.getPublicClient();
+      const contractAddress = celoService.getContractAddress();
+
+      const MOVE_SUBMITTED_EVENT = {
+        type: 'event',
+        name: 'MoveSubmitted',
+        inputs: [
+          { type: 'uint256', name: 'gameId', indexed: true },
+          { type: 'string', name: 'moveStr', indexed: false },
+          { type: 'string', name: 'boardState', indexed: false }
+        ]
+      } as const;
+
+      const logs = await publicClient.getLogs({
+        address: contractAddress,
+        event: MOVE_SUBMITTED_EVENT,
+        args: {
+          gameId: BigInt(gameId)
+        },
+        fromBlock: 0n
+      });
+
+      // Sort logs by block number and log index to keep correct chronological order
+      const sortedLogs = [...logs].sort((a, b) => {
+        if (a.blockNumber === b.blockNumber) {
+          return (a.logIndex || 0) - (b.logIndex || 0);
+        }
+        return Number((a.blockNumber || 0n) - (b.blockNumber || 0n));
+      });
+
+      return sortedLogs
+        .map(log => log.args.moveStr)
+        .filter((moveStr): moveStr is string => typeof moveStr === 'string');
+    } catch (error) {
+      console.warn(`Failed to fetch move history for Celo game ${gameId}:`, error);
+      return [];
+    }
   }
 
   /**
@@ -258,7 +305,7 @@ class GameSyncService {
       
       for (let gameId = gameCount; gameId >= startId && games.length < maxGames; gameId--) {
         try {
-          const gameData = await stacksService.getGameState(gameId) as any;
+          const gameData = (await stacksService.getGameState(gameId)) as OnChainGameState | null;
           
           if (!gameData) continue;
 
@@ -319,16 +366,16 @@ class GameSyncService {
    */
   async syncGame(
     gameId: number,
-    chain: 'stacks' | 'celo'
+    chain: ChainType
   ): Promise<boolean> {
     try {
       await gameHistoryDB.init();
 
-      let gameData: any;
+      let gameData: CeloGameStruct | OnChainGameState | null = null;
       if (chain === 'celo') {
         gameData = await celoService.getGame(gameId);
       } else {
-        gameData = await stacksService.getGameState(gameId);
+        gameData = (await stacksService.getGameState(gameId)) as OnChainGameState | null;
       }
 
       if (!gameData) return false;
@@ -350,6 +397,7 @@ class GameSyncService {
         boardState: chain === 'celo' ? gameData.boardState : gameData['board-state'],
         turn: gameData.turn?.value || gameData.turn || 'w',
         status: gameData.status || 0,
+        moveHistory: chain === 'celo' ? await this.fetchCeloMoveHistory(gameId) : [],
         timestamp: blockTimestamp,
         lastUpdated: Date.now(),
         syncedAt: Date.now()
@@ -366,7 +414,7 @@ class GameSyncService {
   /**
    * Auto-sync on application load
    */
-  async autoSync(playerAddress: string, chain: 'stacks' | 'celo'): Promise<void> {
+  async autoSync(playerAddress: string, chain: ChainType): Promise<void> {
     // Check if we should sync (e.g., not synced in last hour)
     const ONE_HOUR = 60 * 60 * 1000;
     const shouldSync = !this.lastSyncTime || (Date.now() - this.lastSyncTime) > ONE_HOUR;

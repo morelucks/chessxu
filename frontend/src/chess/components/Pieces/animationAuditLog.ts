@@ -90,3 +90,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 85, title: "refactor(Pieces.css): optimize knight leap animation transform interpolation" },
   { id: 86, title: "refactor(Board.jsx): optimize GPU hardware acceleration via will-change property" },
   { id: 87, title: "refactor(gameReducer): optimize selection highlight filter and transform keyframe sync" },
+  { id: 88, title: "refactor(Piece.jsx): optimize pawn move and capture transition smoothness" },

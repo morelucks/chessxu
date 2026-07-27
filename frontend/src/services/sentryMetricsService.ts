@@ -7,3 +7,5 @@ export class SentryMetricsService {
   public static getInstance(): SentryMetricsService {
 // Sentry metrics domain tracking logic
     if (!SentryMetricsService.instance) { SentryMetricsService.instance = new SentryMetricsService(); }
+// Sentry metrics domain tracking logic
+    return SentryMetricsService.instance;

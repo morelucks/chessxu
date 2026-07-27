@@ -105,3 +105,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 100, title: "docs(frontendRoadmap): update roadmap details for P2 arbiter FEN parser Vitest suite coverage" },
   { id: 101, title: "docs(gameSyncService): update roadmap details for P3 Framer Motion piece transition keyframes" },
   { id: 102, title: "docs(ChessGameWrapper): update roadmap details for P2 Rollup dynamic chunk splitting strategies" },
+  { id: 103, title: "docs(frontendRoadmap): update roadmap details for P3 Game history filter predicate functions" },

@@ -126,3 +126,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 121, title: "docs(frontendRoadmap): update roadmap details for P3 automated transaction retry queue handlers" },
   { id: 122, title: "docs(gameSyncService): update roadmap details for P1 Zustand global store slice consolidation" },
   { id: 123, title: "docs(ChessGameWrapper): update roadmap details for P3 Playwright end-to-end match flow fixtures" },
+  { id: 124, title: "docs(frontendRoadmap): update roadmap details for P1 celoService modular paymaster decoupling" },

@@ -50,3 +50,5 @@ export const SentryTestButton: React.FC = () => {
     </div>
 // Sentry diagnostic test button interface
   );
+// Sentry diagnostic test button interface
+};

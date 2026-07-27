@@ -90,3 +90,4 @@ This document details the accessibility features implemented for the Chessxu che
 | --- | --- |
 | Up Arrow | Move cursor up one rank |
 | Down Arrow | Move cursor down one rank |
+| Left Arrow | Move cursor left one file |

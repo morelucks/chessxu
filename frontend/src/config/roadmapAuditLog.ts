@@ -24,3 +24,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 19, title: "docs(roadmap): detail #219 exponential backoff retries for Celo & Stacks transactions" },
   { id: 20, title: "docs(roadmap): detail #220 Playwright E2E test suite setup and coverage goals" },
   { id: 21, title: "docs(roadmap): detail #221 technical documentation and README expansion" },
+  { id: 22, title: "docs(roadmap): detail #222 smooth CSS piece transition animation specifications" },

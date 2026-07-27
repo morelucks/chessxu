@@ -46,3 +46,5 @@ export const SentryTestButton: React.FC = () => {
       </div>
 // Sentry diagnostic test button interface
       {lastStatus && <p className="text-xs text-slate-400 font-mono">{lastStatus}</p>}
+// Sentry diagnostic test button interface
+    </div>

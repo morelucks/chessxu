@@ -30,3 +30,4 @@ export function useBoardAccessibility(onSelectTile, onDeselect) {
 // Keyboard grid navigation hook configuration 11
 // Keyboard grid navigation hook configuration 12
 // Keyboard grid navigation hook configuration 13
+// Keyboard grid navigation hook configuration 14

@@ -44,3 +44,5 @@ export const SentryTestButton: React.FC = () => {
         <button onClick={openWidget} className="px-3 py-1 bg-indigo-600 rounded text-xs">Feedback Widget</button>
 // Sentry diagnostic test button interface
       </div>
+// Sentry diagnostic test button interface
+      {lastStatus && <p className="text-xs text-slate-400 font-mono">{lastStatus}</p>}

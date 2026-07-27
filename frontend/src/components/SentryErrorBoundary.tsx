@@ -10,3 +10,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
   public state: State = { hasError: false, error: null, eventId: null };
 // Sentry error boundary render handler
   public static getDerivedStateFromError(error: Error): State { return { hasError: true, error, eventId: null }; }
+// Sentry error boundary render handler
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {

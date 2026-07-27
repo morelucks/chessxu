@@ -22,3 +22,4 @@ export interface SentryErrorContext {
 export interface SentryBreadcrumbData {
   category: string;
   message: string;
+  level?: SentrySeverity;

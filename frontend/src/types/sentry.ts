@@ -30,3 +30,4 @@ export interface SentryFeedbackOptions {
   title?: string;
   subtitle?: string;
   submitButtonLabel?: string;
+  cancelButtonLabel?: string;

@@ -246,3 +246,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 241, title: "refactor(celoService): enhance contract ABI return type verification", timestamp: "2026-07-27T04:21:00Z" },
   { id: 242, title: "refactor(useStacksChess): enhance MiniPay auto-connect provider property validation", timestamp: "2026-07-27T04:21:00Z" },
   { id: 243, title: "refactor(JoinGameModal): enhance IndexedDB offline cache schema validation", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 244, title: "refactor(notificationDB): enhance EIP-1193 window provider interface narrowing", timestamp: "2026-07-27T04:21:00Z" },

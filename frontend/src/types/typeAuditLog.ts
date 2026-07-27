@@ -57,3 +57,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 52, title: "refactor(header): remove unused activeChain and isMiniPay state variables", timestamp: "2026-07-27T04:21:00Z" },
   { id: 53, title: "refactor(iframeDetection): remove eslint-disable and type payload as unknown", timestamp: "2026-07-27T04:21:00Z" },
   { id: 54, title: "refactor(feeCurrency): remove eslint-disable and type publicClient parameter", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 55, title: "refactor(sw): remove eslint-disable and add ServiceWorkerGlobalScope declaration", timestamp: "2026-07-27T04:21:00Z" },

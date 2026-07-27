@@ -49,3 +49,4 @@ createRoot(rootElement).render(
 // Sentry application initialization hook
 // Sentry application initialization hook
 // Sentry application initialization hook
+// Sentry application initialization hook

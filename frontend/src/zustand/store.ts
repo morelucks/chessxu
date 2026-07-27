@@ -6,7 +6,7 @@ import { AppConfig, UserSession } from '@stacks/connect';
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 export const userSession = new UserSession({ appConfig });
 
-export type ChainType = 'stacks' | 'celo';
+export type ChainType = 'stacks' | 'celo' | 'privy';
 
 export interface FarcasterUser {
   fid: number;
@@ -20,6 +20,7 @@ export interface AuthState {
   address: string | null; // Currently active chain address
   stacksAddress: string | null;
   celoAddress: string | null;
+  privyAddress: string | null;
   activeChain: ChainType;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -51,6 +52,7 @@ export interface AppStore extends AuthState, GameState {
   setAddress: (address: string | null) => void;
   setStacksAddress: (address: string | null) => void;
   setCeloAddress: (address: string | null) => void;
+  setPrivyAddress: (address: string | null) => void;
   setActiveChain: (chain: ChainType) => void;
   setIsLoading: (isLoading: boolean) => void;
   setIsFarcaster: (isFarcaster: boolean) => void;
@@ -78,7 +80,8 @@ const useAppStore = create<AppStore>()(
       address: null,
       stacksAddress: null,
       celoAddress: null,
-      activeChain: 'celo',
+      privyAddress: null,
+      activeChain: 'stacks',
       isAuthenticated: false,
       isLoading: false,
       isFarcaster: false,
@@ -104,9 +107,11 @@ const useAppStore = create<AppStore>()(
       setAddress: (address: string | null) => {
         const { activeChain } = get();
         if (activeChain === 'stacks') {
-            set({ stacksAddress: address, address, isAuthenticated: !!address });
-        } else {
+            set({ stacksAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
+        } else if (activeChain === 'celo') {
             set({ celoAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
+        } else {
+            set({ privyAddress: address, address, isAuthenticated: !!address, isOfflineMode: !address, upgradePromptDismissed: false });
         }
       },
       setStacksAddress: (stacksAddress: string | null) => {
@@ -123,9 +128,19 @@ const useAppStore = create<AppStore>()(
             set({ address: celoAddress, isAuthenticated: !!celoAddress });
         }
       },
+      setPrivyAddress: (privyAddress: string | null) => {
+        const { activeChain } = get();
+        set({ privyAddress });
+        if (activeChain === 'privy') {
+            set({ address: privyAddress, isAuthenticated: !!privyAddress });
+        }
+      },
       setActiveChain: (activeChain: ChainType) => {
-        const { stacksAddress, celoAddress } = get();
-        const address = activeChain === 'stacks' ? stacksAddress : celoAddress;
+        const { stacksAddress, celoAddress, privyAddress } = get();
+        let address = null;
+        if (activeChain === 'stacks') address = stacksAddress;
+        else if (activeChain === 'celo') address = celoAddress;
+        else address = privyAddress;
         set({ activeChain, address, isAuthenticated: !!address });
       },
       setIsLoading: (isLoading: boolean) => set({ isLoading }),
@@ -150,7 +165,8 @@ const useAppStore = create<AppStore>()(
         set({ 
             address: null, 
             stacksAddress: null, 
-            celoAddress: null, 
+            celoAddress: null,
+            privyAddress: null,
             isAuthenticated: false, 
             isFarcaster: false,
             farcasterUser: null,

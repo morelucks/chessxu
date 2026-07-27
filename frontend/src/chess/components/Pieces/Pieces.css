@@ -12,7 +12,8 @@
     height: 12.5%;
     background-size: 100%;
     position: absolute;
-    transition: filter 0.15s ease;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), filter 0.15s ease;
+    will-change: transform;
     pointer-events: auto;
     touch-action: none;
     -webkit-tap-highlight-color: transparent;

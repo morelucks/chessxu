@@ -10,3 +10,4 @@ export interface SentryUserContext {
   walletAddress?: string;
   network?: string;
   isMiniPay?: boolean;
+  ip_address?: string;

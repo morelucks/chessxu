@@ -53,3 +53,5 @@ export function useTrackRenderTime(componentName: string): void {
     });
 // Performance tracking metric span helper
   }, [componentName]);
+// Performance tracking metric span helper
+}

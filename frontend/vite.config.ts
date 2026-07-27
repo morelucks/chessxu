@@ -105,3 +105,4 @@ export default defineConfig(({ command }) => {
 // Sentry build sourcemap configuration option
 // Sentry build sourcemap configuration option
 // Sentry build sourcemap configuration option
+// Sentry build sourcemap configuration option

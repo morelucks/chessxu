@@ -31,3 +31,5 @@ export function useSentryUser(userContext: SentryUserContext | null): void {
     } else {
 // Sentry user hook effect binding
       setSentryUser(null);
+// Sentry user hook effect binding
+    }

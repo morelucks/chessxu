@@ -59,3 +59,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 54, title: "docs(ChessGameWrapper): update roadmap details for P3 Skeleton loader placeholder component design" },
   { id: 55, title: "docs(frontendRoadmap): update roadmap details for P0 ARIA gridcell and coordinate accessibility" },
   { id: 56, title: "docs(gameSyncService): update roadmap details for P3 automated transaction retry queue handlers" },
+  { id: 57, title: "docs(ChessGameWrapper): update roadmap details for P1 Zustand global store slice consolidation" },

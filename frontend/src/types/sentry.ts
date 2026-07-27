@@ -38,3 +38,4 @@ export interface SentryFeedbackOptions {
 }
 export interface SentryPerformanceMetric {
   name: string;
+  value: number;

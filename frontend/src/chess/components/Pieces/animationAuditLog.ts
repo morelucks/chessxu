@@ -10,3 +10,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 5, title: "refactor(chess): update piece rendering loop to accumulate instance counts by piece type" },
   { id: 6, title: "refactor(chess): decouple square coordinate unmounting from piece DOM lifecycle" },
   { id: 7, title: "style(chess): maintain filter brightness transition for piece selection state" },
+  { id: 8, title: "style(chess): preserve tap highlight and touch action styles during transitions" },

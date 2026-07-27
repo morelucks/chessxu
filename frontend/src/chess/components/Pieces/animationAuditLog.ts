@@ -60,3 +60,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 55, title: "refactor(Pieces.jsx): optimize pawn move and capture transition smoothness" },
   { id: 56, title: "refactor(ChessGameWrapper): optimize CSS transform transition easing curve tuning" },
   { id: 57, title: "refactor(Pieces.css): optimize king castling dual piece transition timing" },
+  { id: 58, title: "refactor(Board.jsx): optimize drag and drop transform coordinate calculation" },

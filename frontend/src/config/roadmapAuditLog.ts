@@ -28,3 +28,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 23, title: "docs(roadmap): detail #223 game history search and multi-criteria filters" },
   { id: 24, title: "docs(roadmap): detail #224 Sentry SDK integration for client error tracking" },
   { id: 25, title: "feat(roadmap): create frontendRoadmap.ts configuration and task registry" },
+  { id: 26, title: "feat(roadmap): export RoadmapPriority, RoadmapCategory, and RoadmapTask types" },

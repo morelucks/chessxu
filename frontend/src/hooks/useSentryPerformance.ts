@@ -15,3 +15,5 @@ export function useTrackRenderTime(componentName: string): void {
       category: "performance",
 // Performance tracking metric span helper
       message: `${componentName} mounted in ${duration.toFixed(2)}ms`,
+// Performance tracking metric span helper
+      level: "debug",

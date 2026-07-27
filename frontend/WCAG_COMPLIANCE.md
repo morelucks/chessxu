@@ -77,3 +77,4 @@ This document details the accessibility features implemented for the Chessxu che
 ## ARIA Attributes
 - `role="grid"` on board container
 - `role="button"` and `tabIndex={0}` on each square tile
+- `aria-label`: Full description e.g. "Square e4, White Pawn"

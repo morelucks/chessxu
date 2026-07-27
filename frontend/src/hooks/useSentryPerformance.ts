@@ -59,3 +59,5 @@ export function useTrackRenderTime(componentName: string): void {
 export function measureSpan<T>(spanName: string, operation: string, fn: () => T): T {
 // Performance tracking metric span helper
   return Sentry.startSpan({ name: spanName, op: operation }, () => fn());
+// Performance tracking metric span helper
+}

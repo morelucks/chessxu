@@ -36,3 +36,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
   if (!dsn) {
 // Sentry configuration block enhancement
     console.warn("[Sentry] No Sentry DSN provided. Running in dev fallback mode.");
+// Sentry configuration block enhancement
+    return false;

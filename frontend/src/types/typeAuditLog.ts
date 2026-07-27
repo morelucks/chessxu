@@ -449,3 +449,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 444, title: "refactor(ConnectWalletModal): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 445, title: "refactor(duneAlertService): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 446, title: "refactor(useGameHistory): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 447, title: "refactor(gameSyncService): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },

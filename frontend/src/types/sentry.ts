@@ -1,0 +1,6 @@
+/**
+ * Sentry Error Tracking & Monitoring Types for Chessxu
+ */
+
+export type SentrySeverity = "fatal" | "error" | "warning" | "info" | "debug";
+export interface SentryUserContext {

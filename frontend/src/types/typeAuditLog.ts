@@ -33,3 +33,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 28, title: "refactor(useStacksChess): type isPlayerWhite parameter with OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },
   { id: 29, title: "refactor(useStacksChess): type isPlayerBlack parameter with OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },
   { id: 30, title: "refactor(useStacksChess): type isMyTurn parameter with OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 31, title: "refactor(useStacksChess): type getOpponentAddress parameter with OnChainGameState", timestamp: "2026-07-27T04:21:00Z" },

@@ -8,6 +8,7 @@
 import { gameHistoryDB, CachedGame } from './gameHistoryDB';
 import celoService from '../chess/services/celoService';
 import stacksService from '../chess/services/stacksService';
+import { ChainType } from '../zustand/store';
 import { getGameBlockTimestamp } from './blockTimestampService';
 import { CONTRACTS } from '../chess/blockchainConstants';
 import { CeloGameStruct } from '../types/celo';
@@ -69,7 +70,7 @@ class GameSyncService {
    */
   async syncPlayerGames(
     playerAddress: string,
-    chain: 'stacks' | 'celo',
+    chain: ChainType,
     options: {
       maxGames?: number;
       forceRefresh?: boolean;
@@ -165,7 +166,7 @@ class GameSyncService {
    */
   private async fetchPlayerGamesFromChain(
     playerAddress: string,
-    chain: 'stacks' | 'celo',
+    chain: ChainType,
     maxGames: number
   ): Promise<CachedGame[]> {
     const games: CachedGame[] = [];
@@ -365,7 +366,7 @@ class GameSyncService {
    */
   async syncGame(
     gameId: number,
-    chain: 'stacks' | 'celo'
+    chain: ChainType
   ): Promise<boolean> {
     try {
       await gameHistoryDB.init();
@@ -413,7 +414,7 @@ class GameSyncService {
   /**
    * Auto-sync on application load
    */
-  async autoSync(playerAddress: string, chain: 'stacks' | 'celo'): Promise<void> {
+  async autoSync(playerAddress: string, chain: ChainType): Promise<void> {
     // Check if we should sync (e.g., not synced in last hour)
     const ONE_HOUR = 60 * 60 * 1000;
     const shouldSync = !this.lastSyncTime || (Date.now() - this.lastSyncTime) > ONE_HOUR;

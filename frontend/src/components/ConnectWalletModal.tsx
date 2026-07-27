@@ -20,7 +20,7 @@ export const ConnectWalletModal: React.FC = () => {
 
   if (!isConnectModalOpen) return null;
 
-  const handleSelectChain = async (chain: "celo" | "farcaster") => {
+  const handleSelectChain = async (chain: "celo" | "privy" | "farcaster") => {
     setConnectModalOpen(false);
     await connect({ chain });
   };
@@ -51,6 +51,29 @@ export const ConnectWalletModal: React.FC = () => {
 
         {/* Options List */}
         <div className="flex flex-col gap-3">
+          {/* Privy WalletConnect Option */}
+          <button
+            onClick={() => handleSelectChain("privy")}
+            className="w-full text-left p-4 rounded-xl border border-indigo-500/20 bg-indigo-500/10 hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all flex items-center justify-between group relative overflow-hidden"
+          >
+            <div className="absolute right-0 top-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-500/20 transition-all" />
+            <div className="flex items-center gap-3.5 z-10">
+              <div className="w-10 h-10 rounded-xl bg-indigo-500/25 flex items-center justify-center text-indigo-300 font-bold group-hover:scale-105 transition-transform">
+                PRIVY
+              </div>
+              <div className="flex flex-col">
+                <span className="text-sm font-bold text-white flex items-center gap-1.5">
+                  Privy WalletConnect
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                </span>
+                <span className="text-[11px] text-slate-300 max-w-[240px] mt-0.5 leading-snug">
+                  Fast login via WalletConnect, Email, Socials, or Embedded Wallet.
+                </span>
+              </div>
+            </div>
+            <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all z-10" />
+          </button>
+
           {/* Farcaster Option */}
           {isFarcaster && (
             <button
@@ -75,6 +98,7 @@ export const ConnectWalletModal: React.FC = () => {
               <ArrowRight size={16} className="text-slate-400 group-hover:text-violet-400 group-hover:translate-x-1 transition-all z-10" />
             </button>
           )}
+
 
           {/* Celo Option */}
           <button

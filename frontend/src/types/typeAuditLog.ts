@@ -509,3 +509,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 504, title: "refactor(stacksService): enhance Service Worker event listener parameter typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 505, title: "refactor(useLeaderboard): enhance Farcaster MiniApp SDK response typing", timestamp: "2026-07-27T04:21:00Z" },
   { id: 506, title: "refactor(OnChainLeaderboard): enhance Stacks Clarinet Clarity response type annotations", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 507, title: "refactor(useCeloChess): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },

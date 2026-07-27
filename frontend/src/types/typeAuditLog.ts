@@ -257,3 +257,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 252, title: "refactor(ConnectWalletModal): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
   { id: 253, title: "refactor(duneAlertService): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },
   { id: 254, title: "refactor(useGameHistory): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 255, title: "refactor(gameSyncService): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },

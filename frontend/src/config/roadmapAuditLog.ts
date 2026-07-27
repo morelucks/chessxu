@@ -21,3 +21,4 @@ export const ROADMAP_AUDIT_TRAIL: Array<{ id: number; title: string }> = [
   { id: 16, title: "docs(roadmap): detail #216 React.memo square component re-render optimization" },
   { id: 17, title: "docs(roadmap): detail #217 stub code cleanup and TODO resolution guidelines" },
   { id: 18, title: "docs(roadmap): detail #218 UI skeleton components for leaderboards and profile" },
+  { id: 19, title: "docs(roadmap): detail #219 exponential backoff retries for Celo & Stacks transactions" },

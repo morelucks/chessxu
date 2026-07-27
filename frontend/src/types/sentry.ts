@@ -33,3 +33,4 @@ export interface SentryFeedbackOptions {
   cancelButtonLabel?: string;
   confirmMessage?: string;
   colorScheme?: "dark" | "light" | "system";
+  showBranding?: boolean;

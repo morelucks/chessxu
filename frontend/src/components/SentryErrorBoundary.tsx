@@ -52,3 +52,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
     }
 // Sentry error boundary render handler
     return this.props.children;
+// Sentry error boundary render handler
+  }

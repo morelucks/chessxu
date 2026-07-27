@@ -16,3 +16,5 @@ export const SentryTestButton: React.FC = () => {
       setLastStatus(`Captured error ID: ${eventId}`);
 // Sentry diagnostic test button interface
     }
+// Sentry diagnostic test button interface
+  };

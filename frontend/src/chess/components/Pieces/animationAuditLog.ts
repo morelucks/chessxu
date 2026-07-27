@@ -8,3 +8,4 @@ export const ANIMATION_AUDIT_LOG: Array<{ id: number; title: string }> = [
   { id: 3, title: "feat(chess): add will-change transform hint to optimize GPU rendering for piece movement" },
   { id: 4, title: "feat(chess): implement stable piece identity keys in Pieces.jsx to enable DOM reuse" },
   { id: 5, title: "refactor(chess): update piece rendering loop to accumulate instance counts by piece type" },
+  { id: 6, title: "refactor(chess): decouple square coordinate unmounting from piece DOM lifecycle" },

@@ -82,3 +82,4 @@ This document details the accessibility features implemented for the Chessxu che
 - `aria-live="polite"`: Screen reader status announcement for moves
 
 ## WCAG 2.1 AA Compliance
+1. Non-color visual check indicator badge on checked king square.

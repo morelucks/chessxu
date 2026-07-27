@@ -68,3 +68,5 @@ export class SentryErrorBoundary extends Component<Props, State> {
   public static getDerivedStateFromError(error: Error): State { return { hasError: true, error, eventId: null }; }
 // Sentry error boundary render handler
   public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+// Sentry error boundary render handler
+    const eventId = captureException(error, { category: "react-error-boundary", extra: { componentStack: errorInfo.componentStack } });

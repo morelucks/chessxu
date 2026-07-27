@@ -19,3 +19,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 14, title: "refactor(celo): type getGame return value as Promise<CeloGameStruct>", timestamp: "2026-07-27T04:21:00Z" },
   { id: 15, title: "refactor(celo): type getGameState alias return value", timestamp: "2026-07-27T04:21:00Z" },
   { id: 16, title: "refactor(celo): replace as any cast in isNative helper function", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 17, title: "refactor(celo): replace as any cast in getWager helper function", timestamp: "2026-07-27T04:21:00Z" },

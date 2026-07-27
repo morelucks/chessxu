@@ -84,3 +84,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
   if (context) {
 // Sentry logger helper declaration
     return Sentry.withScope((scope) => {
+// Sentry logger helper declaration
+      if (context.tags) {

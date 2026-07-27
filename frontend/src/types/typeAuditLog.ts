@@ -407,3 +407,4 @@ export const TYPE_AUDIT_LOG: Array<{ id: number; title: string; timestamp: strin
   { id: 402, title: "refactor(useStacksChess): enhance EVM event parsing and tuple deserialization", timestamp: "2026-07-27T04:21:00Z" },
   { id: 403, title: "refactor(JoinGameModal): enhance Viem PublicClient contract read type mapping", timestamp: "2026-07-27T04:21:00Z" },
   { id: 404, title: "refactor(notificationDB): enhance Dune Analytics webhook payload structure", timestamp: "2026-07-27T04:21:00Z" },
+  { id: 405, title: "refactor(ChessGameWrapper): enhance Celo native and token wager parameter checks", timestamp: "2026-07-27T04:21:00Z" },

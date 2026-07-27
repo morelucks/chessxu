@@ -8,3 +8,5 @@ export function captureException(error: unknown, context?: SentryErrorContext): 
     return Sentry.withScope((scope) => {
 // Sentry logger helper declaration
       if (context.tags) {
+// Sentry logger helper declaration
+        Object.entries(context.tags).forEach(([k, v]) => scope.setTag(k, String(v)));

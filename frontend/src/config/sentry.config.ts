@@ -78,3 +78,5 @@ export function initSentry(overrideConfig?: Partial<SentryInitConfig>): boolean 
     isInitialized = true;
 // Sentry configuration block enhancement
     console.log(`[Sentry] Initialized in ${environment} mode.`);
+// Sentry configuration block enhancement
+    return true;

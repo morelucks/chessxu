@@ -9,8 +9,6 @@ import { NotificationCenter } from "./NotificationCenter";
 
 export function Header() {
   const { address, isConnected, isConnecting, connect, disconnect } = useWalletAuth();
-  const activeChain = useAppStore((s) => s.activeChain);
-  const setActiveChain = useAppStore((s) => s.setActiveChain);
   const eloFromStore = useAppStore((s) => s.elo);
   const chessBalanceFromStore = useAppStore((s) => s.chessBalance);
   const setChessBalance = useAppStore((s) => s.setChessBalance);
@@ -20,7 +18,7 @@ export function Header() {
 
   const { elo: eloFromHook } = usePlayerStats(address);
   const { getTokenBalance } = useStacksChess();
-  
+
   const isAuthenticated = isConnected;
 
   useEffect(() => {
@@ -40,10 +38,6 @@ export function Header() {
   const handleDisconnect = () => {
     disconnect();
   };
-
-  const miniPayDetected = useAppStore((s) => s.miniPayDetected);
-
-  const isMiniPay = miniPayDetected || (typeof window !== 'undefined' && (window as any).ethereum?.isMiniPay);
 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-10 text-center relative">

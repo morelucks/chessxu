@@ -11,6 +11,8 @@ import stacksService from '../chess/services/stacksService';
 import { ChainType } from '../zustand/store';
 import { getGameBlockTimestamp } from './blockTimestampService';
 import { CONTRACTS } from '../chess/blockchainConstants';
+import { CeloGameStruct } from '../types/celo';
+import { OnChainGameState } from '../types/chess';
 
 export interface SyncProgress {
   total: number;
@@ -303,7 +305,7 @@ class GameSyncService {
       
       for (let gameId = gameCount; gameId >= startId && games.length < maxGames; gameId--) {
         try {
-          const gameData = await stacksService.getGameState(gameId) as any;
+          const gameData = (await stacksService.getGameState(gameId)) as OnChainGameState | null;
           
           if (!gameData) continue;
 
@@ -369,11 +371,11 @@ class GameSyncService {
     try {
       await gameHistoryDB.init();
 
-      let gameData: any;
+      let gameData: CeloGameStruct | OnChainGameState | null = null;
       if (chain === 'celo') {
         gameData = await celoService.getGame(gameId);
       } else {
-        gameData = await stacksService.getGameState(gameId);
+        gameData = (await stacksService.getGameState(gameId)) as OnChainGameState | null;
       }
 
       if (!gameData) return false;

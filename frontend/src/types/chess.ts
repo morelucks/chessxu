@@ -1,36 +1,115 @@
-/*
-npm
-Npm: Npm download concentration
-NPM Package Downloads
-Npm: Npm download uniform
-Npm: Npm excluded packages quality
-Npm: Npm monorepo collapsed
-Npm: Npm download sparse burst
-Npm: Npm excluded packages
-*/
+/**
+ * Chess Type Definitions
+ * Core types for the chess engine and game state
+ */
 
 /**
- * Represents the local client-side game state.
+ * Piece color - white or black
+ */
+export type PieceColor = 'w' | 'b';
+
+/**
+ * Piece type without color prefix
+ */
+export type PieceType = 'p' | 'n' | 'b' | 'r' | 'q' | 'k';
+
+/**
+ * Full piece notation (color + type)
+ * Examples: 'wp' (white pawn), 'bk' (black king)
+ */
+export type Piece = `${PieceColor}${PieceType}`;
+
+/**
+ * Board position - 8x8 grid of piece strings or empty strings
+ */
+export type Position = string[][];
+
+/**
+ * Coordinate on the chess board [rank, file]
+ * rank: 0-7 (row), file: 0-7 (column)
+ */
+export type Coordinate = [number, number];
+
+/**
+ * Castling direction options
+ */
+export type CastleDirection = 'left' | 'right' | 'both' | 'none';
+
+/**
+ * Castling rights for both players
+ */
+export interface CastleRights {
+  w: CastleDirection;
+  b: CastleDirection;
+}
+
+/**
+ * Represents a move on the board
+ */
+export interface Move {
+  piece: Piece;
+  from: Coordinate;
+  to: Coordinate;
+  capture?: Piece;
+  promotion?: PieceType;
+  castling?: boolean;
+  enPassant?: boolean;
+}
+
+/**
+ * Promotion square coordinates and metadata
+ */
+export interface PromotionSquare {
+  rank: number;
+  file: number;
+  x: number;
+  y: number;
+}
+
+/**
+ * Game status values
+ */
+export const Status = {
+  ongoing: 'Ongoing',
+  promoting: 'Promoting',
+  white: 'White wins',
+  black: 'Black wins',
+  stalemate: 'Game draws due to stalemate',
+  insufficient: 'Game draws due to insufficient material',
+} as const;
+
+export type GameStatus = typeof Status[keyof typeof Status];
+
+/**
+ * Game mode types
+ */
+export type GameMode = 'pvc' | 'pvp' | 'puzzle';
+
+/**
+ * Represents the local client-side game state
  */
 export interface GameState {
-  position: any[];
-  turn: string;
-  candidateMoves: any[];
-  movesList: any[];
-  promotionSquare: any;
-  status: string;
-  castleDirection: {
-    w: string;
-    b: string;
-  };
+  position: Position[];
+  turn: PieceColor;
+  candidateMoves: Coordinate[];
+  movesList: string[];
+  promotionSquare: PromotionSquare | null;
+  status: GameStatus;
+  castleDirection: CastleRights;
   points: {
     w: number;
     b: number;
   };
-  gameMode: string;
-  playerColor?: 'w' | 'b';
+  gameMode: GameMode;
+  playerColor?: PieceColor;
   whiteTimeMs?: number | null;
   blackTimeMs?: number | null;
+  timeoutWinner?: PieceColor;
+  selectedPiece?: {
+    piece: Piece;
+    rank: number;
+    file: number;
+  } | null;
 }
 
 export interface OnChainGameState {

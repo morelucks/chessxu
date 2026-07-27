@@ -1,25 +1,27 @@
 import useAppStore from '../zustand/store';
+import { OnChainGameState } from '../types/chess';
 
 export const useStacksChess = () => {
   const address = useAppStore((state) => state.address);
 
   const createGame = async (wager: number, isStxMode: boolean) => {
-    console.log('Stub createGame called');
+    console.log('Stub createGame called:', wager, isStxMode);
   };
 
   const joinGame = async (gameId: number, wager: number, isStxMode: boolean) => {
-    console.log('Stub joinGame called');
+    console.log('Stub joinGame called:', gameId, wager, isStxMode);
   };
 
   const submitMove = async (gameId: number, move: string, boardState: string) => {
-    console.log('Stub submitMove called');
+    console.log('Stub submitMove called:', gameId, move, boardState);
   };
 
   const resign = async (gameId: number) => {
-    console.log('Stub resign called');
+    console.log('Stub resign called:', gameId);
   };
 
   const getGame = async (gameId: number) => {
+    console.log('Stub getGame called:', gameId);
     return null;
   };
 
@@ -28,14 +30,17 @@ export const useStacksChess = () => {
   };
 
   const getTokenBalance = async (userAddress: string) => {
+    console.log('Stub getTokenBalance called:', userAddress);
     return 0;
   };
 
   const getPlayerStats = async (playerAddress: string) => {
+    console.log('Stub getPlayerStats called:', playerAddress);
     return null;
   };
 
   const getPlayerElo = async (playerAddress: string) => {
+    console.log('Stub getPlayerElo called:', playerAddress);
     return 1200;
   };
 
@@ -44,6 +49,7 @@ export const useStacksChess = () => {
   };
 
   const getExpectedScore = async (playerA: string, playerB: string) => {
+    console.log('Stub getExpectedScore called:', playerA, playerB);
     return 500;
   };
 
@@ -60,13 +66,15 @@ export const useStacksChess = () => {
   };
 
   const resolveGame = async (gameId: number, newStatus: number) => {
-    console.log('Stub resolveGame called');
+    console.log('Stub resolveGame called:', gameId, newStatus);
   };
 
-  const isPlayerWhite = (game: any, playerAddress: string) =>
+  const isPlayerWhite = (game: OnChainGameState | null | undefined, playerAddress: string) =>
     game?.['player-w'] === playerAddress;
-  const isPlayerBlack = (game: any, playerAddress: string) =>
-    game?.['player-b']?.value === playerAddress;
+  const isPlayerBlack = (game: OnChainGameState | null | undefined, playerAddress: string) =>
+    typeof game?.['player-b'] === 'object'
+      ? game?.['player-b']?.value === playerAddress
+      : game?.['player-b'] === playerAddress;
 
   const getGameStatusString = (status: number) => {
     switch (status) {
@@ -88,7 +96,7 @@ export const useStacksChess = () => {
     return `${wager / 1000000} CHESS`;
   };
 
-  const isMyTurn = (game: any, playerAddress: string) => {
+  const isMyTurn = (game: OnChainGameState | null | undefined, playerAddress: string) => {
     if (!game || !playerAddress) return false;
     const currentTurn = typeof game.turn === 'string' ? game.turn : game.turn?.value;
     const isWhite = isPlayerWhite(game, playerAddress);
@@ -96,10 +104,11 @@ export const useStacksChess = () => {
     return (currentTurn === 'w' && isWhite) || (currentTurn === 'b' && isBlack);
   };
 
-  const getOpponentAddress = (game: any, playerAddress: string) => {
+  const getOpponentAddress = (game: OnChainGameState | null | undefined, playerAddress: string) => {
     if (!game || !playerAddress) return null;
     const isWhite = isPlayerWhite(game, playerAddress);
-    return isWhite ? (game['player-b']?.value || null) : game['player-w'];
+    const playerB = typeof game['player-b'] === 'object' ? game['player-b']?.value : game['player-b'];
+    return isWhite ? (playerB || null) : (game['player-w'] || null);
   };
 
   return { 

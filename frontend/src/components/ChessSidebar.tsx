@@ -46,7 +46,7 @@ const TakeBackButton = () => {
 
 // Freemium Upgrade Section
 const FreemiumUpgradeSection = () => {
-    const { isOfflineMode, offlineGamesPlayed, canPlayOnChain } = useFreemium();
+    const { isOfflineMode, offlineGamesPlayed } = useFreemium();
     const { connect } = useWalletAuth();
     if (!isOfflineMode) return null;
     return (

@@ -8,3 +8,5 @@ export const SentryTestButton: React.FC = () => {
   const triggerError = () => {
 // Sentry diagnostic test button interface
     try { throw new Error("Sentry Diagnostic Test Error"); }
+// Sentry diagnostic test button interface
+    catch (err) {

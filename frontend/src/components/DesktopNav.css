@@ -24,11 +24,11 @@
 .desktop-nav-inner {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 16px;
-  height: 52px;
+  padding: 0 24px;
+  height: 54px;
 }
 
 /* Brand */
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-right: 16px;
+  text-decoration: none;
   flex-shrink: 0;
 }
 
@@ -63,11 +63,26 @@
   50% { background-position: 100% 50%; }
 }
 
-/* Nav Links Container */
+/* Nav Links Containers */
 .desktop-nav-links {
   display: flex;
   align-items: center;
-  gap: 2px;
+}
+
+.desktop-nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 6px;
+  margin: 0 16px;
+}
+
+.desktop-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 /* Individual Nav Link */
@@ -127,9 +142,4 @@
     width: 18px;
     opacity: 1;
   }
-}
-
-/* Spacer for right-side alignment */
-.desktop-nav-spacer {
-  flex: 1;
 }

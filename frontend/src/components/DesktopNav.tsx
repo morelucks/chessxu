@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Gamepad2, Zap, Trophy, Puzzle, ShoppingBag, User, History, BarChart3 } from 'lucide-react';
 import './DesktopNav.css';
 
-const navItems = [
+const mainNavItems = [
   { label: 'Game', icon: Gamepad2, path: '/' },
   { label: 'PvP', icon: Zap, path: '/pvp' },
   { label: 'Puzzle', icon: Puzzle, path: '/puzzle' },
@@ -11,7 +11,6 @@ const navItems = [
   { label: 'History', icon: History, path: '/history' },
   { label: 'Analytics', icon: BarChart3, path: '/analytics' },
   { label: 'Shop', icon: ShoppingBag, path: '/shop' },
-  { label: 'Me', icon: User, path: '/profile' },
 ];
 
 export const DesktopNav: React.FC = () => {
@@ -20,15 +19,15 @@ export const DesktopNav: React.FC = () => {
   return (
     <nav className="desktop-nav" id="desktop-navigation">
       <div className="desktop-nav-inner">
-        {/* Brand */}
-        <div className="desktop-nav-brand">
+        {/* Left: Brand */}
+        <NavLink to="/" className="desktop-nav-brand">
           <span className="desktop-nav-logo">♟️</span>
           <span className="desktop-nav-title">Chessxu</span>
-        </div>
+        </NavLink>
 
-        {/* Nav Links */}
-        <div className="desktop-nav-links">
-          {navItems.map((item) => {
+        {/* Center: Main Navigation Tabs */}
+        <div className="desktop-nav-links desktop-nav-center">
+          {mainNavItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
 
@@ -47,8 +46,18 @@ export const DesktopNav: React.FC = () => {
           })}
         </div>
 
-        {/* Spacer for alignment */}
-        <div className="desktop-nav-spacer" />
+        {/* Right: User Profile */}
+        <div className="desktop-nav-right">
+          <NavLink
+            to="/profile"
+            className={`desktop-nav-link ${location.pathname === '/profile' ? 'active' : ''}`}
+            id="desktop-nav-me"
+          >
+            <User size={16} strokeWidth={location.pathname === '/profile' ? 2.5 : 1.8} />
+            <span>Me</span>
+            {location.pathname === '/profile' && <div className="desktop-nav-indicator" />}
+          </NavLink>
+        </div>
       </div>
     </nav>
   );

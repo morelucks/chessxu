@@ -175,100 +175,149 @@
   font-weight: 700;
 }
 
-/* Benefits Grid */
-.free-games-gate__benefits {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* Wallet Options */
+.free-games-gate__wallets {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
-.free-games-gate__benefit {
+.free-games-gate__wallet-option {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #e2e8f0;
-  transition: all 0.2s ease;
-}
-
-.free-games-gate__benefit:hover {
-  background: rgba(99, 102, 241, 0.08);
-  border-color: rgba(99, 102, 241, 0.15);
-}
-
-.free-games-gate__benefit-icon {
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-
-/* CTA Button */
-.free-games-gate__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  gap: 12px;
   width: 100%;
-  padding: 14px 24px;
-  border: none;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 4px 20px rgba(99, 102, 241, 0.3),
-    0 0 0 1px rgba(99, 102, 241, 0.2) inset;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  color: white;
 }
 
-.free-games-gate__cta::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-  transform: translateX(-100%);
-  animation: gateCtaShimmer 3s ease-in-out infinite;
-}
-
-@keyframes gateCtaShimmer {
-  0% { transform: translateX(-100%); }
-  50%, 100% { transform: translateX(100%); }
-}
-
-.free-games-gate__cta:hover:not(:disabled) {
-  background: linear-gradient(135deg, #7c3aed, #6366f1);
-  box-shadow:
-    0 8px 32px rgba(99, 102, 241, 0.45),
-    0 0 0 1px rgba(139, 92, 246, 0.3) inset;
+.free-games-gate__wallet-option:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
-.free-games-gate__cta:active:not(:disabled) {
-  transform: translateY(0) scale(0.98);
+.free-games-gate__wallet-option:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
 }
 
-.free-games-gate__cta:disabled {
-  opacity: 0.6;
+.free-games-gate__wallet-option:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-.free-games-gate__cta-icon {
-  font-size: 1.1rem;
+.free-games-gate__wallet-option--privy:hover:not(:disabled) {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.12);
+}
+
+.free-games-gate__wallet-option--farcaster:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.12);
+}
+
+.free-games-gate__wallet-option--celo:hover:not(:disabled) {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.2);
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.1);
+}
+
+/* Wallet Badge */
+.free-games-gate__wallet-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.free-games-gate__wallet-option:hover .free-games-gate__wallet-badge {
+  transform: scale(1.05);
+}
+
+.free-games-gate__wallet-badge--privy {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+}
+
+.free-games-gate__wallet-badge--farcaster {
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+}
+
+.free-games-gate__wallet-badge--celo {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fcd34d;
+}
+
+/* Wallet Info */
+.free-games-gate__wallet-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.free-games-gate__wallet-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.free-games-gate__wallet-desc {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Arrow */
+.free-games-gate__wallet-arrow {
+  font-size: 1rem;
+  color: #475569;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.free-games-gate__wallet-option:hover .free-games-gate__wallet-arrow {
+  color: #94a3b8;
+  transform: translateX(3px);
+}
+
+/* Spinner */
+.free-games-gate__spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #818cf8;
+  border-radius: 50%;
+  animation: gateSpinnerSpin 0.6s linear infinite;
+}
+
+@keyframes gateSpinnerSpin {
+  to { transform: rotate(360deg); }
 }
 
 /* Disclaimer */
 .free-games-gate__disclaimer {
-  margin: 14px 0 0;
+  margin: 0;
   font-size: 0.7rem;
   color: #64748b;
   font-weight: 500;

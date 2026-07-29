@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Gamepad2, Palette, Sparkles, Award, ShoppingBag, Coins, Gift, Info, Check, Loader2 } from 'lucide-react';
 import useAppStore from '../../zustand/store';
+import { useWalletAuth } from '../../hooks/useWalletAuth';
 import './ShopPage.css';
 import { CELO_CONFIG } from '../../chess/blockchainConstants';
 import celoService from '../../chess/services/celoService';
@@ -36,8 +37,6 @@ const BADGES: ShopItem[] = [
 ];
 
 const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
-
-import { useWalletAuth } from '../../hooks/useWalletAuth';
 
 export default function ShopPage() {
   const address = useAppStore((s) => s.address);

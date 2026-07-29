@@ -37,10 +37,12 @@ const BADGES: ShopItem[] = [
 
 const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];
 
+import { useWalletAuth } from '../../hooks/useWalletAuth';
+
 export default function ShopPage() {
   const address = useAppStore((s) => s.address);
   const activeChain = useAppStore((s) => s.activeChain);
-  const setConnectModalOpen = useAppStore((s) => s.setConnectModalOpen);
+  const { connect } = useWalletAuth();
 
   const [walletBalance, setWalletBalance] = useState<string>('0.0000');
   const [isLoadingBalance, setIsLoadingBalance] = useState(false);
@@ -112,7 +114,7 @@ export default function ShopPage() {
   const handleBuy = async (item: ShopItem) => {
     if (ownedItems.includes(item.id)) return;
     if (!address) {
-      setConnectModalOpen(true);
+      connect();
       triggerToast('Please connect your wallet first.', 'error');
       return;
     }
@@ -260,7 +262,7 @@ export default function ShopPage() {
             ) : (
               <>
                 <div className="balance-value" style={{ fontSize: '1.2rem', color: '#64748b', margin: '4px 0' }}>Disconnected</div>
-                <button onClick={() => setConnectModalOpen(true)} className="shop-connect-btn">
+                <button onClick={() => connect()} className="shop-connect-btn">
                   Connect Wallet
                 </button>
               </>

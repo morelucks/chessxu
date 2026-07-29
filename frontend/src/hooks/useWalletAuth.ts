@@ -59,8 +59,7 @@ export function useWalletAuth() {
       if (isMiniPay) {
         chain = 'celo';
       } else {
-        setConnectModalOpen(true);
-        return;
+        chain = 'privy';
       }
     }
 

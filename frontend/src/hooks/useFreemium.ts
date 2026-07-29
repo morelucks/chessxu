@@ -25,6 +25,8 @@ export interface FreemiumState {
     offlineGamesPlayed: number;
     /** True when the user has no wallet connected */
     isOfflineMode: boolean;
+    /** True when all free games are used and wallet is not connected */
+    freeGamesExhausted: boolean;
     /** Call when an offline game completes to track progress */
     onGameComplete: () => void;
     /** Dismiss the upgrade prompt */
@@ -46,11 +48,12 @@ export function useFreemium(): FreemiumState {
     const canPlayOffline  = true; // No wallet required — always available
     const canPlayOnChain  = !!address;
 
+    // True when all free games are used and no wallet connected
+    const freeGamesExhausted = isOfflineMode && offlineGamesPlayed >= UPGRADE_THRESHOLD;
+
     // Show the upgrade prompt once threshold is hit, unless dismissed
     const shouldShowUpgradePrompt =
-        isOfflineMode &&
-        !upgradePromptDismissed &&
-        offlineGamesPlayed >= UPGRADE_THRESHOLD;
+        freeGamesExhausted && !upgradePromptDismissed;
 
     const onGameComplete = useCallback(() => {
         if (isOfflineMode) incrementOfflineGames();
@@ -66,6 +69,7 @@ export function useFreemium(): FreemiumState {
         shouldShowUpgradePrompt,
         offlineGamesPlayed,
         isOfflineMode,
+        freeGamesExhausted,
         onGameComplete,
         dismissUpgradePrompt,
     };

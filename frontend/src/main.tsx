@@ -7,8 +7,12 @@ import "./index.css";
 import { Buffer } from "buffer";
 import { userSession } from "./zustand/store";
 import { PRIVY_APP_ID, privyConfig } from "./config/privyConfig";
+import { initSentry } from "./config/sentry.config";
 
 console.log("=== main.tsx starting ===");
+
+// Initialize Sentry monitoring prior to rendering
+initSentry();
 
 if (typeof window !== "undefined") {
   window.Buffer = window.Buffer || Buffer;
@@ -58,19 +62,3 @@ createRoot(rootElement).render(
     </PrivyProvider>
   </StrictMode>
 );
-
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook
-// Sentry application initialization hook

@@ -113,6 +113,7 @@ function getPieceValue(p: string): number {
  * Wrapper providing AppContext with typed reducer for the chess board UI.
  */
 export default function ChessGameWrapper({ isPuzzle = false }) {
+    const address = useAppStore((state) => state.address);
     const timeControlMs = useAppStore((state) => state.timeControlMs);
     const farcasterUser = useAppStore((state) => state.farcasterUser);
     const elo = useAppStore((state) => state.elo);

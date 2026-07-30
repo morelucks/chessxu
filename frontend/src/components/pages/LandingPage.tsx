@@ -119,7 +119,7 @@ export default function LandingPage() {
                 disabled={isConnecting}
                 className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isConnecting ? "Connecting..." : "Connect & Play"}
+                {isConnecting ? "Connecting..." : "Play Chessxu"}
               </button>
             )}
           </div>

@@ -255,7 +255,7 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
             >
               <option value="all">All Stakes</option>
               <option value="free">Free Games ($0)</option>
-              <option value="wagered">Wagered (> $0)</option>
+              <option value="wagered">Wagered (&gt; $0)</option>
             </select>
           </div>
 

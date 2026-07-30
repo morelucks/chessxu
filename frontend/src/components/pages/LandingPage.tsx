@@ -2,6 +2,7 @@ import HeroSection from "../landing/HeroSection";
 import FeatureGrid from "../landing/FeatureGrid";
 import StatsSection from "../landing/StatsSection";
 import CTASection from "../landing/CTASection";
+import CeloBenefits from "../landing/CeloBenefits";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
@@ -135,6 +136,7 @@ export default function LandingPage() {
           <FeatureGrid />
         </div>
         <StatsSection />
+        <CeloBenefits />
         <CTASection onStartPlaying={handleStartPlaying} isConnecting={isConnecting} isConnected={isConnected} />
       </main>
     </div>

@@ -41,6 +41,120 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <style>
+        .noscript-fallback {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          color: #e2e8f0;
+          padding: 24px;
+          margin: 0;
+        }
+        .noscript-card {
+          max-width: 480px;
+          width: 100%;
+          background: rgba(15, 23, 42, 0.8);
+          border: 1px solid rgba(99, 102, 241, 0.25);
+          border-radius: 20px;
+          padding: 40px 32px;
+          text-align: center;
+          box-shadow: 0 0 60px rgba(99, 102, 241, 0.1);
+        }
+        .noscript-icon {
+          font-size: 56px;
+          margin-bottom: 16px;
+          display: block;
+        }
+        .noscript-title {
+          font-size: 22px;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 8px;
+        }
+        .noscript-subtitle {
+          font-size: 14px;
+          color: #94a3b8;
+          margin: 0 0 24px;
+          line-height: 1.5;
+        }
+        .noscript-steps {
+          text-align: left;
+          background: rgba(30, 41, 59, 0.6);
+          border-radius: 12px;
+          padding: 20px 24px;
+          margin-bottom: 24px;
+        }
+        .noscript-steps-title {
+          font-size: 13px;
+          font-weight: 600;
+          color: #818cf8;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin: 0 0 12px;
+        }
+        .noscript-steps ol {
+          margin: 0;
+          padding-left: 20px;
+          color: #cbd5e1;
+          font-size: 14px;
+          line-height: 1.8;
+        }
+        .noscript-steps li { margin-bottom: 4px; }
+        .noscript-steps code {
+          background: rgba(99, 102, 241, 0.15);
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-size: 13px;
+          color: #a5b4fc;
+        }
+        .noscript-footer {
+          font-size: 12px;
+          color: #64748b;
+          margin: 0;
+          line-height: 1.5;
+        }
+        .noscript-celo {
+          display: inline-block;
+          margin-top: 16px;
+          padding: 8px 20px;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+          color: #fff;
+          font-size: 13px;
+          font-weight: 600;
+          text-decoration: none;
+          letter-spacing: 0.3px;
+        }
+      </style>
+      <div class="noscript-fallback">
+        <div class="noscript-card">
+          <span class="noscript-icon">♟️</span>
+          <h1 class="noscript-title">Chessxu requires JavaScript</h1>
+          <p class="noscript-subtitle">
+            Chessxu is an on-chain chess app built on Celo. JavaScript is needed
+            to connect your wallet, play games, and interact with the blockchain.
+          </p>
+          <div class="noscript-steps">
+            <p class="noscript-steps-title">How to enable JavaScript</p>
+            <ol>
+              <li>Open your browser <strong>Settings</strong></li>
+              <li>Search for <code>JavaScript</code></li>
+              <li>Toggle it <strong>On</strong> (or add this site to your allowlist)</li>
+              <li>Refresh this page</li>
+            </ol>
+          </div>
+          <p class="noscript-footer">
+            Works best in Chrome, Firefox, Brave, or the Farcaster app.
+            <br />Zero gas fees via MiniPay on Celo.
+          </p>
+          <a class="noscript-celo" href="https://celo.org" target="_blank" rel="noopener">Learn about Celo →</a>
+        </div>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

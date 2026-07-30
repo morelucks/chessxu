@@ -5,7 +5,7 @@
  * Shows cached games and allows reviewing past matches.
  */
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useGameHistory } from '../../hooks/useGameHistory';
 import { CachedGame } from '../../services/gameHistoryDB';
 import { 
@@ -18,7 +18,12 @@ import {
   Minus,
   Wifi,
   WifiOff,
-  Calendar
+  Calendar,
+  Search,
+  X,
+  Filter,
+  Coins,
+  RotateCcw
 } from 'lucide-react';
 import './GameHistoryDashboard.css';
 
@@ -39,19 +44,56 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
   } = useGameHistory();
 
   const [filter, setFilter] = useState<'all' | 'wins' | 'losses' | 'draws' | 'ongoing'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [wagerFilter, setWagerFilter] = useState<'all' | 'free' | 'wagered'>('all');
+  const [dateFilter, setDateFilter] = useState<'all' | '24h' | '7d' | '30d'>('all');
   const [isOnline] = useState(navigator.onLine);
 
+  const hasActiveFilters = searchQuery !== '' || filter !== 'all' || wagerFilter !== 'all' || dateFilter !== 'all';
+
+  const resetFilters = () => {
+    setSearchQuery('');
+    setFilter('all');
+    setWagerFilter('all');
+    setDateFilter('all');
+  };
+
   /**
-   * Filter games based on selected filter
+   * Filter games based on search, outcome, wager, and date range
    */
-  const filteredGames = games.filter(game => {
-    if (filter === 'all') return true;
-    if (filter === 'ongoing') return game.status === 0 || game.status === 1;
-    if (filter === 'wins') return game.winner === 'win';
-    if (filter === 'losses') return game.winner === 'loss';
-    if (filter === 'draws') return game.winner === 'draw';
-    return true;
-  });
+  const filteredGames = useMemo(() => {
+    const now = Date.now();
+    const query = searchQuery.trim().toLowerCase();
+
+    return games.filter(game => {
+      // Outcome filter
+      if (filter === 'ongoing' && !(game.status === 0 || game.status === 1)) return false;
+      if (filter === 'wins' && game.winner !== 'win') return false;
+      if (filter === 'losses' && game.winner !== 'loss') return false;
+      if (filter === 'draws' && game.winner !== 'draw') return false;
+
+      // Wager filter
+      const isFree = !game.wager || game.wager === '0' || game.wager === '0.0';
+      if (wagerFilter === 'free' && !isFree) return false;
+      if (wagerFilter === 'wagered' && isFree) return false;
+
+      // Date range filter
+      if (dateFilter === '24h' && now - game.timestamp > 86400000) return false;
+      if (dateFilter === '7d' && now - game.timestamp > 7 * 86400000) return false;
+      if (dateFilter === '30d' && now - game.timestamp > 30 * 86400000) return false;
+
+      // Search query (by Game ID or Opponent address)
+      if (query) {
+        const gameIdStr = game.gameId.toString();
+        const matchesId = gameIdStr === query || gameIdStr.includes(query);
+        const matchesWhite = game.playerW.toLowerCase().includes(query);
+        const matchesBlack = (game.playerB || '').toLowerCase().includes(query);
+        if (!matchesId && !matchesWhite && !matchesBlack) return false;
+      }
+
+      return true;
+    });
+  }, [games, filter, wagerFilter, dateFilter, searchQuery]);
 
   /**
    * Handle sync button click
@@ -183,38 +225,104 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="filter-tabs">
-        <button 
-          className={filter === 'all' ? 'active' : ''}
-          onClick={() => setFilter('all')}
-        >
-          All ({games.length})
-        </button>
-        <button 
-          className={filter === 'wins' ? 'active' : ''}
-          onClick={() => setFilter('wins')}
-        >
-          Wins ({stats.wins})
-        </button>
-        <button 
-          className={filter === 'losses' ? 'active' : ''}
-          onClick={() => setFilter('losses')}
-        >
-          Losses ({stats.losses})
-        </button>
-        <button 
-          className={filter === 'draws' ? 'active' : ''}
-          onClick={() => setFilter('draws')}
-        >
-          Draws ({stats.draws})
-        </button>
-        <button 
-          className={filter === 'ongoing' ? 'active' : ''}
-          onClick={() => setFilter('ongoing')}
-        >
-          Ongoing ({stats.ongoing})
-        </button>
+      {/* Filter & Search Bar */}
+      <div className="history-filter-panel">
+        {/* Search Bar */}
+        <div className="search-input-wrapper">
+          <Search className="search-icon" size={16} />
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search by game ID or opponent address..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button className="search-clear-btn" onClick={() => setSearchQuery('')} title="Clear search">
+              <X size={14} />
+            </button>
+          )}
+        </div>
+
+        {/* Filter Dropdowns */}
+        <div className="filter-dropdowns">
+          <div className="filter-group">
+            <Coins size={14} className="filter-icon" />
+            <select 
+              value={wagerFilter} 
+              onChange={(e) => setWagerFilter(e.target.value as 'all' | 'free' | 'wagered')}
+              className="filter-select"
+            >
+              <option value="all">All Stakes</option>
+              <option value="free">Free Games ($0)</option>
+              <option value="wagered">Wagered (> $0)</option>
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <Calendar size={14} className="filter-icon" />
+            <select 
+              value={dateFilter} 
+              onChange={(e) => setDateFilter(e.target.value as 'all' | '24h' | '7d' | '30d')}
+              className="filter-select"
+            >
+              <option value="all">All Time</option>
+              <option value="24h">Past 24 Hours</option>
+              <option value="7d">Past 7 Days</option>
+              <option value="30d">Past 30 Days</option>
+            </select>
+          </div>
+
+          {hasActiveFilters && (
+            <button className="reset-filters-btn" onClick={resetFilters} title="Reset all filters">
+              <RotateCcw size={13} />
+              <span>Reset</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Filter Tabs & Results Count */}
+      <div className="filter-tabs-container">
+        <div className="filter-tabs">
+          <button 
+            className={filter === 'all' ? 'active' : ''}
+            onClick={() => setFilter('all')}
+          >
+            All ({games.length})
+          </button>
+          <button 
+            className={filter === 'wins' ? 'active' : ''}
+            onClick={() => setFilter('wins')}
+          >
+            Wins ({stats.wins})
+          </button>
+          <button 
+            className={filter === 'losses' ? 'active' : ''}
+            onClick={() => setFilter('losses')}
+          >
+            Losses ({stats.losses})
+          </button>
+          <button 
+            className={filter === 'draws' ? 'active' : ''}
+            onClick={() => setFilter('draws')}
+          >
+            Draws ({stats.draws})
+          </button>
+          <button 
+            className={filter === 'ongoing' ? 'active' : ''}
+            onClick={() => setFilter('ongoing')}
+          >
+            Ongoing ({stats.ongoing})
+          </button>
+        </div>
+
+        {hasActiveFilters && (
+          <div className="results-count-badge">
+            <Filter size={12} />
+            Showing {filteredGames.length} of {games.length} games
+          </div>
+        )}
       </div>
 
       {/* Error Message */}
@@ -229,18 +337,22 @@ export default function GameHistoryDashboard({ onGameSelect }: GameHistoryDashbo
         {filteredGames.length === 0 ? (
           <div className="empty-state-card">
             <div className="empty-state-svg-wrapper">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="empty-state-svg">
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-                <path d="M12 11h.01" />
-              </svg>
+              <Search size={32} className="empty-state-svg" />
             </div>
             <h3>No Matches Found</h3>
             <p className="empty-state-desc">
-              {filter === 'all' 
+              {hasActiveFilters
+                ? 'No games match your current filter and search criteria. Try adjusting your search query or reset filters.'
+                : filter === 'all' 
                 ? 'No games recorded yet. Put your skills to the test and play a match to build your history!' 
                 : `No ${filter} matches have been recorded in this category yet.`}
             </p>
+            {hasActiveFilters && (
+              <button className="reset-filters-empty-btn" onClick={resetFilters}>
+                <RotateCcw size={14} />
+                Clear Filters & Search
+              </button>
+            )}
             {!isOnline && (
               <p className="offline-note">
                 <WifiOff size={16} />

@@ -43,7 +43,7 @@ export default function CTASection({ onStartPlaying, isConnecting, isConnected }
                 disabled={isConnecting}
                 className="px-10 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Connect & Play"}
+                {isConnecting ? (isMiniPay ? "Detecting MiniPay..." : "Connecting Wallet...") : isConnected || isMiniPay ? "Start Playing Now" : "Play Chessxu"}
                 {!isConnecting && <ChevronRight className="w-5 h-5" />}
               </button>
             </div>

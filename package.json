@@ -23,7 +23,7 @@
     "build:sdk": "npm run build:cjs && npm run build:esm",
     "build:frontend": "npm --prefix frontend run build",
     "build": "npm run build:sdk",
-    "vercel-build": "cd frontend && npm install && cd .. && NODE_OPTIONS=--max-old-space-size=4096 npm run build:sdk && npm --prefix frontend run build",
+    "vercel-build": "npm run build:sdk && npm --prefix frontend run build",
     "test": "tsc -p tsconfig.test.json && node --test dist-test/tests/*.test.js",
     "test:coverage": "tsc -p tsconfig.test.json && c8 --reporter=lcov --reporter=text --reporter=json-summary --include='dist-test/src/**' node --test dist-test/tests/*.test.js",
     "coverage:check": "c8 check-coverage --lines 80 --functions 80 --branches 70 --statements 80",

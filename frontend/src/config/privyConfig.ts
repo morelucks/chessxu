@@ -8,7 +8,7 @@ export const privyConfig: { appId: string; config: PrivyClientConfig } = {
     appearance: {
       theme: 'dark',
       accentColor: '#6366f1',
-      logo: '/logo.png',
+      logo: '/favicon.png',
       showWalletLoginFirst: true,
     },
     loginMethods: ['wallet', 'email', 'farcaster', 'google'],

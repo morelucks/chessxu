@@ -8,6 +8,7 @@ import { useMiniPay } from "../hooks/useMiniPay";
 import { useFarcaster } from "../hooks/useFarcaster";
 import { FarcasterMiniAppReady } from "../components/FarcasterMiniAppReady";
 import ConnectWalletModal from "../components/ConnectWalletModal";
+import OnboardingTutorial from "../components/OnboardingTutorial";
 
 import BottomNav from "../components/BottomNav";
 import DesktopNav from "../components/DesktopNav";
@@ -31,6 +32,7 @@ function App() {
     <ToasterProvider>
       <FarcasterMiniAppReady />
       <ConnectWalletModal />
+      <OnboardingTutorial />
       <BrowserRouter>
         <div className="flex flex-col h-[100dvh] bg-slate-950 text-white overflow-hidden">
           <DesktopNav />

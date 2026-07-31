@@ -99,17 +99,20 @@ export function Header() {
         </div>
       </div>
 
-      <h1
+      <Link
+        to="/about"
         className="
           text-4xl md:text-6xl 
           font-black mb-4 py-2
           bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500 
           bg-clip-text text-transparent 
           leading-tight tracking-tight
+          hover:opacity-90 transition-opacity inline-block
         "
+        title="About Chessxu"
       >
         Chessxu
-      </h1>
+      </Link>
       <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto px-4 font-medium">
         Onchain Chess on{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 font-bold">

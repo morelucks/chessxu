@@ -20,6 +20,8 @@ import NotFoundPage from '../components/pages/NotFoundPage';
 import HistoryPage from '../components/pages/HistoryPage';
 import AnalyticsDashboard from '../components/pages/AnalyticsDashboard';
 
+import AboutPage from '../components/pages/AboutPage';
+
 function App() {
   console.log("=== App component rendering ===");
   // Attempt MiniPay auto-connection
@@ -39,6 +41,7 @@ function App() {
           <div className="flex flex-col flex-1 min-h-0 pb-20 md:pb-0 overflow-y-auto">
             <Routes>
               <Route path="/" element={<ChessScreen />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route path="/puzzle" element={<PuzzleScreen />} />
               <Route path="/pvp" element={<PvPScreen />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />

@@ -20,7 +20,7 @@ export const DesktopNav: React.FC = () => {
     <nav className="desktop-nav" id="desktop-navigation">
       <div className="desktop-nav-inner">
         {/* Left: Brand */}
-        <NavLink to="/" className="desktop-nav-brand">
+        <NavLink to="/about" className="desktop-nav-brand" id="desktop-nav-brand">
           <span className="desktop-nav-logo">♟️</span>
           <span className="desktop-nav-title">Chessxu</span>
         </NavLink>

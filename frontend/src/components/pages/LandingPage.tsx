@@ -3,7 +3,7 @@ import FeatureGrid from "../landing/FeatureGrid";
 import StatsSection from "../landing/StatsSection";
 import CTASection from "../landing/CTASection";
 import CeloBenefits from "../landing/CeloBenefits";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useWalletAuth } from "../../hooks/useWalletAuth";
 import useAppStore from "../../zustand/store";
@@ -60,9 +60,9 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md">
         <div className="container mx-auto px-6 py-4 max-w-6xl flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <Link to="/about" className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent hover:opacity-90 transition-opacity">
             ♟ Chessxu
-          </div>
+          </Link>
           {/* Mobile Connect Button */}
           <div className="md:hidden">
             {isConnected ? (

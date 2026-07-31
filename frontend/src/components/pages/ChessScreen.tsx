@@ -26,9 +26,14 @@ export default function ChessScreen() {
             
             {/* Left: Brand Title & Status/Free Games Counter */}
             <div className="flex items-center gap-3 min-w-0">
-              <h1 className="text-base md:text-lg font-black tracking-tight text-white drop-shadow-md leading-none flex-shrink-0">
-                Chessxu
-              </h1>
+              <button 
+                onClick={() => navigate('/about')}
+                className="text-base md:text-lg font-black tracking-tight text-white drop-shadow-md leading-none flex-shrink-0 flex items-center gap-1.5 hover:text-indigo-300 transition-colors group cursor-pointer"
+                title="About Chessxu"
+              >
+                <span className="text-base group-hover:scale-110 transition-transform">♟️</span>
+                <span>Chessxu</span>
+              </button>
               <div className="h-4 w-px bg-white/10 flex-shrink-0" />
               
               <div className="flex items-center gap-2 truncate">

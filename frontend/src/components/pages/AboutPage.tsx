@@ -505,3 +505,4 @@ export default function AboutPage() {
 // Feature pillars grid definition
 // Game modes tabbed switcher
 // Expandable FAQ accordion
+// Bottom call-to-action banner

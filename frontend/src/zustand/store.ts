@@ -226,3 +226,4 @@ export default useAppStore;
 // toggle3DView implementation
 // Store logout state reset
 // Persist configuration comment
+// AppStore export type check

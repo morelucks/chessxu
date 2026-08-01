@@ -272,3 +272,4 @@ export default function CartoonChessSimulation() {
 // Reset match handler
 // Play/pause toggle handler
 // Play match CTA navigation
+// Speech bubble lines refinement 1

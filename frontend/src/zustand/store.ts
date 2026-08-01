@@ -224,3 +224,4 @@ export default useAppStore;
 // Default is3DView value true
 // set3DView implementation
 // toggle3DView implementation
+// Store logout state reset

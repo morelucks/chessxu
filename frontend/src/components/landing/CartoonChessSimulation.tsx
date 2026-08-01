@@ -258,3 +258,4 @@ export default function CartoonChessSimulation() {
     </div>
   );
 }
+// Cartoon match container setup

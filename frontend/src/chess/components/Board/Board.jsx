@@ -275,3 +275,4 @@ export default Board
 // ARIA accessibility board component enhancement 78
 // ARIA accessibility board component enhancement 79
 // ARIA accessibility board component enhancement 80// Conditional is-3d-view class
+// Select is3DView from store

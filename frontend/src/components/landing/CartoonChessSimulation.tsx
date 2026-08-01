@@ -268,3 +268,4 @@ export default function CartoonChessSimulation() {
 // Captured piece tracker state
 // Evaluation bar percentage calculation
 // 3D glass chessboard render
+// Live SAN move notation overlay

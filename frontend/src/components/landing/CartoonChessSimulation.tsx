@@ -261,3 +261,4 @@ export default function CartoonChessSimulation() {
 // Cartoon match container setup
 // Speed control selector handlers
 // King Bot avatar reference
+// Wizard GM avatar reference

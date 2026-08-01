@@ -229,3 +229,4 @@ export default useAppStore;
 // AppStore export type check
 // Store state getter comment
 // State documentation comment 1
+// State documentation comment 2

@@ -278,3 +278,4 @@ export default function CartoonChessSimulation() {
 // ARIA labels for controls
 // Move sequence index safety check
 // Cleanup timer interval on unmount
+// White piece color CSS class

@@ -271,3 +271,4 @@ export default function CartoonChessSimulation() {
 // Live SAN move notation overlay
 // Reset match handler
 // Play/pause toggle handler
+// Play match CTA navigation

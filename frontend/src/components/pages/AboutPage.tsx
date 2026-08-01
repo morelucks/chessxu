@@ -511,3 +511,4 @@ export default function AboutPage() {
 // Section title headers
 // Subheading description text
 // Metric label interfaces
+// Register AboutPage component

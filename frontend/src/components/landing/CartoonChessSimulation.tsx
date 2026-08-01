@@ -274,3 +274,4 @@ export default function CartoonChessSimulation() {
 // Play match CTA navigation
 // Speech bubble lines refinement 1
 // Speech bubble lines refinement 2
+// Web3 gasless callout lines

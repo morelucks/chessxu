@@ -276,3 +276,4 @@ export default function CartoonChessSimulation() {
 // Speech bubble lines refinement 2
 // Web3 gasless callout lines
 // ARIA labels for controls
+// Move sequence index safety check

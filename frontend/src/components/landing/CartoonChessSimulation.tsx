@@ -265,3 +265,4 @@ export default function CartoonChessSimulation() {
 // Animated speech bubble container
 // Opera Game tactical move sequence
 // Automated timer match loop
+// Captured piece tracker state

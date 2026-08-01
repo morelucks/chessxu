@@ -277,3 +277,4 @@ export default function CartoonChessSimulation() {
 // Web3 gasless callout lines
 // ARIA labels for controls
 // Move sequence index safety check
+// Cleanup timer interval on unmount

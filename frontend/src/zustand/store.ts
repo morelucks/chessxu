@@ -225,3 +225,4 @@ export default useAppStore;
 // set3DView implementation
 // toggle3DView implementation
 // Store logout state reset
+// Persist configuration comment

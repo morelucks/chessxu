@@ -218,3 +218,4 @@ export default useAppStore;
 // Three offline game modes: pvc, pvp-local (pass-play), puzzle — all free
 // The freemium model is: play free forever offline, upgrade for on-chain benefits
 // All three freemium actions are synchronous — no async side effects
+// 3D view state interface definition

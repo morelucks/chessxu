@@ -232,3 +232,4 @@ export default useAppStore;
 // State documentation comment 2
 // State documentation comment 3
 // Store reset helper comment
+// Store exports validation

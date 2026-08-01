@@ -19,6 +19,7 @@ import {
   Award,
   Play
 } from 'lucide-react';
+import CartoonChessSimulation from '../landing/CartoonChessSimulation';
 import './AboutPage.css';
 
 // Interactive FAQ data
@@ -168,6 +169,9 @@ export default function AboutPage() {
               <span className="metric-label">Stablecoin Wagers</span>
             </div>
           </div>
+
+          {/* Cartoon Live Match Background Simulation */}
+          <CartoonChessSimulation />
         </div>
       </section>
 

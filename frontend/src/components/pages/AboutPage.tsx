@@ -500,3 +500,4 @@ export default function AboutPage() {
   );
 }
 // Hero section layout structure
+// Key metrics strip component

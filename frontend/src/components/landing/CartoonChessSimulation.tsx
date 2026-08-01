@@ -266,3 +266,4 @@ export default function CartoonChessSimulation() {
 // Opera Game tactical move sequence
 // Automated timer match loop
 // Captured piece tracker state
+// Evaluation bar percentage calculation

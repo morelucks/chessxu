@@ -507,3 +507,4 @@ export default function AboutPage() {
 // Expandable FAQ accordion
 // Bottom call-to-action banner
 // Add WCAG aria attributes to FAQ buttons
+// Navigation click handlers

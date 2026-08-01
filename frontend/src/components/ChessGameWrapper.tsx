@@ -413,3 +413,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     // Offline player name shows 'You' — no address to truncate
 // Select is3DView in game wrapper
 // Header 3D View toggle button
+// Overflow visible on container

@@ -267,3 +267,4 @@ export default function CartoonChessSimulation() {
 // Automated timer match loop
 // Captured piece tracker state
 // Evaluation bar percentage calculation
+// 3D glass chessboard render

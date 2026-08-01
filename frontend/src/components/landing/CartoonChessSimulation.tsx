@@ -270,3 +270,4 @@ export default function CartoonChessSimulation() {
 // 3D glass chessboard render
 // Live SAN move notation overlay
 // Reset match handler
+// Play/pause toggle handler

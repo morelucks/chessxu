@@ -510,3 +510,4 @@ export default function AboutPage() {
 // Navigation click handlers
 // Section title headers
 // Subheading description text
+// Metric label interfaces

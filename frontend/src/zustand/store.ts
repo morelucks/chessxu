@@ -230,3 +230,4 @@ export default useAppStore;
 // Store state getter comment
 // State documentation comment 1
 // State documentation comment 2
+// State documentation comment 3

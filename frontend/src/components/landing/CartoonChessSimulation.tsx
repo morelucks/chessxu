@@ -279,3 +279,4 @@ export default function CartoonChessSimulation() {
 // Move sequence index safety check
 // Cleanup timer interval on unmount
 // White piece color CSS class
+// Move speed multiplier calculation

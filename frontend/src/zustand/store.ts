@@ -228,3 +228,4 @@ export default useAppStore;
 // Persist configuration comment
 // AppStore export type check
 // Store state getter comment
+// State documentation comment 1

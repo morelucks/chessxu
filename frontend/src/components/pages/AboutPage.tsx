@@ -504,3 +504,4 @@ export default function AboutPage() {
 // Interactive tactical preview board
 // Feature pillars grid definition
 // Game modes tabbed switcher
+// Expandable FAQ accordion

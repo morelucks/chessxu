@@ -396,3 +396,4 @@ export default function ChessSidebar() {
     // Upgrade section placed before AI panel so wallet CTA is visible first
 // Select is3DView in sidebar
 // 3D View toggle button
+// Toggle button gradient style

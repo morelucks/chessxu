@@ -280,3 +280,4 @@ export default function CartoonChessSimulation() {
 // Cleanup timer interval on unmount
 // White piece color CSS class
 // Move speed multiplier calculation
+// Export CartoonChessSimulation

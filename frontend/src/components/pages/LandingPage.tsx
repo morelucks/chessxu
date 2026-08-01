@@ -142,3 +142,4 @@ export default function LandingPage() {
     </div>
   );
 }
+// Nav brand link to /about

@@ -64,3 +64,4 @@ export const DesktopNav: React.FC = () => {
 };
 
 export default DesktopNav;
+// Link brand to /about

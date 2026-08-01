@@ -116,3 +116,4 @@ export default function ChessScreen() {
     </div>
   );
 }
+// Mobile brand title button

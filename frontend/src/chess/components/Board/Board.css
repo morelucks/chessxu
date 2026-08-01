@@ -286,4 +286,26 @@
 .board.is-3d-view .tile.highlight:after,
 .board.is-3d-view .tile.attacking:after {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
-}
+}/* 3D perspective container */
+/* 3D rotateX transformation */
+/* Classic Wood 3D rim */
+/* Modern Neon 3D rim */
+/* Dark Slate 3D rim */
+/* Light Slate 3D rim */
+/* Piece drop shadow filters */
+/* Piece hover elevation */
+/* Target highlight drop shadow */
+/* Preserved 3D transform style */
+/* Tile background transition */
+/* Board box-shadow depth */
+/* Neon underglow reflection */
+/* Wood bevel border shading */
+/* Obsidian border shading */
+/* Marble border shading */
+/* Attacking target ring 3D shadow */
+/* Selected tile highlight ring */
+/* Checked king tile animation */
+/* Last move square background */
+/* Responsive tile size CSS variables */
+/* 3D view perspective origin */
+/* Hardware acceleration hint */

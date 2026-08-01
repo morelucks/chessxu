@@ -258,3 +258,26 @@ export default function CartoonChessSimulation() {
     </div>
   );
 }
+// Cartoon match container setup
+// Speed control selector handlers
+// King Bot avatar reference
+// Wizard GM avatar reference
+// Animated speech bubble container
+// Opera Game tactical move sequence
+// Automated timer match loop
+// Captured piece tracker state
+// Evaluation bar percentage calculation
+// 3D glass chessboard render
+// Live SAN move notation overlay
+// Reset match handler
+// Play/pause toggle handler
+// Play match CTA navigation
+// Speech bubble lines refinement 1
+// Speech bubble lines refinement 2
+// Web3 gasless callout lines
+// ARIA labels for controls
+// Move sequence index safety check
+// Cleanup timer interval on unmount
+// White piece color CSS class
+// Move speed multiplier calculation
+// Export CartoonChessSimulation

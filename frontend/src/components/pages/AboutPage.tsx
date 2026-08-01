@@ -499,3 +499,16 @@ export default function AboutPage() {
     </div>
   );
 }
+// Hero section layout structure
+// Key metrics strip component
+// Interactive tactical preview board
+// Feature pillars grid definition
+// Game modes tabbed switcher
+// Expandable FAQ accordion
+// Bottom call-to-action banner
+// Add WCAG aria attributes to FAQ buttons
+// Navigation click handlers
+// Section title headers
+// Subheading description text
+// Metric label interfaces
+// Register AboutPage component

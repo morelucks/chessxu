@@ -269,3 +269,4 @@ export default function CartoonChessSimulation() {
 // Evaluation bar percentage calculation
 // 3D glass chessboard render
 // Live SAN move notation overlay
+// Reset match handler

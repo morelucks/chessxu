@@ -220,3 +220,4 @@ export default useAppStore;
 // All three freemium actions are synchronous — no async side effects
 // 3D view state interface definition
 // set3DView action interface
+// toggle3DView action interface

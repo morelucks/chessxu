@@ -219,3 +219,4 @@ export default useAppStore;
 // The freemium model is: play free forever offline, upgrade for on-chain benefits
 // All three freemium actions are synchronous — no async side effects
 // 3D view state interface definition
+// set3DView action interface

@@ -506,3 +506,4 @@ export default function AboutPage() {
 // Game modes tabbed switcher
 // Expandable FAQ accordion
 // Bottom call-to-action banner
+// Add WCAG aria attributes to FAQ buttons

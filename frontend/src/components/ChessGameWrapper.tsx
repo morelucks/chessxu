@@ -412,3 +412,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
     // Freemium design: show what on-chain play looks like before requiring wallet
     // Offline player name shows 'You' — no address to truncate
 // Select is3DView in game wrapper
+// Header 3D View toggle button

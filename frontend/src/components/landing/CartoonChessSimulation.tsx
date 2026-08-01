@@ -263,3 +263,4 @@ export default function CartoonChessSimulation() {
 // King Bot avatar reference
 // Wizard GM avatar reference
 // Animated speech bubble container
+// Opera Game tactical move sequence

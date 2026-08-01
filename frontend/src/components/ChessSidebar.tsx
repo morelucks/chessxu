@@ -224,6 +224,8 @@ const GameModeSelection = ({ gameMode, onNewGame, onShowStakingModal }: GameMode
 const BoardThemeCustomizer = () => {
     const boardTheme = useAppStore((s) => s.boardTheme);
     const setBoardTheme = useAppStore((s) => s.setBoardTheme);
+    const is3DView = useAppStore((s) => s.is3DView);
+    const toggle3DView = useAppStore((s) => s.toggle3DView);
 
     const themes = [
         { id: 'dark', name: 'Dark Slate', lightColor: '#475569', darkColor: '#1e293b' },
@@ -234,7 +236,20 @@ const BoardThemeCustomizer = () => {
 
     return (
         <div className="board-theme-customizer">
-            <h3 className="chess-sidebar-title">Board Theme</h3>
+            <div className="flex items-center justify-between mb-2">
+                <h3 className="chess-sidebar-title mb-0">Board Style & View</h3>
+                <button
+                    onClick={toggle3DView}
+                    className={`px-2.5 py-1 rounded-md text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                        is3DView 
+                            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-500/30 border border-purple-400/40' 
+                            : 'bg-slate-800 text-slate-400 border border-slate-700 hover:text-white'
+                    }`}
+                    title="Toggle 3D Gaming Perspective View"
+                >
+                    <span>{is3DView ? '🎮 3D View' : '📐 2D Flat'}</span>
+                </button>
+            </div>
             <div className="theme-grid">
                 {themes.map((t) => (
                     <button

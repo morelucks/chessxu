@@ -45,6 +45,8 @@ export interface GameState {
   /** Whether the upgrade prompt has been dismissed */
   upgradePromptDismissed: boolean;
   boardTheme: 'classic-wood' | 'modern-neon' | 'light' | 'dark';
+  /** Whether 3D gaming perspective view is enabled on the chessboard */
+  is3DView: boolean;
 }
 
 export interface AppStore extends AuthState, GameState {
@@ -70,6 +72,8 @@ export interface AppStore extends AuthState, GameState {
   incrementOfflineGames: () => void;
   dismissUpgradePrompt: () => void;
   setBoardTheme: (theme: 'classic-wood' | 'modern-neon' | 'light' | 'dark') => void;
+  set3DView: (is3DView: boolean) => void;
+  toggle3DView: () => void;
   logout: () => void;
 }
 
@@ -101,6 +105,7 @@ const useAppStore = create<AppStore>()(
       offlineGamesPlayed: 0,
       upgradePromptDismissed: false,
       boardTheme: 'dark',
+      is3DView: true,
 
       // Actions
       // When address changes, sync offline mode: offline iff no address
@@ -160,6 +165,8 @@ const useAppStore = create<AppStore>()(
       dismissUpgradePrompt: () => set({ upgradePromptDismissed: true }),
       setConnectModalOpen: (isConnectModalOpen: boolean) => set({ isConnectModalOpen }),
       setBoardTheme: (boardTheme) => set({ boardTheme }),
+      set3DView: (is3DView: boolean) => set({ is3DView }),
+      toggle3DView: () => set((state) => ({ is3DView: !state.is3DView })),
       logout: () => {
         userSession.signUserOut();
         set({ 

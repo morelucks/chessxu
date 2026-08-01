@@ -24,6 +24,7 @@ const Board = () => {
 
     const { appState, dispatch } = useAppContext();
     const boardTheme = useAppStore((state) => state.boardTheme);
+    const is3DView = useAppStore((state) => state.is3DView);
     const position = appState.position[appState.position.length - 1]
 
     const lastMoveSquares = (() => {
@@ -163,7 +164,7 @@ const Board = () => {
         dispatch(clearCandidates())
     }
 
-    return <div className={`board theme-${boardTheme}`}>
+    return <div className={`board theme-${boardTheme} ${is3DView ? 'is-3d-view' : ''}`}>
 
         <Ranks ranks={ranks}/>
 

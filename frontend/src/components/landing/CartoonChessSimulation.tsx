@@ -262,3 +262,4 @@ export default function CartoonChessSimulation() {
 // Speed control selector handlers
 // King Bot avatar reference
 // Wizard GM avatar reference
+// Animated speech bubble container

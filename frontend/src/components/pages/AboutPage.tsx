@@ -499,3 +499,4 @@ export default function AboutPage() {
     </div>
   );
 }
+// Hero section layout structure

@@ -508,3 +508,4 @@ export default function AboutPage() {
 // Bottom call-to-action banner
 // Add WCAG aria attributes to FAQ buttons
 // Navigation click handlers
+// Section title headers

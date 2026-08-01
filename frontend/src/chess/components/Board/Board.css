@@ -286,4 +286,4 @@
 .board.is-3d-view .tile.highlight:after,
 .board.is-3d-view .tile.attacking:after {
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
-}
+}/* 3D perspective container */

@@ -227,3 +227,4 @@ export default useAppStore;
 // Store logout state reset
 // Persist configuration comment
 // AppStore export type check
+// Store state getter comment

@@ -147,3 +147,4 @@ const Piece = ({
 
 export default Piece// Import React.memo for Piece component
 // arePiecePropsEqual comparator function
+// Compare rank prop in Piece memo

@@ -9,3 +9,4 @@
 // Compare rank and file props in areEqual
 // Export memoized Tile component
 // Add JSDoc comments to Tile component
+// Tile tabIndex keyboard accessibility

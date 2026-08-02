@@ -292,3 +292,4 @@ export default Board
 // Pass rank and file props to Tile
 // Pass className prop to Tile
 // Pass pieceSymbol prop to Tile
+// Pass isChecked prop to Tile

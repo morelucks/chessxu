@@ -296,3 +296,4 @@ export default Board
 // Pass memoized onClick handler to Tile
 // Castling move detection optimization
 // King position lookup optimization
+// Board ranks array memoization

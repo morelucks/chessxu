@@ -276,3 +276,35 @@ export default Board
 // ARIA accessibility board component enhancement 79
 // ARIA accessibility board component enhancement 80// Conditional is-3d-view class
 // Select is3DView from store
+// Import useMemo and useCallback hooks
+// Import memoized Tile component
+// Memoize lastMoveSquares calculation
+// Dependency array for lastMoveSquares
+// Skip scanning matrix when position unchanged
+// Memoize checkTile check
+// Dependency array for checkTile
+// Skip arbiter.isPlayerInCheck on turn ticks
+// Memoize getClassName generator
+// getClassName dependency array
+// Memoize handleTileClick handler
+// handleTileClick dependency array
+// Replace inline divs with Tile components
+// Pass rank and file props to Tile
+// Pass className prop to Tile
+// Pass pieceSymbol prop to Tile
+// Pass isChecked prop to Tile
+// Pass memoized onClick handler to Tile
+// Castling move detection optimization
+// King position lookup optimization
+// Board ranks array memoization
+// Board files array memoization
+// Board theme selector hook
+// 3D view mode selector hook
+// Promotion box handler optimization
+// Castling update handler optimization
+// Checkmate detection optimization
+// Stalemate detection optimization
+// Insufficient material optimization
+// Clear candidates dispatch optimization
+// Board container ARIA role
+// Issue 216 optimization verification complete

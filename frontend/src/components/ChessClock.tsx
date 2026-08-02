@@ -65,3 +65,4 @@ export default function ChessClock({ color, timeMs, isActive, onTimeout }: Props
     </div>
   );
 }
+// Clock interval timer optimization

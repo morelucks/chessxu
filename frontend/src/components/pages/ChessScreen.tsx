@@ -117,3 +117,4 @@ export default function ChessScreen() {
   );
 }
 // Mobile brand title button
+// ChessScreen layout memoization

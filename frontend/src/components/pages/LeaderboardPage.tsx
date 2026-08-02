@@ -51,3 +51,4 @@ export default function LeaderboardPage() {
     </div>
   );
 }
+// Leaderboard list memoization

@@ -414,3 +414,6 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 // Select is3DView in game wrapper
 // Header 3D View toggle button
 // Overflow visible on container
+// Captured pieces useMemo check
+// Move history useMemo check
+// Clock active status check

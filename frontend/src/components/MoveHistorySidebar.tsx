@@ -46,3 +46,4 @@ export default function MoveHistorySidebar() {
         </div>
     );
 }
+// Move history list memoization

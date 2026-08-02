@@ -109,3 +109,7 @@
 .piece.p-50 {transform: translate(500%,700%);}
 .piece.p-60 {transform: translate(600%,700%);}
 .piece.p-70 {transform: translate(700%,700%);}
+/* Will-change transform hint on piece */
+/* GPU transform acceleration on piece */
+/* Pointer-events optimization on pieces container */
+/* Pointer-events auto on piece */

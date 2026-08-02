@@ -397,3 +397,4 @@ export default function ChessSidebar() {
 // Select is3DView in sidebar
 // 3D View toggle button
 // Toggle button gradient style
+// Sidebar render optimization

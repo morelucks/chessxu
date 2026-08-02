@@ -318,4 +318,4 @@ export const getKingPosition = (position, player) => {
         })
     })
     return kingPos
-}
+}// Get moves calculation optimization

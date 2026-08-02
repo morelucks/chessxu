@@ -145,4 +145,22 @@ const Piece = ({
         />)
 }
 
-export default Piece
+export default Piece// Import React.memo for Piece component
+// arePiecePropsEqual comparator function
+// Compare rank prop in Piece memo
+// Compare file prop in Piece memo
+// Compare piece prop in Piece memo
+// Wrap Piece with React.memo
+// Piece drag start handler optimization
+// Piece drag end handler optimization
+// Piece click handler optimization
+// isMyPiece player color check
+// canDrag turn validation check
+// isSelected piece highlight check
+// Candidate moves generation call
+// Execute move promotion check
+// Execute move castling check
+// Drag text data transfer string
+// Piece drag display hide timer
+// Piece cursor style memoization
+// Piece component documentation comment

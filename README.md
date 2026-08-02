@@ -238,3 +238,8 @@ Contract:  Clarity + Clarinet
 
 **Ready to build the future of onchain gaming?** Jump into the `frontend/`, `stacks-contracts/` or `celo-contracts/` directories to begin! 🚀
 
+
+## Performance Optimizations (Issue #216)
+- **Tile Memoization**: Extracted standalone `Tile` component wrapped with `React.memo` and custom equality comparator, reducing tile re-renders from 64 to 2-4 per move.
+- **Piece Memoization**: Wrapped `Piece` with `React.memo` and cached `pieceElements` mapping in `Pieces` with `useMemo`.
+- **Board Hook Caching**: Memoized `lastMoveSquares`, `checkTile`, `getClassName`, and `handleTileClick` with `useMemo` and `useCallback`.

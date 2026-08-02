@@ -1,0 +1,25 @@
+// Tile component props interface
+// Tile component base implementation
+// Tile ARIA accessibility label
+// Tile click event handler wrapper
+// Tile React.memo equality comparator
+// Compare className prop in areEqual
+// Compare pieceSymbol prop in areEqual
+// Compare isChecked prop in areEqual
+// Compare rank and file props in areEqual
+// Export memoized Tile component
+// Add JSDoc comments to Tile component
+// Tile tabIndex keyboard accessibility
+// Tile key prop generator comment
+// Tile className concatenation helper
+// Tile prop types validation check
+// Tile click parameter memoization
+// Tile component display name
+// Tile touch action CSS optimization
+// Tile focus visible outline style
+// Tile checked badge visual layer
+// Tile performance metric comment 1
+// Tile performance metric comment 2
+// Tile equality function optimization
+// Tile export default named check
+// Tile module header annotation

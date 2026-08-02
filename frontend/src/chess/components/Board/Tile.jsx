@@ -12,3 +12,4 @@
 // Tile tabIndex keyboard accessibility
 // Tile key prop generator comment
 // Tile className concatenation helper
+// Tile prop types validation check

@@ -289,3 +289,4 @@ export default Board
 // Memoize handleTileClick handler
 // handleTileClick dependency array
 // Replace inline divs with Tile components
+// Pass rank and file props to Tile

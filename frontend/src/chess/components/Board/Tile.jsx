@@ -22,3 +22,4 @@
 // Tile performance metric comment 2
 // Tile equality function optimization
 // Tile export default named check
+// Tile module header annotation

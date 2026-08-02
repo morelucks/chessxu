@@ -281,3 +281,4 @@ export default Board
 // Memoize lastMoveSquares calculation
 // Dependency array for lastMoveSquares
 // Skip scanning matrix when position unchanged
+// Memoize checkTile check

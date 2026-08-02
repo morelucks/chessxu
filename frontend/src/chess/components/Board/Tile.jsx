@@ -5,3 +5,4 @@
 // Tile React.memo equality comparator
 // Compare className prop in areEqual
 // Compare pieceSymbol prop in areEqual
+// Compare isChecked prop in areEqual

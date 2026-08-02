@@ -3,3 +3,4 @@
 // Tile ARIA accessibility label
 // Tile click event handler wrapper
 // Tile React.memo equality comparator
+// Compare className prop in areEqual

@@ -286,3 +286,4 @@ export default Board
 // Skip arbiter.isPlayerInCheck on turn ticks
 // Memoize getClassName generator
 // getClassName dependency array
+// Memoize handleTileClick handler

@@ -287,3 +287,4 @@ export default Board
 // Memoize getClassName generator
 // getClassName dependency array
 // Memoize handleTileClick handler
+// handleTileClick dependency array

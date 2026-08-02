@@ -162,3 +162,4 @@ export default Piece// Import React.memo for Piece component
 // Execute move castling check
 // Drag text data transfer string
 // Piece drag display hide timer
+// Piece cursor style memoization

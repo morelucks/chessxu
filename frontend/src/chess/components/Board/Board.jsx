@@ -283,3 +283,4 @@ export default Board
 // Skip scanning matrix when position unchanged
 // Memoize checkTile check
 // Dependency array for checkTile
+// Skip arbiter.isPlayerInCheck on turn ticks

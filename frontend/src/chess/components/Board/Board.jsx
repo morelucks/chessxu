@@ -288,3 +288,4 @@ export default Board
 // getClassName dependency array
 // Memoize handleTileClick handler
 // handleTileClick dependency array
+// Replace inline divs with Tile components

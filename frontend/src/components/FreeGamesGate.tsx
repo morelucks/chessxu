@@ -128,3 +128,4 @@ export default function FreeGamesGate({ gamesPlayed }: FreeGamesGateProps) {
     </div>
   );
 }
+// Free games gate check optimization

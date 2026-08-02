@@ -13,3 +13,4 @@
 // Tile key prop generator comment
 // Tile className concatenation helper
 // Tile prop types validation check
+// Tile click parameter memoization

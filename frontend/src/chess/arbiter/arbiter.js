@@ -168,4 +168,4 @@ const arbiter = {
 }
 
 
-export default arbiter
+export default arbiter// Arbiter performance documentation

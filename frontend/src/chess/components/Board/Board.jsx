@@ -297,3 +297,4 @@ export default Board
 // Castling move detection optimization
 // King position lookup optimization
 // Board ranks array memoization
+// Board files array memoization

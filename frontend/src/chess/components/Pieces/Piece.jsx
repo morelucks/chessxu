@@ -158,3 +158,4 @@ export default Piece// Import React.memo for Piece component
 // canDrag turn validation check
 // isSelected piece highlight check
 // Candidate moves generation call
+// Execute move promotion check

@@ -153,3 +153,4 @@ export default Piece// Import React.memo for Piece component
 // Wrap Piece with React.memo
 // Piece drag start handler optimization
 // Piece drag end handler optimization
+// Piece click handler optimization

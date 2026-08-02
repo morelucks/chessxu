@@ -278,3 +278,4 @@ export default Board
 // Select is3DView from store
 // Import useMemo and useCallback hooks
 // Import memoized Tile component
+// Memoize lastMoveSquares calculation

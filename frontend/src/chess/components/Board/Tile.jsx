@@ -1,0 +1,1 @@
+// Tile component props interface

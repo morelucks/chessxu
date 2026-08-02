@@ -284,3 +284,4 @@ export default Board
 // Memoize checkTile check
 // Dependency array for checkTile
 // Skip arbiter.isPlayerInCheck on turn ticks
+// Memoize getClassName generator

@@ -416,3 +416,4 @@ export default function ChessGameWrapper({ isPuzzle = false }) {
 // Overflow visible on container
 // Captured pieces useMemo check
 // Move history useMemo check
+// Clock active status check

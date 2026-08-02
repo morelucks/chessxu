@@ -299,3 +299,4 @@ export default Board
 // Board ranks array memoization
 // Board files array memoization
 // Board theme selector hook
+// 3D view mode selector hook

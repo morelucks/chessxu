@@ -295,3 +295,4 @@ export default Board
 // Pass isChecked prop to Tile
 // Pass memoized onClick handler to Tile
 // Castling move detection optimization
+// King position lookup optimization

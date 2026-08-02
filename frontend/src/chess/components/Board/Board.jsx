@@ -300,3 +300,4 @@ export default Board
 // Board files array memoization
 // Board theme selector hook
 // 3D view mode selector hook
+// Promotion box handler optimization

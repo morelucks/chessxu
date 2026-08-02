@@ -285,3 +285,4 @@ export default Board
 // Dependency array for checkTile
 // Skip arbiter.isPlayerInCheck on turn ticks
 // Memoize getClassName generator
+// getClassName dependency array

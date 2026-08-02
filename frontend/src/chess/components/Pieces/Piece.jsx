@@ -150,3 +150,4 @@ export default Piece// Import React.memo for Piece component
 // Compare rank prop in Piece memo
 // Compare file prop in Piece memo
 // Compare piece prop in Piece memo
+// Wrap Piece with React.memo

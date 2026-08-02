@@ -15,3 +15,4 @@
 // Tile prop types validation check
 // Tile click parameter memoization
 // Tile component display name
+// Tile touch action CSS optimization

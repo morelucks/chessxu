@@ -345,3 +345,4 @@ export default function PvPScreen() {
     </div>
   );
 }
+// PvPScreen layout memoization

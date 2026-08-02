@@ -306,3 +306,4 @@ export default Board
 // Stalemate detection optimization
 // Insufficient material optimization
 // Clear candidates dispatch optimization
+// Board container ARIA role

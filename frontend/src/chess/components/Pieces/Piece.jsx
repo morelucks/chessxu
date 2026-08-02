@@ -145,4 +145,4 @@ const Piece = ({
         />)
 }
 
-export default Piece
+export default Piece// Import React.memo for Piece component

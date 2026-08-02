@@ -128,3 +128,4 @@ const Pieces = () => {
 }
 
 export default Pieces// Import useMemo in Pieces component
+// Memoize pieceElements calculation

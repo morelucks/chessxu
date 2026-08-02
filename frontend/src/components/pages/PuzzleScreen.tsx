@@ -68,3 +68,4 @@ export default function PuzzleScreen() {
     </div>
   );
 }
+// PuzzleScreen layout memoization

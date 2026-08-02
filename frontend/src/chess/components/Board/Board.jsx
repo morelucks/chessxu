@@ -298,3 +298,4 @@ export default Board
 // King position lookup optimization
 // Board ranks array memoization
 // Board files array memoization
+// Board theme selector hook

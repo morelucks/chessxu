@@ -127,4 +127,4 @@ const Pieces = () => {
     </div>
 }
 
-export default Pieces
+export default Pieces// Import useMemo in Pieces component

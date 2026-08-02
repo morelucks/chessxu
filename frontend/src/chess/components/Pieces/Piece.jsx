@@ -161,3 +161,4 @@ export default Piece// Import React.memo for Piece component
 // Execute move promotion check
 // Execute move castling check
 // Drag text data transfer string
+// Piece drag display hide timer

@@ -294,3 +294,4 @@ export default Board
 // Pass pieceSymbol prop to Tile
 // Pass isChecked prop to Tile
 // Pass memoized onClick handler to Tile
+// Castling move detection optimization

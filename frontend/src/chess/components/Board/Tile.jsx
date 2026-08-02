@@ -21,3 +21,4 @@
 // Tile performance metric comment 1
 // Tile performance metric comment 2
 // Tile equality function optimization
+// Tile export default named check

@@ -159,3 +159,4 @@ export default Piece// Import React.memo for Piece component
 // isSelected piece highlight check
 // Candidate moves generation call
 // Execute move promotion check
+// Execute move castling check

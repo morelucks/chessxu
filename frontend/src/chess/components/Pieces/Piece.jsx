@@ -160,3 +160,4 @@ export default Piece// Import React.memo for Piece component
 // Candidate moves generation call
 // Execute move promotion check
 // Execute move castling check
+// Drag text data transfer string

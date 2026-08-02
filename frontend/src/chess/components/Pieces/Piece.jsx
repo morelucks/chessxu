@@ -163,3 +163,4 @@ export default Piece// Import React.memo for Piece component
 // Drag text data transfer string
 // Piece drag display hide timer
 // Piece cursor style memoization
+// Piece component documentation comment

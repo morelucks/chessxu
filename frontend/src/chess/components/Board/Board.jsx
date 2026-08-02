@@ -305,3 +305,4 @@ export default Board
 // Checkmate detection optimization
 // Stalemate detection optimization
 // Insufficient material optimization
+// Clear candidates dispatch optimization

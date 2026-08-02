@@ -293,3 +293,4 @@ export default Board
 // Pass className prop to Tile
 // Pass pieceSymbol prop to Tile
 // Pass isChecked prop to Tile
+// Pass memoized onClick handler to Tile

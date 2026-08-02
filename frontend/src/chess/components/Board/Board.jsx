@@ -304,3 +304,4 @@ export default Board
 // Castling update handler optimization
 // Checkmate detection optimization
 // Stalemate detection optimization
+// Insufficient material optimization

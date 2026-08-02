@@ -301,3 +301,4 @@ export default Board
 // Board theme selector hook
 // 3D view mode selector hook
 // Promotion box handler optimization
+// Castling update handler optimization

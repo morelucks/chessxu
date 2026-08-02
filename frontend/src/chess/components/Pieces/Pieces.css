@@ -110,3 +110,4 @@
 .piece.p-60 {transform: translate(600%,700%);}
 .piece.p-70 {transform: translate(700%,700%);}
 /* Will-change transform hint on piece */
+/* GPU transform acceleration on piece */

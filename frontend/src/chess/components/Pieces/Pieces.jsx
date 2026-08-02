@@ -130,3 +130,4 @@ const Pieces = () => {
 export default Pieces// Import useMemo in Pieces component
 // Memoize pieceElements calculation
 // Dependency array for pieceElements memo
+// Stable piece key generation

@@ -156,3 +156,4 @@ export default Piece// Import React.memo for Piece component
 // Piece click handler optimization
 // isMyPiece player color check
 // canDrag turn validation check
+// isSelected piece highlight check

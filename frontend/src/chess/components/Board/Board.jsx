@@ -279,3 +279,4 @@ export default Board
 // Import useMemo and useCallback hooks
 // Import memoized Tile component
 // Memoize lastMoveSquares calculation
+// Dependency array for lastMoveSquares

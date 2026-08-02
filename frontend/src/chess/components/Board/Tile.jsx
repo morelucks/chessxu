@@ -14,3 +14,4 @@
 // Tile className concatenation helper
 // Tile prop types validation check
 // Tile click parameter memoization
+// Tile component display name

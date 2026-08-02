@@ -6,3 +6,4 @@
 // Compare className prop in areEqual
 // Compare pieceSymbol prop in areEqual
 // Compare isChecked prop in areEqual
+// Compare rank and file props in areEqual

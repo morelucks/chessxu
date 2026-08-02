@@ -303,3 +303,4 @@ export default Board
 // Promotion box handler optimization
 // Castling update handler optimization
 // Checkmate detection optimization
+// Stalemate detection optimization

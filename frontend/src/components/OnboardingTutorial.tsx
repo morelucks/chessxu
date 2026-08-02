@@ -204,3 +204,4 @@ export default function OnboardingTutorial() {
     </div>
   );
 }
+// Tutorial modal memoization

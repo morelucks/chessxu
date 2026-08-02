@@ -282,3 +282,4 @@ export default Board
 // Dependency array for lastMoveSquares
 // Skip scanning matrix when position unchanged
 // Memoize checkTile check
+// Dependency array for checkTile

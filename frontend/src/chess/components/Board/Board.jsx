@@ -290,3 +290,4 @@ export default Board
 // handleTileClick dependency array
 // Replace inline divs with Tile components
 // Pass rank and file props to Tile
+// Pass className prop to Tile

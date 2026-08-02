@@ -11,3 +11,4 @@
 // Add JSDoc comments to Tile component
 // Tile tabIndex keyboard accessibility
 // Tile key prop generator comment
+// Tile className concatenation helper

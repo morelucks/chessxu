@@ -280,3 +280,4 @@ export default Board
 // Import memoized Tile component
 // Memoize lastMoveSquares calculation
 // Dependency array for lastMoveSquares
+// Skip scanning matrix when position unchanged

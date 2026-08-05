@@ -18,7 +18,6 @@ The repository is organized into a monorepo containing both the frontend web app
 ```text
 chessxu/
 ├── frontend/          # React + Vite web application
-├── backend/           # Node.js backend services & paymaster
 ├── contracts/         # Smart contracts monorepo
 │   ├── celo/          # Hardhat project with Celo smart contracts (EVM)
 │   └── stacks/        # Clarinet project with Stacks smart contracts (Clarity)

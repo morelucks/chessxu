@@ -17,10 +17,12 @@ The repository is organized into a monorepo containing both the frontend web app
 
 ```text
 chessxu/
-├── src/               # @morelucks/chessxu-sdk TypeScript SDK
 ├── frontend/          # React + Vite web application
-├── stacks-contracts/  # Clarinet project with Stacks smart contracts
-└── celo-contracts/    # Hardhat project with Celo smart contracts (EVM)
+├── backend/           # Node.js backend services & paymaster
+├── contracts/         # Smart contracts monorepo
+│   ├── celo/          # Hardhat project with Celo smart contracts (EVM)
+│   └── stacks/        # Clarinet project with Stacks smart contracts (Clarity)
+└── src/               # @morelucks/chessxu-sdk TypeScript SDK
 ```
 
 The SDK's helper API (error decoding, game-status predicates, wager and address
@@ -53,7 +55,7 @@ Your client will be running locally at `http://localhost:5173` with optimistic u
 The core game logic and STX wagering system are managed by a Clarity smart contract (`chessxu.clar`). You need [Clarinet](https://github.com/hirosystems/clarinet) installed to interact with it.
 
 ```bash
-cd chessxu/stacks-contracts
+cd chessxu/contracts/stacks
 
 # Check the syntax of the Clarity contracts
 clarinet check
@@ -99,7 +101,7 @@ const getStatus = (statusId: number) => {
 - **State Management**: React `useReducer` for complex chess logic, combined with Context API.
 - **Blockchain Integration**: (Planned) `@stacks/connect` for wallet authentication and transaction signing.
 
-### **The Smart Contract (`stacks-contracts/`)**
+### **The Smart Contracts (`contracts/`)**
 - **Language**: Clarity
 - **Core Features**:
   1. **Game Creation**: Players escrow STX to initialize a match (`create-game`).

@@ -22,10 +22,10 @@ const steps: OnboardingStep[] = [
   },
   {
     icon: Bot,
-    title: 'Play vs AI — Free',
-    description: 'Jump straight into a game against Stockfish AI. Choose your difficulty and start sharpening your skills — no signup, no wallet, no fees.',
+    title: 'Select Your Initial Skill Level',
+    description: 'Choose your starting experience level so we match you against the right AI difficulty and calibrate your starting rating correctly.',
     accent: 'onboarding-accent--blue',
-    hint: 'Available right now from the main screen',
+    hint: 'You can adjust this anytime in your profile!',
   },
   {
     icon: Wallet,
@@ -118,6 +118,16 @@ export default function OnboardingTutorial() {
   const isLast = currentStep === steps.length - 1;
   const progress = ((currentStep + 1) / steps.length) * 100;
 
+  const [selectedSkill, setSelectedSkill] = useState<'beginner' | 'intermediate' | 'advanced'>('beginner');
+
+  const handleSelectSkill = (level: 'beginner' | 'intermediate' | 'advanced', elo: number) => {
+    setSelectedSkill(level);
+    try {
+      localStorage.setItem('chessxu-user-skill-level', level);
+      localStorage.setItem('chessxu-user-elo', elo.toString());
+    } catch { /* ignore */ }
+  };
+
   return (
     <div className={`onboarding-overlay ${exiting ? 'onboarding-overlay--exiting' : ''}`}>
       <div className="onboarding-card" role="dialog" aria-label="Onboarding tutorial">
@@ -150,6 +160,68 @@ export default function OnboardingTutorial() {
           {/* Title & description */}
           <h2 className="onboarding-title">{step.title}</h2>
           <p className="onboarding-description">{step.description}</p>
+
+          {/* Interactive Skill Selector on Step 2 */}
+          {currentStep === 1 && (
+            <div className="flex flex-col gap-2 my-3 w-full text-left">
+              <button
+                type="button"
+                onClick={() => handleSelectSkill('beginner', 800)}
+                className={`p-3 rounded-xl border transition-all text-left flex items-center justify-between ${
+                  selectedSkill === 'beginner'
+                    ? 'border-emerald-500/80 bg-emerald-500/10 text-emerald-300 shadow-lg shadow-emerald-950/40'
+                    : 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-slate-700'
+                }`}
+              >
+                <div>
+                  <div className="font-bold text-sm flex items-center gap-2">
+                    🟢 Beginner
+                    <span className="text-xs opacity-75 font-mono">(800 ELO)</span>
+                  </div>
+                  <div className="text-xs text-slate-400 mt-0.5">New to chess or learning piece rules</div>
+                </div>
+                {selectedSkill === 'beginner' && <Sparkles size={16} className="text-emerald-400" />}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSelectSkill('intermediate', 1200)}
+                className={`p-3 rounded-xl border transition-all text-left flex items-center justify-between ${
+                  selectedSkill === 'intermediate'
+                    ? 'border-amber-500/80 bg-amber-500/10 text-amber-300 shadow-lg shadow-amber-950/40'
+                    : 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-slate-700'
+                }`}
+              >
+                <div>
+                  <div className="font-bold text-sm flex items-center gap-2">
+                    🟡 Intermediate
+                    <span className="text-xs opacity-75 font-mono">(1200 ELO)</span>
+                  </div>
+                  <div className="text-xs text-slate-400 mt-0.5">Know standard tactics & opening principles</div>
+                </div>
+                {selectedSkill === 'intermediate' && <Sparkles size={16} className="text-amber-400" />}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSelectSkill('advanced', 1600)}
+                className={`p-3 rounded-xl border transition-all text-left flex items-center justify-between ${
+                  selectedSkill === 'advanced'
+                    ? 'border-rose-500/80 bg-rose-500/10 text-rose-300 shadow-lg shadow-rose-950/40'
+                    : 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-slate-700'
+                }`}
+              >
+                <div>
+                  <div className="font-bold text-sm flex items-center gap-2">
+                    🔴 Advanced
+                    <span className="text-xs opacity-75 font-mono">(1600 ELO)</span>
+                  </div>
+                  <div className="text-xs text-slate-400 mt-0.5">Experienced club player or tournament player</div>
+                </div>
+                {selectedSkill === 'advanced' && <Sparkles size={16} className="text-rose-400" />}
+              </button>
+            </div>
+          )}
 
           {/* Hint badge */}
           <div className="onboarding-hint">

@@ -38,9 +38,9 @@ export default function FreeGamesGate({ gamesPlayed }: FreeGamesGateProps) {
         </div>
 
         {/* Header */}
-        <h2 className="free-games-gate__title">Free Games Exhausted</h2>
+        <h2 className="free-games-gate__title">Daily Practice Limit Reached</h2>
         <p className="free-games-gate__subtitle">
-          You've played <strong>{gamesPlayed}/{UPGRADE_THRESHOLD}</strong> free games
+          You've played <strong>{gamesPlayed}/{UPGRADE_THRESHOLD}</strong> free daily practice games
         </p>
 
         {/* Progress bar */}
@@ -62,7 +62,7 @@ export default function FreeGamesGate({ gamesPlayed }: FreeGamesGateProps) {
 
         {/* Message */}
         <div className="free-games-gate__message">
-          <p>Connect a wallet to unlock <strong>unlimited games</strong>, on-chain play, rankings, and rewards.</p>
+          <p>Free offline games refill daily at midnight. Connect a wallet now for <strong>zero-gas unlimited games</strong>, ranked PvP, and achievement rewards.</p>
         </div>
 
         {/* Direct Wallet Options — no intermediate modal */}

@@ -15,25 +15,30 @@ export interface ShopItem {
   category: 'boards' | 'pieces' | 'badges';
   icon: string;
   accentColor: string;
+  unlockRequirement?: {
+    wins?: number;
+    elo?: number;
+    text: string;
+  };
 }
 
 const BOARD_THEMES: ShopItem[] = [
   { id: 'board-slate', name: 'Classic Slate', description: 'The elegant default dark theme board.', price: 0, category: 'boards', icon: 'Gamepad2', accentColor: '#64748b' },
-  { id: 'board-wood', name: 'Royal Walnut', description: 'Traditional premium wooden chess board.', price: 100, category: 'boards', icon: 'Palette', accentColor: '#b45309' },
-  { id: 'board-marble', name: 'Carrara Marble', description: 'Polished Italian white and grey stone.', price: 250, category: 'boards', icon: 'Sparkles', accentColor: '#cbd5e1' },
-  { id: 'board-neon', name: 'Synthwave Neon', description: 'Glowing grid cyberpunk board style.', price: 500, category: 'boards', icon: 'ShoppingBag', accentColor: '#ec4899' }
+  { id: 'board-wood', name: 'Royal Walnut', description: 'Traditional premium wooden chess board.', price: 100, category: 'boards', icon: 'Palette', accentColor: '#b45309', unlockRequirement: { wins: 10, text: "Unlocked at 10 PvP Wins" } },
+  { id: 'board-marble', name: 'Carrara Marble', description: 'Polished Italian white and grey stone.', price: 250, category: 'boards', icon: 'Sparkles', accentColor: '#cbd5e1', unlockRequirement: { elo: 1400, text: "Unlocked at 1400 ELO" } },
+  { id: 'board-neon', name: 'Synthwave Neon', description: 'Glowing grid cyberpunk board style.', price: 500, category: 'boards', icon: 'ShoppingBag', accentColor: '#ec4899', unlockRequirement: { wins: 30, text: "Unlocked at 30 PvP Wins" } }
 ];
 
 const PIECE_SETS: ShopItem[] = [
   { id: 'piece-classic', name: 'Neo Classic', description: 'The standard modern set of pieces.', price: 0, category: 'pieces', icon: 'Gamepad2', accentColor: '#64748b' },
-  { id: 'piece-minimal', name: 'Geometric Minimal', description: 'Abstract sharp vector pieces.', price: 150, category: 'pieces', icon: 'Palette', accentColor: '#3b82f6' },
-  { id: 'piece-pixel', name: 'Retro Pixel Art', description: '8-bit nostalgic arcade style chess pieces.', price: 300, category: 'pieces', icon: 'Sparkles', accentColor: '#10b981' }
+  { id: 'piece-minimal', name: 'Geometric Minimal', description: 'Abstract sharp vector pieces.', price: 150, category: 'pieces', icon: 'Palette', accentColor: '#3b82f6', unlockRequirement: { wins: 5, text: "Unlocked at 5 Wins" } },
+  { id: 'piece-pixel', name: 'Retro Pixel Art', description: '8-bit nostalgic arcade style chess pieces.', price: 300, category: 'pieces', icon: 'Sparkles', accentColor: '#10b981', unlockRequirement: { wins: 20, text: "Unlocked at 20 Wins" } }
 ];
 
 const BADGES: ShopItem[] = [
-  { id: 'badge-early', name: 'Pioneer Badge', description: 'Show you were here since day one.', price: 50, category: 'badges', icon: 'Award', accentColor: '#eab308' },
-  { id: 'badge-gm', name: 'Grandmaster Crown', description: 'A glorious golden crown for your profile.', price: 500, category: 'badges', icon: 'Award', accentColor: '#ec4899' },
-  { id: 'badge-diamond', name: 'Infinity Diamond', description: 'The ultimate chess prestige badge.', price: 1000, category: 'badges', icon: 'Award', accentColor: '#a855f7' }
+  { id: 'badge-early', name: 'Pioneer Badge', description: 'Show you were here since day one.', price: 50, category: 'badges', icon: 'Award', accentColor: '#eab308', unlockRequirement: { wins: 3, text: "Unlocked at 3 PvP Wins" } },
+  { id: 'badge-gm', name: 'Grandmaster Crown', description: 'A glorious golden crown for your profile.', price: 500, category: 'badges', icon: 'Award', accentColor: '#ec4899', unlockRequirement: { wins: 15, text: "Unlocked at 15 PvP Wins or 1500 ELO" } },
+  { id: 'badge-diamond', name: 'Infinity Diamond', description: 'The ultimate chess prestige badge.', price: 1000, category: 'badges', icon: 'Award', accentColor: '#a855f7', unlockRequirement: { elo: 1600, text: "Unlocked at 1600 ELO Rating" } }
 ];
 
 const SHOP_ITEMS: ShopItem[] = [...BOARD_THEMES, ...PIECE_SETS, ...BADGES];

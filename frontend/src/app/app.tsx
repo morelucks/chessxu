@@ -21,6 +21,8 @@ import HistoryPage from '../components/pages/HistoryPage';
 import AnalyticsDashboard from '../components/pages/AnalyticsDashboard';
 
 import AboutPage from '../components/pages/AboutPage';
+import SupportPage from '../components/pages/SupportPage';
+import TermsPage from '../components/pages/TermsPage';
 
 function App() {
   console.log("=== App component rendering ===");
@@ -49,6 +51,9 @@ function App() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/history" element={<HistoryPage />} />
               <Route path="/analytics" element={<AnalyticsDashboard />} />
+              <Route path="/support" element={<SupportPage />} />
+              <Route path="/faq" element={<SupportPage />} />
+              <Route path="/terms" element={<TermsPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
